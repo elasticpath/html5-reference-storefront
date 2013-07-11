@@ -1,0 +1,120 @@
+<div id="IATemplateContainer">
+
+  <!--
+
+
+    NAVIGATIONS
+
+
+  -->
+
+  <!-- Main Navigation Template Container -->
+  <script type="text/template" id="MainNavTemplateContainer">
+
+    <nav class="main-nav nav-h">
+        <button class="btn-main-nav-toggle btn-link-cmd">
+          Categories
+        </button>
+        <ul class="main-nav-list" data-region="mainNavList">
+
+        </ul>
+    </nav>
+
+  </script>
+
+  <!-- Navigation item Template -->
+  <script type="text/template" id="NavItemTemplateContainer">
+
+    <a href="#category/<%= E.name.toLowerCase() %>" class="cmd-nav-item" title="<%= E.label %>" data-route="<%= E.name %>"><span><%= E.name %></span></a>
+
+  </script>
+
+  <!-- Main Navigation Preferences -->
+  <script id="MainNavPreferences" type="text/template">
+    <h3>preferences</h3>
+    <form>
+      <fieldset>
+        <label for="PrefMainNavDisplayType">Display compact view</label>
+        <input type="checkbox" name="PrefMainNavDisplayType" id="PrefMainNavDisplayType" />
+      </fieldset>
+      <button id="PrefMainNavDisplayTypeSave">Ok</button>
+    </form>
+  </script>
+
+  <!-- lOADING INDICATOR TEMPLATE -->
+  <script id="LoadingIndicatorTemplate" type="text/template">
+    <img src="/images/activity-indicator-strobe.gif" />
+  </script>
+
+
+
+
+
+  <!--
+
+
+    CATEGORIES
+
+
+  -->
+  <!-- Browse Categories and Items Layout Container -->
+  <script id="BrowseCategoryLayoutContainer" type="text/template">
+    <h1 class="view-title"><%= E.title %></h1>
+    <div class="row">
+      <div class="fifth" data-region="categoryRegion">categories</div>
+      <div class="fourfifth" data-region="itemRegion">
+        <img src="/images/activity-indicator-strobe.gif" />
+      </div>
+    </div>
+  </script>
+
+  <!-- Sub Category Nav list -->
+  <script id="BrowseCategoryListTemplate" type="text/template">
+    <h2 class="browse-subtitle">Sub Categories</h2>
+    <div data-region="subCategoryListRegion">
+      <ul class="browse-subcategory-list"></ul>
+    </div>
+  </script>
+
+  <!-- Category Node Item -->
+  <script data-view="IACategoryNodeView" type="text/template">
+    <a href="#" class="ia-category-node">Node Item<%= E.name %></a>
+  </script>
+
+  <!-- Sub Category Item Template  -->
+  <script id="BrowseCategoryItemTemplate" type="text/template">
+
+    <a href="#" class="cmd-nav-item" title="<%= E.label %>" data-route="<%= E.name %>"><span><%= E.name %></span></a>
+
+  </script>
+
+  <!-- Item List Container -->
+  <script id="BrowseItemListTemplate" type="text/template">
+    <h2 class="browse-subtitle">Products</h2>
+    <div data-region="browseItemListRegion">
+      <ul class="browse-item-list"></ul>
+    </div>
+  </script>
+
+  <!-- No Sub Cats View -->
+  <script id="NoSubCatsView" type="text/template">
+    <p></p>
+  </script>
+
+  <!-- Item Container -->
+  <script id="BrowseItemTemplate" type="text/template">
+
+    <div>
+      <img src="/images/img-placeholder.png" class="item-img" />
+      <div data-region="displayName"><%= E.name %></div>
+      <div data-region="price"><%= E.price %></div>
+      <div class="btn-container">
+        <button class="btn-view-item-detail">View</button>
+        <button class="btn-addtocart">Add to Cart</button>
+      </div>
+    </div>
+
+  </script>
+
+
+</div>

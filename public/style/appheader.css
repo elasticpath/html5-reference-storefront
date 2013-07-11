@@ -1,0 +1,146 @@
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+.app-header {
+  boder-radius: 8px;
+  border-top: 1px solid #fff;
+  position: relative;
+  min-height: 4em;
+  padding-top: .5rem;
+  border-bottom: 1px solid #333;
+  background: #efef33;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #a2c5bf), color-stop(1, #a2c5bf));
+  background: -ms-linear-gradient(bottom, #a2c5bf, #a2c5bf);
+  background: -moz-linear-gradient(center bottom, #a2c5bf 0%, #a2c5bf 100%);
+  background: -o-linear-gradient(#a2c5bf, #a2c5bf);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a2c5bf', endColorstr='#a2c5bf', GradientType=0);
+  /*
+  background-image: linear-gradient(bottom, rgb(0,0,0) 41%, rgb(66,66,66) 71%);
+  background-image: -o-linear-gradient(bottom, rgb(0,0,0) 41%, rgb(66,66,66) 71%);
+  background-image: -moz-linear-gradient(bottom, rgb(0,0,0) 41%, rgb(66,66,66) 71%);
+  background-image: -webkit-linear-gradient(bottom, rgb(0,0,0) 41%, rgb(66,66,66) 71%);
+  background-image: -ms-linear-gradient(bottom, rgb(0,0,0) 41%, rgb(66,66,66) 71%);
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.41, rgb(0,0,0)),
+    color-stop(0.71, rgb(66,66,66))
+  );
+  */
+
+}
+header.app-header .row {
+  margin-bottom: 0;
+  background: transparent;
+}
+.logo-container {
+  float: left;
+}
+header.app-header .btn-main-nav-toggle {
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #444;
+  border-right: 1px solid #444;
+  padding: 0;
+  border-radius: 4px;
+  background-color: #424242;
+  height: 50px;
+}
+header.app-header .btn-main-nav-toggle:active {
+  border-top: 1px solid #444;
+  border-left: 1px solid #444;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  background-color: #050505;
+}
+.btn-main-nav-toggle img {
+  height: 50px;
+}
+.btn-link-cmd {
+  background: transparent;
+  border: 0;
+  color: #ffffff;
+}
+.main-nav-container {
+  float: left;
+}
+.main-nav {
+  position: relative;
+  float: left;
+}
+.main-nav-list {
+  float: left;
+  list-style: none;
+  background-color: rgba(210, 210, 210, 0.68);
+  border-radius: 1rem;
+  /*  display:none;*/
+
+}
+.main-nav-list .nav-v li {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border-radius: 1rem;
+}
+.main-nav-container .nav-h li {
+  display: inline-block;
+}
+.main-nav-container li {
+  line-height: 3rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.main-nav-container .nav-h {
+  margin-bottom: .2em;
+}
+.nav-main-nav ul {
+  list-style: none;
+}
+.main-nav-list li span {
+  padding-top: .3rem;
+  padding-right: 1.5rem;
+  padding-bottom: .3rem;
+  padding-left: 1.5rem;
+}
+.main-nav-list li:hover {
+  background: #eee;
+  color: #444;
+}
+.main-nav-list li span {
+  color: #ffffff;
+}
+.main-nav-list li:hover span {
+  color: #444;
+}
+.main-search-container {
+  float: right;
+  line-height: 3rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.main-search-container button.btn-header-search {
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  background-color: #ff5511;
+}
+.global-nav-container {
+  float: right;
+  margin-right: 1rem;
+}
+.global-nav-container ul {
+  list-style: none;
+}
+.global-nav-container li {
+  display: inline-block;
+  margin: .3rem;
+  line-height: 3rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.global-nav-container a {
+  color: #f2f2f5;
+}

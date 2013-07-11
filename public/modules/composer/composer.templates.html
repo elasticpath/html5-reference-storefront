@@ -1,0 +1,283 @@
+<div id="ComposerTemplateContainer">
+
+  <!-- ComposerBaseLayoutTemplate -->
+  <script id="ComposerBaseLayoutTemplate" type="text/template">
+    <div data-region="mainComposerRegion"></div>
+  </script>
+
+  <!-- Composer IA View -->
+  <script id="ComposerIAViewTemplate" type="text/template">
+    <!-- hard coded for now will be moved to a tab component -->
+    <h2>EP Visual Cortex Composer</h2>
+    <nav class="nav-tabs" data-toggle="tabs" data-height="equal">
+      <ul>
+        <li class="composer-filetype-tab"><a href="#EditStyles">Styles</a></li>
+        <li class="composer-filetype-tab"><a href="#EditModules">Modules</a></li>
+        <li class="composer-filetype-tab"><a href="#EditThemes">Themes</a></li>
+        <li class="composer-filetype-tab"><a href="#EditForms">Forms</a></li>
+        <li class="composer-filetype-tab"><a href="#EditRoutes" class="tab-disabled">Routes</a></li>
+        <li class="composer-filetype-tab"><a href="#EditViews" class="tab-disabled">Views</a></li>
+      </ul>
+    </nav>
+    <div id="EditStyles">
+      <div data-region="composerStylesRegion"></div>
+    </div>
+    <div id="EditModules">
+      <div data-region="composerModulesRegion"></div>
+    </div>
+    <div id="EditThemes">
+      <div data-region="composerThemesRegion"></div>
+    </div>
+    <div id="EditForms">
+      <div data-region="composerFormsRegion"></div>
+    </div>
+    <div id="EditRoutes">
+      <div data-region="composerRoutesRegion"></div>
+    </div>
+    <div id="EditViews">
+      <div data-region="composerViewsRegion"></div>
+    </div>
+
+  </script>
+
+  <!-- General Composer File Editor Layout -->
+  <script id="ComposerFileEditorViewTemplate" type="text/template">
+
+    <div class="row">
+      <div data-region="cmpsrFileListRegion" class="quarter"></div>
+      <div data-region="cmpsrEditorRegion" class="threequarter"></div>
+
+
+    </div>
+
+  </script>
+
+  <!-- Composer Editor Controls  -->
+  <script id="ComposerEditorControlsTemplate" type="text/template">
+
+    <button class="btn-save-file" data-type="<%= E.type %>" data-dir="<%= E.typeName %>" data-file="<%= E.fileName %>"><span>save</span></button>
+    <button class="btn-clear-editor"><span>cancel</span></button>
+
+  </script>
+  <!-- Composer Editor File Meta Data  -->
+  <script id="ComposerEditorMetaDataTemplate" type="text/template">
+
+    <table>
+      <thead>
+      </thead>
+      <tbody>
+        <tr>
+          <td>File name:</td>
+          <td><%= E.fileName %></td>
+        </tr>
+        <tr>
+          <td>Type:</td>
+          <td><%= E.type %></td>
+        </tr>
+        <tr>
+          <td>Name:</td>
+          <td><%= E.typeName %></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </script>
+
+  <!-- Composer Editor  -->
+  <script id="ComposerEditorTemplate" type="text/template">
+
+    <h1>Editor</h1>
+    <div data-region="composerEditorFileMetaDataRegion"></div>
+    <div data-region="composerEditorControlsRegion"></div>
+    <div data-region="editorRegion"></div>
+  </script>
+
+  <!-- CSS Files List View -->
+  <script id="CSSFileListTemplate" type="text/template">
+    <button class="btn-small" data-cmd="addNewCSSFile">Add New</button>
+    <ul></ul>
+  </script>
+
+  <!-- CSS File Item -->
+  <script id="CSSFileItemTemplate" type="text/template">
+
+    <a href="/#composer/style/<%= E.returnFileExtension(E.file) %>/<%= E.removeFileExtension(E.file) %>" class="cmd-file-name" data-dir="<%= E.dir %>"  data-file="<%= E.file %>"><%= E.file %></a>
+
+  </script>
+
+  <!-- Module List View -->
+  <script id="ModuleListTemplate" type="text/template">
+
+    <div class="module-list-container">
+
+      <ul></ul>
+
+    </div>
+
+  </script>
+
+  <!-- Module Item View -->
+  <script id="ModuleItemTemplate" type="text/template">
+
+    <div class="module-list-container">
+
+      <ul></ul>
+
+    </div>
+
+  </script>
+
+  <!-- Form Item Template -->
+  <script id="ComposerFormItemTemplate" text="text/template">
+
+  </script>
+
+  <!-- Form Item List View -->
+  <script id="FormItemListTemplate" type="text/template">
+    <h2>Form Items</h2>
+    <ul></ul>
+  </script>
+
+
+  <!-- Add CSS File Form -->
+  <script id="AddCSSFileFormTemplate" type="text/template">
+
+    <h2>Add New CSS File</h2>
+    <form>
+      <fieldset>
+        <label>
+          File Name:
+        </label>
+        <input id="NewCSSFileName" name="NewCSSFileName" type="text" />
+
+      </fieldset>
+      <div class="form-control-container">
+        <button class="btn-round" data-cmd="saveNewCSSFile">Add</button>
+        <button class="btn-round" data-cmd="cancelNewCSSFile">Cancel</button>
+      </div>
+    </form>
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Module Composer Layout
+
+
+  MARKED FOR DELETION
+  -->
+  <script id="ModuleComposerLayout" type="text/template">
+
+    <div class="row">
+
+      <div class="third">
+        <nav class="nav-tabs" data-toggle="tabs" data-height="equal">
+          <ul>
+            <li class="composer-filetype-tab"><a href="#EditModuleslist">Modules</a></li>
+            <li class="composer-filetype-tab"><a href="#EditCSSList">CSS</a></li>
+            <li class="composer-filetype-tab"><a href="#EditThemesList">Themes</a></li>
+            <li class="composer-filetype-tab"><a href="#EditRoutesList">Routes</a></li>
+            <li class="composer-filetype-tab"><a href="#EditViewsList">Views</a></li>
+          </ul>
+        </nav>
+        <div id="EditModuleslist">
+          <h2>Modules</h2>
+          <div data-region="moduleListRegion"></div>
+          <!--<div class="module-list-content" data-region="moduleFileListRegion">-->
+          <!--</div>-->
+        </div>
+        <div id="EditCSSList">
+          <h2>CSS</h2>
+          <div data-region="cssFileListRegion"></div>
+        </div>
+      </div>
+      <div class="twothird">
+        <div class="editor-content"></div>
+      </div>
+    </div>
+  </script>
+
+
+
+  <!-- Module File Item Template -->
+  <script id="ModuleFileItemTemplate" type="text/template">
+    <a href="/#composer/<%= E.module %>/<%= E.returnFileExtension(E.file) %>/<%= E.removeFileExtension(E.file) %>" class="cmd-file-name" data-dir="<%= E.dir %>" data-module="<%= E.module %>"  data-file="<%= E.file %>"><%= E.file %></a>
+  </script>
+
+  <!-- Module List  -->
+  <script id="ModuleListItemTemplate" type="text/template">
+    <a href="/#composer/edit/<%= E.moduleName %>" class="cmd-module-name" data-module="<%= E.moduleName %>"><%= E.moduleName %></a>
+    <ul data-module="<%= E.moduleName %>"></ul>
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- File Item Template -->
+  <!--<script id="FileItemTemplate" type="text/template">-->
+
+    <!--<a href="/#composer/css/<%= E.returnFileExtension(E.file) %>/<%= E.removeFileExtension(E.file) %>" class="x-cmd-file-name" data-dir="<%= E.dir %>"  data-file="<%= E.file %>"><%= E.file %></a>-->
+
+  <!--</script>-->
+
+
+  <!-- File List Template -->
+  <!--<script id="FileListTemplate" type="text/template">-->
+    <!--<button class="btn-small" data-cmd="addNewCSSFile">Add New</button>-->
+    <!--<ul></ul>-->
+  <!--</script>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

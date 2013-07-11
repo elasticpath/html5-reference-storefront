@@ -1,0 +1,54 @@
+@-ms-viewport {
+  width: device-width;
+}
+@-o-viewport {
+  width: device-width;
+}
+@viewport {
+  width: device-width;
+}
+body {
+  font-size: 100%;
+  background-color: #a2c5bf;
+  color: #faf7fa;
+}
+h1 {
+  font-size: 2.5rem;
+}
+/*36/16*/
+h2 {
+  font-size: 1.5rem;
+}
+/*24/16*/
+h3 {
+  font-size: 1.3125rem;
+}
+/*21/16*/
+h4 {
+  font-size: 1.125rem;
+}
+/*18/16*/
+h5 {
+  font-size: 1rem;
+}
+/*16/16*/
+a {
+  color: rgba(89, 23, 255, 0.9);
+}
+.viewport {
+  min-width: 320px;
+  max-width: 90rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* just examples */
+@media only screen and (max-width: 59rem) {
+  
+}
+@media only screen and (min-width: 60rem) {
+  
+}
+/* override some kube stuff */
+.viewport .row {
+  background: transparent;
+}

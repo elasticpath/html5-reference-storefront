@@ -1,0 +1,44 @@
+@import 'variables';
+
+@-ms-viewport { width: device-width; }
+@-o-viewport { width: device-width; }
+@viewport { width: device-width; }
+
+body{
+  font-size:100%;
+  background-color:@bodyBgColor;
+  color:@bodyColor;
+}
+
+h1 { font-size: @h1DefaultSize; } /*36/16*/
+h2 { font-size: @h2DefaultSize; } /*24/16*/
+h3 { font-size: @h3DefaultSize; } /*21/16*/
+h4 { font-size: @h4DefaultSize; } /*18/16*/
+h5 { font-size: @h5DefaultSize; } /*16/16*/
+
+a {
+  color:@defaultLinkColor;
+}
+
+.viewport{
+  min-width:320px;
+  max-width:90rem;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* just examples */
+@media only screen and (max-width:59rem) {
+  body{
+
+  }
+}
+@media only screen and (min-width:60rem) {
+  body{
+
+  }
+}
+  /* override some kube stuff */
+.viewport .row{
+  background:transparent;
+}

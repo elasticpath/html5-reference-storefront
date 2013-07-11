@@ -1,0 +1,522 @@
+<div id="ComposerModuleTemplateContainer">
+
+<!-- Home -->
+<script id="ComposerIndexTemplate" type="text/template" >
+
+  <h1>Composer Index</h1>
+
+</script>
+
+
+<!-- Editor View -->
+<script id="CodeEditorTemplate" type="text/template">
+  <div id="editor">function foo(items) {
+    var x = "All this is syntax highlighted";
+    return x;
+    }
+  </div>
+  <button class="btn-round btn btn-large" data-id="btnSaveFile">Save</button>
+
+</script>
+
+
+<!-- Home -->
+<script id="ComposerIndexLayoutTemplate" type="text/template" >
+
+  <div class="row">
+
+    <div class="half">
+      <div class="view-index composer-container ui-view" data-view="index-view">
+        <nav class="nav-tabs" data-toggle="tabs" data-height="equal">
+          <ul>
+            <li><a href="#tab11" class="active">Layouts</a></li>
+            <li><a href="#tab12">Form</a></li>
+            <li><a href="#tab13">View</a></li>
+          </ul>
+        </nav>
+        <div id="tab11">
+          <div data-region="LayoutMenuRegion"></div>
+        </div>
+        <div id="tab12">
+          <div data-region="FormMenuRegion"></div>
+        </div>
+        <div id="tab13">
+          <div data-region="ViewMenuRegion"></div>
+        </div>
+      </div>
+      <ul id="contextmenu"></ul>
+      <button class="btn btn-round" data-id="btnPostCode">Post Code</button>
+    </div>
+
+    <div class="half">
+      <nav class="nav-tabs" data-toggle="tabs" data-height="equal">
+        <ul>
+          <li><a href="#tab1" class="active">Design</a></li>
+          <li><a href="#tab2">Code</a></li>
+        </ul>
+      </nav>
+      <div id="tab1">
+        <div id="DropZone" class="drop-zone">design box</div>
+      </div>
+      <div id="tab2">
+        <div class="composer-editor-container">
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+</script>
+
+
+<!-- Form Chooser -->
+<script id="FormChooserTemplate" type="text/template">
+  <h2>Forms</h2>
+  <section data-menu="form" class="ac-container">
+    <div>
+      <input id="ac-31" name="accordion-1" type="checkbox" />
+      <label for="ac-31">Form</label>
+      <article class="ac-small">
+        <ul>
+          <li>
+            <a href="#">Form</a>
+          </li>
+          <li>
+            <a href="#">Legend</a>
+          </li>
+          <li>
+            <a href="#">Fieldset</a>
+          </li>
+        </ul>
+      </article>
+    </div>
+    <div>
+      <input id="ac-32" name="accordion-2" type="checkbox" />
+      <label for="ac-32">Input</label>
+      <article class="ac-medium">
+        <ul>
+          <li draggable="true">
+            <a data-element="text" href="#">Text</a>
+          </li>
+          <li draggable="true">
+            <a data-element="email" href="#">Email</a>
+          </li>
+          <li draggable="true">
+            <a href="#">Password</a>
+          </li>
+          <li draggable="true">
+            <a href="#">Textarea</a>
+          </li>
+          <li>
+            <a href="#">Radio</a>
+          </li>
+          <li>
+            <a href="#">Checkbox</a>
+          </li>
+          <li>
+            <a href="#">Select</a>
+          </li>
+          <li>
+            <a href="#">Option</a>
+          </li>
+        </ul>
+      </article>
+    </div>
+    <div>
+      <input id="ac-33" name="accordion-3" type="checkbox" />
+      <label for="ac-33">Buttons</label>
+      <article class="ac-large">
+        <ul>
+          <li>
+            <a href="#">Submit</a>
+          </li>
+          <li>
+            <a href="#">Save</a>
+          </li>
+          <li>
+            <a href="#">Reset</a>
+          </li>
+          <li>
+            <a href="#">Cancel</a>
+          </li>
+        </ul>
+      </article>
+    </div>
+    <div>
+      <input id="ac-34" name="accordion-1" type="checkbox" />
+      <label for="ac-34">Validation</label>
+      <article class="ac-large">
+        <p>You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'? Why don't they know? If they don't know, that means we never told anyone. And if we never told anyone it means we never made it back. Hence we die down here. Just as a matter of deductive logic. </p>
+      </article>
+    </div>
+  </section>
+
+</script>
+
+<!-- View Chooser -->
+<script id="ViewChooserTemplate" type="text/template">
+  <h2>Views</h2>
+  <section data-menu="views" class="ac-container">
+    <div>
+      <input id="ac-21" name="accordion-1" type="checkbox" />
+      <label for="ac-21">Cart</label>
+      <article class="ac-small">
+        <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.</p>
+      </article>
+    </div>
+    <div>
+      <input id="ac-22" name="accordion-1" type="checkbox" />
+      <label for="ac-22">Users</label>
+      <article class="ac-medium">
+        <p>Like you, I used to think the world was this great place where everybody lived by the same standards I did, then some kid with a nail showed me I was living in his world, a world where chaos rules not order, a world where righteousness is not rewarded. That's Cesar's world, and if you're not willing to play by his rules, then you're gonna have to pay the price. </p>
+      </article>
+    </div>
+    <div>
+      <input id="ac-23" name="accordion-1" type="checkbox" />
+      <label for="ac-23">Catalog</label>
+      <article class="ac-large">
+        <p>You think water moves fast? You should see ice. It moves like it has a mind. Like it knows it killed the world once and got a taste for murder. After the avalanche, it took us a week to climb out. Now, I don't know exactly when we turned on each other, but I know that seven of us survived the slide... and only five made it out. Now we took an oath, that I'm breaking now. We said we'd say it was the snow that killed the other two, but it wasn't. Nature is lethal but it doesn't hold a candle to man. </p>
+      </article>
+    </div>
+    <div>
+      <input id="ac-24" name="accordion-1" type="checkbox" />
+      <label for="ac-24">Home</label>
+      <article class="ac-large">
+        <p>You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'? Why don't they know? If they don't know, that means we never told anyone. And if we never told anyone it means we never made it back. Hence we die down here. Just as a matter of deductive logic. </p>
+      </article>
+    </div>
+  </section>
+
+</script>
+<!-- Layout Options -->
+<script id="LayoutChooserTemplate" type="text/template">
+<h2>Layouts</h2>
+<section data-menu="layouts" class="ac-container">
+<div>
+  <input id="ac-1" name="accordion-1" type="checkbox">
+  <label for="ac-1">Grid</label>
+  <article class="ac-small">
+    <div class="row" draggable="true" data-element="half">
+      <div class="half bg-lightblue">Half</div>
+      <div class="half bg-lightblue">Half</div>
+    </div>
+    <div class="row" draggable="true" data-element="thirds">
+      <div class="third bg-blue">Third</div>
+      <div class="third bg-blue">Third</div>
+      <div class="third bg-blue">Third</div>
+    </div>
+    <div class="row" draggable="true" data-element="quarter">
+      <div class="quarter bg-lightblue">Quarter</div>
+      <div class="quarter bg-lightblue">Quarter</div>
+      <div class="quarter bg-lightblue">Quarter</div>
+      <div class="quarter bg-lightblue">Quarter <!--
+                    Nested
+
+                                    <div class="row">
+                                        <div class="third bg-blue">Third</div>
+                                        <div class="third bg-lightblue">Third</div>
+                                        <div class="third bg-blue">Third</div>
+                                    </div>
+                    -->
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fifth bg-blue">Fifth</div>
+      <div class="fifth bg-blue">Fifth</div>
+      <div class="fifth bg-blue">Fifth</div>
+      <div class="fifth bg-blue">Fifth</div>
+      <div class="fifth bg-blue">Fifth</div>
+    </div>
+
+    <div class="row">
+      <div class="sixth bg-lightblue">Sixth</div>
+      <div class="sixth bg-lightblue">Sixth</div>
+      <div class="sixth bg-lightblue">Sixth</div>
+      <div class="sixth bg-lightblue">Sixth</div>
+      <div class="sixth bg-lightblue">Sixth</div>
+      <div class="sixth bg-lightblue">Sixth</div>
+    </div>
+
+    <div class="row">
+      <div class="third bg-blue"><div class="">Third with inner</div></div>
+      <div class="twothird bg-blue">TwoThird</div>
+    </div>
+
+    <div class="row">
+      <div class="twofifth bg-lightblue">Two Fifth</div>
+      <div class="threefifth bg-lightblue">Three Fifth</div>
+    </div>
+
+    <div class="row">
+      <div class="fifth bg-blue">Fifth</div>
+      <div class="fourfifth bg-blue">Four Fifth</div>
+    </div>
+
+    <div class="row">
+      <div class="fivesixth bg-lightblue">Five Sixth</div>
+      <div class="sixth bg-lightblue">Sixth</div>
+    </div>
+
+    <div class="row">
+      <div class="quarter bg-blue">Quarter</div>
+      <div class="threequarter bg-blue">Three Quarter</div>
+    </div>
+
+    <div class="row">
+
+      <div class="fifth bg-lightblue">Fifth</div>
+      <div class="threefifth bg-lightblue">Three Fifth</div>
+      <div class="fifth bg-lightblue">Fifth</div>
+
+    </div>
+  </article>
+</div>
+<div>
+  <input id="ac-2" name="accordion-1" type="checkbox">
+  <label for="ac-2">Centered</label>
+  <article class="ac-medium">
+    <div class="row">
+      <div class="half bg-blue centered">Half</div>
+    </div>
+
+
+    <div class="row">
+      <div class="third bg-blue centered">Third</div>
+    </div>
+
+    <div class="row">
+      <div class="quarter bg-lightblue centered">Quarter</div>
+    </div>
+
+    <div class="row">
+      <div class="fifth bg-blue centered">Fifth</div>
+    </div>
+
+    <div class="row">
+      <div class="sixth bg-lightblue centered">Sixth</div>
+    </div>
+
+    <div class="row">
+      <div class="twothird bg-blue centered">TwoThird</div>
+    </div>
+
+    <div class="row">
+      <div class="twofifth bg-lightblue centered">Two Fifth</div>
+    </div>
+    <div class="row">
+      <div class="threefifth bg-lightblue centered">Three Fifth</div>
+    </div>
+
+    <div class="row">
+      <div class="fourfifth bg-blue centered">Four Fifth</div>
+    </div>
+
+    <div class="row">
+      <div class="fivesixth bg-lightblue centered">Five Sixth</div>
+    </div>
+
+    <div class="row">
+      <div class="threequarter bg-blue centered">Three Quarter</div>
+    </div>
+  </article>
+</div>
+<div>
+  <input id="ac-3" name="accordion-1" type="checkbox">
+  <label for="ac-3">Push</label>
+  <article class="ac-large">
+    <div class="row">
+      <div class="sixth bg-blue push-fivesixth">Five Sixth</div>
+    </div>
+
+    <div class="row">
+      <div class="fifth bg-blue push-fourfifth">Four Fifth</div>
+    </div>
+
+
+    <div class="row">
+      <div class="quarter bg-blue push-threequarter">Three Quarter</div>
+    </div>
+
+    <div class="row">
+      <div class="third bg-blue push-twothird">Two Third</div>
+    </div>
+
+
+    <div class="row">
+      <div class="twofifth bg-blue push-threefifth">Three Fifth</div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="half bg-blue push-half">Half</div>
+    </div>
+
+    <div class="row">
+      <div class="threefifth bg-blue push-twofifth">Two Fifth</div>
+    </div>
+
+
+    <div class="row">
+      <div class="twothird bg-blue push-third">Third</div>
+    </div>
+
+
+    <div class="row">
+      <div class="threequarter bg-blue push-quarter">Quarter</div>
+    </div>
+
+    <div class="row">
+      <div class="fourfifth bg-blue push-fifth">Fifth</div>
+    </div>
+
+    <div class="row">
+      <div class="fivesixth bg-blue push-sixth">Sixth</div>
+    </div>
+  </article>
+</div>
+<div>
+  <input id="ac-4" name="accordion-1" type="checkbox">
+  <label for="ac-4">Split</label>
+  <article class="ac-large">
+    <div class="row split">
+      <div class="half bg-lightblue">Half</div>
+      <div class="half bg-blue">Half</div>
+    </div>
+
+
+    <div class="row split">
+      <div class="third bg-blue">Third</div>
+      <div class="third bg-lightblue">Third</div>
+      <div class="third bg-blue">Third</div>
+    </div>
+
+    <div class="row split">
+      <div class="quarter bg-lightblue">Quarter</div>
+      <div class="quarter bg-blue">Quarter</div>
+      <div class="quarter bg-lightblue">Quarter</div>
+      <div class="quarter bg-blue">Quarter</div>
+    </div>
+
+    <div class="row split">
+      <div class="fifth bg-blue">Fifth</div>
+      <div class="fifth bg-lightblue">Fifth</div>
+      <div class="fifth bg-blue">Fifth</div>
+      <div class="fifth bg-lightblue">Fifth</div>
+      <div class="fifth bg-blue">Fifth</div>
+    </div>
+
+    <div class="row split">
+      <div class="sixth bg-lightblue">Sixth</div>
+      <div class="sixth bg-blue">Sixth</div>
+      <div class="sixth bg-lightblue">Sixth</div>
+      <div class="sixth bg-blue">Sixth</div>
+      <div class="sixth bg-lightblue">Sixth</div>
+      <div class="sixth bg-blue">Sixth</div>
+    </div>
+
+    <div class="row split">
+      <div class="third bg-blue">Third</div>
+      <div class="twothird bg-lightblue">TwoThird</div>
+    </div>
+
+    <div class="row split">
+      <div class="twofifth bg-lightblue">Two Fifth</div>
+      <div class="threefifth bg-blue">Three Fifth</div>
+    </div>
+
+    <div class="row split">
+      <div class="fifth bg-lightblue">Fifth</div>
+      <div class="fourfifth bg-blue">Four Fifth</div>
+    </div>
+
+    <div class="row split">
+      <div class="fivesixth bg-blue">Five Sixth</div>
+      <div class="sixth bg-lightblue">Sixth</div>
+    </div>
+
+    <div class="row split">
+      <div class="quarter bg-lightblue">Quarter</div>
+      <div class="threequarter bg-blue">Three Quarter</div>
+    </div>
+
+    <div class="row split">
+
+      <div class="fifth bg-lightblue">Fifth</div>
+      <div class="threefifth bg-blue">Three Fifth</div>
+      <div class="fifth bg-lightblue">Fifth</div>
+
+    </div>
+  </article>
+</div>
+<div>
+  <input id="ac-5" name="accordion-1" type="checkbox">
+  <label for="ac-5">Block</label>
+  <article class="ac-large">
+    <ul class="block-two">
+      <li class="bg-lightblue">Two</li>
+      <li class="bg-blue">Two</li>
+    </ul>
+
+
+
+
+    <br>
+    <ul class="block-three">
+      <li class="bg-lightblue">Three</li>
+      <li class="bg-blue">Three</li>
+      <li class="bg-lightblue">Three</li>
+    </ul>
+
+
+
+    <br>
+    <ul class="block-four">
+      <li class="bg-lightblue">Four</li>
+      <li class="bg-blue">Four</li>
+      <li class="bg-lightblue">Four</li>
+      <li class="bg-blue">Four</li>
+    </ul>
+
+
+    <br>
+    <ul class="block-five">
+      <li class="bg-lightblue">Five</li>
+      <li class="bg-blue">Five</li>
+      <li class="bg-lightblue">Five</li>
+      <li class="bg-blue">Five</li>
+      <li class="bg-lightblue">Five</li>
+    </ul>
+
+
+
+    <br>
+    <ul class="block-six">
+      <li class="bg-lightblue">Six</li>
+      <li class="bg-blue">Six</li>
+      <li class="bg-lightblue">Six</li>
+      <li class="bg-blue">Six</li>
+      <li class="bg-lightblue">Six</li>
+      <li class="bg-blue">Six</li>
+    </ul>
+  </article>
+</div>
+</section>
+
+</script>
+
+
+
+<!-- original accordion demo -->
+<script id="AccordionDemoTemplate" type="text/template"></script>
+
+
+
+
+</div>

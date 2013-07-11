@@ -1,0 +1,85 @@
+@import 'variables';
+@import 'elements';
+@import 'kube';
+@import 'base';
+@import 'colorpicker';
+@import 'dev';
+@import 'composer';
+@import 'accordion.style.less';
+@import 'composer';
+@import 'appheader';
+
+  /*
+
+    plugin css files
+
+  */
+@import 'jquery.toastmessage.less';
+
+
+/*
+reference:
+http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of-ems/
+*/
+.btn-cmd{
+    border:8px solid grey;
+    background:transparent;
+    color:@defaultLinkColor;
+}
+.btn-cmd:hover{
+    border:0;
+    background:rgba(150,150,150,.3);
+}
+.btn-cmd:active{
+    border:0;
+    background:rgba(150,150,150,.4);
+    text-shadow:7px 7px 12px rgba(150, 150, 150, 1);
+}
+
+
+.view-title{
+  color:@viewTitleColor;
+  text-transform: capitalize;
+  text-shadow: 1px 1px 0px rgb(21, 25, 26), 2px 2px 0px rgb(128, 87, 87);
+}
+
+
+#contextmenu{
+  margin:0;
+  padding:0;
+  border: 1px solid #000;
+  background:@contextMenuBgColorDefault;
+}
+#contextmenu li {
+  list-style-type:none;
+  margin:1px;
+  padding:2px;
+  color:@contextMenuItemColorDefault;
+  cursor:pointer;
+}
+#contextmenu li.hover{
+  background: #ddd;
+}
+
+#simplemodal-overlay {background-color:#000;}
+#simplemodal-container {background-color:#333; border:8px solid #444; padding:12px;}
+#simplemodal-container a.modalCloseImg {
+  background:url(images/x.png) no-repeat; /* adjust url as required */
+  width:25px;
+  height:29px;
+  display:inline;
+  z-index:3200;
+  position:absolute;
+  top:-15px;
+  right:-18px;
+  cursor:pointer;
+}
+
+.theme-variable-item-value-dark .btn-cmd{
+    color:#111111;
+}
+.theme-variable-item-value-light .btn-cmd{
+    color:#eeeeee;
+}
+
+

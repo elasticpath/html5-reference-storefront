@@ -1,0 +1,73 @@
+<div id="AppModuleTemplateContainer">
+
+  <!-- Default Base layout Template -->
+  <script id="AppModuleDefaultBaseTemplate" type="text/template">
+
+    <!-- Application Header -->
+    <header class="app-header" data-region="appHeader"></header>
+
+    <!-- Application Main Content Region -->
+    <div class="app-main" data-region="appMain"></div>
+
+    <!-- Application Footer Region -->
+    <footer class="app-footer" data-region="appFooter"></footer>
+
+  </script>
+
+  <!-- Instrumentation View -->
+  <script id="EPDevInstrumentationTemplate" type="text/template">
+    <button class="btn-cmd" id="BtnDevInstrumenationToggle">INSTRUMENATION</button>
+    <div id="EPDevInstrumentation">
+      <label>Keep Open
+        <input type="checkbox" id="DevInstrumentationToggleCheckbox" checked="checked" />
+      </label>
+      <h2 class="ep-dev-instrumentation-header">Application</h2>
+      <table class="ep-dev-instrumentation-table">
+        <thead>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+
+        <tr>
+          <td>
+            Pixel Density
+          </td>
+          <td id="DevInstrumentationPixelDensity"></td>
+        </tr>
+        <tr>
+          <td>
+            Touch Enabled
+          </td>
+          <td id="DevInstrumentationTouchEnabled"></td>
+        </tr>
+        <tr>
+          <td>
+            Render Profile
+          </td>
+          <td id="DevInstrumentationRenderProfile"></td>
+        </tr>
+        <tr>
+          <td>
+            Screen Width (Px)
+          </td>
+          <td id="DevInstrumentationScreenPixelWidth"></td>
+        </tr>
+        <tr>
+          <td>
+            Screen Width (REM)
+          </td>
+          <td id="DevInstrumentationScreenRemWidth"></td>
+        </tr>
+
+
+
+        </tbody>
+
+      </table>
+      <div data-region="EPDevAppHeaderInstrumentationContainer"></div>
+    </div>
+
+  </script>
+
+</div>

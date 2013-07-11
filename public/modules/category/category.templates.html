@@ -1,0 +1,39 @@
+<div id="CategoryTemplageContainer">
+
+  <script type="text/template" id="RelSummaryTemplate">
+
+    <label class="rel-title-label"><%= E.name %><span class="rel-child-count">[<%= E.count%>]</span></label>
+    <div class="summary-content"></div>
+
+  </script>
+
+  <script type="text/template" id="RelItemLayout">
+
+    <h1><%= E.catName %></h1>
+    <div class="element-content rel-contnent-container"></div>
+    <div class="child-content rel-contnent-container"></div>
+    <div class="items-content rel-contnent-container"></div>
+    <div class="item-content rel-contnent-container"></div>
+    <div class="other-conten rel-contnent-containert"></div>
+
+  </script>
+
+
+  <script id="LinkItemTemplate" type="text/template">
+
+    <label class="rel-type-label">[<%= E.name %>][<%= E.rel %>]:</label><a href="<%= E.href %>" class="link-getdata" data-uri="<%= E.uri %>">fire request</a><span data-id="<%= E.uri %>"></span>
+
+  </script>
+  <script id="LinkTemplateContainer" type="text/template">
+
+    <div class="category-list-container">
+
+      <ul class="category-list">
+
+      </ul>
+
+    </div>
+
+  </script>
+
+</div>

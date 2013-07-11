@@ -1,0 +1,21 @@
+{
+  "logging":{
+    "logInfo":true,
+    "logWarnings":true,
+    "logErrors":true
+  },
+  "debug":{
+    "showInstrumentation":false
+  },
+  "cortexApi":{
+    "host":"http://localhost",
+    "port":"3004",
+    "path":"cortex",
+    "store":"mobee"
+  },
+  "deployMode":"development",
+  "api":{
+    "url":"cortex",
+    "store":"mobee"
+  }
+}

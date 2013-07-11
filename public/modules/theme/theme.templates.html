@@ -1,0 +1,58 @@
+<div id="ThemeModuleTemplateContainer">
+
+  <script id="ThemeModuleDefaultTemplate" type="text/template">
+
+    <!-- Theme Main Content Region -->
+
+    <div data-region="themeListRegion"></div>
+    <div data-region="themeDetailsRegion"></div>
+
+
+  </script>
+
+  <script id="ThemeListItemViewTemplate" type="text/template">
+
+    <button class="btn-cmd btn-edit-theme" data-name="<%= E.name %>" data-i18n="<%= E.i18n %>"><%= E.label %></button>
+    <button class="btn-activate-theme" data-name="<%= E.name %>" data-i18n="composer.activatetheme">set theme</button>
+
+  </script>
+
+  <script id="ThemeListViewTemplate" type="text/template">
+
+    <h2>Themes</h2><p class="color-picker" id="ColorP">color picker</p>
+    <ul class="theme-list"></ul>
+
+  </script>
+
+  <script id="ThemeFormViewTemplate" type="text/template">
+
+    <div class="" ></div>
+
+  </script>
+
+  <script id="ThemeVariableItemTemplate" type="text/template">
+    <div class="theme-variable-item-container" data-name="<%= E.name %>">
+      <span class="theme-variable-item-preview" ></span>
+      <label class="theme-variable-item-name"><%= E.name %></label>
+      <span class="theme-variable-item-value theme-variable-item-value-light" style="<%= E.renderColorStyleAttributeValue(E.value) %>"><button class="btn-cmd btn-edit-theme-var" data-name="<%= E.name %>" data-value="<%= E.value %>"><%= E.value %></button></span>
+      <span class="theme-variable-item-value theme-variable-item-value-dark" style="<%= E.renderColorStyleAttributeValue(E.value) %>"><button class="btn-cmd btn-edit-theme-var" data-name="<%= E.name %>" data-value="<%= E.value %>"><%= E.value %></button></span>
+      <span class="theme-variable-item-comment"><%= E.comment %></span>
+      <span class="theme-variable-item-description"><%= E.description %></span>
+    </div>
+  </script>
+  <script id="ThemeDetailViewTemplate" type="text/template">
+
+    <h2>Theme Details</h2>
+    <label>theme name: <%= E.display %></label>
+    <h3>Theme Variables</h3>
+    <ul class="theme-variables-list"></ul>
+
+  </script>
+
+  <script id="ThemeEditorViewTemplate" type="text/template">
+
+    <div class="" >E</div>
+
+  </script>
+
+</div>
