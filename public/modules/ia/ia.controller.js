@@ -44,7 +44,7 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
       });
 
       mainNavCollection.fetch({
-        url: '/cortex/navigations/mobee?zoom=element',
+        url: '/' + ep.app.cortexApi.path + '/navigations/' + ep.app.cortexApi.store + '?zoom=element',
         success: function(response){},
         error:function(response){
           //clearInterval(timer);
@@ -251,7 +251,7 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
       // Product Item List View
       itemListCollection.fetch({
         //url:targetParentNode.itemsHref[0].href + '?zoom=element:price,element:availability,element:definition,element:definition:assets:element',
-        url:targetParentNode.itemsHref[0].href + '?zoom=element:definition:item,element:price,element:definition',
+        url:targetParentNode.itemsHref[0].href + '?zoom=element,element:definition:item,element:price,element:definition',
         success:function(response){
           //ep.logger.info('ya hoo ' + response);
 

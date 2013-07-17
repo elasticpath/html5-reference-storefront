@@ -26,7 +26,7 @@ define(['ep','eventbus', 'backbone', 'cortex'],
     // Build Main Nav collection
     var MainNavCollection = Backbone.Collection.extend({
       model: MainNavItemModel,
-      url: '/cortex/navigations/mobee?zoom=element',
+      url: '/' + ep.app.cortexApi.path + '/navigations/' + ep.app.cortexApi.store + '?zoom=element',
       parse:function(response){
         // grab only the elements
         var mainNavCollection = _.first(jsonPath(response, "$.['_element']"));
@@ -100,12 +100,23 @@ define(['ep','eventbus', 'backbone', 'cortex'],
 
         retVal = [];
 
+
+        //encodeURIComponent / decodeURIComponent
         if (firstCutArray){
           for (var i = 0;i < firstCutArray[0].length;i++){
             var retItem = {};
             var item = firstCutArray[0][i];
             if (item['_definition']){
               retItem.name = item['_definition'][0]['display-name'];
+              retItem.uri = item['_definition'][0].self.uri;
+              var itemUri = item['_definition'][0].self.uri;
+              var uriCruft = '/itemdefinitions/' +ep.app.cortexApi.store + '/';
+              if (itemUri.indexOf(uriCruft) > -1){
+                var isoId = itemUri.substring(uriCruft.length,itemUri.length);
+                retItem.isoId = isoId;
+              }
+
+
             }
             if (item['_price']){
               retItem.price = item['_price'][0]['purchase-price'][0].display;

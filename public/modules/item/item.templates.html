@@ -1,10 +1,41 @@
 <div id="ItemTemplateContainer">
 
-  <script type="text/template" id="ItemDefaultTemplate">
+  <script type="text/template" id="ItemDefaultLayoutTemplate">
 
-    <div class="cart-container">Item</div>
+    <div data-region="itemDetailViewRegion"></div>
+    <div class="item-attributes-list-container" data-region="attributeListRegion"></div>
 
   </script>
 
+  <script id="DefaultItemDetailViewTemplate" type="text/template">
+    <h1><%- E.displayName  %></h1>
 
+    <div data-region="itemDetailAssetRegion"></div>
+    <span class="item-availability"><%= E.getAvailabilityDisplayText(E.availability) %></span>
+    <div data-region="listPriceRegion"></div>
+    <div class="item-detail-price-container">
+      <label>Purchase Price:</label><span><%= E.price.purchase.display %></span>
+      <button class="btn-round btn btn-primary">Add to Cart</button>
+    </div>
+
+  </script>
+
+  <!-- List Price Template -->
+  <script id="ItemDetailListPriceTemplate" type="text/template">
+    <label i18n="listPriceLabel">List Price:</label><span class="item-detail-value list-price"><%= E.display %></span>
+  </script>
+
+  <!-- Product Image Template -->
+  <script id="ItemDetailImageTemplate" type="text/template">
+    <img src="<%= E.src %>" class="item-detail-main-img" />
+  </script>
+
+  <script id="DefaultItemDetailListItemTemplate" type="text/template">
+    <td class="item-attribute-label-col">
+        <%= E.displayName %>
+    </td>
+    <td class="item-attribute-value-col">
+        <%= E.displayValue %>
+    </td>
+  </script>
 </div>

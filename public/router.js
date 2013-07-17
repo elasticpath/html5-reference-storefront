@@ -17,6 +17,30 @@ define(['marionette','eventbus'],
           view:'IndexLayout'
         });
       },
+      item: function(id) {
+        EventBus.trigger('layout.loadRegionContentRequest',{
+          region:'appMainRegion',
+          module:'item',
+          view:'DefaultItemDetailView',
+          data:id
+        });
+      },
+      category: function(category) {
+        EventBus.trigger('layout.loadRegionContentRequest',{
+          region:'appMainRegion',
+          module:'ia',
+          view:'BrowseCategoryView',
+          data:category
+        });
+      },
+      search: function(keywords) {
+        EventBus.trigger('layout.loadRegionContentRequest',{
+          region:'appMainRegion',
+          module:'search',
+          view:'SearchResultsView',
+          data:keywords
+        });
+      },
       composer: function() {
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
@@ -91,6 +115,10 @@ define(['marionette','eventbus'],
       appRoutes:{
         '': 'index',
         'home': 'index',
+        'category' : 'category',
+        'category/:name' : 'category',
+        'search' : 'search',
+        'search/:keywords' : 'search',
         'composer': 'composer',
         'composer/module/:module/:ext/:fileName': 'moduleComposer',
         'composer/style/:fileName': 'styleComposer',
@@ -100,6 +128,7 @@ define(['marionette','eventbus'],
         'composer/view/:viewName': 'viewComposer',
         'composer2': 'composer2',
         'theme': 'theme',
+        'itemdetail/:id': 'item',
         'settings': 'settings'
       },
       controller:appRouterController

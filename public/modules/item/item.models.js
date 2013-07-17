@@ -1,124 +1,135 @@
-define([
-	"app",
-
-	// Libs
-	"backbone",
-
-	// Modules
-	"cortex",
-	"URI",
-
-	// Plugins
-	"jsonpath"
-	],
-
-	function(app, Backbone, Cortex, URI) {
+define(['ep','app','backbone','jsonpath'],
+	function(ep, app, Backbone, Cortex, URI) {
 		var ItemModels = {};
 
-		var itemMedia = Backbone.Cortex.Model.extend({
-			zoom: 'assets:element',
-			urlRoot: function () {
-				return app.config.url + '/itemdefinitions/' + app.config.store;
-			},
-			initialize: function (attributes, options) {
-				Backbone.Cortex.Model.prototype.initialize.call(this, options);
-				this.name = attributes.name;
-			},
-			afterParse: function (response, model) {
-				var mediaArray = _.first(jsonPath(response, "$..[':assets']..[':element']"));
-				if (mediaArray == null) {
-					return model;
-				}
-				var media = _.findWhere(mediaArray, {name: "default-image"});
-				if (media) {
-					model["content-location"] = media["content-location"];
-					model["name"] = this.name;
-				}
-				return model;
-			}
-		});
 
-		var itemPrice = Backbone.Cortex.Model.extend({
-			afterParse: function (response, model) {
-				model['list-price'] = _.first(jsonPath(response, "$..['list-price'][0]"));
-				model['purchase-price'] = _.first(jsonPath(response, "$..['purchase-price'][0]"));
-				return model;
-			}
-		});
+    var itemModel = Backbone.Model.extend({
+      parse:function(item){
 
-		var itemDefinition = Backbone.Cortex.Model.extend({
-			afterParse: function (response, model) {
-				_.extend(model, _.pick(response, "display-name"));
-				model["media"] = new itemMedia({ id: model.self.id, name: model["display-name"]});
-				return model;
-			}
-		});
+        var tempObj = {};
 
-		//Item model
-		var item = Backbone.Cortex.Model.extend({
-			zoom: 'price,definition',
-			urlRoot: function () {
-				return app.config.url + '/items/' + app.config.store;
-			},
-			afterParse: function (response, model) {
-				var price, definition;
 
-				price = _.first(jsonPath(response, "$..[':price'][0]"));
-				definition = _.first(jsonPath(response, "$..[':definition'][0]"));
+        tempObj.displayName = item['display-name'];
 
-				if (price) {
-					model.price = new itemPrice(price, { parse: true });
-				}
 
-				if (definition) {
-					model.definition = new itemDefinition(definition, { parse: true, id: model.self.id});
-				}
-				return model;
-			},
-			addToCart: function (quantity, options) {
-				options = options || {};
-				var follow = options.followLocation || false;
-				var zoom = options.zoom;
-				var formLink = this.get("links").addtocartform;
-				var form = new Backbone.Cortex.Model( {self: formLink.createSelf()} );
+        var itemObj = {};
 
-				form.fetch( {success: function(resp, status, xhr) {
-					var link = resp.get("links").addtodefaultcartaction;
-					var linkhref;
 
-					if (!link && options.notavailable && _.isFunction(options.notavailable)) {
-						options.notavailable();
-						return;
-					} 
-					linkhref = URI(link.href);
-					if (follow) {
-						linkhref.addSearch("followLocation", "");
-					}
-					if (zoom) {
-						linkhref.addSearch("zoom", zoom);
-					}
-					$.jsonAjax({
-						type: 'POST',
-						url: linkhref.toString(),
-						data: JSON.stringify({quantity: quantity}),
-						error: options.error,
-						success: options.success
-					});					
-				}} );
-			}		
-		});
+        /*
+         *
+         * Display Name
+         *
+         * */
+        itemObj.displayName = item['_definition'][0]['display-name'];
 
-		var items = Backbone.Cortex.Collection.extend({
-			model: item
-		});
+        /*
+         *
+         * Details
+         *
+         * */
+
+        var detailsArray = [];
+        if (item['_definition'][0]['details']){
+          var detailsRoot = item['_definition'][0]['details'];
+
+          for (var x = 0;x < detailsRoot.length;x++){
+            var currObj = detailsRoot[x];
+            var detailObject = {};
+            detailObject.displayName = currObj['display-name'];
+            detailObject.displayValue = currObj['display-value'];
+            detailsArray.push(detailObject);
+          }
+
+        }
+
+
+        itemObj.details = detailsArray;
+
+
+        /*
+         *
+         * Assets
+         *
+         * */
+        itemObj.asset = {};
+        itemObj.asset.url = '';
+        var assetsListArray = [];
+        if (item['_definition'][0]['_assets']){
+          var assetsList = item['_definition'][0]['_assets'][0]._element;
+          for (var i = 0;i < assetsList.length;i++){
+            var currAssetObj = assetsList[i];
+            var assetObj = {};
+            // for first cut only worry about the default image
+            // multi image will come in future enhancements
+            if (currAssetObj['name'] === 'default-image'){
+              itemObj.asset.url = 'http://localhost:3007/images/testdata/finding-nemo.jpg';
+              //assetObj.contentLocation = currAssetObj['content-location'];
+              assetObj.name = currAssetObj['name'];
+              assetObj.relatvieLocation = currAssetObj['relative-location'];
+            }
+
+            assetsListArray.push(assetObj);
+          }
+
+        }
+        itemObj.assets = assetsListArray;
+
+
+        /*
+         *
+         * Availability
+         *
+         * */
+        itemObj.availability = item['_availability'][0]['state'];
+
+        /*
+         *
+         * Price
+         *
+         * */
+        itemObj.price = {};
+        itemObj.price.list = {};
+        itemObj.price.purchase = {};
+
+        if (item['_price'] && item['_price'][0]['list-price']){
+
+          itemObj.price.list = {
+            currency:item['_price'][0]['list-price'][0].currency,
+            amount:item['_price'][0]['list-price'][0].amount,
+            display:item['_price'][0]['list-price'][0].display
+          };
+        }
+
+
+        if (item['_price'] && item['_price'][0]['purchase-price']){
+          itemObj.price.purchase = {
+            currency:item['_price'][0]['purchase-price'][0].currency,
+            amount:item['_price'][0]['purchase-price'][0].amount,
+            display:item['_price'][0]['purchase-price'][0].display
+          };
+        }
+
+
+
+        return itemObj;
+      }
+    });
+
+    var itemAttributeModel = Backbone.Model.extend();
+    var itemAttributeCollection = Backbone.Collection.extend({
+      model:itemAttributeModel,
+      parse:function(collection){
+        return collection;
+      }
+    });
+
+    var listPriceModel = Backbone.Model.extend();
 
 	// Required, return the module for AMD compliance
 	return {
-    ItemMedia:itemMedia,
-    ItemPrice:itemPrice,
-    ItemDefinition:itemDefinition,
-    Item:item,
-    Items:items
+    ItemModel:itemModel,
+    ItemAttributeCollection:itemAttributeCollection,
+    ListPriceModel:listPriceModel
   };
 });
 

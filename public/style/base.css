@@ -9,8 +9,8 @@
 }
 body {
   font-size: 100%;
-  background-color: #a2c5bf;
-  color: #faf7fa;
+  background-color: #ffffff;
+  color: #444444;
 }
 h1 {
   font-size: 2.5rem;
@@ -33,7 +33,10 @@ h5 {
 }
 /*16/16*/
 a {
-  color: rgba(89, 23, 255, 0.9);
+  color: #070ca6;
+}
+ul {
+  list-style: none;
 }
 .viewport {
   min-width: 320px;
@@ -51,4 +54,8 @@ a {
 /* override some kube stuff */
 .viewport .row {
   background: transparent;
+}
+.btn-primary {
+  background: blue;
+  color: #ffffff;
 }

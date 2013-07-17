@@ -1722,6 +1722,9 @@ h5 {
 a {
   color: #070ca6;
 }
+ul {
+  list-style: none;
+}
 .viewport {
   min-width: 320px;
   max-width: 90rem;
@@ -1738,6 +1741,10 @@ a {
 /* override some kube stuff */
 .viewport .row {
   background: transparent;
+}
+.btn-primary {
+  background: blue;
+  color: #ffffff;
 }
 .colorpicker {
   width: 356px;
@@ -2277,6 +2284,39 @@ header.app-header .btn-main-nav-toggle:active {
 }
 .global-nav-container a {
   color: #070ca6;
+}
+/*
+    item detail
+  */
+.item-detail-main-img {
+  width: 20rem;
+}
+.item-detail-asset-container {
+  float: left;
+  padding: 2rem;
+}
+.item-availability {
+  border-radius: .4rem;
+  padding: .5rem;
+  color: #ffffff;
+  background-color: darkorange;
+  font-size: 120%;
+}
+.item-detail-price-container {
+  margin-top: 1rem;
+}
+.item-attributes-list-container {
+  margin-top: 1.8rem;
+}
+.item-attribute-label-col {
+  vertical-align: middle;
+  padding: 0;
+  font-size: 90%;
+  color: #444444;
+}
+.item-attribute-value-col {
+  padding: .2rem;
+  font-weight: bold;
 }
 /*
 

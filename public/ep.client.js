@@ -262,7 +262,7 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
 
       $.ajax({
         type:'POST',
-        url:'/cortex/oauth2/tokens',
+        url:'/' + config.cortexApi.path + '/oauth2/tokens',
 
         contentType: 'application/x-www-form-urlencoded',
         data:authString,
@@ -270,7 +270,7 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
           // $('#authHeader').val("Bearer " + json.access_token);
           //cortex.ui.saveField('authHeader');
           window.localStorage.setItem('oAuthRole', 'PUBLIC');
-          window.localStorage.setItem('oAuthScope', 'mobee');
+          window.localStorage.setItem('oAuthScope', ep.app.cortexApi.store);
           window.localStorage.setItem('oAuthToken', 'Bearer ' + json.access_token);
 
           //if (authRole === 'PUBLIC') {
@@ -310,11 +310,10 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
 
       if (!oAuthToken){
         generatePublicAuth();
-        EventBus.on('app.authInit');
-        oAuthToken = window.localStorage.getItem('oAuthToken');
+        EventBus.on('app.authInit',function(){
+          document.location.reload();
 
-        ep.logger.info('GENERATED THE TOKEN!!!: ' + oAuthToken);
-        return oAuthToken;
+        });
       }
       else{
         return oAuthToken;
@@ -328,22 +327,36 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
       options = options || {};
 
       if (options.url){
-        var origUrl = options.url;
-        var replaceUrl = origUrl.replace('http://10.10.2.141:8080','');
+
+        // scrub out any absolute path (prior to /cortex) in the URL to avoid confusing the proxy
+        // ie all requests are relative path
+        var replaceUrl = options.url;
+        var testPath = '/' + config.cortexApi.path;
+        var pathIndex = replaceUrl.indexOf(testPath);
+        if (pathIndex > 0){
+
+          replaceUrl = replaceUrl.substring(pathIndex,replaceUrl.length);
+         // ep.logger.info('YAUYAUYAP0SDFASDF   path: ' + replaceUrl);
+
+
+        }
         options.url = replaceUrl;
       }
+      options.error = function(data, response, options){
+        if (response.status === 401){
+          ep.logger.error('reponse error: ' + response.responseText + ' : ' + response.status);
+          generatePublicAuth();
 
-//      "http://10.10.2.141:8080/cortex/navigations/mobee/i5qw2zlt=?zoom=child"
-
-
-
-
+        }
+      }
 
       options.headers = options.headers || {};
-      //'Authorization' : cortex.authHeader
+
       _.extend(options.headers, { 'Authorization': getAuthToken() });
 
+
       baseSync(method, model, options);
+
     };
 
 
