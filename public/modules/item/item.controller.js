@@ -21,12 +21,13 @@ define(['ep','app', 'eventbus', 'cortex', 'modules/item/item.models', 'modules/i
     };
 
     var defaultItemDetailView = function(id){
+
       var defaultItemViewLayout = new View.DefaultItemViewLayout();
 
       var itemModel = new Model.ItemModel();
 
       itemModel.fetch({
-        url: ep.app.cortexApi.path + '/items/' + ep.app.cortexApi.store + '/' + id  + '?zoom=availability,addtocartform,price,definition,definition:assets:element',
+        url: ep.app.config.cortexApi.path + '/items/' + ep.app.config.cortexApi.store + '/' + id  + '?zoom=availability,addtocartform,price,definition,definition:assets:element',
         success:function(response){
 
           var attribsList = response.attributes.details;

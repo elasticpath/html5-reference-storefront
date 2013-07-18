@@ -6,11 +6,6 @@ define(['ep','app','backbone','jsonpath'],
     var itemModel = Backbone.Model.extend({
       parse:function(item){
 
-        var tempObj = {};
-
-
-        tempObj.displayName = item['display-name'];
-
 
         var itemObj = {};
 
@@ -20,19 +15,22 @@ define(['ep','app','backbone','jsonpath'],
          * Display Name
          *
          * */
-        itemObj.displayName = item['_definition'][0]['display-name'];
+        itemObj.displayName  = jsonPath(item, "$.['_definition'][0]['display-name']")[0];
+        //itemObj.displayName = item['_definition'][0]['display-name'];
 
         /*
          *
          * Details
          *
          * */
-
         var detailsArray = [];
-        if (item['_definition'][0]['details']){
-          var detailsRoot = item['_definition'][0]['details'];
+        var detailsRoot = jsonPath(item, "$.['_definition'][0]['details']")[0];
+        //if (item['_definition'][0]['details']){
+        if (detailsRoot){
+          //var detailsRoot = item['_definition'][0]['details'];
 
-          for (var x = 0;x < detailsRoot.length;x++){
+          var detailsAttribsArrayLen = detailsRoot.length;
+          for (var x = 0;x < detailsAttribsArrayLen;x++){
             var currObj = detailsRoot[x];
             var detailObject = {};
             detailObject.displayName = currObj['display-name'];
@@ -41,9 +39,21 @@ define(['ep','app','backbone','jsonpath'],
           }
 
         }
-
-
         itemObj.details = detailsArray;
+
+        /*
+        *
+        * Add to Cart Action test
+        *
+        * */
+        itemObj.addtocart = {};
+        itemObj.addtocart.actionlink = null;
+        var addToCartFormAction = jsonPath(item, "$._addtocartform..links[?(@.rel='addtodefaultcartaction')].rel")[0];
+        if (addToCartFormAction){
+          itemObj.addtocart.actionlink = jsonPath(item, "$._addtocartform..links[?(@.rel='addtodefaultcartaction')].href")[0];;
+        }
+
+
 
 
         /*
@@ -54,33 +64,27 @@ define(['ep','app','backbone','jsonpath'],
         itemObj.asset = {};
         itemObj.asset.url = '';
         var assetsListArray = [];
-        if (item['_definition'][0]['_assets']){
-          var assetsList = item['_definition'][0]['_assets'][0]._element;
-          for (var i = 0;i < assetsList.length;i++){
-            var currAssetObj = assetsList[i];
-            var assetObj = {};
-            // for first cut only worry about the default image
-            // multi image will come in future enhancements
-            if (currAssetObj['name'] === 'default-image'){
-              itemObj.asset.url = 'http://localhost:3007/images/testdata/finding-nemo.jpg';
-              //assetObj.contentLocation = currAssetObj['content-location'];
-              assetObj.name = currAssetObj['name'];
-              assetObj.relatvieLocation = currAssetObj['relative-location'];
-            }
+        var assetsArray = jsonPath(item, "$._definition.._assets.._element")[0];
+        if (assetsArray){
+          var defaultImage = jsonPath(item, "$._definition.._assets.._element[?(@.name='default-image')]")[0];
+          var assetObj = {};
 
-            assetsListArray.push(assetObj);
-          }
-
+          itemObj.asset.url = 'http://localhost:3007/images/testdata/finding-nemo.jpg';
+          //itemObj.asset.url = defaultImage['content-location'];
+          assetObj.name = defaultImage['name'];
+          assetObj.relatvieLocation = defaultImage['relative-location'];
+          assetsListArray.push(assetObj);
         }
         itemObj.assets = assetsListArray;
-
 
         /*
          *
          * Availability
          *
          * */
-        itemObj.availability = item['_availability'][0]['state'];
+        //itemObj.availability = item['_availability'][0]['state'];
+        itemObj.availability = jsonPath(item, "$.['_availability'][0]['state']")[0];
+
 
         /*
          *
@@ -91,25 +95,30 @@ define(['ep','app','backbone','jsonpath'],
         itemObj.price.list = {};
         itemObj.price.purchase = {};
 
-        if (item['_price'] && item['_price'][0]['list-price']){
+        var listPriceObject = jsonPath(item, "$.['_price'].['list-price']")[0];
+        var purchasePriceObject = jsonPath(item, "$.['_price'].['purchase-price']")[0];
 
+        /*
+        *   List Price
+        * */
+        if (listPriceObject){
           itemObj.price.list = {
-            currency:item['_price'][0]['list-price'][0].currency,
-            amount:item['_price'][0]['list-price'][0].amount,
-            display:item['_price'][0]['list-price'][0].display
+            currency:listPriceObject[0].currency,
+            amount:listPriceObject[0].amount,
+            display:listPriceObject[0].display
           };
         }
 
-
-        if (item['_price'] && item['_price'][0]['purchase-price']){
+        /*
+        *   Purchase Price
+        * */
+        if (purchasePriceObject){
           itemObj.price.purchase = {
-            currency:item['_price'][0]['purchase-price'][0].currency,
-            amount:item['_price'][0]['purchase-price'][0].amount,
-            display:item['_price'][0]['purchase-price'][0].display
+            currency:purchasePriceObject[0].currency,
+            amount:purchasePriceObject[0].amount,
+            display:purchasePriceObject[0].display
           };
         }
-
-
 
         return itemObj;
       }

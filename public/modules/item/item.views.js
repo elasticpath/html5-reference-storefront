@@ -37,6 +37,29 @@ define(['marionette'],
             retVal = '';
         }
         return retVal;
+      },
+      checkForDisabledAddToCart:function(model){
+
+        /*
+        *
+        * evaluate conditions where Add To Cart would be disabled
+        *
+        * - availability is NOT_AVAILABLE
+        * - there is no url in the addtocartaction link rel
+        *
+        * */
+
+//        if (model.availability === 'NOT_AVAILABLE'){
+//          return 'disabled="disabled"';
+//        }
+        // only check for the action link on the form as the
+        // determining whether the add to cart button should be active
+          // check if add to cart is available
+          if (!model.addtocart.actionlink){
+            return 'disabled="disabled"';
+          }
+
+
       }
 
     };

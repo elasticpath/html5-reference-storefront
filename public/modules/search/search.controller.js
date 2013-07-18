@@ -53,7 +53,8 @@ define(['ep','eventbus','modules/search/search.views','modules/search/search.mod
                 var searchResultModel = new Model.GetSearchResult();
 
                 // fire a get rquest to get the actual search results
-                searchResultModel.fetch({url:getCachedSearchResultUrl,
+                searchResultModel.fetch({
+                  url:getCachedSearchResultUrl,
                   success:function(data, textStatus, xhr){
 
                     // declare the target render region

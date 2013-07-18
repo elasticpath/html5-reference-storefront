@@ -188,9 +188,11 @@ define(['ep', 'app', 'eventbus', 'modules/appheader/appheader.models', 'modules/
       var instrumentationRegion = new Marionette.Region({
         el:'[data-region="EPDevAppHeaderInstrumentationContainer"]'
       });
-      instrumentationRegion.show(new View.EPDevInstrumentationView({
-        collection:new Backbone.Collection(instrumentationCollection)
-      }));
+      if (ep.app.config.debug.showInstrumentation){
+        instrumentationRegion.show(new View.EPDevInstrumentationView({
+          collection:new Backbone.Collection(instrumentationCollection)
+        }));
+      }
       $('#EPDevReloadHeaderBtn').unbind().click(function(event){
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appHeaderRegion',

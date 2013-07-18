@@ -79,7 +79,7 @@ define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!m
       EventBus.trigger('app.baseLayoutRenderSuccess');
     });
     EventBus.bind('app.baseLayoutRenderSuccess',function(){
-      if (ep.app.deployMode() === 'development'){
+      if (ep.app.deployMode() === 'development' && ep.app.config.debug.showInstrumentation){
         //if (ep.app.getUserPref('displayDevInstrumentaion')){
         ep.logger.info('RENDER INSTRUMENTATION');
 

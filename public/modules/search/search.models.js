@@ -16,17 +16,17 @@ define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
     var searchResult = Backbone.Cortex.Model.extend({
       url: function () {
         // TODO: remove url function, replace with zoom and page params
-        var suffix = '?zoom=element,element:price,element:definition';
+        var suffix = '?zoom=element,element_price,element:definition';
         if (this.get('page')) {
           suffix = '/pages/' + this.get('page') + suffix;
         }
         return Backbone.Model.prototype.url.call(this) + suffix;
       },
       urlRoot: function () {
-        return 'cortex/searches/' + app.config.cortexApi.store + '/keywords/items';
+        return 'cortex/searches/' + ep.app.config.cortexApi.store + '/keywords/items';
       },
       afterParse: function (response, model) {
-        var element =  _.first(jsonPath(response, "$..[':element']"));
+        var element =  _.first(jsonPath(response, "$..['_element']"));
 
         if (element) {
           model.results = new Item.ItemsModel(element, { parse: true });
@@ -37,7 +37,7 @@ define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
     var expSearchResult = Backbone.Cortex.Model.extend({
       url: function () {
         // TODO: remove url function, replace with zoom and page params
-        var suffix = '?zoom=element,element:price,element:definition';
+        var suffix = '?zoom=element,element:price,element_definition';
         if (this.get('page')) {
           suffix = '/pages/' + this.get('page') + suffix;
         }
@@ -47,7 +47,7 @@ define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
         return 'cortex/searches/' + app.config.store + '/keywords/items';
       },
       afterParse: function (response, model) {
-        var element =  _.first(jsonPath(response, "$..[':element']"));
+        var element =  _.first(jsonPath(response, "$..['_element']"));
 
         if (element) {
           model.results = new Item.ItemsModel(element, { parse: true });
@@ -57,8 +57,8 @@ define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
     });
     var getSearchResult = Backbone.Collection.extend({
       parse: function (response, model) {
-        var element = _.first(jsonPath(response, "$..[':element']"));
-        //var element = jsonPath(response, "$..[':element']");
+        var element = _.first(jsonPath(response, "$..['_element']"));
+        //var element = jsonPath(response, "$..['_element']");
 
         var retCollection = [];
         if (element){
@@ -66,12 +66,12 @@ define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
           for (var i = 0;i < element.length;i++){
             var procItemObj = {};
             var item = element[i];
-            var firstDefinitionArray = jsonPath(item, "$..[':definition']");
+            var firstDefinitionArray = jsonPath(item, "$..['_definition']");
 
             var firstDefinition = firstDefinitionArray[0];
 
 
-            var firstPriceArray = jsonPath(item, "$..[':price']");
+            var firstPriceArray = jsonPath(item, "$..['_price']");
             var firstPrice = firstPriceArray[0];
             var firstPurchasePriceArray = jsonPath(firstPrice, "$..['purchase-price']");
             var firstPurchasePrice = firstPurchasePriceArray[0];
@@ -82,12 +82,13 @@ define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
 
             procItemObj.name = displayName;
             procItemObj.price = displayPrice;
+            procItemObj.uri = item.self.uri;
 
             retCollection.push(procItemObj);
           }
 
 //        if (element) {
-//          EventBus.trigger('log.info','We have an element: ' + element[0][':definition'][0]['display-name']);
+//          EventBus.trigger('log.info','We have an element: ' + element[0]['_definition'][0]['display-name']);
 //          model.results = new Item.ItemsModel(element, { parse: true });
         }
         return retCollection;

@@ -14,9 +14,9 @@
     <span class="item-availability"><%= E.getAvailabilityDisplayText(E.availability) %></span>
     <div data-region="listPriceRegion"></div>
     <div class="item-detail-price-container">
-      <label>Purchase Price:</label><span><%= E.price.purchase.display %></span>
-      <button class="btn-round btn btn-primary">Add to Cart</button>
+      <label data-i18n="purchase_price">Purchase Price:</label><span><%= E.price.purchase.display %></span>
     </div>
+    <button class="btn-round btn btn-primary" <%= E.checkForDisabledAddToCart(E) %>>Add to Cart</button>
 
   </script>
 

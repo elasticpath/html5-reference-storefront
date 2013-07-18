@@ -15,6 +15,9 @@ define(['ep','eventbus','marionette'],
           return 'inline-block';
         }
         return 'none';
+      },
+      encodeUri:function(uri){
+        return ep.ui.encodeUri(uri);
       }
     };
 

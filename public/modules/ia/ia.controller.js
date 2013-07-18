@@ -44,7 +44,7 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
       });
 
       mainNavCollection.fetch({
-        url: '/' + ep.app.cortexApi.path + '/navigations/' + ep.app.cortexApi.store + '?zoom=element',
+        url: '/' + ep.app.config.cortexApi.path + '/navigations/' + ep.app.config.cortexApi.store + '?zoom=element',
         success: function(response){},
         error:function(response){
           //clearInterval(timer);

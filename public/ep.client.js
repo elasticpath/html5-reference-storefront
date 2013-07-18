@@ -15,20 +15,20 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
     ep.io = {};
     ep.app = new Backbone.Marionette.Application();
 
-    config = JSON.parse(config);
 
 
     // presentation dom container region
     ep.app.addRegions({
       viewPortRegion:'[data-region="viewPortRegion"]'
     });
-    ep.app.cortexApi = config.cortexApi;
+    ep.app.config = JSON.parse(config);
+    //ep.app.config.cortexApi = config.cortexApi;
 
     ep.app.deployMode = function(){
-      return config.deployMode || 'development';
+      return ep.app.config.deployMode || 'development';
     };
     ep.app.showInstrumentation = function(){
-      return config.debug.showInstrumentation || false;
+      return ep.app.config.debug.showInstrumentation || false;
     };
     // experimental hook
 
@@ -46,6 +46,17 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
       }
       return false;
     };
+    ep.ui.encodeUri = function(uri){
+      if (uri){
+        return encodeURIComponent(uri);
+      }
+    };
+    ep.ui.decodeUri = function(uri){
+      if (uri){
+        return decodeURIComponent(uri);
+      }
+    };
+
 
     // io namespace
     // reserved for any io but simple jQuery ajax wrapper out of the gate
@@ -64,7 +75,7 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
       }
     });
     ep.io.getApiUrl = function(){
-      var config = ep.app.cortexApi;
+      var config = ep.app.config.cortexApi;
       var retVal;
       if (config.host){
         retVal = config.host;
@@ -72,7 +83,7 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
       if (config.port){
         retVal += ':' + config.port;
       }
-      retVal += '/' + ep.app.cortexApi.path;
+      retVal += '/' + ep.app.config.cortexApi.path;
       return retVal;
     };
 
@@ -86,21 +97,21 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
     };
     ep.logger = {};
     ep.logger.info = function(){
-      if (config.logging.logInfo){
+      if (ep.app.config.logging.logInfo){
         var args = Array.prototype.slice.call(arguments);
         args.unshift('INFO: ');
         ep.log(args.join(' '));
       }
     };
     ep.logger.warn = function(){
-      if (config.logging.logWarnings){
+      if (ep.app.config.logging.logWarnings){
         var args = Array.prototype.slice.call(arguments);
         args.unshift('WARN: ');
         ep.log(args.join(' '));
       }
     };
     ep.logger.error = function(){
-      if (config.logging.logErrors){
+      if (ep.app.config.logging.logErrors){
         var args = Array.prototype.slice.call(arguments);
         args.unshift('ERROR: ');
         ep.log(args.join(' '));
@@ -156,9 +167,9 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
         ep.app.addInitializer(function(options){
           // do useful stuff here
           ep.router = new Router.AppRouter();
-          ep.app.config = {};
-          ep.app.config.url = config.api.url;
-          ep.app.config.store = config.api.store;
+         // ep.app.config = {};
+          ep.app.config.url = ep.app.config.api.url;
+          ep.app.config.store = ep.app.config.api.store;
 
         });
         // wait until the application and DOM are spun up
@@ -262,7 +273,7 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
 
       $.ajax({
         type:'POST',
-        url:'/' + config.cortexApi.path + '/oauth2/tokens',
+        url:'/' + ep.app.config.cortexApi.path + '/oauth2/tokens',
 
         contentType: 'application/x-www-form-urlencoded',
         data:authString,
@@ -270,7 +281,7 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
           // $('#authHeader').val("Bearer " + json.access_token);
           //cortex.ui.saveField('authHeader');
           window.localStorage.setItem('oAuthRole', 'PUBLIC');
-          window.localStorage.setItem('oAuthScope', ep.app.cortexApi.store);
+          window.localStorage.setItem('oAuthScope', ep.app.config.cortexApi.store);
           window.localStorage.setItem('oAuthToken', 'Bearer ' + json.access_token);
 
           //if (authRole === 'PUBLIC') {
@@ -331,7 +342,7 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
         // scrub out any absolute path (prior to /cortex) in the URL to avoid confusing the proxy
         // ie all requests are relative path
         var replaceUrl = options.url;
-        var testPath = '/' + config.cortexApi.path;
+        var testPath = '/' + ep.app.config.cortexApi.path;
         var pathIndex = replaceUrl.indexOf(testPath);
         if (pathIndex > 0){
 

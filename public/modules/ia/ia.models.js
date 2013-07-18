@@ -26,7 +26,7 @@ define(['ep','eventbus', 'backbone', 'cortex'],
     // Build Main Nav collection
     var MainNavCollection = Backbone.Collection.extend({
       model: MainNavItemModel,
-      url: '/' + ep.app.cortexApi.path + '/navigations/' + ep.app.cortexApi.store + '?zoom=element',
+      url: '/' + ep.app.config.cortexApi.path + '/navigations/' + ep.app.config.cortexApi.store + '?zoom=element',
       parse:function(response){
         // grab only the elements
         var mainNavCollection = _.first(jsonPath(response, "$.['_element']"));
@@ -110,7 +110,7 @@ define(['ep','eventbus', 'backbone', 'cortex'],
               retItem.name = item['_definition'][0]['display-name'];
               retItem.uri = item['_definition'][0].self.uri;
               var itemUri = item['_definition'][0].self.uri;
-              var uriCruft = '/itemdefinitions/' +ep.app.cortexApi.store + '/';
+              var uriCruft = '/itemdefinitions/' +ep.app.config.cortexApi.store + '/';
               if (itemUri.indexOf(uriCruft) > -1){
                 var isoId = itemUri.substring(uriCruft.length,itemUri.length);
                 retItem.isoId = isoId;

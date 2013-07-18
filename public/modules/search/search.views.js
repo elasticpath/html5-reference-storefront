@@ -6,8 +6,14 @@
  * Time: 3:08 PM
  *
  */
-define(['backbone','eventbus','cortex'],
-  function(Backbone,EventBus,Cortex){
+define(['ep','backbone','eventbus','cortex'],
+  function(ep,Backbone,EventBus,Cortex){
+
+    var viewHelpers = {
+      encodeUri:function(uri){
+        return ep.ui.encodeUri(uri);
+      }
+    };
 
     var HeaderSearchView = Backbone.Marionette.ItemView.extend({
       template:'#SearchModuleDefaultTemplate',
@@ -29,7 +35,8 @@ define(['backbone','eventbus','cortex'],
       template:'#SearchResultsLayoutContainer'
     });
     var searchResultsItem = Backbone.Marionette.ItemView.extend({
-      template:'#SearchResultsItemContainer'
+      template:'#SearchResultsItemContainer',
+      templateHelpers:viewHelpers
     });
     var noResults = Backbone.Marionette.ItemView.extend({
       template:'#SearchNoResultsTemplate'
