@@ -77,7 +77,20 @@ define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
             var firstPurchasePrice = firstPurchasePriceArray[0];
 
             var displayPrice = jsonPath(firstPurchasePrice, "$..['display']");
-            var displayName = jsonPath(firstDefinition, "$..['display-name']");
+            var displayName = jsonPath(firstDefinition, "$..['display-name']")[0];
+
+            if (item['_definition']){
+             // retItem.name = item['_definition'][0]['display-name'];
+             // retItem.uri = item['_definition'][0].self.uri;
+              var itemUri = item['_definition'][0].self.uri;
+              var uriCruft = '/itemdefinitions/' +ep.app.config.cortexApi.store + '/';
+              if (itemUri.indexOf(uriCruft) > -1){
+                var isoId = itemUri.substring(uriCruft.length,itemUri.length);
+                procItemObj.isoId = isoId;
+              }
+
+
+            }
 
 
             procItemObj.name = displayName;

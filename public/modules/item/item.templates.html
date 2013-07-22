@@ -1,41 +1,55 @@
 <div id="ItemTemplateContainer">
 
-  <script type="text/template" id="ItemDefaultLayoutTemplate">
-
-    <div data-region="itemDetailViewRegion"></div>
-    <div class="item-attributes-list-container" data-region="attributeListRegion"></div>
-
-  </script>
-
-  <script id="DefaultItemDetailViewTemplate" type="text/template">
-    <h1><%- E.displayName  %></h1>
-
+  <!-- Default Item Detail Layout Template -->
+  <script id="DefaultItemDetailLayoutTemplate" type="text/template">
+    <div data-region="itemDetailTitleRegion"></div>
     <div data-region="itemDetailAssetRegion"></div>
-    <span class="item-availability"><%= E.getAvailabilityDisplayText(E.availability) %></span>
-    <div data-region="listPriceRegion"></div>
-    <div class="item-detail-price-container">
-      <label data-i18n="purchase_price">Purchase Price:</label><span><%= E.price.purchase.display %></span>
-    </div>
-    <button class="btn-round btn btn-primary" <%= E.checkForDisabledAddToCart(E) %>>Add to Cart</button>
-
+    <div data-region="itemDetailAvailabilityRegion"></div>
+    <div data-region="itemDetailAttributeRegion"></div>
+    <div data-region="itemDetialPriceRegion"></div>
+    <div data-region="itemDetail.SubscriptionRegion"></div>
+    <div data-region="itemDetailAddToCartRegion"></div>
   </script>
 
-  <!-- List Price Template -->
-  <script id="ItemDetailListPriceTemplate" type="text/template">
-    <label i18n="listPriceLabel">List Price:</label><span class="item-detail-value list-price"><%= E.display %></span>
+  <!-- Default Item Detail Title Template -->
+  <script id="DefaultItemTitleTemplate" type="text/template">
+    <h1 class="item-title"><%= E.displayName %></h1>
   </script>
 
-  <!-- Product Image Template -->
-  <script id="ItemDetailImageTemplate" type="text/template">
+  <!-- Default Item Detail Asset Template -->
+  <script id="DefaultItemAssetTemplate" type="text/template">
     <img src="<%= E.src %>" class="item-detail-main-img" />
   </script>
 
-  <script id="DefaultItemDetailListItemTemplate" type="text/template">
+  <!-- Default Item Detail Attribute Template -->
+  <script id="DefaultItemAttributeItemTemplate" type="text/template">
     <td class="item-attribute-label-col">
-        <%= E.displayName %>
+      <%= E.displayName %>
     </td>
     <td class="item-attribute-value-col">
-        <%= E.displayValue %>
+      <%= E.displayValue %>
     </td>
   </script>
+
+  <!-- Default Item Detail Availability Template -->
+  <script id="DefaultItemDetailAvailabilityTemplate" type="text/template">
+    <%= E.getAvailabilityDisplayText(E.availability) %>
+  </script>
+
+  <!-- Default Item Detail Price Template -->
+  <script id="DefaultItemDetailPriceTemplate" type="text/template">
+    <label i18n="listPriceLabel">Price:</label><span class="item-detail-value purchase-price"><%= E.getPurchasePrice(E.price) %></span>
+  </script>
+
+  <!-- Default Item Detail Subscription Template -->
+  <script id="DefaultItemDetailSubscriptionTemplate" type="text/template">
+    <div>[subscription info goes here]</div>
+  </script>
+
+  <!-- Default Item Detail Add To Cart Template -->
+  <script id="DefaultItemDetailAddToCartTemplate" type="text/template">
+    <button class="btn-round btn btn-primary btn-addtocart" <%= E.checkForDisabledAddToCart(E) %>>Add to Cart</button>
+  </script>
+
 </div>
+.

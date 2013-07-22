@@ -14,15 +14,10 @@ define(['ep','app', 'eventbus', 'cortex', 'modules/item/item.models', 'modules/i
 
     _.templateSettings.variable = 'E';
 
-    var init = function(){
-
-
-
-    };
 
     var defaultItemDetailView = function(id){
 
-      var defaultItemViewLayout = new View.DefaultItemViewLayout();
+      var defaultItemViewLayout = new View.DefaultLayout();
 
       var itemModel = new Model.ItemModel();
 
@@ -30,47 +25,44 @@ define(['ep','app', 'eventbus', 'cortex', 'modules/item/item.models', 'modules/i
         url: ep.app.config.cortexApi.path + '/items/' + ep.app.config.cortexApi.store + '/' + id  + '?zoom=availability,addtocartform,price,definition,definition:assets:element',
         success:function(response){
 
-          var attribsList = response.attributes.details;
+          // Attribute List Collection
+          var attribsList = new Model.ItemAttributeCollection(response.attributes.details);
 
-          var itemView = new View.DefaultItemDetailView({
-            model:itemModel,
-            collection:new Model.ItemAttributeCollection(attribsList)
+          // Title View
+          var titleView = new View.DefaultItemTitleView({
+            model:itemModel
           });
 
-          var collectionView = new View.ItemAttributeListView({
-            collection:new Model.ItemAttributeCollection(attribsList)
+          // Asset Imge Url Processing
+          var urlVal = itemModel.attributes.asset.url;
+          var modelObject = {src:urlVal};
+          var assetView = new View.DefaultItemAssetView({
+            model:new Backbone.Model(modelObject)
+          });
+          // Attribute View
+          var attributeView = new View.DefaultItemAttributeView({
+            collection:attribsList
+          });
+          // Availability View
+          var availabilityView = new View.DefaultItemAvailabilityView({
+            model:itemModel
+          });
+          // Price View
+          var priceView = new View.DefaultItemPriceView({
+            model:itemModel
+          });
+          // Add To Cart View
+          var addToCartView = new View.DefaultItemAddToCartView({
+            model:itemModel
           });
 
-          var attribListRegion = new Marionette.Region({
-            el:'[data-region="attributeListRegion"]'
-          });
-          attribListRegion.show(collectionView);
+          defaultItemViewLayout.itemDetailTitleRegion.show(titleView);
+          defaultItemViewLayout.itemDetailAssetRegion.show(assetView);
+          defaultItemViewLayout.itemDetailAttributeRegion.show(attributeView);
+          defaultItemViewLayout.itemDetailAvailabilityRegion.show(availabilityView);
+          defaultItemViewLayout.itemDetailPriceRegion.show(priceView);
+          defaultItemViewLayout.itemDetailAddToCartRegion.show(addToCartView);
 
-          if (itemModel.attributes.price.list){
-            var listPriceView = new View.ItemDetailListPriceView({
-              model:new Model.ListPriceModel(itemModel.attributes.price.list)
-            });
-            var listPriceRegion = new Marionette.Region({
-              el:'[data-region="listPriceRegion"]'
-            });
-            listPriceRegion.show(listPriceView);
-          }
-          itemView.on('show',function(){
-            if (itemModel.attributes.asset.url){
-              var itemDetailAssetRegion = new Marionette.Region({
-                el:'[data-region="itemDetailAssetRegion"]'
-              });
-              var urlVal = itemModel.attributes.asset.url;
-              var modelObject = {src:urlVal};
-              var itemDetailImageView = new View.ItemDetailImageView({
-                model:new Backbone.Model(modelObject)
-              });
-              itemDetailAssetRegion.show(itemDetailImageView);
-            }
-          });
-
-
-          defaultItemViewLayout.itemDetailViewRegion.show(itemView);
         },
         error:function(response){
           ep.logger.info('ERROR GETTING THE ITEM: ' + response);
@@ -83,7 +75,7 @@ define(['ep','app', 'eventbus', 'cortex', 'modules/item/item.models', 'modules/i
 
 
     return {
-      init:init,
+      DefaultLayout:View.DefaultLayout,
       DefaultItemDetailView:defaultItemDetailView,
       ItemModel:Model.ItemModel
     };

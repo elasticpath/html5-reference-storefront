@@ -262,7 +262,12 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
 
     EventBus.on('ep.startAppRequest', function(){
       // turn the key and give 'er some gass
-      ep.app.start();
+      try{
+        ep.app.start();
+      }
+      catch(e){
+
+      }
     });
 
 
@@ -366,6 +371,7 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
       _.extend(options.headers, { 'Authorization': getAuthToken() });
 
 
+      ep.logger.info('SYNC REQUEST: ' + model + '   : ' + options);
       baseSync(method, model, options);
 
     };

@@ -60,58 +60,98 @@ define(['marionette'],
           }
 
 
+      },
+      getListPrice:function(priceObj){
+        if (priceObj.list && priceObj.list.display){
+          return priceObj.list.display;
+        }
+        else{
+          return '';
+        }
+      },
+      getPurchasePrice:function(priceObj){
+        if (priceObj.purchase && priceObj.purchase.display){
+          return priceObj.purchase.display;
+        }
+        else{
+          return '';
+        }
       }
 
     };
 
-
-
-
-
-
-
-    var defaultItemViewLayout = Backbone.Marionette.Layout.extend({
-      template:'#ItemDefaultLayoutTemplate',
+    // Default Item Detail Layout
+    var defaultLayout = Backbone.Marionette.Layout.extend({
+      template:'#DefaultItemDetailLayoutTemplate',
       regions:{
-        itemDetailViewRegion:'[data-region="itemDetailViewRegion"]'
+        itemDetailTitleRegion:'[data-region="itemDetailTitleRegion"]',
+        itemDetailAssetRegion:'[data-region="itemDetailAssetRegion"]',
+        itemDetailAttributeRegion:'[data-region="itemDetailAttributeRegion"]',
+        itemDetailPriceRegion:'[data-region="itemDetialPriceRegion"]',
+        itemDetailSubscriptionRegion:'[data-region="itemDetailSubscriptionRegion"]',
+        itemDetailAvailabilityRegion:'[data-region="itemDetailAvailabilityRegion"]',
+        itemDetailAddToCartRegion:'[data-region="itemDetailAddToCartRegion"]'
       }
-
     });
 
-    var defaultItemDetailListItemView = Backbone.Marionette.ItemView.extend({
-      template:'#DefaultItemDetailListItemTemplate',
-      tagName:'tr'
-    });
-    var defaultItemDetailView = Backbone.Marionette.ItemView.extend({
-      template:'#DefaultItemDetailViewTemplate',
-      templateHelpers:viewHelpers
+    // Default Title View
+    var defaultItemTitleView = Backbone.Marionette.ItemView.extend({
+      template:'#DefaultItemTitleTemplate'
     });
 
-    var itemAttributeListView = Backbone.Marionette.CollectionView.extend({
-      itemView:defaultItemDetailListItemView,
-      tagName:'table',
-      className:'striped'
-
-    });
-
-    var itemDetailListPriceView = Backbone.Marionette.ItemView.extend({
-      template:'#ItemDetailListPriceTemplate'
-    });
-
-    var itemDetailImageView = Backbone.Marionette.ItemView.extend({
-      template:'#ItemDetailImageTemplate',
+    // Default Asset View
+    var defaultItemAssetView = Backbone.Marionette.ItemView.extend({
+      template:'#DefaultItemAssetTemplate',
       className:'item-detail-asset-container'
     });
 
+    // Default Attribute item View
+    var defaultItemAttributeView = Backbone.Marionette.ItemView.extend({
+      template:'#DefaultItemAttributeItemTemplate',
+      tagName:'tr'
+    });
 
+    // Default Attribute List View
+    var defaultItemAttributeListView = Backbone.Marionette.CollectionView.extend({
+      itemView:defaultItemAttributeView,
+      tagName:'table',
+      className:'striped'
+    });
 
+    // Default Item Availability View
+    var defaultItemAvailabilityView = Backbone.Marionette.ItemView.extend({
+      template:'#DefaultItemDetailAvailabilityTemplate',
+      className:'item-availability',
+      tagName:'span',
+      templateHelpers:viewHelpers
+    });
+
+    // Default Item Price View
+    var defaultItemPriceView = Backbone.Marionette.ItemView.extend({
+      template:'#DefaultItemDetailPriceTemplate',
+      templateHelpers:viewHelpers
+    });
+
+    // Default Item Subscription View
+    var defaultItemSubscriptionView = Backbone.Marionette.ItemView.extend({
+      template:'#DefaultItemDetailSubscriptionTemplate'
+    });
+
+    var defaultItemAddToCartView = Backbone.Marionette.ItemView.extend({
+      template:'#DefaultItemDetailAddToCartTemplate',
+      templateHelpers:viewHelpers
+    });
 
     return {
-      DefaultItemViewLayout:defaultItemViewLayout,
-      DefaultItemDetailView:defaultItemDetailView,
-      ItemAttributeListView:itemAttributeListView,
-      ItemDetailListPriceView:itemDetailListPriceView,
-      ItemDetailImageView:itemDetailImageView
+      DefaultLayout:defaultLayout,
+      DefaultItemTitleView:defaultItemTitleView,
+      DefaultItemAssetView:defaultItemAssetView,
+      DefaultItemAttributeView:defaultItemAttributeListView,
+      DefaultItemAvailabilityView:defaultItemAvailabilityView,
+      DefaultItemPriceView:defaultItemPriceView,
+      DefaultItemSubscriptionView:defaultItemSubscriptionView,
+      DefaultItemAddToCartView:defaultItemAddToCartView
+
 
     };
   }

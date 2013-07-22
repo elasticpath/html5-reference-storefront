@@ -1742,9 +1742,22 @@ ul {
 .viewport .row {
   background: transparent;
 }
+button.btn-primary[disabled=disabled] {
+  background: #cccccc;
+  color: #aaaaaa;
+}
 .btn-primary {
-  background: blue;
+  background: #33349a;
+  color: #eeeeee;
+}
+.btn-primary:hover {
+  background: #3333ff;
+  color: #eeeeee;
+}
+.btn-primary:active {
+  background: #0000aa;
   color: #ffffff;
+  text-shadow: 3px 3px 2px #fadcdc;
 }
 .colorpicker {
   width: 356px;
@@ -2450,7 +2463,7 @@ reference:
 http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of-ems/
 */
 .btn-cmd {
-  border: 8px solid grey;
+  border: 0 solid grey;
   background: transparent;
   color: #070ca6;
 }
