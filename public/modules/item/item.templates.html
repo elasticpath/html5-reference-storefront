@@ -12,7 +12,6 @@
         <div data-region="itemDetailAttributeRegion"></div>
         <div class="itemdetail-price-container" data-region="itemDetialPriceRegion"></div>
         <div data-region="itemDetail.SubscriptionRegion"></div>
-        <div data-region="itemDetailQuantityRegion"></div>
         <div data-region="itemDetailAddToCartRegion"></div>
       </div>
     </div>
@@ -66,25 +65,24 @@
 
   <!-- Default Item Detail Add To Cart Template -->
   <script id="DefaultItemDetailAddToCartTemplate" type="text/template">
-    <button class="btn-round btn btn-primary btn-itemdetail-addtocart" <%= E.checkForDisabledAddToCart(E) %> data-i18n="itemDetail.addToCart"><%= E.getI18nLabel('itemDetail.addToCart') %></button>
+    <form class="ItemDetailAddToCartForm">
+      <label for="itemdetail-select-quantity" data-i18n="itemDetail.quantity"><%= E.getI18nLabel('itemDetail.quantity') %></label>
+      <select id="itemdetail-select-quantity" name="itemdetail-select-quantity">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+      <button class="btn-round btn btn-primary btn-itemdetail-addtocart" <%= E.checkForDisabledAddToCart(E) %> data-i18n="itemDetail.addToCart"><%= E.getI18nLabel('itemDetail.addToCart') %></button>
+    </form>
   </script>
 
-  <!-- Default Item Detail Quantity Template -->
-  <script id="DefaultItemDetailQuantityTemplate" type="text/template">
-    <label for="itemdetail-select-quantity" data-i18n="itemDetail.quantity"><%= E.getI18nLabel('itemDetail.quantity') %></label>
-    <select id="itemdetail-select-quantity" name="itemdetail-select-quantity">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-    </select>
-  </script>
 
 </div>
 .

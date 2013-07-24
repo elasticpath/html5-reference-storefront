@@ -164,11 +164,6 @@ define(['ep','marionette','i18n'],
       template:'#DefaultItemDetailAddToCartTemplate',
       templateHelpers:viewHelpers
     });
-    // Item Quanity Select View
-    var itemQuantitySelectView = Backbone.Marionette.ItemView.extend({
-      template:'#DefaultItemDetailQuantityTemplate',
-      templateHelpers:viewHelpers
-    });
 
     return {
       DefaultLayout:defaultLayout,
@@ -178,8 +173,7 @@ define(['ep','marionette','i18n'],
       DefaultItemAvailabilityView:defaultItemAvailabilityView,
       DefaultItemPriceView:defaultItemPriceView,
       DefaultItemSubscriptionView:defaultItemSubscriptionView,
-      DefaultItemAddToCartView:defaultItemAddToCartView,
-      ItemQuantitySelectView:itemQuantitySelectView
+      DefaultItemAddToCartView:defaultItemAddToCartView
 
 
     };

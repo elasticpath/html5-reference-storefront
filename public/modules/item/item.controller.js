@@ -58,26 +58,14 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
           var addToCartView = new View.DefaultItemAddToCartView({
             model:itemModel
           });
-          // Quantity View
-          var quantityView = new View.ItemQuantitySelectView({
-            model:itemModel
-          });
 
           defaultItemViewLayout.itemDetailTitleRegion.show(titleView);
           defaultItemViewLayout.itemDetailAssetRegion.show(assetView);
           defaultItemViewLayout.itemDetailAttributeRegion.show(attributeView);
           defaultItemViewLayout.itemDetailAvailabilityRegion.show(availabilityView);
           defaultItemViewLayout.itemDetailPriceRegion.show(priceView);
-          defaultItemViewLayout.itemDetailQuantityRegion.show(quantityView);
-
           defaultItemViewLayout.itemDetailAddToCartRegion.show(addToCartView);
-       // i18n.init(function(t) {
-          // translate nav
-         // $('.itemdetail-container').i18n();
 
-          // programatical access
-          //var appName = $.t('itemdetail.quantity',{});
-       // });
 
         },
         error:function(response){
