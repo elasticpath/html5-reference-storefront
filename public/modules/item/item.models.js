@@ -72,6 +72,7 @@ define(['ep','app','backbone','jsonpath'],
 
           itemObj.asset.url = 'http://localhost:3007/images/testdata/finding-nemo.jpg';
           //itemObj.asset.url = defaultImage['content-location'];
+          assetObj.contentLocation = defaultImage['content-location'];
           assetObj.name = defaultImage['name'];
           assetObj.relatvieLocation = defaultImage['relative-location'];
           assetsListArray.push(assetObj);
@@ -122,6 +123,27 @@ define(['ep','app','backbone','jsonpath'],
         }
 
         return itemObj;
+      },
+      getDefaultImage:function(){
+        var retVal = null;
+        if(this.attributes.assets && (this.attributes.assets.length > 0)){
+          for (var i = 0;i < this.attributes.assets.length;i++){
+            if (this.attributes.assets[i].name === 'default-image'){
+              retVal = this.attributes.assets[i];
+              break;
+            }
+          }
+        }
+        return retVal;
+      },
+      isAddToCartEnabled:function(){
+        var retVal = false;
+        if (this.attributes.addtocart){
+          if(this.attributes.addtocart.actionlink){
+            return true;
+          }
+        }
+        return retVal;
       }
     });
 

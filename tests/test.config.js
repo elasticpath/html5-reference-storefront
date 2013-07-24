@@ -36,6 +36,7 @@ requirejs.config({
     'item'            : 'modules/item/item.controller',
     'itemviews'       : 'modules/item/item.views',
     'debug'           : 'modules/debug/debug.controller',
+    'itemdata'        : './tests/data/item',
     'ace'             : 'http://rawgithub.com/ajaxorg/ace-builds/master/src-noconflict/ace'
   },
   shim: {

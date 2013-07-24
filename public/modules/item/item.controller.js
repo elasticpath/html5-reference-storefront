@@ -7,17 +7,20 @@
  *
  * 
  */
-define(['ep','app', 'eventbus', 'cortex', 'modules/item/item.models', 'modules/item/item.views', 'text!modules/item/item.templates.html'],
-  function(ep, App, EventBus, Cortex, Model, View, template){
+define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', 'modules/item/item.views', 'text!modules/item/item.templates.html','i18n'],
+  function($, ep, App, EventBus, Cortex, Model, View, template,i18n){
 
     $('#TemplateContainer').append(template);
 
     _.templateSettings.variable = 'E';
 
 
+
     var defaultItemDetailView = function(id){
 
-      var defaultItemViewLayout = new View.DefaultLayout();
+      var defaultItemViewLayout = new View.DefaultLayout({
+        className:''
+      });
 
       var itemModel = new Model.ItemModel();
 
@@ -55,13 +58,26 @@ define(['ep','app', 'eventbus', 'cortex', 'modules/item/item.models', 'modules/i
           var addToCartView = new View.DefaultItemAddToCartView({
             model:itemModel
           });
+          // Quantity View
+          var quantityView = new View.ItemQuantitySelectView({
+            model:itemModel
+          });
 
           defaultItemViewLayout.itemDetailTitleRegion.show(titleView);
           defaultItemViewLayout.itemDetailAssetRegion.show(assetView);
           defaultItemViewLayout.itemDetailAttributeRegion.show(attributeView);
           defaultItemViewLayout.itemDetailAvailabilityRegion.show(availabilityView);
           defaultItemViewLayout.itemDetailPriceRegion.show(priceView);
+          defaultItemViewLayout.itemDetailQuantityRegion.show(quantityView);
+
           defaultItemViewLayout.itemDetailAddToCartRegion.show(addToCartView);
+       // i18n.init(function(t) {
+          // translate nav
+         // $('.itemdetail-container').i18n();
+
+          // programatical access
+          //var appName = $.t('itemdetail.quantity',{});
+       // });
 
         },
         error:function(response){

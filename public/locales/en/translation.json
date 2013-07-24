@@ -1,1 +1,8 @@
-{}
+{
+  "itemDetail":{
+    "addToCart":"Add to Cart",
+    "purchasePrice":"Price",
+    "listPrice":"Original Price",
+    "quantity":"Quantity"
+  }
+}

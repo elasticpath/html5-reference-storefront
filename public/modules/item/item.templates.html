@@ -3,30 +3,39 @@
   <!-- Default Item Detail Layout Template -->
   <script id="DefaultItemDetailLayoutTemplate" type="text/template">
     <div data-region="itemDetailTitleRegion"></div>
-    <div data-region="itemDetailAssetRegion"></div>
-    <div data-region="itemDetailAvailabilityRegion"></div>
-    <div data-region="itemDetailAttributeRegion"></div>
-    <div data-region="itemDetialPriceRegion"></div>
-    <div data-region="itemDetail.SubscriptionRegion"></div>
-    <div data-region="itemDetailAddToCartRegion"></div>
+    <div class="row">
+      <div class="quarter">
+        <div data-region="itemDetailAssetRegion"></div>
+      </div>
+      <div class="threequarter">
+        <div data-region="itemDetailAvailabilityRegion"></div>
+        <div data-region="itemDetailAttributeRegion"></div>
+        <div class="itemdetail-price-container" data-region="itemDetialPriceRegion"></div>
+        <div data-region="itemDetail.SubscriptionRegion"></div>
+        <div data-region="itemDetailQuantityRegion"></div>
+        <div data-region="itemDetailAddToCartRegion"></div>
+      </div>
+    </div>
+
+
   </script>
 
   <!-- Default Item Detail Title Template -->
   <script id="DefaultItemTitleTemplate" type="text/template">
-    <h1 class="item-title"><%= E.displayName %></h1>
+    <h1 class="itemdetail-title"><%= E.displayName %></h1>
   </script>
 
   <!-- Default Item Detail Asset Template -->
   <script id="DefaultItemAssetTemplate" type="text/template">
-    <img src="<%= E.src %>" class="item-detail-main-img" />
+    <img src="<%= E.src %>" class="itemdetail-main-img" />
   </script>
 
   <!-- Default Item Detail Attribute Template -->
   <script id="DefaultItemAttributeItemTemplate" type="text/template">
-    <td class="item-attribute-label-col">
+    <td class="itemdetail-attribute-label-col">
       <%= E.displayName %>
     </td>
-    <td class="item-attribute-value-col">
+    <td class="itemdetail-attribute-value-col">
       <%= E.displayValue %>
     </td>
   </script>
@@ -38,7 +47,16 @@
 
   <!-- Default Item Detail Price Template -->
   <script id="DefaultItemDetailPriceTemplate" type="text/template">
-    <label i18n="listPriceLabel">Price:</label><span class="item-detail-value purchase-price"><%= E.getPurchasePrice(E.price) %></span>
+    <ul>
+      <li class="price-list-item">
+        <label class="itemdetail-label label-listprice" data-i18n="itemDetail.listPrice"><%= E.getI18nLabel('itemDetail.listPrice') %></label>
+        <span class="itemdetail-value itemdetail-list-price"><%= E.getListPrice(E.price) %></span>
+      </li>
+      <li class="price-purchase-item">
+        <label class="itemdetail-label label-purchaseprice" data-i18n="itemDetail.purchasePrice"><%= E.getI18nLabel('itemDetail.purchasePrice') %></label>
+        <span class="itemdetail-value itemdetail-purchase-price"><%= E.getPurchasePrice(E.price) %></span>
+      </li>
+    </ul>
   </script>
 
   <!-- Default Item Detail Subscription Template -->
@@ -48,7 +66,24 @@
 
   <!-- Default Item Detail Add To Cart Template -->
   <script id="DefaultItemDetailAddToCartTemplate" type="text/template">
-    <button class="btn-round btn btn-primary btn-addtocart" <%= E.checkForDisabledAddToCart(E) %>>Add to Cart</button>
+    <button class="btn-round btn btn-primary btn-itemdetail-addtocart" <%= E.checkForDisabledAddToCart(E) %> data-i18n="itemDetail.addToCart"><%= E.getI18nLabel('itemDetail.addToCart') %></button>
+  </script>
+
+  <!-- Default Item Detail Quantity Template -->
+  <script id="DefaultItemDetailQuantityTemplate" type="text/template">
+    <label for="itemdetail-select-quantity" data-i18n="itemDetail.quantity"><%= E.getI18nLabel('itemDetail.quantity') %></label>
+    <select id="itemdetail-select-quantity" name="itemdetail-select-quantity">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
   </script>
 
 </div>

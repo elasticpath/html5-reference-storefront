@@ -1,3 +1,4 @@
+/* Start Item Detail  */
 /*---------------------------------------------------
     LESS Elements 0.9
   ---------------------------------------------------
@@ -11,12 +12,12 @@
   min-height: 4em;
   padding-top: .5rem;
   border-bottom: 1px solid #333;
-  background: #efef33;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #a2c5bf), color-stop(1, #a2c5bf));
-  background: -ms-linear-gradient(bottom, #a2c5bf, #a2c5bf);
-  background: -moz-linear-gradient(center bottom, #a2c5bf 0%, #a2c5bf 100%);
-  background: -o-linear-gradient(#a2c5bf, #a2c5bf);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a2c5bf', endColorstr='#a2c5bf', GradientType=0);
+  background: #eeeeee;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(1, #cccccc));
+  background: -ms-linear-gradient(bottom, #eeeeee, #cccccc);
+  background: -moz-linear-gradient(center bottom, #eeeeee 0%, #cccccc 100%);
+  background: -o-linear-gradient(#cccccc, #eeeeee);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cccccc', endColorstr='#eeeeee', GradientType=0);
   /*
   background-image: linear-gradient(bottom, rgb(0,0,0) 41%, rgb(66,66,66) 71%);
   background-image: -o-linear-gradient(bottom, rgb(0,0,0) 41%, rgb(66,66,66) 71%);
@@ -63,7 +64,7 @@ header.app-header .btn-main-nav-toggle:active {
 .btn-link-cmd {
   background: transparent;
   border: 0;
-  color: #ffffff;
+  color: #070ca6;
 }
 .main-nav-container {
   float: left;
@@ -111,7 +112,7 @@ header.app-header .btn-main-nav-toggle:active {
   color: #444;
 }
 .main-nav-list li span {
-  color: #ffffff;
+  color: #070ca6;
 }
 .main-nav-list li:hover span {
   color: #444;
@@ -142,5 +143,5 @@ header.app-header .btn-main-nav-toggle:active {
   margin-bottom: auto;
 }
 .global-nav-container a {
-  color: #f2f2f5;
+  color: #070ca6;
 }

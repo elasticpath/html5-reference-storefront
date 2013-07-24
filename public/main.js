@@ -70,17 +70,17 @@ require.config({
   }
 });
 
-define(['app','eventbus','i18n','ep'],
-  function (App,EventBus,I18n){
+define(['app','eventbus','i18n'],
+  function (App,EventBus,i18n){
 
     // Application DOM container is ready (viewport)
     $(document).ready(function(){
 
       // initialize the localization engine
-      I18n.init({
+      i18n.init({
           lng: 'en' // default to english
         },
-        function(){
+        function(t){
 
           // trigger event to let the application know it is safe to kick off
           EventBus.trigger('app.bootstrapInitSuccess');

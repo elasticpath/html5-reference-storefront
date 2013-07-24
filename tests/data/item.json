@@ -1,0 +1,31 @@
+{
+  "addtocart": {
+    "actionlink": "http://10.10.2.141:8080/cortex/carts/mobee/default/lineitems/items/mobee/m5yxissunrjgovjqnrefsrluizlwercvnbyuokzrmqyfg5dspi3xqntbgf4xgqrpoazu44tekvhhmwshk5zwiscrgjheiujsjzdvu5kygjugw"
+  },
+  "assets":[
+    {
+      "contentLocation": "http://www.images.com/default-image",
+      "name": "default-image",
+      "relatvieLocation": "Thumbnail_HD.jpg"
+    }
+  ],
+  "availability": "AVAILABLE",
+  "details":[{
+    "displayName": "Specific Resolution",
+    "displayValue": "High"
+    }
+  ],
+  "displayName": "Finding Nemo",
+  "price": {
+    "list":{
+      "amount": "31",
+      "currency": "CAD",
+      "display": "$31.00"
+    },
+    "purchase": {
+      "amount": "30",
+      "currency": "CAD",
+      "display": "$30.00"
+    }
+  }
+}

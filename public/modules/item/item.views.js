@@ -6,8 +6,9 @@
  * Time: 9:16 AM
  *
  */
-define(['marionette'],
-  function(Marionette){
+define(['ep','marionette','i18n'],
+  function(ep,Marionette,i18n){
+    //console.log('fuck:  ' + i18n);
     var viewHelpers = {
       getDisplayType:function(bHasChildren){
         if (bHasChildren){
@@ -76,6 +77,18 @@ define(['marionette'],
         else{
           return '';
         }
+      },
+      getI18nLabel:function(key){
+        retVal = key;
+        try{
+          retVal = i18n.t(key);
+        }
+        catch(e){
+          // slient failure on label rendering
+        }
+
+        return retVal;
+
       }
 
     };
@@ -90,8 +103,10 @@ define(['marionette'],
         itemDetailPriceRegion:'[data-region="itemDetialPriceRegion"]',
         itemDetailSubscriptionRegion:'[data-region="itemDetailSubscriptionRegion"]',
         itemDetailAvailabilityRegion:'[data-region="itemDetailAvailabilityRegion"]',
+        itemDetailQuantityRegion:'[data-region="itemDetailQuantityRegion"]',
         itemDetailAddToCartRegion:'[data-region="itemDetailAddToCartRegion"]'
-      }
+      },
+      className:'itemdetail-container'
     });
 
     // Default Title View
@@ -102,7 +117,7 @@ define(['marionette'],
     // Default Asset View
     var defaultItemAssetView = Backbone.Marionette.ItemView.extend({
       template:'#DefaultItemAssetTemplate',
-      className:'item-detail-asset-container'
+      className:'itemdetail-asset-container'
     });
 
     // Default Attribute item View
@@ -121,15 +136,22 @@ define(['marionette'],
     // Default Item Availability View
     var defaultItemAvailabilityView = Backbone.Marionette.ItemView.extend({
       template:'#DefaultItemDetailAvailabilityTemplate',
-      className:'item-availability',
-      tagName:'span',
+      className:'itemdetail-availability',
+      tagName:'div',
       templateHelpers:viewHelpers
     });
 
     // Default Item Price View
     var defaultItemPriceView = Backbone.Marionette.ItemView.extend({
       template:'#DefaultItemDetailPriceTemplate',
-      templateHelpers:viewHelpers
+      templateHelpers:viewHelpers,
+      onShow:function(){
+        // check if there is list price data
+        // if not then turn off the item
+        if (!viewHelpers.getListPrice(this.model.attributes.price)){
+          $('.price-list-item').hide();
+        }
+      }
     });
 
     // Default Item Subscription View
@@ -137,8 +159,14 @@ define(['marionette'],
       template:'#DefaultItemDetailSubscriptionTemplate'
     });
 
+    // Default Item Add to Cart View
     var defaultItemAddToCartView = Backbone.Marionette.ItemView.extend({
       template:'#DefaultItemDetailAddToCartTemplate',
+      templateHelpers:viewHelpers
+    });
+    // Item Quanity Select View
+    var itemQuantitySelectView = Backbone.Marionette.ItemView.extend({
+      template:'#DefaultItemDetailQuantityTemplate',
       templateHelpers:viewHelpers
     });
 
@@ -150,7 +178,8 @@ define(['marionette'],
       DefaultItemAvailabilityView:defaultItemAvailabilityView,
       DefaultItemPriceView:defaultItemPriceView,
       DefaultItemSubscriptionView:defaultItemSubscriptionView,
-      DefaultItemAddToCartView:defaultItemAddToCartView
+      DefaultItemAddToCartView:defaultItemAddToCartView,
+      ItemQuantitySelectView:itemQuantitySelectView
 
 
     };

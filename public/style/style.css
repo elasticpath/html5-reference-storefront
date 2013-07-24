@@ -1,3 +1,4 @@
+/* Start Item Detail  */
 /*---------------------------------------------------
     LESS Elements 0.9
   ---------------------------------------------------
@@ -1685,6 +1686,15 @@ a.error:hover {
     bottom: 0;
   }
 }
+/* Start Item Detail  */
+/* apply a natural box layout model to all elements */
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 @-ms-viewport {
   width: device-width;
 }
@@ -2152,6 +2162,7 @@ in the ui framework
   border: 1px solid darkgreen;
   background-color: #dbc59e;
 }
+/* Start Item Detail  */
 /*---------------------------------------------------
     LESS Elements 0.9
   ---------------------------------------------------
@@ -2298,38 +2309,62 @@ header.app-header .btn-main-nav-toggle:active {
 .global-nav-container a {
   color: #070ca6;
 }
+/* Start Item Detail  */
 /*
-    item detail
-  */
-.item-detail-main-img {
+  item detail
+*/
+.itemdetail-container {
+  margin-top: .6rem;
+}
+.itemdetail-title {
+  margin-left: .5rem;
+  font-size: 180%;
+  color: #070ca6;
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+}
+.itemdetail-main-img {
   width: 20rem;
 }
-.item-detail-asset-container {
-  float: left;
+.itemdetail-asset-container {
   padding: 2rem;
+  border: 1px solid #eeeeee;
+  border-radius: 1rem;
 }
-.item-availability {
+.itemdetail-availability {
+  text-align: center;
   border-radius: .4rem;
+  margin-bottom: 1rem;
   padding: .5rem;
+  width: 8rem;
   color: #ffffff;
-  background-color: darkorange;
+  background-color: #ff8c00;
   font-size: 120%;
 }
-.item-detail-price-container {
+.itemdetail-price-container {
   margin-top: 1rem;
 }
-.item-attributes-list-container {
+.itemdetail-price-container ul {
+  margin: 0;
+}
+.itemdetail-list-price {
+  text-decoration: line-through;
+}
+.itemdetail-attributes-container {
   margin-top: 1.8rem;
 }
-.item-attribute-label-col {
+.itemdetail-attribute-label-col {
   vertical-align: middle;
   padding: 0;
   font-size: 90%;
   color: #444444;
 }
-.item-attribute-value-col {
+.itemdetail-attribute-value-col {
   padding: .2rem;
   font-weight: bold;
+}
+.itemdetail-purchase-price {
+  font-weight: bold;
+  color: #444444;
 }
 /*
 
