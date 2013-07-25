@@ -38,9 +38,7 @@ define(function(require) {
     it('should have an add to cart region',function(){
       expect(defaultLayout.itemDetailAddToCartRegion).to.be.ok;
     });
-    it('should have a quantity select region',function(){
-      expect(defaultLayout.itemDetailQuantityRegion).to.be.ok;
-    });
+
   });
   describe('UI Storefront - Item Detail - Item Views ', function(){
     it('DefaultLayout should exist', function(){
@@ -66,9 +64,6 @@ define(function(require) {
     });
     it('DefaultItemAddToCartView should exist', function(){
       expect(itemViews.DefaultItemAddToCartView).to.be.ok;
-    });
-    it('ItemQuantitySelectView should exist', function(){
-      expect(itemViews.ItemQuantitySelectView).to.be.ok;
     });
   });
   describe('UI Storefront - Item Detail - Model', function(){

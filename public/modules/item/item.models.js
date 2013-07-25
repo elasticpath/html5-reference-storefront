@@ -70,7 +70,7 @@ define(['ep','app','backbone','jsonpath'],
           var defaultImage = jsonPath(item, "$._definition.._assets.._element[?(@.name='default-image')]")[0];
           var assetObj = {};
 
-          itemObj.asset.url = 'http://localhost:3007/images/testdata/finding-nemo.jpg';
+          //itemObj.asset.url = 'http://localhost:3007/images/testdata/finding-nemo.jpg';
           //itemObj.asset.url = defaultImage['content-location'];
           assetObj.contentLocation = defaultImage['content-location'];
           assetObj.name = defaultImage['name'];

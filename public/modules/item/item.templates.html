@@ -26,7 +26,7 @@
 
   <!-- Default Item Detail Asset Template -->
   <script id="DefaultItemAssetTemplate" type="text/template">
-    <img src="<%= E.src %>" class="itemdetail-main-img" />
+    <img src="<%- E.getDefaultImagePath(E.attributes.assets) %>" class="itemdetail-main-img" />
   </script>
 
   <!-- Default Item Detail Attribute Template -->

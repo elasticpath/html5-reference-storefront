@@ -16,23 +16,35 @@ define(['ep','marionette','i18n'],
         }
         return 'none';
       },
+      getI18nLabel:function(key){
+        retVal = key;
+        try{
+          retVal = i18n.t(key);
+        }
+        catch(e){
+          // slient failure on label rendering
+        }
+
+        return retVal;
+
+      },
       getAvailabilityDisplayText:function(availability){
         var retVal = '';
         switch(availability){
           case 'AVAILABLE':
-            retVal = 'In Stock';
+            retVal = this.getI18nLabel('AVAILABLE');
             break;
           case 'ALWAYS':
-            retVal = 'Always';
+            retVal = this.getI18nLabel('ALWAYS');
             break;
           case 'NOT_AVAILABLE':
-            retVal = 'Out of Stock';
+            retVal = this.getI18nLabel('NOT_AVAILABLE');
             break;
           case 'AVAILABLE_FOR_BACK_ORDER':
-            retVal = 'Available for Back Order';
+            retVal = this.getI18nLabel('AVAILABLE_FOR_BACK_ORDER');
             break;
           case 'AVAILABLE_FOR_PRE_ORDER':
-            retVal = 'Pre Order';
+            retVal = this.getI18nLabel('AVAILABLE_FOR_PRE_ORDER');
             break;
           default:
             retVal = '';
@@ -78,19 +90,19 @@ define(['ep','marionette','i18n'],
           return '';
         }
       },
-      getI18nLabel:function(key){
-        retVal = key;
-        try{
-          retVal = i18n.t(key);
+      getDefaultImagePath:function(aModel){
+        if (aModel){
+          for (var i = 0;i < aModel.length;i++){
+            if (aModel[i].name == 'default-image'){
+              return aModel[i].contentLocation;
+              break;
+            }
+          }
         }
-        catch(e){
-          // slient failure on label rendering
+        else{
+          return '';
         }
-
-        return retVal;
-
       }
-
     };
 
     // Default Item Detail Layout
@@ -117,7 +129,8 @@ define(['ep','marionette','i18n'],
     // Default Asset View
     var defaultItemAssetView = Backbone.Marionette.ItemView.extend({
       template:'#DefaultItemAssetTemplate',
-      className:'itemdetail-asset-container'
+      className:'itemdetail-asset-container',
+      templateHelpers:viewHelpers
     });
 
     // Default Attribute item View

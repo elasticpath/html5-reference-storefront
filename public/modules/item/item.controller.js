@@ -40,7 +40,7 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
           var urlVal = itemModel.attributes.asset.url;
           var modelObject = {src:urlVal};
           var assetView = new View.DefaultItemAssetView({
-            model:new Backbone.Model(modelObject)
+            model:new Backbone.Model(itemModel)
           });
           // Attribute View
           var attributeView = new View.DefaultItemAttributeView({

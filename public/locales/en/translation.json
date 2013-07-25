@@ -4,5 +4,11 @@
     "purchasePrice":"Price",
     "listPrice":"Original Price",
     "quantity":"Quantity"
-  }
+
+  },
+  "AVAILABLE":"In Stock",
+  "ALWAYS":"Always",
+  "NOT_AVAILABLE":"Out of Stock",
+  "AVAILABLE_FOR_BACK_ORDER":"Available for Back Order",
+  "AVAILABLE_FOR_PRE_ORDER":"Pre Order"
 }
