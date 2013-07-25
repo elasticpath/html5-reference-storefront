@@ -102,6 +102,15 @@ define(['ep','marionette','i18n'],
         else{
           return '';
         }
+      },
+      getDefaultImageName:function(aModel){
+        // redundant until we have more sophisticated implementation
+        if (aModel){
+          return 'default-image';
+        }
+        else{
+          return '';
+        }
       }
     };
 
