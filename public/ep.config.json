@@ -8,8 +8,8 @@
     "showInstrumentation":false
   },
   "cortexApi":{
-    "host":"http://localhost",
-    "port":"3004",
+    "host":"http://10.10.121.201",
+    "port":"8080",
     "path":"cortex",
     "store":"mobee"
   },

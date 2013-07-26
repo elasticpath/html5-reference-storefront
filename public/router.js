@@ -108,6 +108,13 @@ define(['marionette','eventbus'],
           module:'settings',
           view:'IndexLayout'
         });
+      },
+      cart: function(){
+        EventBus.trigger('layout.loadRegionContentRequest',{
+          region:'appMainRegion',
+          module:'cart',
+          view:'DefaultView'
+        });
       }
     };
 
@@ -129,7 +136,8 @@ define(['marionette','eventbus'],
         'composer2': 'composer2',
         'theme': 'theme',
         'itemdetail/:id': 'item',
-        'settings': 'settings'
+        'settings': 'settings',
+        'mycart': 'cart'
       },
       controller:appRouterController
     });

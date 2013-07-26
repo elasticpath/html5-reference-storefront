@@ -14,17 +14,14 @@ define(['app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/cart/c
 
     _.templateSettings.variable = 'E';
 
-    var init = function(){
 
-
-
+    var defaultLayout = function(){
+      return new View.DefaultLayout();
     };
 
 
-
     return {
-      init:init
-
+      DefaultView:defaultLayout
     };
   }
 );

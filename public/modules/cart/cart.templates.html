@@ -1,9 +1,70 @@
 <div id="CartTemplateContainer">
 
-  <script type="text/template" id="CartMainTemplate">
+  <!-- Default Cart Layout Template -->
+  <script id="DefaultCartLayoutTemplate" type="text/template">
+    <div data-region="cartTitleRegion"></div>
+    <div data-region="mainCartRegion"></div>
+    <div data-region="cartSummaryRegion"></div>
+    <div data-region="cartCheckoutActionRegion"></div>
 
-    <div class="cart-container">CART</div>
+  </script>
 
+  <!-- Cart Title Template -->
+  <script id="CartTitleTemplate" type="text/template">
+    <h1>My Cart</h1>
+  </script>
+
+  <!-- Cart Line Item Template -->
+  <script id="CartLineItemTemplate" type="text/template">
+    <td>[thumbnail]</td>
+    <td>[name]</td>
+    <td>[item price]</td>
+    <td>[quantity]</td>
+    <td>[item total]</td>
+    <td>[remove]</td>
+  </script>
+
+  <!-- Main Cart Template -->
+  <script id="MainCartTemplate" type="text/template">
+    <table>
+      <thead>
+        <tr>
+          <th>product</th>
+          <th>name</th>
+          <th>item price</th>
+          <th>quantity</th>
+          <th>item total</th>
+          <th>remove</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </script>
+
+  <!-- Cart Summary Template -->
+  <script id="CartSummaryTemplate" type="text/template">
+    <ul>
+      <li>
+        <label>Sub Total</label>
+        $45.98
+      </li>
+      <li>
+        <label>Tax</label>
+        $5.98
+      </li>
+      <li>
+        <label>Total</label>
+        $52.98
+      </li>
+    </ul>
+
+  </script>
+
+  <!-- Cart Checkout Action Template -->
+  <script id="CartChecktouActionTemplate" type="text/template">
+    <button class="btn-round btn-primary btn-cmd-checkout">Checkout</button>
   </script>
 
 </div>

@@ -65,6 +65,29 @@ define(function(require) {
     it('DefaultItemAddToCartView should exist', function(){
       expect(itemViews.DefaultItemAddToCartView).to.be.ok;
     });
+   // describe('Add to Cart View',function(){
+     // var template = require('text!modules/item/item.templates.html');
+
+     // var x = $(template).find('#DefaultItemDetailAddToCartTemplate');
+//      var addToCartView = new itemViews.DefaultItemAddToCartView({
+//        template:function(){
+//          return x;
+//        }
+//      });
+//      addToCartView.render();
+//      it('x ok', function(){
+//        expect(template.length).to.be.belowq(2);
+//      });
+     // it('Add Item To Cart should have a button',function(done){
+        //var xButton = ;
+//        $('.btn-itemdetail-addtocart').click(function(done){
+//          expect().to.be.ok;
+//          done();
+//        })
+
+     // });
+
+   // });
   });
   describe('UI Storefront - Item Detail - Model', function(){
     var testDataOne = {

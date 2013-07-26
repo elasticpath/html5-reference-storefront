@@ -74,9 +74,14 @@ define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
             var firstPriceArray = jsonPath(item, "$..['_price']");
             var firstPrice = firstPriceArray[0];
             var firstPurchasePriceArray = jsonPath(firstPrice, "$..['purchase-price']");
-            var firstPurchasePrice = firstPurchasePriceArray[0];
+            var firstPurchasePrice;
+            var displayPrice;
+            if (firstPurchasePriceArray){
+              firstPurchasePrice = firstPurchasePriceArray[0];
+              displayPrice = jsonPath(firstPurchasePrice, "$..['display']");
 
-            var displayPrice = jsonPath(firstPurchasePrice, "$..['display']");
+            }
+
             var displayName = jsonPath(firstDefinition, "$..['display-name']")[0];
 
             if (item['_definition']){

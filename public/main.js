@@ -80,7 +80,7 @@ define(['app','eventbus','i18n'],
       i18n.init({
           lng: 'en' // default to english
         },
-        function(t){
+        function(){
 
           // trigger event to let the application know it is safe to kick off
           EventBus.trigger('app.bootstrapInitSuccess');
