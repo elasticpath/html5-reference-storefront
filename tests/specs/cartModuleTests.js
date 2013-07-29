@@ -12,7 +12,7 @@ define(function(require) {
   var cartModel = require('modules/cart/cart.models');
 
   describe('UI Storefront Cart Module - Default Layout ', function(){
-    var defaultLayout = new cart.DefaultLayout();
+    var defaultLayout = new cart.DefaultView();
     it('Cart View defaultLayout should exist', function(){
       expect(defaultLayout).to.be.ok;
     });

@@ -41,6 +41,13 @@ define(['marionette','eventbus'],
           data:keywords
         });
       },
+      profile: function(){
+        EventBus.trigger('layout.loadRegionContentRequest',{
+          region:'appMainRegion',
+          module:'profile',
+          view:'DefaultView'
+        });
+      },
       composer: function() {
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
@@ -137,6 +144,7 @@ define(['marionette','eventbus'],
         'theme': 'theme',
         'itemdetail/:id': 'item',
         'settings': 'settings',
+        'profile': 'profile',
         'mycart': 'cart'
       },
       controller:appRouterController
