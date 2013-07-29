@@ -4,6 +4,151 @@
 
     <div class="profile-container">profile</div>
 
+    <div data-region="profileSummaryRegion"></div>
+    <div data-region="profileShippingAddressRegion"></div>
+    <div data-region="profileBillingAddressRegion"></div>
+    <div data-region="profilePaymentMethodRegion"></div>
+
+  </script>
+
+  <!-- Profile Info View Template -->
+  <script id="ProfileInfoViewTemplate" type="text/template">
+
+  </script>
+
+  <!-- Profile Info Form Template -->
+  <script id="ProfileInfoFormTemplate" type="text/template">
+
+  </script>
+
+  <!--  -->
+
+
+  <!-- Profile Billing Address Form -->
+  <div id="ProfileBillingAddressFormTemplate" type="text/template">
+    <form class="form column-form">
+      <ul>
+        <li class="required-field">
+          <label for="BillingFirstName">First Name</label>
+          <input id="BillingFirstName" name="BillingFirstName" type="text" >
+        </li>
+        <li class="required-field">
+          <label for="BillingLastName">Last Name</label>
+          <input id="BillingLastName" name="BillingLastName" type="text" >
+        </li>
+        <li class="required-field">
+          <label for="BillingAddressLine1">Address Line 1</label>
+          <input id="BillingAddressLine1" name="BillingAddressLine1" type="text" >
+        </li>
+        <li>
+          <label for="BillingAddressLine2">Address Line 2</label>
+          <input id="BillingAddressLine2" name="BillingAddressLine2" type="text" >
+        </li>
+        <li class="required-field">
+          <label for="BillingCity">City</label>
+          <input id="BillingCity" name="BillingCity" type="text" >
+        </li>
+        <li class="required-field">
+          <label for="BillingCountry">Country</label>
+          <select id="BillingCountry" name="BillingCountry"></select>
+        </li>
+        <li class="required-field">
+          <label for="BillingStateProv">State / Province</label>
+          <select id="BillingStateProv" name="BillingStateProv" ></select>
+        </li>
+        <li class="required-field">
+          <label for="BillingZipPostal">Zip / Postal Code</label>
+          <input id="BillingZipPostal" name="BillingZipPostal" type="text" >
+        </li>
+        <li class="required-field">
+          <label for="BillingPhone">Phone</label>
+          <input id="BillingPhone" name="BillingPhone" type="text" >
+        </li>
+      </ul>
+    </form>
+  </div>
+  <!-- Profile Billing Address View -->
+  <!-- Profile Shipping Address View -->
+  <!-- Profile Shipping Address Form -->
+  <div id="ProfileShippingAddressFormTemplate" type="text/template">
+    <form class="form column-form">
+      <ul>
+        <li class="required-field">
+          <label for="ShippingFirstName">First Name</label>
+          <input id="ShippingFirstName" name="ShippingFirstName" type="text" >
+        </li>
+        <li class="required-field">
+          <label for="ShippingLastName">Last Name</label>
+          <input id="ShippingLastName" name="ShippingLastName" type="text" >
+        </li>
+        <li class="required-field">
+          <label for="ShippingAddressLine1">Address Line 1</label>
+          <input id="ShippingAddressLine1" name="ShippingAddressLine1" type="text" >
+        </li>
+        <li>
+          <label for="ShippingAddressLine2">Address Line 2</label>
+          <input id="ShippingAddressLine2" name="ShippingAddressLine2" type="text" >
+        </li>
+        <li class="required-field">
+          <label for="ShippingCity">City</label>
+          <input id="ShippingCity" name="ShippingCity" type="text" >
+        </li>
+        <li class="required-field">
+          <label for="ShippingCountry">Country</label>
+          <select id="ShippingCountry" name="ShippingCountry"></select>
+        </li>
+        <li class="required-field">
+          <label for="ShippingStateProv">State / Province</label>
+          <select id="ShippingStateProv" name="ShippingStateProv" ></select>
+        </li>
+        <li class="required-field">
+          <label for="ShippingZipPostal">Zip / Postal Code</label>
+          <input id="ShippingZipPostal" name="ShippingZipPostal" type="text" >
+        </li>
+        <li class="required-field">
+          <label for="ShippingPhone">Phone</label>
+          <input id="ShippingPhone" name="ShippingPhone" type="text" >
+        </li>
+      </ul>
+    </form>
+  </div>
+  <!-- Profile Payment Method View -->
+  <!-- Profile Payment Method Form -->
+  <script id="PaymentMethodFormTemplate" type="text/template">
+    <form class="form columnar">
+      <ul>
+        <li>
+          <label form="">Card Type</label>
+          <select id="" name="" ></select>
+        </li>
+        <li>
+          <label form="">Card Holder Name</label>
+          <input id="" name="" >
+        </li>
+        <li>
+          <label form="">Card Number</label>
+          <input id="" name="" >
+        </li>
+        <li>
+          <label form="">Expiry Month</label>
+          <select id="" name="" ></select>
+        </li>
+        <li>
+          <label form="">Expiry Year</label>
+          <select id="" name="" ></select>
+        </li>
+        <li>
+          <label form="">Default Card</label>
+          <input type="checkbox" id="" name="" >
+        </li>
+        <li>
+          <div class="button-container">
+            <button>Add Credit Card</button>
+            <button>Regurn</button>
+          </div>
+        </li>
+      </ul>
+    </form>
   </script>
 
 
