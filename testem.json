@@ -1,0 +1,12 @@
+{
+  "framework":"mocha",
+  "test_page": "tests/testrunner.html",
+  "launch_in_dev":[
+    "phantom",
+    "chrome"
+  ],
+  "src_files":[
+    "tests/*.js",
+    "tests/specs/*.js"
+  ]
+}
