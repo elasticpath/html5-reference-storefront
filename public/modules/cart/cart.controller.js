@@ -7,8 +7,8 @@
  *
  * 
  */
-define(['app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/cart/cart.views', 'text!modules/cart/cart.templates.html'],
-  function(App, EventBus, Cortex, Model, View, template){
+define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/cart/cart.views', 'text!modules/cart/cart.templates.html'],
+  function(ep, App, EventBus, Cortex, Model, View, template){
 
     $('#TemplateContainer').append(template);
 
@@ -16,7 +16,24 @@ define(['app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/cart/c
 
 
     var defaultLayout = function(){
-      return new View.DefaultLayout();
+      var cartLayout =  new View.DefaultLayout();
+      var cartModel = new Model.CartModel();
+
+      cartModel.fetch({
+        success:function(response){
+          cartLayout.cartTitleRegion.show(new View.CartTitleView());
+          cartLayout.mainCartRegion.show(new View.MainCartView({
+            collection:response
+          }));
+          cartLayout.cartSummaryRegion.show(new View.CartSummaryView());
+          cartLayout.cartCheckoutActionRegion.show(new View.CartCheckoutActionView());
+
+        },
+        error:function(response){
+          ep.logger.error('error fetching my cart model: ' + response);
+        }
+      });
+      return cartLayout;
     };
 
 

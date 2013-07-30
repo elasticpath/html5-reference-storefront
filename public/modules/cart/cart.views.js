@@ -16,7 +16,7 @@ define(['marionette'],
       regions:{
         cartTitleRegion:'[data-region="cartTitleRegion"]',
         mainCartRegion:'[data-region="mainCartRegion"]',
-        cartSummaryRegion:'data-region="cartSummaryRegion"]',
+        cartSummaryRegion:'[data-region="cartSummaryRegion"]',
         cartCheckoutActionRegion:'[data-region="cartCheckoutActionRegion"]'
       }
     });

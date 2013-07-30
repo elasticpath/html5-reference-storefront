@@ -33,6 +33,12 @@ define(['ep','eventbus','marionette'],
       template:'#MainNavTemplateContainer',
       itemViewContainer: 'ul[data-region="mainNavList"]',
       itemView: NavItemView,
+      events:{
+        'click .cmd-nav-item':function(){
+          $('.main-nav-list').fadeOut();
+//          EventBus.trigger('ia.clearNavMenuRequest');
+        }
+      },
       onShow:function(){
         ep.logger.info('main nav test');
 //        $('.btn-main-nav-toggle').click(function(event){

@@ -51,7 +51,7 @@ define(['ep','app','backbone','jsonpath'],
         itemObj.addtocart.actionlink = null;
         var addToCartFormAction = jsonPath(item, "$._addtocartform..links[?(@.rel='addtodefaultcartaction')].rel")[0];
         if (addToCartFormAction){
-          itemObj.addtocart.actionlink = jsonPath(item, "$._addtocartform..links[?(@.rel='addtodefaultcartaction')].href")[0];;
+          itemObj.addtocart.actionlink = jsonPath(item, "$._addtocartform..links[?(@.rel='addtodefaultcartaction')].uri")[0];;
         }
 
 

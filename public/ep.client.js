@@ -270,7 +270,10 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
       }
     });
 
+    EventBus.on('app.authInit',function(){
+      document.location.reload();
 
+    });
 
     function generatePublicAuth(){
       var authString = 'grant_type=password&scope=mobee&role=PUBLIC';
@@ -326,10 +329,7 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
 
       if (!oAuthToken){
         generatePublicAuth();
-        EventBus.on('app.authInit',function(){
-          document.location.reload();
 
-        });
       }
       else{
         return oAuthToken;

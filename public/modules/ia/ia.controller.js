@@ -200,7 +200,7 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
     *
     * */
     // Reload Main Nav Request
-    EventBus.bind('ia.reloadMainNavRequest',function(){
+    EventBus.on('ia.reloadMainNavRequest',function(){
       // load main nav
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'mainNavRegion',
@@ -210,7 +210,7 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
     });
 
     // Render Browse Category Request
-    EventBus.bind('ia.renderBrowseCategoryRequest',function renderBrowseCategory(){
+    EventBus.on('ia.renderBrowseCategoryRequest',function renderBrowseCategory(){
       var subCategoryNavCollection = new Model.BrowseCategoryCollection();
       var itemListCollection = new Model.BrowseItemCollection();
 

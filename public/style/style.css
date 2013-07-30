@@ -2228,7 +2228,7 @@ header.app-header .btn-main-nav-toggle:active {
 .btn-link-cmd {
   background: transparent;
   border: 0;
-  color: #070ca6;
+  color: #eeeeee;
 }
 .main-nav-container {
   float: left;
@@ -2276,7 +2276,7 @@ header.app-header .btn-main-nav-toggle:active {
   color: #444;
 }
 .main-nav-list li span {
-  color: #070ca6;
+  color: #eeeeee;
 }
 .main-nav-list li:hover span {
   color: #444;
