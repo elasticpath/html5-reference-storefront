@@ -6,8 +6,8 @@
  * Time: 9:16 AM
  *
  */
-define(['ep','marionette','i18n'],
-  function(ep,Marionette,i18n){
+define(['ep','marionette','i18n','eventbus'],
+  function(ep,Marionette,i18n,EventBus){
     //console.log('fuck:  ' + i18n);
     var viewHelpers = {
       getDisplayType:function(bHasChildren){
@@ -111,6 +111,9 @@ define(['ep','marionette','i18n'],
         else{
           return '';
         }
+      },
+      getCortexPath:function(){
+        return ep.app.config.cortexApi.path;
       }
     };
 
@@ -184,8 +187,19 @@ define(['ep','marionette','i18n'],
     // Default Item Add to Cart View
     var defaultItemAddToCartView = Backbone.Marionette.ItemView.extend({
       template:'#DefaultItemDetailAddToCartTemplate',
-      templateHelpers:viewHelpers
+      templateHelpers:viewHelpers,
+      events:{
+        'click .btn-itemdetail-addtocart':function(event){
+          event.preventDefault();
+          EventBus.trigger('item.addToCartBtnClicked',event);
+        }
+      }
     });
+
+    function getAddToCartQuantity(){
+
+      return $('#itemdetail-select-quantity').val() || 0;
+    }
 
     return {
       DefaultLayout:defaultLayout,
@@ -195,7 +209,8 @@ define(['ep','marionette','i18n'],
       DefaultItemAvailabilityView:defaultItemAvailabilityView,
       DefaultItemPriceView:defaultItemPriceView,
       DefaultItemSubscriptionView:defaultItemSubscriptionView,
-      DefaultItemAddToCartView:defaultItemAddToCartView
+      DefaultItemAddToCartView:defaultItemAddToCartView,
+      getAddToCartQuantity:getAddToCartQuantity
 
 
     };
