@@ -23,11 +23,16 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
       cartModel.fetch({
         url: cartUrl,
         success:function(response){
+
+          var summaryView = new View.CartSummaryView({
+            model: cartModel
+          });
+
           cartLayout.cartTitleRegion.show(new View.CartTitleView());
           cartLayout.mainCartRegion.show(new View.MainCartView({
             collection:response
           }));
-          cartLayout.cartSummaryRegion.show(new View.CartSummaryView());
+          cartLayout.cartSummaryRegion.show(summaryView);
           cartLayout.cartCheckoutActionRegion.show(new View.CartCheckoutActionView());
 
         },

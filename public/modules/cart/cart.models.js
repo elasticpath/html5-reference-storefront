@@ -16,12 +16,14 @@ define(['ep','eventbus', 'backbone'],
         var cartObj = {};
 
         /*
-         * Cart total-quantity
+         * Cart Summary: total quantity & total price (excluding tax)
          */
-        cartObj.totalQuantity = jsonPath(cart, "$.['total-quantity']")[0];
+        cartObj.cartTotalQuantity = jsonPath(cart, "$.['total-quantity']")[0];
+        cartObj.cartSubTotal = jsonPath(cart, "$.['_total'][0].['cost'][0].['display']")[0];
 
 
-        ep.logger.info('CART TOTAL-QUANTITY PARSE:: ' + cartObj.totalQuantity );
+        ep.logger.info('CART TOTAL-QUANTITY: ' + cartObj.cartTotalQuantity );
+        ep.logger.info('CART SUB TOTAL: ' + cartObj.cartSubTotal );
         return cartObj;
       }
     });
