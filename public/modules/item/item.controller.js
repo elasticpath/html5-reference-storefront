@@ -86,7 +86,7 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
     *
     * */
 
-    EventBus.on('item.loadDefaultCartRequest',function(cartUrl){
+    EventBus.on('item.loadDefaultCartRequest',function(){
       var test = 'test';
       // request cart data from Coretext
       document.location.href = '/#mycart';

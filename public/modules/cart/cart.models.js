@@ -11,10 +11,18 @@ define(['ep','eventbus', 'backbone'],
 
 
     var cartModel = Backbone.Model.extend({
-      url:ep.app.config.cortexApi.path + '/carts/' + ep.app.config.store + '/default/?zoom=lineitems,total',
       parse:function(cart){
-        ep.logger.info('CART ITEM PARSE:: ' + cart );
-        return cart;
+
+        var cartObj = {};
+
+        /*
+         * Cart total-quantity
+         */
+        cartObj.totalQuantity = jsonPath(cart, "$.['total-quantity']")[0];
+
+
+        ep.logger.info('CART TOTAL-QUANTITY PARSE:: ' + cartObj.totalQuantity );
+        return cartObj;
       }
     });
 

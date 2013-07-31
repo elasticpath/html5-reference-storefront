@@ -18,8 +18,10 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
     var defaultLayout = function(){
       var cartLayout =  new View.DefaultLayout();
       var cartModel = new Model.CartModel();
+      var cartUrl = ep.app.config.cortexApi.path + '/carts/' + ep.app.config.store + '/default/?zoom=total,lineitems:element,lineitems:element:price,lineitems:element:availability,lineitems:element:item:definition,lineitems:element:item:definition:assets:element';
 
       cartModel.fetch({
+        url: cartUrl,
         success:function(response){
           cartLayout.cartTitleRegion.show(new View.CartTitleView());
           cartLayout.mainCartRegion.show(new View.MainCartView({
