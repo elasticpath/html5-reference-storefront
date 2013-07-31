@@ -9,7 +9,6 @@
 define(['marionette'],
   function(Marionette){
 
-
     // Default Layout
     var defaultLayout = Backbone.Marionette.Layout.extend({
       template:'#DefaultCartLayoutTemplate',
@@ -28,13 +27,15 @@ define(['marionette'],
 
     // Cart Line Item View
     var cartLineItemView = Backbone.Marionette.ItemView.extend({
-      template:'#CartLineItemTemplate'
+      template:'#CartLineItemTemplate',
+      tagName:'tr'
     });
 
     // Main Cart View
     var mainCartView = Backbone.Marionette.CompositeView.extend({
       template:'#MainCartTemplate',
-      itemView:cartLineItemView
+      itemView:cartLineItemView,
+      itemViewContainer:"tbody"
     });
 
     // Cart Summary View
@@ -47,15 +48,10 @@ define(['marionette'],
       template:'#CartChecktouActionTemplate'
     });
 
-
-
-
-
     return {
-
       CartTitleView:cartTitleView,
       MainCartView:mainCartView,
-      CartLineItemView:cartLineItemView,
+//      CartLineItemView:cartLineItemView,
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
       DefaultLayout:defaultLayout

@@ -16,23 +16,65 @@ define(['ep','eventbus', 'backbone'],
         var cartObj = {};
 
         /*
-         * Cart Summary: total quantity & total price (excluding tax)
+         * Cart-lineitems
+         */
+        var lineItemsArray = [];
+        var lineItemsRoot = jsonPath(cart, "$.['_lineitems'][0]['_element']")[0];
+
+        if (lineItemsRoot) {
+          var lineItemArrayLen = lineItemsRoot.length;
+          for (var x = 0; x < lineItemArrayLen; x++){
+            var currObj = lineItemsRoot[x];
+            var lineItemObj = {};
+
+            /*
+             * quantity
+             */
+            lineItemObj.quantity = currObj['quantity'];
+
+            /*
+             * availability
+             */
+            lineItemObj.availability = currObj['_availability'][0]['state'];
+
+            /*
+             * item-toal (list price & purchase price)
+             */
+            lineItemObj.price = {};
+
+
+            lineItemsArray.push(lineItemObj);
+          }
+        }
+        cartObj.lineItem = lineItemsArray;
+
+
+        /*
+         * Cart Summary: total quantity
          */
         cartObj.cartTotalQuantity = jsonPath(cart, "$.['total-quantity']")[0];
-        cartObj.cartSubTotal = jsonPath(cart, "$.['_total'][0].['cost'][0].['display']")[0];
 
+        /*
+         *    total price (excluding tax)
+         */
+        var cartSubTotal = jsonPath(cart, "$.['_total'][0].['cost'][0]")[0];
+        cartObj.cartSubTotal = {
+          currency:cartSubTotal.currency,
+          amount:cartSubTotal.amount,
+          display:cartSubTotal.display
+        }
 
-        ep.logger.info('CART TOTAL-QUANTITY: ' + cartObj.cartTotalQuantity );
-        ep.logger.info('CART SUB TOTAL: ' + cartObj.cartSubTotal );
+        ep.logger.info('CART SUB TOTAL: ' + cartObj.cartSubTotal.display );
         return cartObj;
       }
     });
 
-    var cartItemModel = Backbone.Model.extend({
-
-    });
+    var cartItemModel = Backbone.Model.extend();
     var cartItemCollection = Backbone.Collection.extend({
-      model:cartItemModel
+      model:cartItemModel,
+      parse:function(collection){
+        return collection;
+      }
     });
 
 

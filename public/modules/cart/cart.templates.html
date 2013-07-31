@@ -18,8 +18,9 @@
   <script id="CartLineItemTemplate" type="text/template">
     <td>[thumbnail]</td>
     <td>[name]</td>
-    <td><%= E.getLineItemPrice(E.price) %></td>
-    <td>[quantity]</td>
+    <td><%= E.availability %></td>
+    <td>[price]</td><!-- E.getLineItemPrice(E.price) -->
+    <td><%= E.quantity %></td>
     <td>[item total]</td>
     <td>[remove]</td>
   </script>
@@ -31,15 +32,14 @@
         <tr>
           <th>product</th>
           <th>name</th>
+          <th>availability</th>
           <th>item price</th>
           <th>quantity</th>
           <th>item total</th>
           <th>remove</th>
         </tr>
       </thead>
-      <tbody>
-
-      </tbody>
+      <tbody></tbody>
     </table>
   </script>
 
@@ -51,8 +51,8 @@
         <%= E.cartTotalQuantity %>
       </li>
       <li>
-        <label>Total</label>
-        <%= E.cartSubTotal %>
+        <label>Sub Total</label>
+        <%= E.cartSubTotal.display %>
       </li>
     </ul>
 

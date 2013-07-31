@@ -24,14 +24,18 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
         url: cartUrl,
         success:function(response){
 
+          var lineItemList = new Model.CartItemCollection(response.attributes.lineItem);
+
           var summaryView = new View.CartSummaryView({
             model: cartModel
           });
 
+          var mainCartView = new View.MainCartView({
+            collection: lineItemList
+          });
+
           cartLayout.cartTitleRegion.show(new View.CartTitleView());
-          cartLayout.mainCartRegion.show(new View.MainCartView({
-            collection:response
-          }));
+          cartLayout.mainCartRegion.show(mainCartView);
           cartLayout.cartSummaryRegion.show(summaryView);
           cartLayout.cartCheckoutActionRegion.show(new View.CartCheckoutActionView());
 
