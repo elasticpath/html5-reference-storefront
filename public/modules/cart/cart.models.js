@@ -28,20 +28,80 @@ define(['ep','eventbus', 'backbone'],
             var lineItemObj = {};
 
             /*
+             * item display name
+             */
+            lineItemObj.displayName = currObj['_item'][0]['_definition'][0]['display-name'];
+
+            /*
+             * availability
+             */
+            lineItemObj.availability = {};
+            lineItemObj.availability.state = currObj['_availability'][0]['state'];
+
+            lineItemObj.availability.releaseDate = {};
+            var lineItemReleaseDate = currObj['_availability'][0]['release-date'];
+            if (lineItemReleaseDate) {
+              lineItemObj.availability.releaseDate = {
+                displayValue:lineItemReleaseDate['display-value'],
+                value:lineItemReleaseDate['value']
+              }
+            }
+
+            /*
              * quantity
              */
             lineItemObj.quantity = currObj['quantity'];
 
             /*
-             * availability
+             * item unit price
              */
-            lineItemObj.availability = currObj['_availability'][0]['state'];
+            lineItemObj.unitPrice = {};
+            lineItemObj.unitPrice.listed = {};
+            lineItemObj.unitPrice.purchase = {};
+
+            var itemUnitListPrice = currObj['_item'][0]['_price'][0]['list-price'];
+            var itemUnitPurchasePrice = currObj['_item'][0]['_price'][0]['purchase-price'];
+            if (itemUnitListPrice) {
+              lineItemObj.unitPrice.listed = {
+                currency:itemUnitListPrice[0].currency,
+                amount:itemUnitListPrice[0].amount,
+                display:itemUnitListPrice[0].display
+              }
+            }
+
+            if (itemUnitPurchasePrice) {
+              lineItemObj.unitPrice.purchase = {
+                currency:itemUnitPurchasePrice[0].currency,
+                amount:itemUnitPurchasePrice[0].amount,
+                display:itemUnitPurchasePrice[0].display
+              }
+            }
 
             /*
-             * item-toal (list price & purchase price)
+             * item-total (list price & purchase price)
              */
             lineItemObj.price = {};
+            lineItemObj.price.listed = {};
+            lineItemObj.price.purchase = {};
 
+            var lineItemListPrice = currObj['_price'][0]['list-price'];
+            var lineItemPurchasePrice = currObj['_price'][0]['purchase-price'];
+
+            if (lineItemListPrice) {
+              lineItemObj.price.listed = {
+                currency:lineItemListPrice[0].currency,
+                amount:lineItemListPrice[0].amount,
+                display:lineItemListPrice[0].display
+              }
+            }
+
+            if (lineItemPurchasePrice) {
+              lineItemObj.price.purchase = {
+                currency:lineItemPurchasePrice[0].currency,
+                amount:lineItemPurchasePrice[0].amount,
+                display:lineItemPurchasePrice[0].display
+              }
+            }
 
             lineItemsArray.push(lineItemObj);
           }
@@ -55,7 +115,7 @@ define(['ep','eventbus', 'backbone'],
         cartObj.cartTotalQuantity = jsonPath(cart, "$.['total-quantity']")[0];
 
         /*
-         *    total price (excluding tax)
+         * Cart Summary: total price (excluding tax)
          */
         var cartSubTotal = jsonPath(cart, "$.['_total'][0].['cost'][0]")[0];
         cartObj.cartSubTotal = {
@@ -64,7 +124,7 @@ define(['ep','eventbus', 'backbone'],
           display:cartSubTotal.display
         }
 
-        ep.logger.info('CART SUB TOTAL: ' + cartObj.cartSubTotal.display );
+        ep.logger.info('A CART-LINEITEM RELEASE DATE: ' + cartObj.lineItem[2].availability.releaseDate.displayValue );
         return cartObj;
       }
     });

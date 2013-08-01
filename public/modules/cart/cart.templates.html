@@ -11,17 +11,35 @@
 
   <!-- Cart Title Template -->
   <script id="CartTitleTemplate" type="text/template">
-    <h1>My Cart</h1>
+    <h1 class="view-title">My Cart</h1>
   </script>
 
   <!-- Cart Line Item Template -->
   <script id="CartLineItemTemplate" type="text/template">
     <td>[thumbnail]</td>
-    <td>[name]</td>
-    <td><%= E.availability %></td>
-    <td>[price]</td><!-- E.getLineItemPrice(E.price) -->
+    <td><%= E.displayName %></td>
+    <td>
+      <ul>
+        <li><%= E.getAvailabilityDisplayText(E.availability.state) %></li>
+        <li class="availability-release-date">
+          <label data-i18n="releasedOn"><%= E.getI18nLabel('releasedOn') %>: </label>
+          <span><%= E.getAvailabilityReleaseDate(E.availability.releaseDate) %></span>
+        </li>
+      </ul>
+    </td>
+    <td class="lineitem-price-container">
+      <ul>
+        <li class="price-list-item"><span class="lineitem-list-price"><%= E.getListPrice(E.unitPrice) %></span></li>
+        <li class="price-purchase-item"><%= E.getPurchasePrice(E.unitPrice) %></li>
+      </ul>
+    </td>
     <td><%= E.quantity %></td>
-    <td>[item total]</td>
+    <td class="lineitem-price-container">
+      <ul>
+        <li class="price-list-item"><span class="lineitem-list-price"><%= E.getListPrice(E.price) %></span></li>
+        <li class="price-purchase-item"><%= E.getPurchasePrice(E.price) %></li>
+      </ul>
+    </td>
     <td>[remove]</td>
   </script>
 
