@@ -28,6 +28,20 @@ define(['ep','eventbus', 'backbone'],
             var lineItemObj = {};
 
             /*
+             * item default image thumbnail
+             */
+            lineItemObj.thumbnail = {};
+            var assetsArray = jsonPath(currObj, "$._item.._definition.._assets.._element")[0];
+            if (assetsArray) {
+              var defaultImg = jsonPath(assetsArray, "$.[?(@.name='default-image')]")[0];
+              lineItemObj.thumbnail = {
+                name:defaultImg['name'],
+                contentLocation:defaultImg['content-location'],
+                relativeLocation:defaultImg['relative-location']
+              }
+            }
+
+            /*
              * item display name
              */
             lineItemObj.displayName = currObj['_item'][0]['_definition'][0]['display-name'];
@@ -124,7 +138,7 @@ define(['ep','eventbus', 'backbone'],
           display:cartSubTotal.display
         }
 
-        ep.logger.info('A CART-LINEITEM RELEASE DATE: ' + cartObj.lineItem[2].availability.releaseDate.displayValue );
+        ep.logger.info('A CART-LINEITEM IMG NAME: ' + cartObj.lineItem[1].thumbnail.name );
         return cartObj;
       }
     });

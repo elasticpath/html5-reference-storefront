@@ -106,7 +106,7 @@ define(['ep','marionette','i18n','eventbus'],
       getDefaultImageName:function(aModel){
         // redundant until we have more sophisticated implementation
         if (aModel){
-          return 'default-image';
+          return this.getI18nLabel('itemDetail.defaultImage');
         }
         else{
           return '';

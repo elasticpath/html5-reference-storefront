@@ -3,8 +3,12 @@
     "addToCart":"Add to Cart",
     "purchasePrice":"Price",
     "listPrice":"Original Price",
-    "quantity":"Quantity"
+    "quantity":"Quantity",
+    "defaultImage":"Default Image"
 
+  },
+  "cart":{
+    "defaultImage":"Default Image"
   },
   "AVAILABLE":"In Stock",
   "ALWAYS":"Always",

@@ -68,6 +68,26 @@ define(['marionette','i18n'],
         else{
           return '';
         }
+      },
+      getDefaultImagePath:function(aModel){
+        var retVar;
+        if (aModel){
+          retVar = aModel.contentLocation;
+        }
+        else{
+         retVar = '';
+        }
+        return retVar;
+      },
+      getDefaultImageName:function(aModel){
+        var retVar;
+        if (aModel){
+          retVar = this.getI18nLabel('cart.defaultImage');
+        }
+        else{
+          retVar = '';
+        }
+        return retVar;
       }
     };
 
