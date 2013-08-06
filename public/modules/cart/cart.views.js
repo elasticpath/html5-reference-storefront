@@ -136,12 +136,14 @@ define(['ep','marionette','i18n'],
     var mainCartView = Backbone.Marionette.CompositeView.extend({
       template:'#MainCartTemplate',
       itemView:cartLineItemView,
-      itemViewContainer:"tbody"
+      itemViewContainer:"tbody",
+      templateHelpers:viewHelpers
     });
 
     // Cart Summary View
     var cartSummaryView = Backbone.Marionette.ItemView.extend({
-      template:'#CartSummaryTemplate'
+      template:'#CartSummaryTemplate',
+      templateHelpers:viewHelpers
     });
 
     // Cart Checkout Action View

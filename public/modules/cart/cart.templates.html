@@ -48,13 +48,13 @@
     <table>
       <thead>
         <tr>
-          <th>product</th>
-          <th>name</th>
-          <th>availability</th>
-          <th>item price</th>
-          <th>quantity</th>
-          <th>item total</th>
-          <th>remove</th>
+          <th><%= E.getI18nLabel('cart.product') %></th>
+          <th><%= E.getI18nLabel('cart.name') %></th>
+          <th><%= E.getI18nLabel('cart.availability') %></th>
+          <th><%= E.getI18nLabel('cart.itemPrice') %></th>
+          <th><%= E.getI18nLabel('cart.quantity') %></th>
+          <th><%= E.getI18nLabel('cart.itemTotal') %></th>
+          <th><%= E.getI18nLabel('cart.remove') %></th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -65,12 +65,12 @@
   <script id="CartSummaryTemplate" type="text/template">
     <ul>
       <li>
-        <label>Total Quantity</label>
-        <%= E.cartTotalQuantity %>
+        <label><%= E.getI18nLabel('cart.totalQuantity') %>: </label>
+        <span><%= E.cartTotalQuantity %></span>
       </li>
       <li>
-        <label>Sub Total</label>
-        <%= E.cartSubTotal.display %>
+        <label><%= E.getI18nLabel('cart.subTotal') %>: </label>
+        <span><%= E.cartSubTotal.display %></span>
       </li>
     </ul>
 

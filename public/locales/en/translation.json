@@ -8,6 +8,15 @@
 
   },
   "cart":{
+    "product":"Product",
+    "name":"Name",
+    "availability":"Availability",
+    "itemPrice":"Item Price",
+    "quantity":"Quantity",
+    "itemTotal":"Item Total",
+    "remove":"Remove",
+    "totalQuantity":"Total Quantity",
+    "subTotal":"Sub Total",
     "defaultImage":"Default Image"
   },
   "AVAILABLE":"In Stock",
