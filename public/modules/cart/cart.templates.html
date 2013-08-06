@@ -17,7 +17,7 @@
   <!-- Cart Line Item Template -->
   <script id="CartLineItemTemplate" type="text/template">
     <td><img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>" /></td>
-    <td><%= E.displayName %></td>
+    <td><a href="<%= E.getItemUrl(E.uri) %>"><%= E.displayName %></a></td>
     <td>
       <ul>
         <li><%= E.getAvailabilityDisplayText(E.availability.state) %></li>

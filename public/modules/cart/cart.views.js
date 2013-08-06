@@ -6,8 +6,8 @@
  * Time: 9:16 AM
  *
  */
-define(['marionette','i18n'],
-  function(Marionette,i18n){
+define(['ep','marionette','i18n'],
+  function(ep,Marionette,i18n){
     var viewHelpers = {
       getI18nLabel:function(key){
         retVal = key;
@@ -85,6 +85,16 @@ define(['marionette','i18n'],
           retVar = this.getI18nLabel('cart.defaultImage');
         }
         else{
+          retVar = '';
+        }
+        return retVar;
+      },
+      getItemUrl:function(uri){
+        var retVar;
+        var uriCruft = '/itemdefinitions/' + ep.app.config.cortexApi.store + '/';
+        if (uri && uri.indexOf(uriCruft) > -1){
+          retVar = '#itemdetail/' + uri.substring(uriCruft.length, uri.length);
+        } else {
           retVar = '';
         }
         return retVar;

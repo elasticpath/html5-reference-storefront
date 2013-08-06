@@ -45,6 +45,8 @@ define(['ep','eventbus', 'backbone'],
              * item display name
              */
             lineItemObj.displayName = currObj['_item'][0]['_definition'][0]['display-name'];
+            var itemUri = currObj['_item'][0]['_definition'][0].self.uri;
+            lineItemObj.uri = itemUri;
 
             /*
              * availability
@@ -138,7 +140,7 @@ define(['ep','eventbus', 'backbone'],
           display:cartSubTotal.display
         }
 
-        ep.logger.info('A CART-LINEITEM IMG NAME: ' + cartObj.lineItem[1].thumbnail.name );
+        ep.logger.info('A CART-LINEITEM URI: ' + cartObj.lineItem[0].uri );
         return cartObj;
       }
     });
