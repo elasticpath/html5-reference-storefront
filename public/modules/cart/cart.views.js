@@ -154,7 +154,7 @@ define(['ep','marionette','i18n'],
     return {
       CartTitleView:cartTitleView,
       MainCartView:mainCartView,
-//      CartLineItemView:cartLineItemView,
+      CartLineItemView:cartLineItemView,
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
       DefaultLayout:defaultLayout
