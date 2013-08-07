@@ -119,6 +119,11 @@ define(['ep','eventbus', 'backbone'],
               }
             }
 
+            /*
+             * LineItem Uri (for remove lineitem button)
+             */
+            lineItemObj.lineitemUri = currObj['self']['uri'];
+
             lineItemsArray.push(lineItemObj);
           }
         }
@@ -140,7 +145,6 @@ define(['ep','eventbus', 'backbone'],
           display:cartSubTotal.display
         }
 
-        ep.logger.info('A CART-LINEITEM URI: ' + cartObj.lineItem[0].itemDefinitionUri );
         return cartObj;
       }
     });

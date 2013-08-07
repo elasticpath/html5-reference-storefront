@@ -47,6 +47,46 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
       return cartLayout;
     };
 
+    /*
+     *
+     *
+     * EVENT LISTENERS
+     *
+     */
+    EventBus.on('cart.ReloadCartView', function() {
+      ep.logger.info('Refreshing view...');
+      document.location.reload();
+    });
+
+    EventBus.on('cart.CartLineItemRemoved', function(){
+      // could trigger other actions too.
+      EventBus.trigger('cart.ReloadCartView');
+    });
+
+    EventBus.on('cart.removeLineItemBtnClicked', function(event){
+      var oAuthToken = window.localStorage.getItem('oAuthToken');
+      var deleteActionLink = $(event.target).data('actionlink');
+
+      if (oAuthToken && deleteActionLink) {
+        ep.io.ajax({
+          type:'DELETE',
+          beforeSend:function(request)
+          {
+            request.setRequestHeader("Authorization", oAuthToken);
+          },
+          contentType:'application/json',
+          url:deleteActionLink,
+          success:function(response, x, y){
+            ep.logger.info('Success deleting lineitem - refreshing cart view');
+            ep.logger.info('RESPONSE ' + x);
+            EventBus.trigger('cart.CartLineItemRemoved');
+          },
+          error:function(response){
+            ep.logger.error('error deleting lineitem from cart: ' + response);
+          }
+        });
+      }
+    });
 
     return {
       DefaultView:defaultLayout

@@ -6,8 +6,8 @@
  * Time: 9:16 AM
  *
  */
-define(['ep','marionette','i18n'],
-  function(ep,Marionette,i18n){
+define(['ep','marionette','i18n','eventbus'],
+  function(ep,Marionette,i18n,EventBus){
     var viewHelpers = {
       getI18nLabel:function(key){
         retVal = key;
@@ -98,6 +98,9 @@ define(['ep','marionette','i18n'],
           retVar = '';
         }
         return retVar;
+      },
+      getCortexPath:function(){
+        return ep.app.config.cortexApi.path;
       }
     };
 
@@ -122,6 +125,12 @@ define(['ep','marionette','i18n'],
       template:'#CartLineItemTemplate',
       tagName:'tr',
       templateHelpers:viewHelpers,
+      events:{
+        'click.btn-cart-removelineitem':function(event){
+          event.preventDefault();
+          EventBus.trigger('cart.removeLineItemBtnClicked', event);
+        }
+      },
       onShow:function(){
         if (!viewHelpers.getListPrice(this.model.attributes.price)){
           $('.price-list-item', this.el).hide();
@@ -148,7 +157,8 @@ define(['ep','marionette','i18n'],
 
     // Cart Checkout Action View
     var cartCheckoutActionView = Backbone.Marionette.ItemView.extend({
-      template:'#CartChecktouActionTemplate'
+      template:'#CartChecktouActionTemplate',
+      templateHelpers:viewHelpers
     });
 
     return {

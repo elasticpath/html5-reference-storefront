@@ -57,7 +57,9 @@
     </td>
 
     <!-- Cart Line Item Remove Button -->
-    <td>[remove]</td>
+    <td>
+      <button class="btn-round btn btn-primary btn-cart-removelineitem" data-actionlink="<%= E.getCortexPath() %><%= E.lineitemUri %>" data-i18n="cart.remove"><%= E.getI18nLabel('cart.remove') %></button>
+    </td>
   </script>
 
   <!-- Main Cart Template -->
@@ -95,7 +97,7 @@
 
   <!-- Cart Checkout Action Template -->
   <script id="CartChecktouActionTemplate" type="text/template">
-    <button class="btn-round btn-primary btn-cmd-checkout">Checkout</button>
+    <button class="btn-round btn-primary btn-cmd-checkout"><%= E.getI18nLabel('cart.checkout') %></button>
   </script>
 
 </div>

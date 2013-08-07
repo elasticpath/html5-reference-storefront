@@ -17,7 +17,8 @@
     "remove":"Remove",
     "totalQuantity":"Total Quantity",
     "subTotal":"Sub Total",
-    "defaultImage":"Default Image"
+    "defaultImage":"Default Image",
+    "checkout":"Checkout"
   },
   "AVAILABLE":"In Stock",
   "ALWAYS":"Always",
