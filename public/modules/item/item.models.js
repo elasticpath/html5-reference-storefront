@@ -85,7 +85,16 @@ define(['ep','app','backbone','jsonpath'],
          *
          * */
         //itemObj.availability = item['_availability'][0]['state'];
-        itemObj.availability = jsonPath(item, "$.['_availability'][0]['state']")[0];
+        itemObj.availability = {};
+        itemObj.availability.state = jsonPath(item, "$.['_availability'][0]['state']")[0];
+        itemObj.availability.releaseDate = {};
+        var itemReleaseDate = jsonPath(item, "$._availability..release-date");
+        if (itemReleaseDate) {
+          itemObj.availability.releaseDate = {
+            displayValue:itemReleaseDate[0]['display-value'],
+            value:itemReleaseDate[0]['value']
+          };
+        }
 
 
         /*

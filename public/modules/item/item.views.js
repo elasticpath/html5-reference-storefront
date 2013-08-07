@@ -51,6 +51,15 @@ define(['ep','marionette','i18n','eventbus'],
         }
         return retVal;
       },
+      getAvailabilityReleaseDate:function(releaseDate){
+        var retVar = '';
+
+        if (releaseDate && releaseDate.displayValue){
+          retVar = releaseDate.displayValue;
+        }
+
+        return retVar;
+      },
       checkForDisabledAddToCart:function(model){
 
         /*
@@ -163,7 +172,12 @@ define(['ep','marionette','i18n','eventbus'],
       template:'#DefaultItemDetailAvailabilityTemplate',
       className:'itemdetail-availability',
       tagName:'div',
-      templateHelpers:viewHelpers
+      templateHelpers:viewHelpers,
+      onShow:function() {
+        if (!viewHelpers.getAvailabilityReleaseDate(this.model.attributes.availability.releaseDate)) {
+          $('.availability-release-date').hide();
+        }
+      }
     });
 
     // Default Item Price View
