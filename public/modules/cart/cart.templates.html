@@ -16,8 +16,17 @@
 
   <!-- Cart Line Item Template -->
   <script id="CartLineItemTemplate" type="text/template">
-    <td><img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>" /></td>
-    <td><a href="<%= E.getItemUrl(E.uri) %>"><%= E.displayName %></a></td>
+    <!-- Cart Line Item Thumbnail -->
+    <td>
+      <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>" />
+    </td>
+
+    <!-- Cart Line Item Display Name -->
+    <td>
+      <a href="<%= E.getItemUrl(E.itemDefinitionUri) %>"><%= E.displayName %></a>
+    </td>
+
+    <!-- Cart Line Item Availability -->
     <td>
       <ul>
         <li><%= E.getAvailabilityDisplayText(E.availability.state) %></li>
@@ -27,19 +36,27 @@
         </li>
       </ul>
     </td>
+
+    <!-- Cart Line Item Unit Price -->
     <td class="lineitem-price-container">
       <ul>
         <li class="price-list-item"><span class="lineitem-list-price"><%= E.getListPrice(E.unitPrice) %></span></li>
         <li class="price-purchase-item"><%= E.getPurchasePrice(E.unitPrice) %></li>
       </ul>
     </td>
+
+    <!-- Cart Line Item Quantity -->
     <td><%= E.quantity %></td>
+
+    <!-- Cart Line Item Total Price -->
     <td class="lineitem-price-container">
       <ul>
         <li class="price-list-item"><span class="lineitem-list-price"><%= E.getListPrice(E.price) %></span></li>
         <li class="price-purchase-item"><%= E.getPurchasePrice(E.price) %></li>
       </ul>
     </td>
+
+    <!-- Cart Line Item Remove Button -->
     <td>[remove]</td>
   </script>
 

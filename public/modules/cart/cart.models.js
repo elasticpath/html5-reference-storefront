@@ -46,7 +46,7 @@ define(['ep','eventbus', 'backbone'],
              */
             lineItemObj.displayName = currObj['_item'][0]['_definition'][0]['display-name'];
             var itemUri = currObj['_item'][0]['_definition'][0].self.uri;
-            lineItemObj.uri = itemUri;
+            lineItemObj.itemDefinitionUri = itemUri;
 
             /*
              * availability
@@ -140,7 +140,7 @@ define(['ep','eventbus', 'backbone'],
           display:cartSubTotal.display
         }
 
-        ep.logger.info('A CART-LINEITEM URI: ' + cartObj.lineItem[0].uri );
+        ep.logger.info('A CART-LINEITEM URI: ' + cartObj.lineItem[0].itemDefinitionUri );
         return cartObj;
       }
     });
