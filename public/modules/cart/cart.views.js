@@ -146,7 +146,12 @@ define(['ep','marionette','i18n','eventbus'],
       template:'#MainCartTemplate',
       itemView:cartLineItemView,
       itemViewContainer:"tbody",
-      templateHelpers:viewHelpers
+      templateHelpers:viewHelpers,
+      onShow:function() {
+        if(!this.$itemViewContainer){
+          $(this.el).replaceWith("<div><b>Your shopping cart is empty.</b></div>");
+        }
+      }
     });
 
     // Cart Summary View
@@ -161,17 +166,12 @@ define(['ep','marionette','i18n','eventbus'],
       templateHelpers:viewHelpers
     });
 
-    var cartEmptyView = Backbone.Marionette.ItemView.extend({
-      template:'#CartEmptyTemplate'
-    });
-
     return {
       CartTitleView:cartTitleView,
       MainCartView:mainCartView,
       CartLineItemView:cartLineItemView,
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
-      CartEmptyView:cartEmptyView,
       DefaultLayout:defaultLayout
     };
   }
