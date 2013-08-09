@@ -35,10 +35,14 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
           });
 
           cartLayout.cartTitleRegion.show(new View.CartTitleView());
-          cartLayout.mainCartRegion.show(mainCartView);
-          cartLayout.cartSummaryRegion.show(summaryView);
-          cartLayout.cartCheckoutActionRegion.show(new View.CartCheckoutActionView());
 
+          if (lineItemList.length > 0) {
+            cartLayout.mainCartRegion.show(mainCartView);
+            cartLayout.cartSummaryRegion.show(summaryView);
+            cartLayout.cartCheckoutActionRegion.show(new View.CartCheckoutActionView());
+          } else {
+            cartLayout.mainCartRegion.show(new View.CartEmptyView());
+          }
         },
         error:function(response){
           ep.logger.error('error fetching my cart model: ' + response);

@@ -161,12 +161,17 @@ define(['ep','marionette','i18n','eventbus'],
       templateHelpers:viewHelpers
     });
 
+    var cartEmptyView = Backbone.Marionette.ItemView.extend({
+      template:'#CartEmptyTemplate'
+    });
+
     return {
       CartTitleView:cartTitleView,
       MainCartView:mainCartView,
       CartLineItemView:cartLineItemView,
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
+      CartEmptyView:cartEmptyView,
       DefaultLayout:defaultLayout
     };
   }
