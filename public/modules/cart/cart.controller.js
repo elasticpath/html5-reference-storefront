@@ -18,27 +18,28 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
     var defaultLayout = function(){
       var cartLayout =  new View.DefaultLayout();
       var cartModel = new Model.CartModel();
-      var cartUrl = ep.app.config.cortexApi.path + '/carts/' + ep.app.config.store + '/default/?zoom=total,lineitems:element,lineitems:element:price,lineitems:element:availability,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price';
 
       cartModel.fetch({
-        url: cartUrl,
         success:function(response){
-
-          var lineItemList = new Model.CartItemCollection(response.attributes.lineItem);
 
           var summaryView = new View.CartSummaryView({
             model: cartModel
           });
 
+          // collection (attributes.lineitems) coming from parse method of cartModel
           var mainCartView = new View.MainCartView({
-            collection: lineItemList
+            collection: new Model.CartItemCollection(response.attributes.lineItems)
           });
 
           cartLayout.cartTitleRegion.show(new View.CartTitleView());
-          cartLayout.mainCartRegion.show(mainCartView);
           cartLayout.cartSummaryRegion.show(summaryView);
           cartLayout.cartCheckoutActionRegion.show(new View.CartCheckoutActionView());
 
+          if (response.attributes.lineItems.length > 0) {
+            cartLayout.mainCartRegion.show(mainCartView);
+          } else {
+            cartLayout.mainCartRegion.show(new View.EmptyCartView());
+          }
         },
         error:function(response){
           ep.logger.error('error fetching my cart model: ' + response);
@@ -53,14 +54,18 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
      * EVENT LISTENERS
      *
      */
-    EventBus.on('cart.ReloadCartView', function() {
+    EventBus.on('cart.ReloadCartViewRequest', function() {
       ep.logger.info('Refreshing view...');
-      document.location.reload();
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region:'appMainRegion',
+        module:'cart',
+        view:'DefaultView'
+      });
     });
 
     EventBus.on('cart.CartLineItemRemoved', function(){
       // EventBus.trigger('cart.DisplayCartLineItemRemovedSuccessMsg');
-      EventBus.trigger('cart.ReloadCartView');
+      EventBus.trigger('cart.ReloadCartViewRequest');
     });
 
     EventBus.on('cart.CartLineItemRemoveFailed', function(response) {
@@ -81,8 +86,6 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
           contentType:'application/json',
           url:deleteActionLink,
           success:function(response, x, y){
-            ep.logger.info('Success deleting lineitem - refreshing cart view');
-            ep.logger.info('RESPONSE ' + x);
             EventBus.trigger('cart.CartLineItemRemoved');
           },
           error:function(response){

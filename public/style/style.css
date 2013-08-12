@@ -1686,7 +1686,6 @@ a.error:hover {
     bottom: 0;
   }
 }
-/* Start Item Detail  */
 /* apply a natural box layout model to all elements */
 *,
 *:before,
@@ -2113,62 +2112,6 @@ in the ui framework
 .ac-container input:checked ~ article.ac-large {
   height: 230px;
 }
-#FileEditor,
-#ModFileEditor,
-#TestEditor {
-  height: 40em;
-  width: 50em;
-}
-.composer-editor-container {
-  position: relative;
-}
-.ac-container article {
-  overflow-y: scroll;
-}
-.row {
-  background-color: #ccc;
-}
-.composer-container h2 {
-  font-size: 1.2em;
-  padding-top: .1em;
-  padding-bottom: .1em;
-  margin-top: .1em;
-  margin-bottom: .1em;
-}
-#contextmenu {
-  margin: 0;
-  padding: 0;
-  border: 1px solid #000;
-  background: #ccc;
-  z-index: 4000;
-}
-#contextmenu li {
-  list-style-type: none;
-  margin: 1px;
-  padding: 2px;
-  cursor: pointer;
-}
-#contextmenu li.hover {
-  background: #ddd;
-}
-.drop-zone {
-  height: 400px;
-  width: 400px;
-  border: 1px solid #444;
-  background-color: #999;
-}
-.test-layout {
-  padding: 1em;
-  border: 1px solid darkgreen;
-  background-color: #dbc59e;
-}
-/* Start Item Detail  */
-/*---------------------------------------------------
-    LESS Elements 0.9
-  ---------------------------------------------------
-    A set of useful LESS mixins
-    More info at: http://lesselements.com
-  ---------------------------------------------------*/
 .app-header {
   boder-radius: 8px;
   border-top: 1px solid #fff;
@@ -2309,7 +2252,6 @@ header.app-header .btn-main-nav-toggle:active {
 .global-nav-container a {
   color: #070ca6;
 }
-/* Start Item Detail  */
 /*
   item detail
 */
@@ -2366,6 +2308,9 @@ header.app-header .btn-main-nav-toggle:active {
   font-weight: bold;
   color: #444444;
 }
+/*
+  cart page
+*/
 /*
 
     plugin css files

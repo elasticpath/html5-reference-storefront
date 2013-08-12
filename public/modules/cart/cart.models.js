@@ -11,6 +11,8 @@ define(['ep','eventbus', 'backbone'],
 
 
     var cartModel = Backbone.Model.extend({
+      url:ep.app.config.cortexApi.path + '/carts/' + ep.app.config.store + '/default/?zoom=total,lineitems:element,lineitems:element:price,lineitems:element:availability,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price',
+
       parse:function(cart){
 
         var cartObj = {};
@@ -23,6 +25,7 @@ define(['ep','eventbus', 'backbone'],
 
         if (lineItemsRoot) {
           var lineItemArrayLen = lineItemsRoot.length;
+          // Iterate over Lineitems
           for (var x = 0; x < lineItemArrayLen; x++){
             var currObj = lineItemsRoot[x];
             var lineItemObj = {};
@@ -127,7 +130,7 @@ define(['ep','eventbus', 'backbone'],
             lineItemsArray.push(lineItemObj);
           }
         }
-        cartObj.lineItem = lineItemsArray;
+        cartObj.lineItems = lineItemsArray;
 
 
         /*
@@ -138,12 +141,12 @@ define(['ep','eventbus', 'backbone'],
         /*
          * Cart Summary: total price (excluding tax)
          */
-        var cartSubTotal = jsonPath(cart, "$.['_total'][0].['cost'][0]")[0];
-        cartObj.cartSubTotal = {
-          currency:cartSubTotal.currency,
-          amount:cartSubTotal.amount,
-          display:cartSubTotal.display
-        }
+        var cartTotal = jsonPath(cart, "$.['_total'][0].['cost'][0]")[0];
+        cartObj.cartTotal = {
+          currency:cartTotal.currency,
+          amount:cartTotal.amount,
+          display:cartTotal.display
+        };
 
         return cartObj;
       }

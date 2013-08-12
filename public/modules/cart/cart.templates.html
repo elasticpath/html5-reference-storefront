@@ -46,7 +46,7 @@
     </td>
 
     <!-- Cart Line Item Quantity -->
-    <td><%= E.quantity %></td>
+    <td class="cart-lineitem-quantity-col"><%= E.quantity %></td>
 
     <!-- Cart Line Item Total Price -->
     <td class="lineitem-price-container">
@@ -89,14 +89,19 @@
       </li>
       <li>
         <label><%= E.getI18nLabel('cart.subTotal') %>: </label>
-        <span><%= E.cartSubTotal.display %></span>
+        <span><%= E.cartTotal.display %></span>
       </li>
     </ul>
 
   </script>
 
+  <!-- Empty Cart Template -->
+  <script id="EmptyCartTemplate" type="text/template">
+    <b>Your shopping cart is empty.</b>
+  </script>
+
   <!-- Cart Checkout Action Template -->
-  <script id="CartChecktouActionTemplate" type="text/template">
+  <script id="CartCheckoutActionTemplate" type="text/template">
     <button class="btn-round btn-primary btn-cmd-checkout"><%= E.getI18nLabel('cart.checkout') %></button>
   </script>
 

@@ -126,7 +126,7 @@ define(['ep','marionette','i18n','eventbus'],
       tagName:'tr',
       templateHelpers:viewHelpers,
       events:{
-        'click.btn-cart-removelineitem':function(event){
+        'click .btn-cart-removelineitem':function(event){
           event.preventDefault();
           EventBus.trigger('cart.removeLineItemBtnClicked', event);
         }
@@ -141,17 +141,24 @@ define(['ep','marionette','i18n','eventbus'],
       }
     });
 
+    var emptyCartView = Backbone.Marionette.ItemView.extend({
+      template:'#EmptyCartTemplate'
+    });
+
     // Main Cart View
     var mainCartView = Backbone.Marionette.CompositeView.extend({
       template:'#MainCartTemplate',
       itemView:cartLineItemView,
-      itemViewContainer:"tbody",
-      templateHelpers:viewHelpers,
-      onShow:function() {
-        if(!this.$itemViewContainer){
-          $(this.el).replaceWith("<div><b>Your shopping cart is empty.</b></div>");
+      itemViewContainer:'tbody',
+      templateHelpers:viewHelpers/*,
+      onRender:function() {
+        // reload empty cart view
+        if(this.collection.length === 0){
+          $('table', this.el).remove();
+
+          ep.logger.info('No lineitem in cart');
         }
-      }
+      }*/
     });
 
     // Cart Summary View
@@ -162,14 +169,22 @@ define(['ep','marionette','i18n','eventbus'],
 
     // Cart Checkout Action View
     var cartCheckoutActionView = Backbone.Marionette.ItemView.extend({
-      template:'#CartChecktouActionTemplate',
-      templateHelpers:viewHelpers
+      template:'#CartCheckoutActionTemplate',
+      templateHelpers:viewHelpers,
+      events:{
+        'click .btn-cmd-checkout':function(event){
+          event.preventDefault();
+          ep.logger.info('Checkout button clicked');
+          EventBus.trigger('cart.checkoutBtnClicked');
+        }
+      }
     });
 
     return {
       CartTitleView:cartTitleView,
       MainCartView:mainCartView,
       CartLineItemView:cartLineItemView,
+      EmptyCartView:emptyCartView,
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
       DefaultLayout:defaultLayout
