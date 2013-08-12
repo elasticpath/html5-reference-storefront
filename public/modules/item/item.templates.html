@@ -41,7 +41,13 @@
 
   <!-- Default Item Detail Availability Template -->
   <script id="DefaultItemDetailAvailabilityTemplate" type="text/template">
-    <%= E.getAvailabilityDisplayText(E.availability) %>
+    <ul>
+      <li><%= E.getAvailabilityDisplayText(E.availability.state) %></li>
+      <li class="availability-release-date">
+        <label data-i18n="releasedOn"><%= E.getI18nLabel('releasedOn') %>: </label>
+        <span><%= E.getAvailabilityReleaseDate(E.availability.releaseDate) %></span>
+      </li>
+    </ul>
   </script>
 
   <!-- Default Item Detail Price Template -->

@@ -11,17 +11,55 @@
 
   <!-- Cart Title Template -->
   <script id="CartTitleTemplate" type="text/template">
-    <h1>My Cart</h1>
+    <h1 class="view-title">My Cart</h1>
   </script>
 
   <!-- Cart Line Item Template -->
   <script id="CartLineItemTemplate" type="text/template">
-    <td>[thumbnail]</td>
-    <td>[name]</td>
-    <td><%= E.getLineItemPrice(E.price) %></td>
-    <td>[quantity]</td>
-    <td>[item total]</td>
-    <td>[remove]</td>
+    <!-- Cart Line Item Thumbnail -->
+    <td>
+      <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>" />
+    </td>
+
+    <!-- Cart Line Item Display Name -->
+    <td>
+      <a href="<%= E.getItemUrl(E.itemDefinitionUri) %>"><%= E.displayName %></a>
+    </td>
+
+    <!-- Cart Line Item Availability -->
+    <td>
+      <ul>
+        <li><%= E.getAvailabilityDisplayText(E.availability.state) %></li>
+        <li class="availability-release-date">
+          <label data-i18n="releasedOn"><%= E.getI18nLabel('releasedOn') %>: </label>
+          <span><%= E.getAvailabilityReleaseDate(E.availability.releaseDate) %></span>
+        </li>
+      </ul>
+    </td>
+
+    <!-- Cart Line Item Unit Price -->
+    <td class="lineitem-price-container">
+      <ul>
+        <li class="price-list-item"><span class="lineitem-list-price"><%= E.getListPrice(E.unitPrice) %></span></li>
+        <li class="price-purchase-item"><%= E.getPurchasePrice(E.unitPrice) %></li>
+      </ul>
+    </td>
+
+    <!-- Cart Line Item Quantity -->
+    <td><%= E.quantity %></td>
+
+    <!-- Cart Line Item Total Price -->
+    <td class="lineitem-price-container">
+      <ul>
+        <li class="price-list-item"><span class="lineitem-list-price"><%= E.getListPrice(E.price) %></span></li>
+        <li class="price-purchase-item"><%= E.getPurchasePrice(E.price) %></li>
+      </ul>
+    </td>
+
+    <!-- Cart Line Item Remove Button -->
+    <td>
+      <button class="btn-round btn btn-primary btn-cart-removelineitem" data-actionlink="<%= E.getCortexPath() %><%= E.lineitemUri %>" data-i18n="cart.remove"><%= E.getI18nLabel('cart.remove') %></button>
+    </td>
   </script>
 
   <!-- Main Cart Template -->
@@ -29,17 +67,16 @@
     <table>
       <thead>
         <tr>
-          <th>product</th>
-          <th>name</th>
-          <th>item price</th>
-          <th>quantity</th>
-          <th>item total</th>
-          <th>remove</th>
+          <th><%= E.getI18nLabel('cart.product') %></th>
+          <th><%= E.getI18nLabel('cart.name') %></th>
+          <th><%= E.getI18nLabel('cart.availability') %></th>
+          <th><%= E.getI18nLabel('cart.itemPrice') %></th>
+          <th><%= E.getI18nLabel('cart.quantity') %></th>
+          <th><%= E.getI18nLabel('cart.itemTotal') %></th>
+          <th><%= E.getI18nLabel('cart.remove') %></th>
         </tr>
       </thead>
-      <tbody>
-
-      </tbody>
+      <tbody></tbody>
     </table>
   </script>
 
@@ -47,16 +84,12 @@
   <script id="CartSummaryTemplate" type="text/template">
     <ul>
       <li>
-        <label>Sub Total</label>
-        <%= E.cartSubTotal %>
+        <label><%= E.getI18nLabel('cart.totalQuantity') %>: </label>
+        <span><%= E.cartTotalQuantity %></span>
       </li>
       <li>
-        <label>Tax</label>
-        <%= E.cartTax %>
-      </li>
-      <li>
-        <label>Total</label>
-        <%= E.cartTotal %>
+        <label><%= E.getI18nLabel('cart.subTotal') %>: </label>
+        <span><%= E.cartSubTotal.display %></span>
       </li>
     </ul>
 
@@ -64,7 +97,7 @@
 
   <!-- Cart Checkout Action Template -->
   <script id="CartChecktouActionTemplate" type="text/template">
-    <button class="btn-round btn-primary btn-cmd-checkout">Checkout</button>
+    <button class="btn-round btn-primary btn-cmd-checkout"><%= E.getI18nLabel('cart.checkout') %></button>
   </script>
 
 </div>
