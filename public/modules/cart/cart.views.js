@@ -117,7 +117,8 @@ define(['ep','marionette','i18n','eventbus'],
 
     // Cart Title View
     var cartTitleView = Backbone.Marionette.ItemView.extend({
-      template:'#CartTitleTemplate'
+      template:'#CartTitleTemplate',
+      templateHelpers:viewHelpers
     });
 
     // Cart Line Item View
