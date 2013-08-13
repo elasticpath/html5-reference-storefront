@@ -32,19 +32,19 @@ define(['ep','marionette','i18n','eventbus'],
         var retVal = '';
         switch(availability){
           case 'AVAILABLE':
-            retVal = this.getI18nLabel('AVAILABLE');
+            retVal = this.getI18nLabel('availability.AVAILABLE');
             break;
           case 'ALWAYS':
-            retVal = this.getI18nLabel('ALWAYS');
+            retVal = this.getI18nLabel('availability.ALWAYS');
             break;
           case 'NOT_AVAILABLE':
-            retVal = this.getI18nLabel('NOT_AVAILABLE');
+            retVal = this.getI18nLabel('availability.NOT_AVAILABLE');
             break;
           case 'AVAILABLE_FOR_BACK_ORDER':
-            retVal = this.getI18nLabel('AVAILABLE_FOR_BACK_ORDER');
+            retVal = this.getI18nLabel('availability.AVAILABLE_FOR_BACK_ORDER');
             break;
           case 'AVAILABLE_FOR_PRE_ORDER':
-            retVal = this.getI18nLabel('AVAILABLE_FOR_PRE_ORDER');
+            retVal = this.getI18nLabel('availability.AVAILABLE_FOR_PRE_ORDER');
             break;
           default:
             retVal = '';

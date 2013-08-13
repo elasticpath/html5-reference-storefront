@@ -8,7 +8,7 @@
 
   },
   "cart":{
-    "pageTitle":"My Cart",
+    "viewTitle":"My Cart",
     "product":"Product",
     "name":"Name",
     "availability":"Availability",
@@ -21,10 +21,12 @@
     "defaultImage":"Default Image",
     "checkout":"Checkout"
   },
-  "AVAILABLE":"In Stock",
-  "ALWAYS":"Always",
-  "NOT_AVAILABLE":"Out of Stock",
-  "AVAILABLE_FOR_BACK_ORDER":"Available for Back Order",
-  "AVAILABLE_FOR_PRE_ORDER":"Pre Order",
-  "releasedOn":"Expected Release Date"
+  "availability":{
+    "AVAILABLE":"In Stock",
+    "ALWAYS":"Always",
+    "NOT_AVAILABLE":"Out of Stock",
+    "AVAILABLE_FOR_BACK_ORDER":"Available for Back Order",
+    "AVAILABLE_FOR_PRE_ORDER":"Pre Order",
+    "releasedOn":"Expected Release Date"
+  }
 }

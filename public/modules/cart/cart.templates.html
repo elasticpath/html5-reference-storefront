@@ -11,7 +11,7 @@
 
   <!-- Cart Title Template -->
   <script id="CartTitleTemplate" type="text/template">
-    <h1 class="view-title"><%= E.getI18nLabel('cart.pageTitle') %></h1>
+    <h1 class="view-title"><%= E.getI18nLabel('cart.viewTitle') %></h1>
   </script>
 
   <!-- Cart Line Item Template -->
@@ -31,7 +31,7 @@
       <ul>
         <li><%= E.getAvailabilityDisplayText(E.availability.state) %></li>
         <li class="availability-release-date">
-          <label data-i18n="releasedOn"><%= E.getI18nLabel('releasedOn') %>: </label>
+          <label data-i18n="releasedOn"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
           <span><%= E.getAvailabilityReleaseDate(E.availability.releaseDate) %></span>
         </li>
       </ul>
