@@ -2233,10 +2233,10 @@ header.app-header .btn-main-nav-toggle:active {
   margin-top: auto;
   margin-bottom: auto;
 }
-.main-search-container button.btn-header-search {
+.main-search-container .btn-header-search {
   border-top: 1px solid #ddd;
   border-left: 1px solid #ddd;
-  background-color: #ff5511;
+  background-color: #aaaaaa;
 }
 .global-nav-container {
   float: right;

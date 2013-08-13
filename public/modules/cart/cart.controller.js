@@ -72,7 +72,7 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
       ep.logger.error('error deleting lineitem from cart: ' + response);
     });
 
-    EventBus.on('cart.removeLineItemBtnClicked', function(event){
+    EventBus.on('cart.removeLineItemRequest', function(event){
       var oAuthToken = window.localStorage.getItem('oAuthToken');
       var deleteActionLink = $(event.target).data('actionlink');
 
@@ -92,6 +92,13 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
             EventBus.trigger('cart.CartLineItemRemoveFailed', response);
           }
         });
+      }
+    });
+
+    EventBus.on('cart.removeLineItemBtnClicked', function(event){
+      var confirmation = window.confirm("Do you really want to delete this item");
+      if (confirmation) {
+        EventBus.trigger('cart.removeLineItemRequest', event);
       }
     });
 
