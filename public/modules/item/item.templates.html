@@ -42,10 +42,10 @@
   <!-- Default Item Detail Availability Template -->
   <script id="DefaultItemDetailAvailabilityTemplate" type="text/template">
     <ul>
-      <li><%= E.getAvailabilityDisplayText(E.availability.state) %></li>
+      <li class="itemdetail-availability-state"><%= E.getAvailabilityDisplayText(E.availability.state) %></li>
       <li class="availability-release-date">
-        <label data-i18n="releasedOn"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
-        <span><%= E.getAvailabilityReleaseDate(E.availability.releaseDate) %></span>
+        <label class="itemdetail-releasedate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
+        <span class="itemdetail-releasedate-value"><%= E.getAvailabilityReleaseDate(E.availability.releaseDate) %></span>
       </li>
     </ul>
   </script>
@@ -54,11 +54,11 @@
   <script id="DefaultItemDetailPriceTemplate" type="text/template">
     <ul>
       <li class="price-list-item">
-        <label class="itemdetail-label label-listprice" data-i18n="itemDetail.listPrice"><%= E.getI18nLabel('itemDetail.listPrice') %></label>
+        <label class="itemdetail-label itemdetail-list-price-label"><%= E.getI18nLabel('itemDetail.listPrice') %></label>
         <span class="itemdetail-value itemdetail-list-price"><%= E.getListPrice(E.price) %></span>
       </li>
       <li class="price-purchase-item">
-        <label class="itemdetail-label label-purchaseprice" data-i18n="itemDetail.purchasePrice"><%= E.getI18nLabel('itemDetail.purchasePrice') %></label>
+        <label class="itemdetail-label itemdetail-purchase-price-label"><%= E.getI18nLabel('itemDetail.purchasePrice') %></label>
         <span class="itemdetail-value itemdetail-purchase-price"><%= E.getPurchasePrice(E.price) %></span>
       </li>
     </ul>
@@ -71,8 +71,8 @@
 
   <!-- Default Item Detail Add To Cart Template -->
   <script id="DefaultItemDetailAddToCartTemplate" type="text/template">
-    <form class="ItemDetailAddToCartForm">
-      <label for="itemdetail-select-quantity" data-i18n="itemDetail.quantity"><%= E.getI18nLabel('itemDetail.quantity') %></label>
+    <form class="itemdetail-addtocart-form">
+      <label for="itemdetail-select-quantity"><%= E.getI18nLabel('itemDetail.quantity') %></label>
       <select id="itemdetail-select-quantity" name="itemdetail-select-quantity">
         <option value="1">1</option>
         <option value="2">2</option>
@@ -85,7 +85,7 @@
         <option value="9">9</option>
         <option value="10">10</option>
       </select>
-      <button class="btn-round btn btn-primary btn-itemdetail-addtocart" data-actionlink="<%= E.getCortexPath() %><%= E.addtocart.actionlink %>" <%= E.checkForDisabledAddToCart(E) %> data-i18n="itemDetail.addToCart"><%= E.getI18nLabel('itemDetail.addToCart') %></button>
+      <button class="btn-round btn btn-primary btn-itemdetail-addtocart" data-actionlink="<%= E.getCortexPath() %><%= E.addtocart.actionlink %>" <%= E.checkForDisabledAddToCart(E) %> ><%= E.getI18nLabel('itemDetail.addToCart') %></button>
     </form>
   </script>
 

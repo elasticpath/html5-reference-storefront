@@ -1,4 +1,7 @@
 /* Start Item Detail  */
+/* End Item Detail */
+/* Start Cart */
+/* End Cart */
 /*---------------------------------------------------
     LESS Elements 0.9
   ---------------------------------------------------
@@ -2273,9 +2276,15 @@ header.app-header .btn-main-nav-toggle:active {
   border-radius: 1rem;
 }
 .itemdetail-availability {
+  margin-bottom: 1rem;
+}
+.itemdetail-availability ul {
+  margin: 0;
+}
+.itemdetail-availability-state {
   text-align: center;
   border-radius: .4rem;
-  margin-bottom: 1rem;
+  margin-bottom: .3rem;
   padding: .5rem;
   width: 8rem;
   color: #ffffff;
@@ -2311,6 +2320,42 @@ header.app-header .btn-main-nav-toggle:active {
 /*
   cart page
 */
+.cart-lineitem-thumbnail {
+  width: 10rem;
+  height: 8rem;
+}
+.cart-lineitem-title-col {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 100%;
+  font-weight: bold;
+}
+.cart-lineitem-availability-col ul {
+  margin: 0rem;
+}
+.cart-lineitem-releasedate-label {
+  display: block;
+}
+.cart-lineitem-unit-price-col ul {
+  margin: 0rem;
+}
+.cart-lineitem-total-price-col ul {
+  margin: 0rem;
+}
+.cart-list-price {
+  text-decoration: line-through;
+}
+.cart-summary-container {
+  margin: 3rem;
+}
+.cart-summary-label-col {
+  display: inline-block;
+  width: 10rem;
+}
+.cart-summary-value-col {
+  display: inline-block;
+  width: 10rem;
+  text-align: right;
+}
 /*
 
     plugin css files

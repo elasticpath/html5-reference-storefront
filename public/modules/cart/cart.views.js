@@ -134,12 +134,23 @@ define(['ep','marionette','i18n','eventbus'],
       },
       onShow:function(){
         if (!viewHelpers.getListPrice(this.model.attributes.price)){
-          $('.price-list-item', this.el).hide();
+          $('.DATA-ATT-price-list-item', this.el).hide();
         }
         if (!viewHelpers.getAvailabilityReleaseDate(this.model.attributes.availability.releaseDate)) {
-          $('.availability-release-date', this.el).hide();
+          $('availability-release-date', this.el).hide();
         }
-      }
+      },
+      onRender:function() {
+
+      }/*,
+       onRender:function() {
+       // reload empty cart view
+       if(this.collection.length === 0){
+       $('table', this.el).remove();
+
+       ep.logger.info('No lineitem in cart');
+       }
+       }*/
     });
 
     var emptyCartView = Backbone.Marionette.ItemView.extend({
@@ -151,15 +162,7 @@ define(['ep','marionette','i18n','eventbus'],
       template:'#MainCartTemplate',
       itemView:cartLineItemView,
       itemViewContainer:'tbody',
-      templateHelpers:viewHelpers/*,
-      onRender:function() {
-        // reload empty cart view
-        if(this.collection.length === 0){
-          $('table', this.el).remove();
-
-          ep.logger.info('No lineitem in cart');
-        }
-      }*/
+      templateHelpers:viewHelpers
     });
 
     // Cart Summary View
