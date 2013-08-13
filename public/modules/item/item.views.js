@@ -174,11 +174,26 @@ define(['ep','marionette','i18n','eventbus'],
       tagName:'div',
       templateHelpers:viewHelpers,
       onShow:function() {
-        if (!viewHelpers.getAvailabilityReleaseDate(this.model.attributes.availability.releaseDate)) {
-          $('.availability-release-date').hide();
+        // check if there is releaseDate in model
+        // if so inject view to display availability release date
+        if (viewHelpers.getAvailabilityReleaseDate(this.model.attributes.availability.releaseDate)) {
+          var releaseDateView = new defaultItemdetailReleaseDateView({
+            model:this.model
+          });
+          releaseDateView.render();
+          $('li[data-region="defaultItemDetailReleaseDateRegion"]').html(releaseDateView.el);
+        }
+        else {
+          $('li[data-region="defaultItemDetailReleaseDateRegion"]').hide();
         }
       }
     });
+
+    // Default Item Release Date View
+    var defaultItemdetailReleaseDateView = Backbone.Marionette.ItemView.extend({
+      template:'#DefaultItemDetailReleaseDateTemplate',
+      templateHelpers:viewHelpers
+    })
 
     // Default Item Price View
     var defaultItemPriceView = Backbone.Marionette.ItemView.extend({
@@ -187,10 +202,23 @@ define(['ep','marionette','i18n','eventbus'],
       onShow:function(){
         // check if there is list price data
         // if not then turn off the item
-        if (!viewHelpers.getListPrice(this.model.attributes.price)){
-          $('.price-list-item').hide();
+        if (viewHelpers.getListPrice(this.model.attributes.price)){
+          var listPriceView = new defaultItemdetailListPriceView({
+            model:this.model
+          });
+
+          listPriceView.render();
+          $('li[data-region="defaultItemDetailListPriceRegion"]').html(listPriceView.el);
+        } else {
+          $('li[data-region="defaultItemDetailListPriceRegion"]').hide();
         }
       }
+    });
+
+    // Default Item List Price View
+    var defaultItemdetailListPriceView = Backbone.Marionette.ItemView.extend({
+      template:'#DefaultItemDetailListPriceTemplate',
+      templateHelpers:viewHelpers
     });
 
     // Default Item Subscription View

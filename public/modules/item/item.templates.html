@@ -15,8 +15,6 @@
         <div data-region="itemDetailAddToCartRegion"></div>
       </div>
     </div>
-
-
   </script>
 
   <!-- Default Item Detail Title Template -->
@@ -43,20 +41,14 @@
   <script id="DefaultItemDetailAvailabilityTemplate" type="text/template">
     <ul>
       <li class="itemdetail-availability-state"><%= E.getAvailabilityDisplayText(E.availability.state) %></li>
-      <li class="availability-release-date">
-        <label class="itemdetail-releasedate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
-        <span class="itemdetail-releasedate-value"><%= E.getAvailabilityReleaseDate(E.availability.releaseDate) %></span>
-      </li>
+      <li data-region="defaultItemDetailReleaseDateRegion" class="itemdetail-release-date"></li>
     </ul>
   </script>
 
   <!-- Default Item Detail Price Template -->
   <script id="DefaultItemDetailPriceTemplate" type="text/template">
     <ul>
-      <li class="price-list-item">
-        <label class="itemdetail-label itemdetail-list-price-label"><%= E.getI18nLabel('itemDetail.listPrice') %></label>
-        <span class="itemdetail-value itemdetail-list-price"><%= E.getListPrice(E.price) %></span>
-      </li>
+      <li data-region="defaultItemDetailListPriceRegion" class="price-list-item"></li>
       <li class="price-purchase-item">
         <label class="itemdetail-label itemdetail-purchase-price-label"><%= E.getI18nLabel('itemDetail.purchasePrice') %></label>
         <span class="itemdetail-value itemdetail-purchase-price"><%= E.getPurchasePrice(E.price) %></span>
@@ -89,6 +81,16 @@
     </form>
   </script>
 
+  <!-- Default Item Detault Release Date Template -->
+  <script id="DefaultItemDetailReleaseDateTemplate" type="text/template">
+    <label class="itemdetail-releasedate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
+    <span class="cart-lineitem-releasedate-value"><%= E.getAvailabilityReleaseDate(E.availability.releaseDate) %></span>
+  </script>
 
+  <!-- Default Item Detault List Price Template -->
+  <script id="DefaultItemDetailListPriceTemplate" type="text/template">
+    <label class="itemdetail-label itemdetail-list-price-label"><%= E.getI18nLabel('itemDetail.listPrice') %></label>
+    <span class="itemdetail-value itemdetail-list-price"><%= E.getListPrice(E.price) %></span>
+  </script>
 </div>
 .

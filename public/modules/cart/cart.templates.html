@@ -30,15 +30,14 @@
     <td class="cart-lineitem-availability-col">
       <ul>
         <li class="cart-lineitem=availability"><%= E.getAvailabilityDisplayText(E.availability.state) %></li>
-        <li data-region="cartLineitemReleaseDateRegion" class="cart-lineitem-release-date">
-        </li>
+        <li data-region="cartLineitemReleaseDateRegion" class="cart-lineitem-release-date"></li>
       </ul>
     </td>
 
     <!-- Cart Line Item Unit Price -->
     <td class="cart-lineitem-unit-price-col">
       <ul>
-        <li class="DATA-ATT-price-list-item"><span class="cart-list-price"><%= E.getListPrice(E.unitPrice) %></span></li>
+        <li data-region="cartLineitemUnitListPrice" cart-lineitem-list-price"></li>
         <li class="cart-lineitem-purchase-price"><%= E.getPurchasePrice(E.unitPrice) %></li>
       </ul>
     </td>
@@ -49,7 +48,7 @@
     <!-- Cart Line Item Total Price -->
     <td class="cart-lineitem-total-price-col">
       <ul>
-        <li class="DATA-ATT-price-list-item"><span class="cart-list-price"><%= E.getListPrice(E.price) %></span></li>
+        <li data-region="cartLineitemTotalListPrice" class="cart-lineitem-list-price"></li>
         <li class="cart-lineitem-purchase-price"><%= E.getPurchasePrice(E.price) %></li>
       </ul>
     </td>
@@ -58,12 +57,6 @@
     <td class="cart-lineitem-remove-btn-col">
       <button class="btn-round btn btn-primary btn-cart-removelineitem" data-actionlink="<%= E.getCortexPath() %><%= E.lineitemUri %>"><%= E.getI18nLabel('cart.remove') %></button>
     </td>
-  </script>
-
-  <!-- Cart Lineitem Release Date Template -->
-  <script id="CartLineitemReleaseDateTemplate" type="text/template">
-    <label class="cart-lineitem-releasedate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
-    <span class="cart-lineitem-releasedate-value"><%= E.getAvailabilityReleaseDate(E.availability.releaseDate) %></span>
   </script>
 
   <!-- Main Cart Template -->
@@ -99,14 +92,32 @@
 
   </script>
 
+  <!-- Cart Checkout Action Template -->
+  <script id="CartCheckoutActionTemplate" type="text/template">
+    <button class="btn-round btn-primary btn-cmd-checkout"><%= E.getI18nLabel('cart.checkout') %></button>
+  </script>
+
+
+
   <!-- Empty Cart Template -->
   <script id="EmptyCartTemplate" type="text/template">
     <b>Your shopping cart is empty.</b>
   </script>
 
-  <!-- Cart Checkout Action Template -->
-  <script id="CartCheckoutActionTemplate" type="text/template">
-    <button class="btn-round btn-primary btn-cmd-checkout"><%= E.getI18nLabel('cart.checkout') %></button>
+  <!-- Cart Lineitem Release Date Template -->
+  <script id="CartLineitemReleaseDateTemplate" type="text/template">
+    <label class="cart-lineitem-releasedate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
+    <span class="cart-lineitem-releasedate-value"><%= E.getAvailabilityReleaseDate(E.availability.releaseDate) %></span>
+  </script>
+
+  <!-- Cart Lineitem Total List Price Template -->
+  <script id="CartLineitemTotalListPriceTemplate" type="text/template">
+    <span class="cart-list-price"><%= E.getListPrice(E.price) %></span>
+  </script>
+
+  <!-- Cart Lineitem Unit List Price Template -->
+  <script id="CartLineitemUnitListPriceTemplate" type="text/template">
+    <span class="cart-list-price"><%= E.getListPrice(E.unitPrice) %></span>
   </script>
 
 </div>

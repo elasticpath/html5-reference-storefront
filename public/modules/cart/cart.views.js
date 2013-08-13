@@ -133,26 +133,60 @@ define(['ep','marionette','i18n','eventbus'],
         }
       },
       onShow:function(){
-        if (!viewHelpers.getListPrice(this.model.attributes.price)){
-          $('.DATA-ATT-price-list-item', this.el).hide();
+        // check if there is releaseDate in model
+        // if so inject view to display availability release date
+        if (viewHelpers.getAvailabilityReleaseDate(this.model.attributes.availability.releaseDate)) {
+          var childReleaseDateView = new cartLineItemReleaseDateView({
+            model:this.model
+          });
+          childReleaseDateView.render();
+          $('li[data-region="cartLineitemReleaseDateRegion"]', this.el).html(childReleaseDateView.el);
         }
-        if (!viewHelpers.getAvailabilityReleaseDate(this.model.attributes.availability.releaseDate)) {
-          $('availability-release-date', this.el).hide();
+        else {
+          $('li[data-region="cartLineitemReleaseDateRegion"]', this.el).hide();
         }
-      },
-      onRender:function() {
 
-      }/*,
-       onRender:function() {
-       // reload empty cart view
-       if(this.collection.length === 0){
-       $('table', this.el).remove();
+        // check if there is list price data (unit price or total price)
+        // if so inject view to display list price
+        if (viewHelpers.getListPrice(this.model.attributes.price)){
+          var childTotalListPriceView = new cartLineitemTotalListPriceView({
+            model:this.model
+          });
+          var childUnitListPriceView = new cartLineitemUnitListPriceView({
+            model:this.model
+          });
 
-       ep.logger.info('No lineitem in cart');
-       }
-       }*/
+          childTotalListPriceView.render();
+          childUnitListPriceView.render();
+
+          $('li[data-region="cartLineitemTotalListPrice"]', this.el).html(childTotalListPriceView.el);
+          $('li[data-region="cartLineitemUnitListPrice"]', this.el).html(childUnitListPriceView.el);
+        } else {
+          $('li[data-region="cartLineitemTotalListPrice"]', this.el).hide();
+          $('li[data-region="cartLineitemUnitListPrice"]', this.el).hide();
+        }
+      }
     });
 
+    // Cart Line Item Release Date View
+    var cartLineItemReleaseDateView = Backbone.Marionette.ItemView.extend({
+      template:'#CartLineitemReleaseDateTemplate',
+      templateHelpers:viewHelpers
+    });
+
+    // Cart Line Item List Price (unit price) View
+    var cartLineitemUnitListPriceView = Backbone.Marionette.ItemView.extend({
+      template:'#CartLineitemUnitListPriceTemplate',
+      templateHelpers:viewHelpers
+    });
+
+    // Cart Line Item List Price (total price) View
+    var cartLineitemTotalListPriceView = Backbone.Marionette.ItemView.extend({
+      template:'#CartLineitemTotalListPriceTemplate',
+      templateHelpers:viewHelpers
+    });
+
+    // Empty Cart View
     var emptyCartView = Backbone.Marionette.ItemView.extend({
       template:'#EmptyCartTemplate'
     });
