@@ -19,7 +19,8 @@
     "totalQuantity":"Total Quantity",
     "subTotal":"Sub Total",
     "defaultImage":"Default Image",
-    "checkout":"Checkout"
+    "checkout":"Checkout",
+    "emptyCartMsg":"Your shopping cart is empty."
   },
   "availability":{
     "AVAILABLE":"In Stock",
