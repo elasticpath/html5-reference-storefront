@@ -20,7 +20,7 @@ define(['ep','backbone','eventbus','cortex'],
       events: {
         'click .btn-header-search': 'keywordSearch'
       },
-      keywordSearch:function(e){
+      keywordSearch:function(event){
         event.preventDefault();
         if (this.$('.header-search-input').val()){
           var keywords = this.$('.header-search-input').val();
