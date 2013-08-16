@@ -18,6 +18,7 @@ require.config({
     'URI'             : 'scripts/lib/URI',
     'router'          : 'router',
     'ep'              : 'ep.client',
+    'mediator'        : 'ep.mediator',
     'jsonpath'        : 'scripts/lib/jsonpath-0.8.0',
     'i18n'            : 'scripts/lib/i18next.amd-1.6.0',
     'eventbus'        : 'eventbus',

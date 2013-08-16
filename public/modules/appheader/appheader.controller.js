@@ -6,8 +6,8 @@
  * Time: 1:54 PM
  *
  */
-define(['ep', 'app', 'eventbus', 'modules/appheader/appheader.models', 'modules/appheader/appheader.views',  'text!modules/appheader/appheader.templates.html'],
-  function(ep, App, EventBus, Model, View, template){
+define(['ep', 'mediator', 'app', 'eventbus', 'modules/appheader/appheader.models', 'modules/appheader/appheader.views',  'text!modules/appheader/appheader.templates.html'],
+  function(ep, Mediator, App, EventBus, Model, View, template){
 
     $('#TemplateContainer').append(template);
 
@@ -60,7 +60,8 @@ define(['ep', 'app', 'eventbus', 'modules/appheader/appheader.models', 'modules/
         });
         logoContainer = $('.logo-container');
 
-        EventBus.trigger('appheader.loadLogoComponent');
+        EventBus.trigger('appheader.loadLogoComponentRequest');
+       // Mediator.fire('mediator.loadLogoComponentRequest');
         EventBus.trigger('appheader.loadSearchComponent');
 
 
@@ -97,7 +98,7 @@ define(['ep', 'app', 'eventbus', 'modules/appheader/appheader.models', 'modules/
 
       });
     });
-    EventBus.bind('appheader.loadLogoComponent',function(){
+    EventBus.on('appheader.loadLogoComponentRequest',function(){
       var logoView = new View.HeaderLogoView({
         model:new Model.LogoModel({
           homeUri: '/',
