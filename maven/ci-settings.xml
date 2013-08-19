@@ -13,7 +13,7 @@
 	</pluginGroups>
 
 	<activeProfiles>
-		<activeProfile>ui-storefront-build-server-repositories</activeProfile>
+		<activeProfile>build-server-repositories</activeProfile>
 	</activeProfiles>
 
 	<profiles>
