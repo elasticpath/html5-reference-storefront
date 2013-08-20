@@ -7,6 +7,7 @@
 @import 'composer';
 @import 'accordion.style.less';
 @import 'composer';
+@import 'mainnav';
 @import 'appheader';
 @import 'itemdetail';
 @import 'cart';
@@ -25,6 +26,7 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
 */
 .btn-cmd{
     border:0 solid grey;
+  font-size:100%;
     background:transparent;
     color:@defaultLinkColor;
 }
@@ -37,8 +39,22 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
     background:rgba(150,150,150,.4);
     text-shadow:7px 7px 12px rgba(150, 150, 150, 1);
 }
+.global-nav-container a{
+  text-decoration: none;
+}
+.global-nav-container a:hover{
+  text-decoration: underline;
+}
 
-
+.browse-items-container, .search-results-container{
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:1rem;
+  border:1px solid #dddddd;
+  border-radius:4rem;
+  max-width:70rem;
+  padding:4rem;
+}
 .view-title{
   color:@viewTitleColor;
   text-transform: capitalize;
@@ -76,7 +92,25 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
   right:-18px;
   cursor:pointer;
 }
+.home-container{
+  background:url(images/hm-commerce-software-bb.jpg) no-repeat;
+  min-height:500px;
+  background-size: 100%;
+  text-align:center;
+}
+.field-content{
 
+  max-width:75rem;
+  color:#ffffff;
+  margin:0 auto;
+  font-family: 'ProximaNova-Regular',Helvetica,Arial,sans-serif;
+  padding-top:8rem;
+
+}
+.field-content h2{
+  font-size: 48px;
+  line-height: 47px;
+}
 .theme-variable-item-value-dark .btn-cmd{
     color:#111111;
 }

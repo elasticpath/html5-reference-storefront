@@ -108,7 +108,7 @@ define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!m
 
     return{
       config:Model.config
-    }
+    };
 
   }
 );

@@ -11,7 +11,7 @@ define(['backbone','eventbus'],
 
     var DefaultHomeView = Backbone.Marionette.ItemView.extend({
       template:'#HomeModuleDefaultTemplate',
-      tagName:'p',
+      className:'home-container',
       onRender:function(){
 //        (function(){
 //          var script = document.createElement('script');

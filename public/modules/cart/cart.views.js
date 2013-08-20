@@ -71,11 +71,11 @@ define(['ep','marionette','i18n','eventbus'],
       },
       getDefaultImagePath:function(aModel){
         var retVar;
-        if (aModel){
+        if (aModel && aModel.contentLocation){
           retVar = aModel.contentLocation;
         }
         else{
-         retVar = '';
+         retVar = '/images/img-placeholder.png';
         }
         return retVar;
       },
@@ -113,6 +113,9 @@ define(['ep','marionette','i18n','eventbus'],
         mainCartRegion:'[data-region="mainCartRegion"]',
         cartSummaryRegion:'[data-region="cartSummaryRegion"]',
         cartCheckoutActionRegion:'[data-region="cartCheckoutActionRegion"]'
+      },
+      onShow:function(){
+        $('.main-nav-list li').removeClass('is-selected');
       }
     });
 

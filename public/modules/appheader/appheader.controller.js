@@ -102,7 +102,7 @@ define(['ep', 'mediator', 'app', 'eventbus', 'modules/appheader/appheader.models
       var logoView = new View.HeaderLogoView({
         model:new Model.LogoModel({
           homeUri: '/',
-          logoImgPath: 'images/logo-trans.png'
+          logoImgPath: 'images/elastic-path-logo.png'
         })
       });
       ep.app.logoRegion.show(logoView);
@@ -211,7 +211,7 @@ define(['ep', 'mediator', 'app', 'eventbus', 'modules/appheader/appheader.models
       var referenceOffset = globalNavContainer.offset().top;
       var logoOffset = logoContainer.offset().top;
       var mainNavOffset = mainNavContainer.offset().top;
-      var searchOffset = searchContainer.offset().top
+      var searchOffset = searchContainer.offset().top;
 
       var logoContainerWidth = 0;
       var searchContainerWidth = 0;
@@ -262,25 +262,25 @@ define(['ep', 'mediator', 'app', 'eventbus', 'modules/appheader/appheader.models
 
 
       // main nav
-      if (mainNavContainer.offset().top > referenceOffset){
-        if (!renderMainNavCompact){
-          renderMainNavCompact = true;
-          var epUserPrefs;
-          if (localStorage.getItem('epUserPrefs')){
-            epUserPrefs = JSON.parse(localStorage.getItem('epUserPrefs'));
-          }
-          else{
-            epUserPrefs = {};
-          }
-          epUserPrefs.prefMainNavDisplayCompact = true;
-          localStorage.setItem('epUserPrefs',JSON.stringify(epUserPrefs));
-          EventBus.trigger('ia.reloadMainNavRequest');
-
-          mainNavDirty = true;
-        }
-
-
-      }
+//      if (mainNavContainer.offset().top > referenceOffset){
+//        if (!renderMainNavCompact){
+//          renderMainNavCompact = true;
+//          var epUserPrefs;
+//          if (localStorage.getItem('epUserPrefs')){
+//            epUserPrefs = JSON.parse(localStorage.getItem('epUserPrefs'));
+//          }
+//          else{
+//            epUserPrefs = {};
+//          }
+//          epUserPrefs.prefMainNavDisplayCompact = true;
+//          localStorage.setItem('epUserPrefs',JSON.stringify(epUserPrefs));
+//          EventBus.trigger('ia.reloadMainNavRequest');
+//
+//          mainNavDirty = true;
+//        }
+//
+//
+//      }
 
       if(!searchContainer.is(":visible")){
 
@@ -303,23 +303,22 @@ define(['ep', 'mediator', 'app', 'eventbus', 'modules/appheader/appheader.models
 
       }
 
-      if (!mainNavDirty){
-        if (mainNavContainer.offset().top > referenceOffset){
-          if (renderMainNavCompact){
-            if (logoContainer.is(":visible")){
-              ep.logger.info('hide logo');
-              logoContainer.fadeOut(300);
-
-            }
-            else if (searchContainer.is(":visible")){
-              ep.logger.info('log.info','hide search');
-              searchContainer.fadeOut(300);
-
-            }
-//            var searchContainer = $('.main-search-container');
-          }
-        }
-      }
+//      if (!mainNavDirty){
+//        if (mainNavContainer.offset().top > referenceOffset){
+//          if (renderMainNavCompact){
+//            if (logoContainer.is(":visible")){
+//             // logoContainer.fadeOut(300);
+//
+//            }
+//            else if (searchContainer.is(":visible")){
+//              ep.logger.info('log.info','hide search');
+//             // searchContainer.fadeOut(300);
+//
+//            }
+////            var searchContainer = $('.main-search-container');
+//          }
+//        }
+//      }
 //      if (mainNavOffset === referenceOffset){
 //        if (renderMainNavCompact){
 //          renderMainNavCompact = false;
@@ -328,12 +327,12 @@ define(['ep', 'mediator', 'app', 'eventbus', 'modules/appheader/appheader.models
 //      }
       // logo
       if (logoOffset > referenceOffset){
-        $('.logo-container').fadeOut(200);
+       // $('.logo-container').fadeOut(200);
       }
 
       // search
       if (searchOffset > referenceOffset){
-        $('.main-search-container').fadeOut(200);
+        //$('.main-search-container').fadeOut(200);
       }
     }
     EventBus.bind('layout.windowResized',function(winRemWidth){

@@ -42,6 +42,6 @@ define(['ep','eventbus','marionette'],
     return{
       BaseLayout:baseLayout,
       DevInstrumentation:devInstrumentation
-    }
+    };
   }
 );

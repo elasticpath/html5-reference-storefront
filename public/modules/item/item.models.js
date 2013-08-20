@@ -77,6 +77,7 @@ define(['ep','app','backbone','jsonpath'],
           assetObj.relatvieLocation = defaultImage['relative-location'];
           assetsListArray.push(assetObj);
         }
+
         itemObj.assets = assetsListArray;
 
         /*

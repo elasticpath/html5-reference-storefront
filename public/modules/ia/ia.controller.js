@@ -17,7 +17,7 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
     _.templateSettings.variable = 'E';
 
     // set default render mode for main nav
-    var currentMainNavDisplayCompactSetting = true;
+    var currentMainNavDisplayCompactSetting = false;
 
     var mainNavInitialized = false;
 
@@ -63,11 +63,12 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
       if (ep.ui.touchEnabled()){
         contextTrigger = 'hold';
       }
-      $('.main-nav-container').contextmenu({
-          'preferences':preferences
-        },
-        contextTrigger
-      );
+      // turn off context menu
+//      $('.main-nav-container').contextmenu({
+//          'preferences':preferences
+//        },
+//        contextTrigger
+//      );
 
 
 
@@ -109,6 +110,8 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
                 EventBus.trigger('ia.renderBrowseCategoryRequest');
               });
             }
+            $('.main-nav-list li').removeClass('is-selected');
+            $('li[data-name="' + category + '"]').addClass('is-selected');
           }
         });
 

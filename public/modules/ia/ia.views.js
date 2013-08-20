@@ -26,7 +26,12 @@ define(['ep','eventbus','marionette'],
     var NavItemView = Backbone.Marionette.ItemView.extend({
       template:'#NavItemTemplateContainer',
       tagName: 'li',
-      templateHelpers: viewHelpers
+      templateHelpers: viewHelpers,
+      attributes:function(){
+        return{
+          'data-name':this.model.attributes.name.toLowerCase()
+        };
+      }
     });
     // Main Nav View
     var MainNavView = Backbone.Marionette.CompositeView.extend({
@@ -35,18 +40,18 @@ define(['ep','eventbus','marionette'],
       itemView: NavItemView,
       events:{
         'click .cmd-nav-item':function(){
-          $('.main-nav-list').fadeOut();
+          //$('.main-nav-list').fadeOut();
 //          EventBus.trigger('ia.clearNavMenuRequest');
         }
       },
       onShow:function(){
-        ep.logger.info('main nav test');
+        ep.logger.info('main nav on show');
 //        $('.btn-main-nav-toggle').click(function(event){
 //          $('.main-nav-list').fadeToggle(400);
 //        });
         //function(){
         //var epUserPrefs = {};
-        var currentMainNavDisplayCompactSetting = true;
+        var currentMainNavDisplayCompactSetting = false;
         if (this.model.attributes && (this.model.attributes.compactDisplay !== undefined)) {
           currentMainNavDisplayCompactSetting = this.model.attributes.compactDisplay;
         }
@@ -55,35 +60,39 @@ define(['ep','eventbus','marionette'],
 //          currentMainNavDisplayCompactSetting = this.model.displayCompactMode;
 //        }
 //        else{
-        if (localStorage.getItem('epUserPrefs')){
-          ep.app.epUserPrefs = JSON.parse(localStorage.getItem('epUserPrefs'));
-          if (typeof ep.app.epUserPrefs.prefMainNavDisplayCompact !== 'undefined'){
-            //if (epUserPrefs.prefMainNavDisplayCompact){
-            currentMainNavDisplayCompactSetting = ep.app.epUserPrefs.prefMainNavDisplayCompact;
-            //}
-          }
-        }
+//        if (localStorage.getItem('epUserPrefs')){
+//          ep.app.epUserPrefs = JSON.parse(localStorage.getItem('epUserPrefs'));
+//          if (typeof ep.app.epUserPrefs.prefMainNavDisplayCompact !== 'undefined'){
+//            //if (epUserPrefs.prefMainNavDisplayCompact){
+//            currentMainNavDisplayCompactSetting = ep.app.epUserPrefs.prefMainNavDisplayCompact;
+//            //}
+//          }
+//        }
         // }
-
-        if (currentMainNavDisplayCompactSetting){
-          $('.main-nav-list').hide();
-          $('.btn-main-nav-toggle').click(function(event){
-            $('.main-nav-list').fadeToggle(400).css('position','absolute');
-
-            //$('.main-nav-container nav').removeClass('nav-h').addClass('.nav-v');
-          });
-        }
-        else{
+/*
+*
+* Turn user prefs off for now
+*
+* */
+//        if (currentMainNavDisplayCompactSetting){
+//          $('.main-nav-list').hide();
+//          $('.btn-main-nav-toggle').click(function(event){
+//            $('.main-nav-list').fadeToggle(400).css('position','absolute');
+//
+//            //$('.main-nav-container nav').removeClass('nav-h').addClass('.nav-v');
+//          });
+//        }
+//        else{
           $('.btn-main-nav-toggle').hide();
           $('.main-nav-list').show();
-          $('.main-nav-container nav').removeClass('nav-v').addClass('.nav-h');
+          //$('.main-nav-container nav').removeClass('nav-v').addClass('.nav-h');
           // $('.main-nav-container').css('width','100%');
           $('.main-nav-container .nav-h ul li').css('display','inline');
 
           EventBus.bind('ia.compactMainNav',function(){
 
           });
-        }
+        //}
         //}
 
         EventBus.trigger('ia.MainNavViewRendered');
@@ -178,6 +187,7 @@ define(['ep','eventbus','marionette'],
     // Browse Category Layout
     var BrowseCategoryLayout = Backbone.Marionette.Layout.extend({
       template:'#BrowseCategoryLayoutContainer',
+      className:'browse-items-container',
       regions:{
         categoryRegion:'.categoryRegion',
         itemRegion:'.itemRegion'

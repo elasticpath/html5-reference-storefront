@@ -3,7 +3,9 @@
   <!-- Default Cart Layout Template -->
   <script id="DefaultCartLayoutTemplate" type="text/template">
     <div data-region="cartTitleRegion" class="cart-title-container"></div>
-    <div data-region="mainCartRegion" class="cart-main-container"></div>
+    <div data-region="mainCartRegion" class="cart-main-container">
+      <img src="/images/activity-indicator-strobe.gif" />
+    </div>
     <div data-region="cartSummaryRegion" class="cart-summary-container"></div>
     <div data-region="cartCheckoutActionRegion" class="cart-checkout-container"></div>
 
@@ -55,7 +57,7 @@
 
     <!-- Cart Line Item Remove Button -->
     <td class="cart-lineitem-remove-btn-col">
-      <button class="btn-round btn btn-primary btn-cart-removelineitem" data-actionlink="<%= E.getCortexPath() %><%= E.lineitemUri %>"><%= E.getI18nLabel('cart.remove') %></button>
+      <button class="btn-round btn btn-cart-removelineitem" data-actionlink="<%= E.getCortexPath() %><%= E.lineitemUri %>"><%= E.getI18nLabel('cart.remove') %></button>
     </td>
   </script>
 
@@ -64,7 +66,7 @@
     <table>
       <thead class="cart-lineitem-table-headings">
         <tr>
-          <th><%= E.getI18nLabel('cart.product') %></th>
+          <th><span class="lineitem-asset-col"><%= E.getI18nLabel('cart.product') %></span></th>
           <th><%= E.getI18nLabel('cart.name') %></th>
           <th><%= E.getI18nLabel('cart.availability') %></th>
           <th><%= E.getI18nLabel('cart.itemPrice') %></th>
@@ -79,7 +81,7 @@
 
   <!-- Cart Summary Template -->
   <script id="CartSummaryTemplate" type="text/template">
-    <ul class="cart-summary-container">
+    <ul class="cart-summary-list">
       <li class="cart-total-quantity">
         <label class="cart-summary-label-col"><%= E.getI18nLabel('cart.totalQuantity') %>: </label>
         <span class="cart-summary-value-col"><%= E.cartTotalQuantity %></span>
@@ -94,7 +96,7 @@
 
   <!-- Cart Checkout Action Template -->
   <script id="CartCheckoutActionTemplate" type="text/template">
-    <button class="btn-round btn-primary btn-cmd-checkout"><%= E.getI18nLabel('cart.checkout') %></button>
+    <button class="btn btn-round btn-primary btn-cmd-checkout"><%= E.getI18nLabel('cart.checkout') %></button>
   </script>
 
 

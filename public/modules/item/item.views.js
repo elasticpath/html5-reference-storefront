@@ -100,7 +100,7 @@ define(['ep','marionette','i18n','eventbus'],
         }
       },
       getDefaultImagePath:function(aModel){
-        if (aModel){
+        if (aModel && (aModel.length > 0)){
           for (var i = 0;i < aModel.length;i++){
             if (aModel[i].name == 'default-image'){
               return aModel[i].contentLocation;
@@ -109,7 +109,7 @@ define(['ep','marionette','i18n','eventbus'],
           }
         }
         else{
-          return '';
+          return '/images/img-placeholder.png';
         }
       },
       getDefaultImageName:function(aModel){

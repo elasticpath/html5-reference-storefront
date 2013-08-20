@@ -1,3 +1,5 @@
+/* start main nav*/
+/* end main nav*/
 /* Start Item Detail  */
 /* End Item Detail */
 /* Start Cart */
@@ -1689,6 +1691,8 @@ a.error:hover {
     bottom: 0;
   }
 }
+/* start main nav*/
+/* end main nav*/
 /* Start Item Detail  */
 /* End Item Detail */
 /* Start Cart */
@@ -1740,6 +1744,7 @@ a {
 }
 ul {
   list-style: none;
+  margin-bottom: 0;
 }
 .viewport {
   min-width: 320px;
@@ -2168,6 +2173,105 @@ in the ui framework
   border: 1px solid darkgreen;
   background-color: #dbc59e;
 }
+/* start main nav*/
+/* end main nav*/
+/* Start Item Detail  */
+/* End Item Detail */
+/* Start Cart */
+/* End Cart */
+.btn-main-nav-toggle {
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #444;
+  border-right: 1px solid #444;
+  padding: 0;
+  border-radius: 4px;
+  background-color: #424242;
+  height: 50px;
+}
+.btn-main-nav-toggle:active {
+  border-top: 1px solid #444;
+  border-left: 1px solid #444;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  background-color: #050505;
+}
+.btn-main-nav-toggle img {
+  height: 50px;
+}
+.main-nav-container {
+  clear: both;
+  border: 0px solid orange;
+  min-width: 37rem;
+}
+.main-nav {
+  position: relative;
+  border: 0px solid pink;
+  text-align: center;
+}
+.main-nav-list {
+  text-align: center;
+  list-style: none;
+  display: inline-block;
+  border: 0px solid green;
+  background-color: rgba(210, 210, 210, 0.68);
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+  margin-bottom: 0;
+  /*  display:none;*/
+
+}
+.main-nav-list .nav-v li {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border-radius: 1rem;
+}
+.main-nav-container .nav-h li {
+  display: inline-block;
+}
+.main-nav-container li {
+  display: inline-block;
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.main-nav-container .nav-h {
+  margin-bottom: .2em;
+}
+.main-nav-list li.is-selected {
+  background-color: #ffffff;
+  margin-bottom: 0;
+}
+.nav-main-nav ul {
+  list-style: none;
+}
+.cmd-nav-item {
+  text-decoration: none;
+}
+.cmd-nav-item:hover {
+  text-decoration: underline;
+}
+.main-nav-list li span {
+  /* padding-top:.3rem;*/
+
+  padding-right: 1.5rem;
+  /*padding-bottom:.3rem;*/
+
+  padding-left: 1.5rem;
+}
+.main-nav-list li:hover {
+  background: #eee;
+  color: #444;
+}
+.main-nav-list li span {
+  color: #444444;
+}
+.main-nav-list li:hover span {
+  color: #2222aa;
+}
+/* start main nav*/
+/* end main nav*/
 /* Start Item Detail  */
 /* End Item Detail */
 /* Start Cart */
@@ -2179,12 +2283,11 @@ in the ui framework
     More info at: http://lesselements.com
   ---------------------------------------------------*/
 .app-header {
-  boder-radius: 8px;
   border-top: 1px solid #fff;
   position: relative;
   min-height: 4em;
-  padding-top: .5rem;
-  border-bottom: 1px solid #333;
+  padding-top: .2rem;
+  border-bottom: 0px solid #333;
   background: #eeeeee;
   background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(1, #cccccc));
   background: -ms-linear-gradient(bottom, #eeeeee, #cccccc);
@@ -2211,84 +2314,26 @@ header.app-header .row {
   margin-bottom: 0;
   background: transparent;
 }
+@media only screen and (max-width: 49rem) {
+  .logo-container {
+    display: none;
+  }
+}
+@media only screen and (max-width: 31rem) {
+  .main-search-container {
+    display: none;
+  }
+}
 .logo-container {
   float: left;
 }
-header.app-header .btn-main-nav-toggle {
-  border-top: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  border-bottom: 1px solid #444;
-  border-right: 1px solid #444;
-  padding: 0;
-  border-radius: 4px;
-  background-color: #424242;
-  height: 50px;
-}
-header.app-header .btn-main-nav-toggle:active {
-  border-top: 1px solid #444;
-  border-left: 1px solid #444;
-  border-bottom: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  background-color: #050505;
-}
-.btn-main-nav-toggle img {
-  height: 50px;
+.cmd-home-logo img {
+  height: 3rem;
 }
 .btn-link-cmd {
   background: transparent;
   border: 0;
-  color: #eeeeee;
-}
-.main-nav-container {
-  float: left;
-}
-.main-nav {
-  position: relative;
-  float: left;
-}
-.main-nav-list {
-  float: left;
-  list-style: none;
-  background-color: rgba(210, 210, 210, 0.68);
-  border-radius: 1rem;
-  /*  display:none;*/
-
-}
-.main-nav-list .nav-v li {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  border-radius: 1rem;
-}
-.main-nav-container .nav-h li {
-  display: inline-block;
-}
-.main-nav-container li {
-  line-height: 3rem;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-.main-nav-container .nav-h {
-  margin-bottom: .2em;
-}
-.nav-main-nav ul {
-  list-style: none;
-}
-.main-nav-list li span {
-  padding-top: .3rem;
-  padding-right: 1.5rem;
-  padding-bottom: .3rem;
-  padding-left: 1.5rem;
-}
-.main-nav-list li:hover {
-  background: #eee;
-  color: #444;
-}
-.main-nav-list li span {
-  color: #eeeeee;
-}
-.main-nav-list li:hover span {
-  color: #444;
+  color: #444444;
 }
 .main-search-container {
   float: right;
@@ -2318,6 +2363,8 @@ header.app-header .btn-main-nav-toggle:active {
 .global-nav-container a {
   color: #070ca6;
 }
+/* start main nav*/
+/* end main nav*/
 /* Start Item Detail  */
 /* End Item Detail */
 /* Start Cart */
@@ -2326,13 +2373,16 @@ header.app-header .btn-main-nav-toggle:active {
   item detail
 */
 .itemdetail-container {
-  margin-top: .6rem;
+  padding: 4rem;
+  margin: 1rem auto;
+  border: 1px solid #eee;
+  border-radius: 4rem;
+  max-width: 70rem;
 }
 .itemdetail-title {
-  margin-left: .5rem;
-  font-size: 180%;
-  color: #070ca6;
-  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 1.3rem;
+  color: #777777;
+  font-family: freesans, Helvetica, Arial, clean, sans-serif;
 }
 .itemdetail-main-img {
   width: 20rem;
@@ -2352,7 +2402,7 @@ header.app-header .btn-main-nav-toggle:active {
   text-align: center;
   border-radius: .4rem;
   margin-bottom: .3rem;
-  padding: .5rem;
+  padding: .3rem;
   width: 8rem;
   color: #ffffff;
   background-color: #ff8c00;
@@ -2384,6 +2434,8 @@ header.app-header .btn-main-nav-toggle:active {
   font-weight: bold;
   color: #444444;
 }
+/* start main nav*/
+/* end main nav*/
 /* Start Item Detail  */
 /* End Item Detail */
 /* Start Cart */
@@ -2396,18 +2448,35 @@ header.app-header .btn-main-nav-toggle:active {
   margin-right: auto;
   margin-top: 1rem;
   border: 1px solid #dddddd;
-  border-radius: 8px;
-  max-width: 80rem;
+  border-radius: 4rem;
+  max-width: 70rem;
   padding: 4rem;
 }
 .cart-summary-container {
   float: right;
+  margin-right: 8rem;
 }
 .cart-checkout-container {
   clear: both;
+  margin-right: 10rem;
+}
+.btn-cmd-checkout {
+  float: right;
+}
+.cart-main-container table {
+  margin: 0 auto;
 }
 .cart-lineitem-thumbnail {
   width: 10rem;
+}
+@media only screen and (max-width: 47rem) {
+  .cart-lineitem-thumbnail,
+  .lineitem-asset-col {
+    display: none;
+  }
+  .cart-title-container h1 {
+    font-size: 100%;
+  }
 }
 .cart-lineitem-title-col {
   font-family: Helvetica, arial, freesans, clean, sans-serif;
@@ -2429,17 +2498,23 @@ header.app-header .btn-main-nav-toggle:active {
 .cart-list-price {
   text-decoration: line-through;
 }
-.cart-summary-container {
-  margin: 3rem;
+.cart-summary-list {
+  border: 1px solid #eeeeee;
+  border-bottom-radius: 4px;
+  padding: .4rem;
+}
+.cart-summary-list li {
+  border-bottom: 1px dashed #cccccc;
 }
 .cart-summary-label-col {
   display: inline-block;
-  width: 10rem;
+  width: 7rem;
 }
 .cart-summary-value-col {
   display: inline-block;
-  width: 10rem;
+  width: 7rem;
   text-align: right;
+  font-weight: bold;
 }
 /*
 
@@ -2574,6 +2649,7 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
 */
 .btn-cmd {
   border: 0 solid grey;
+  font-size: 100%;
   background: transparent;
   color: #070ca6;
 }
@@ -2585,6 +2661,22 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
   border: 0;
   background: rgba(150, 150, 150, 0.4);
   text-shadow: 7px 7px 12px #969696;
+}
+.global-nav-container a {
+  text-decoration: none;
+}
+.global-nav-container a:hover {
+  text-decoration: underline;
+}
+.browse-items-container,
+.search-results-container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  border: 1px solid #dddddd;
+  border-radius: 4rem;
+  max-width: 70rem;
+  padding: 4rem;
 }
 .view-title {
   color: #000000;
@@ -2627,6 +2719,23 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
   top: -15px;
   right: -18px;
   cursor: pointer;
+}
+.home-container {
+  background: url(images/hm-commerce-software-bb.jpg) no-repeat;
+  min-height: 500px;
+  background-size: 100%;
+  text-align: center;
+}
+.field-content {
+  max-width: 75rem;
+  color: #ffffff;
+  margin: 0 auto;
+  font-family: 'ProximaNova-Regular', Helvetica, Arial, sans-serif;
+  padding-top: 8rem;
+}
+.field-content h2 {
+  font-size: 48px;
+  line-height: 47px;
 }
 .theme-variable-item-value-dark .btn-cmd {
   color: #111111;

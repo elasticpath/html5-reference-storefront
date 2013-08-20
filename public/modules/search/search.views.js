@@ -45,8 +45,12 @@ define(['ep','backbone','eventbus','cortex'],
     var searchResults = Backbone.Marionette.CompositeView.extend({
       template:'#SearchResultsTemplate',
       itemView:searchResultsItem,
+      className:'search-results-container',
       emptyView: noResults,
-      itemViewContainer:'[data-region="searchResultsList"]'
+      itemViewContainer:'[data-region="searchResultsList"]',
+      onShow:function(){
+        $('.main-nav-list li').removeClass('is-selected');
+      }
 
     });
     return{
