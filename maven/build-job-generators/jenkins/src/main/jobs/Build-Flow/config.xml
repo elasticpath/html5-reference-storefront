@@ -84,7 +84,7 @@ H/3 * * * *</spec>
   <builders/>
   <publishers>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.25">
-      <recipientList>$DEFAULT_RECIPIENTS</recipientList>
+      <recipientList>$EMAIL_LIST</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
