@@ -193,7 +193,8 @@ define(['ep','marionette','i18n','eventbus'],
     // Empty Cart View
     var emptyCartView = Backbone.Marionette.ItemView.extend({
       template:'#EmptyCartTemplate',
-      templateHelpers:viewHelpers
+      templateHelpers:viewHelpers,
+      className:"cart-empty-container"
     });
 
     // Main Cart View
