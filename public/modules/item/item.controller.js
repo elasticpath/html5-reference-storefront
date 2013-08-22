@@ -103,48 +103,38 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
 
           var obj = '{quantity:' + qty +'}';
           // TODO improve robustness of oauth token when we work on that story
-          var oAuthToken = window.localStorage.getItem('oAuthToken');
-          if(oAuthToken){
-            ep.io.ajax({
-              type:'POST',
-              beforeSend: function (request)
-              {
-                request.setRequestHeader("Authorization", oAuthToken);
-              },
-              contentType:'application/json',
-              url:formActionLink,
-              data:obj,
-              success:function(response,x, y){
-                // follow link response
-                ep.logger.info('Success posting to cart - go to cart view');
+          ep.io.ajax({
+            type:'POST',
+            contentType:'application/json',
+            url:formActionLink,
+            data:obj,
+            success:function(response,x, y){
+              // follow link response
+              ep.logger.info('Success posting to cart - go to cart view');
 
-                // get the location header
-                ep.logger.info(response);
-                // ep.logger.info(request);
-                ep.logger.info(JSON.stringify(y));
-                var lineItemUrl = y.getResponseHeader('Location');
-                ep.logger.info(lineItemUrl);
-                if (lineItemUrl){
-                  EventBus.trigger('item.loadDefaultCartRequest');
-                }
-                else{
-                  ep.logger.warn('add to cart success but no cart url returned');
-                }
-
-
-                ep.logger.info('we are done load the cart view');
-
-
-
-              },
-              error:function(response){
-                ep.logger.error('error posting item to cart: ' + response);
+              // get the location header
+              ep.logger.info(response);
+              // ep.logger.info(request);
+              ep.logger.info(JSON.stringify(y));
+              var lineItemUrl = y.getResponseHeader('Location');
+              ep.logger.info(lineItemUrl);
+              if (lineItemUrl){
+                EventBus.trigger('item.loadDefaultCartRequest');
               }
-            });
-          }
-          else{
-            ep.logger.warn('add to cart called with no auth token');
-          }
+              else{
+                ep.logger.warn('add to cart success but no cart url returned');
+              }
+
+
+              ep.logger.info('we are done load the cart view');
+
+
+
+            },
+            error:function(response){
+              ep.logger.error('error posting item to cart: ' + response);
+            }
+          });
 
         }
         else{

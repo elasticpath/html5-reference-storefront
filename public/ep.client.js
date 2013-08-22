@@ -58,15 +58,40 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
     };
 
 
+    /*
+    *
+    *
+    *   IO
+    *
+    *
+    * */
     // io namespace
     // reserved for any io but simple jQuery ajax wrapper out of the gate
 
     // AJAX lives here!
     ep.io.ajax = function(ioObj){
-      if (ioObj){
+      ep.logger.info('|----------------------------');
+      ep.logger.info('|');
+      ep.logger.info('|');
+      ep.logger.info('|');
+      ep.logger.info('|     AJAX CALL - CHECK TOKENS');
+      ep.logger.info('|');
+      ep.logger.info('|');
+      ep.logger.info('|');
+      ep.logger.info('|------------------------------');
+      var oAuthToken = window.localStorage.getItem('oAuthToken');
+
+      if (ioObj && oAuthToken){
         // check if there is an ajax request type and other properties
         // make sure the required parameters (url and type are there )
+        ioObj.beforeSend = function(request){
+          request.setRequestHeader("Authorization", oAuthToken);
+        };
         $.ajax(ioObj);
+      }
+      else{
+        generatePublicAuth();
+        ep.logger.warn('AJAX request attempt without tokens: ' + ioObj);
       }
     };
     EventBus.on('io.ajaxRequest',function(options){
@@ -86,6 +111,163 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
       retVal += '/' + ep.app.config.cortexApi.path;
       return retVal;
     };
+
+
+    EventBus.on('app.authInit',function(){
+      document.location.reload();
+
+    });
+
+    function generatePublicAuth(){
+      var authString = 'grant_type=password&scope=mobee&role=PUBLIC';
+//      authString += '&scope=' + authScope + '&role=' + authRole
+
+      $.ajax({
+        type:'POST',
+        url:'/' + ep.app.config.cortexApi.path + '/oauth2/tokens',
+
+        contentType: 'application/x-www-form-urlencoded',
+        data:authString,
+        success:function(json, responseStatus, xhr){
+          // $('#authHeader').val("Bearer " + json.access_token);
+          //cortex.ui.saveField('authHeader');
+          window.localStorage.setItem('oAuthRole', 'PUBLIC');
+          window.localStorage.setItem('oAuthScope', ep.app.config.cortexApi.store);
+          window.localStorage.setItem('oAuthToken', 'Bearer ' + json.access_token);
+
+          //if (authRole === 'PUBLIC') {
+          window.localStorage.setItem('oAuthUserName', 'Anonymous');
+          // } else {
+          //  window.localStorage.setItem('oAuthUserName', userName);
+          //}
+          EventBus.trigger('app.authInit');
+        },
+        error:function(response){
+
+          ep.logger.error('ERROR generating public auth token: ' + response);
+        }
+      });
+    }
+
+
+    function getAuthToken(){
+      var oAuthRole;
+      var oAuthUserName;
+      var oAuthToken;
+
+      // check and see if there is a local auth token
+      // if yes, is it still valid
+      // if not generate a public one
+      if (ep.ui.localStorage){
+        // check for auth token
+        oAuthRole = window.localStorage.getItem('oAuthRole');
+        oAuthUserName = window.localStorage.getItem('oAuthUserName');
+        oAuthToken = window.localStorage.getItem('oAuthToken');
+
+        //if (!oAuthRole)
+      }
+      else{
+        ep.logger.warn('check before cortex api call for auth token but local storage is not supported');
+      }
+
+
+      return oAuthToken;
+
+
+    }
+
+
+    var baseSync = Backbone.sync;
+    Backbone.sync = function(method, model, options) {
+      var isTokenDirty = false;
+      options = options || {};
+      options.error = function(data, response, options){
+        if (response.status === 401){
+          ep.logger.error('reponse error: ' + response.responseText + ' : ' + response.status);
+          if (!isTokenDirty){
+            generatePublicAuth();
+          }
+
+        }
+      };
+      ep.logger.info('|----------------------------');
+      ep.logger.info('|');
+      ep.logger.info('|');
+      ep.logger.info('|');
+      ep.logger.info('|     BACKBONE SYNC  - CHECK TOKENS');
+      ep.logger.info('|');
+      ep.logger.info('|');
+      ep.logger.info('|');
+      ep.logger.info('|------------------------------');
+      if (options.url){
+
+        // scrub out any absolute path (prior to /cortex) in the URL to avoid confusing the proxy
+        // ie all requests are relative path
+        var replaceUrl = options.url;
+        var testPath = '/' + ep.app.config.cortexApi.path;
+        var pathIndex = replaceUrl.indexOf(testPath);
+        if (pathIndex > 0){
+
+          replaceUrl = replaceUrl.substring(pathIndex,replaceUrl.length);
+          // ep.logger.info('YAUYAUYAP0SDFASDF   path: ' + replaceUrl);
+
+
+        }
+        options.url = replaceUrl;
+      }
+
+
+      options.headers = options.headers || {};
+
+      var authToken = getAuthToken();
+      if (authToken){
+        _.extend(options.headers, { 'Authorization': getAuthToken() });
+
+        ep.logger.info('SYNC REQUEST: ' + model + '   : ' + options);
+        baseSync(method, model, options);
+      }
+      else{
+        ep.logger.warn('Backbone sync called with no auth token');
+        isTokenDirty = true;
+        generatePublicAuth();
+      }
+
+
+
+
+
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // logging utility
     ep.log = function () {
@@ -270,111 +452,7 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
       }
     });
 
-    EventBus.on('app.authInit',function(){
-      document.location.reload();
 
-    });
-
-    function generatePublicAuth(){
-      var authString = 'grant_type=password&scope=mobee&role=PUBLIC';
-//      authString += '&scope=' + authScope + '&role=' + authRole
-
-      $.ajax({
-        type:'POST',
-        url:'/' + ep.app.config.cortexApi.path + '/oauth2/tokens',
-
-        contentType: 'application/x-www-form-urlencoded',
-        data:authString,
-        success:function(json, responseStatus, xhr){
-          // $('#authHeader').val("Bearer " + json.access_token);
-          //cortex.ui.saveField('authHeader');
-          window.localStorage.setItem('oAuthRole', 'PUBLIC');
-          window.localStorage.setItem('oAuthScope', ep.app.config.cortexApi.store);
-          window.localStorage.setItem('oAuthToken', 'Bearer ' + json.access_token);
-
-          //if (authRole === 'PUBLIC') {
-          window.localStorage.setItem('oAuthUserName', 'Anonymous');
-          // } else {
-          //  window.localStorage.setItem('oAuthUserName', userName);
-          //}
-          EventBus.trigger('app.authInit');
-        },
-        error:function(response){
-
-          ep.logger.error('ERROR generating public auth token: ' + response);
-        }
-      });
-    }
-
-
-    function getAuthToken(){
-      var oAuthRole;
-      var oAuthUserName;
-      var oAuthToken;
-
-      // check and see if there is a local auth token
-      // if yes, is it still valid
-      // if not generate a public one
-      if (ep.ui.localStorage){
-        // check for auth token
-        oAuthRole = window.localStorage.getItem('oAuthRole');
-        oAuthUserName = window.localStorage.getItem('oAuthUserName');
-        oAuthToken = window.localStorage.getItem('oAuthToken');
-
-        //if (!oAuthRole)
-      }
-      else{
-        ep.logger.warn('check before cortex api call for auth token but local storage is not supported');
-      }
-
-      if (!oAuthToken){
-        generatePublicAuth();
-
-      }
-      else{
-        return oAuthToken;
-      }
-
-    }
-
-
-    var baseSync = Backbone.sync;
-    Backbone.sync = function(method, model, options) {
-      options = options || {};
-
-      if (options.url){
-
-        // scrub out any absolute path (prior to /cortex) in the URL to avoid confusing the proxy
-        // ie all requests are relative path
-        var replaceUrl = options.url;
-        var testPath = '/' + ep.app.config.cortexApi.path;
-        var pathIndex = replaceUrl.indexOf(testPath);
-        if (pathIndex > 0){
-
-          replaceUrl = replaceUrl.substring(pathIndex,replaceUrl.length);
-         // ep.logger.info('YAUYAUYAP0SDFASDF   path: ' + replaceUrl);
-
-
-        }
-        options.url = replaceUrl;
-      }
-      options.error = function(data, response, options){
-        if (response.status === 401){
-          ep.logger.error('reponse error: ' + response.responseText + ' : ' + response.status);
-          generatePublicAuth();
-
-        }
-      }
-
-      options.headers = options.headers || {};
-
-      _.extend(options.headers, { 'Authorization': getAuthToken() });
-
-
-      ep.logger.info('SYNC REQUEST: ' + model + '   : ' + options);
-      baseSync(method, model, options);
-
-    };
 
 
 

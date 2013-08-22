@@ -2392,6 +2392,16 @@ header.app-header .row {
   .cart-title-container h1 {
     font-size: 100%;
   }
+  .cart-container {
+    margin-left: 0;
+    margin-top: .2rem;
+    border: 0px solid #dddddd;
+    padding: 1rem;
+  }
+  .cart-summary-container {
+    float: right;
+    margin-right: .5rem;
+  }
 }
 .cart-lineitem-title-col {
   font-family: Helvetica, arial, freesans, clean, sans-serif;
@@ -2658,3 +2668,19 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
 .theme-variable-item-value-light .btn-cmd {
   color: #eeeeee;
 }
+/*
+  Begin Login Form
+*/
+/* oAuth Form Feedback */
+.feedback-label {
+  color: red;
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+}
+.oAuth-logout {
+  display: none;
+}
+/*end login form*/

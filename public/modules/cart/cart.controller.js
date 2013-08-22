@@ -73,16 +73,11 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
     });
 
     EventBus.on('cart.removeLineItemRequest', function(event){
-      var oAuthToken = window.localStorage.getItem('oAuthToken');
       var deleteActionLink = $(event.target).data('actionlink');
 
-      if (oAuthToken && deleteActionLink) {
+
         ep.io.ajax({
           type:'DELETE',
-          beforeSend:function(request)
-          {
-            request.setRequestHeader("Authorization", oAuthToken);
-          },
           contentType:'application/json',
           url:deleteActionLink,
           success:function(response, x, y){
@@ -92,7 +87,7 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
             EventBus.trigger('cart.CartLineItemRemoveFailed', response);
           }
         });
-      }
+
     });
 
     EventBus.on('cart.removeLineItemBtnClicked', function(event){
