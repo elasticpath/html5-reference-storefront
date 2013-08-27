@@ -16,9 +16,9 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
 
 
 
-    var defaultItemDetailView = function(id){
+    var defaultLayout = function(id){
 
-      var defaultItemViewLayout = new View.DefaultLayout({
+      var itemDetailLayout = new View.DefaultLayout({
         className:''
       });
 
@@ -61,12 +61,12 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
             model:itemModel
           });
 
-          defaultItemViewLayout.itemDetailTitleRegion.show(titleView);
-          defaultItemViewLayout.itemDetailAssetRegion.show(assetView);
-          defaultItemViewLayout.itemDetailAttributeRegion.show(attributeView);
-          defaultItemViewLayout.itemDetailAvailabilityRegion.show(availabilityView);
-          defaultItemViewLayout.itemDetailPriceRegion.show(priceView);
-          defaultItemViewLayout.itemDetailAddToCartRegion.show(addToCartView);
+          itemDetailLayout.itemDetailTitleRegion.show(titleView);
+          itemDetailLayout.itemDetailAssetRegion.show(assetView);
+          itemDetailLayout.itemDetailAttributeRegion.show(attributeView);
+          itemDetailLayout.itemDetailAvailabilityRegion.show(availabilityView);
+          itemDetailLayout.itemDetailPriceRegion.show(priceView);
+          itemDetailLayout.itemDetailAddToCartRegion.show(addToCartView);
 
 
         },
@@ -76,7 +76,7 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
       });
 
 
-      return defaultItemViewLayout;
+      return itemDetailLayout;
     };
 
     /*
@@ -146,9 +146,7 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
 
 
     return {
-      DefaultLayout:View.DefaultLayout,
-      DefaultItemDetailView:defaultItemDetailView,
-      ItemModel:Model.ItemModel
+      DefaultView:defaultLayout
     };
   }
 );

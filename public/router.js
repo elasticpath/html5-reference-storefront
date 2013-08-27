@@ -21,8 +21,15 @@ define(['marionette','eventbus'],
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
           module:'item',
-          view:'DefaultItemDetailView',
+          view:'DefaultView',
           data:id
+        });
+      },
+      cart: function(){
+        EventBus.trigger('layout.loadRegionContentRequest',{
+          region:'appMainRegion',
+          module:'cart',
+          view:'DefaultView'
         });
       },
       category: function(category) {
@@ -114,13 +121,6 @@ define(['marionette','eventbus'],
           region:'appMainRegion',
           module:'settings',
           view:'IndexLayout'
-        });
-      },
-      cart: function(){
-        EventBus.trigger('layout.loadRegionContentRequest',{
-          region:'appMainRegion',
-          module:'cart',
-          view:'DefaultView'
         });
       }
     };

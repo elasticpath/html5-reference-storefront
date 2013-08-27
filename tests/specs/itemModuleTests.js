@@ -8,14 +8,13 @@
  */
 
 define(function(require) {
-  var item   = require('item');
   var itemViews = require('modules/item/item.views');
   var itemModel = require('modules/item/item.models');
 
   describe('UI Storefront Item Detail - Default Layout ', function(){
-    var defaultLayout = new item.DefaultLayout();
+    var defaultLayout = new itemViews.DefaultLayout();
     it('should exist', function(){
-      expect(defaultLayout).to.be.ok;
+      expect(itemViews.DefaultLayout).to.be.ok;
     });
     it('should have a title region',function(){
       expect(defaultLayout.itemDetailTitleRegion).to.be.ok;
