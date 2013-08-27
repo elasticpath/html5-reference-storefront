@@ -8,24 +8,13 @@
  */
 define(
   function(require) {
-    var auth   = require('auth');
     var authView = require('modules/auth/auth.views');
-    var authModel = require('modules/auth/auth.models');
-
-    describe('UI Storefront Auth Module - Model', function() {
-      var testData = {};
-
-      var testAuthModel = new authModel.AuthModel(testData);
-
-      it("testAuthModel should exist");
-      it("testAuthModel has ROLE");
-      it("testAuthModel has Scope");
-      it("testAuthModel has post url");
-    });
 
     describe('UI Storefront Auth Module - Views', function() {
-      it("AuthLoginFormView should exists");
-      it("ProfileMenuView should exists");
+      it("Global Login Menu Item Button View should exist");
+      it("Nav Item Auth Container should exist");
+      it("Login Form View should exist");
+      it("Profile Menu View should exists");
     });
 
   }
