@@ -6,8 +6,8 @@
  * Time: 1:54 PM
  *
  */
-define(['eventbus','backbone','marionette','i18n','modules/appheader/appheader.models'],
-  function(EventBus,Backbone, Marionette,i18n,Model){
+define(['ep','eventbus','backbone','marionette','i18n','modules/appheader/appheader.models'],
+  function(ep, EventBus,Backbone, Marionette,i18n,Model){
 
     var viewHelpers = {
       getI18nLabel:function(key){
@@ -27,9 +27,13 @@ define(['eventbus','backbone','marionette','i18n','modules/appheader/appheader.m
     var PageHeaderView = Backbone.Marionette.Layout.extend({
       template:'#AppHeaderDefaultTemplateContainer',
       events:{
-        'click .btn-cmd':function(event){
-          EventBus.trigger('profile.authButtonClicked',event);
+        'click .btn-login-cmd':function(event){
+          event.preventDefault();
+          EventBus.trigger('auth.loginFormSubmitButtonClicked',event);
         },
+//        'click .btn-login-cmd':function(event){
+//          EventBus.trigger('profile.authButtonClicked',event);
+//        },
         'click .oauth-menu-toggle':function(event){
           $('.' + $(event.target).data('target')).toggle(250);
         }
@@ -55,10 +59,25 @@ define(['eventbus','backbone','marionette','i18n','modules/appheader/appheader.m
       itemViewContainer:'tbody'
     });
 
+    /*
+     *
+     * Functiontions
+     *
+     * */
+    var getLoginRequestModel = function(){
+      var retVal = new Model.AuthRequestModel();
+      retVal.set('userName',$('#OAuthUserName').val());
+      retVal.set('password',$('#OAuthPassword').val());
+      retVal.set('role','REGISTERED');
+      retVal.set('scope',ep.app.config.cortexApi.store);
+      return retVal;
+    };
+
     return {
       PageHeaderView:PageHeaderView,
       HeaderLogoView:HeaderLogoView,
-      EPDevInstrumentationView:EPDevInstrumentationView
+      EPDevInstrumentationView:EPDevInstrumentationView,
+      getLoginRequestModel:getLoginRequestModel
 
     };
   }

@@ -10,9 +10,10 @@ define(['marionette'],
   function(Marionette){
 
     var LogoModel = Backbone.Model.extend();
-
+    var authRequestModel = Backbone.Model.extend({});
     return{
-      LogoModel:LogoModel
+      LogoModel:LogoModel,
+      AuthRequestModel:authRequestModel
     };
   }
 );
