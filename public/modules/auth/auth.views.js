@@ -9,14 +9,12 @@
 define(['marionette'],
   function(Marionette){
 
+    var defaultLayout = Backbone.Marionette.Layout.extend({
 
-
-
-
-
+    });
 
     return {
-
+      DefaultLayout:defaultLayout
     };
   }
 );

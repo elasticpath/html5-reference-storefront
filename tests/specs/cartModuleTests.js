@@ -12,7 +12,7 @@ define(function(require) {
   var cartModel = require('modules/cart/cart.models');
 
   describe('UI Storefront Cart Module - Default Layout ', function(){
-    var defaultLayout = new cart.DefaultView();
+    var defaultLayout = new cartViews.DefaultLayout();
     it('Cart View defaultLayout should exist', function(){
       expect(defaultLayout).to.be.ok;
     });
@@ -28,8 +28,6 @@ define(function(require) {
     it('Default Layout should have a cartCheckoutRegion',function(){
       expect(defaultLayout.cartCheckoutActionRegion).to.be.ok;
     });
-
-
   });
   describe('UI Storefront Cart Module - Cart Views',function(){
     it('DefaultLayout should exist', function(){

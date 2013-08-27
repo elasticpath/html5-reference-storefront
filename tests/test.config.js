@@ -36,6 +36,7 @@ requirejs.config({
     'contextmenu'     : 'scripts/lib/plugins/jquery.contextmenu',
     'item'            : 'modules/item/item.controller',
     'cart'            : 'modules/cart/cart.controller',
+    'auth'            : 'modules/auth/auth.controller',
     'itemviews'       : 'modules/item/item.views',
     'debug'           : 'modules/debug/debug.controller',
     'itemdata'        : './tests/data/item',

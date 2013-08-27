@@ -10,12 +10,12 @@ define(['eventbus', 'backbone'],
   function(EventBus, Backbone){
 
 
+    var authModel = Backbone.Model.extend({
 
-
+    });
 
     return {
-
-
+      AuthModel:authModel
     };
   }
 );

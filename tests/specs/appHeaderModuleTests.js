@@ -21,4 +21,9 @@ define(function(require) {
       expect(appHeaderLogoView).to.be.ok;
     });
   });
+  describe('EP App Header Global Navigation ', function(){
+   it("global navigation should exist");
+   it("global cart navigation should exist");
+   it("global login navigation should exist");
+  });
 });

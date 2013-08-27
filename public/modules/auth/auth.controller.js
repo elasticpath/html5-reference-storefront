@@ -7,7 +7,7 @@
  *
  * 
  */
-define(['app', 'eventbus', 'cortex', 'modules/auth/tmpl.models', 'modules/auth/tmpl.views', 'text!modules/auth/tmpl.templates.html'],
+define(['app', 'eventbus', 'cortex', 'modules/auth/auth.models', 'modules/auth/auth.views', 'text!modules/auth/auth.templates.html'],
   function(App, EventBus, Cortex, Model, View, template){
 
     $('#TemplateContainer').append(template);
@@ -21,9 +21,15 @@ define(['app', 'eventbus', 'cortex', 'modules/auth/tmpl.models', 'modules/auth/t
     };
 
 
+    var defaultLayout = function() {
+
+    };
 
     return {
-      init:init
+      init:init,
+      AuthModel:Model.AuthModel,
+      DefaultViews:View.DefaultLayout,
+      DefaultLayout:defaultLayout
 
     };
   }

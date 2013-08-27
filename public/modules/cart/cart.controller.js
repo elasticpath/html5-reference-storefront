@@ -51,9 +51,9 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
     /*
      *
      *
-     * EVENT LISTENERS
-     *
-     */
+        * EVENT LISTENERS
+        *
+        */
     EventBus.on('cart.ReloadCartViewRequest', function() {
       ep.logger.info('Refreshing view...');
       EventBus.trigger('layout.loadRegionContentRequest',{
