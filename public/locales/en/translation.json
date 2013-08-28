@@ -35,5 +35,12 @@
     "AVAILABLE_FOR_BACK_ORDER":"Available for Back Order",
     "AVAILABLE_FOR_PRE_ORDER":"Pre Order",
     "releasedOn":"Expected Release Date"
+  },
+  "auth":{
+    "loginMenu":"Login",
+    "login":"Login",
+    "logout":"Logout",
+    "userName": "Username",
+    "password": "Password"
   }
 }

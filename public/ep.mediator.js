@@ -13,7 +13,18 @@ define(['eventbus'],function(EventBus){
       require(['appheader'],function(mod){
         EventBus.trigger('appheader.loadLogoComponent',reqEventData);
       });
+    },
+    'mediator.globalNavRendered':function(){
+        EventBus.trigger('layout.loadRegionContentRequest',{
+          region:'authMenuItemRegion',
+          module:'auth',
+          view:'DefaultView'
+        });
+      /*require(['cart'],function(mod){
+        EventBus.trigger('cart.loadGlobalNavAuthMenuRequest');
+      });*/
     }
+
   };
 
 

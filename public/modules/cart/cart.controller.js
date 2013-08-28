@@ -15,7 +15,7 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
     _.templateSettings.variable = 'E';
 
 
-    var defaultLayout = function(){
+    var defaultView = function(){
       var cartLayout =  new View.DefaultLayout();
       var cartModel = new Model.CartModel();
 
@@ -98,7 +98,7 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
     });
 
     return {
-      DefaultView:defaultLayout
+      DefaultView:defaultView
     };
   }
 );

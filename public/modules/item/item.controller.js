@@ -16,7 +16,7 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
 
 
 
-    var defaultLayout = function(id){
+    var defaultView = function(id){
 
       var itemDetailLayout = new View.DefaultLayout({
         className:''
@@ -146,7 +146,7 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
 
 
     return {
-      DefaultView:defaultLayout
+      DefaultView:defaultView
     };
   }
 );

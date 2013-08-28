@@ -6,9 +6,9 @@
  * Time: 1:54 PM
  *
  */
-define(['ep','eventbus','backbone','marionette','i18n','modules/appheader/appheader.models'],
-  function(ep, EventBus,Backbone, Marionette,i18n,Model){
 
+define(['ep', 'mediator', 'eventbus','backbone','marionette','i18n','modules/appheader/appheader.models'],
+  function(ep, Mediator, EventBus,Backbone, Marionette,i18n,Model){
     var viewHelpers = {
       getI18nLabel:function(key){
         retVal = key;
@@ -26,23 +26,12 @@ define(['ep','eventbus','backbone','marionette','i18n','modules/appheader/apphea
 
     var PageHeaderView = Backbone.Marionette.Layout.extend({
       template:'#AppHeaderDefaultTemplateContainer',
-      events:{
-        'click .btn-login-cmd':function(event){
-          event.preventDefault();
-          EventBus.trigger('auth.loginFormSubmitButtonClicked',event);
-        },
-//        'click .btn-login-cmd':function(event){
-//          EventBus.trigger('profile.authButtonClicked',event);
-//        },
-        'click .oauth-menu-toggle':function(event){
-          $('.' + $(event.target).data('target')).toggle(250);
-        }
-      },
+      templateHelpers:viewHelpers,
       onShow:function(){
         var elementWidth = $('.logo-container').outerWidth();
         EventBus.trigger('view.headerLogoViewRendered', elementWidth);
-      },
-      templateHelpers:viewHelpers
+        Mediator.fire('mediator.globalNavRendered');
+      }
     });
     var HeaderLogoView = Backbone.Marionette.Layout.extend({
       template:'#LogoTemplateContainer'

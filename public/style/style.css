@@ -4,7 +4,8 @@
 /* End Item Detail */
 /* Start Cart */
 /* End Cart */
-/*---------------------------------------------------
+/* Start Auth */
+/* End Auth *//*---------------------------------------------------
     LESS Elements 0.9
   ---------------------------------------------------
     A set of useful LESS mixins
@@ -2277,17 +2278,17 @@ header.app-header .row {
   float: right;
   margin-right: 1rem;
 }
-.global-nav-container ul {
+.global-nav-container {
   list-style: none;
 }
-.global-nav-container li {
+.global-nav-container > li {
   display: inline-block;
   margin: .3rem;
   line-height: 3rem;
   margin-top: auto;
   margin-bottom: auto;
 }
-.global-nav-container a {
+.global-nav-container > a {
   color: #070ca6;
 }
 /*
@@ -2440,6 +2441,28 @@ header.app-header .row {
   width: 7rem;
   text-align: right;
   font-weight: bold;
+}
+/*
+  auth view
+*/
+.auth-nav-container {
+  display: none;
+  position: absolute;
+  background: #ffffff;
+}
+.auth-profile-menu-container {
+  margin-left: 0rem;
+}
+.auth-login-form {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.auth-login-form input {
+  display: block;
+  width: 10rem;
+}
+.auth-feedback-container {
+  color: #ff0000;
 }
 /*
 

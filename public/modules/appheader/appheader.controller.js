@@ -35,7 +35,8 @@ define(['ep', 'mediator', 'app', 'eventbus', 'modules/appheader/appheader.models
       ep.app.addRegions({
         headerSearchRegion:'.main-search-container',
         mainNavRegion:'.main-nav-container',
-        logoRegion:'.logo-container'
+        logoRegion:'.logo-container',
+        authMenuItemRegion:'[data-region="authMenuItemRegion"]'
       });
       var headerView = new View.PageHeaderView();
 //      var logoRegion = new Marionette.Region({

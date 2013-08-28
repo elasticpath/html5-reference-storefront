@@ -10,42 +10,17 @@
 
     <!-- Main Search Container -->
     <div class="main-search-container">[main search goes here]</div>
+
     <!-- Global Nav Container -->
-    <div class="global-nav-container">
-      <ul>
+      <ul class="global-nav-container">
         <li class="global-nav-cart-nav">
           <a href="#mycart">
             <span>Shopping Cart</span>
           </a>
         </li>
-        <li id="oAuthMenu" class="dropdown">
-          <a href="#" class="oauth-menu-toggle" data-target="dropdown-menu">[login]<%= E.loginText %><b class="caret"></b></a>
-
-          <div class="dropdown-menu">
-            <ul class="outerMenu" id="oAuthOuterMenu">
-              <div class="innerMenu" id="oAuthInnerMenu">
-                <div id="OAuthFeedbackContainer" style="margin-right:25px">
-                  <span class="feedback-label"></span>
-                </div>
-                <div id="OAuthGreetingContainer" style="margin-right:25px">
-                  <span class="greeting-label"></span>
-                  <a href="#" class="oAuth-logout"><%= E.getI18nLabel('auth.logout') %></a>
-                </div>
-                <form id="OAuthForm" style="margin-right:25px">
-                  <label for="OAuthUserName"><%= E.getI18nLabel('auth.userName') %>:</label>
-                  <input id="OAuthUserName" name="OAuthUserName" type="text" size="40"/>
-                  <label for="OAuthPassword"><%= E.getI18nLabel('auth.password') %>:</label>
-                  <input id="OAuthPassword" name="OAuthPassword" type="password" size="40"/>
-                  <input id="OAuthScope" name="OAuthScope" list="oAuthScopeList" type="hidden" value="<%= E.scope%>">
-                  <input id="OAuthRole" name="OAuthRole" list="oAuthRoleList" type="hidden" value="REGISTERED">
-                  <button class="btn btn-round btn-primary btn-login-cmd" data-cmd="login" ><%= E.getI18nLabel('auth.login') %></button>
-                </form>
-              </div>
-            </ul>
-          </div>
-        </li>
+        <li data-region="authMenuItemRegion"></li>
       </ul>
-    </div>
+
     <!-- Main Nav Container -->
     <div class="main-nav-container" data-region="mainNavRegion">
       <img src="/images/activity-indicator-strobe.gif" />
