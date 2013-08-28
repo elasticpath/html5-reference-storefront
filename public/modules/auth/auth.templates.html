@@ -2,7 +2,7 @@
 
   <!-- Default Auth Main Template -->
   <script type="text/template" id="DefaultAuthLayoutTemplate">
-    <button class="btn-cmd btn-auth-dropdown" data-state="<!--E.getLoginState-->"><%= E.getLoginText('') %></button>
+    <button class="btn-cmd btn-auth-dropdown" data-state="<%= E.getLoginState() %>"><%= E.getLoginText(E.getLoginState()) %></button>
 
     <div data-region="authMainRegion" class="auth-nav-container"></div>
   </script>

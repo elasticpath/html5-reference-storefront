@@ -16,23 +16,22 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
 
     var defaultView = function() {
       var authLayout =  new View.DefaultLayout();
-
       return authLayout;
     };
 
-    EventBus.on('auth.showAuthMenu', function(event) {
-      if ($(event.target).data("state") === 'loggedIn') { // FIXME
-        EventBus.trigger('layout.loadRegionContentRequest', {
-          region:'mainAuthView',
-          module:'auth',
-          view:'ProfileMenuView'
-        });
-      }
-      else {
+    EventBus.on('auth.loadAuthMenuRequest', function(event) {
+      if ($(event.target).data("state") === 'PUBLIC') {
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'mainAuthView',
           module:'auth',
           view:'LoginFormView'
+        });
+      }
+      else {
+        EventBus.trigger('layout.loadRegionContentRequest', {
+          region:'mainAuthView',
+          module:'auth',
+          view:'ProfileMenuView'
         });
       }
     });
@@ -42,8 +41,53 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
     });
 
     EventBus.on('auth.loginFormSubmitButtonClicked', function(event) {
-      EventBus.trigger('auth.loginFailed', 'Failed to login.'); // FIXME
-      ep.logger.info("login click caught");
+      var requestModel = View.getLoginRequestModel();
+
+      var authString = 'grant_type=password&username='
+          + requestModel.get('userName') + '&password='
+          + requestModel.get('password') + '&scope='
+          + requestModel.get('scope') + '&role='
+          + requestModel.get('role');
+
+      ep.logger.info('login form submit clicked String: ' + authString);
+
+      // make sure the values are valid
+      $.ajax({
+        type:'POST',
+        url:'/' + ep.app.config.cortexApi.path + '/oauth2/tokens',
+        contentType: 'application/x-www-form-urlencoded',
+        data:authString,
+        success:function(json, responseStatus, xhr){
+          // $('#authHeader').val("Bearer " + json.access_token);
+          //cortex.ui.saveField('authHeader');
+          window.localStorage.setItem('oAuthRole', 'REGISTERED');
+          window.localStorage.setItem('oAuthScope', ep.app.config.cortexApi.store);
+          window.localStorage.setItem('oAuthToken', 'Bearer ' + json.access_token);
+          window.localStorage.setItem('oAuthUserName', requestModel.attributes.userName);
+
+          ep.logger.info('username: ' + requestModel.userName);
+
+          /*if (authRole === 'PUBLIC') {
+           } else {
+           window.localStorage.setItem('oAuthUserName', userName);
+           }*/
+          EventBus.trigger('app.authInit');
+        },
+        error:function(response){
+          if (response.status === 400) {
+            EventBus.trigger('auth.loginFormValidationFailed', response.responseText);
+
+          }
+          else if (response.status === 401) {
+            EventBus.trigger('auth.loginRequestFailed', response.responseText);
+          }
+          else {
+            // FIXME need better naming
+            EventBus.trigger('auth.loginFailedOtherReasons');
+            ep.logger.error('ERROR login: ' + response.responseText);
+          }
+        }
+      });
     });
 
     return {

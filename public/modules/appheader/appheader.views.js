@@ -48,26 +48,10 @@ define(['ep', 'mediator', 'eventbus','backbone','marionette','i18n','modules/app
       itemViewContainer:'tbody'
     });
 
-    /*
-     *
-     * Functiontions
-     *
-     * */
-    var getLoginRequestModel = function(){
-      var retVal = new Model.AuthRequestModel();
-      retVal.set('userName',$('#OAuthUserName').val());
-      retVal.set('password',$('#OAuthPassword').val());
-      retVal.set('role','REGISTERED');
-      retVal.set('scope',ep.app.config.cortexApi.store);
-      return retVal;
-    };
-
     return {
       PageHeaderView:PageHeaderView,
       HeaderLogoView:HeaderLogoView,
-      EPDevInstrumentationView:EPDevInstrumentationView,
-      getLoginRequestModel:getLoginRequestModel
-
+      EPDevInstrumentationView:EPDevInstrumentationView
     };
   }
 );

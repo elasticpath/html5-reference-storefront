@@ -6,12 +6,12 @@
  * Time: 9:16 AM
  *
  */
-define(['ep', 'marionette', 'eventbus', 'i18n'],
-  function(ep, Marionette, EventBus, i18n){
+define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
+  function(ep, Marionette, EventBus, i18n, Model){
 
     var viewHelpers = {
       getI18nLabel:function(key){
-        retVal = key;
+        var retVal = key;
         try{
           retVal = i18n.t(key);
         }
@@ -22,14 +22,14 @@ define(['ep', 'marionette', 'eventbus', 'i18n'],
         return retVal;
       },
       getLoginState:function() {
-
+        return window.localStorage.oAuthRole;
       },
-      getLoginText:function(userName) {
+      getLoginText:function(state) {
         var retVal;
-        if (userName) {
-          retVal = userName;
-        } else {
+        if (state === 'PUBLIC') {
           retVal = this.getI18nLabel('auth.loginMenu');
+        } else {
+          retVal = window.localStorage.oAuthUserName;  // FIXME not user's name
         }
         return retVal;
       }
@@ -42,8 +42,8 @@ define(['ep', 'marionette', 'eventbus', 'i18n'],
       events:{
         'click .btn-auth-dropdown':function(event){
           event.preventDefault();
+          EventBus.trigger("auth.loadAuthMenuRequest", event);
           $('.auth-nav-container').toggle(250);
-          EventBus.trigger("auth.showAuthMenu", event);
         }
       },
       onShow:function() {
@@ -60,12 +60,18 @@ define(['ep', 'marionette', 'eventbus', 'i18n'],
       events:{
         'click .btn-auth-login':function(event) {
           event.preventDefault();
-          EventBus.trigger('auth.loginFormSubmitButtonClicked',event);
+          EventBus.trigger('auth.loginFormSubmitButtonClicked',event); // TODO why use mediator?
         }
       },
       onShow:function(){
-        EventBus.on("auth.loginFailed", function(msg) {
+        EventBus.on("auth.loginRequestFailed", function(msg) {
           $('.auth-feedback-container').text(msg);
+        });
+        EventBus.on("auth.loginFormValidationFailed", function(msg) {
+          $('.auth-feedback-container').text(msg);
+        });
+        EventBus.on("auth.loginFailedOtherReasons", function() {
+          $('.auth-feedback-container').text("Sorry, login failed."); // FIXME localized better message
         });
       }
     });
@@ -83,10 +89,27 @@ define(['ep', 'marionette', 'eventbus', 'i18n'],
       }
     });
 
+
+    /*
+     *
+     * Functiontions
+     *
+     * */
+    var getLoginRequestModel = function(){
+      var retVal = new Model.AuthRequestModel();
+      retVal.set('userName',$('#OAuthUserName').val());
+      retVal.set('password',$('#OAuthPassword').val());
+      retVal.set('role','REGISTERED');
+      retVal.set('scope',ep.app.config.cortexApi.store);
+      return retVal;
+    };
+
+
     return {
       DefaultLayout:defaultLayout,
       LoginFormView:loginFormView,
-      ProfileMenuView:profileMenuView
+      ProfileMenuView:profileMenuView,
+      getLoginRequestModel:getLoginRequestModel
     };
   }
 );

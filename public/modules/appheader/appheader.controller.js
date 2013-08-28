@@ -366,49 +366,6 @@ define(['ep', 'mediator', 'app', 'eventbus', 'modules/appheader/appheader.models
       ep.logger.info('FIRE AUTH REQUEST');
     });
 
-
-    // temporary test function
-    EventBus.on('auth.loginFormSubmitButtonClicked',function(event){
-      var requestModel = View.getLoginRequestModel();
-      if (requestModel.get('userName') && requestModel.get('password') && requestModel.get('role') && requestModel.get('scope') ){
-
-        var authString = 'grant_type=password&username=' + requestModel.get('userName') + '&password=' + requestModel.get('password') + '&scope=' + requestModel.get('scope') + '&role=' + requestModel.get('role');
-        ep.logger.info('login form submit clicked tring: ' + authString);
-
-        // make sure the values are valid
-        $.ajax({
-          type:'POST',
-          url:'/' + ep.app.config.cortexApi.path + '/oauth2/tokens',
-
-          contentType: 'application/x-www-form-urlencoded',
-          data:authString,
-          success:function(json, responseStatus, xhr){
-            // $('#authHeader').val("Bearer " + json.access_token);
-            //cortex.ui.saveField('authHeader');
-            window.localStorage.setItem('oAuthRole', 'REGISTERED');
-            window.localStorage.setItem('oAuthScope', ep.app.config.cortexApi.store);
-            window.localStorage.setItem('oAuthToken', 'Bearer ' + json.access_token);
-
-            //if (authRole === 'PUBLIC') {
-            window.localStorage.setItem('oAuthUserName', requestModel.userName);
-            // } else {
-            //  window.localStorage.setItem('oAuthUserName', userName);
-            //}
-            EventBus.trigger('app.authInit');
-          },
-          error:function(response){
-
-            ep.logger.error('ERROR generating public auth token: ' + response);
-          }
-        });
-
-      }
-      else{
-        Mediator.fire('auth.loginFormValidationFailed');
-        ep.logger.warn('Warning - attempt to login with insufficient values');
-      }
-    });
-
     return {
       AppHeaderView:appHeaderView,
       HeaderLogoView:function(){

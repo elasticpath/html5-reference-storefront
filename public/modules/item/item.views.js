@@ -17,7 +17,7 @@ define(['ep','marionette','i18n','eventbus'],
         return 'none';
       },
       getI18nLabel:function(key){
-        retVal = key;
+        var retVal = key;
         try{
           retVal = i18n.t(key);
         }
