@@ -80,7 +80,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
       template:'#AuthProfileMenuTemplate',
       templateHelpers:viewHelpers,
       tagName:'ul',
-      className: 'auth-profile-menu-container',
+      className: 'auth-profile-menu-list',
       events:{
         'click .btn-auth-logout':function(event){
           event.preventDefault();

@@ -37,7 +37,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
     });
 
     EventBus.on('auth.logoutBtnClicked', function(event) {
-      ep.logger.info("logout click caught");
+      Mediator.fire('mediator.logoutRequest');
     });
 
     EventBus.on('auth.loginFormSubmitButtonClicked', function(event) {
@@ -52,6 +52,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
       ep.logger.info('login form submit clicked String: ' + authString);
 
       // make sure the values are valid
+      // TODO - change to native ep.io
       $.ajax({
         type:'POST',
         url:'/' + ep.app.config.cortexApi.path + '/oauth2/tokens',
@@ -88,6 +89,21 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
           }
         }
       });
+    });
+    // Logout Request
+    EventBus.on('auth.logoutRequest',function(){
+      try{
+        window.localStorage.removeItem('oAuthRole');
+        window.localStorage.removeItem('oAuthScope');
+        window.localStorage.removeItem('oAuthToken');
+        window.localStorage.removeItem('oAuthUserName');
+        document.location.reload();
+      }
+      catch(err){
+        ep.logger.error('Error - removing authentication tokens from local storage');
+      }
+
+
     });
 
     return {

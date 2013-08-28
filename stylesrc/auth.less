@@ -7,10 +7,19 @@
   display: none;
   position: absolute;
   background: @authNavBackGroundColor;
+  z-index:1000;
+  min-width:20rem;
+  border:1px solid #dddddd;
+  -webkit-box-shadow: -9px 3px 5px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    -9px 3px 5px rgba(50, 50, 50, 0.75);
+  box-shadow:         -9px 3px 5px rgba(50, 50, 50, 0.75);
 }
 
-.auth-profile-menu-container {
-  margin-left: 0rem;
+.auth-profile-menu-list {
+  margin: 1rem;
+}
+.auth-profile-menu-list li{
+  border-bottom: 1px solid #eeeeee;
 }
 
 .auth-login-form {
@@ -26,3 +35,9 @@
 .auth-feedback-container {
   color:@authFeedBackErrorMsgColor;
 }
+.auth-profile-menu-list button{
+  width:100%;
+  background:transparent;
+  text-align: left;
+}
+

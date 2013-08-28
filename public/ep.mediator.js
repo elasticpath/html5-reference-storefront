@@ -23,6 +23,9 @@ define(['eventbus'],function(EventBus){
       /*require(['cart'],function(mod){
         EventBus.trigger('cart.loadGlobalNavAuthMenuRequest');
       });*/
+    },
+    'mediator.logoutRequest':function(){
+      EventBus.trigger('auth.logoutRequest');
     }
 
   };

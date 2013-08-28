@@ -14,11 +14,11 @@
         <form class="auth-login-form">
           <li>
             <label for="OAuthUserName"><%= E.getI18nLabel('auth.userName') %>:</label>
-            <input id="OAuthUserName" name="OAuthUserName" type="text"/>
+            <input class="auth-input-field" id="OAuthUserName" name="OAuthUserName" type="text"/>
           </li>
           <li>
             <label for="OAuthPassword"><%= E.getI18nLabel('auth.password') %>:</label>
-            <input id="OAuthPassword" name="OAuthPassword" type="password"/>
+            <input class="auth-input-field" id="OAuthPassword" name="OAuthPassword" type="password"/>
           </li>
           <li>
             <input id="OAuthScope" name="OAuthScope" list="oAuthScopeList" type="hidden" value="<%= E.scope%>">
@@ -34,7 +34,7 @@
 
   <!-- Auth Profile Menu Template -->
   <script id="AuthProfileMenuTemplate" type="text/template">
-      <li>Profile</li>
+      <li><button disabled="disabled">Profile</button></li>
       <li><button class="btn-cmd btn-auth-logout"><%= E.getI18nLabel('auth.logout') %></button></li>
   </script>
 </div>
