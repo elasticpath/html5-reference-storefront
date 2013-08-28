@@ -6,26 +6,74 @@
  * Time: 9:16 AM
  *
  */
-define(['ep', 'eventbus', 'backbone'],
-  function(ep, EventBus, Backbone){
+define(['ep', 'mediator', 'eventbus', 'backbone'],
+  function(ep, Mediator, EventBus, Backbone){
 
 
-    var authRequestModel = Backbone.Model.extend({});
+    /*
+     * Login Form Model: store data from login form fields
+     */
+    var loginFormModel = Backbone.Model.extend({});
 
-    var loginViewModel = Backbone.Model.extend({
-      url:ep.app.config.cortexApi.path +'profile' + ep.app.config.store + '/default',
-      parse:function(profile) {
-        var profileObj = {
-          firstName: jsonPath(profile, "$.")[0]
-        };
 
-        return profileObj;
+    /*
+     * Login Model: store default login / public auth request ajax call properties
+     */
+    var loginModel = Backbone.Model.extend({
+     defaults: {
+       userName:'Anonymous',
+       authRequest: true,
+       url:'/' + ep.app.config.cortexApi.path + '/oauth2/tokens',
+       type: 'POST',
+       contentType: 'application/x-www-form-urlencoded',
+       success: function (json, responseStatus, xhr) {
+         window.localStorage.setItem('oAuthRole', json.role);
+         window.localStorage.setItem('oAuthScope', json.scope);
+         window.localStorage.setItem('oAuthToken', 'Bearer ' + json.access_token);
+         window.localStorage.setItem('oAuthUserName', this.userName);
+
+         Mediator.fire('mediator.authenticationSuccess', json.role);
+       },
+       error: function(response) {
+         if (response.status === 401) {
+           EventBus.trigger('auth.loginRequestFailed', 'loginFailBadCredentialErrMsg');
+         } else {
+           ep.logger.error('response code ' + response.status + ': ' + response.responseText);
+         }
+       }
+     }
+    });
+
+
+    /*
+     * Logout Model: store default logout auth request ajax call properties
+     */
+    var logoutModel = Backbone.Model.extend({
+      defaults: {
+        authRequest: true,
+        type:'DELETE',
+        url:'/' + ep.app.config.cortexApi.path + '/oauth2/tokens',
+        success:function(json, responseSTatus, xhr) {
+          try{
+            // FIXME abstract persistence layer
+            window.localStorage.removeItem('oAuthRole');
+            window.localStorage.removeItem('oAuthScope');
+            window.localStorage.removeItem('oAuthToken');
+            window.localStorage.removeItem('oAuthUserName');
+          }
+          catch(err){
+            ep.logger.error('Error - removing authentication tokens from local storage');
+          }
+
+          EventBus.trigger('auth.generatePublicAuthTokenRequest');
+        }
       }
     });
 
     return {
-      AuthRequestModel:authRequestModel,
-      LoginViewModel:loginViewModel
+      LoginFormModel:loginFormModel,
+      LogoutModel:logoutModel,
+      LoginModel:loginModel
     };
   }
 );

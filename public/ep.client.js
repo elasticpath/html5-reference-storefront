@@ -6,8 +6,8 @@
  * Time: 8:25 AM
  *
  */
-define(['jquery','underscore','backbone','marionette','eventbus','router', 'text!ep.config.json', 'jsonpath','modernizr'],
-  function( $, _, Backbone, Marionette, EventBus, Router, config) {
+define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','router', 'text!ep.config.json', 'jsonpath','modernizr'],
+  function( $, _, Backbone, Marionette, Mediator, EventBus, Router, config) {
 
     // root application namespace
     var ep = {};
@@ -21,12 +21,14 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
     ep.app.addRegions({
       viewPortRegion:'[data-region="viewPortRegion"]'
     });
+
     ep.app.config = JSON.parse(config);
     //ep.app.config.cortexApi = config.cortexApi;
 
     ep.app.deployMode = function(){
       return ep.app.config.deployMode || 'development';
     };
+
     ep.app.showInstrumentation = function(){
       return ep.app.config.debug.showInstrumentation || false;
     };
@@ -40,17 +42,20 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
       }
       return false;
     };
+
     ep.ui.localStorage = function(){
       if (Modernizr.localstorage){
         return true;
       }
       return false;
     };
+
     ep.ui.encodeUri = function(uri){
       if (uri){
         return encodeURIComponent(uri);
       }
     };
+
     ep.ui.decodeUri = function(uri){
       if (uri){
         return decodeURIComponent(uri);
@@ -70,35 +75,44 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
 
     // AJAX lives here!
     ep.io.ajax = function(ioObj){
-      ep.logger.info('|----------------------------');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|     AJAX CALL - CHECK TOKENS');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|------------------------------');
-      var oAuthToken = window.localStorage.getItem('oAuthToken');
+      var oAuthToken = getAuthToken();
 
-      if (ioObj && oAuthToken){
-        // check if there is an ajax request type and other properties
-        // make sure the required parameters (url and type are there )
-        ioObj.beforeSend = function(request){
-          request.setRequestHeader("Authorization", oAuthToken);
+      // FIXME fire a set of default error handle events
+      // if passed ajax request doesn't have an error handle function, use default below
+      if (!ioObj.error) {
+        ioObj.error = function(response) {
+          ep.logger.error('response code ' + response.status + ': ' + response.responseText);
         };
+      }
+
+      // check if this is an authentication request, if so, do not need to check oAuthToken status
+      if(ioObj.authRequest) {
         $.ajax(ioObj);
       }
-      else{
-        generatePublicAuth();
-        ep.logger.warn('AJAX request attempt without tokens: ' + ioObj);
+      // below is for standard ajax request
+      else {
+        if (ioObj && oAuthToken){
+          // check if there is an ajax request type and other properties
+          // make sure the required parameters (url and type are there )
+          ioObj.beforeSend = function(request){
+            request.setRequestHeader("Authorization", oAuthToken);
+          };
+          $.ajax(ioObj);
+        }
+        else{
+          Mediator.fire('mediator.getPublicAuthTokenRequest');
+          ep.logger.warn('AJAX request attempt without tokens: ' + ioObj);
+        }
       }
     };
+
+
     EventBus.on('io.ajaxRequest',function(options){
       if (options){
         ep.io.ajax(options);
       }
     });
+
     ep.io.getApiUrl = function(){
       var config = ep.app.config.cortexApi;
       var retVal;
@@ -115,44 +129,9 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
 
     EventBus.on('app.authInit',function(){
       document.location.reload();
-
     });
 
-    function generatePublicAuth(){
-      var authString = 'grant_type=password&scope=mobee&role=PUBLIC';
-//      authString += '&scope=' + authScope + '&role=' + authRole
-
-      $.ajax({
-        type:'POST',
-        url:'/' + ep.app.config.cortexApi.path + '/oauth2/tokens',
-
-        contentType: 'application/x-www-form-urlencoded',
-        data:authString,
-        success:function(json, responseStatus, xhr){
-          // $('#authHeader').val("Bearer " + json.access_token);
-          //cortex.ui.saveField('authHeader');
-          window.localStorage.setItem('oAuthRole', 'PUBLIC');
-          window.localStorage.setItem('oAuthScope', ep.app.config.cortexApi.store);
-          window.localStorage.setItem('oAuthToken', 'Bearer ' + json.access_token);
-
-          //if (authRole === 'PUBLIC') {
-          window.localStorage.setItem('oAuthUserName', 'Anonymous');
-          // } else {
-          //  window.localStorage.setItem('oAuthUserName', userName);
-          //}
-          EventBus.trigger('app.authInit');
-        },
-        error:function(response){
-
-          ep.logger.error('ERROR generating public auth token: ' + response);
-        }
-      });
-    }
-
-
     function getAuthToken(){
-      var oAuthRole;
-      var oAuthUserName;
       var oAuthToken;
 
       // check and see if there is a local auth token
@@ -160,8 +139,6 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
       // if not generate a public one
       if (ep.ui.localStorage){
         // check for auth token
-        oAuthRole = window.localStorage.getItem('oAuthRole');
-        oAuthUserName = window.localStorage.getItem('oAuthUserName');
         oAuthToken = window.localStorage.getItem('oAuthToken');
 
         //if (!oAuthRole)
@@ -185,20 +162,12 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
         if (response.status === 401){
           ep.logger.error('reponse error: ' + response.responseText + ' : ' + response.status);
           if (!isTokenDirty){
-            generatePublicAuth();
+            Mediator.fire('mediator.getPublicAuthTokenRequest');
           }
 
         }
       };
-      ep.logger.info('|----------------------------');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|     BACKBONE SYNC  - CHECK TOKENS');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|------------------------------');
+
       if (options.url){
 
         // scrub out any absolute path (prior to /cortex) in the URL to avoid confusing the proxy
@@ -229,11 +198,8 @@ define(['jquery','underscore','backbone','marionette','eventbus','router', 'text
       else{
         ep.logger.warn('Backbone sync called with no auth token');
         isTokenDirty = true;
-        generatePublicAuth();
+        Mediator.fire('mediator.getPublicAuthTokenRequest');
       }
-
-
-
 
 
     };

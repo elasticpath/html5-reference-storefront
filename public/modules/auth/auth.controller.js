@@ -5,7 +5,7 @@
  * Date: 04/04/13
  * Time: 9:16 AM
  *
- * 
+ *
  */
 define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models', 'modules/auth/auth.views', 'text!modules/auth/auth.templates.html'],
   function(ep, App, Mediator, EventBus, Cortex, Model, View, template){
@@ -19,102 +19,9 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
       return authLayout;
     };
 
-
-
-    EventBus.on('auth.logoutBtnClicked', function(event) {
-      Mediator.fire('mediator.logoutRequest');
-    });
-
-    EventBus.on('auth.loginFormSubmitButtonClicked', function(event) {
-      var requestModel = View.getLoginRequestModel();
-
-      var authString = 'grant_type=password&username='
-          + requestModel.get('userName') + '&password='
-          + requestModel.get('password') + '&scope='
-          + requestModel.get('scope') + '&role='
-          + requestModel.get('role');
-
-      ep.logger.info('login form submit clicked String: ' + authString);
-
-      // make sure the values are valid
-      // TODO - change to native ep.io
-      $.ajax({
-        type:'POST',
-        url:'/' + ep.app.config.cortexApi.path + '/oauth2/tokens',
-        contentType: 'application/x-www-form-urlencoded',
-        data:authString,
-        success:function(json, responseStatus, xhr){
-          // $('#authHeader').val("Bearer " + json.access_token);
-          //cortex.ui.saveField('authHeader');
-          window.localStorage.setItem('oAuthRole', 'REGISTERED');
-          window.localStorage.setItem('oAuthScope', ep.app.config.cortexApi.store);
-          window.localStorage.setItem('oAuthToken', 'Bearer ' + json.access_token);
-          window.localStorage.setItem('oAuthUserName', requestModel.attributes.userName);
-
-          ep.logger.info('username: ' + requestModel.userName);
-
-          /*if (authRole === 'PUBLIC') {
-           } else {
-           window.localStorage.setItem('oAuthUserName', userName);
-           }*/
-          EventBus.trigger('app.authInit');
-        },
-        error:function(response){
-          if (response.status === 400) {
-            EventBus.trigger('auth.loginFormValidationFailed', response.responseText);
-
-          }
-          else if (response.status === 401) {
-            EventBus.trigger('auth.loginRequestFailed', response.responseText);
-          }
-          else {
-            // FIXME need better naming
-            EventBus.trigger('auth.loginFailedOtherReasons');
-            ep.logger.error('ERROR login: ' + response.responseText);
-          }
-        }
-      });
-    });
-    // error messaging - feedback
-    EventBus.on("auth.loginRequestFailed", function(msg) {
-      $('.auth-feedback-container').text(msg);
-    });
-    EventBus.on("auth.loginFormValidationFailed", function(msg) {
-      $('.auth-feedback-container').text(msg);
-    });
-    EventBus.on("auth.loginFailedOtherReasons", function() {
-      $('.auth-feedback-container').text("Sorry, login failed."); // FIXME localized better message
-    });
-    // Logout Request
-    EventBus.on('auth.logoutRequest',function(){
-      try{
-        window.localStorage.removeItem('oAuthRole');
-        window.localStorage.removeItem('oAuthScope');
-        window.localStorage.removeItem('oAuthToken');
-        window.localStorage.removeItem('oAuthUserName');
-        document.location.reload();
-      }
-      catch(err){
-        ep.logger.error('Error - removing authentication tokens from local storage');
-      }
-
-
-    });
-
-    // load auth menu request
-    EventBus.on('auth.loadAuthMenuRequest', function(state) {
-      var viewName = 'LoginFormView';
-      if (state === 'REGISTERED'){
-        viewName = 'ProfileMenuView';
-      }
-      EventBus.trigger('layout.loadRegionContentRequest',{
-        region:'mainAuthView',
-        module:'auth',
-        view: viewName
-      });
-
-    });
-
+    /*
+     * Load login menu - load login form or profile menu depend on authentication state
+     */
     // auth menu item dropdown clicked
     EventBus.on('auth.btnAuthMenuDropdownClicked',function(){
       var state = 'PUBLIC';
@@ -130,7 +37,90 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
 
     });
 
+    // auth menu request
+    EventBus.on('auth.loadAuthMenuRequest', function(state) {
+      var viewName = 'LoginFormView';
+      if (state === 'REGISTERED'){
+        viewName = 'ProfileMenuView';
+      }
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region:'mainAuthView',
+        module:'auth',
+        view: viewName
+      });
 
+    });
+
+
+    /*
+     *
+     * Login Error Message Feedback
+     */
+    EventBus.on("auth.loginRequestFailed", function(msg) {
+      View.displayLoginErrorMsg(msg);
+    });
+
+    EventBus.on("auth.loginFormValidationFailed", function(msg) {
+      View.displayLoginErrorMsg(msg);
+
+    });
+
+
+    /*
+     * Authentication Request Types:
+     *  - Login (POST)
+     *  - get Public Authentication (POST)
+     *  - Logout (DELETE)
+     */
+    EventBus.on('auth.authenticationRequest', function(authObj) {
+      ep.io.ajax(authObj);
+    });
+
+
+    /*
+     * Login Button Clicked - submit login form to server
+     */
+    EventBus.on('auth.loginFormSubmitButtonClicked', function () {
+      var requestModel = View.getLoginRequestModel();
+
+      if (requestModel.isComplete()) {
+        var authString = 'grant_type=password&username=' + requestModel.get('userName')
+          + '&password=' + requestModel.get('password')
+          + '&scope=' + requestModel.get('scope')
+          + '&role=' + requestModel.get('role');
+
+        var loginModel = new Model.LoginModel();
+        loginModel.set('data', authString);
+        loginModel.set('userName', requestModel.attributes.userName);
+
+        EventBus.trigger('auth.authenticationRequest', loginModel.attributes);
+      }
+      else {
+        EventBus.trigger('auth.loginFormValidationFailed', 'formValidationFailErrMsg');
+      }
+    });
+
+    /*
+     * Generate Public Authentication Request
+     */
+    EventBus.on('auth.generatePublicAuthTokenRequest', function() {
+      var authString = 'grant_type=password&scope=' + ep.app.config.cortexApi.store + '&role=PUBLIC';
+
+      var publicAuthModel = new Model.LoginModel();
+      publicAuthModel.set('data', authString);
+
+      EventBus.trigger('auth.authenticationRequest', publicAuthModel.attributes);
+    });
+
+    /*
+     * Logout Button Clicked - make logout request to server
+     */
+    EventBus.on('auth.logoutBtnClicked', function() {
+      var logoutModel = new Model.LogoutModel();
+      logoutModel.set('data', window.localStorage.oAuthToken);
+
+      EventBus.trigger('auth.authenticationRequest', logoutModel.attributes);
+    });
 
     return {
       AuthModel:Model.AuthModel,

@@ -21,12 +21,9 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
 
         return retVal;
       },
-      getLoginState:function() {
-        return window.localStorage.oAuthRole;
-      },
-      getLoginText:function(state) {
+      getLoginText:function() {
         var retVal;
-        if (state === 'PUBLIC') {
+        if (window.localStorage.oAuthRole === 'PUBLIC') {
           retVal = this.getI18nLabel('auth.loginMenu');
         } else {
           retVal = window.localStorage.oAuthUserName;  // FIXME not user's name
@@ -35,6 +32,9 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
       }
     };
 
+    /*
+     * Default Layout View: loginMenu button, and controlling the toggle menu
+     */
     var defaultLayout = Backbone.Marionette.Layout.extend({
       template:'#DefaultAuthLayoutTemplate',
       className:'auth-container',
@@ -53,6 +53,9 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
       }
     });
 
+    /*
+     * Login Form View: login form and login button
+     */
     var loginFormView = Backbone.Marionette.ItemView.extend({
       template:'#AuthLoginFormTemplate',
       className:'auth-login-container',
@@ -60,11 +63,15 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
       events:{
         'click .btn-auth-login':function(event) {
           event.preventDefault();
-          EventBus.trigger('auth.loginFormSubmitButtonClicked',event); // TODO why use mediator?
+          EventBus.trigger('auth.loginFormSubmitButtonClicked');
         }
       }
     });
 
+    /*
+     * Profile Menu View: menu view presented after logging-in
+     *  show logout button, and links and info regarding to user profile
+     */
     var profileMenuView = Backbone.Marionette.ItemView.extend({
       template:'#AuthProfileMenuTemplate',
       templateHelpers:viewHelpers,
@@ -73,7 +80,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
       events:{
         'click .btn-auth-logout':function(event){
           event.preventDefault();
-          EventBus.trigger("auth.logoutBtnClicked", event);
+          EventBus.trigger("auth.logoutBtnClicked");
         }
       }
     });
@@ -81,11 +88,11 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
 
     /*
      *
-     * Functiontions
+     * Functions
      *
      * */
     var getLoginRequestModel = function(){
-      var retVal = new Model.AuthRequestModel();
+      var retVal = new Model.LoginFormModel();
       retVal.set('userName',$('#OAuthUserName').val());
       retVal.set('password',$('#OAuthPassword').val());
       retVal.set('role','REGISTERED');
@@ -93,12 +100,22 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
       return retVal;
     };
 
+    var displayLoginErrorMsg = function(msg){
+      if (msg) {
+        var errMsg = viewHelpers.getI18nLabel('auth.' + msg);
+        $('.auth-feedback-container').text(errMsg);
+      }
+      else {
+        ep.logger.warn('DisplayLoginErrorMsg called without error message');
+      }
+    };
 
     return {
       DefaultLayout:defaultLayout,
       LoginFormView:loginFormView,
       ProfileMenuView:profileMenuView,
-      getLoginRequestModel:getLoginRequestModel
+      getLoginRequestModel:getLoginRequestModel,
+      displayLoginErrorMsg:displayLoginErrorMsg
     };
   }
 );

@@ -9,7 +9,7 @@
 define(['eventbus'],function(EventBus){
 
   var mediatorObj = {
-    'mediator.loadLogoComponentRequest':function(){
+    'mediator.loadLogoComponentRequest':function(reqEventData){
       require(['appheader'],function(mod){
         EventBus.trigger('appheader.loadLogoComponent',reqEventData);
       });
@@ -24,8 +24,20 @@ define(['eventbus'],function(EventBus){
         EventBus.trigger('cart.loadGlobalNavAuthMenuRequest');
       });*/
     },
-    'mediator.logoutRequest':function(){
-      EventBus.trigger('auth.logoutRequest');
+    'mediator.getPublicAuthTokenRequest':function(){
+      require(['auth'],function(mod){
+        EventBus.trigger('auth.generatePublicAuthTokenRequest');
+      });
+    },
+    'mediator.authenticationSuccess':function(role){
+      // check if this is an anonymous authentication request
+      if (role === 'PUBLIC') {
+        EventBus.trigger('app.authInit'); // FIXME for reload page
+      }
+      // else this should be a registered login authentication request
+      else {
+        EventBus.trigger('app.authInit');
+      }
     }
 
   };
