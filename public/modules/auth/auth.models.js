@@ -13,7 +13,11 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
     /*
      * Login Form Model: store data from login form fields
      */
-    var loginFormModel = Backbone.Model.extend({});
+    var loginFormModel = Backbone.Model.extend({
+      isComplete:function() {
+        return this.get('userName') && this.get('password') && this.get('role') && this.get('scope');
+      }
+    });
 
 
     /*
