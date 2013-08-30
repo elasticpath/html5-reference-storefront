@@ -30,7 +30,7 @@ define(
         });
 
         this.view = new authView.DefaultLayout({
-          model: new authModel.LoginViewModel()
+          model: new authModel.LoginFormModel()
         });
         this.authMenuItemRegion.show(this.view);
 
@@ -93,12 +93,16 @@ define(
 
     });
     describe('UI Storefront Auth Module - Models', function() {
-      it("AuthRequestModel should exist",function(){
-        expect(authModel.AuthRequestModel).to.be.ok;
+      it("LogoutModel should exist",function(){
+        expect(authModel.LogoutModel).to.be.ok;
       });
-      it("LoginViewModel should exist",function(){
-        expect(authModel.LoginViewModel).to.be.ok;
+      it("LoginFormModel should exist",function(){
+        expect(authModel.LoginFormModel).to.be.ok;
       });
+      it("LoginModel should exist",function(){
+        expect(authModel.LoginModel).to.be.ok;
+      });
+
     });
 
   }
