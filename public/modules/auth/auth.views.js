@@ -42,8 +42,8 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
       events:{
         'click .btn-auth-dropdown':function(event){
           event.preventDefault();
-          EventBus.trigger("auth.loadAuthMenuRequest", event);
           $('.auth-nav-container').toggle(250);
+          EventBus.trigger('auth.btnAuthMenuDropdownClicked');
         }
       },
       onShow:function() {
@@ -62,17 +62,6 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
           event.preventDefault();
           EventBus.trigger('auth.loginFormSubmitButtonClicked',event); // TODO why use mediator?
         }
-      },
-      onShow:function(){
-        EventBus.on("auth.loginRequestFailed", function(msg) {
-          $('.auth-feedback-container').text(msg);
-        });
-        EventBus.on("auth.loginFormValidationFailed", function(msg) {
-          $('.auth-feedback-container').text(msg);
-        });
-        EventBus.on("auth.loginFailedOtherReasons", function() {
-          $('.auth-feedback-container').text("Sorry, login failed."); // FIXME localized better message
-        });
       }
     });
 

@@ -2576,6 +2576,8 @@ header.app-header .row {
 }
 .auth-feedback-container {
   color: #ff0000;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .auth-profile-menu-list button {
   width: 100%;

@@ -19,22 +19,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
       return authLayout;
     };
 
-    EventBus.on('auth.loadAuthMenuRequest', function(event) {
-      if ($(event.target).data("state") === 'PUBLIC') {
-        EventBus.trigger('layout.loadRegionContentRequest',{
-          region:'mainAuthView',
-          module:'auth',
-          view:'LoginFormView'
-        });
-      }
-      else {
-        EventBus.trigger('layout.loadRegionContentRequest', {
-          region:'mainAuthView',
-          module:'auth',
-          view:'ProfileMenuView'
-        });
-      }
-    });
+
 
     EventBus.on('auth.logoutBtnClicked', function(event) {
       Mediator.fire('mediator.logoutRequest');
@@ -90,6 +75,16 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
         }
       });
     });
+    // error messaging - feedback
+    EventBus.on("auth.loginRequestFailed", function(msg) {
+      $('.auth-feedback-container').text(msg);
+    });
+    EventBus.on("auth.loginFormValidationFailed", function(msg) {
+      $('.auth-feedback-container').text(msg);
+    });
+    EventBus.on("auth.loginFailedOtherReasons", function() {
+      $('.auth-feedback-container').text("Sorry, login failed."); // FIXME localized better message
+    });
     // Logout Request
     EventBus.on('auth.logoutRequest',function(){
       try{
@@ -105,6 +100,37 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
 
 
     });
+
+    // load auth menu request
+    EventBus.on('auth.loadAuthMenuRequest', function(state) {
+      var viewName = 'LoginFormView';
+      if (state === 'REGISTERED'){
+        viewName = 'ProfileMenuView';
+      }
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region:'mainAuthView',
+        module:'auth',
+        view: viewName
+      });
+
+    });
+
+    // auth menu item dropdown clicked
+    EventBus.on('auth.btnAuthMenuDropdownClicked',function(){
+      var state = 'PUBLIC';
+      if (window.localStorage.oAuthRole){
+        state = window.localStorage.oAuthRole;
+        if (state){
+          EventBus.trigger("auth.loadAuthMenuRequest", state);
+        }
+        else{
+          ep.logger.warn('auth.btnAuthMenuDropdownClicked with no state');
+        }
+      }
+
+    });
+
+
 
     return {
       AuthModel:Model.AuthModel,
