@@ -12,7 +12,7 @@ define(
     var $ = require('jquery');
     var EventBus = require('eventbus');
     var templates = require('text!modules/auth/auth.templates.html');
-    var authController = require('modules/auth/auth.controller');
+    var auth = require('modules/auth/auth.controller');
     var authView = require('modules/auth/auth.views');
     var authModel = require('modules/auth/auth.models');
 
@@ -89,6 +89,7 @@ define(
         });
         EventBus.trigger('auth.loadAuthMenuRequest', state);
       });
+
 
     });
     describe('UI Storefront Auth Module - Models', function() {
