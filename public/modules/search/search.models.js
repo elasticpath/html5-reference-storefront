@@ -23,7 +23,7 @@ define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
         return Backbone.Model.prototype.url.call(this) + suffix;
       },
       urlRoot: function () {
-        return 'cortex/searches/' + ep.app.config.cortexApi.store + '/keywords/items';
+        return 'cortex/searches/' + ep.app.config.cortexApi.scope + '/keywords/items';
       },
       afterParse: function (response, model) {
         var element =  _.first(jsonPath(response, "$..['_element']"));
@@ -88,7 +88,7 @@ define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
              // retItem.name = item['_definition'][0]['display-name'];
              // retItem.uri = item['_definition'][0].self.uri;
               var itemUri = item['_definition'][0].self.uri;
-              var uriCruft = '/itemdefinitions/' +ep.app.config.cortexApi.store + '/';
+              var uriCruft = '/itemdefinitions/' +ep.app.config.cortexApi.scope + '/';
               if (itemUri.indexOf(uriCruft) > -1){
                 var isoId = itemUri.substring(uriCruft.length,itemUri.length);
                 procItemObj.isoId = isoId;

@@ -91,7 +91,7 @@ define(['ep','marionette','i18n','eventbus'],
       },
       getItemUrl:function(uri){
         var retVar;
-        var uriCruft = '/itemdefinitions/' + ep.app.config.cortexApi.store + '/';
+        var uriCruft = '/itemdefinitions/' + ep.app.config.cortexApi.scope + '/';
         if (uri && uri.indexOf(uriCruft) > -1){
           retVar = '#itemdetail/' + uri.substring(uriCruft.length, uri.length);
         } else {

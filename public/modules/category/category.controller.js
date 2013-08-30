@@ -22,7 +22,7 @@ define(['app', 'eventbus', 'modules/category/category.models', 'modules/category
        * */
       EventBus.trigger('io.apiRequest',{
         type:'GET',
-        url:'/cortex/navigations/' + ep.app.config.cortexApi.store + '?zoom=element',
+        url:'/cortex/navigations/' + ep.app.config.cortexApi.scope + '?zoom=element',
         success:function(data,textStatus,response){
           EventBus.trigger('category.getFirstLevelCategoryDataSuccess',data);
         },

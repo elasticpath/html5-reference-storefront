@@ -11,11 +11,11 @@
     "host":"http://10.10.121.201",
     "port":"8080",
     "path":"cortex",
-    "store":"mobee"
+    "scope":"snapitup"
   },
   "deployMode":"development",
   "api":{
     "url":"cortex",
-    "store":"mobee"
+    "store":"snapitup"
   }
 }

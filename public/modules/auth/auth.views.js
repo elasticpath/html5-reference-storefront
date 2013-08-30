@@ -96,7 +96,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
       retVal.set('userName',$('#OAuthUserName').val());
       retVal.set('password',$('#OAuthPassword').val());
       retVal.set('role','REGISTERED');
-      retVal.set('scope',ep.app.config.cortexApi.store);
+      retVal.set('scope',ep.app.config.cortexApi.scope);
       return retVal;
     };
 

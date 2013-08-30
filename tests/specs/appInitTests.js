@@ -28,8 +28,8 @@ define(function(require) {
     it('ep.app.cortexApi.path property should exist', function(){
       expect(ep.app.config.cortexApi.path).to.be.ok;
     });
-    it('ep.app.cortexApi.store property should exist', function(){
-      expect(ep.app.config.cortexApi.store).to.be.ok;
+    it('ep.app.cortexApi.scope property should exist', function(){
+      expect(ep.app.config.cortexApi.scope).to.be.ok;
     });
     it('ep.app.showInstrumentation method should exist', function(){
       expect(ep.app.showInstrumentation).to.be.ok;

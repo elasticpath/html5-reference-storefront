@@ -104,7 +104,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
      * Generate Public Authentication Request
      */
     EventBus.on('auth.generatePublicAuthTokenRequest', function() {
-      var authString = 'grant_type=password&scope=' + ep.app.config.cortexApi.store + '&role=PUBLIC';
+      var authString = 'grant_type=password&scope=' + ep.app.config.cortexApi.scope + '&role=PUBLIC';
 
       var publicAuthModel = new Model.LoginModel();
       publicAuthModel.set('data', authString);
