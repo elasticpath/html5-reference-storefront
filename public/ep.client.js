@@ -6,8 +6,8 @@
  * Time: 8:25 AM
  *
  */
-define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','router', 'text!ep.config.json', 'jsonpath','modernizr'],
-  function( $, _, Backbone, Marionette, Mediator, EventBus, Router, config) {
+define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus', 'router', 'text!ep.config.json', 'jsonpath', 'modernizr'],
+  function ($, _, Backbone, Marionette, Mediator, EventBus, Router, config) {
 
     // root application namespace
     var ep = {};
@@ -16,110 +16,109 @@ define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','r
     ep.app = new Backbone.Marionette.Application();
 
 
-
     // presentation dom container region
     ep.app.addRegions({
-      viewPortRegion:'[data-region="viewPortRegion"]'
+      viewPortRegion: '[data-region="viewPortRegion"]'
     });
 
     ep.app.config = JSON.parse(config);
     //ep.app.config.cortexApi = config.cortexApi;
 
-    ep.app.deployMode = function(){
+    ep.app.deployMode = function () {
       return ep.app.config.deployMode || 'development';
     };
 
-    ep.app.showInstrumentation = function(){
+    ep.app.showInstrumentation = function () {
       return ep.app.config.debug.showInstrumentation || false;
     };
     // experimental hook
 
     // determine if touch enabled
-    ep.ui.touchEnabled = function(){
+    ep.ui.touchEnabled = function () {
       // logic to return if this is a touch interface
-      if (Modernizr.touch){
+      if (Modernizr.touch) {
         return true;
       }
       return false;
     };
 
-    ep.ui.localStorage = function(){
-      if (Modernizr.localstorage){
+    ep.ui.localStorage = function () {
+      if (Modernizr.localstorage) {
         return true;
       }
       return false;
     };
 
-    ep.ui.encodeUri = function(uri){
-      if (uri){
+    ep.ui.encodeUri = function (uri) {
+      if (uri) {
         return encodeURIComponent(uri);
       }
     };
 
-    ep.ui.decodeUri = function(uri){
-      if (uri){
+    ep.ui.decodeUri = function (uri) {
+      if (uri) {
         return decodeURIComponent(uri);
       }
     };
 
 
     /*
-    *
-    *
-    *   IO
-    *
-    *
-    * */
+     *
+     *
+     *   IO
+     *
+     *
+     * */
     // io namespace
     // reserved for any io but simple jQuery ajax wrapper out of the gate
 
     // AJAX lives here!
-    ep.io.ajax = function(ioObj){
+    ep.io.ajax = function (ioObj) {
       var oAuthToken = getAuthToken();
 
-      // FIXME fire a set of default error handle events
-      // if passed ajax request doesn't have an error handle function, use default below
-      if (!ioObj.error) {
-        ioObj.error = function(response) {
-          ep.logger.error('response code ' + response.status + ': ' + response.responseText);
-        };
-      }
+      if (ioObj) {
+        // if passed ajax request doesn't have an error handle function, use default below
+        if (!ioObj.error) { // FIXME simplify logic
+          ioObj.error = function (response) { // FIXME fire a set of default error handle events
+            ep.logger.error('response code ' + response.status + ': ' + response.responseText);
+          };
+        }
 
-      // check if this is an authentication request, if so, do not need to check oAuthToken status
-      if(ioObj.authRequest) {
-        $.ajax(ioObj);
-      }
-      // below is for standard ajax request
-      else {
-        if (ioObj && oAuthToken){
-          // check if there is an ajax request type and other properties
-          // make sure the required parameters (url and type are there )
-          ioObj.beforeSend = function(request){
+        if (oAuthToken) {
+          ioObj.beforeSend = function (request) {
             request.setRequestHeader("Authorization", oAuthToken);
           };
+        }
+
+        // if this is an authentication request do not care if valid oAuthToken is present
+        // if this is an non-auth type request, make sure have valid oAuthToken, else get one
+        if (oAuthToken || ioObj.authRequest) {
           $.ajax(ioObj);
         }
-        else{
+        else {
           Mediator.fire('mediator.getPublicAuthTokenRequest');
           ep.logger.warn('AJAX request attempt without tokens: ' + ioObj);
         }
       }
+      else {
+        ep.logger.error('AJAX request attempt without request body');
+      }
     };
 
 
-    EventBus.on('io.ajaxRequest',function(options){
-      if (options){
+    EventBus.on('io.ajaxRequest', function (options) {
+      if (options) {
         ep.io.ajax(options);
       }
     });
 
-    ep.io.getApiUrl = function(){
+    ep.io.getApiUrl = function () {
       var config = ep.app.config.cortexApi;
       var retVal;
-      if (config.host){
+      if (config.host) {
         retVal = config.host;
       }
-      if (config.port){
+      if (config.port) {
         retVal += ':' + config.port;
       }
       retVal += '/' + ep.app.config.cortexApi.path;
@@ -127,23 +126,23 @@ define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','r
     };
 
 
-    EventBus.on('app.authInit',function(){
+    EventBus.on('app.authInit', function () {
       document.location.reload();
     });
 
-    function getAuthToken(){
+    function getAuthToken() {
       var oAuthToken;
 
       // check and see if there is a local auth token
       // if yes, is it still valid
       // if not generate a public one
-      if (ep.ui.localStorage){
+      if (ep.ui.localStorage) {
         // check for auth token
         oAuthToken = window.localStorage.getItem('oAuthToken');
 
         //if (!oAuthRole)
       }
-      else{
+      else {
         ep.logger.warn('check before cortex api call for auth token but local storage is not supported');
       }
 
@@ -155,29 +154,29 @@ define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','r
 
 
     var baseSync = Backbone.sync;
-    Backbone.sync = function(method, model, options) {
+    Backbone.sync = function (method, model, options) {
       var isTokenDirty = false;
       options = options || {};
-      options.error = function(data, response, options){
-        if (response.status === 401){
+      options.error = function (data, response, options) {
+        if (response.status === 401) {
           ep.logger.error('reponse error: ' + response.responseText + ' : ' + response.status);
-          if (!isTokenDirty){
+          if (!isTokenDirty) {
             Mediator.fire('mediator.getPublicAuthTokenRequest');
           }
 
         }
       };
 
-      if (options.url){
+      if (options.url) {
 
         // scrub out any absolute path (prior to /cortex) in the URL to avoid confusing the proxy
         // ie all requests are relative path
         var replaceUrl = options.url;
         var testPath = '/' + ep.app.config.cortexApi.path;
         var pathIndex = replaceUrl.indexOf(testPath);
-        if (pathIndex > 0){
+        if (pathIndex > 0) {
 
-          replaceUrl = replaceUrl.substring(pathIndex,replaceUrl.length);
+          replaceUrl = replaceUrl.substring(pathIndex, replaceUrl.length);
           // ep.logger.info('YAUYAUYAP0SDFASDF   path: ' + replaceUrl);
 
 
@@ -189,13 +188,13 @@ define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','r
       options.headers = options.headers || {};
 
       var authToken = getAuthToken();
-      if (authToken){
+      if (authToken) {
         _.extend(options.headers, { 'Authorization': getAuthToken() });
 
         ep.logger.info('SYNC REQUEST: ' + model + '   : ' + options);
         baseSync(method, model, options);
       }
-      else{
+      else {
         ep.logger.warn('Backbone sync called with no auth token');
         isTokenDirty = true;
         Mediator.fire('mediator.getPublicAuthTokenRequest');
@@ -203,36 +202,6 @@ define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','r
 
 
     };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     // logging utility
@@ -244,22 +213,22 @@ define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','r
       }
     };
     ep.logger = {};
-    ep.logger.info = function(){
-      if (ep.app.config.logging.logInfo){
+    ep.logger.info = function () {
+      if (ep.app.config.logging.logInfo) {
         var args = Array.prototype.slice.call(arguments);
         args.unshift('INFO: ');
         ep.log(args.join(' '));
       }
     };
-    ep.logger.warn = function(){
-      if (ep.app.config.logging.logWarnings){
+    ep.logger.warn = function () {
+      if (ep.app.config.logging.logWarnings) {
         var args = Array.prototype.slice.call(arguments);
         args.unshift('WARN: ');
         ep.log(args.join(' '));
       }
     };
-    ep.logger.error = function(){
-      if (ep.app.config.logging.logErrors){
+    ep.logger.error = function () {
+      if (ep.app.config.logging.logErrors) {
         var args = Array.prototype.slice.call(arguments);
         args.unshift('ERROR: ');
         ep.log(args.join(' '));
@@ -267,63 +236,63 @@ define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','r
     };
 
     /*
-    *
-    * User Preferences
-    *
-    * */
-    ep.app.getUserPref = function(prop){
+     *
+     * User Preferences
+     *
+     * */
+    ep.app.getUserPref = function (prop) {
       // test if user pref exists
       var retVal = null;
-      if (ep.ui.localStorage()){
-        if (localStorage.getItem('epUserPrefs')){
+      if (ep.ui.localStorage()) {
+        if (localStorage.getItem('epUserPrefs')) {
           ep.app.epUserPrefs = JSON.parse(localStorage.getItem('epUserPrefs'));
-          if (ep.app.epUserPrefs[prop]){
+          if (ep.app.epUserPrefs[prop]) {
             return ep.app.epUserPrefs[prop];
           }
-          else{
+          else {
             return null;
           }
         }
       }
       return retVal;
     };
-    ep.app.setUserPref = function(prop,val){
+    ep.app.setUserPref = function (prop, val) {
       // test if user pref exists
-      if (ep.ui.localStorage()){
-        if (!localStorage.getItem('epUserPrefs')){
-          localStorage.setItem('epUserPrefs','{}');
+      if (ep.ui.localStorage()) {
+        if (!localStorage.getItem('epUserPrefs')) {
+          localStorage.setItem('epUserPrefs', '{}');
         }
         ep.app.epUserPrefs = JSON.parse(localStorage.getItem('epUserPrefs'));
         ep.app.epUserPrefs[prop] = val;
-        localStorage.setItem('epUserPrefs',JSON.stringify(ep.app.epUserPrefs));
+        localStorage.setItem('epUserPrefs', JSON.stringify(ep.app.epUserPrefs));
       }
-      else{
+      else {
         ep.logger.warn('attmempt to set user pref but localStorage not supported')
       }
       return val;
     };
     /*
-    * end user prefs
-    * */
+     * end user prefs
+     * */
 
 
-     // bootstrap initialization complete (main.js)
+    // bootstrap initialization complete (main.js)
     // time to start up the application
     EventBus.on('app.bootstrapInitSuccess',
-      function(){
+      function () {
         // when ready start the router
-        ep.app.addInitializer(function(options){
+        ep.app.addInitializer(function (options) {
           // do useful stuff here
           ep.router = new Router.AppRouter();
-         // ep.app.config = {};
+          // ep.app.config = {};
           ep.app.config.url = ep.app.config.api.url;
           ep.app.config.store = ep.app.config.api.store;
 
         });
         // wait until the application and DOM are spun up
         // then start the history manager
-        ep.app.on("initialize:after", function(){
-          if (Backbone.history){
+        ep.app.on("initialize:after", function () {
+          if (Backbone.history) {
             //Backbone.history.start({ pushState: true });
             Backbone.history.start();
           }
@@ -331,10 +300,10 @@ define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','r
 
 
         /*
-        *
-        * UI related calculations and methods
-        *
-        * */
+         *
+         * UI related calculations and methods
+         *
+         * */
         var rem = (function rem() {
           var html = document.getElementsByTagName('html')[0];
 
@@ -347,9 +316,9 @@ define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','r
           return (parseInt(length) / rem());
         }
 
-        ep.ui.getRenderProfile = function(){
+        ep.ui.getRenderProfile = function () {
           var curRemWidth = ep.ui.remWidth();
-          switch (true){
+          switch (true) {
             case (curRemWidth < 31):
               // phone
               return 'phone';
@@ -375,61 +344,45 @@ define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','r
           }
 
         };
-        ep.ui.remWidth = function(){
+        ep.ui.remWidth = function () {
           var pxWidth = $(window).width();
           return toRem(pxWidth);
         };
-        ep.ui.width = function(){
+        ep.ui.width = function () {
           var pxWidth = $(window).width();
           return pxWidth;
         };
-        ep.ui.screenwidth = function(){
+        ep.ui.screenwidth = function () {
           var pxWidth = window.screen.width();
           return pxWidth;
         };
-        ep.ui.ppi = function(){
+        ep.ui.ppi = function () {
           var dpr = 1;
-          if(window.devicePixelRatio !== undefined) {
+          if (window.devicePixelRatio !== undefined) {
             dpr = window.devicePixelRatio;
           }
           return dpr;
         };
-        $(window).resize(function() {
-          EventBus.trigger('layout.windowResized',ep.ui.remWidth());
+        $(window).resize(function () {
+          EventBus.trigger('layout.windowResized', ep.ui.remWidth());
         });
-
-
 
 
         EventBus.trigger('ep.startAppRequest');
 
 
-
       }
     );
 
-    EventBus.on('ep.startAppRequest', function(){
+    EventBus.on('ep.startAppRequest', function () {
       // turn the key and give 'er some gass
-      try{
+      try {
         ep.app.start();
       }
-      catch(e){
+      catch (e) {
 
       }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     // recieves an object literal with refrence to
@@ -437,7 +390,7 @@ define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','r
     // - module
     // - view
     // - data (optional)
-    var RegionContentLoaderRequest = function(req){
+    var RegionContentLoaderRequest = function (req) {
       var that = this;
       that.region = req.region;
       that.module = req.module;
@@ -445,24 +398,24 @@ define(['jquery','underscore','backbone','marionette', 'mediator', 'eventbus','r
       that.data = req.data;
       that.callback = req.callback;
 
-      require([that.module],function(mod){
+      require([that.module], function (mod) {
         var targetRegion = ep.app[that.region];
-        try{
+        try {
           targetRegion.show(mod[that.view](that.data));
           // fire the callback if there is one
-          if (that.callback){
+          if (that.callback) {
             that.callback();
           }
           EventBus.trigger('layout.loadRegionContentSuccess');
         }
-        catch(e){
-          ep.logger.error('Exception['+that.module+']['+that.view+']: '+e.message + ' : ' + e);
+        catch (e) {
+          ep.logger.error('Exception[' + that.module + '][' + that.view + ']: ' + e.message + ' : ' + e);
         }
       });
     };
 
     // listener for content loading requests
-    EventBus.on('layout.loadRegionContentRequest',function(obj){
+    EventBus.on('layout.loadRegionContentRequest', function (obj) {
 
       var localVar = obj;
       var loadRequest = new RegionContentLoaderRequest(localVar);

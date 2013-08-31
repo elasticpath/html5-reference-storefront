@@ -70,6 +70,7 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
           }
 
           EventBus.trigger('auth.generatePublicAuthTokenRequest');
+          ep.logger.info('LOGOUT REQUEST CAME BACK.');
         }
       }
     });
