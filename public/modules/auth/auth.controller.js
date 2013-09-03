@@ -117,7 +117,6 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
      */
     EventBus.on('auth.logoutBtnClicked', function() {
       var logoutModel = new Model.LogoutModel();
-      logoutModel.set('data', window.localStorage.oAuthToken);
 
       EventBus.trigger('auth.authenticationRequest', logoutModel.attributes);
     });

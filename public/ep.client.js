@@ -84,6 +84,7 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
           };
         }
 
+        // if oAuthToken available, set it in request header, so current oAuthToken is passed to Cortex
         if (oAuthToken) {
           ioObj.beforeSend = function (request) {
             request.setRequestHeader("Authorization", oAuthToken);
@@ -99,6 +100,7 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
           Mediator.fire('mediator.getPublicAuthTokenRequest');
           ep.logger.warn('AJAX request attempt without tokens: ' + ioObj);
         }
+
       }
       else {
         ep.logger.error('AJAX request attempt without request body');
