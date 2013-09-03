@@ -41,7 +41,7 @@ define(
       });
 
       after(function(){
-       // $("#Fixtures").empty();
+        $("#Fixtures").empty();
       });
 
 
