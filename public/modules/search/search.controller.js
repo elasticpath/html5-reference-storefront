@@ -32,6 +32,8 @@ define(['ep','eventbus','modules/search/search.views','modules/search/search.mod
           // render the view
           var modelInst = new  Model.InitCachedSearch();
 
+          ep.logger.info('modelInst URL: ' + modelInst.url);
+
           modelInst.fetch({
             data:JSON.stringify(options),
             dataType: 'json',
