@@ -15,7 +15,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
     _.templateSettings.variable = 'E';
 
     var defaultView = function() {
-      var authLayout =  new View.DefaultLayout();
+      var authLayout =  new View.DefaultView();
       return authLayout;
     };
 

@@ -231,7 +231,7 @@ define(['ep','marionette','i18n','eventbus'],
       EmptyCartView:emptyCartView,
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
-      DefaultLayout:defaultLayout
+      DefaultView:defaultLayout
     };
   }
 );

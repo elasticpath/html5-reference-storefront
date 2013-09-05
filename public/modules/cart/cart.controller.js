@@ -16,7 +16,7 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
 
 
     var defaultView = function(){
-      var cartLayout =  new View.DefaultLayout();
+      var cartLayout =  new View.DefaultView();
       var cartModel = new Model.CartModel();
 
       cartModel.fetch({

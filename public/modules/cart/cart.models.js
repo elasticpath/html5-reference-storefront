@@ -11,7 +11,7 @@ define(['ep','eventbus', 'backbone'],
 
 
     var cartModel = Backbone.Model.extend({
-      url:ep.app.config.cortexApi.path + '/carts/' + ep.app.config.store + '/default/?zoom=total,lineitems:element,lineitems:element:price,lineitems:element:availability,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price,order:purchaseform',
+      url:ep.app.config.cortexApi.path + '/carts/' + ep.app.config.cortexApi.scope + '/default/?zoom=total,lineitems:element,lineitems:element:price,lineitems:element:availability,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price,order:purchaseform',
 
       parse:function(cart){
 

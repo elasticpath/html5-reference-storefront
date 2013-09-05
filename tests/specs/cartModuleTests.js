@@ -11,27 +11,27 @@ define(function(require) {
   var cartModel = require('modules/cart/cart.models');
 
   describe('UI Storefront Cart Module - Default Layout ', function(){
-    var defaultLayout = new cartViews.DefaultLayout();
-    it('Cart View defaultLayout should exist', function(){
-      expect(defaultLayout).to.be.ok;
+    var defaultView = new cartViews.DefaultView();
+    it('Cart View DefaultView should exist', function(){
+      expect(defaultView).to.be.ok;
     });
     it('Default Layout should have a cartTitleRegion',function(){
-      expect(defaultLayout.cartTitleRegion).to.be.ok;
+      expect(defaultView.cartTitleRegion).to.be.ok;
     });
     it('Default Layout should have a mainCartRegion',function(){
-      expect(defaultLayout.mainCartRegion).to.be.ok;
+      expect(defaultView.mainCartRegion).to.be.ok;
     });
     it('Default Layout should have a cartSummaryRegion',function(){
-      expect(defaultLayout.cartSummaryRegion).to.be.ok;
+      expect(defaultView.cartSummaryRegion).to.be.ok;
     });
     it('Default Layout should have a cartCheckoutRegion',function(){
-      expect(defaultLayout.cartCheckoutActionRegion).to.be.ok;
+      expect(defaultView.cartCheckoutActionRegion).to.be.ok;
     });
   });
 
   describe('UI Storefront Cart Module - Cart Views',function(){
-    it('DefaultLayout should exist', function(){
-      expect(cartViews.DefaultLayout).to.be.ok;
+    it('DefaultView should exist', function(){
+      expect(cartViews.DefaultView).to.be.ok;
     });
     it('CartTitleView should exist', function(){
       expect(cartViews.CartTitleView).to.be.ok;

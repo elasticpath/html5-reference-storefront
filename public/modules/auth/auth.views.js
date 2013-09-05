@@ -111,7 +111,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
     };
 
     return {
-      DefaultLayout:defaultLayout,
+      DefaultView:defaultLayout,
       LoginFormView:loginFormView,
       ProfileMenuView:profileMenuView,
       getLoginRequestModel:getLoginRequestModel,

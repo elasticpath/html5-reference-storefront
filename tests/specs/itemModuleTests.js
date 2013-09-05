@@ -12,36 +12,36 @@ define(function(require) {
   var itemModel = require('modules/item/item.models');
 
   describe('UI Storefront Item Detail - Default Layout ', function(){
-    var defaultLayout = new itemViews.DefaultLayout();
+    var defaultView = new itemViews.DefaultView();
     it('should exist', function(){
-      expect(itemViews.DefaultLayout).to.be.ok;
+      expect(itemViews.DefaultView).to.be.ok;
     });
     it('should have a title region',function(){
-      expect(defaultLayout.itemDetailTitleRegion).to.be.ok;
+      expect(defaultView.itemDetailTitleRegion).to.be.ok;
     });
     it('should have an asset region',function(){
-      expect(defaultLayout.itemDetailAssetRegion).to.be.ok;
+      expect(defaultView.itemDetailAssetRegion).to.be.ok;
     });
     it('should have an attribute list region',function(){
-      expect(defaultLayout.itemDetailAttributeRegion).to.be.ok;
+      expect(defaultView.itemDetailAttributeRegion).to.be.ok;
     });
     it('should have an availability display region',function(){
-      expect(defaultLayout.itemDetailAvailabilityRegion).to.be.ok;
+      expect(defaultView.itemDetailAvailabilityRegion).to.be.ok;
     });
     it('should have a price region',function(){
-      expect(defaultLayout.itemDetailPriceRegion).to.be.ok;
+      expect(defaultView.itemDetailPriceRegion).to.be.ok;
     });
     it('should have a subscription region',function(){
-      expect(defaultLayout.itemDetailSubscriptionRegion).to.be.ok;
+      expect(defaultView.itemDetailSubscriptionRegion).to.be.ok;
     });
     it('should have an add to cart region',function(){
-      expect(defaultLayout.itemDetailAddToCartRegion).to.be.ok;
+      expect(defaultView.itemDetailAddToCartRegion).to.be.ok;
     });
 
   });
   describe('UI Storefront - Item Detail - Item Views ', function(){
-    it('DefaultLayout should exist', function(){
-      expect(itemViews.DefaultLayout).to.be.ok;
+    it('DefaultView should exist', function(){
+      expect(itemViews.DefaultView).to.be.ok;
     });
     it('DefaultItemTitleView should exist', function(){
       expect(itemViews.DefaultItemTitleView).to.be.ok;

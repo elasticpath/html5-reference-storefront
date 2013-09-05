@@ -244,7 +244,7 @@ define(['ep','marionette','i18n','eventbus'],
     }
 
     return {
-      DefaultLayout:defaultLayout,
+      DefaultView:defaultLayout,
       DefaultItemTitleView:defaultItemTitleView,
       DefaultItemAssetView:defaultItemAssetView,
       DefaultItemAttributeView:defaultItemAttributeListView,

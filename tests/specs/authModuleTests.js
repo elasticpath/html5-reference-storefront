@@ -29,7 +29,7 @@ define(
           el:'[data-region="authMenuItemRegion"]'
         });
 
-        this.view = new authView.DefaultLayout({
+        this.view = new authView.DefaultView({
           model: new authModel.LoginFormModel()
         });
         this.authMenuItemRegion.show(this.view);
@@ -45,8 +45,8 @@ define(
       });
 
 
-      it("DefaultLayout should exist",function(){
-        expect(authView.DefaultLayout).to.be.ok;
+      it("DefaultView should exist",function(){
+        expect(authView.DefaultView).to.be.ok;
       });
       it("LoginFormView should exist",function(){
         expect(authView.LoginFormView).to.be.ok;

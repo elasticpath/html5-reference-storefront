@@ -18,7 +18,7 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
 
     var defaultView = function(id){
 
-      var itemDetailLayout = new View.DefaultLayout({
+      var itemDetailLayout = new View.DefaultView({
         className:''
       });
 

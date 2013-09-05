@@ -24,7 +24,7 @@ define(function(require) {
         el:'[data-region="cartCheckoutActionRegion"]'
       });
 
-      this.view = new cartViews.DefaultLayout({
+      this.view = new cartViews.DefaultView({
         model: new cartModel.CartModel()
       });
       this.cartCheckoutActionRegion.show(this.view);
