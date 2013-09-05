@@ -46,16 +46,16 @@ define(
 
 
       it("DefaultView should exist", function () {
-        expect(authView.DefaultView).to.be.ok;
+        expect(authView.DefaultView).to.exist;
       });
       it("LoginFormView should exist", function () {
-        expect(authView.LoginFormView).to.be.ok;
+        expect(authView.LoginFormView).to.exist;
       });
       it("ProfileMenuView should exist", function () {
-        expect(authView.ProfileMenuView).to.be.ok;
+        expect(authView.ProfileMenuView).to.exist;
       });
       it("getLoginRequestModel should exist", function () {
-        expect(authView.getLoginRequestModel).to.be.ok;
+        expect(authView.getLoginRequestModel).to.exist;
       });
       it("Login Button and hidden menu container should exist", function () {
         expect($('.btn-auth-dropdown').html()).to.exist;
@@ -93,27 +93,24 @@ define(
 
     describe('UI Storefront Auth Module - Models', function () {
       it("LogoutModel should exist", function () {
-        expect(authModel.LogoutModel).to.be.ok;
+        expect(authModel.LogoutModel).to.exist;
       });
       it("LoginFormModel should exist", function () {
-        expect(authModel.LoginFormModel).to.be.ok;
+        expect(authModel.LoginFormModel).to.exist;
       });
       it("LoginModel should exist", function () {
-        expect(authModel.LoginModel).to.be.ok;
+        expect(authModel.LoginModel).to.exist;
       });
 
     });
 
     describe('UI Storefront Anonymous token generation tests', function (done) {
 
-      var authUrl = 'http://localhost:3007/' + ep.app.config.cortexApi.path + '/oauth2/tokens';
-      // url:'/' + ep.app.config.cortexApi.path + '/oauth2/tokens',
       var authString = 'grant_type=password&scope=' + ep.app.config.cortexApi.scope + '&role=PUBLIC';
-      //authString += 'grant_type=password&scope=' + ep.app.config.cortexApi.scope + '&role=PUBLIC';
 
       var publicAuthModel = new authModel.LoginModel();
       publicAuthModel.set('data', authString);
-      publicAuthModel.set('url', authUrl);
+
 
       it("auth.authenticationRequest listener should be called when it is triggered", function (done) {
         EventBus.on('auth.authenticationRequest', function () {
@@ -122,14 +119,7 @@ define(
         EventBus.trigger('auth.authenticationRequest');
 
       });
-      it("auth.authenticationRequest listener should be called when it is triggered - arguments should include LoginModel", function (done) {
-        EventBus.on('auth.authenticationRequest', function (loginModel) {
-          expect(loginModel).to.exist;
-          done();
-        });
-        EventBus.trigger('auth.authenticationRequest', publicAuthModel.attributes);
 
-      });
 
 
     });

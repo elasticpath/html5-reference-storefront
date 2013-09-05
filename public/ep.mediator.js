@@ -25,6 +25,7 @@ define(['eventbus'],function(EventBus){
       });*/
     },
     'mediator.getPublicAuthTokenRequest':function(){
+      ep.logger.info('mediator.getPublicAuthTokenRequest');
       require(['auth'],function(mod){
         EventBus.trigger('auth.generatePublicAuthTokenRequest');
       });
@@ -38,6 +39,11 @@ define(['eventbus'],function(EventBus){
       else {
         EventBus.trigger('app.authInit');
       }
+    },
+    'mediator.cart.DefaultViewRendered':function(){
+      require(['ia'],function(mod){
+        EventBus.trigger('ia.clearSelectedNavRequest');
+      });
     }
 
   };
@@ -48,6 +54,7 @@ define(['eventbus'],function(EventBus){
     var args = arguments;
     if (args.length > 0){
       var reqEventName  = args[0];
+      //ep.logger.info('Mediator: ' + reqEventName);
       var reqEventData;
       if (args.length > 1){
         reqEventData = args[1];

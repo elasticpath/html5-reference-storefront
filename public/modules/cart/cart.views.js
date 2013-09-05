@@ -6,8 +6,8 @@
  * Time: 9:16 AM
  *
  */
-define(['ep','marionette','i18n','eventbus'],
-  function(ep,Marionette,i18n,EventBus){
+define(['ep','marionette','i18n','eventbus','mediator'],
+  function(ep,Marionette,i18n,EventBus,Mediator){
     var viewHelpers = {
       getI18nLabel:function(key){
         var retVal = key;
@@ -105,7 +105,7 @@ define(['ep','marionette','i18n','eventbus'],
     };
 
     // Default Layout
-    var defaultLayout = Backbone.Marionette.Layout.extend({
+    var defaultView = Backbone.Marionette.Layout.extend({
       template:'#DefaultCartLayoutTemplate',
       className:'cart-container',
       regions:{
@@ -115,7 +115,8 @@ define(['ep','marionette','i18n','eventbus'],
         cartCheckoutActionRegion:'[data-region="cartCheckoutActionRegion"]'
       },
       onShow:function(){
-        $('.main-nav-list li').removeClass('is-selected');
+        Mediator.fire('mediator.cart.DefaultViewRendered');
+
       }
     });
 
@@ -231,7 +232,7 @@ define(['ep','marionette','i18n','eventbus'],
       EmptyCartView:emptyCartView,
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
-      DefaultView:defaultLayout
+      DefaultView:defaultView
     };
   }
 );

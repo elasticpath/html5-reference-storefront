@@ -34,6 +34,7 @@ requirejs.config({
     'settings': 'modules/settings/settings.controller',
     'tabs': 'scripts/lib/plugins/kube.tabs',
     'contextmenu': 'scripts/lib/plugins/jquery.contextmenu',
+    'ia': 'modules/ia/ia.controller',
     'item': 'modules/item/item.controller',
     'cart': 'modules/cart/cart.controller',
     'auth': 'modules/auth/auth.controller',

@@ -7,6 +7,7 @@
  *
  */
 define(function (require) {
+  var cartController = require('cart');
   var cartViews = require('modules/cart/cart.views');
   var cartModel = require('modules/cart/cart.models');
   var templates = require('text!modules/cart/cart.templates.html');
@@ -24,25 +25,20 @@ define(function (require) {
         el: '[data-region="cartCheckoutActionRegion"]'
       });
 
-      this.view = new cartViews.DefaultView({
-        model: new cartModel.CartModel()
-      });
+      this.view = new cartViews.DefaultView();
       this.cartCheckoutActionRegion.show(this.view);
 
     });
 
     afterEach(function () {
-      this.view.model.destroy();
+      //this.view.model.destroy();
     });
 
     after(function () {
       $("#Fixtures").empty();
     });
 
-    it("Cart Model Exists", function () {
-      var cModel = new cartModel.CartModel();
-      expect(cModel).to.exist;
-    });
+
 
 
   });

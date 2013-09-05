@@ -8,13 +8,23 @@
  */
 
 define(function (require) {
-  var iaViews = require('appheader');
+
 
   describe('EP IA Module ', function () {
-//    MainNavView:MainNavView,
-//      BrowseCategoryView:BrowseCategoryView
 
-    describe('- IA Views',function(){
+
+    describe("IA Controller",function(){
+      var iaController = require('ia');
+      it("MainNavView view should exist",function(){
+        expect(iaController.MainNavView).to.exsist;
+      });
+      it("BrowseCategoryView view should exist",function(){
+        expect(iaController.BrowseCategoryView).to.exsist;
+      });
+
+    });
+    describe("IA Views",function(){
+      var iaViews = require('modules/ia/ia.views');
       it("MainNavView view should exist",function(){
         expect(iaViews.MainNavView).to.exsist;
       });
@@ -36,7 +46,26 @@ define(function (require) {
       it("MainNavPreferencesView view should exist",function(){
         expect(iaViews.MainNavPreferencesView).to.exsist;
       });
+      it("clearSelectedMainNav method should exist",function(){
+        expect(iaViews.clearSelectedMainNav).to.exist;
+      });
 
+    });
+    describe("IA Models",function(){
+      var iaModel = require('modules/ia/ia.models');
+
+        it("MainNavCollection should exist",function(){
+          expect(iaModel.MainNavCollection).to.exist;
+        });
+        it("BrowseItemCollection should exist",function(){
+          expect(iaModel.BrowseItemCollection).to.exist;
+        });
+        it("BrowseCategoryCollection should exist",function(){
+          expect(iaModel.BrowseCategoryCollection).to.exist;
+        });
+        it("BrowseCategoryLayout should exist",function(){
+          expect(iaModel.BrowseCategoryLayout).to.exist;
+        });
     });
 
     /**

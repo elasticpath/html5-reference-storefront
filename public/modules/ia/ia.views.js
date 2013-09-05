@@ -228,6 +228,10 @@ define(['ep','eventbus','marionette'],
       itemView: ItemView
     });
 
+    function clearSelectedMainNav(){
+      $('.main-nav-list li').removeClass('is-selected');
+    }
+
 
 
     return {
@@ -237,7 +241,8 @@ define(['ep','eventbus','marionette'],
       BrowseCategoryList:BrowseCategoryView,
       BrowseItemView:BrowseItemView,
       CatagoryNodeView:CatagoryNodeView,
-      MainNavPreferencesView:MainNavPreferencesView
+      MainNavPreferencesView:MainNavPreferencesView,
+      clearSelectedMainNav:clearSelectedMainNav
 
     };
   }

@@ -157,6 +157,7 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
 
     var baseSync = Backbone.sync;
     Backbone.sync = function (method, model, options) {
+      ep.logger.info('BACKBONE SYNC');
       var isTokenDirty = false;
       options = options || {};
       options.error = function (data, response, options) {

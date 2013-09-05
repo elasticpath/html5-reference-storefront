@@ -279,7 +279,7 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
     });
 
     // Window Resized Event
-    EventBus.bind('layout.windowResized',function(event){
+    EventBus.on('layout.windowResized',function(event){
       if (ep.ui.width < 700){
         if (displayModeFull){
           displayModeFull = false;
@@ -295,11 +295,13 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
     });
 
     // Main Nav Nodes Load Success
-    EventBus.bind('ia.mainNavNodesLoadSuccess',function(){
+    EventBus.on('ia.mainNavNodesLoadSuccess',function(){
       mainNavInitialized = true;
     });
 
-
+    EventBus.on('ia.clearSelectedNavRequest',function(){
+      View.clearSelectedMainNav();
+    });
 
 
 

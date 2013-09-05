@@ -73,6 +73,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
      *  - Logout (DELETE)
      */
     EventBus.on('auth.authenticationRequest', function(authObj) {
+      ep.logger.info('auth.authenticationRequest');
       ep.io.ajax(authObj);
     });
 
@@ -81,6 +82,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
      * Login Button Clicked - submit login form to server
      */
     EventBus.on('auth.loginFormSubmitButtonClicked', function () {
+      ep.logger.info('auth.loginFormSubmitButtonClicked');
       var requestModel = View.getLoginRequestModel();
 
       if (requestModel.isComplete()) {
@@ -104,6 +106,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
      * Generate Public Authentication Request
      */
     EventBus.on('auth.generatePublicAuthTokenRequest', function() {
+      ep.logger.info('auth.generatePublicAuthTokenRequest');
       var authString = 'grant_type=password&scope=' + ep.app.config.cortexApi.scope + '&role=PUBLIC';
 
       var publicAuthModel = new Model.LoginModel();
@@ -116,6 +119,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
      * Logout Button Clicked - make logout request to server
      */
     EventBus.on('auth.logoutBtnClicked', function() {
+      ep.logger.info('auth.logoutBtnClicked');
       var logoutModel = new Model.LogoutModel();
 
       EventBus.trigger('auth.authenticationRequest', logoutModel.attributes);
