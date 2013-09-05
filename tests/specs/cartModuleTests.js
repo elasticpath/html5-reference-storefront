@@ -7,19 +7,22 @@
  *
  */
 define(function (require) {
-  var cartViews = require('modules/cart/cart.views');
-  var cartModel = require('modules/cart/cart.models');
 
   describe('UI Storefront Cart Module  ', function () {
 
     describe('Cart Controller',function(){
       var cartController = require('cart');
-      it('DefaultView should exist',function(){
-        expect(cartController.DefaultView).to.exist;
+      describe("DefaultView",function(){
+        var defaultView = new cartController.DefaultView();
+        it('DefaultView should exist',function(){
+          expect(defaultView).to.exist;
+        });
       });
+
     });
     describe('Cart Views', function () {
-      describe('Default View ', function () {
+      var cartViews = require('modules/cart/cart.views');
+      describe('DefaultView ', function () {
         var defaultView = new cartViews.DefaultView();
         it('DefaultView should exist', function () {
           expect(defaultView).to.exist;
@@ -54,7 +57,17 @@ define(function (require) {
       });
     });
     describe("Cart Models",function(){
-      var defaultView = new cartViews.DefaultView();
+      var cartModel = require('modules/cart/cart.models');
+      it("CartModel should exist",function(){
+        expect(cartModel.CartModel).to.exist;
+      });
+      it("CartItemCollection should exist",function(){
+        expect(cartModel.CartItemCollection).to.exist;
+      });
+      it("CartItemModel should exist",function(){
+        expect(cartModel.CartItemModel).to.exist;
+      });
+
     });
 
 

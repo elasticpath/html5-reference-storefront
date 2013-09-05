@@ -25,7 +25,6 @@ define(['eventbus'],function(EventBus){
       });*/
     },
     'mediator.getPublicAuthTokenRequest':function(){
-      ep.logger.info('mediator.getPublicAuthTokenRequest');
       require(['auth'],function(mod){
         EventBus.trigger('auth.generatePublicAuthTokenRequest');
       });

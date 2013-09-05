@@ -49,12 +49,13 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
     };
 
     /*
-     *
-     *
-        * EVENT LISTENERS
-        *
-        */
-    EventBus.on('cart.ReloadCartViewRequest', function() {
+    *
+    *
+    * EVENT LISTENERS
+    *
+    */
+    // Reload Cart View Request
+    EventBus.on('cart.reloadCartViewRequest', function() {
       ep.logger.info('Refreshing view...');
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'appMainRegion',
@@ -63,15 +64,18 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
       });
     });
 
-    EventBus.on('cart.CartLineItemRemoved', function(){
+    // Remove Line Item Success
+    EventBus.on('cart.removeLineItemSuccess', function(){
       // EventBus.trigger('cart.DisplayCartLineItemRemovedSuccessMsg');
-      EventBus.trigger('cart.ReloadCartViewRequest');
+      EventBus.trigger('cart.reloadCartViewRequest');
     });
 
-    EventBus.on('cart.CartLineItemRemoveFailed', function(response) {
+    // Remove Line Item Failed
+    EventBus.on('cart.removeLineItemFailed', function(response) {
       ep.logger.error('error deleting lineitem from cart: ' + response);
     });
 
+    // Remove Line Item Request
     EventBus.on('cart.removeLineItemRequest', function(event){
       var deleteActionLink = $(event.target).data('actionlink');
 
@@ -81,15 +85,16 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
           contentType:'application/json',
           url:deleteActionLink,
           success:function(response, x, y){
-            EventBus.trigger('cart.CartLineItemRemoved');
+            EventBus.trigger('cart.removeLineItemSuccess');
           },
           error:function(response){
-            EventBus.trigger('cart.CartLineItemRemoveFailed', response);
+            EventBus.trigger('cart.removeLineItemFailed', response);
           }
         });
 
     });
 
+    // Remove Line Item Button Clicked
     EventBus.on('cart.removeLineItemBtnClicked', function(event){
       var confirmation = window.confirm("Do you really want to delete this item");
       if (confirmation) {

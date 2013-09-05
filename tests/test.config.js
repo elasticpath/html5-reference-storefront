@@ -10,6 +10,7 @@ requirejs.config({
     'modernizr': 'scripts/lib/modernizr-latest',
     'chai': '/tests/libs/chai',
     'mocha.common': '/tests/libs/mocha.common',
+    'sinon':  'scripts/lib/sinon-1.7.3',
     'URI': 'scripts/lib/URI',
     'router': 'router',
     'ep': 'ep.client',

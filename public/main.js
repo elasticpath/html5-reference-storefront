@@ -14,7 +14,6 @@ require.config({
     'backbone'        : 'scripts/lib/backbone',
     'marionette'      : 'scripts/lib/backbone.marionette',
     'modernizr'       : 'scripts/lib/modernizr-latest',
-    'chai'            : 'scripts/lib/chai',
     'URI'             : 'scripts/lib/URI',
     'router'          : 'router',
     'ep'              : 'ep.client',

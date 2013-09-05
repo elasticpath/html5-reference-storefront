@@ -51,10 +51,7 @@ define(['ep', 'mediator', 'app', 'eventbus', 'modules/appheader/appheader.models
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'mainNavRegion',
           module:'ia',
-          view:'MainNavView',
-          callback:function(){
-            initMainNavWidth = toRem(mainNavContainer.outerWidth());
-          }
+          view:'MainNavView'
         });
         logoContainer = $('.logo-container');
 
