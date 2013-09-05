@@ -19,9 +19,6 @@ define(function (require) {
       });
     });
     describe('Cart Views', function () {
-      it('DefaultView should exist', function () {
-        expect(cartViews.DefaultView).to.exist;
-      });
       describe('Default View ', function () {
         var defaultView = new cartViews.DefaultView();
         it('DefaultView should exist', function () {
@@ -55,6 +52,9 @@ define(function (require) {
       it('CartCheckoutActionView should exist', function () {
         expect(cartViews.CartCheckoutActionView).to.exist;
       });
+    });
+    describe("Cart Models",function(){
+      var defaultView = new cartViews.DefaultView();
     });
 
 
