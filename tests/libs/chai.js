@@ -1,7 +1,7 @@
 !function (name, context, definition) {
   if (typeof require === 'function' && typeof exports === 'object' && typeof module === 'object') {
     module.exports = definition();
-  } else if (typeof define === 'function' && typeof define.amd  === 'object') {
+  } else if (typeof define === 'function' && typeof define.amd === 'object') {
     define(function () {
       return definition();
     });
@@ -37,7 +37,7 @@
   };
 
   require.relative = function (parent) {
-    return function(p){
+    return function (p) {
       if ('.' != p.charAt(0)) return require(p);
 
       var path = parent.split('/')
@@ -60,7 +60,7 @@
   };
 
 
-  require.register("chai.js", function(module, exports, require){
+  require.register("chai.js", function (module, exports, require) {
     /*!
      * chai
      * Copyright(c) 2011-2012 Jake Luer <jake@alogicalparadox.com>
@@ -143,7 +143,7 @@
 
   }); // module: chai.js
 
-  require.register("chai/assertion.js", function(module, exports, require){
+  require.register("chai/assertion.js", function (module, exports, require) {
     /*!
      * chai
      * http://chaijs.com
@@ -174,23 +174,23 @@
      * @api private
      */
 
-    function Assertion (obj, msg, stack) {
+    function Assertion(obj, msg, stack) {
       flag(this, 'ssfi', stack || arguments.callee);
       flag(this, 'object', obj);
       flag(this, 'message', msg);
     }
 
     /*!
-      * ### Assertion.includeStack
-      *
-      * User configurable property, influences whether stack trace
-      * is included in Assertion error message. Default of false
-      * suppresses stack trace in the error message
-      *
-      *     Assertion.includeStack = true;  // enable stack on error
-      *
-      * @api public
-      */
+     * ### Assertion.includeStack
+     *
+     * User configurable property, influences whether stack trace
+     * is included in Assertion error message. Default of false
+     * suppresses stack trace in the error message
+     *
+     *     Assertion.includeStack = true;  // enable stack on error
+     *
+     * @api public
+     */
 
     Assertion.includeStack = false;
 
@@ -235,10 +235,7 @@
         var msg = util.getMessage(this, arguments)
           , actual = util.getActual(this, arguments);
         throw new AssertionError({
-            message: msg
-          , actual: actual
-          , expected: expected
-          , stackStartFunction: (Assertion.includeStack) ? this.assert : flag(this, 'ssfi')
+          message: msg, actual: actual, expected: expected, stackStartFunction: (Assertion.includeStack) ? this.assert : flag(this, 'ssfi')
         });
       }
     };
@@ -253,16 +250,15 @@
 
     Object.defineProperty(Assertion.prototype, '_obj',
       { get: function () {
-          return flag(this, 'object');
-        }
-      , set: function (val) {
-          flag(this, 'object', val);
-        }
-    });
+        return flag(this, 'object');
+      }, set: function (val) {
+        flag(this, 'object', val);
+      }
+      });
 
   }); // module: chai/assertion.js
 
-  require.register("chai/browser/error.js", function(module, exports, require){
+  require.register("chai/browser/error.js", function (module, exports, require) {
     /*!
      * chai
      * Copyright(c) 2011-2012 Jake Luer <jake@alogicalparadox.com>
@@ -271,7 +267,7 @@
 
     module.exports = AssertionError;
 
-    function AssertionError (options) {
+    function AssertionError(options) {
       options = options || {};
       this.message = options.message;
       this.actual = options.actual;
@@ -288,13 +284,13 @@
     AssertionError.prototype.name = 'AssertionError';
     AssertionError.prototype.constructor = AssertionError;
 
-    AssertionError.prototype.toString = function() {
+    AssertionError.prototype.toString = function () {
       return this.message;
     };
 
   }); // module: chai/browser/error.js
 
-  require.register("chai/core/assertions.js", function(module, exports, require){
+  require.register("chai/core/assertions.js", function (module, exports, require) {
     /*!
      * chai
      * http://chaijs.com
@@ -331,12 +327,12 @@
        */
 
       [ 'to', 'be', 'been'
-      , 'is', 'and', 'have'
-      , 'with', 'that' ].forEach(function (chain) {
-        Assertion.addProperty(chain, function () {
-          return this;
+        , 'is', 'and', 'have'
+        , 'with', 'that' ].forEach(function (chain) {
+          Assertion.addProperty(chain, function () {
+            return this;
+          });
         });
-      });
 
       /**
        * ### .not
@@ -405,7 +401,7 @@
           , article = ~[ 'A', 'E', 'I', 'O', 'U' ].indexOf(klassStart) ? 'an ' : 'a ';
 
         this.assert(
-            '[object ' + klass + ']' === toString.call(obj)
+          '[object ' + klass + ']' === toString.call(obj)
           , 'expected #{this} to be ' + article + type
           , 'expected #{this} not to be ' + article + type
         );
@@ -433,15 +429,15 @@
        * @api public
        */
 
-      function includeChainingBehavior () {
+      function includeChainingBehavior() {
         flag(this, 'contains', true);
       }
 
-      function include (val, msg) {
+      function include(val, msg) {
         if (msg) flag(this, 'message', msg);
         var obj = flag(this, 'object')
         this.assert(
-            ~obj.indexOf(val)
+          ~obj.indexOf(val)
           , 'expected #{this} to include ' + _.inspect(val)
           , 'expected #{this} to not include ' + _.inspect(val));
       }
@@ -466,7 +462,7 @@
 
       Assertion.addProperty('ok', function () {
         this.assert(
-            flag(this, 'object')
+          flag(this, 'object')
           , 'expected #{this} to be truthy'
           , 'expected #{this} to be falsy');
       });
@@ -485,7 +481,7 @@
 
       Assertion.addProperty('true', function () {
         this.assert(
-            true === flag(this, 'object')
+          true === flag(this, 'object')
           , 'expected #{this} to be true'
           , 'expected #{this} to be false'
           , this.negate ? false : true
@@ -506,7 +502,7 @@
 
       Assertion.addProperty('false', function () {
         this.assert(
-            false === flag(this, 'object')
+          false === flag(this, 'object')
           , 'expected #{this} to be false'
           , 'expected #{this} to be true'
           , this.negate ? true : false
@@ -527,7 +523,7 @@
 
       Assertion.addProperty('null', function () {
         this.assert(
-            null === flag(this, 'object')
+          null === flag(this, 'object')
           , 'expected #{this} to be null'
           , 'expected #{this} not to be null'
         );
@@ -547,7 +543,7 @@
 
       Assertion.addProperty('undefined', function () {
         this.assert(
-            undefined === flag(this, 'object')
+          undefined === flag(this, 'object')
           , 'expected #{this} to be undefined'
           , 'expected #{this} not to be undefined'
         );
@@ -572,7 +568,7 @@
 
       Assertion.addProperty('exist', function () {
         this.assert(
-            null != flag(this, 'object')
+          null != flag(this, 'object')
           , 'expected #{this} to exist'
           , 'expected #{this} to not exist'
         );
@@ -605,7 +601,7 @@
         }
 
         this.assert(
-            !expected
+          !expected
           , 'expected #{this} to be empty'
           , 'expected #{this} not to be empty'
         );
@@ -625,11 +621,11 @@
        * @api public
        */
 
-      function checkArguments () {
+      function checkArguments() {
         var obj = flag(this, 'object')
           , type = Object.prototype.toString.call(obj);
         this.assert(
-            '[object Arguments]' === type
+          '[object Arguments]' === type
           , 'expected #{this} to be arguments but got ' + type
           , 'expected #{this} to not be arguments'
         );
@@ -660,14 +656,14 @@
        * @api public
        */
 
-      function assertEqual (val, msg) {
+      function assertEqual(val, msg) {
         if (msg) flag(this, 'message', msg);
         var obj = flag(this, 'object');
         if (flag(this, 'deep')) {
           return this.eql(val);
         } else {
           this.assert(
-              val === obj
+            val === obj
             , 'expected #{this} to equal #{exp}'
             , 'expected #{this} to not equal #{exp}'
             , val
@@ -696,7 +692,7 @@
       Assertion.addMethod('eql', function (obj, msg) {
         if (msg) flag(this, 'message', msg);
         this.assert(
-            _.eql(obj, flag(this, 'object'))
+          _.eql(obj, flag(this, 'object'))
           , 'expected #{this} to deeply equal #{exp}'
           , 'expected #{this} to not deeply equal #{exp}'
           , obj
@@ -726,14 +722,14 @@
        * @api public
        */
 
-      function assertAbove (n, msg) {
+      function assertAbove(n, msg) {
         if (msg) flag(this, 'message', msg);
         var obj = flag(this, 'object');
         if (flag(this, 'doLength')) {
           new Assertion(obj, msg).to.have.property('length');
           var len = obj.length;
           this.assert(
-              len > n
+            len > n
             , 'expected #{this} to have a length above #{exp} but got #{act}'
             , 'expected #{this} to not have a length above #{exp}'
             , n
@@ -741,7 +737,7 @@
           );
         } else {
           this.assert(
-              obj > n
+            obj > n
             , 'expected #{this} to be above ' + n
             , 'expected #{this} to be below ' + n
           );
@@ -775,14 +771,14 @@
        * @api public
        */
 
-      function assertBelow (n, msg) {
+      function assertBelow(n, msg) {
         if (msg) flag(this, 'message', msg);
         var obj = flag(this, 'object');
         if (flag(this, 'doLength')) {
           new Assertion(obj, msg).to.have.property('length');
           var len = obj.length;
           this.assert(
-              len < n
+            len < n
             , 'expected #{this} to have a length below #{exp} but got #{act}'
             , 'expected #{this} to not have a length below #{exp}'
             , n
@@ -790,7 +786,7 @@
           );
         } else {
           this.assert(
-              obj < n
+            obj < n
             , 'expected #{this} to be below ' + n
             , 'expected #{this} to be above ' + n
           );
@@ -831,13 +827,13 @@
           new Assertion(obj, msg).to.have.property('length');
           var len = obj.length;
           this.assert(
-              len >= start && len <= finish
+            len >= start && len <= finish
             , 'expected #{this} to have a length within ' + range
             , 'expected #{this} to not have a length within ' + range
           );
         } else {
           this.assert(
-              obj >= start && obj <= finish
+            obj >= start && obj <= finish
             , 'expected #{this} to be within ' + range
             , 'expected #{this} to not be within ' + range
           );
@@ -862,11 +858,11 @@
        * @api public
        */
 
-      function assertInstanceOf (constructor, msg) {
+      function assertInstanceOf(constructor, msg) {
         if (msg) flag(this, 'message', msg);
         var name = _.getName(constructor);
         this.assert(
-            flag(this, 'object') instanceof constructor
+          flag(this, 'object') instanceof constructor
           , 'expected #{this} to be an instance of ' + name
           , 'expected #{this} to not be an instance of ' + name
         );
@@ -951,14 +947,14 @@
           }
         } else {
           this.assert(
-              undefined !== value
+            undefined !== value
             , 'expected #{this} to have a ' + descriptor + _.inspect(name)
             , 'expected #{this} to not have ' + descriptor + _.inspect(name));
         }
 
         if (undefined !== val) {
           this.assert(
-              val === value
+            val === value
             , 'expected #{this} to have a ' + descriptor + _.inspect(name) + ' of #{exp}, but got #{act}'
             , 'expected #{this} to not have a ' + descriptor + _.inspect(name) + ' of #{act}'
             , val
@@ -984,11 +980,11 @@
        * @api public
        */
 
-      function assertOwnProperty (name, msg) {
+      function assertOwnProperty(name, msg) {
         if (msg) flag(this, 'message', msg);
         var obj = flag(this, 'object');
         this.assert(
-            obj.hasOwnProperty(name)
+          obj.hasOwnProperty(name)
           , 'expected #{this} to have own property ' + _.inspect(name)
           , 'expected #{this} to not have own property ' + _.inspect(name)
         );
@@ -1023,18 +1019,18 @@
        * @api public
        */
 
-      function assertLengthChain () {
+      function assertLengthChain() {
         flag(this, 'doLength', true);
       }
 
-      function assertLength (n, msg) {
+      function assertLength(n, msg) {
         if (msg) flag(this, 'message', msg);
         var obj = flag(this, 'object');
         new Assertion(obj, msg).to.have.property('length');
         var len = obj.length;
 
         this.assert(
-            len == n
+          len == n
           , 'expected #{this} to have a length of #{exp} but got #{act}'
           , 'expected #{this} to not have a length of #{act}'
           , n
@@ -1062,7 +1058,7 @@
         if (msg) flag(this, 'message', msg);
         var obj = flag(this, 'object');
         this.assert(
-            re.exec(obj)
+          re.exec(obj)
           , 'expected #{this} to match ' + re
           , 'expected #{this} not to match ' + re
         );
@@ -1087,7 +1083,7 @@
         new Assertion(obj, msg).is.a('string');
 
         this.assert(
-            ~obj.indexOf(str)
+          ~obj.indexOf(str)
           , 'expected #{this} to contain ' + _.inspect(str)
           , 'expected #{this} to not contain ' + _.inspect(str)
         );
@@ -1110,7 +1106,7 @@
        * @api public
        */
 
-      function assertKeys (keys) {
+      function assertKeys(keys) {
         var obj = flag(this, 'object')
           , str
           , ok = true;
@@ -1125,7 +1121,7 @@
           , len = keys.length;
 
         // Inclusion
-        ok = keys.every(function(key){
+        ok = keys.every(function (key) {
           return ~actual.indexOf(key);
         });
 
@@ -1136,7 +1132,7 @@
 
         // Key string
         if (len > 1) {
-          keys = keys.map(function(key){
+          keys = keys.map(function (key) {
             return _.inspect(key);
           });
           var last = keys.pop();
@@ -1153,7 +1149,7 @@
 
         // Assertion
         this.assert(
-            ok
+          ok
           , 'expected #{this} to ' + str
           , 'expected #{this} to not ' + str
         );
@@ -1197,7 +1193,7 @@
        * @api public
        */
 
-      function assertThrows (constructor, errMsg, msg) {
+      function assertThrows(constructor, errMsg, msg) {
         if (msg) flag(this, 'message', msg);
         var obj = flag(this, 'object');
         new Assertion(obj, msg).is.a('function');
@@ -1229,7 +1225,7 @@
           // first, check desired error
           if (desiredError) {
             this.assert(
-                err === desiredError
+              err === desiredError
               , 'expected #{this} to throw ' + _.inspect(desiredError) + ' but ' + _.inspect(err) + ' was thrown'
               , 'expected #{this} to not throw ' + _.inspect(desiredError)
             );
@@ -1238,7 +1234,7 @@
           // next, check constructor
           if (constructor) {
             this.assert(
-                err instanceof constructor
+              err instanceof constructor
               , 'expected #{this} to throw ' + name + ' but ' + _.inspect(err) + ' was thrown'
               , 'expected #{this} to not throw ' + name + ' but ' + _.inspect(err) + ' was thrown');
             if (!errMsg) return this;
@@ -1246,14 +1242,14 @@
           // next, check message
           if (err.message && errMsg && errMsg instanceof RegExp) {
             this.assert(
-                errMsg.exec(err.message)
+              errMsg.exec(err.message)
               , 'expected #{this} to throw error matching ' + errMsg + ' but got ' + _.inspect(err.message)
               , 'expected #{this} to throw error not matching ' + errMsg
             );
             return this;
           } else if (err.message && errMsg && 'string' === typeof errMsg) {
             this.assert(
-                ~err.message.indexOf(errMsg)
+              ~err.message.indexOf(errMsg)
               , 'expected #{this} to throw error including #{exp} but got #{act}'
               , 'expected #{this} to throw error not including #{act}'
               , errMsg
@@ -1273,7 +1269,7 @@
         }
 
         this.assert(
-            thrown === true
+          thrown === true
           , 'expected #{this} to throw ' + expectedThrown + actuallyGot
           , 'expected #{this} to not throw ' + expectedThrown + actuallyGot
         );
@@ -1313,7 +1309,7 @@
             : obj[method];
 
         this.assert(
-            'function' === typeof context
+          'function' === typeof context
           , 'expected #{this} to respond to ' + _.inspect(method)
           , 'expected #{this} to not respond to ' + _.inspect(method)
         );
@@ -1356,7 +1352,7 @@
         if (msg) flag(this, 'message', msg);
         var obj = flag(this, 'object');
         this.assert(
-            matcher(obj)
+          matcher(obj)
           , 'expected #{this} to satisfy ' + _.inspect(matcher)
           , 'expected #{this} to not satisfy' + _.inspect(matcher)
           , this.negate ? false : true
@@ -1382,7 +1378,7 @@
         if (msg) flag(this, 'message', msg);
         var obj = flag(this, 'object');
         this.assert(
-            Math.abs(obj - expected) <= delta
+          Math.abs(obj - expected) <= delta
           , 'expected #{this} to be close to ' + expected + ' +/- ' + delta
           , 'expected #{this} not to be close to ' + expected + ' +/- ' + delta
         );
@@ -1392,7 +1388,7 @@
 
   }); // module: chai/core/assertions.js
 
-  require.register("chai/interface/assert.js", function(module, exports, require){
+  require.register("chai/interface/assert.js", function (module, exports, require) {
     /*!
      * chai
      * Copyright(c) 2011-2012 Jake Luer <jake@alogicalparadox.com>
@@ -1430,7 +1426,7 @@
       var assert = chai.assert = function (express, errmsg) {
         var test = new Assertion(null);
         test.assert(
-            express
+          express
           , errmsg
           , '[ negation message unavailable ]'
         );
@@ -1451,11 +1447,7 @@
 
       assert.fail = function (actual, expected, message, operator) {
         throw new chai.AssertionError({
-            actual: actual
-          , expected: expected
-          , message: message
-          , operator: operator
-          , stackStartFunction: assert.fail
+          actual: actual, expected: expected, message: message, operator: operator, stackStartFunction: assert.fail
         });
       };
 
@@ -1495,7 +1487,7 @@
         var test = new Assertion(act, msg);
 
         test.assert(
-            exp == flag(test, 'object')
+          exp == flag(test, 'object')
           , 'expected #{this} to equal #{exp}'
           , 'expected #{this} to not equal #{act}'
           , exp
@@ -1521,7 +1513,7 @@
         var test = new Assertion(act, msg);
 
         test.assert(
-            exp != flag(test, 'object')
+          exp != flag(test, 'object')
           , 'expected #{this} to not equal #{exp}'
           , 'expected #{this} to equal #{act}'
           , exp
@@ -2332,9 +2324,9 @@
         }
         var test = new Assertion(eval(val + operator + val2), msg);
         test.assert(
-            true === flag(test, 'object')
+          true === flag(test, 'object')
           , 'expected ' + util.inspect(val) + ' to be ' + operator + ' ' + util.inspect(val2)
-          , 'expected ' + util.inspect(val) + ' to not be ' + operator + ' ' + util.inspect(val2) );
+          , 'expected ' + util.inspect(val) + ' to not be ' + operator + ' ' + util.inspect(val2));
       };
 
       /**
@@ -2368,17 +2360,17 @@
        * Aliases.
        */
 
-      (function alias(name, as){
+      (function alias(name, as) {
         assert[as] = assert[name];
         return alias;
       })
-      ('Throw', 'throw')
-      ('Throw', 'throws');
+        ('Throw', 'throw')
+        ('Throw', 'throws');
     };
 
   }); // module: chai/interface/assert.js
 
-  require.register("chai/interface/expect.js", function(module, exports, require){
+  require.register("chai/interface/expect.js", function (module, exports, require) {
     /*!
      * chai
      * Copyright(c) 2011-2012 Jake Luer <jake@alogicalparadox.com>
@@ -2394,7 +2386,7 @@
 
   }); // module: chai/interface/expect.js
 
-  require.register("chai/interface/should.js", function(module, exports, require){
+  require.register("chai/interface/should.js", function (module, exports, require) {
     /*!
      * chai
      * Copyright(c) 2011-2012 Jake Luer <jake@alogicalparadox.com>
@@ -2404,7 +2396,7 @@
     module.exports = function (chai, util) {
       var Assertion = chai.Assertion;
 
-      function loadShould () {
+      function loadShould() {
         // modify Object.prototype to have `should`
         Object.defineProperty(Object.prototype, 'should',
           {
@@ -2421,17 +2413,15 @@
                 configurable: true,
                 writable: true
               });
+            }, get: function () {
+            if (this instanceof String || this instanceof Number) {
+              return new Assertion(this.constructor(this));
+            } else if (this instanceof Boolean) {
+              return new Assertion(this == true);
             }
-          , get: function(){
-              if (this instanceof String || this instanceof Number) {
-                return new Assertion(this.constructor(this));
-              } else if (this instanceof Boolean) {
-                return new Assertion(this == true);
-              }
-              return new Assertion(this);
-            }
-          , configurable: true
-        });
+            return new Assertion(this);
+          }, configurable: true
+          });
 
         var should = {};
 
@@ -2474,7 +2464,7 @@
 
   }); // module: chai/interface/should.js
 
-  require.register("chai/utils/addChainableMethod.js", function(module, exports, require){
+  require.register("chai/utils/addChainableMethod.js", function (module, exports, require) {
     /*!
      * Chai - addChainingMethod utility
      * Copyright(c) 2012 Jake Luer <jake@alogicalparadox.com>
@@ -2517,38 +2507,38 @@
 
     module.exports = function (ctx, name, method, chainingBehavior) {
       if (typeof chainingBehavior !== 'function')
-        chainingBehavior = function () { };
+        chainingBehavior = function () {
+        };
 
       Object.defineProperty(ctx, name,
         { get: function () {
-            chainingBehavior.call(this);
+          chainingBehavior.call(this);
 
-            var assert = function () {
-              var result = method.apply(this, arguments);
-              return result === undefined ? this : result;
-            };
+          var assert = function () {
+            var result = method.apply(this, arguments);
+            return result === undefined ? this : result;
+          };
 
-            // Re-enumerate every time to better accomodate plugins.
-            var asserterNames = Object.getOwnPropertyNames(ctx);
-            asserterNames.forEach(function (asserterName) {
-              var pd = Object.getOwnPropertyDescriptor(ctx, asserterName)
-                , functionProtoPD = Object.getOwnPropertyDescriptor(Function.prototype, asserterName);
-              // Avoid trying to overwrite things that we can't, like `length` and `arguments`.
-              if (functionProtoPD && !functionProtoPD.configurable) return;
-              if (asserterName === 'arguments') return; // @see chaijs/chai/issues/69
-              Object.defineProperty(assert, asserterName, pd);
-            });
+          // Re-enumerate every time to better accomodate plugins.
+          var asserterNames = Object.getOwnPropertyNames(ctx);
+          asserterNames.forEach(function (asserterName) {
+            var pd = Object.getOwnPropertyDescriptor(ctx, asserterName)
+              , functionProtoPD = Object.getOwnPropertyDescriptor(Function.prototype, asserterName);
+            // Avoid trying to overwrite things that we can't, like `length` and `arguments`.
+            if (functionProtoPD && !functionProtoPD.configurable) return;
+            if (asserterName === 'arguments') return; // @see chaijs/chai/issues/69
+            Object.defineProperty(assert, asserterName, pd);
+          });
 
-            transferFlags(this, assert);
-            return assert;
-          }
-        , configurable: true
-      });
+          transferFlags(this, assert);
+          return assert;
+        }, configurable: true
+        });
     };
 
   }); // module: chai/utils/addChainableMethod.js
 
-  require.register("chai/utils/addMethod.js", function(module, exports, require){
+  require.register("chai/utils/addMethod.js", function (module, exports, require) {
     /*!
      * Chai - addMethod utility
      * Copyright(c) 2012 Jake Luer <jake@alogicalparadox.com>
@@ -2589,7 +2579,7 @@
 
   }); // module: chai/utils/addMethod.js
 
-  require.register("chai/utils/addProperty.js", function(module, exports, require){
+  require.register("chai/utils/addProperty.js", function (module, exports, require) {
     /*!
      * Chai - addProperty utility
      * Copyright(c) 2012 Jake Luer <jake@alogicalparadox.com>
@@ -2624,16 +2614,15 @@
     module.exports = function (ctx, name, getter) {
       Object.defineProperty(ctx, name,
         { get: function () {
-            var result = getter.call(this);
-            return result === undefined ? this : result;
-          }
-        , configurable: true
-      });
+          var result = getter.call(this);
+          return result === undefined ? this : result;
+        }, configurable: true
+        });
     };
 
   }); // module: chai/utils/addProperty.js
 
-  require.register("chai/utils/eql.js", function(module, exports, require){
+  require.register("chai/utils/eql.js", function (module, exports, require) {
     // This is (almost) directly from Node.js assert
     // https://github.com/joyent/node/blob/f8c335d0caf47f16d31413f89aa28eda3878e3aa/lib/assert.js
 
@@ -2645,7 +2634,9 @@
       Buffer = require('buffer').Buffer;
     } catch (ex) {
       Buffer = {
-        isBuffer: function () { return false; }
+        isBuffer: function () {
+          return false;
+        }
       };
     }
 
@@ -2664,22 +2655,22 @@
 
         return true;
 
-      // 7.2. If the expected value is a Date object, the actual value is
-      // equivalent if it is also a Date object that refers to the same time.
+        // 7.2. If the expected value is a Date object, the actual value is
+        // equivalent if it is also a Date object that refers to the same time.
       } else if (actual instanceof Date && expected instanceof Date) {
         return actual.getTime() === expected.getTime();
 
-      // 7.3. Other pairs that do not both pass typeof value == 'object',
-      // equivalence is determined by ==.
+        // 7.3. Other pairs that do not both pass typeof value == 'object',
+        // equivalence is determined by ==.
       } else if (typeof actual != 'object' && typeof expected != 'object') {
         return actual === expected;
 
-      // 7.4. For all other Object pairs, including Array objects, equivalence is
-      // determined by having the same number of owned properties (as verified
-      // with Object.prototype.hasOwnProperty.call), the same set of keys
-      // (although not necessarily the same order), equivalent values for every
-      // corresponding key, and an identical 'prototype' property. Note: this
-      // accounts for both named and indexed properties on Arrays.
+        // 7.4. For all other Object pairs, including Array objects, equivalence is
+        // determined by having the same number of owned properties (as verified
+        // with Object.prototype.hasOwnProperty.call), the same set of keys
+        // (although not necessarily the same order), equivalent values for every
+        // corresponding key, and an identical 'prototype' property. Note: this
+        // accounts for both named and indexed properties on Arrays.
       } else {
         return objEquiv(actual, expected);
       }
@@ -2710,8 +2701,8 @@
       }
       try {
         var ka = Object.keys(a),
-            kb = Object.keys(b),
-            key, i;
+          kb = Object.keys(b),
+          key, i;
       } catch (e) {//happens when one is a string literal and the other isn't
         return false;
       }
@@ -2738,7 +2729,7 @@
 
   }); // module: chai/utils/eql.js
 
-  require.register("chai/utils/flag.js", function(module, exports, require){
+  require.register("chai/utils/flag.js", function (module, exports, require) {
     /*!
      * Chai - flag utility
      * Copyright(c) 2012 Jake Luer <jake@alogicalparadox.com>
@@ -2774,7 +2765,7 @@
 
   }); // module: chai/utils/flag.js
 
-  require.register("chai/utils/getActual.js", function(module, exports, require){
+  require.register("chai/utils/getActual.js", function (module, exports, require) {
     /*!
      * Chai - getActual utility
      * Copyright(c) 2012 Jake Luer <jake@alogicalparadox.com>
@@ -2797,7 +2788,7 @@
 
   }); // module: chai/utils/getActual.js
 
-  require.register("chai/utils/getMessage.js", function(module, exports, require){
+  require.register("chai/utils/getMessage.js", function (module, exports, require) {
     /*!
      * Chai - message composition utility
      * Copyright(c) 2012 Jake Luer <jake@alogicalparadox.com>
@@ -2850,7 +2841,7 @@
 
   }); // module: chai/utils/getMessage.js
 
-  require.register("chai/utils/getName.js", function(module, exports, require){
+  require.register("chai/utils/getName.js", function (module, exports, require) {
     /*!
      * Chai - getName utility
      * Copyright(c) 2012 Jake Luer <jake@alogicalparadox.com>
@@ -2874,7 +2865,7 @@
 
   }); // module: chai/utils/getName.js
 
-  require.register("chai/utils/getPathValue.js", function(module, exports, require){
+  require.register("chai/utils/getPathValue.js", function (module, exports, require) {
     /*!
      * Chai - getPathValue utility
      * Copyright(c) 2012 Jake Luer <jake@alogicalparadox.com>
@@ -2935,7 +2926,7 @@
      * @api private
      */
 
-    function parsePath (path) {
+    function parsePath(path) {
       var str = path.replace(/\[/g, '.[')
         , parts = str.match(/(\\\.|[^.]+?)+/g);
       return parts.map(function (value) {
@@ -2960,7 +2951,7 @@
      * @api private
      */
 
-    function _getPathValue (parsed, obj) {
+    function _getPathValue(parsed, obj) {
       var tmp = obj
         , res;
       for (var i = 0, l = parsed.length; i < l; i++) {
@@ -2980,7 +2971,7 @@
 
   }); // module: chai/utils/getPathValue.js
 
-  require.register("chai/utils/index.js", function(module, exports, require){
+  require.register("chai/utils/index.js", function (module, exports, require) {
     /*!
      * chai
      * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
@@ -3086,7 +3077,7 @@
 
   }); // module: chai/utils/index.js
 
-  require.register("chai/utils/inspect.js", function(module, exports, require){
+  require.register("chai/utils/inspect.js", function (module, exports, require) {
     // This is (almost) directly from Node.js utils
     // https://github.com/joyent/node/blob/f8c335d0caf47f16d31413f89aa28eda3878e3aa/lib/util.js
 
@@ -3109,13 +3100,15 @@
       var ctx = {
         showHidden: showHidden,
         seen: [],
-        stylize: function (str) { return str; }
+        stylize: function (str) {
+          return str;
+        }
       };
       return formatValue(ctx, obj, (typeof depth === 'undefined' ? 2 : depth));
     }
 
     // https://gist.github.com/1044128/
-    var getOuterHTML = function(element) {
+    var getOuterHTML = function (element) {
       if ('outerHTML' in element) return element.outerHTML;
       var ns = "http://www.w3.org/1999/xhtml";
       var container = document.createElementNS(ns, '_');
@@ -3131,7 +3124,7 @@
         return html;
       }
     };
-      
+
     // Returns true if object is a DOM element.
     var isDOMElement = function (object) {
       if (typeof HTMLElement === 'object') {
@@ -3148,10 +3141,10 @@
       // Provide a hook for user-specified inspect functions.
       // Check that value is an object with an inspect function on it
       if (value && typeof value.inspect === 'function' &&
-          // Filter out the util module, it's inspect function is special
-          value.inspect !== exports.inspect &&
-          // Also filter out any prototype objects using the circular check.
-          !(value.constructor && value.constructor.prototype === value)) {
+        // Filter out the util module, it's inspect function is special
+        value.inspect !== exports.inspect &&
+        // Also filter out any prototype objects using the circular check.
+        !(value.constructor && value.constructor.prototype === value)) {
         return value.inspect(recurseTimes);
       }
 
@@ -3174,9 +3167,9 @@
       // In IE, errors have a single `stack` property, or if they are vanilla `Error`,
       // a `stack` plus `description` property; ignore those for consistency.
       if (keys.length === 0 || (isError(value) && (
-          (keys.length === 1 && keys[0] === 'stack') ||
+        (keys.length === 1 && keys[0] === 'stack') ||
           (keys.length === 2 && keys[0] === 'description' && keys[1] === 'stack')
-         ))) {
+        ))) {
         if (typeof value === 'function') {
           var name = getName(value);
           var nameSuffix = name ? ': ' + name : '';
@@ -3241,7 +3234,7 @@
       if (array) {
         output = formatArray(ctx, value, recurseTimes, visibleKeys, keys);
       } else {
-        output = keys.map(function(key) {
+        output = keys.map(function (key) {
           return formatProperty(ctx, value, recurseTimes, visibleKeys, key, array);
         });
       }
@@ -3259,8 +3252,8 @@
 
         case 'string':
           var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
-                                                   .replace(/'/g, "\\'")
-                                                   .replace(/\\"/g, '"') + '\'';
+            .replace(/'/g, "\\'")
+            .replace(/\\"/g, '"') + '\'';
           return ctx.stylize(simple, 'string');
 
         case 'number':
@@ -3286,15 +3279,15 @@
       for (var i = 0, l = value.length; i < l; ++i) {
         if (Object.prototype.hasOwnProperty.call(value, String(i))) {
           output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
-              String(i), true));
+            String(i), true));
         } else {
           output.push('');
         }
       }
-      keys.forEach(function(key) {
+      keys.forEach(function (key) {
         if (!key.match(/^\d+$/)) {
           output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
-              key, true));
+            key, true));
         }
       });
       return output;
@@ -3328,11 +3321,11 @@
           }
           if (str.indexOf('\n') > -1) {
             if (array) {
-              str = str.split('\n').map(function(line) {
+              str = str.split('\n').map(function (line) {
                 return '  ' + line;
               }).join('\n').substr(2);
             } else {
-              str = '\n' + str.split('\n').map(function(line) {
+              str = '\n' + str.split('\n').map(function (line) {
                 return '   ' + line;
               }).join('\n');
             }
@@ -3351,8 +3344,8 @@
           name = ctx.stylize(name, 'name');
         } else {
           name = name.replace(/'/g, "\\'")
-                     .replace(/\\"/g, '"')
-                     .replace(/(^"|"$)/g, "'");
+            .replace(/\\"/g, '"')
+            .replace(/(^"|"$)/g, "'");
           name = ctx.stylize(name, 'string');
         }
       }
@@ -3363,7 +3356,7 @@
 
     function reduceToSingleString(output, base, braces) {
       var numLinesEst = 0;
-      var length = output.reduce(function(prev, cur) {
+      var length = output.reduce(function (prev, cur) {
         numLinesEst++;
         if (cur.indexOf('\n') >= 0) numLinesEst++;
         return prev + cur.length + 1;
@@ -3371,11 +3364,11 @@
 
       if (length > 60) {
         return braces[0] +
-               (base === '' ? '' : base + '\n ') +
-               ' ' +
-               output.join(',\n  ') +
-               ' ' +
-               braces[1];
+          (base === '' ? '' : base + '\n ') +
+          ' ' +
+          output.join(',\n  ') +
+          ' ' +
+          braces[1];
       }
 
       return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
@@ -3383,7 +3376,7 @@
 
     function isArray(ar) {
       return Array.isArray(ar) ||
-             (typeof ar === 'object' && objectToString(ar) === '[object Array]');
+        (typeof ar === 'object' && objectToString(ar) === '[object Array]');
     }
 
     function isRegExp(re) {
@@ -3404,7 +3397,7 @@
 
   }); // module: chai/utils/inspect.js
 
-  require.register("chai/utils/objDisplay.js", function(module, exports, require){
+  require.register("chai/utils/objDisplay.js", function (module, exports, require) {
     /*!
      * Chai - flag utility
      * Copyright(c) 2012 Jake Luer <jake@alogicalparadox.com>
@@ -3452,7 +3445,7 @@
 
   }); // module: chai/utils/objDisplay.js
 
-  require.register("chai/utils/overwriteMethod.js", function(module, exports, require){
+  require.register("chai/utils/overwriteMethod.js", function (module, exports, require) {
     /*!
      * Chai - overwriteMethod utility
      * Copyright(c) 2012 Jake Luer <jake@alogicalparadox.com>
@@ -3494,7 +3487,9 @@
 
     module.exports = function (ctx, name, method) {
       var _method = ctx[name]
-        , _super = function () { return this; };
+        , _super = function () {
+          return this;
+        };
 
       if (_method && 'function' === typeof _method)
         _super = _method;
@@ -3507,7 +3502,7 @@
 
   }); // module: chai/utils/overwriteMethod.js
 
-  require.register("chai/utils/overwriteProperty.js", function(module, exports, require){
+  require.register("chai/utils/overwriteProperty.js", function (module, exports, require) {
     /*!
      * Chai - overwriteProperty utility
      * Copyright(c) 2012 Jake Luer <jake@alogicalparadox.com>
@@ -3549,23 +3544,23 @@
 
     module.exports = function (ctx, name, getter) {
       var _get = Object.getOwnPropertyDescriptor(ctx, name)
-        , _super = function () {};
+        , _super = function () {
+        };
 
       if (_get && 'function' === typeof _get.get)
         _super = _get.get
 
       Object.defineProperty(ctx, name,
         { get: function () {
-            var result = getter(_super).call(this);
-            return result === undefined ? this : result;
-          }
-        , configurable: true
-      });
+          var result = getter(_super).call(this);
+          return result === undefined ? this : result;
+        }, configurable: true
+        });
     };
 
   }); // module: chai/utils/overwriteProperty.js
 
-  require.register("chai/utils/test.js", function(module, exports, require){
+  require.register("chai/utils/test.js", function (module, exports, require) {
     /*!
      * Chai - test utility
      * Copyright(c) 2012 Jake Luer <jake@alogicalparadox.com>
@@ -3595,7 +3590,7 @@
 
   }); // module: chai/utils/test.js
 
-  require.register("chai/utils/transferFlags.js", function(module, exports, require){
+  require.register("chai/utils/transferFlags.js", function (module, exports, require) {
     /*!
      * Chai - transferFlags utility
      * Copyright(c) 2012 Jake Luer <jake@alogicalparadox.com>
@@ -3635,7 +3630,7 @@
 
       for (var flag in flags) {
         if (includeAll ||
-            (flag !== 'object' && flag !== 'ssfi' && flag != 'message')) {
+          (flag !== 'object' && flag !== 'ssfi' && flag != 'message')) {
           object.__flags[flag] = flags[flag];
         }
       }

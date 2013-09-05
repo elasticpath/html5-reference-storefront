@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Cortex Backbone Client Unit Tests</title>
-    <link rel="stylesheet" href="css/mocha.css" type="text/css" charset="utf-8" />
-</head>
-<body>
-  <!-- Required for browser reporter -->
-  <div id="mocha"></div>
+    <link rel="stylesheet" href="css/mocha.css" type="text/css" charset="utf-8"/>
+  </head>
+  <body>
+    <!-- Required for browser reporter -->
+    <div id="mocha"></div>
 
-  <!-- mocha -->
-  <script src="libs/mocha.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/testem.js"></script>
-  <script src="libs/chai.js" type="text/javascript" charset="utf-8"></script>
+    <!-- mocha -->
+    <script src="libs/mocha.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/testem.js"></script>
+    <script src="libs/chai.js" type="text/javascript" charset="utf-8"></script>
 
-  <!-- Common config -->
-  <script src="/public/scripts/lib/require.js" type="text/javascript" charset="utf-8"></script>
-  <script src="test.config.js" type="text/javascript" charset="utf-8"></script>
+    <!-- Common config -->
+    <script src="/public/scripts/lib/require.js" type="text/javascript" charset="utf-8"></script>
+    <script src="test.config.js" type="text/javascript" charset="utf-8"></script>
 
-  <script type="text/javascript" charset="utf-8">
-    require([
+    <script type="text/javascript" charset="utf-8">
+      require([
         'mocha.common',
         'jquery',
         'backbone',
@@ -32,10 +32,11 @@
         'specs/cartModuleTests.js',
         'specs/authModuleTests.js',
         'specs/homeModuleTests.js',
-        'specs/createPurchaseTests.js'
-    ], runMocha);
-  </script>
+        'specs/createPurchaseTests.js',
+        'specs/iaModuleTests.js'
+      ], runMocha);
+    </script>
 
-  <div id="Fixtures" style="display:none;visibility:hidden;"></div>
-</body>
+    <div id="Fixtures" style="display:none;visibility:hidden;"></div>
+  </body>
 </html>

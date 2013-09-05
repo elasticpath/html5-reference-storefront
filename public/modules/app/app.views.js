@@ -39,9 +39,25 @@ define(['ep','eventbus','marionette'],
       }
     });
 
+    /*
+    * Instrumentation
+    *
+    * */
+
+//    var EPDevInstrumentationItemView = Backbone.Marionette.ItemView.extend({
+//      template:'#EPDevAppHeaderInstrumentationItemTemplate',
+//      tagName:'tr'
+//    });
+//    var EPDevInstrumentationView = Backbone.Marionette.CompositeView.extend({
+//      template:'#EPDevAppHeaderInstrumentationTemplate',
+//      itemView:EPDevInstrumentationItemView,
+//      itemViewContainer:'tbody'
+//    });
+
     return{
       BaseLayout:baseLayout,
       DevInstrumentation:devInstrumentation
+//      EPDevInstrumentationView:EPDevInstrumentationView
     };
   }
 );

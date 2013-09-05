@@ -38,20 +38,12 @@ define(['ep', 'mediator', 'eventbus','backbone','marionette','i18n','modules/app
 
     });
 
-    var EPDevInstrumentationItemView = Backbone.Marionette.ItemView.extend({
-      template:'#EPDevAppHeaderInstrumentationItemTemplate',
-      tagName:'tr'
-    });
-    var EPDevInstrumentationView = Backbone.Marionette.CompositeView.extend({
-      template:'#EPDevAppHeaderInstrumentationTemplate',
-      itemView:EPDevInstrumentationItemView,
-      itemViewContainer:'tbody'
-    });
+
 
     return {
       PageHeaderView:PageHeaderView,
-      HeaderLogoView:HeaderLogoView,
-      EPDevInstrumentationView:EPDevInstrumentationView
+      HeaderLogoView:HeaderLogoView
+
     };
   }
 );

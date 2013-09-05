@@ -6,17 +6,17 @@
  * Time: 2:33 PM
  *
  */
-define(function(require) {
-  var home   = require('home');
+define(function (require) {
+  var home = require('home');
 
-  describe('EP Home Index View ', function(){
-    it('should exist', function(){
+  describe('EP Home Index View ', function () {
+    it('should exist', function () {
       var homeIndexView = home.IndexView();
       expect(homeIndexView).to.be.ok;
     });
   });
-  describe('EP Home Index Layout ', function(){
-    it('should exist', function(){
+  describe('EP Home Index Layout ', function () {
+    it('should exist', function () {
       var homeIndexLayout = home.IndexLayout();
       expect(homeIndexLayout).to.be.ok;
     });

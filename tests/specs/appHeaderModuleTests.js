@@ -6,24 +6,44 @@
  * Time: 2:41 PM
  *
  */
-define(function(require) {
-  var appHeader   = require('appheader');
+define(
+  function (require) {
 
-  describe('EP App Header View ', function(){
-    it('should exist', function(){
-      var appHeaderView = appHeader.AppHeaderView();
-      expect(appHeaderView).to.be.ok;
+
+    describe('EP App Header Module',function(){
+      // Controler interface
+      describe('AppHeader Controller', function () {
+        var appHeaderController = require('appheader');
+
+        it('HeaderView should exist', function () {
+          var appHeaderView = appHeaderController.AppHeaderView();
+          expect(appHeaderView).to.be.ok;
+        });
+        it('HeaderLogoView should exist', function () {
+          var appHeaderLogoView = appHeaderController.HeaderLogoView();
+          expect(appHeaderLogoView).to.be.ok;
+        });
+      });
+      // Module Views
+      describe("AppHeader Views",function(){
+        var appHeaderViews = require('modules/appheader/appheader.views');
+        it('PageHeaderView should exist', function () {
+          expect(appHeaderViews.PageHeaderView).to.exist;
+        });
+        it('HeaderLogoView should exist', function () {
+          expect(appHeaderViews.HeaderLogoView).to.exist;
+        });
+
+      });
+      // Module Models
+      describe("AppHeader Models",function(){
+        var appHeaderModels = require('modules/appheader/appheader.models');
+        it('LogoModel should exist', function () {
+          expect(appHeaderModels.LogoModel).to.exist;
+        });
+
+      });
     });
+
+
   });
-  describe('EP App Header Logo View ', function(){
-    it('should exist', function(){
-      var appHeaderLogoView = appHeader.HeaderLogoView();
-      expect(appHeaderLogoView).to.be.ok;
-    });
-  });
-  describe('EP App Header Global Navigation ', function(){
-   it("global navigation should exist");
-   it("global cart navigation should exist");
-   it("global login navigation should exist");
-  });
-});

@@ -6,22 +6,22 @@
  * Time: 2:48 PM
  *
  */
-define(function(require) {
+define(function (require) {
   var cartViews = require('modules/cart/cart.views');
   var cartModel = require('modules/cart/cart.models');
   var templates = require('text!modules/cart/cart.templates.html');
 
-  describe('UI Storefront Create Purchase Tests', function() {
+  describe('UI Storefront Create Purchase Tests', function () {
 
-    before(function(){
+    before(function () {
       this.$fixture = $('<div data-region="appMain"></div>');
     });
 
-    beforeEach(function(){
+    beforeEach(function () {
       this.$fixture.empty().appendTo($("#Fixtures"));
       this.$fixture.append(templates);
       this.cartCheckoutActionRegion = new Marionette.Region({
-        el:'[data-region="cartCheckoutActionRegion"]'
+        el: '[data-region="cartCheckoutActionRegion"]'
       });
 
       this.view = new cartViews.DefaultView({
@@ -31,15 +31,15 @@ define(function(require) {
 
     });
 
-    afterEach(function(){
+    afterEach(function () {
       this.view.model.destroy();
     });
 
-    after(function(){
+    after(function () {
       $("#Fixtures").empty();
     });
 
-    it("Cart Model Exists",function(){
+    it("Cart Model Exists", function () {
       var cModel = new cartModel.CartModel();
       expect(cModel).to.exist;
     });
