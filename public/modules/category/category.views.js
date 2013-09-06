@@ -8,40 +8,66 @@
  */
 define(['marionette'],function(Marionette){
 
-  var RelItemLayout = Backbone.Marionette.Layout.extend({
-    template:'#RelItemLayout',
+  var viewHelper = {
+
+  };
+
+  /*
+   * Default Layout View:
+   */
+  var defaultLayout = Backbone.Marionette.Layout.extend({
+    template:'#DefaultCategoryLayoutTemplate',
     regions:{
-      elementRegion:'.element-content',
-      childRegion:'.child-content',
-      itemRegion:'.item-content',
-      itemsRegion:'.items-content',
-      otherRegion:'.other-content'
+      categoryTitleRegion:'[data-region="categoryTitleRegion"]',
+      categoryBrowseRegion:'[data-region="categoryBrowseRegion"]',
+      categoryPaginationTopRegion:'[data-region="categoryPaginationTopRegion"]',
+      categoryPaginationBottomRegion:'[data-region="categoryPaginationBottomRegion"]'
     }
   });
 
-  var LinkItemView = Backbone.Marionette.ItemView.extend({
-    template:'#LinkItemTemplate',
-    tagName:'li'
+
+  /*
+   * Category Title View
+   */
+  var categoryTitleView = Backbone.Marionette.ItemView.extend({
+    template:'#CategoryTitleTemplate'
   });
 
-  var ChildRelView = Backbone.Marionette.CompositeView.extend({
-    template:'#RelSummaryTemplate',
-    itemViewContainer:'.summary-content',
-    itemView:LinkItemView
-
+  /*
+   * Category Item Collection View
+   */
+  var categoryItemCollectionView = Marionette.CollectionView.extend({
+    itemView:categoryItemView,
+    emptyView:categoryItemCollectionEmptyView
   });
 
-  var LinksView = Backbone.Marionette.CompositeView.extend({
-    template:'#LinkTemplateContainer',
-    itemViewContainer: 'ul',
-    itemView: LinkItemView
+  /* Category Item View */
+  var categoryItemView = Backbone.Marionette.ItemView.extend({
+    template:'#CategoryItemTemplate',
+    templateHelper:viewHelper,
+    className:'category-item-container'
   });
 
-  var defaultLayout = function() {};
+  /* Category Item Collection Empty View */
+  var categoryItemCollectionEmptyView = Backbone.Marionette.ItemView.extend({
+    template:'#CategoryItemCollectionEmptyTemplate'
+  });
+
+  /*
+   * Category Pagination View
+   */
+  var categoryPaginationView = Backbone.Marionette.ItemView.extend({
+    template:'#CategoryPaginationTemplate',
+    templateHelper:viewHelper,
+    className:'pagination-container'
+  });
+
   return {
-    LinksView:LinksView,
-    ChildRelView:ChildRelView,
-    RelItemLayout:RelItemLayout,
-    DefaultView:defaultLayout
+    DefaultView:defaultLayout,
+    CategoryTitleView:categoryTitleView,
+    CategoryItemCollectionView:categoryItemCollectionView,
+    CategoryItemView:categoryItemView,
+    CategoryItemView:categoryItemView,
+    CategoryPaginationView: categoryPaginationView
   };
 });
