@@ -23,10 +23,17 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
       },
       getLoginText:function() {
         var retVal;
-        if (window.localStorage.oAuthRole === 'PUBLIC') {
+        if (ep.io.localStore.getItem('oAuthRole') === 'PUBLIC') {
           retVal = this.getI18nLabel('auth.loginMenu');
         } else {
           retVal = window.localStorage.oAuthUserName;  // FIXME not user's name
+        }
+        return retVal;
+      },
+      getMenuItemText:function(){
+        var retVal = '';
+        if (ep.io.localStore.getItem('oAuthRole') === 'PUBLIC') {
+          retVal = 'auth.loginMenu';
         }
         return retVal;
       }
