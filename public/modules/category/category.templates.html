@@ -1,39 +1,35 @@
 <div id="CategoryTemplateContainer">
 
-  <script id="RelSummaryTemplate" type="text/template">
-
-    <label class="rel-title-label"><%= E.name %><span class="rel-child-count">[<%= E.count%>]</span></label>
-    <div class="summary-content"></div>
-
+  <script id="DefaultCategoryLayoutTemplate" type="text/template">
+    <div data-region="categoryTitleRegion"></div>
+    <div data-region="categoryBrowseRegion"></div>
+    <div data-region="categoryPaginationTopRegion"></div>
+    <div data-region="categoryPaginationBottomRegion"></div>
   </script>
 
-  <script id="RelItemLayout" type="text/template">
-
-    <h1><%= E.catName %></h1>
-    <div class="element-content rel-contnent-container"></div>
-    <div class="child-content rel-contnent-container"></div>
-    <div class="items-content rel-contnent-container"></div>
-    <div class="item-content rel-contnent-container"></div>
-    <div class="other-conten rel-contnent-containert"></div>
-
+  <script id="CategoryTitleTemplate" type="text/template">
+    <h1 class="view-title">Category Name</h1>
   </script>
 
-  <script id="LinkItemTemplate" type="text/template">
-
-    <label class="rel-type-label">[<%= E.name %>][<%= E.rel %>]:</label><a href="<%= E.href %>" class="link-getdata" data-uri="<%= E.uri %>">fire request</a><span data-id="<%= E.uri %>"></span>
-
+  <script id="CategoryItemTemplate" type="text/template">
+    <div>thumbnail</div>
+    <div>Item Name</div>
+    <div>availability</div>
+    <div>Prices</div>
   </script>
 
-  <script id="LinkTemplateContainer" type="text/template">
+  <script id="CategoryItemCollectionEmptyTemplate" type="text/template">
+    [i18n] No item currently in this category.
+  </script>
 
-    <div class="category-list-container">
-
-      <ul class="category-list">
-
-      </ul>
-
+  <script id="CategoryPaginationTemplate" type="text/template">
+    <div class="paginationStatsContainer">
+      [i18n] Number of Results Displaying: n <br />
+      [i18n] Total Number of Results: n
     </div>
-
+    <div class="pagination-navigation-container">
+      <button class="btn-pagination" value="prev">[i18n] Prev</button> |
+      <button class="btn-pagination" value="next">[i18n] Next</button>
+    </div>
   </script>
-
 </div>
