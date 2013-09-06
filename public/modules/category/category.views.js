@@ -37,9 +37,11 @@ define(['marionette'],function(Marionette){
     itemView: LinkItemView
   });
 
+  var defaultLayout = function() {};
   return {
     LinksView:LinksView,
     ChildRelView:ChildRelView,
-    RelItemLayout:RelItemLayout
+    RelItemLayout:RelItemLayout,
+    DefaultView:defaultLayout
   };
 });
