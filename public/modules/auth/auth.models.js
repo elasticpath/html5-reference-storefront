@@ -31,10 +31,10 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
        type: 'POST',
        contentType: 'application/x-www-form-urlencoded',
        success: function (json, responseStatus, xhr) {
-         window.localStorage.setItem('oAuthRole', json.role);
-         window.localStorage.setItem('oAuthScope', json.scope);
-         window.localStorage.setItem('oAuthToken', 'Bearer ' + json.access_token);
-         window.localStorage.setItem('oAuthUserName', this.userName);
+         ep.io.localStore.setItem('oAuthRole', json.role);
+         ep.io.localStore.setItem('oAuthScope', json.scope);
+         ep.io.localStore.setItem('oAuthToken', 'Bearer ' + json.access_token);
+         ep.io.localStore.setItem('oAuthUserName', this.userName);
 
          Mediator.fire('mediator.authenticationSuccess', json.role);
        },
@@ -60,10 +60,10 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
         success:function(json, responseSTatus, xhr) {
           try{
             // FIXME abstract persistence layer
-            window.localStorage.removeItem('oAuthRole');
-            window.localStorage.removeItem('oAuthScope');
-            window.localStorage.removeItem('oAuthToken');
-            window.localStorage.removeItem('oAuthUserName');
+            ep.io.localStore.removeItem('oAuthRole');
+            ep.io.localStore.removeItem('oAuthScope');
+            ep.io.localStore.removeItem('oAuthToken');
+            ep.io.localStore.removeItem('oAuthUserName');
           }
           catch(err){
             ep.logger.error('Error - removing authentication tokens from local storage');

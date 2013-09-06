@@ -28,10 +28,6 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
       return ep.app.config.deployMode || 'development';
     };
 
-    ep.app.showInstrumentation = function () {
-      return ep.app.config.debug.showInstrumentation || false;
-    };
-    // experimental hook
 
     // determine if touch enabled
     ep.ui.touchEnabled = function () {
@@ -42,12 +38,7 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
       return false;
     };
 
-    ep.ui.localStorage = function () {
-      if (Modernizr.localstorage) {
-        return true;
-      }
-      return false;
-    };
+
 
     ep.ui.encodeUri = function (uri) {
       if (uri) {
@@ -127,6 +118,8 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
       return retVal;
     };
 
+    ep.io.localStore = window.localStorage;
+
 
     EventBus.on('app.authInit', function () {
       document.location.reload();
@@ -138,9 +131,9 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
       // check and see if there is a local auth token
       // if yes, is it still valid
       // if not generate a public one
-      if (ep.ui.localStorage) {
+      if (ep.io.localStore) {
         // check for auth token
-        oAuthToken = window.localStorage.getItem('oAuthToken');
+        oAuthToken = ep.io.localStore.getItem('oAuthToken');
 
         //if (!oAuthRole)
       }
@@ -245,9 +238,9 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
     ep.app.getUserPref = function (prop) {
       // test if user pref exists
       var retVal = null;
-      if (ep.ui.localStorage()) {
-        if (localStorage.getItem('epUserPrefs')) {
-          ep.app.epUserPrefs = JSON.parse(localStorage.getItem('epUserPrefs'));
+      if (ep.io.localStore) {
+        if (ep.io.localStore.getItem('epUserPrefs')) {
+          ep.app.epUserPrefs = JSON.parse(ep.io.localStore.getItem('epUserPrefs'));
           if (ep.app.epUserPrefs[prop]) {
             return ep.app.epUserPrefs[prop];
           }
@@ -260,13 +253,13 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
     };
     ep.app.setUserPref = function (prop, val) {
       // test if user pref exists
-      if (ep.ui.localStorage()) {
-        if (!localStorage.getItem('epUserPrefs')) {
-          localStorage.setItem('epUserPrefs', '{}');
+      if (ep.io.localStore) {
+        if (!ep.io.localStore.getItem('epUserPrefs')) {
+          ep.io.localStore.setItem('epUserPrefs', '{}');
         }
-        ep.app.epUserPrefs = JSON.parse(localStorage.getItem('epUserPrefs'));
+        ep.app.epUserPrefs = JSON.parse(ep.io.localStore.getItem('epUserPrefs'));
         ep.app.epUserPrefs[prop] = val;
-        localStorage.setItem('epUserPrefs', JSON.stringify(ep.app.epUserPrefs));
+        ep.io.localStore.setItem('epUserPrefs', JSON.stringify(ep.app.epUserPrefs));
       }
       else {
         ep.logger.warn('attmempt to set user pref but localStorage not supported')

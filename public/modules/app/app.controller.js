@@ -44,38 +44,8 @@ define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!m
           view:'AppHeaderView'
         });
       });
-      ep.app.getUserPref = function(prop){
-        // test if user pref exists
-        var retVal = false;
-        if (ep.ui.localStorage()){
-          if (localStorage.getItem('epUserPrefs')){
-            ep.app.epUserPrefs = localStorage.getItem('epUserPrefs');
-            if (ep.app.epUserPrefs[prop]){
-              return ep.app.epUserPrefs[prop];
-            }
-          }
-        }
-        // if not return false
-        // if so then return value
 
-        return retVal;
-      };
 
-      // set window resize event to detect when the view should change
-      EventBus.bind('layout.windowResized',function(event){
-        if (ep.ui.width < 700){
-          if (displayModeFull){
-            displayModeFull = false;
-            ep.logger.info('|-------------------   resize app down');
-          }
-        }
-        if (ep.ui.width > 700){
-          if (!displayModeFull){
-            displayModeFull = true;
-            ep.logger.info('|-------------------   resize app up');
-          }
-        }
-      });
       EventBus.trigger('app.baseLayoutRenderSuccess');
     });
     EventBus.bind('app.baseLayoutRenderSuccess',function(){
@@ -106,7 +76,7 @@ define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!m
 
 /*
 
-Old Instrumentation code - delete?
+Old Instrumentation code - po
 
  var rem = function rem() {
  var html = document.getElementsByTagName('html')[0];

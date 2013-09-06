@@ -19,6 +19,32 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
       return authLayout;
     };
 
+
+    /*
+    *
+    * Functions
+    *
+    * */
+    // test if user is logged in
+    function isUserLoggedIn(){
+      var retVar = false;
+      // check if there is an auth token
+      if (ep.io.localStore.getItem('oAuthRole') && ep.io.localStore.getItem('oAuthRole') === 'REGISTERED'){
+        retVar = true;
+      }
+
+      return retVar;
+    }
+    // log user out
+    function logUserOut(){
+
+    }
+
+    /*
+    *
+    * Event Listeners
+    *
+    * */
     /*
      * Load login menu - load login form or profile menu depend on authentication state
      */
@@ -73,7 +99,6 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
      *  - Logout (DELETE)
      */
     EventBus.on('auth.authenticationRequest', function(authObj) {
-      ep.logger.info('auth.authenticationRequest');
       ep.io.ajax(authObj);
     });
 
@@ -82,7 +107,6 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
      * Login Button Clicked - submit login form to server
      */
     EventBus.on('auth.loginFormSubmitButtonClicked', function () {
-      ep.logger.info('auth.loginFormSubmitButtonClicked');
       var requestModel = View.getLoginRequestModel();
 
       if (requestModel.isComplete()) {
@@ -106,7 +130,6 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
      * Generate Public Authentication Request
      */
     EventBus.on('auth.generatePublicAuthTokenRequest', function() {
-      ep.logger.info('auth.generatePublicAuthTokenRequest');
       var authString = 'grant_type=password&scope=' + ep.app.config.cortexApi.scope + '&role=PUBLIC';
 
       var publicAuthModel = new Model.LoginModel();
@@ -119,17 +142,19 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
      * Logout Button Clicked - make logout request to server
      */
     EventBus.on('auth.logoutBtnClicked', function() {
-      ep.logger.info('auth.logoutBtnClicked');
+
       var logoutModel = new Model.LogoutModel();
 
       EventBus.trigger('auth.authenticationRequest', logoutModel.attributes);
     });
 
+
     return {
-      AuthModel:Model.AuthModel,
       DefaultView:defaultView,
       LoginFormView: function() {return new View.LoginFormView(); },
-      ProfileMenuView: function() {return new View.ProfileMenuView(); }
+      ProfileMenuView: function() {return new View.ProfileMenuView(); },
+      isUserLoggedIn:isUserLoggedIn,
+      logUserOut:logUserOut
     };
   }
 );

@@ -8,6 +8,7 @@
  */
 define(
   function (require) {
+    require('sinon');
     var ep = require('ep');
     var $ = require('jquery');
     var EventBus = require('eventbus');
@@ -34,9 +35,11 @@ define(
         });
         this.authMenuItemRegion.show(this.view);
 
+        this.ajax_stub = sinon.stub(ep.io,'ajax');
       });
 
       afterEach(function () {
+        ep.io.ajax.restore();
         this.view.model.destroy();
       });
 
@@ -45,6 +48,43 @@ define(
       });
 
 
+      describe("Auth Controller",function(){
+
+        it("DefaultView should exist", function () {
+          expect(authController.DefaultView).to.exist;
+        });
+        it("LoginFormView should exist", function () {
+          expect(authController.LoginFormView).to.exist;
+        });
+        it("ProfileMenuView should exist", function () {
+          expect(authController.ProfileMenuView).to.exist;
+        });
+        it("isUserLoggedIn method should exist",function(){
+          expect(authController.isUserLoggedIn).to.exist;
+        });
+        it("user should not be logged in",function(){
+          expect(authController.isUserLoggedIn()).to.be.false;
+        });
+        it("log user in",function(){
+          var aModel = new authModel.LoginModel();
+          aModel.set('username','ben.boxer@elasticpath.com');
+          aModel.set('password','password');
+          aModel.set('scope','mobee');
+          aModel.set('role','REGISTERED');
+
+          var authString = 'grant_type=password&username=' + aModel.get('userName')
+            + '&password=' + aModel.get('password')
+            + '&scope=' + aModel.get('scope')
+            + '&role=' + aModel.get('role');
+
+          aModel.set('data', authString);
+
+          this.ajax_stub(aModel.attributes);
+
+        });
+
+
+      });
       describe("Auth Views",function(){
         it("DefaultView should exist", function () {
           expect(authView.DefaultView).to.exist;
@@ -91,21 +131,21 @@ define(
           EventBus.trigger('auth.loadAuthMenuRequest', state);
         });
       });
+      describe('Auth Models', function () {
+        it("LogoutModel should exist", function () {
+          expect(authModel.LogoutModel).to.exist;
+        });
+        it("LoginFormModel should exist", function () {
+          expect(authModel.LoginFormModel).to.exist;
+        });
+        it("LoginModel should exist", function () {
+          expect(authModel.LoginModel).to.exist;
+        });
+
+      });
 
     });
 
-    describe('Auth Module - Models', function () {
-      it("LogoutModel should exist", function () {
-        expect(authModel.LogoutModel).to.exist;
-      });
-      it("LoginFormModel should exist", function () {
-        expect(authModel.LoginFormModel).to.exist;
-      });
-      it("LoginModel should exist", function () {
-        expect(authModel.LoginModel).to.exist;
-      });
-
-    });
 
 
 

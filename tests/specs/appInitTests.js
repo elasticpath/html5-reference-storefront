@@ -10,6 +10,9 @@ define(function (require) {
   var ep = require('ep');
 
   describe('EP Client App', function () {
+    before(function(){
+      ep.io.localStore.removeItem('testItem');
+    });
     it('ep.app namespace should exist', function () {
       expect(ep.app).to.be.ok;
     });
@@ -31,9 +34,7 @@ define(function (require) {
     it('ep.app.cortexApi.scope property should exist', function () {
       expect(ep.app.config.cortexApi.scope).to.be.ok;
     });
-    it('ep.app.showInstrumentation method should exist', function () {
-      expect(ep.app.showInstrumentation).to.be.ok;
-    });
+
     it('viewPortRegion should exist', function () {
       expect(ep.app.viewPortRegion).to.be.ok;
     });
@@ -60,6 +61,26 @@ define(function (require) {
       var apiUrl = ep.io.getApiUrl();
       expect(apiUrl).to.be.ok;
     });
+    describe("EP IO localStore",function(){
+      it('ep.io.localStore namespace should exist', function () {
+        expect(ep.io.localStore).to.exist;
+      });
+      it("localStore getItem testItem should be null",function(){
+
+        expect(ep.io.localStore.getItem('testItem')).to.be.null;
+      });
+      it("setItem 'testItem = test' in localStore",function(){
+        ep.io.localStore.setItem('testItem','test');
+        expect(ep.io.localStore.getItem('testItem')).to.equal('test');
+      });
+      it("localStore can set get and remove item (testItem)",function(){
+        ep.io.localStore.setItem('testItem','test');
+        expect(ep.io.localStore.getItem('testItem')).to.equal('test');
+        ep.io.localStore.removeItem('testItem');
+        expect(ep.io.localStore.getItem('testItem')).to.be.null;
+      });
+    });
+
 
     it(' UI namespace should exist', function () {
       expect(ep.ui).to.be.ok;
@@ -67,9 +88,7 @@ define(function (require) {
     it('UI touchEnabled method should exist', function () {
       expect(ep.ui.touchEnabled).to.be.ok;
     });
-    it('localStorage method should exist', function () {
-      expect(ep.ui.localStorage).to.be.ok;
-    });
+
     it('logger namespace should exist', function () {
       expect(ep.logger).to.be.ok;
     });
