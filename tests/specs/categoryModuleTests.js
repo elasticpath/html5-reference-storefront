@@ -41,17 +41,17 @@ define(function(require) {
         });
       });
 
-      it('categoryTitleView should exist', function () {
-        expect(categoryViews.categoryTitleView).to.exist;
+      it('CategoryTitleView should exist', function () {
+        expect(categoryViews.CategoryTitleView).to.exist;
       });
-      it('categoryItemCollectionView should exist', function () {
-        expect(categoryViews.categoryItemCollectionView).to.exist;
+      it('CategoryItemCollectionView should exist', function () {
+        expect(categoryViews.CategoryItemCollectionView).to.exist;
       });
-      it('categoryItemView should exist', function () {
-        expect(categoryViews.categoryItemView).to.exist;
+      it('CategoryItemView should exist', function () {
+        expect(categoryViews.CategoryItemView).to.exist;
       });
-      it('categoryPaginationView should exist', function () {
-        expect(categoryViews.categoryPaginationView).to.exist;
+      it('CategoryPaginationView should exist', function () {
+        expect(categoryViews.CategoryPaginationView).to.exist;
       });
     });
 
@@ -70,7 +70,56 @@ define(function(require) {
      * Test Events
      */
     describe ('UI Storefront Category Events', function() {
-      
+      var EventBus = require('eventbus');
+      var templates = require('text!modules/category/category.templates.html');
+      var categoryViews = require('modules/category/category.views');
+      var categoryModel = require('modules/category/category.models');
+
+      /* Setup Begin*/
+      before(function () {
+        this.$fixture = $('<div data-region="myTestRegion"></div>');
+      });
+
+      beforeEach(function () {
+        this.$fixture.empty().appendTo($("#Fixtures"));
+        this.$fixture.append(templates);
+        this.myTestRegion = new Marionette.Region({
+          el: '[data-region="myTestRegion"]'
+        });
+
+        this.view = new categoryViews.CategoryPaginationView({
+          model: new categoryModel.CategoryModel()
+        });
+        this.myTestRegion.show(this.view);
+      });
+
+      afterEach(function () {
+        this.view.model.destroy();
+      });
+
+      after(function () {
+        $("#Fixtures").empty();
+      });
+      /* Setup Ends */
+
+      it("Pagination button should exist", function () {
+        expect($('.btn-pagination').html()).to.exist;
+      });
+
+      it ('Pagination button should trigger category.paginationBtnClicked event', function(done){
+        EventBus.on('category.paginationBtnClicked', function(direction) {
+          done();
+        });
+        $('button.btn-pagination').trigger('click');
+      });
+
+      it ('category.paginationBtnClicked event should trigger category.loadCategoryViewRequest event', function(done){
+        var direction = 'NEXT'; // actual direction does not matter in this test.
+        EventBus.on('category.loadCategoryViewRequest', function(direction) {
+          done();
+        });
+        EventBus.trigger('category.paginationBtnClicked', direction);
+      });
     });
   });
 });
