@@ -12,11 +12,11 @@ define(
     var $ = require('jquery');
     var EventBus = require('eventbus');
     var templates = require('text!modules/auth/auth.templates.html');
-    var auth = require('modules/auth/auth.controller');
+    var authController = require('modules/auth/auth.controller');
     var authView = require('modules/auth/auth.views');
     var authModel = require('modules/auth/auth.models');
 
-    describe('UI Storefront Auth Module - Views', function () {
+    describe('UI Storefront Auth Module', function () {
 
       before(function () {
         this.$fixture = $('<div data-region="authMenuItemRegion"></div>');
@@ -45,53 +45,56 @@ define(
       });
 
 
-      it("DefaultView should exist", function () {
-        expect(authView.DefaultView).to.exist;
-      });
-      it("LoginFormView should exist", function () {
-        expect(authView.LoginFormView).to.exist;
-      });
-      it("ProfileMenuView should exist", function () {
-        expect(authView.ProfileMenuView).to.exist;
-      });
-      it("getLoginRequestModel should exist", function () {
-        expect(authView.getLoginRequestModel).to.exist;
-      });
-      it("Login Button and hidden menu container should exist", function () {
-        expect($('.btn-auth-dropdown').html()).to.exist;
-        expect($('.auth-nav-container').html()).to.exist;
-      });
-      it("Login Button click should fire auth.btnAuthMenuDropdownClicked", function (done) {
-        EventBus.on('auth.btnAuthMenuDropdownClicked', function () {
-          done();
+      describe("Auth Views",function(){
+        it("DefaultView should exist", function () {
+          expect(authView.DefaultView).to.exist;
         });
-        $('button.btn-auth-dropdown').trigger('click');
+        it("LoginFormView should exist", function () {
+          expect(authView.LoginFormView).to.exist;
+        });
+        it("ProfileMenuView should exist", function () {
+          expect(authView.ProfileMenuView).to.exist;
+        });
+        it("getLoginRequestModel should exist", function () {
+          expect(authView.getLoginRequestModel).to.exist;
+        });
+        it("Login Button and hidden menu container should exist", function () {
+          expect($('.btn-auth-dropdown').html()).to.exist;
+          expect($('.auth-nav-container').html()).to.exist;
+        });
+        it("Login Button click should fire auth.btnAuthMenuDropdownClicked", function (done) {
+          EventBus.on('auth.btnAuthMenuDropdownClicked', function () {
+            done();
+          });
+          $('button.btn-auth-dropdown').trigger('click');
+        });
+
+        it("ep.app.mainAuthRegion should exist", function () {
+          expect(ep.app.mainAuthView).to.exist;
+        });
+        it("auth.btnAuthMenuDropdownClicked event with PUBLIC state should trigger loadRegionContentRequest with LoginFormView ", function (done) {
+          var state = 'PUBLIC';
+          EventBus.on('layout.loadRegionContentRequest', function (obj) {
+            if (obj.view === 'LoginFormView') {
+              done();
+            }
+          });
+          EventBus.trigger('auth.loadAuthMenuRequest', state);
+        });
+        it("auth.btnAuthMenuDropdownClicked event with REGISTERED state should trigger loadRegionContentRequest with ProfileMenuView ", function (done) {
+          var state = 'REGISTERED';
+          EventBus.on('layout.loadRegionContentRequest', function (obj) {
+            if (obj.view === 'ProfileMenuView') {
+              done();
+            }
+          });
+          EventBus.trigger('auth.loadAuthMenuRequest', state);
+        });
       });
 
-      it("ep.app.mainAuthRegion should exist", function () {
-        expect(ep.app.mainAuthView).to.exist;
-      });
-      it("auth.btnAuthMenuDropdownClicked event with PUBLIC state should trigger loadRegionContentRequest with LoginFormView ", function (done) {
-        var state = 'PUBLIC';
-        EventBus.on('layout.loadRegionContentRequest', function (obj) {
-          if (obj.view === 'LoginFormView') {
-            done();
-          }
-        });
-        EventBus.trigger('auth.loadAuthMenuRequest', state);
-      });
-      it("auth.btnAuthMenuDropdownClicked event with REGISTERED state should trigger loadRegionContentRequest with ProfileMenuView ", function (done) {
-        var state = 'REGISTERED';
-        EventBus.on('layout.loadRegionContentRequest', function (obj) {
-          if (obj.view === 'ProfileMenuView') {
-            done();
-          }
-        });
-        EventBus.trigger('auth.loadAuthMenuRequest', state);
-      });
     });
 
-    describe('UI Storefront Auth Module - Models', function () {
+    describe('Auth Module - Models', function () {
       it("LogoutModel should exist", function () {
         expect(authModel.LogoutModel).to.exist;
       });
@@ -104,25 +107,6 @@ define(
 
     });
 
-    describe('UI Storefront Anonymous token generation tests', function (done) {
-
-      var authString = 'grant_type=password&scope=' + ep.app.config.cortexApi.scope + '&role=PUBLIC';
-
-      var publicAuthModel = new authModel.LoginModel();
-      publicAuthModel.set('data', authString);
-
-
-      it("auth.authenticationRequest listener should be called when it is triggered", function (done) {
-        EventBus.on('auth.authenticationRequest', function () {
-          done();
-        });
-        EventBus.trigger('auth.authenticationRequest');
-
-      });
-
-
-
-    });
 
 
   }
