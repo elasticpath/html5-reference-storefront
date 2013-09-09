@@ -42,7 +42,7 @@
     "logout":"Logout",
     "userName": "Username",
     "password": "Password",
-    "formValidationFailErrMsg":"Username or password are missing. ",
-    "loginFailBadCredentialErrMsg":"Your username or password is invalid. "
+    "loginFormMissingFieldsErrMsg":"Username or password are missing. ",
+    "badCredentialErrMsg":"Your username or password is invalid. "
   }
 }

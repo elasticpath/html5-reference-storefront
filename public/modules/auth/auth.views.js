@@ -109,8 +109,10 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
 
     var displayLoginErrorMsg = function(msg){
       if (msg) {
-        var errMsg = viewHelpers.getI18nLabel('auth.' + msg);
+        var key = 'auth.' + msg;
+        var errMsg = viewHelpers.getI18nLabel(key);
         $('.auth-feedback-container').text(errMsg);
+        $('.auth-feedback-container').attr('data-i18n', key);
       }
       else {
         ep.logger.warn('DisplayLoginErrorMsg called without error message');

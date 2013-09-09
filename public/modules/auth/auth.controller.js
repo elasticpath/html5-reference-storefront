@@ -122,7 +122,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
         EventBus.trigger('auth.authenticationRequest', loginModel.attributes);
       }
       else {
-        EventBus.trigger('auth.loginFormValidationFailed', 'formValidationFailErrMsg');
+        EventBus.trigger('auth.loginFormValidationFailed', 'loginFormMissingFieldsErrMsg');
       }
     });
 

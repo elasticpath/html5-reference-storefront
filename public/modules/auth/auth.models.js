@@ -40,7 +40,7 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
        },
        error: function(response) {
          if (response.status === 401) {
-           EventBus.trigger('auth.loginRequestFailed', 'loginFailBadCredentialErrMsg');
+           EventBus.trigger('auth.loginRequestFailed', 'badCredentialErrMsg');
          } else {
            ep.logger.error('response code ' + response.status + ': ' + response.responseText);
          }
