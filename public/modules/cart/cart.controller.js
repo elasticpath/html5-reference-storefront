@@ -33,7 +33,9 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/cart/cart.models', 'modules/
 
           cartLayout.cartTitleRegion.show(new View.CartTitleView());
           cartLayout.cartSummaryRegion.show(summaryView);
-          cartLayout.cartCheckoutActionRegion.show(new View.CartCheckoutActionView());
+          cartLayout.cartCheckoutActionRegion.show(new View.CartCheckoutActionView({
+            model: cartModel
+          }));
 
           if (response.attributes.lineItems.length > 0) {
             cartLayout.mainCartRegion.show(mainCartView);

@@ -230,6 +230,16 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
       }
     };
 
+    ep.isUserLoggedIn = function(){
+      var retVar = false;
+      // check if there is an auth token
+      if (ep.io.localStore.getItem('oAuthRole') && ep.io.localStore.getItem('oAuthRole') === 'REGISTERED'){
+        retVar = true;
+      }
+
+      return retVar;
+    };
+
     /*
      *
      * User Preferences

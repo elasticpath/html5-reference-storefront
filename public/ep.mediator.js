@@ -6,7 +6,7 @@
  * Time: 3:49 PM
  *
  */
-define(['eventbus'],function(EventBus){
+define(['ep','eventbus'],function(ep, EventBus){
 
   var mediatorObj = {
     'mediator.loadLogoComponentRequest':function(reqEventData){

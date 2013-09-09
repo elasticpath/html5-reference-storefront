@@ -101,6 +101,20 @@ define(['ep','marionette','i18n','eventbus','mediator'],
       },
       getCortexPath:function(){
         return ep.app.config.cortexApi.path;
+      },
+      getCheckoutButtonDisabledAttrib:function(model){
+        // complete purchase disabled by default
+        var retVar = 'disabled="disabled"';
+        // is user anonymous - return true
+        if (!ep.isUserLoggedIn()){
+            retVar = '';
+        }
+        // user is logged in but may not have a submitorderaction link
+        else if(model.submitOrderActionUri){
+          retVar = '';
+        }
+        return  retVar;
+
       }
     };
 

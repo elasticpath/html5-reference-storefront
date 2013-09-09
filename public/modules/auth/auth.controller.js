@@ -25,16 +25,8 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
     * Functions
     *
     * */
-    // test if user is logged in
-    function isUserLoggedIn(){
-      var retVar = false;
-      // check if there is an auth token
-      if (ep.io.localStore.getItem('oAuthRole') && ep.io.localStore.getItem('oAuthRole') === 'REGISTERED'){
-        retVar = true;
-      }
 
-      return retVar;
-    }
+
     // log user out
     function logUserOut(){
 
@@ -153,7 +145,6 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
       DefaultView:defaultView,
       LoginFormView: function() {return new View.LoginFormView(); },
       ProfileMenuView: function() {return new View.ProfileMenuView(); },
-      isUserLoggedIn:isUserLoggedIn,
       logUserOut:logUserOut
     };
   }

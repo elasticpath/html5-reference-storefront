@@ -66,12 +66,7 @@ define(
         it("ProfileMenuView should exist", function () {
           expect(authController.ProfileMenuView).to.exist;
         });
-        it("isUserLoggedIn method should exist",function(){
-          expect(authController.isUserLoggedIn).to.exist;
-        });
-        it("user should not be logged in",function(){
-          expect(authController.isUserLoggedIn()).to.be.false;
-        });
+
         it("log user in",function(done){
           var aModel = new authModel.LoginModel();
           aModel.set('username','ben.boxer@elasticpath.com');

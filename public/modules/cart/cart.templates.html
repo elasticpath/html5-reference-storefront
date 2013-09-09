@@ -96,7 +96,7 @@
 
   <!-- Cart Checkout Action Template -->
   <script id="CartCheckoutActionTemplate" type="text/template">
-    <button class="btn btn-round btn-primary btn-cmd-checkout"><%= E.getI18nLabel('cart.checkout') %></button>
+    <button class="btn btn-round btn-primary btn-cmd-checkout" <%= E.getCheckoutButtonDisabledAttrib(E) %>><%= E.getI18nLabel('cart.checkout') %></button>
   </script>
 
 

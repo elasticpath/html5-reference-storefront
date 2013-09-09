@@ -133,6 +133,12 @@ define(['ep','eventbus', 'backbone'],
         }
         cartObj.lineItems = lineItemsArray;
 
+        /*
+        * Cart Submit Order Action
+        * */
+        cartObj.submitOrderActionUri = jsonPath(cart, "$.['_purchaseform'][0][links][0].uri")[0];
+
+
 
         /*
          * Cart Summary: total quantity
