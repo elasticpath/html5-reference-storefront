@@ -279,10 +279,6 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
         ep.app.addInitializer(function (options) {
           // do useful stuff here
           ep.router = new Router.AppRouter();
-          // ep.app.config = {};
-          ep.app.config.url = ep.app.config.api.url;
-          ep.app.config.store = ep.app.config.api.store;
-
         });
         // wait until the application and DOM are spun up
         // then start the history manager
