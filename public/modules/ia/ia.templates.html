@@ -3,13 +3,13 @@
   <!--
 
 
-    NAVIGATIONS
+    MAIN NAVIGATION
 
 
   -->
 
   <!-- Main Navigation Template Container -->
-  <script type="text/template" id="MainNavTemplateContainer">
+  <script type="text/template" id="MainNavTemplate">
 
     <nav class="main-nav">
         <button class="btn-main-nav-toggle btn-link-cmd">
@@ -23,31 +23,9 @@
   </script>
 
   <!-- Navigation item Template -->
-  <script type="text/template" id="NavItemTemplateContainer">
-
-    <a href="#category/<%= E.name.toLowerCase() %>" class="cmd-nav-item" title="<%= E.label %>" data-route="<%= E.name %>"><span><%= E.name %></span></a>
-
+  <script type="text/template" id="NavItemTemplate">
+    <a href="<%= E.generateCategoryHref(E.uri) %>" class="nav-item" title="<%= E.displayName %>"><span><%= E.displayName %></span></a>
   </script>
-
-  <!-- Main Navigation Preferences -->
-  <script id="MainNavPreferences" type="text/template">
-    <h3>preferences</h3>
-    <form>
-      <fieldset>
-        <label for="PrefMainNavDisplayType">Display compact view</label>
-        <input type="checkbox" name="PrefMainNavDisplayType" id="PrefMainNavDisplayType" />
-      </fieldset>
-      <button id="PrefMainNavDisplayTypeSave">Ok</button>
-    </form>
-  </script>
-
-  <!-- lOADING INDICATOR TEMPLATE -->
-  <script id="LoadingIndicatorTemplate" type="text/template">
-    <img src="/images/activity-indicator-strobe.gif" />
-  </script>
-
-
-
 
 
   <!--

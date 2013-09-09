@@ -16,12 +16,7 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
 
     _.templateSettings.variable = 'E';
 
-    // set default render mode for main nav
-    var currentMainNavDisplayCompactSetting = false;
-
     var mainNavInitialized = false;
-
-    var displayModeFull = true;
 
 
     /*
@@ -32,51 +27,20 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
     *
     * */
     var MainNavView = function(){
-
-
-
-      var mainNavCollection = new  Model.MainNavCollection();
-
-      var mainNavView = new View.MainNavView({
-        collection:mainNavCollection,
-        model:new Backbone.Model({compactDisplay:currentMainNavDisplayCompactSetting})
-
+      var mainNavCollection = new  Model.MainNavTopCategoryModel();
+      var mainNavView =  new View.MainNavView({
+        collection:mainNavCollection
       });
 
-      mainNavCollection.fetch({
-        url: '/' + ep.app.config.cortexApi.path + '/navigations/' + ep.app.config.cortexApi.scope + '?zoom=element',
-        success: function(response){},
-        error:function(response){
-          //clearInterval(timer);
-         // ep.logger.error('Error retrieving main nav data time:' + seconds + ' seconds');
-          ep.logger.error('Warning: unable to fetch main nav model from Cortex: ' + JSON.stringify(response));
-
+      mainNavCollection.fetch ({
+        error: function(response){
+          ep.logger.error('top level main navigation model load failed: ' + response);
         }
-
       });
-
-      /*
-      *
-      * Context menu
-      * */
-      var contextTrigger = 'right';
-      if (ep.ui.touchEnabled()){
-        contextTrigger = 'hold';
-      }
-      // turn off context menu
-//      $('.main-nav-container').contextmenu({
-//          'preferences':preferences
-//        },
-//        contextTrigger
-//      );
-
-
-
-
-
 
       return mainNavView;
     };
+
     /*
      *
      *    BROWSE CATEGORY VIEW
@@ -127,74 +91,6 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
      * Functions
      *
      * */
-    /*
-     *
-     * Main Nav Component Rendering Preference
-     *
-     * */
-    function preferences(){
-
-      var isDirty = false;
-      if (localStorage.getItem('epUserPrefs')){
-        epUserPrefs = JSON.parse(localStorage.getItem('epUserPrefs'));
-        if (epUserPrefs.prefMainNavDisplayCompact){
-          currentMainNavDisplayCompactSetting = epUserPrefs.prefMainNavDisplayCompact;
-        }
-      }
-      var modalRegion = new Marionette.Region({
-        el: "#modal",
-
-        onShow:function(){
-          this.showModal(this);
-        },
-
-        getEl: function(selector){
-          var $el = $(selector);
-          $el.on("hidden", this.close);
-          return $el;
-        },
-
-        showModal: function(view){
-          view.on("close", this.hideModal, this);
-          var $modalEl = $("#modal");
-          $modalEl.modal({overlayClose:true});
-          //this.$el.modal({overlayClose:true});
-        },
-
-        hideModal: function(){
-          this.$el.modal('hide');
-        }
-      });
-      ep.logger.info('preferences clicked');
-      var view = new View.MainNavPreferencesView();
-      view.on('show',function(){
-        if (currentMainNavDisplayCompactSetting){
-          $('#PrefMainNavDisplayType').attr('checked','checked');
-        }
-      });
-      var $modalEl = $("#modal");
-      $modalEl.modal({overlayClose:true});
-      modalRegion.show(view);
-      // $modalEl.modal({overlayClose:true});
-      $('#PrefMainNavDisplayTypeSave').click(function(event){
-
-        // save the preference
-        var preCompactDisplay = $('#PrefMainNavDisplayType').is(':checked');
-        var epUserPrefs = {};
-        if (localStorage.getItem('epUserPrefs')){
-          epUserPrefs = JSON.parse(localStorage.getItem('epUserPrefs'));
-        }
-        epUserPrefs.prefMainNavDisplayCompact = preCompactDisplay;
-        localStorage.setItem('epUserPrefs',JSON.stringify(epUserPrefs));
-        // close the window
-        // repaint the nav component
-
-        EventBus.trigger('ia.reloadMainNavRequest');
-        $.modal.close();
-
-      });
-    }
-
 
 
     /*
@@ -210,6 +106,11 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
         module:'ia',
         view:'MainNavView'
       });
+    });
+
+    // clear selection when no category selected is out of focus
+    EventBus.on('ia.clearSelectedNavRequest',function(){
+      View.clearSelectedMainNav();
     });
 
     // Render Browse Category Request
@@ -276,31 +177,6 @@ define(['ep', 'app', 'eventbus', 'cortex', 'modules/ia/ia.models', 'modules/ia/i
 
         }
       });
-    });
-
-    // Window Resized Event
-    EventBus.on('layout.windowResized',function(event){
-      if (ep.ui.width < 700){
-        if (displayModeFull){
-          displayModeFull = false;
-          ep.logger.info( '|-------------------   resize nav down');
-        }
-      }
-      if (ep.ui.width > 700){
-        if (!displayModeFull){
-          displayModeFull = true;
-          ep.logger.info( '|-------------------   resize nav up');
-        }
-      }
-    });
-
-    // Main Nav Nodes Load Success
-    EventBus.on('ia.mainNavNodesLoadSuccess',function(){
-      mainNavInitialized = true;
-    });
-
-    EventBus.on('ia.clearSelectedNavRequest',function(){
-      View.clearSelectedMainNav();
     });
 
 

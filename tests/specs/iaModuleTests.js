@@ -16,35 +16,17 @@ define(function (require) {
     describe("IA Controller",function(){
       var iaController = require('ia');
       it("MainNavView view should exist",function(){
-        expect(iaController.MainNavView).to.exsist;
+        expect(iaController.MainNavView).to.exist;
       });
-      it("BrowseCategoryView view should exist",function(){
-        expect(iaController.BrowseCategoryView).to.exsist;
-      });
-
     });
+
     describe("IA Views",function(){
       var iaViews = require('modules/ia/ia.views');
       it("MainNavView view should exist",function(){
-        expect(iaViews.MainNavView).to.exsist;
+        expect(iaViews.MainNavView).to.exist;
       });
       it("NavItemView view should exist",function(){
-        expect(iaViews.NavItemView).to.exsist;
-      });
-      it("BrowseCategoryLayout view should exist",function(){
-        expect(iaViews.BrowseCategoryLayout).to.exsist;
-      });
-      it("BrowseCategoryList view should exist",function(){
-        expect(iaViews.BrowseCategoryList).to.exsist;
-      });
-      it("BrowseItemView view should exist",function(){
-        expect(iaViews.BrowseItemView).to.exsist;
-      });
-      it("CatagoryNodeView view should exist",function(){
-        expect(iaViews.CatagoryNodeView).to.exsist;
-      });
-      it("MainNavPreferencesView view should exist",function(){
-        expect(iaViews.MainNavPreferencesView).to.exsist;
+        expect(iaViews.NavItemView).to.exist;
       });
       it("clearSelectedMainNav method should exist",function(){
         expect(iaViews.clearSelectedMainNav).to.exist;
@@ -54,17 +36,8 @@ define(function (require) {
     describe("IA Models",function(){
       var iaModel = require('modules/ia/ia.models');
 
-        it("MainNavCollection should exist",function(){
-          expect(iaModel.MainNavCollection).to.exist;
-        });
-        it("BrowseItemCollection should exist",function(){
-          expect(iaModel.BrowseItemCollection).to.exist;
-        });
-        it("BrowseCategoryCollection should exist",function(){
-          expect(iaModel.BrowseCategoryCollection).to.exist;
-        });
-        it("BrowseCategoryLayout should exist",function(){
-          expect(iaModel.BrowseCategoryLayout).to.exist;
+        it("MainNavTopCategoryModel should exist",function(){
+          expect(iaModel.MainNavTopCategoryModel).to.exist;
         });
     });
 

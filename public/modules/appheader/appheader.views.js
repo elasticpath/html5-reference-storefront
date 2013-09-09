@@ -30,7 +30,7 @@ define(['ep', 'mediator', 'eventbus','backbone','marionette','i18n','modules/app
       onShow:function(){
         var elementWidth = $('.logo-container').outerWidth();
         EventBus.trigger('view.headerLogoViewRendered', elementWidth);
-        Mediator.fire('mediator.globalNavRendered');
+        Mediator.fire('mediator.appHeaderRendered');
       }
     });
     var HeaderLogoView = Backbone.Marionette.Layout.extend({

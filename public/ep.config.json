@@ -14,5 +14,8 @@
     "scope":"mobee"
   },
   "deployMode":"development",
-  "requireAuthToCheckout":true
+  "requireAuthToCheckout":true,
+  "routes": {
+    "category":"#category/"
+  }
 }

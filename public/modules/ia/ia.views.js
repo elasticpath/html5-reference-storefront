@@ -10,165 +10,39 @@ define(['ep','eventbus','marionette'],
   function(ep,EventBus,Marionette){
 
     var viewHelpers = {
-      getDisplayType:function(bHasChildren){
-        if (bHasChildren){
-          return 'inline-block';
+      generateCategoryHref:function(uri) {
+        var retVal;
+
+        if (uri) {
+          retVal = ep.app.config.routes.category + ep.app.config.cortexApi.path + ep.ui.encodeUri(uri);
         }
-        return 'none';
-      },
-      encodeUri:function(uri){
-        return ep.ui.encodeUri(uri);
+        else {
+          retVal = '';
+          ep.logger.warn('main nav category loaded without uri');
+        }
+
+        return retVal;
       }
     };
 
 
     // Nav Item View
     var NavItemView = Backbone.Marionette.ItemView.extend({
-      template:'#NavItemTemplateContainer',
+      template:'#NavItemTemplate',
       tagName: 'li',
-      templateHelpers: viewHelpers,
-      attributes:function(){
-        return{
-          'data-name':this.model.attributes.name.toLowerCase()
-        };
-      }
+      templateHelpers: viewHelpers
     });
+
     // Main Nav View
     var MainNavView = Backbone.Marionette.CompositeView.extend({
-      template:'#MainNavTemplateContainer',
+      template:'#MainNavTemplate',
       itemViewContainer: 'ul[data-region="mainNavList"]',
       itemView: NavItemView,
-      events:{
-        'click .cmd-nav-item':function(){
-          //$('.main-nav-list').fadeOut();
-//          EventBus.trigger('ia.clearNavMenuRequest');
-        }
-      },
+      templateHelper:viewHelpers,
       onShow:function(){
-        ep.logger.info('main nav on show');
-//        $('.btn-main-nav-toggle').click(function(event){
-//          $('.main-nav-list').fadeToggle(400);
-//        });
-        //function(){
-        //var epUserPrefs = {};
-        var currentMainNavDisplayCompactSetting = false;
-        if (this.model.attributes && (this.model.attributes.compactDisplay !== undefined)) {
-          currentMainNavDisplayCompactSetting = this.model.attributes.compactDisplay;
-        }
-
-//        if (this.model.displayCompactMode !== 'undefined'){
-//          currentMainNavDisplayCompactSetting = this.model.displayCompactMode;
-//        }
-//        else{
-//        if (localStorage.getItem('epUserPrefs')){
-//          ep.app.epUserPrefs = JSON.parse(localStorage.getItem('epUserPrefs'));
-//          if (typeof ep.app.epUserPrefs.prefMainNavDisplayCompact !== 'undefined'){
-//            //if (epUserPrefs.prefMainNavDisplayCompact){
-//            currentMainNavDisplayCompactSetting = ep.app.epUserPrefs.prefMainNavDisplayCompact;
-//            //}
-//          }
-//        }
-        // }
-/*
-*
-* Turn user prefs off for now
-*
-* */
-//        if (currentMainNavDisplayCompactSetting){
-//          $('.main-nav-list').hide();
-//          $('.btn-main-nav-toggle').click(function(event){
-//            $('.main-nav-list').fadeToggle(400).css('position','absolute');
-//
-//            //$('.main-nav-container nav').removeClass('nav-h').addClass('.nav-v');
-//          });
-//        }
-//        else{
-          $('.btn-main-nav-toggle').hide();
-          $('.main-nav-list').show();
-          //$('.main-nav-container nav').removeClass('nav-v').addClass('.nav-h');
-          // $('.main-nav-container').css('width','100%');
-          $('.main-nav-container .nav-h ul li').css('display','inline');
-
-          EventBus.bind('ia.compactMainNav',function(){
-
-          });
-        //}
-        //}
-
-        EventBus.trigger('ia.MainNavViewRendered');
+        $('.btn-main-nav-toggle').hide();
+        ep.logger.info('main nav on show, toggle btn hidden.');
       }
-    });
-
-
-
-    // Main Nav Preferences View
-    var MainNavPreferencesView = Backbone.Marionette.ItemView.extend({
-      template:'#MainNavPreferences',
-      onShow:function(){
-
-
-        // set the preference
-        //var epUserPrefs;
-        if (localStorage.getItem('epUserPrefs')){
-          ep.app.epUserPrefs = JSON.parse(localStorage.getItem('epUserPrefs'));
-        }
-        if (ep.app.epUserPrefs.prefMainNavDisplayCompact !== undefined){
-          if(ep.app.epUserPrefs.prefMainNavDisplayCompact){
-            $('#PrefMainNavDisplayType').prop('checked',true);
-          }
-          else{
-            $('#PrefMainNavDisplayType').prop('checked',false);
-          }
-        }
-        else{
-          $('#PrefMainNavDisplayType').prop('checked',false);
-        }
-
-
-
-        // event handler for button
-        ep.logger.info('SHOW THE DIALOG MODAL VIEW FOR NAV PREF');
-
-        $('#PrefMainNavDisplayTypeSave').click(function(event){
-          event.preventDefault();
-          // save the preference
-          var preCompactDisplay = $('#PrefMainNavDisplayType').is(':checked');
-
-          //var epUserPrefs;
-          if (localStorage.getItem('epUserPrefs')){
-            ep.app.epUserPrefs = JSON.parse(localStorage.getItem('epUserPrefs'));
-          }
-          ep.app.epUserPrefs.prefMainNavDisplayCompact = preCompactDisplay;
-          localStorage.setItem('epUserPrefs',JSON.stringify(ep.app.epUserPrefs));
-
-
-
-          //localStorage.setItem('prefMainNavDisplayCompact',preCompactDisplay);
-
-
-
-
-
-
-
-
-          // close the window
-          // repaint the nav component
-          EventBus.trigger('ia.reloadMainNavRequest');
-        });
-
-
-      }
-    });
-
-
-    /*
-    *
-    * Loading View
-    *
-    * */
-    var loadingIndicatorTemplate = Backbone.Marionette.ItemView.extend({
-      template:'#LoadingIndicatorTemplate'
     });
 
 
@@ -241,7 +115,6 @@ define(['ep','eventbus','marionette'],
       BrowseCategoryList:BrowseCategoryView,
       BrowseItemView:BrowseItemView,
       CatagoryNodeView:CatagoryNodeView,
-      MainNavPreferencesView:MainNavPreferencesView,
       clearSelectedMainNav:clearSelectedMainNav
 
     };

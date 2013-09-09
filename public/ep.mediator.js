@@ -14,11 +14,16 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         EventBus.trigger('appheader.loadLogoComponent',reqEventData);
       });
     },
-    'mediator.globalNavRendered':function(){
+    'mediator.appHeaderRendered':function(){
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'authMenuItemRegion',
           module:'auth',
           view:'DefaultView'
+        });
+        EventBus.trigger('layout.loadRegionContentRequest',{
+          region:'mainNavRegion',
+          module:'ia',
+          view:'MainNavView'
         });
       /*require(['cart'],function(mod){
         EventBus.trigger('cart.loadGlobalNavAuthMenuRequest');

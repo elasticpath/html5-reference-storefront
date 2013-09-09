@@ -44,8 +44,8 @@ define(['marionette','eventbus'],
       category: function(category) {
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
-          module:'ia',
-          view:'BrowseCategoryView',
+          module:'category',
+          view:'DefaultView',
           data:category
         });
       },
@@ -139,7 +139,7 @@ define(['marionette','eventbus'],
         '': 'index',
         'home': 'index',
         'category' : 'category',
-        'category/:name' : 'category',
+        'category/:uri' : 'category',
         'search' : 'search',
         'search/:keywords' : 'search',
         'composer': 'composer',

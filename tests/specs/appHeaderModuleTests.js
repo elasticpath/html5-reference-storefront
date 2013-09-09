@@ -27,9 +27,15 @@ define(
       // Module Views
       describe("AppHeader Views",function(){
         var appHeaderViews = require('modules/appheader/appheader.views');
+        var ep = require('ep');
+
         it('PageHeaderView should exist', function () {
           expect(appHeaderViews.PageHeaderView).to.exist;
         });
+        it('MainNavRegion should exist', function() {
+          expect(ep.app.mainNavRegion).to.exist;
+        });
+
         it('HeaderLogoView should exist', function () {
           expect(appHeaderViews.HeaderLogoView).to.exist;
         });

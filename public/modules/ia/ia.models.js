@@ -11,60 +11,49 @@ define(['ep','eventbus', 'backbone', 'cortex'],
 
 
 
-    var categoryNavTree = {};
     var mainNavInitialized = false;
     var mainNavLength = 0;
     var mainNavCurrentIndex = 0;
 
-    categoryNavTree.nodes = [];
-
-    var BrowseCategoryLayout = Backbone.Model.extend({});
 
     // Main Nav Item
     var MainNavItemModel = Backbone.Model.extend({});
 
     // Build Main Nav collection
-    var MainNavCollection = Backbone.Collection.extend({
+    var mainNavTopCategoryModel = Backbone.Collection.extend({
       model: MainNavItemModel,
       url: '/' + ep.app.config.cortexApi.path + '/navigations/' + ep.app.config.cortexApi.scope + '?zoom=element',
       parse:function(response){
-        // grab only the elements
-        var mainNavCollection = _.first(jsonPath(response, "$.['_element']"));
-        // generate the reference structure for category nav
-        generateCategoryTreeTopLevel(mainNavCollection);
+        var mainNavCollection = [];
+        var mainNavItem = {};
+
+        var topLevelCatArray = response._element;
+        var arrayLen;
+        if (topLevelCatArray) {
+          arrayLen = topLevelCatArray.length;
+        }
+
+        for (var x = 0; x < arrayLen; x++) {
+          var arrayObj = topLevelCatArray[x];
+          mainNavItem = {
+            displayName:arrayObj['display-name'],
+            name:arrayObj['name'],
+            uri:arrayObj['self']['uri'],
+            details:arrayObj['details']
+          }
+
+          mainNavCollection.push(mainNavItem);
+        }
 
         return mainNavCollection;
-
       }
     });
 
-
-
+    var BrowseCategoryLayout = Backbone.Model.extend({});
     // generate the tree structure to drive the category browsing
-    function generateCategoryTreeTopLevel(collection){
 
-      var topLevelNavRootsCount = collection.length;
-      // TOP LEVEL NAV LIST
-      for (var i = 0;i < topLevelNavRootsCount;i++){
-        var topLevelNavItem = collection[i];
 
-        var nodeObj = {};
-        nodeObj.nodes = [];
-        nodeObj.name = topLevelNavItem.name;
-        var navNode = {
-          name:topLevelNavItem.name,
-          displayName:topLevelNavItem['display-name'],
-          href:topLevelNavItem.self.href,
-          uri:topLevelNavItem.self.uri,
-          itemsHref:jsonPath(topLevelNavItem, "$.links[?(@.rel=='items')]"),
-          nodes:[]
-        };
-        categoryNavTree.nodes.push(navNode);
-      }
 
-      EventBus.trigger('ia.mainNavNodesLoadSuccess');
-
-    }
     // CATEGORY
     var CategoryItemModel = Cortex.Model.extend({
       afterParse:function(response, retVal, xhr){
@@ -132,11 +121,10 @@ define(['ep','eventbus', 'backbone', 'cortex'],
 
 
     return {
-      MainNavCollection:MainNavCollection,
+      MainNavTopCategoryModel:mainNavTopCategoryModel,
       BrowseItemCollection:BrowseItemCollection,
       BrowseCategoryCollection:BrowseCategoryCollection,
-      BrowseCategoryLayout:BrowseCategoryLayout,
-      MainNavNodeCollection:categoryNavTree
+      BrowseCategoryLayout:BrowseCategoryLayout
 
     };
   }
