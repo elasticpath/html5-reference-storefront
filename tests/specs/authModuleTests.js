@@ -35,8 +35,15 @@ define(
         });
         this.authMenuItemRegion.show(this.view);
 
-        this.ajax_stub = sinon.stub(ep.io,'ajax');
+        this.ajax_stub = sinon.stub(ep.io,'ajax',function(options){
+
+        });
+//        sinon.stub(ep.io,'ajax').yieldsTo('success', {
+//          count: '100',
+//          message: 'oh boy, 100 pickles!'
+//        });
       });
+
 
       afterEach(function () {
         ep.io.ajax.restore();
@@ -65,7 +72,7 @@ define(
         it("user should not be logged in",function(){
           expect(authController.isUserLoggedIn()).to.be.false;
         });
-        it("log user in",function(){
+        it("log user in",function(done){
           var aModel = new authModel.LoginModel();
           aModel.set('username','ben.boxer@elasticpath.com');
           aModel.set('password','password');
@@ -80,6 +87,8 @@ define(
           aModel.set('data', authString);
 
           this.ajax_stub(aModel.attributes);
+          expect(ep.io.ajax.calledOnce).to.be.true;
+          done();
 
         });
 

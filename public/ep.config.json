@@ -10,12 +10,12 @@
   "cortexApi":{
     "host":"http://10.10.121.201",
     "port":"8080",
-    "path":"cortex",
-    "scope":"mobee"
+    "path":"integrator",
+    "scope":"telcooperative"
   },
   "deployMode":"development",
   "api":{
-    "url":"cortex",
-    "store":"mobee"
+    "url":"integrator",
+    "store":"telcooperative"
   }
 }
