@@ -20,7 +20,7 @@ define(['app', 'eventbus', 'cortex', 'modules/ui/ui.modal.models', 'modules/ui/u
 
     };
     var modalRegion = new Marionette.Region({
-      el: "#modal",
+      el: '[data-region="modalRegion"]',
 
 //      constructor: function(){
 //        _.bindAll(this);

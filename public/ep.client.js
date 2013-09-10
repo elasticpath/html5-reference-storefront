@@ -230,7 +230,10 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
       }
     };
 
-    ep.isUserLoggedIn = function(){
+    /*
+    * Is IUser
+    * */
+    ep.app.isUserLoggedIn = function(){
       var retVar = false;
       // check if there is an auth token
       if (ep.io.localStore.getItem('oAuthRole') && ep.io.localStore.getItem('oAuthRole') === 'REGISTERED'){

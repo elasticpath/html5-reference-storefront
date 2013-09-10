@@ -102,10 +102,10 @@ define(function (require) {
       expect(ep.logger.error).to.be.ok;
     });
     it("isUserLoggedIn method should exist",function(){
-      expect(ep.isUserLoggedIn).to.exist;
+      expect(ep.app.isUserLoggedIn).to.exist;
     });
     it("user should not be logged in",function(){
-      expect(ep.isUserLoggedIn()).to.be.false;
+      expect(ep.app.isUserLoggedIn()).to.be.false;
     });
   });
 

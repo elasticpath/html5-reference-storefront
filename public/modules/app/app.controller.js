@@ -6,7 +6,7 @@
  * Time: 2:53 PM
  *
  */
-define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!modules/app/app.templates.html'],
+define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!modules/app/app.templates.html','modalwin'],
   function(ep,EventBus,Model,View,template){
 
     _.templateSettings.variable = 'E';
@@ -19,9 +19,80 @@ define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!m
     // attach the module template markup to the DOM
     $(anchorSelector).append(baseMarkup);
 
+    /*
+    * User Preferences
+    * */
     ep.app.epUserPrefs = {};
 
-    ep.app.on('start',function(){
+    /*
+    * Modal Region
+    * */
+    var modalRegion = Backbone.Marionette.Region.extend({
+      el: '[data-region="modalRegion"]',
+
+      constructor: function(){
+        _.bindAll(this);
+        Backbone.Marionette.Region.prototype.constructor.apply(this, arguments);
+        this.on('show', this.showModal, this);
+        this.on('hide', this.hideModal, this);
+      },
+      getEl:function(selector){
+        var $el = $(selector);
+        $el.on('hidden', this.close);
+        return $el;
+      },
+
+      showModal: function(view){
+
+        this.$el.modal({
+          autoResize: true,
+          minWidth: 700,
+          modal: true,
+          position:['18%','18%'],
+          onShow: function(dialog){
+
+          },
+          onOpen:function(dialog){
+            dialog.overlay.fadeIn('fast',function(){
+              dialog.data.hide();
+              dialog.container.fadeIn('fast',function(){
+                dialog.data.slideDown('fast');
+              });
+            });
+          },
+          onClose:function(dialog){
+            dialog.data.fadeOut('fast',function(){
+              dialog.container.hide('fast',function(){
+                dialog.overlay.slideUp('fast',function(){
+                  $.modal.close();
+                });
+              });
+            });
+          }
+        });
+
+
+//        view.on("close", this.hideModal, this);
+//        var $modalEl = $("#modal");
+//        $modalEl.modal({overlayClose:true});
+//        //this.$el.modal({overlayClose:true});
+      },
+
+
+      onShow:function(){
+        //this.showModal(this);
+      },
+
+
+      hideModal: function(){
+        this.$el.modal('hide');
+      }
+    });
+
+    /*
+    * Start App Listener
+    * */
+    ep.app.on('start',function(options){
       // base application layout
       var baseLayout = new View.BaseLayout();
       baseLayout.render();
@@ -29,7 +100,9 @@ define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!m
         appHeaderRegion:'[data-region="appHeader"]',
         mainNavRegion:'[data-region="mainNavRegion"]',
         appMainRegion:'[data-region="appMain"]',
-        appFooterRegion:'[data-region="appFooter"]'
+        appFooterRegion:'[data-region="appFooter"]',
+        appModalRegion:modalRegion
+
       });
 
       // test forlocalStorage

@@ -99,6 +99,11 @@
     <button class="btn btn-round btn-primary btn-cmd-checkout" <%= E.getCheckoutButtonDisabledAttrib(E) %>><%= E.getI18nLabel('cart.checkout') %></button>
   </script>
 
+  <!-- Cart Activity Indicator Template -->
+  <script id="CartActivityIndicatorTemplate" type="text/template">
+    <img src="/images/activity-indicator-strobe.gif" />
+  </script>
+
 
 
   <!-- Empty Cart Template -->
@@ -120,6 +125,13 @@
   <!-- Cart Lineitem Unit List Price Template -->
   <script id="CartLineitemUnitListPriceTemplate" type="text/template">
     <span class="cart-list-price"><%= E.getListPrice(E.unitPrice) %></span>
+  </script>
+
+  <!-- Purchase Confirmation Template -->
+  <script id="PurchaseConfirmationTemplate" type="text/template">
+    <p>Thank you for your order it has been processed</p>
+    <!--<p>status: <span><%= E.status %></span></p>-->
+    <!--<p>Order #: <span><%= E.purchase-number %></span></p>-->
   </script>
 
 </div>

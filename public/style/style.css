@@ -1693,6 +1693,14 @@ a.error:hover {
     bottom: 0;
   }
 }
+/* start main nav*/
+/* end main nav*/
+/* Start Item Detail  */
+/* End Item Detail */
+/* Start Cart */
+/* End Cart */
+/* Start Auth */
+/* End Auth */
 /* apply a natural box layout model to all elements */
 *,
 *:before,
@@ -2120,6 +2128,63 @@ in the ui framework
 .ac-container input:checked ~ article.ac-large {
   height: 230px;
 }
+#FileEditor,
+#ModFileEditor,
+#TestEditor {
+  height: 40em;
+  width: 50em;
+}
+.composer-editor-container {
+  position: relative;
+}
+.ac-container article {
+  overflow-y: scroll;
+}
+.row {
+  background-color: #ccc;
+}
+.composer-container h2 {
+  font-size: 1.2em;
+  padding-top: .1em;
+  padding-bottom: .1em;
+  margin-top: .1em;
+  margin-bottom: .1em;
+}
+#contextmenu {
+  margin: 0;
+  padding: 0;
+  border: 1px solid #000;
+  background: #ccc;
+  z-index: 4000;
+}
+#contextmenu li {
+  list-style-type: none;
+  margin: 1px;
+  padding: 2px;
+  cursor: pointer;
+}
+#contextmenu li.hover {
+  background: #ddd;
+}
+.drop-zone {
+  height: 400px;
+  width: 400px;
+  border: 1px solid #444;
+  background-color: #999;
+}
+.test-layout {
+  padding: 1em;
+  border: 1px solid darkgreen;
+  background-color: #dbc59e;
+}
+/* start main nav*/
+/* end main nav*/
+/* Start Item Detail  */
+/* End Item Detail */
+/* Start Cart */
+/* End Cart */
+/* Start Auth */
+/* End Auth */
 .btn-main-nav-toggle {
   border-top: 1px solid #ddd;
   border-left: 1px solid #ddd;
@@ -2211,6 +2276,20 @@ in the ui framework
 .main-nav-list li:hover span {
   color: #2222aa;
 }
+/* start main nav*/
+/* end main nav*/
+/* Start Item Detail  */
+/* End Item Detail */
+/* Start Cart */
+/* End Cart */
+/* Start Auth */
+/* End Auth */
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
 .app-header {
   border-top: 1px solid #fff;
   position: relative;
@@ -2292,6 +2371,14 @@ header.app-header .row {
 .global-nav-container > a {
   color: #070ca6;
 }
+/* start main nav*/
+/* end main nav*/
+/* Start Item Detail  */
+/* End Item Detail */
+/* Start Cart */
+/* End Cart */
+/* Start Auth */
+/* End Auth */
 /*
   item detail
 */
@@ -2357,6 +2444,14 @@ header.app-header .row {
   font-weight: bold;
   color: #444444;
 }
+/* start main nav*/
+/* end main nav*/
+/* Start Item Detail  */
+/* End Item Detail */
+/* Start Cart */
+/* End Cart */
+/* Start Auth */
+/* End Auth */
 /*
   cart view
 */
@@ -2443,6 +2538,14 @@ header.app-header .row {
   text-align: right;
   font-weight: bold;
 }
+/* start main nav*/
+/* end main nav*/
+/* Start Item Detail  */
+/* End Item Detail */
+/* Start Cart */
+/* End Cart */
+/* Start Auth */
+/* End Auth */
 /*
   auth view
 */
@@ -2676,6 +2779,8 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
   background-color: #333;
   border: 8px solid #444;
   padding: 12px;
+  width: auto !important;
+  height: auto !important;
 }
 #simplemodal-container a.modalCloseImg {
   background: url(images/x.png) no-repeat;

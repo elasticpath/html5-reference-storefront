@@ -32,6 +32,15 @@ define(['marionette','eventbus'],
           view:'DefaultView'
         });
       },
+      confirmation: function(id){
+        EventBus.trigger('layout.loadRegionContentRequest',{
+          region:'appMainRegion',
+          module:'cart',
+          view:'PurchaseConfirmationView',
+          data:id
+        });
+      },
+
       category: function(category) {
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
@@ -145,7 +154,8 @@ define(['marionette','eventbus'],
         'itemdetail/:id': 'item',
         'settings': 'settings',
         'profile': 'profile',
-        'mycart': 'cart'
+        'mycart': 'cart',
+        'confirmation/:id': 'confirmation'
       },
       controller:appRouterController
     });

@@ -106,7 +106,7 @@ define(['ep','marionette','i18n','eventbus','mediator'],
         // complete purchase disabled by default
         var retVar = 'disabled="disabled"';
         // is user anonymous - return true
-        if (!ep.isUserLoggedIn()){
+        if (!ep.app.isUserLoggedIn() && (model.cartTotalQuantity > 0)){
             retVar = '';
         }
         // user is logged in but may not have a submitorderaction link
@@ -234,9 +234,19 @@ define(['ep','marionette','i18n','eventbus','mediator'],
         'click .btn-cmd-checkout':function(event){
           event.preventDefault();
           ep.logger.info('Checkout button clicked');
-          EventBus.trigger('cart.checkoutBtnClicked');
+          EventBus.trigger('cart.checkoutBtnClicked',this.model);
         }
       }
+    });
+
+    // Purchase Confirmation View
+    var purchaseConfirmationView = Backbone.Marionette.ItemView.extend({
+      template:'#PurchaseConfirmationTemplate'
+    });
+
+    // Activity Indicator View
+    var cartActivityIndicatorView = Backbone.Marionette.ItemView.extend({
+      template:'#CartActivityIndicatorTemplate'
     });
 
     return {
@@ -246,7 +256,9 @@ define(['ep','marionette','i18n','eventbus','mediator'],
       EmptyCartView:emptyCartView,
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
-      DefaultView:defaultView
+      DefaultView:defaultView,
+      PurchaseConfirmationView:purchaseConfirmationView,
+      CartActivityIndicatorView:cartActivityIndicatorView
     };
   }
 );

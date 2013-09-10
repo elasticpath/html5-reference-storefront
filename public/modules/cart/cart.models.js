@@ -10,6 +10,7 @@ define(['ep','eventbus', 'backbone'],
   function(ep, EventBus, Backbone){
 
 
+    // Cart Model
     var cartModel = Backbone.Model.extend({
       url:ep.app.config.cortexApi.path + '/carts/' + ep.app.config.cortexApi.scope + '/default/?zoom=total,lineitems:element,lineitems:element:price,lineitems:element:availability,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price,order:purchaseform',
       parse:function(cart){
@@ -136,8 +137,9 @@ define(['ep','eventbus', 'backbone'],
         /*
         * Cart Submit Order Action
         * */
-        cartObj.submitOrderActionUri = jsonPath(cart, "$.['_purchaseform'][0][links][0].uri")[0];
-
+        //cartObj.submitOrderActionUri = jsonPath(cart, "$.['_purchaseform'][0][links][0].uri")[0];
+        cartObj.submitOrderActionUri = jsonPath(cart, "$..links[?(@.rel=='submitorderaction')].uri");
+//        $..book[?(@.price<10)]
 
 
         /*
@@ -167,12 +169,15 @@ define(['ep','eventbus', 'backbone'],
       }
     });
 
+    var purchaseConfirmationModel = Backbone.Model.extend();
+
 
 
     return {
       CartModel:cartModel,
       CartItemCollection:cartItemCollection,
-      CartItemModel:cartItemModel
+      CartItemModel:cartItemModel,
+      PurchaseConfirmationModel:purchaseConfirmationModel
 
     };
   }

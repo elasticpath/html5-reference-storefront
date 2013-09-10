@@ -6,7 +6,7 @@
  * Time: 3:49 PM
  *
  */
-define(['ep','eventbus'],function(ep, EventBus){
+define(['ep','eventbus','router'],function(ep, EventBus, Router){
 
   var mediatorObj = {
     'mediator.loadLogoComponentRequest':function(reqEventData){
@@ -43,6 +43,23 @@ define(['ep','eventbus'],function(ep, EventBus){
       require(['ia'],function(mod){
         EventBus.trigger('ia.clearSelectedNavRequest');
       });
+    },
+    'mediator.orderProcessSuccess':function(uri){
+
+
+      if (uri){
+        require(['ep'], function(ep){
+
+          document.location.href = '#confirmation/' + ep.ui.encodeUri(uri);
+        });
+
+        EventBus.trigger('layout.loadRegionContentRequest',{
+          region:'appMainRegion',
+          module:'cart',
+          view:'PurchaseConfirmationView',
+          data:uri
+        });
+      }
     }
 
   };

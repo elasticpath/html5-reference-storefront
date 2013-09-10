@@ -143,7 +143,9 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
 
     return {
       DefaultView:defaultView,
-      LoginFormView: function() {return new View.LoginFormView(); },
+      LoginFormView: function() {
+        return new View.LoginFormView();
+      },
       ProfileMenuView: function() {return new View.ProfileMenuView(); },
       logUserOut:logUserOut
     };
