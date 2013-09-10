@@ -6,8 +6,8 @@
  * Time: 1:32 PM
  *
  */
-define(['i18n'],
-  function (i18n) {
+define(['ep', 'i18n'],
+  function (ep, i18n) {
 
     var viewHelpers = {
       getI18nLabel: function (key) {
@@ -20,6 +20,38 @@ define(['i18n'],
         }
 
         return retVal;
+      },
+      getDefaultImagePath: function (thumbnail) {
+        var retVar;
+        if (thumbnail && thumbnail.absolutePath) {
+          retVar = thumbnail.absolutePath;
+        }
+        else {
+          retVar = '/images/img-placeholder.png';
+        }
+        return retVar;
+      },
+      getDefaultImageName: function (thumbnail) {
+        var retVar;
+        if (thumbnail && thumbnail.name) {
+          retVar = thumbnail.name;
+        }
+        else {
+          retVar = this.getI18nLabel('itemDetail.noImgLabel');
+        }
+        return retVar;
+      },
+      generateItemHref: function (uri) {
+        var retVar;
+        var uriCruft = '/items/' + ep.app.config.cortexApi.scope + '/';
+        if (uri && uri.indexOf(uriCruft) > -1) {
+          retVar = ep.app.config.routes.itemDetail + '/' + uri.substring(uriCruft.length, uri.length);
+        } else {
+          retVar = '';
+          ep.logger.warn('[category browse]: unable to generate href to item-detail');
+        }
+
+        return retVar;
       }
     };
 

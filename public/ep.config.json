@@ -16,6 +16,7 @@
   "deployMode":"development",
   "requireAuthToCheckout":true,
   "routes": {
-    "category":"#category/"
+    "category":"#category",
+    "itemDetail":"#itemdetail"
   }
 }

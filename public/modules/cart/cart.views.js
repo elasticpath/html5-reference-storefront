@@ -85,7 +85,7 @@ define(['ep','marionette','i18n','eventbus','mediator'],
           retVar = thumbnail.name;
         }
         else{
-          retVar = this.getI18nLabel('noImgLabel');
+          retVar = this.getI18nLabel('itemDetail.noImgLabel');
         }
         return retVar;
       },

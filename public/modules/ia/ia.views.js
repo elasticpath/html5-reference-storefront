@@ -7,14 +7,14 @@
  *
  */
 define(['ep','eventbus'],
-  function(ep,EventBus){
+  function(ep, EventBus){
 
     var viewHelpers = {
       generateCategoryHref:function(uri) {
         var retVal;
 
         if (uri) {
-          retVal = ep.app.config.routes.category + ep.app.config.cortexApi.path + ep.ui.encodeUri(uri);
+          retVal = ep.app.config.routes.category + '/' + ep.ui.encodeUri(ep.app.config.cortexApi.path + uri);
         }
         else {
           retVal = '';

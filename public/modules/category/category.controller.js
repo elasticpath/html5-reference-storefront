@@ -119,7 +119,7 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
       var categoryModel = new Model.CategoryModel();
 
       categoryModel.fetch({
-        url: ep.ui.decodeUri(uri) + '?zoom=items, items:element:price, items:element:rate, items:element:definition, items:element:definition:assets, items:element:availability',
+        url: ep.ui.decodeUri(uri) + '?zoom=items, items:element, items:element:price, items:element:rate, items:element:definition, items:element:definition:assets:element, items:element:availability',
         success: function (response) {
 
           var itemCollectionView = new View.CategoryItemCollectionView({

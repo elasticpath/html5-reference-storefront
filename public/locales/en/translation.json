@@ -1,47 +1,47 @@
 {
-  "auth":{
-    "loginMenu":"Login",
-    "login":"Login",
-    "logout":"Logout",
+  "auth": {
+    "loginMenu": "Login",
+    "login": "Login",
+    "logout": "Logout",
     "userName": "Username",
     "password": "Password",
-    "loginFormMissingFieldsErrMsg":"Username or password are missing. ",
-    "badCredentialErrMsg":"Your username or password is invalid. "
+    "loginFormMissingFieldsErrMsg": "Username or password are missing. ",
+    "badCredentialErrMsg": "Your username or password is invalid. "
   },
-  "availability":{
-    "AVAILABLE":"In Stock",
-    "ALWAYS":"Always",
-    "NOT_AVAILABLE":"Out of Stock",
-    "AVAILABLE_FOR_BACK_ORDER":"Available for Back Order",
-    "AVAILABLE_FOR_PRE_ORDER":"Pre Order",
-    "releasedOn":"Expected Release Date"
+  "availability": {
+    "AVAILABLE": "In Stock",
+    "ALWAYS": "Always",
+    "NOT_AVAILABLE": "Out of Stock",
+    "AVAILABLE_FOR_BACK_ORDER": "Available for Back Order",
+    "AVAILABLE_FOR_PRE_ORDER": "Pre Order",
+    "releasedOn": "Expected Release Date"
   },
-  "cart":{
-    "viewTitle":"Shopping Cart",
-    "product":"Product",
-    "name":"Name",
-    "availability":"Availability",
-    "itemPrice":"Item Price",
-    "quantity":"Quantity",
-    "itemTotal":"Item Total",
-    "remove":"Remove",
-    "totalQuantity":"Total Quantity",
-    "subTotal":"Sub Total",
-    "checkout":"Complete Purchase",
-    "emptyCartMsg":"Your shopping cart is empty."
+  "cart": {
+    "viewTitle": "Shopping Cart",
+    "product": "Product",
+    "name": "Name",
+    "availability": "Availability",
+    "itemPrice": "Item Price",
+    "quantity": "Quantity",
+    "itemTotal": "Item Total",
+    "remove": "Remove",
+    "totalQuantity": "Total Quantity",
+    "subTotal": "Sub Total",
+    "checkout": "Complete Purchase",
+    "emptyCartMsg": "Your shopping cart is empty."
   },
   "category": {
     "next": "Next",
     "prev": "Previous",
     "resultsOnPage": "Number of Results Displaying",
     "totalResults": "Total Number of Results",
-    "emptyViewMsg":"No item currently in this category"
+    "emptyViewMsg": "No item currently in this category"
   },
-  "noImgLabel":"No Image Available",
-  "itemDetail":{
-    "addToCart":"Add to Cart",
-    "purchasePrice":"Price",
-    "listPrice":"Original Price",
-    "quantity":"Quantity"
+  "itemDetail": {
+    "addToCart": "Add to Cart",
+    "purchasePrice": "Price",
+    "listPrice": "Original Price",
+    "noImgLabel": "No Image Available",
+    "quantity": "Quantity"
   }
 }

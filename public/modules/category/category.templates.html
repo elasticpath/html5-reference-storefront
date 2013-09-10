@@ -12,8 +12,8 @@
   </script>
 
   <script id="CategoryItemTemplate" type="text/template">
-    <div>thumbnail</div>
-    <div>Item Name</div>
+    <div><img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>" class="category-item-thumbnail"/></div>
+    <div><a href="<%= E.generateItemHref(E.uri) %>"><%= E.name %></a></div>
     <div>availability</div>
     <div>Prices</div>
   </script>
@@ -24,11 +24,12 @@
 
   <script id="CategoryPaginationTemplate" type="text/template">
     <div class="paginationStatsContainer">
-      <%= E.getI18nLabel('category.resultsOnPage') %> : <%= E.resultsOnPage %> <br />
+      <%= E.getI18nLabel('category.resultsOnPage') %> : <%= E.resultsOnPage %> <br/>
       <%= E.getI18nLabel('category.totalResults') %> : <%= E.totalResults %>
     </div>
     <div class="pagination-navigation-container">
-      <button class="btn-pagination" value="prev"><%= E.getI18nLabel('category.prev') %></button> |
+      <button class="btn-pagination" value="prev"><%= E.getI18nLabel('category.prev') %></button>
+      |
       <button class="btn-pagination" value="next"><%= E.getI18nLabel('category.next') %></button>
     </div>
   </script>
