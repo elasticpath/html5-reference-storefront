@@ -72,9 +72,9 @@ define(['ep','app','backbone','jsonpath'],
 
           //itemObj.asset.url = 'http://localhost:3007/images/testdata/finding-nemo.jpg';
           //itemObj.asset.url = defaultImage['content-location'];
-          assetObj.contentLocation = defaultImage['content-location'];
+          assetObj.absolutePath = defaultImage['content-location'];
           assetObj.name = defaultImage['name'];
-          assetObj.relatvieLocation = defaultImage['relative-location'];
+          assetObj.relativePath = defaultImage['relative-location'];
           assetsListArray.push(assetObj);
         }
 

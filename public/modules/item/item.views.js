@@ -99,11 +99,11 @@ define(['ep','marionette','i18n','eventbus'],
           return '';
         }
       },
-      getDefaultImagePath:function(aModel){
-        if (aModel && (aModel.length > 0)){
-          for (var i = 0;i < aModel.length;i++){
-            if (aModel[i].name == 'default-image'){
-              return aModel[i].contentLocation;
+      getDefaultImagePath:function(thumbnail){
+        if (thumbnail && (thumbnail.length > 0)){
+          for (var i = 0;i < thumbnail.length;i++){
+            if (thumbnail[i].name == 'default-image'){
+              return thumbnail[i].absolutePath;
               break;
             }
           }
@@ -112,14 +112,15 @@ define(['ep','marionette','i18n','eventbus'],
           return '/images/img-placeholder.png';
         }
       },
-      getDefaultImageName:function(aModel){
-        // redundant until we have more sophisticated implementation
-        if (aModel){
-          return this.getI18nLabel('itemDetail.defaultImage');
+      getDefaultImageName:function(thumbnail){
+        var retVar;
+        if (thumbnail && thumbnail.name){
+          retVar = thumbnail.name;
         }
         else{
-          return '';
+          retVar = this.getI18nLabel('noImgLabel');
         }
+        return retVar;
       },
       getCortexPath:function(){
         return ep.app.config.cortexApi.path;

@@ -27,7 +27,6 @@
     "remove":"Remove",
     "totalQuantity":"Total Quantity",
     "subTotal":"Sub Total",
-    "defaultImage":"Default Image",
     "checkout":"Complete Purchase",
     "emptyCartMsg":"Your shopping cart is empty."
   },
@@ -38,11 +37,11 @@
     "totalResults": "Total Number of Results",
     "emptyViewMsg":"No item currently in this category"
   },
+  "noImgLabel":"No Image Available",
   "itemDetail":{
     "addToCart":"Add to Cart",
     "purchasePrice":"Price",
     "listPrice":"Original Price",
-    "quantity":"Quantity",
-    "defaultImage":"Default Image"
+    "quantity":"Quantity"
   }
 }

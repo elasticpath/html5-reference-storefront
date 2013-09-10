@@ -42,8 +42,8 @@ define(['ep','eventbus', 'backbone'],
             var defaultImg = jsonPath(assetsArray, "$.[?(@.name='default-image')]")[0];
             lineItemObj.thumbnail = {
               name:defaultImg['name'],
-              contentLocation:defaultImg['content-location'],
-              relativeLocation:defaultImg['relative-location']
+              absolutePath:defaultImg['content-location'],
+              relativePath:defaultImg['relative-location']
             }
           }
 

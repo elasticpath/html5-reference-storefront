@@ -69,23 +69,23 @@ define(['ep','marionette','i18n','eventbus','mediator'],
           return '';
         }
       },
-      getDefaultImagePath:function(aModel){
+      getDefaultImagePath:function(thumbnail){
         var retVar;
-        if (aModel && aModel.contentLocation){
-          retVar = aModel.contentLocation;
+        if (thumbnail && thumbnail.absolutePath){
+          retVar = thumbnail.absolutePath;
         }
         else{
          retVar = '/images/img-placeholder.png';
         }
         return retVar;
       },
-      getDefaultImageName:function(aModel){
+      getDefaultImageName:function(thumbnail){
         var retVar;
-        if (aModel){
-          retVar = this.getI18nLabel('cart.defaultImage');
+        if (thumbnail && thumbnail.name){
+          retVar = thumbnail.name;
         }
         else{
-          retVar = '';
+          retVar = this.getI18nLabel('noImgLabel');
         }
         return retVar;
       },
