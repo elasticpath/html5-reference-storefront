@@ -6,8 +6,8 @@
  * Time: 9:16 AM
  *
  */
-define(['ep','eventbus','marionette'],
-  function(ep,EventBus,Marionette){
+define(['ep','eventbus'],
+  function(ep,EventBus){
 
     var viewHelpers = {
       generateCategoryHref:function(uri) {
@@ -45,63 +45,6 @@ define(['ep','eventbus','marionette'],
       }
     });
 
-
-    /*
-    *
-    *
-    *   Category Item List Views
-    *
-    *
-    * */
-    // Category Node View
-    var CatagoryNodeView = Backbone.Marionette.CompositeView.extend({
-      template:'[data-view="IACategoryNodeView"]'
-    });
-
-    // Browse Category Layout
-    var BrowseCategoryLayout = Backbone.Marionette.Layout.extend({
-      template:'#BrowseCategoryLayoutContainer',
-      className:'browse-items-container',
-      regions:{
-        categoryRegion:'.categoryRegion',
-        itemRegion:'.itemRegion'
-      }
-    });
-
-    // Category Item View
-    var CategoryItemView = Backbone.Marionette.ItemView.extend({
-      template:'#BrowseCategoryItemTemplate',
-      tagName: 'li',
-      templateHelpers: viewHelpers
-    });
-
-    // No Sub Category View
-    var noSubCatsView = Backbone.Marionette.ItemView.extend({
-      template:'#NoSubCatsView'
-    });
-
-    // Browse Category View
-    var BrowseCategoryView = Backbone.Marionette.CompositeView.extend({
-      template:'#BrowseCategoryListTemplate',
-      itemViewContainer: 'ul',
-      itemView: CategoryItemView,
-      emptyView: noSubCatsView
-    });
-
-    // Item View
-    var ItemView = Backbone.Marionette.ItemView.extend({
-      template:'#BrowseItemTemplate',
-      tagName: 'li',
-      templateHelpers: viewHelpers
-    });
-
-    // Browse Item View
-    var BrowseItemView = Backbone.Marionette.CompositeView.extend({
-      template:'#BrowseItemListTemplate',
-      itemViewContainer: 'ul',
-      itemView: ItemView
-    });
-
     function clearSelectedMainNav(){
       $('.main-nav-list li').removeClass('is-selected');
     }
@@ -111,10 +54,6 @@ define(['ep','eventbus','marionette'],
     return {
       MainNavView:MainNavView,
       NavItemView:NavItemView,
-      BrowseCategoryLayout:BrowseCategoryLayout,
-      BrowseCategoryList:BrowseCategoryView,
-      BrowseItemView:BrowseItemView,
-      CatagoryNodeView:CatagoryNodeView,
       clearSelectedMainNav:clearSelectedMainNav
 
     };

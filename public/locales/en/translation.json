@@ -1,17 +1,20 @@
 {
   "auth":{
+    "loginMenu":"Login",
     "login":"Login",
     "logout":"Logout",
-    "userName":"User Name",
-    "password":"Password"
+    "userName": "Username",
+    "password": "Password",
+    "loginFormMissingFieldsErrMsg":"Username or password are missing. ",
+    "badCredentialErrMsg":"Your username or password is invalid. "
   },
-  "itemDetail":{
-    "addToCart":"Add to Cart",
-    "purchasePrice":"Price",
-    "listPrice":"Original Price",
-    "quantity":"Quantity",
-    "defaultImage":"Default Image"
-
+  "availability":{
+    "AVAILABLE":"In Stock",
+    "ALWAYS":"Always",
+    "NOT_AVAILABLE":"Out of Stock",
+    "AVAILABLE_FOR_BACK_ORDER":"Available for Back Order",
+    "AVAILABLE_FOR_PRE_ORDER":"Pre Order",
+    "releasedOn":"Expected Release Date"
   },
   "cart":{
     "viewTitle":"Shopping Cart",
@@ -28,21 +31,18 @@
     "checkout":"Complete Purchase",
     "emptyCartMsg":"Your shopping cart is empty."
   },
-  "availability":{
-    "AVAILABLE":"In Stock",
-    "ALWAYS":"Always",
-    "NOT_AVAILABLE":"Out of Stock",
-    "AVAILABLE_FOR_BACK_ORDER":"Available for Back Order",
-    "AVAILABLE_FOR_PRE_ORDER":"Pre Order",
-    "releasedOn":"Expected Release Date"
+  "category": {
+    "next": "Next",
+    "prev": "Previous",
+    "resultsOnPage": "Number of Results Displaying",
+    "totalResults": "Total Number of Results",
+    "emptyViewMsg":"No item currently in this category"
   },
-  "auth":{
-    "loginMenu":"Login",
-    "login":"Login",
-    "logout":"Logout",
-    "userName": "Username",
-    "password": "Password",
-    "loginFormMissingFieldsErrMsg":"Username or password are missing. ",
-    "badCredentialErrMsg":"Your username or password is invalid. "
+  "itemDetail":{
+    "addToCart":"Add to Cart",
+    "purchasePrice":"Price",
+    "listPrice":"Original Price",
+    "quantity":"Quantity",
+    "defaultImage":"Default Image"
   }
 }

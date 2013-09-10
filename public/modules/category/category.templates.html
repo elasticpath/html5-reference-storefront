@@ -2,13 +2,13 @@
 
   <script id="DefaultCategoryLayoutTemplate" type="text/template">
     <div data-region="categoryTitleRegion"></div>
-    <div data-region="categoryBrowseRegion"></div>
     <div data-region="categoryPaginationTopRegion"></div>
+    <div data-region="categoryBrowseRegion"></div>
     <div data-region="categoryPaginationBottomRegion"></div>
   </script>
 
   <script id="CategoryTitleTemplate" type="text/template">
-    <h1 class="view-title">Category Name</h1>
+    <h1 class="view-title"><%= E.title %></h1>
   </script>
 
   <script id="CategoryItemTemplate" type="text/template">
@@ -19,17 +19,17 @@
   </script>
 
   <script id="CategoryItemCollectionEmptyTemplate" type="text/template">
-    [i18n] No item currently in this category.
+    <%= E.getI18nLabel('category.emptyViewMsg') %> empty
   </script>
 
   <script id="CategoryPaginationTemplate" type="text/template">
     <div class="paginationStatsContainer">
-      [i18n] Number of Results Displaying: n <br />
-      [i18n] Total Number of Results: n
+      <%= E.getI18nLabel('category.resultsOnPage') %> : <%= E.resultsOnPage %> <br />
+      <%= E.getI18nLabel('category.totalResults') %> : <%= E.totalResults %>
     </div>
     <div class="pagination-navigation-container">
-      <button class="btn-pagination" value="prev">[i18n] Prev</button> |
-      <button class="btn-pagination" value="next">[i18n] Next</button>
+      <button class="btn-pagination" value="prev"><%= E.getI18nLabel('category.prev') %></button> |
+      <button class="btn-pagination" value="next"><%= E.getI18nLabel('category.next') %></button>
     </div>
   </script>
 </div>
