@@ -53,19 +53,25 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
     // Purchase Confirmation View
     var purchaseConfirmationView = function(uri){
       var purchaseConfirmationModel = new Model.PurchaseConfirmationModel();
+      var purchaseConfirmationLayout = new View.PurchaseConfirmationLayout();
+      var confirmationRegion = new Marionette.Region({
+        el:'[data-region="purchaseConfirmationRegion"]'
+      });
       var purchaseConfirmationView = new View.PurchaseConfirmationView({
         model:purchaseConfirmationModel
       });
       purchaseConfirmationModel.fetch({
         url:ep.ui.decodeUri(uri),
         success:function(response){
-          ep.logger.info('Success getting purchase confirmation response ' + response);
+
+          confirmationRegion.show(purchaseConfirmationView);
+
         },
         error:function(response){
           ep.logger.error('Error retrieving purchase confirmation response');
         }
       });
-      return purchaseConfirmationView;
+      return purchaseConfirmationLayout;
     };
 
     /*
@@ -104,7 +110,7 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
         type: 'DELETE',
         contentType: 'application/json',
         url: deleteActionLink,
-        success: function (response, x, y) {
+        success: function (data, textStatus, XHR) {
           EventBus.trigger('cart.removeLineItemSuccess');
         },
         error: function (response) {
@@ -160,11 +166,11 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
           type: 'POST',
           contentType:'application/json',
           url: uri,
-          success: function (a, b, c) {
+          success: function (data, textStatus, XHR) {
             var obj = {
-              a: a,
-              b: b,
-              c: c
+              data: data,
+              textStatus: textStatus,
+              XHR: XHR
             };
             EventBus.trigger('cart.submitOrderSuccess', obj);
           },
@@ -179,7 +185,7 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
     });
     EventBus.on('cart.submitOrderSuccess', function (obj) {
 
-      var orderSummaryUri = obj.c.getResponseHeader('Location');
+      var orderSummaryUri = obj.XHR.getResponseHeader('Location');
       if (orderSummaryUri){
         Mediator.fire('mediator.orderProcessSuccess',orderSummaryUri);
       }

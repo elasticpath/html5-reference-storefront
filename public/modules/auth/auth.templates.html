@@ -11,23 +11,25 @@
         <div class="auth-feedback-container" data-i18n=""></div>
 
         <form class="auth-login-form">
-          <li>
-            <label for="OAuthUserName"><%= E.getI18nLabel('auth.userName') %>:</label>
-            <input class="auth-input-field" id="OAuthUserName" name="OAuthUserName" type="text"/>
-          </li>
-          <li>
-            <label for="OAuthPassword"><%= E.getI18nLabel('auth.password') %>:</label>
-            <input class="auth-input-field" id="OAuthPassword" name="OAuthPassword" type="password"/>
-          </li>
-          <li>
-            <input id="OAuthScope" name="OAuthScope" list="oAuthScopeList" type="hidden" value="<%= E.scope%>">
-          </li>
-          <li>
-            <input id="OAuthRole" name="OAuthRole" list="oAuthRoleList" type="hidden" value="REGISTERED">
-          </li>
-          <li>
-            <button class="btn btn-round btn-primary btn-auth-login" data-cmd="login" ><%= E.getI18nLabel('auth.login') %></button>
-          </li>
+          <ul>
+            <li>
+              <label for="OAuthUserName"><%= E.getI18nLabel('auth.userName') %>:</label>
+              <input class="auth-input-field" id="OAuthUserName" name="OAuthUserName" type="text"/>
+            </li>
+            <li>
+              <label for="OAuthPassword"><%= E.getI18nLabel('auth.password') %>:</label>
+              <input class="auth-input-field" id="OAuthPassword" name="OAuthPassword" type="password"/>
+            </li>
+            <li>
+              <input id="OAuthScope" name="OAuthScope" list="oAuthScopeList" type="hidden" value="<%= E.scope%>">
+            </li>
+            <li>
+              <input id="OAuthRole" name="OAuthRole" list="oAuthRoleList" type="hidden" value="REGISTERED">
+            </li>
+            <li>
+              <button class="btn btn-round btn-primary btn-auth-login" data-cmd="login" ><%= E.getI18nLabel('auth.login') %></button>
+            </li>
+          </ul>
         </form>
   </script>
 

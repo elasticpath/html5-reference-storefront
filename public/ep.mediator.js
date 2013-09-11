@@ -53,12 +53,12 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
           document.location.href = '#confirmation/' + ep.ui.encodeUri(uri);
         });
 
-        EventBus.trigger('layout.loadRegionContentRequest',{
-          region:'appMainRegion',
-          module:'cart',
-          view:'PurchaseConfirmationView',
-          data:uri
-        });
+//        EventBus.trigger('layout.loadRegionContentRequest',{
+//          region:'appMainRegion',
+//          module:'cart',
+//          view:'PurchaseConfirmationView',
+//          data:uri
+//        });
       }
     }
 

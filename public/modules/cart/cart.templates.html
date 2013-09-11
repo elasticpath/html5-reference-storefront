@@ -127,11 +127,16 @@
     <span class="cart-list-price"><%= E.getListPrice(E.unitPrice) %></span>
   </script>
 
+  <!-- Purchase Confirmation Layout Template -->
+  <script id="PurchaseConfirmationLayoutTemplate" type="text/temmplate">
+    <p>Thank you for your order it has been processed</p>
+    <div data-region="purchaseConfirmationRegion"></div>
+  </script>
+
   <!-- Purchase Confirmation Template -->
   <script id="PurchaseConfirmationTemplate" type="text/template">
-    <p>Thank you for your order it has been processed</p>
-    <!--<p>status: <span><%= E.status %></span></p>-->
-    <!--<p>Order #: <span><%= E.purchase-number %></span></p>-->
+    <p>status: <span><%= E.status %></span></p>
+    <p>Order #: <span><%= E.purchaseNumber %></span></p>
   </script>
 
 </div>

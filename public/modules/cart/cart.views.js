@@ -115,6 +115,10 @@ define(['ep','marionette','i18n','eventbus','mediator'],
         }
         return  retVar;
 
+      },
+      fuck:function(model){
+        var x = model;
+        return JSON.stringify(x);
       }
     };
 
@@ -239,9 +243,16 @@ define(['ep','marionette','i18n','eventbus','mediator'],
       }
     });
 
+    // Purchase Confirmation Layout
+    var purchaseConfirmationLayout = Backbone.Marionette.Layout.extend({
+      template:'#PurchaseConfirmationLayoutTemplate',
+      className:'purchase-confirmation-container'
+    });
+
     // Purchase Confirmation View
     var purchaseConfirmationView = Backbone.Marionette.ItemView.extend({
-      template:'#PurchaseConfirmationTemplate'
+      template:'#PurchaseConfirmationTemplate',
+      templateHelpers:viewHelpers
     });
 
     // Activity Indicator View
@@ -258,6 +269,7 @@ define(['ep','marionette','i18n','eventbus','mediator'],
       CartCheckoutActionView:cartCheckoutActionView,
       DefaultView:defaultView,
       PurchaseConfirmationView:purchaseConfirmationView,
+      PurchaseConfirmationLayout:purchaseConfirmationLayout,
       CartActivityIndicatorView:cartActivityIndicatorView
     };
   }

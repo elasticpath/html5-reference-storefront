@@ -169,7 +169,15 @@ define(['ep','eventbus', 'backbone'],
       }
     });
 
-    var purchaseConfirmationModel = Backbone.Model.extend();
+    var purchaseConfirmationModel = Backbone.Model.extend({
+      parse:function(response){
+        var retVal = {};
+        retVal.status = response.status;
+        retVal.purchaseNumber = response['purchase-number'];
+
+        return retVal;
+      }
+    });
 
 
 
