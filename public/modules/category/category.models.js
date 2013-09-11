@@ -13,6 +13,8 @@ define(['ep', 'eventbus', 'backbone'],
      * Category Model (main model fetching info from server)
      */
     var categoryModel = Backbone.Model.extend({
+      zoom: '?zoom=items, items:element, items:element:price, items:element:rate, items:element:definition, items:element:definition:assets:element, items:element:availability',
+      paginationZoom: '?zoom=element, element:price, element:rate, element:definition, element:definition:assets:element, element:availability',
       parse: function (response) {
         var categoryObj = {};
 
@@ -25,33 +27,38 @@ define(['ep', 'eventbus', 'backbone'],
          * category pagination
          */
         categoryObj.pagination = {};
-        var pageObj = jsonPath(response, '$._items..pagination')[0];
-        categoryObj.pagination = {
-          currentPage: pageObj['current'],
-          numOfPages: pageObj['pages'],
-          resultsOnPage: pageObj['results-on-page'],
-          pageSize: pageObj['page-size'],
-          totalResults: pageObj['results']
-        };
+        categoryObj.pagination.stats = jsonPath(response, '$._items..pagination')[0];
+        categoryObj.pagination.links = jsonPath(response, '$._items..links')[0];
 
         /*
          * category item browse
          */
-        categoryObj.itemCollection = [];
-        var itemArray = jsonPath(response, '$._items.._element')[0];
-        var itemArrayLen;
+        categoryObj.itemCollection = jsonPath(response, '$._items.._element')[0];
 
-        if (itemArray) {
-          itemArrayLen = itemArray.length;
+        return categoryObj;
+      }
+    });
+
+
+    /*
+     * Category Item Collection Model
+     */
+    var itemModel = Backbone.Model.extend({});
+    var categoryItemCollectionModel = Backbone.Collection.extend({
+      model: itemModel,
+      parse: function (collection) {
+        var itemCollection= [];
+
+        if (collection) {
+          var collectionLen = collection.length;
         }
-
-        for (var i = 0; i < itemArrayLen; i++) {
+        for (var i = 0; i < collectionLen; i++) {
 
           var itemObj = {};
 
           // item thumbnail
           itemObj.thumbnail = {};
-          var thumbnail = jsonPath(itemArray[i], '$._definition.._assets.._element[?(@.name="default-image")]')[0];
+          var thumbnail = jsonPath(collection[i], '$._definition.._assets.._element[?(@.name="default-image")]')[0];
           if (thumbnail) {
             itemObj.thumbnail = {
               absolutePath: thumbnail['content-location'],
@@ -61,15 +68,15 @@ define(['ep', 'eventbus', 'backbone'],
           }
 
           // item name
-          itemObj.name = jsonPath(itemArray[i], '$._definition..display-name')[0];
+          itemObj.name = jsonPath(collection[i], '$._definition..display-name')[0];
 
           // item uri
-          itemObj.uri = jsonPath(itemArray[i], '$.self.uri')[0];
+          itemObj.uri = jsonPath(collection[i], '$.self.uri')[0];
 
           // item availability
           itemObj.availability = {}
-          itemObj.availability.state = jsonPath(itemArray[i], '$._availability..state')[0];
-          var releaseDate = jsonPath(itemArray[i], '$._availability..release-date')[0];
+          itemObj.availability.state = jsonPath(collection[i], '$._availability..state')[0];
+          var releaseDate = jsonPath(collection[i], '$._availability..release-date')[0];
           if (releaseDate) {
             itemObj.availability.releaseDate = {
               displayValue: releaseDate['display-value'],
@@ -82,8 +89,8 @@ define(['ep', 'eventbus', 'backbone'],
           itemObj.price.listed = {};
           itemObj.price.purchase = {};
 
-          var listPrice = jsonPath(itemArray[i], '$._price..list-price')[0];
-          var purchasePrice = jsonPath(itemArray[i], '$._price..purchase-price')[0];
+          var listPrice = jsonPath(collection[i], '$._price..list-price')[0];
+          var purchasePrice = jsonPath(collection[i], '$._price..purchase-price')[0];
 
           if (listPrice) {
             itemObj.price.listed = {
@@ -104,22 +111,10 @@ define(['ep', 'eventbus', 'backbone'],
           // item rate
           itemObj.rate = {};
 
-          categoryObj.itemCollection.push(itemObj);
+          itemCollection.push(itemObj);
         }
 
-        return categoryObj;
-      }
-    });
-
-
-    /*
-     * Category Item Collection Model
-     */
-    var itemModel = Backbone.Model.extend({});
-    var categoryItemCollectionModel = Backbone.Collection.extend({
-      model: itemModel,
-      parse: function (collection) {
-        return collection;
+        return itemCollection;
       }
     });
 
@@ -127,8 +122,34 @@ define(['ep', 'eventbus', 'backbone'],
      * Category Pagination Model
      */
     var categoryPaginationModel = Backbone.Model.extend({
-      parse: function (collection) {
-        return collection;
+      parse: function (response) {
+        var model = {};
+        model.stats = {};
+        model.links = {};
+
+        var stats = response.stats;
+        model.stats = {
+          currentPage: stats['current'],
+          numOfPages: stats['pages'],
+          resultsOnPage: stats['results-on-page'],
+          pageSize: stats['page-size'],
+          totalResults: stats['results']
+        };
+
+        var links = response.links;
+        for (var i = 0; i < links.length; i++) {
+          if (links[i].rel === 'prev') {
+            model.links.prev = links[i].uri;
+          }
+          if (links[i].rel === 'next') {
+            model.links.next = links[i].uri;
+          }
+        }
+        /*        var prevLink = jsonPath(response, '$._items..links[?(@.rel="prev")]')[0];
+         if (prevLink) {
+         categoryObj.pagination.prev = prevLink.uri;
+         }*/
+        return model;
       }
     });
 

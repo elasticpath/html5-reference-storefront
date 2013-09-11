@@ -6,8 +6,8 @@
  * Time: 1:32 PM
  *
  */
-define(['ep', 'i18n'],
-  function (ep, i18n) {
+define(['ep', 'i18n', 'eventbus'],
+  function (ep, i18n, EventBus) {
 
     var viewHelpers = {
       getI18nLabel: function (key) {
@@ -109,8 +109,10 @@ define(['ep', 'i18n'],
 
         return retVar;
       },
-      checkForDisabledPaginationBtn: function (model) {
-        return 'disabled';
+      checkForDisabledPaginationBtn: function (link) {
+        if (!link) {
+          return 'disabled';
+        }
       }
     };
 
@@ -202,7 +204,13 @@ define(['ep', 'i18n'],
     var categoryPaginationView = Backbone.Marionette.ItemView.extend({
       template: '#CategoryPaginationTemplate',
       templateHelpers: viewHelpers,
-      className: 'pagination-container'
+      className: 'pagination-container',
+      events:{
+        'click .btn-pagination':function(event){
+          event.preventDefault();
+          EventBus.trigger('category.loadCategoryViewRequest', event.target.value, $(event.target).data('actionlink'));
+        }
+      }
     });
 
     return {

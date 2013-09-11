@@ -48,14 +48,13 @@
   <!-- Category Pagination Template -->
   <script id="CategoryPaginationTemplate" type="text/template">
     <div class="paginationStatsContainer">
-      <%= E.getI18nLabel('category.resultsOnPage') %> : <%= E.resultsOnPage %> <br/>
-      <%= E.getI18nLabel('category.totalResults') %> : <%= E.totalResults %>
+      <%= E.getI18nLabel('category.resultsOnPage') %> : <%= E.stats.resultsOnPage %> <br/>
+      <%= E.getI18nLabel('category.totalResults') %> : <%= E.stats.totalResults %>
     </div>
     <div class="pagination-navigation-container">
-      <button class="btn-pagination" value="prev"
-      <%= E.checkForDisabledPaginationBtn(E) %> ><%= E.getI18nLabel('category.prev') %></button>
+      <button class="btn-pagination" value="prev" data-actionlink="<%= E.links.prev %>" <%= E.checkForDisabledPaginationBtn(E.links.prev) %> ><%= E.getI18nLabel('category.prev') %></button>
       |
-      <button class="btn-pagination" value="next"><%= E.getI18nLabel('category.next') %></button>
+      <button class="btn-pagination" value="next" data-actionlink="<%= E.links.next %>" <%= E.checkForDisabledPaginationBtn(E.links.next) %> ><%= E.getI18nLabel('category.next') %></button>
     </div>
   </script>
 </div>

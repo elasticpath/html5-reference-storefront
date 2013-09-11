@@ -10,147 +10,116 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
   function (App, ep, EventBus, Model, View, template) {
 
     $('#TemplateContainer').append(template);
-    var LocalBus = new Backbone.Wreqr.EventAggregator();
-
     _.templateSettings.variable = 'E';
 
     /*
      *
+     * DEFAULT VIEW
      *
-     * Nav Data Request Success Handler
      *
-     * */
-    EventBus.bind('category.navDataRequestSuccess', function (response, uriForResponse, event) {
-      // write the output to the target
-      var elementArray = [];
-      var childArray = [];
-      var itemsArray = [];
-      var itemArray = [];
-      var otherArray = [];
-      var linkCount = response.links.length;
-      for (var i = 0; i < linkCount; i++) {
-        switch (response.links[i].rel) {
-          case 'element':
-            elementArray.push(response.links[i]);
-            break;
-          case 'child':
-            childArray.push(response.links[i]);
-            break;
-          case 'items':
-            itemsArray.push(response.links[i]);
-            break;
-          case 'item':
-            itemArray.push(response.links[i]);
-            break;
-          default:
-            otherArray.push(response.links[i]);
-        }
-      }
-
-
-      /*
-       *
-       * Child layout
-       *
-       * */
-      var childListLayout = new View.RelItemLayout({
-        model: new Model.ChildItemLayoutModel({catName: response.name})
-      }).render();
-      /*
-       *
-       *   Element Rel ChildRelView
-       *
-       * */
-      var elementView = new View.ChildRelView({
-        model: new Model.RelModel({name: 'Element', count: elementArray.length}),
-        collection: new Model.LinkCollection(elementArray)
-      });
-      childListLayout.elementRegion.show(elementView);
-
-      /*
-       *
-       *   Child Rel ChildRelView
-       *
-       * */
-      var childView = new View.ChildRelView({
-        model: new Model.RelModel({name: 'Child', count: childArray.length}),
-        collection: new Model.LinkCollection(childArray)
-      });
-      childListLayout.childRegion.show(childView);
-
-      /*
-       *
-       *   Items Rels ChildRelView
-       *
-       * */
-      var itemsModel = new Model.LinkCollection(itemsArray);
-      var itemsView = new View.ChildRelView({
-        model: new Model.RelModel({name: 'Items', count: itemsArray.length}),
-        collection: itemsModel
-      });
-      childListLayout.itemsRegion.show(itemsView);
-      /*
-       *
-       *   Item Rels ChildRelView
-       *
-       * */
-      var itemView = new View.ChildRelView({
-        model: new Model.RelModel({name: 'Item', count: itemArray.length}),
-        collection: new Model.LinkCollection(itemArray)
-      });
-      childListLayout.itemRegion.show(itemView);
-      /*
-       *
-       *   Other Rels ChildRelView
-       *
-       * */
-      var otherView = new View.ChildRelView({
-        model: new Model.RelModel({name: 'Other', count: otherArray.length}),
-        collection: new Model.LinkCollection(otherArray)
-      });
-      childListLayout.otherRegion.show(otherView);
-      $('span[data-id="' + uriForResponse + '"]').html(childListLayout.el);
-
-    });
-
-
-    /*
-     * Default View
      */
     var defaultView = function (uri) {
       var categoryLayout = new View.DefaultView();
-      var categoryModel = new Model.CategoryModel();
+      var categoryModel = new Model.CategoryModel('zoom');
 
       categoryModel.fetch({
-        url: ep.ui.decodeUri(uri) + '?zoom=items, items:element, items:element:price, items:element:rate, items:element:definition, items:element:definition:assets:element, items:element:availability',
+        url: ep.ui.decodeUri(uri) + categoryModel.zoom,
         success: function (response) {
 
-          var itemCollectionView = new View.CategoryItemCollectionView({
-            collection: new Model.CategoryItemCollectionModel(response.attributes.itemCollection)
-          });
+          /*
+           *  Declare Models
+           */
+          var tempModelObj;
 
+          tempModelObj = new Model.CategoryPaginationModel();
+          var paginationModel = new Model.CategoryPaginationModel(tempModelObj.parse(response.attributes.pagination));
+
+          tempModelObj = new Model.CategoryItemCollectionModel();
+          var itemCollectionModel = new Model.CategoryItemCollectionModel(tempModelObj.parse(response.attributes.itemCollection));
+
+          /*
+           * Render Views in Regions
+           */
           categoryLayout.categoryTitleRegion.show(
             new View.CategoryTitleView({
               model: categoryModel
             }));
           categoryLayout.categoryPaginationTopRegion.show(
             new View.CategoryPaginationView({
-              model: new Model.CategoryPaginationModel(response.attributes.pagination)
+              model: paginationModel
             })
           );
-          categoryLayout.categoryBrowseRegion.show(itemCollectionView);
+          categoryLayout.categoryBrowseRegion.show(
+            new View.CategoryItemCollectionView({
+              collection: itemCollectionModel
+            })
+          );
           categoryLayout.categoryPaginationBottomRegion.show(
             new View.CategoryPaginationView({
-              model: new Model.CategoryPaginationModel(response.attributes.pagination)
+              model: paginationModel
             })
           );
         },
         error: function (response) {
           ep.logger.error('error fetch category model ' + response)
         }
-      })
+      });
 
       return categoryLayout;
+    };
+
+
+    /*
+     *
+     *
+     * EVENT LISTENERS
+     *
+     *
+     */
+/*
+    EventBus.on('category.paginationBtnClicked', function (direction, uri) {
+      EventBus.trigger('category.reloadCategoryViewsRequest', direction, uri);
+
+    });
+*/
+    EventBus.on('category.loadCategoryViewRequest', function (direction, uri) {
+      ep.logger.info('navigation to ' + direction + ' page');
+
+      var browseRegion = new Backbone.Marionette.Region({
+        el: '#categoryBrowseRegion'
+      });
+      var paginationTopRegion = new Backbone.Marionette.Region({
+        el: '#categoryPaginationTopRegion'
+      });
+      var paginationBottomRegion = new Backbone.Marionette.Region({
+        el: '#categoryPaginationBottomRegion'
+      });
+      var categoryModel = new Model.CategoryModel('zoom');
+
+      categoryModel.fetch({
+        url: ep.ui.decodeUri(uri) + categoryModel.zoom,
+        success: function (response) {
+          browseRegion.show( categoryBrowseView(response) );
+          paginationTopRegion.show(
+            new View.CategoryPaginationView({
+              model: new Model.CategoryPaginationModel(response.attributes.pagination)
+            })
+          );
+          paginationBottomRegion.show(
+            new View.CategoryPaginationView({
+              model: new Model.CategoryPaginationModel(response.attributes.pagination)
+            })
+          );
+        }
+      });
+
+      ep.logger.info('category browse refreshed.');
+    });
+
+    var categoryBrowseView = function(model) {
+      return new View.CategoryItemCollectionView({
+        collection: new Model.CategoryItemCollectionModel(model.attributes.itemCollection)
+      });
     };
 
     return {
