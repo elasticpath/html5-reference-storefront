@@ -114,6 +114,9 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
     });
 
 
+    /*
+     * Default View
+     */
     var defaultView = function (uri) {
       var categoryLayout = new View.DefaultView();
       var categoryModel = new Model.CategoryModel();
