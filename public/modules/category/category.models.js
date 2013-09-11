@@ -14,26 +14,39 @@ define(['ep', 'eventbus', 'backbone'],
      */
     var categoryModel = Backbone.Model.extend({
       zoom: '?zoom=items, items:element, items:element:price, items:element:rate, items:element:definition, items:element:definition:assets:element, items:element:availability',
-      paginationZoom: '?zoom=element, element:price, element:rate, element:definition, element:definition:assets:element, element:availability',
       parse: function (response) {
         var categoryObj = {};
 
-        /*
-         * category title
-         */
+        // category title
         categoryObj.title = response['display-name'];
 
-        /*
-         * category pagination
-         */
+        // category pagination
         categoryObj.pagination = {};
         categoryObj.pagination.stats = jsonPath(response, '$._items..pagination')[0];
         categoryObj.pagination.links = jsonPath(response, '$._items..links')[0];
 
-        /*
-         * category item browse
-         */
+        // category item browse
         categoryObj.itemCollection = jsonPath(response, '$._items.._element')[0];
+
+        return categoryObj;
+      }
+    });
+
+    /*
+     * Category Reload Model (model used for reloading category browse views after pagination btn clicked)
+     */
+    var categoryReloadModel = Backbone.Model.extend({
+      zoom: '?zoom=element,element:availability,element:definition,element:definition:assets:element,element:price,element:rate',
+      parse: function (response) {
+        var categoryObj = {};
+
+        // category pagination
+        categoryObj.pagination = {};
+        categoryObj.pagination.stats = jsonPath(response, '$.pagination')[0];
+        categoryObj.pagination.links = jsonPath(response, '$.links')[0];
+
+        // category item browse
+        categoryObj.itemCollection = jsonPath(response, '$._element')[0];
 
         return categoryObj;
       }
@@ -138,7 +151,8 @@ define(['ep', 'eventbus', 'backbone'],
 
         var links = response.links;
         for (var i = 0; i < links.length; i++) {
-          if (links[i].rel === 'prev') {
+          if (links[i].rel === 'prev' || links[i].rel === 'previous') {
+//          if (links[i].rel.contains('prev')) {
             model.links.prev = links[i].uri;
           }
           if (links[i].rel === 'next') {
@@ -155,6 +169,7 @@ define(['ep', 'eventbus', 'backbone'],
 
     return{
       CategoryModel: categoryModel,
+      CategoryReloadModel: categoryReloadModel,
       CategoryPaginationModel: categoryPaginationModel,
       CategoryItemCollectionModel: categoryItemCollectionModel
     };

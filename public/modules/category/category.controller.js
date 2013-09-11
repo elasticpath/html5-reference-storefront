@@ -76,15 +76,16 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
      *
      *
      */
-/*
     EventBus.on('category.paginationBtnClicked', function (direction, uri) {
-      EventBus.trigger('category.reloadCategoryViewsRequest', direction, uri);
+      ep.logger.info(direction + ' btn clicked.');
+
+      EventBus.trigger('category.reloadCategoryViewsRequest', uri);
 
     });
-*/
-    EventBus.on('category.loadCategoryViewRequest', function (direction, uri) {
-      ep.logger.info('navigation to ' + direction + ' page');
+    EventBus.on('category.reloadCategoryViewsRequest', function (uri) {
+      ep.logger.info('navigation to a different page');
 
+      // declare regions
       var browseRegion = new Backbone.Marionette.Region({
         el: '#categoryBrowseRegion'
       });
@@ -94,10 +95,11 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
       var paginationBottomRegion = new Backbone.Marionette.Region({
         el: '#categoryPaginationBottomRegion'
       });
-      var categoryModel = new Model.CategoryModel('zoom');
 
+      // reload views
+      var categoryModel = new Model.CategoryReloadModel('zoom');
       categoryModel.fetch({
-        url: ep.ui.decodeUri(uri) + categoryModel.zoom,
+        url: ep.app.config.cortexApi.path + uri + categoryModel.zoom,
         success: function (response) {
           browseRegion.show( categoryBrowseView(response) );
           paginationTopRegion.show(

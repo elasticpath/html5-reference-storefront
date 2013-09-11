@@ -208,7 +208,7 @@ define(['ep', 'i18n', 'eventbus'],
       events:{
         'click .btn-pagination':function(event){
           event.preventDefault();
-          EventBus.trigger('category.loadCategoryViewRequest', event.target.value, $(event.target).data('actionlink'));
+          EventBus.trigger('category.paginationBtnClicked', event.target.value, $(event.target).data('actionlink'));
         }
       }
     });
