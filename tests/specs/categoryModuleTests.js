@@ -64,6 +64,9 @@ define(function(require) {
       it("CategoryModel should exist",function(){
         expect(categoryModel.CategoryModel).to.exist;
       });
+      it("CategoryReloadModel should exist",function(){
+        expect(categoryModel.CategoryReloadModel).to.exist;
+      });
       it("CategoryPaginationModel should exist",function(){
         expect(categoryModel.CategoryPaginationModel).to.exist;
       });
@@ -93,8 +96,18 @@ define(function(require) {
           el: '[data-region="myTestRegion"]'
         });
 
+        var paginationModel = new categoryModel.CategoryPaginationModel({
+          stats: {
+            resultsOnPage: 5,
+            totalResults:7
+          },
+          links: {
+            prev: 'prev',
+            next: 'next'
+          }
+        });
         this.view = new categoryViews.CategoryPaginationView({
-          model: new categoryModel.CategoryModel()
+          model: paginationModel
         });
         this.myTestRegion.show(this.view);
       });
@@ -113,19 +126,25 @@ define(function(require) {
       });
 
       it ('Pagination button should trigger category.paginationBtnClicked event', function(done){
-        EventBus.on('category.paginationBtnClicked', function(direction) {
+        var direction = 'NEXT';
+        var uri = 'http://localhost'; // actual direction does not matter in this test.
+        EventBus.on('category.paginationBtnClicked', function(direction, uri) {
           done();
         });
-        $('button.btn-pagination').trigger('click');
+        $('.btn-pagination').trigger('click');
       });
 
-      it ('category.paginationBtnClicked event should trigger category.loadCategoryViewRequest event', function(done){
-        var direction = 'NEXT'; // actual direction does not matter in this test.
-        EventBus.on('category.loadCategoryViewRequest', function(direction) {
+/*
+      it ('category.paginationBtnClicked event should trigger category.reloadCategoryViewRequest event', function(done){
+        var categoryController = require('category');
+        var direction = 'NEXT';
+        var uri = 'http://localhost'; // actual direction does not matter in this test.
+        EventBus.on('category.reloadCategoryViewRequest', function(uri) {
           done();
         });
-        EventBus.trigger('category.paginationBtnClicked', direction);
+        EventBus.trigger('category.paginationBtnClicked', direction, uri);
       });
+*/
     });
   });
 });
