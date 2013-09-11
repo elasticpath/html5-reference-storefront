@@ -64,6 +64,12 @@ define(function(require) {
       it("CategoryModel should exist",function(){
         expect(categoryModel.CategoryModel).to.exist;
       });
+      it("CategoryPaginationModel should exist",function(){
+        expect(categoryModel.CategoryPaginationModel).to.exist;
+      });
+      it("CategoryItemCollectionModel should exist",function(){
+        expect(categoryModel.CategoryItemCollectionModel).to.exist;
+      });
     });
 
     /*

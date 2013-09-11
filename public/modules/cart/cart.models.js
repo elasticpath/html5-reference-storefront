@@ -6,14 +6,14 @@
  * Time: 9:16 AM
  *
  */
-define(['ep','eventbus', 'backbone'],
-  function(ep, EventBus, Backbone){
+define(['ep', 'eventbus', 'backbone'],
+  function (ep, EventBus, Backbone) {
 
 
     // Cart Model
     var cartModel = Backbone.Model.extend({
-      url:ep.app.config.cortexApi.path + '/carts/' + ep.app.config.cortexApi.scope + '/default?zoom=total,lineitems:element,lineitems:element:price,lineitems:element:availability,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price,order:purchaseform',
-      parse:function(cart){
+      url: ep.app.config.cortexApi.path + '/carts/' + ep.app.config.cortexApi.scope + '/default?zoom=total,lineitems:element,lineitems:element:price,lineitems:element:availability,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price,order:purchaseform',
+      parse: function (cart) {
 
         var cartObj = {};
 
@@ -29,7 +29,7 @@ define(['ep','eventbus', 'backbone'],
         }
 
         // Iterate over Lineitems
-        for (var x = 0; x < lineItemArrayLen; x++){
+        for (var x = 0; x < lineItemArrayLen; x++) {
           var currObj = lineItemsRoot[x];
           var lineItemObj = {};
 
@@ -41,9 +41,9 @@ define(['ep','eventbus', 'backbone'],
           if (assetsArray) {
             var defaultImg = jsonPath(assetsArray, "$.[?(@.name='default-image')]")[0];
             lineItemObj.thumbnail = {
-              name:defaultImg['name'],
-              absolutePath:defaultImg['content-location'],
-              relativePath:defaultImg['relative-location']
+              name: defaultImg['name'],
+              absolutePath: defaultImg['content-location'],
+              relativePath: defaultImg['relative-location']
             }
           }
 
@@ -64,8 +64,8 @@ define(['ep','eventbus', 'backbone'],
           var lineItemReleaseDate = currObj['_availability'][0]['release-date'];
           if (lineItemReleaseDate) {
             lineItemObj.availability.releaseDate = {
-              displayValue:lineItemReleaseDate['display-value'],
-              value:lineItemReleaseDate['value']
+              displayValue: lineItemReleaseDate['display-value'],
+              value: lineItemReleaseDate['value']
             }
           }
 
@@ -85,17 +85,17 @@ define(['ep','eventbus', 'backbone'],
           var itemUnitPurchasePrice = currObj['_item'][0]['_price'][0]['purchase-price'];
           if (itemUnitListPrice) {
             lineItemObj.unitPrice.listed = {
-              currency:itemUnitListPrice[0].currency,
-              amount:itemUnitListPrice[0].amount,
-              display:itemUnitListPrice[0].display
+              currency: itemUnitListPrice[0].currency,
+              amount: itemUnitListPrice[0].amount,
+              display: itemUnitListPrice[0].display
             }
           }
 
           if (itemUnitPurchasePrice) {
             lineItemObj.unitPrice.purchase = {
-              currency:itemUnitPurchasePrice[0].currency,
-              amount:itemUnitPurchasePrice[0].amount,
-              display:itemUnitPurchasePrice[0].display
+              currency: itemUnitPurchasePrice[0].currency,
+              amount: itemUnitPurchasePrice[0].amount,
+              display: itemUnitPurchasePrice[0].display
             }
           }
 
@@ -111,17 +111,17 @@ define(['ep','eventbus', 'backbone'],
 
           if (lineItemListPrice) {
             lineItemObj.price.listed = {
-              currency:lineItemListPrice[0].currency,
-              amount:lineItemListPrice[0].amount,
-              display:lineItemListPrice[0].display
+              currency: lineItemListPrice[0].currency,
+              amount: lineItemListPrice[0].amount,
+              display: lineItemListPrice[0].display
             }
           }
 
           if (lineItemPurchasePrice) {
             lineItemObj.price.purchase = {
-              currency:lineItemPurchasePrice[0].currency,
-              amount:lineItemPurchasePrice[0].amount,
-              display:lineItemPurchasePrice[0].display
+              currency: lineItemPurchasePrice[0].currency,
+              amount: lineItemPurchasePrice[0].amount,
+              display: lineItemPurchasePrice[0].display
             }
           }
 
@@ -137,9 +137,7 @@ define(['ep','eventbus', 'backbone'],
         /*
         * Cart Submit Order Action
         * */
-        //cartObj.submitOrderActionUri = jsonPath(cart, "$.['_purchaseform'][0][links][0].uri")[0];
         cartObj.submitOrderActionUri = jsonPath(cart, "$..links[?(@.rel=='submitorderaction')].uri");
-//        $..book[?(@.price<10)]
 
 
         /*
@@ -152,9 +150,9 @@ define(['ep','eventbus', 'backbone'],
          */
         var cartTotal = jsonPath(cart, "$.['_total'][0].['cost'][0]")[0];
         cartObj.cartTotal = {
-          currency:cartTotal.currency,
-          amount:cartTotal.amount,
-          display:cartTotal.display
+          currency: cartTotal.currency,
+          amount: cartTotal.amount,
+          display: cartTotal.display
         };
 
         return cartObj;
@@ -163,8 +161,8 @@ define(['ep','eventbus', 'backbone'],
 
     var cartItemModel = Backbone.Model.extend();
     var cartItemCollection = Backbone.Collection.extend({
-      model:cartItemModel,
-      parse:function(collection){
+      model: cartItemModel,
+      parse: function (collection) {
         return collection;
       }
     });
@@ -180,13 +178,11 @@ define(['ep','eventbus', 'backbone'],
     });
 
 
-
     return {
       CartModel:cartModel,
       CartItemCollection:cartItemCollection,
       CartItemModel:cartItemModel,
       PurchaseConfirmationModel:purchaseConfirmationModel
-
     };
   }
 );
