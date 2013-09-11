@@ -52,26 +52,42 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
 
     // Purchase Confirmation View
     var purchaseConfirmationView = function(uri){
-      var purchaseConfirmationModel = new Model.PurchaseConfirmationModel();
-      var purchaseConfirmationLayout = new View.PurchaseConfirmationLayout();
-      var confirmationRegion = new Marionette.Region({
-        el:'[data-region="purchaseConfirmationRegion"]'
-      });
-      var purchaseConfirmationView = new View.PurchaseConfirmationView({
-        model:purchaseConfirmationModel
-      });
-      purchaseConfirmationModel.fetch({
-        url:ep.ui.decodeUri(uri),
-        success:function(response){
 
-          confirmationRegion.show(purchaseConfirmationView);
 
-        },
-        error:function(response){
-          ep.logger.error('Error retrieving purchase confirmation response');
-        }
-      });
-      return purchaseConfirmationLayout;
+      if (ep.app.isUserLoggedIn()) {
+        var purchaseConfirmationModel = new Model.PurchaseConfirmationModel();
+        var purchaseConfirmationLayout = new View.PurchaseConfirmationLayout();
+        var confirmationRegion = new Marionette.Region({
+          el:'[data-region="purchaseConfirmationRegion"]'
+        });
+        var purchaseConfirmationView = new View.PurchaseConfirmationView({
+          model:purchaseConfirmationModel
+        });
+        purchaseConfirmationModel.fetch({
+          url:ep.ui.decodeUri(uri),
+          success:function(response){
+
+            confirmationRegion.show(purchaseConfirmationView);
+
+          },
+          error:function(response){
+            ep.logger.error('Error retrieving purchase confirmation response');
+          }
+        });
+        return purchaseConfirmationLayout;
+      }
+      else{
+        // trigger login
+        EventBus.trigger('layout.loadRegionContentRequest', {
+          region: 'appModalRegion',
+          module: 'auth',
+          view: 'LoginFormView'
+        });
+
+      }
+
+
+
     };
 
     /*
