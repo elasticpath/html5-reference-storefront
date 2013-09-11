@@ -26,47 +26,23 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
         url: ep.ui.decodeUri(uri) + categoryModel.zoom,
         success: function (response) {
 
-          /*
-           *  Declare Models
-           */
-          var tempModelObj;
-
-          tempModelObj = new Model.CategoryPaginationModel();
-          var paginationModel = new Model.CategoryPaginationModel(tempModelObj.parse(response.attributes.pagination));
-
-          tempModelObj = new Model.CategoryItemCollectionModel();
-          var itemCollectionModel = new Model.CategoryItemCollectionModel(tempModelObj.parse(response.attributes.itemCollection));
-
-          /*
-           * Render Views in Regions
-           */
           categoryLayout.categoryTitleRegion.show(
             new View.CategoryTitleView({
               model: categoryModel
             }));
-          categoryLayout.categoryPaginationTopRegion.show(
-            new View.CategoryPaginationView({
-              model: paginationModel
-            })
-          );
-          categoryLayout.categoryBrowseRegion.show(
-            new View.CategoryItemCollectionView({
-              collection: itemCollectionModel
-            })
-          );
-          categoryLayout.categoryPaginationBottomRegion.show(
-            new View.CategoryPaginationView({
-              model: paginationModel
-            })
-          );
+          categoryLayout.categoryPaginationTopRegion.show( getCategoryPaginationView(response) );
+          categoryLayout.categoryBrowseRegion.show( getCategoryBrowseView(response) );
+          categoryLayout.categoryPaginationBottomRegion.show( getCategoryPaginationView(response) );
         },
         error: function (response) {
-          ep.logger.error('error fetch category model ' + response)
+          ep.logger.error('error fetch category model ' + response);
         }
       });
 
       return categoryLayout;
     };
+
+
 
 
     /*
@@ -87,13 +63,13 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
 
       // declare regions
       var browseRegion = new Backbone.Marionette.Region({
-        el: '#categoryBrowseRegion'
+        el: '[data-region="categoryBrowseRegion"]'
       });
       var paginationTopRegion = new Backbone.Marionette.Region({
-        el: '#categoryPaginationTopRegion'
+        el: '[data-region="categoryPaginationTopRegion"]'
       });
       var paginationBottomRegion = new Backbone.Marionette.Region({
-        el: '#categoryPaginationBottomRegion'
+        el: '[data-region="categoryPaginationBottomRegion"]'
       });
 
       // reload views
@@ -101,27 +77,43 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
       categoryModel.fetch({
         url: ep.app.config.cortexApi.path + uri + categoryModel.zoom,
         success: function (response) {
-          browseRegion.show( categoryBrowseView(response) );
-          paginationTopRegion.show(
-            new View.CategoryPaginationView({
-              model: new Model.CategoryPaginationModel(response.attributes.pagination)
-            })
-          );
-          paginationBottomRegion.show(
-            new View.CategoryPaginationView({
-              model: new Model.CategoryPaginationModel(response.attributes.pagination)
-            })
-          );
+          browseRegion.show( getCategoryBrowseView(response) );
+          paginationTopRegion.show( getCategoryPaginationView(response) );
+          paginationBottomRegion.show( getCategoryPaginationView(response) );
         }
       });
 
       ep.logger.info('category browse refreshed.');
     });
 
-    var categoryBrowseView = function(model) {
-      return new View.CategoryItemCollectionView({
-        collection: new Model.CategoryItemCollectionModel(model.attributes.itemCollection)
+
+
+
+
+    /*
+     *
+     *
+     * FUNCTIONS
+     *
+     */
+    var getCategoryBrowseView = function(model) {
+      var tempModelObj = new Model.CategoryItemCollectionModel();
+      var itemCollectionModel = new Model.CategoryItemCollectionModel(tempModelObj.parse(model.attributes.itemCollection));
+      var browseView = new View.CategoryItemCollectionView({
+        collection: itemCollectionModel
       });
+
+      return browseView;
+    };
+
+    var getCategoryPaginationView = function(model) {
+      var tempModelObj = new Model.CategoryPaginationModel();
+      var paginationModel = new Model.CategoryPaginationModel(tempModelObj.parse(model.attributes.pagination));
+      var paginationView = new View.CategoryPaginationView({
+        model: paginationModel
+      });
+
+      return paginationView;
     };
 
     return {
