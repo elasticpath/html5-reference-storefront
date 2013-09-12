@@ -49,25 +49,16 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
       events:{
         'click .btn-auth-dropdown':function(event){
           event.preventDefault();
-          $('.auth-nav-container').toggle(250,function(){
-            if ($('.auth-nav-container').is(":visible")){
-              // add event listener to body to close this window
-              $('body').click(function(){
-                $('.auth-nav-container').hide();
-              });
-            }
-            else{
-             // remove event listener from body
-              $('body').off('click');
-            }
-          });
+          $('.auth-nav-container').toggle(250);
           EventBus.trigger('auth.btnAuthMenuDropdownClicked');
+
         }
       },
       onShow:function() {
         ep.app.addRegions({
           mainAuthView:'[data-region="authMainRegion"]'
         });
+
       }
     });
 

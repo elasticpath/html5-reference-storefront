@@ -146,11 +146,7 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
 
     // Checkout Button Clicked
     EventBus.on('cart.checkoutBtnClicked', function (model) {
-
-      var cartCheckoutActionRegion = new Marionette.Region({
-        el:'[data-region="cartCheckoutActionRegion"]'
-      });
-      cartCheckoutActionRegion.show(new View.CartActivityIndicatorView());
+      View.setCheckoutButtonProcessing();
       EventBus.trigger('cart.checkoutRequest', model);
     });
 
@@ -165,10 +161,14 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
       // user not logged and config set to require login
       else if (ep.app.config.requireAuthToCheckout && (!ep.app.isUserLoggedIn())) {
         // trigger login
+       // Mediator.fire('mediator.showLoginModalRequest');
         EventBus.trigger('layout.loadRegionContentRequest', {
           region: 'appModalRegion',
           module: 'auth',
           view: 'LoginFormView'
+        });
+        EventBus.on('ui.modalWindowClosed',function(){
+          View.resetCheckoutButtonText();
         });
       }
     });
@@ -192,6 +192,7 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
           },
           error: function (response) {
             ep.logger.error('Error submitting order: ' + response);
+            View.resetCheckoutButtonText();
           }
         });
       }

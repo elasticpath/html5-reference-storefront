@@ -14,8 +14,8 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
 
     _.templateSettings.variable = 'E';
 
-    var defaultView = function() {
-      var authLayout =  new View.DefaultView();
+    var defaultView = function(options) {
+      var authLayout =  new View.DefaultView(options);
       return authLayout;
     };
 
@@ -143,8 +143,8 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
 
     return {
       DefaultView:defaultView,
-      LoginFormView: function() {
-        return new View.LoginFormView();
+      LoginFormView: function(options) {
+        return new View.LoginFormView(options);
       },
       ProfileMenuView: function() {return new View.ProfileMenuView(); },
       logUserOut:logUserOut
