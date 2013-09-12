@@ -15,6 +15,7 @@
   },
   "deployMode":"development",
   "requireAuthToCheckout":true,
+  "viewFadeInValue":500,
   "routes": {
     "cart":"#mycart",
     "category":"#category",

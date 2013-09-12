@@ -19,6 +19,12 @@ define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!m
     // attach the module template markup to the DOM
     $(anchorSelector).append(baseMarkup);
 
+    Marionette.Region.prototype.open = function(view){
+      this.$el.hide();
+      this.$el.html(view.el);
+      this.$el.fadeIn(ep.app.config.viewFadeInValue);
+    }
+
     /*
     * User Preferences
     * */
@@ -65,6 +71,7 @@ define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!m
               dialog.container.hide('fast',function(){
                 dialog.overlay.slideUp('fast',function(){
                   $.modal.close();
+                  EventBus.trigger('ui.modalWindowClosed');
                 });
               });
             });
