@@ -49,7 +49,18 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
       events:{
         'click .btn-auth-dropdown':function(event){
           event.preventDefault();
-          $('.auth-nav-container').toggle(250);
+          $('.auth-nav-container').toggle(250,function(){
+            if ($('.auth-nav-container').is(":visible")){
+              // add event listener to body to close this window
+              $('body').click(function(){
+                $('.auth-nav-container').hide();
+              });
+            }
+            else{
+             // remove event listener from body
+              $('body').off('click');
+            }
+          });
           EventBus.trigger('auth.btnAuthMenuDropdownClicked');
         }
       },

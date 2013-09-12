@@ -126,7 +126,8 @@ define(['ep', 'i18n', 'eventbus'],
         categoryBrowseRegion: '[data-region="categoryBrowseRegion"]',
         categoryPaginationTopRegion: '[data-region="categoryPaginationTopRegion"]',
         categoryPaginationBottomRegion: '[data-region="categoryPaginationBottomRegion"]'
-      }
+      },
+      className:'category-items-container'
     });
 
     /*
@@ -144,6 +145,7 @@ define(['ep', 'i18n', 'eventbus'],
       template: '#CategoryItemTemplate',
       templateHelpers: viewHelpers,
       className: 'category-item-container',
+      tagName:'li',
       onShow: function () {
         // check if there is releaseDate in model
         // if so inject view to display availability release date
@@ -195,7 +197,8 @@ define(['ep', 'i18n', 'eventbus'],
     // Category Item Collection View
     var categoryItemCollectionView = Backbone.Marionette.CollectionView.extend({
       itemView: categoryItemView,
-      emptyView: categoryItemCollectionEmptyView
+      emptyView: categoryItemCollectionEmptyView,
+      tagName:'ul'
     });
 
     /*

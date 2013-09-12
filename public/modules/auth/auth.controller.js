@@ -43,8 +43,8 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
     // auth menu item dropdown clicked
     EventBus.on('auth.btnAuthMenuDropdownClicked',function(){
       var state = 'PUBLIC';
-      if (window.localStorage.oAuthRole){
-        state = window.localStorage.oAuthRole;
+      if (ep.io.localStore.getItem('oAuthRole')){
+        state = ep.io.localStore.getItem('oAuthRole');
         if (state){
           EventBus.trigger("auth.loadAuthMenuRequest", state);
         }

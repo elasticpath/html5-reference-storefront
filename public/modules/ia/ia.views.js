@@ -30,7 +30,15 @@ define(['ep','eventbus'],
     var NavItemView = Backbone.Marionette.ItemView.extend({
       template:'#NavItemTemplate',
       tagName: 'li',
-      templateHelpers: viewHelpers
+      templateHelpers: viewHelpers,
+      attributes:function(){
+        return{
+          'data-name':this.model.get('displayName')
+        };
+      },
+      onShow:function(){
+        $('.main-nav-list li').removeClass('is-selected');
+      }
     });
 
     // Main Nav View
@@ -42,6 +50,7 @@ define(['ep','eventbus'],
       onShow:function(){
         $('.btn-main-nav-toggle').hide();
         ep.logger.info('main nav on show, toggle btn hidden.');
+
       }
     });
 

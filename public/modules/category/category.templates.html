@@ -3,7 +3,7 @@
   <!-- Category Default Layout Template -->
   <script id="CategoryDefaultLayoutTemplate" type="text/template">
     <div data-region="categoryTitleRegion"></div>
-    <div data-region="categoryPaginationTopRegion"></div>
+    <div data-region="categoryPaginationTopRegion" class="pagination-container"></div>
     <div data-region="categoryBrowseRegion"></div>
     <div data-region="categoryPaginationBottomRegion"></div>
   </script>
@@ -16,17 +16,25 @@
 
   <!-- Category Item Template -->
   <script id="CategoryItemTemplate" type="text/template">
-    <div><img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>"
-              class="category-item-thumbnail"/></div>
-    <div><a href="<%= E.generateItemHref(E.uri) %>"><%= E.name %></a></div>
-    <ul>
-      <li class="category-item-availability"><%= E.getAvailabilityDisplayText(E.availability.state) %></li>
-      <li class="category-item-release-date" data-region="categoryItemReleaseDateRegion"></li>
-    </ul>
-    <ul>
-      <li class="category-item-list-price" data-region="categoryItemListPriceRegion"></li>
-      <li class="category-item-purchase-price"><%= E.getPurchasePrice(E.price) %></li>
-    </ul>
+    <div class="row">
+      <div class="quarter">
+        <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>" class="category-item-thumbnail"/>
+      </div>
+      <div class="threequarter">
+        <div class="category-item-title">
+          <a href="<%= E.generateItemHref(E.uri) %>"><%= E.name %></a>
+        </div>
+        <ul>
+          <li class="category-item-availability itemdetail-availability-state"><%= E.getAvailabilityDisplayText(E.availability.state) %></li>
+          <li class="category-item-release-date" data-region="categoryItemReleaseDateRegion"></li>
+        </ul>
+        <ul>
+          <li class="category-item-list-price" data-region="categoryItemListPriceRegion"></li>
+          <li class="category-item-purchase-price"><span>Your Price: </span> <%= E.getPurchasePrice(E.price) %></li>
+        </ul>
+      </div>
+    </div>
+
   </script>
 
   <!-- Category Item Release Date Template -->
@@ -48,8 +56,12 @@
   <!-- Category Pagination Template -->
   <script id="CategoryPaginationTemplate" type="text/template">
     <div class="paginationStatsContainer">
-      <%= E.getI18nLabel('category.resultsOnPage') %> : <%= E.stats.resultsOnPage %> <br/>
-      <%= E.getI18nLabel('category.totalResults') %> : <%= E.stats.totalResults %>
+      <div class="paging-total-results">
+        <%= E.getI18nLabel('category.totalResults') %> : <span class="pagingnation-vlaue"><%= E.stats.totalResults %></span>
+      </div>
+      <div class="paging-results-per-page">
+        <%= E.getI18nLabel('category.resultsOnPage') %> : <span class="pagingnation-vlaue"><%= E.stats.resultsOnPage %></span>
+      </div>
     </div>
     <div class="pagination-navigation-container">
       <button class="btn-pagination" value="prev" data-actionlink="<%= E.links.prev %>" <%= E.checkForDisabledPaginationBtn(E.links.prev) %> ><%= E.getI18nLabel('category.prev') %></button>
