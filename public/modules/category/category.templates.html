@@ -50,17 +50,23 @@
 
   <!-- Category Item Collection Empty Template -->
   <script id="CategoryItemCollectionEmptyTemplate" type="text/template">
-    <%= E.getI18nLabel('category.emptyViewMsg') %> empty
+    <%= E.getI18nLabel('category.emptyViewMsg') %>
   </script>
 
   <!-- Category Pagination Template -->
   <script id="CategoryPaginationTemplate" type="text/template">
     <div class="paginationStatsContainer">
+      <div class="paging-results-per-page">
+        <%= E.getI18nLabel('category.resultsOnPage') %> : <span class="pagingnation-vlaue"><%= E.stats.resultsOnPage %></span>
+      </div>
       <div class="paging-total-results">
         <%= E.getI18nLabel('category.totalResults') %> : <span class="pagingnation-vlaue"><%= E.stats.totalResults %></span>
       </div>
-      <div class="paging-results-per-page">
-        <%= E.getI18nLabel('category.resultsOnPage') %> : <span class="pagingnation-vlaue"><%= E.stats.resultsOnPage %></span>
+      <div class="paging-current-page">
+        <%= E.getI18nLabel('category.currentPage') %> : <span class="pagingnation-vlaue"><%= E.stats.currentPage %></span>
+      </div>
+      <div class="paging-total-pages">
+        <%= E.getI18nLabel('category.totalPage') %> : <span class="pagingnation-vlaue"><%= E.stats.numOfPages %></span>
       </div>
     </div>
     <div class="pagination-navigation-container">

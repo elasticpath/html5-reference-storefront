@@ -33,6 +33,8 @@
   "category": {
     "next": "Next",
     "prev": "Previous",
+    "currentPage": "Current Page",
+    "totalPage": "Total Pages",
     "resultsOnPage": "Number of Results Displaying",
     "totalResults": "Total Number of Results",
     "emptyViewMsg": "No item currently in this category"
