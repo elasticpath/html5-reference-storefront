@@ -64,9 +64,6 @@ define(function(require) {
       it("CategoryModel should exist",function(){
         expect(categoryModel.CategoryModel).to.exist;
       });
-      it("CategoryReloadModel should exist",function(){
-        expect(categoryModel.CategoryReloadModel).to.exist;
-      });
       it("CategoryPaginationModel should exist",function(){
         expect(categoryModel.CategoryPaginationModel).to.exist;
       });

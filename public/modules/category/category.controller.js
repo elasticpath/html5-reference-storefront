@@ -73,9 +73,9 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
       });
 
       // reload views
-      var categoryModel = new Model.CategoryReloadModel('zoom');
+      var categoryModel = new Model.CategoryModel('paginationZoom');
       categoryModel.fetch({
-        url: ep.app.config.cortexApi.path + uri + categoryModel.zoom,
+        url: ep.app.config.cortexApi.path + uri + categoryModel.paginationZoom,
         success: function (response) {
           browseRegion.show( getCategoryBrowseView(response) );
           paginationTopRegion.show( getCategoryPaginationView(response) );
@@ -97,23 +97,15 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
      *
      */
     var getCategoryBrowseView = function(model) {
-      var tempModelObj = new Model.CategoryItemCollectionModel();
-      var itemCollectionModel = new Model.CategoryItemCollectionModel(tempModelObj.parse(model.attributes.itemCollection));
-      var browseView = new View.CategoryItemCollectionView({
-        collection: itemCollectionModel
+      return new View.CategoryItemCollectionView({
+        collection: new Model.CategoryItemCollectionModel(model.attributes.itemCollection)
       });
-
-      return browseView;
     };
 
     var getCategoryPaginationView = function(model) {
-      var tempModelObj = new Model.CategoryPaginationModel();
-      var paginationModel = new Model.CategoryPaginationModel(tempModelObj.parse(model.attributes.pagination));
-      var paginationView = new View.CategoryPaginationView({
-        model: paginationModel
+      return new View.CategoryPaginationView({
+        model: new Model.CategoryPaginationModel(model.attributes.pagination)
       });
-
-      return paginationView;
     };
 
     return {
