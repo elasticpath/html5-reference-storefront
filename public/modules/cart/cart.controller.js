@@ -122,6 +122,7 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
       var deleteActionLink = $(event.target).data('actionlink');
 
 
+      // FIXME move logic to a method
       ep.io.ajax({
         type: 'DELETE',
         contentType: 'application/json',

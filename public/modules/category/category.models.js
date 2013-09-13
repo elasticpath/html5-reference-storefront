@@ -118,6 +118,21 @@ define(['ep', 'eventbus', 'backbone'],
           // item rate
           itemObj.rate = {};
 
+          var rate = jsonPath(itemArray[i], '$._rate'[0]);
+
+          if (rate) {
+            itemObj.rate = {
+              display: rate[0].display
+            }
+          }
+
+          // fake a price object when neither rate nor price present
+          if (!(purchasePrice || itemObj.rate.display)) {
+            itemObj.price.purchase = {
+              display: 'none'
+            };
+          }
+
         categoryObj.itemCollection.push(itemObj);
         }
 

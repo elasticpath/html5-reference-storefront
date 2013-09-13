@@ -74,25 +74,24 @@ define(['ep', 'i18n', 'eventbus'],
         return retVar;
       },
       getListPrice: function (priceObj) {
-        var retVar;
+        var retVar = '';
 
         if (priceObj.listed && priceObj.listed.display) {
           retVar = priceObj.listed.display;
         }
-        else {
-          retVar = '';
-        }
 
         return retVar;
       },
-      getPurchasePrice:function(priceObj){
-        var retVar;
+      getPurchasePrice: function (priceObj) {
+        var retVar = '';
 
-        if (priceObj.purchase && priceObj.purchase.display){
-          retVar = priceObj.purchase.display;
-        }
-        else{
-          retVar = this.getI18nLabel('itemDetail.noPrice');
+        if (priceObj) {
+          if (priceObj.purchase && priceObj.purchase.amount >= 0) {
+            retVar = priceObj.purchase.display;
+          }
+          else {
+            retVar = this.getI18nLabel('itemDetail.noPrice');
+          }
         }
 
         return retVar;
@@ -127,7 +126,12 @@ define(['ep', 'i18n', 'eventbus'],
         categoryPaginationTopRegion: '[data-region="categoryPaginationTopRegion"]',
         categoryPaginationBottomRegion: '[data-region="categoryPaginationBottomRegion"]'
       },
-      className:'category-items-container'
+      className: 'category-items-container',
+      onShow: function () {
+        ep.app.addRegions({
+          categoryBrowseRegion: '[data-region="categoryBrowseRegion"]'
+        });
+      }
     });
 
     /*
@@ -138,6 +142,7 @@ define(['ep', 'i18n', 'eventbus'],
     });
 
     /*
+     *
      * Category Browse Views
      */
     // Category Item View
@@ -145,40 +150,65 @@ define(['ep', 'i18n', 'eventbus'],
       template: '#CategoryItemTemplate',
       templateHelpers: viewHelpers,
       className: 'category-item-container',
-      tagName:'li',
+      tagName: 'li',
       onShow: function () {
-        // check if there is releaseDate in model
-        // if so inject view to display availability release date
-        if (viewHelpers.getAvailabilityReleaseDate(this.model.attributes.availability.releaseDate)) {
-          var childReleaseDateView = new categoryItemReleaseDateView({
-            model: this.model
-          });
-          childReleaseDateView.render();
-          $('li[data-region="categoryItemReleaseDateRegion"]', this.el).html(childReleaseDateView.el);
+        var priceRegion = new Marionette.Region({
+          el: $('[data-region="priceRegion"]', this.el)
+        });
+
+        priceRegion.show(
+          getPriceMasterView({
+            price: this.model.attributes.price,
+            rate: this.model.attributes.rate
+          })
+        );
+      }
+    });
+
+    //
+    // price master view
+    //
+    var priceLayout = Backbone.Marionette.Layout.extend({
+      template: '#ItemPriceMasterViewTemplate',
+      regions: {
+        itemPriceRegion: $('[data-region="itemPriceRegion"]', this.el),
+        itemRateRegion: $('[data-region="itemRateRegion"]', this.el)
+      },
+      onShow: function () {
+        // if item has rate, load rate view
+        if (this.model.get('rate').displayValue) {
+          this.itemRateRegion.show(new itemRateView({
+            model: new Backbone.Model(this.model.attributes.rate)
+          }));
         }
-        else {
-          $('li[data-region="categoryItemReleaseDateRegion"]', this.el).hide();
+
+        // if item has one-time purchase price, load price view
+        if (this.model.get('price').purchase.display) {
+          this.itemPriceRegion.show(
+            new itemPriceView({
+              model: new Backbone.Model(this.model.attributes.price)
+            })
+          );
         }
 
-        // check if there is list price data (unit price or total price)
-        // if so inject view to display list price
-        if (viewHelpers.getListPrice(this.model.attributes.price)){
-          var childListPriceView = new categoryItemListPriceView({
-            model:this.model
-          });
+        // no price nor rate scenario is handled at model level
+        // an item price object is created with artificial display value
+      }
+    });
 
-          childListPriceView.render();
-
-          $('li[data-region="categoryItemListPriceRegion"]', this.el).html(childListPriceView.el);
-        } else {
-          $('li[data-region="categoryItemListPriceRegion"]', this.el).hide();
+    //
+    var itemPriceView = Backbone.Marionette.ItemView.extend({
+      template: '#ItemPriceTemplate',
+      templateHelpers: viewHelpers,
+      onShow: function() {
+        if (!viewHelpers.getListPrice(this.model.attributes)) {
+          $('[data-region="itemListPriceRegion"]', this.el).hide();
         }
       }
     });
 
-    // Category Item Collection Empty View
-    var categoryItemListPriceView = Backbone.Marionette.ItemView.extend({
-      template: '#CategoryItemListPriceTemplate',
+    var itemRateView = Backbone.Marionette.ItemView.extend({
+      template: '#ItemRateTemplate',
       templateHelpers: viewHelpers
     });
 
@@ -191,14 +221,17 @@ define(['ep', 'i18n', 'eventbus'],
     // Category Item Collection Empty View
     var categoryItemCollectionEmptyView = Backbone.Marionette.ItemView.extend({
       template: '#CategoryItemCollectionEmptyTemplate',
-      templateHelpers: viewHelpers
+      templateHelpers: viewHelpers,
+      onShow: function () {
+        EventBus.trigger('category.emptyCollectionRendered');
+      }
     });
 
     // Category Item Collection View
     var categoryItemCollectionView = Backbone.Marionette.CollectionView.extend({
       itemView: categoryItemView,
       emptyView: categoryItemCollectionEmptyView,
-      tagName:'ul'
+      tagName: 'ul'
     });
 
     /*
@@ -208,13 +241,27 @@ define(['ep', 'i18n', 'eventbus'],
       template: '#CategoryPaginationTemplate',
       templateHelpers: viewHelpers,
       className: 'pagination-container',
-      events:{
-        'click .btn-pagination':function(event){
+      events: {
+        'click .btn-pagination': function (event) {
           event.preventDefault();
           EventBus.trigger('category.paginationBtnClicked', event.target.value, $(event.target).data('actionlink'));
         }
       }
     });
+
+
+    /*
+     *
+     *
+     *
+     * FUNCTIONS
+     */
+    // for rates and prices display
+    var getPriceMasterView = function (attributes) {
+      return new priceLayout({
+        model: new Backbone.Model(attributes)
+      });
+    };
 
     return {
       DefaultView: defaultLayout,
