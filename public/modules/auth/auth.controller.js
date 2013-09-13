@@ -41,30 +41,32 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'modules/auth/auth.models
      * Load login menu - load login form or profile menu depend on authentication state
      */
     // auth menu item dropdown clicked
-    EventBus.on('auth.btnAuthMenuDropdownClicked',function(){
-      var state = 'PUBLIC';
-      if (ep.io.localStore.getItem('oAuthRole')){
-        state = ep.io.localStore.getItem('oAuthRole');
-        if (state){
-          EventBus.trigger("auth.loadAuthMenuRequest", state);
-        }
-        else{
-          ep.logger.warn('auth.btnAuthMenuDropdownClicked with no state');
-        }
+    EventBus.on('auth.btnAuthGlobalMenuItemClicked',function(){
+      var triggerLogIn = true;
+      // if user is logged in then show the menu dropdown
+      var currentRole = ep.io.localStore.getItem('oAuthRole');
+      if (currentRole && (currentRole === 'REGISTERED')){
+        EventBus.trigger("auth.loadAuthMenuRequest");
+        triggerLogIn = false;
+      }
+      // show the login modal
+      if (triggerLogIn){
+        EventBus.trigger('layout.loadRegionContentRequest', {
+          region: 'appModalRegion',
+          module: 'auth',
+          view: 'LoginFormView'
+        });
       }
 
     });
 
     // auth menu request
-    EventBus.on('auth.loadAuthMenuRequest', function(state) {
-      var viewName = 'LoginFormView';
-      if (state === 'REGISTERED'){
-        viewName = 'ProfileMenuView';
-      }
+    EventBus.on('auth.loadAuthMenuRequest', function() {
+      View.showProfileMenu();
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'mainAuthView',
         module:'auth',
-        view: viewName
+        view: 'ProfileMenuView'
       });
 
     });

@@ -251,7 +251,6 @@ define(['ep','marionette','i18n','eventbus','mediator'],
       events:{
         'click .btn-cmd-checkout':function(event){
           event.preventDefault();
-          ep.logger.info('Checkout button clicked');
           EventBus.trigger('cart.checkoutBtnClicked',this.model);
         }
       }

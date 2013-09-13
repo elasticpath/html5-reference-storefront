@@ -40,6 +40,16 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
     };
 
     /*
+    * Show the Profile Dropdown menu
+    * */
+    function showProfileMenu(){
+      $('.auth-nav-container').show(250);
+    }
+    function hideProfileMenu(){
+      $('.auth-nav-container').hide(250);
+    }
+
+    /*
      * Default Layout View: loginMenu button, and controlling the toggle menu
      */
     var defaultLayout = Backbone.Marionette.Layout.extend({
@@ -47,16 +57,30 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
       className:'auth-container',
       templateHelpers:viewHelpers,
       events:{
-        'click .btn-auth-dropdown':function(event){
+        'click .btn-auth-menu':function(event){
           event.preventDefault();
-          $('.auth-nav-container').toggle(250);
-          EventBus.trigger('auth.btnAuthMenuDropdownClicked');
-
+          event.stopPropagation();
+          // don't bother firing any events if the menu is open
+          if(!$('.auth-nav-container').is(':visible')){
+            EventBus.trigger('auth.btnAuthGlobalMenuItemClicked');
+          }
+          else{
+            hideProfileMenu();
+          }
         }
       },
       onShow:function() {
         ep.app.addRegions({
           mainAuthView:'[data-region="authMainRegion"]'
+        });
+        // set up the global events to close the profile menu
+        $('body').unbind().bind('click',function(event){
+          if ($('.auth-nav-container').is(':visible')){
+            var container = $('.auth-nav-container');
+            if (!container.is(event.target) && container.has(event.target).length === 0) {
+              container.hide();
+            }
+          }
         });
 
       }
@@ -126,7 +150,9 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
       LoginFormView:loginFormView,
       ProfileMenuView:profileMenuView,
       getLoginRequestModel:getLoginRequestModel,
-      displayLoginErrorMsg:displayLoginErrorMsg
+      displayLoginErrorMsg:displayLoginErrorMsg,
+      showProfileMenu:showProfileMenu,
+      hideProfileMenu:hideProfileMenu
     };
   }
 );

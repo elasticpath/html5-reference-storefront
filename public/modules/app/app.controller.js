@@ -19,11 +19,11 @@ define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!m
     // attach the module template markup to the DOM
     $(anchorSelector).append(baseMarkup);
 
-    Marionette.Region.prototype.open = function(view){
-      this.$el.hide();
-      this.$el.html(view.el);
-      this.$el.fadeIn(ep.app.config.viewFadeInValue);
-    }
+//    Marionette.Region.prototype.open = function(view){
+//      this.$el.hide();
+//      this.$el.html(view.el);
+//      this.$el.fadeIn(ep.app.config.viewFadeInValue);
+//    }
 
     /*
     * User Preferences
@@ -54,7 +54,7 @@ define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!m
           autoResize: true,
           minWidth: 700,
           modal: true,
-          position:['18%','18%'],
+          position:'auto',
           onShow: function(dialog){
 
           },
@@ -78,16 +78,12 @@ define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!m
           }
         });
 
-
-//        view.on("close", this.hideModal, this);
-//        var $modalEl = $("#modal");
-//        $modalEl.modal({overlayClose:true});
-//        //this.$el.modal({overlayClose:true});
       },
 
 
       onShow:function(){
         //this.showModal(this);
+
       },
 
 
