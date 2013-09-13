@@ -142,9 +142,36 @@ define(['ep', 'i18n', 'eventbus'],
     });
 
     /*
+     * Category Pagination View
+     */
+    var categoryPaginationView = Backbone.Marionette.ItemView.extend({
+      template: '#CategoryPaginationTemplate',
+      templateHelpers: viewHelpers,
+      className: 'pagination-container',
+      events: {
+        'click .btn-pagination': function (event) {
+          event.preventDefault();
+          EventBus.trigger('category.paginationBtnClicked', event.target.value, $(event.target).data('actionlink'));
+        }
+      }
+    });
+
+
+
+
+    /*
      *
      * Category Browse Views
      */
+    // Category Item Collection Empty View
+    var categoryItemCollectionEmptyView = Backbone.Marionette.ItemView.extend({
+      template: '#CategoryItemCollectionEmptyTemplate',
+      templateHelpers: viewHelpers,
+      onShow: function () {
+        EventBus.trigger('category.emptyCollectionRendered');
+      }
+    });
+
     // Category Item View
     var categoryItemView = Backbone.Marionette.ItemView.extend({
       template: '#CategoryItemTemplate',
@@ -152,23 +179,48 @@ define(['ep', 'i18n', 'eventbus'],
       className: 'category-item-container',
       tagName: 'li',
       onShow: function () {
+        // show price
         var priceRegion = new Marionette.Region({
           el: $('[data-region="priceRegion"]', this.el)
         });
-
         priceRegion.show(
-          getPriceMasterView({
-            price: this.model.attributes.price,
-            rate: this.model.attributes.rate
+          new itemPriceLayout({
+            model: new Backbone.Model({
+              price: this.model.attributes.price,
+              rate: this.model.attributes.rate
+            })
           })
         );
+
+
+        // show availability
+        var availabilityRegion = new Marionette.Region({
+          el: $('[data-region="availabilityRegion"]', this.el)
+        });
+        availabilityRegion.show(
+          new itemAvailabilityView({
+            model: new Backbone.Model(this.model.get('availability')) // FIXME will this be undefined?
+          })
+        );
+      }
+    });
+
+    // Item Availability
+    var itemAvailabilityView = Backbone.Marionette.ItemView.extend({
+      template: '#ItemAvailabilityTemplate',
+      templateHelpers: viewHelpers,
+      tagName: 'ul',
+      onShow: function() {
+        if (!viewHelpers.getAvailabilityReleaseDate(this.model.get('releaseDate'))) {
+          $('[data-region="itemAvailabilityDescriptionRegion"]', this.el).addClass('itemdetail-release-date-hidden');
+        }
       }
     });
 
     //
     // price master view
     //
-    var priceLayout = Backbone.Marionette.Layout.extend({
+    var itemPriceLayout = Backbone.Marionette.Layout.extend({
       template: '#ItemPriceMasterViewTemplate',
       regions: {
         itemPriceRegion: $('[data-region="itemPriceRegion"]', this.el),
@@ -196,36 +248,24 @@ define(['ep', 'i18n', 'eventbus'],
       }
     });
 
-    //
+    // Item Price View
     var itemPriceView = Backbone.Marionette.ItemView.extend({
       template: '#ItemPriceTemplate',
       templateHelpers: viewHelpers,
+      tagName: 'ul',
       onShow: function() {
         if (!viewHelpers.getListPrice(this.model.attributes)) {
-          $('[data-region="itemListPriceRegion"]', this.el).hide();
+          $('[data-region="itemListPriceRegion"]', this.el).addClass('itemdetail-list-price-hidden');
         }
       }
     });
 
+    // Item Rate View
     var itemRateView = Backbone.Marionette.ItemView.extend({
       template: '#ItemRateTemplate',
       templateHelpers: viewHelpers
     });
 
-    // Category Item Collection Empty View
-    var categoryItemReleaseDateView = Backbone.Marionette.ItemView.extend({
-      template: '#CategoryItemReleaseDateTemplate',
-      templateHelpers: viewHelpers
-    });
-
-    // Category Item Collection Empty View
-    var categoryItemCollectionEmptyView = Backbone.Marionette.ItemView.extend({
-      template: '#CategoryItemCollectionEmptyTemplate',
-      templateHelpers: viewHelpers,
-      onShow: function () {
-        EventBus.trigger('category.emptyCollectionRendered');
-      }
-    });
 
     // Category Item Collection View
     var categoryItemCollectionView = Backbone.Marionette.CollectionView.extend({
@@ -234,34 +274,6 @@ define(['ep', 'i18n', 'eventbus'],
       tagName: 'ul'
     });
 
-    /*
-     * Category Pagination View
-     */
-    var categoryPaginationView = Backbone.Marionette.ItemView.extend({
-      template: '#CategoryPaginationTemplate',
-      templateHelpers: viewHelpers,
-      className: 'pagination-container',
-      events: {
-        'click .btn-pagination': function (event) {
-          event.preventDefault();
-          EventBus.trigger('category.paginationBtnClicked', event.target.value, $(event.target).data('actionlink'));
-        }
-      }
-    });
-
-
-    /*
-     *
-     *
-     *
-     * FUNCTIONS
-     */
-    // for rates and prices display
-    var getPriceMasterView = function (attributes) {
-      return new priceLayout({
-        model: new Backbone.Model(attributes)
-      });
-    };
 
     return {
       DefaultView: defaultLayout,
