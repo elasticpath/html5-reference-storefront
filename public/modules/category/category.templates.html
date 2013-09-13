@@ -30,7 +30,7 @@
         </ul>
         <ul>
           <li class="category-item-list-price" data-region="categoryItemListPriceRegion"></li>
-          <li class="category-item-purchase-price"><span>Your Price: </span> <%= E.getPurchasePrice(E.price) %></li>
+          <li class="category-item-purchase-price"><span><%= E.getI18nLabel('itemDetail.purchasePrice') %>: </span> <%= E.getPurchasePrice(E.price) %></li>
         </ul>
       </div>
     </div>
@@ -45,7 +45,7 @@
 
   <!-- Category Item List Price Template -->
     <script id="CategoryItemListPriceTemplate" type="text/template">
-      <span class="category-item-list-price"><%= E.getListPrice(E.price) %></span>
+      <%= E.getI18nLabel('itemDetail.listPrice') %>: <span class="category-item-list-price-value"><%= E.getListPrice(E.price) %></span>
     </script>
 
   <!-- Category Item Collection Empty Template -->

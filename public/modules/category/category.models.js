@@ -47,7 +47,7 @@ define(['ep', 'eventbus', 'backbone'],
         };
 
         categoryObj.pagination.links.next = jsonPath(pageLinks, "$.[?(@.rel=='next')].uri");
-        categoryObj.pagination.links.prev = jsonPath(pageLinks, "$.[?(@.rel=='previous' || @.rel=='prev')].uri");
+        categoryObj.pagination.links.prev = jsonPath(pageLinks, "$.[?(@.rel=='previous')].uri");
 
 
         /*
