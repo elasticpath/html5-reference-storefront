@@ -96,7 +96,7 @@ define(['ep','marionette','i18n','eventbus'],
           return priceObj.purchase.display;
         }
         else{
-          return '';
+          return this.getI18nLabel('itemDetail.noPrice');
         }
       },
       getDefaultImagePath:function(thumbnail){

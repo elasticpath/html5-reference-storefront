@@ -43,6 +43,7 @@
     "addToCart": "Add to Cart",
     "purchasePrice": "Price",
     "listPrice": "Original Price",
+    "noPrice":"n/a",
     "noImgLabel": "No Image Available",
     "quantity": "Quantity"
   }

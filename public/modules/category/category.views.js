@@ -92,7 +92,7 @@ define(['ep', 'i18n', 'eventbus'],
           retVar = priceObj.purchase.display;
         }
         else{
-          retVar = '';
+          retVar = this.getI18nLabel('itemDetail.noPrice');
         }
 
         return retVar;
