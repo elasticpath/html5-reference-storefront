@@ -13,8 +13,16 @@ define(function(require) {
     /*
      * Test Category Controller
      */
-    describe ('UI Storefront Category Controller', function () {});
+    describe ('UI Storefront Category Controller', function () {
 
+      var categoryController = require('category');
+      describe("DefaultView",function(){
+        var defaultView = new categoryController.DefaultView();
+        it('DefaultView should exist',function(){
+          expect(defaultView).to.exist;
+        });
+      });
+    });
 
     /*
      * Test presence of Category Views and Regions
