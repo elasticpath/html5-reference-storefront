@@ -193,15 +193,17 @@ define(['ep', 'i18n', 'eventbus'],
         );
 
 
-        // show availability
-        var availabilityRegion = new Marionette.Region({
-          el: $('[data-region="availabilityRegion"]', this.el)
-        });
-        availabilityRegion.show(
-          new itemAvailabilityView({
-            model: new Backbone.Model(this.model.get('availability')) // FIXME will this be undefined?
-          })
-        );
+        // show availability if at least has availability state
+        if (this.model.get('availability').state) {
+          var availabilityRegion = new Marionette.Region({
+            el: $('[data-region="availabilityRegion"]', this.el)
+          });
+          availabilityRegion.show(
+            new itemAvailabilityView({
+              model: new Backbone.Model(this.model.get('availability'))
+            })
+          );
+        }
       }
     });
 
@@ -211,6 +213,7 @@ define(['ep', 'i18n', 'eventbus'],
       templateHelpers: viewHelpers,
       tagName: 'ul',
       onShow: function () {
+        // if no release date, hide dom element with release-date & the label
         if (!viewHelpers.getAvailabilityReleaseDate(this.model.get('releaseDate'))) {
           $('[data-region="itemAvailabilityDescriptionRegion"]', this.el).addClass('itemdetail-release-date-hidden');
         }
