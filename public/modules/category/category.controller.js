@@ -52,12 +52,15 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
      *
      *
      */
+    // pagination btn is clicked
     EventBus.on('category.paginationBtnClicked', function (direction, uri) {
       ep.logger.info(direction + ' btn clicked.');
 
       EventBus.trigger('category.reloadCategoryViewsRequest', uri);
 
     });
+
+    // reload category browse collection
     EventBus.on('category.reloadCategoryViewsRequest', function (uri) {
       ep.logger.info('navigation to a different page');
 
@@ -86,6 +89,7 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
       ep.logger.info('category browse refreshed.');
     });
 
+    // Hide pagination regions when empty collection rendered
     EventBus.on('category.emptyCollectionRendered', function() {
       View.HidePaginationRegion();
     });

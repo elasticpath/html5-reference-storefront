@@ -116,6 +116,7 @@ define(['ep', 'eventbus', 'backbone'],
           }
 
           // item rate
+          // [!] currently works for only 1 rate per item; needs more work to display multiple rates
           itemObj.rate = {};
 
           var rate = jsonPath(itemArray[i], '$._rate..rate')[0];

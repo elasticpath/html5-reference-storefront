@@ -269,7 +269,9 @@ define(['ep', 'i18n', 'eventbus'],
 
     // Item Rate View
     var itemRateView = Backbone.Marionette.ItemView.extend({
-      template: '#ItemRateTemplate'
+      template: '#ItemRateTemplate',
+      templateHelpers: viewHelpers,
+      className: 'category-item-rate-container'
     });
 
 

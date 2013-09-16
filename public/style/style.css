@@ -2509,7 +2509,8 @@ header.app-header .row {
   border: 1px solid #eeeeee;
 }
 .category-item-price-container,
-.category-item-availability-container {
+.category-item-availability-container,
+.category-item-rate-container {
   margin-left: 1rem;
 }
 .category-item-list-price-value {
