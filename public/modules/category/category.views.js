@@ -159,8 +159,6 @@ define(['ep', 'i18n', 'eventbus'],
     });
 
 
-
-
     /*
      *
      * Category Browse Views
@@ -212,7 +210,7 @@ define(['ep', 'i18n', 'eventbus'],
       template: '#ItemAvailabilityTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
-      onShow: function() {
+      onShow: function () {
         if (!viewHelpers.getAvailabilityReleaseDate(this.model.get('releaseDate'))) {
           $('[data-region="itemAvailabilityDescriptionRegion"]', this.el).addClass('itemdetail-release-date-hidden');
         }
@@ -231,9 +229,11 @@ define(['ep', 'i18n', 'eventbus'],
       onShow: function () {
         // if item has rate, load rate view
         if (this.model.get('rate').display) {
-          this.itemRateRegion.show(new itemRateView({
-            model: new Backbone.Model(this.model.attributes.rate)
-          }));
+          this.itemRateRegion.show(
+            new itemRateView({
+              model: new Backbone.Model(this.model.attributes.rate)
+            })
+          );
         }
 
         // if item has one-time purchase price, load price view
@@ -255,7 +255,7 @@ define(['ep', 'i18n', 'eventbus'],
       template: '#ItemPriceTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
-      onShow: function() {
+      onShow: function () {
         if (!viewHelpers.getListPrice(this.model.attributes)) {
           $('[data-region="itemListPriceRegion"]', this.el).addClass('itemdetail-list-price-hidden');
         }
@@ -264,8 +264,7 @@ define(['ep', 'i18n', 'eventbus'],
 
     // Item Rate View
     var itemRateView = Backbone.Marionette.ItemView.extend({
-      template: '#ItemRateTemplate',
-      templateHelpers: viewHelpers
+      template: '#ItemRateTemplate'
     });
 
 
