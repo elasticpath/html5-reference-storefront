@@ -18,31 +18,43 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
      *
      *
      */
-    var defaultView = function (uri) {
+    var defaultView = function (uriObj) {
       var categoryLayout = new View.DefaultView();
-      var categoryModel = new Model.CategoryModel('zoom');
+      var categoryModel = new Model.CategoryModel();
+
+
+      var uri = uriObj.uri;
+      var pageUri = uriObj.pageUri;
 
       categoryModel.fetch({
-        url: ep.ui.decodeUri(uri) + categoryModel.zoom,
+        url: categoryModel.getUrl(uri),
         success: function (response) {
-
           categoryLayout.categoryTitleRegion.show(
             new View.CategoryTitleView({
               model: categoryModel
-            }));
-          categoryLayout.categoryPaginationTopRegion.show( getCategoryPaginationView(response) );
-          categoryLayout.categoryBrowseRegion.show( getCategoryBrowseView(response) );
-          categoryLayout.categoryPaginationBottomRegion.show( getCategoryPaginationView(response) );
+            })
+          );
+
+          if (!pageUri) {
+            pageUri = response.attributes.itemUri;
+          }
+
+          var reqObj = {
+            fetchUri: pageUri,
+            categoryUri: response.attributes.uri
+          };
+
+          EventBus.trigger('category.fetchCategoryItemPageModelRequest', reqObj);
+
         },
         error: function (response) {
           ep.logger.error('error fetch category model ' + response);
         }
       });
 
+
       return categoryLayout;
     };
-
-
 
 
     /*
@@ -52,68 +64,39 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
      *
      *
      */
-    // pagination btn is clicked
-    EventBus.on('category.paginationBtnClicked', function (direction, uri) {
-      ep.logger.info(direction + ' btn clicked.');
+    EventBus.on('category.fetchCategoryItemPageModelRequest', function(reqObj) {
+      var categoryItemModel = new Model.CategoryItemPageModel();
+      categoryItemModel.fetch({
+        url: categoryItemModel.getUrl(reqObj.fetchUri),
+        success: function (itemResponse) {
+          var paginationModel = new Model.CategoryPaginationModel(itemResponse.attributes.pagination);
+          paginationModel.set('categoryUri', reqObj.categoryUri);
 
-      EventBus.trigger('category.reloadCategoryViewsRequest', uri);
+          var paginationTopView = new View.CategoryPaginationView({
+            model: paginationModel
+          });
+          var paginationBottomView = new View.CategoryPaginationView({
+            model: paginationModel
+          });
 
-    });
-
-    // reload category browse collection
-    EventBus.on('category.reloadCategoryViewsRequest', function (uri) {
-      ep.logger.info('navigation to a different page');
-
-      // declare regions
-      var browseRegion = new Backbone.Marionette.Region({
-        el: '[data-region="categoryBrowseRegion"]'
-      });
-      var paginationTopRegion = new Backbone.Marionette.Region({
-        el: '[data-region="categoryPaginationTopRegion"]'
-      });
-      var paginationBottomRegion = new Backbone.Marionette.Region({
-        el: '[data-region="categoryPaginationBottomRegion"]'
-      });
-
-      // reload views
-      var categoryModel = new Model.CategoryModel('paginationZoom');
-      categoryModel.fetch({
-        url: ep.app.config.cortexApi.path + uri + categoryModel.paginationZoom,
-        success: function (response) {
-          browseRegion.show( getCategoryBrowseView(response) );
-          paginationTopRegion.show( getCategoryPaginationView(response) );
-          paginationBottomRegion.show( getCategoryPaginationView(response) );
+          ep.app.categoryPaginationTopRegion.show(paginationTopView);
+          ep.app.categoryBrowseRegion.show(
+            new View.CategoryItemCollectionView({
+              collection: new Model.CategoryItemCollectionModel(itemResponse.attributes.itemCollection)
+            })
+          );
+          ep.app.categoryPaginationBottomRegion.show(paginationBottomView);
+        },
+        error: function (response) {
+          ep.logger.error('error fetch category items model ' + response);
         }
       });
-
-      ep.logger.info('category browse refreshed.');
     });
 
     // Hide pagination regions when empty collection rendered
-    EventBus.on('category.emptyCollectionRendered', function() {
+    EventBus.on('category.emptyCollectionRendered', function () {
       View.HidePaginationRegion();
     });
-
-
-
-
-    /*
-     *
-     *
-     * FUNCTIONS
-     *
-     */
-    var getCategoryBrowseView = function(model) {
-      return new View.CategoryItemCollectionView({
-        collection: new Model.CategoryItemCollectionModel(model.attributes.itemCollection)
-      });
-    };
-
-    var getCategoryPaginationView = function(model) {
-      return new View.CategoryPaginationView({
-        model: new Model.CategoryPaginationModel(model.attributes.pagination)
-      });
-    };
 
     return {
       DefaultView: defaultView

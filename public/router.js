@@ -40,13 +40,15 @@ define(['marionette','eventbus'],
           data:id
         });
       },
-
-      category: function(category) {
+      category: function(uri, pageuri) {
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
           module:'category',
           view:'DefaultView',
-          data:category
+          data: {
+            uri: uri,
+            pageUri: pageuri
+          }
         });
       },
       search: function(keywords) {
@@ -140,6 +142,7 @@ define(['marionette','eventbus'],
         'home': 'index',
         'category' : 'category',
         'category/:uri' : 'category',
+        'category/:uri/:pageuri' : 'category',
         'search' : 'search',
         'search/:keywords' : 'search',
         'composer': 'composer',

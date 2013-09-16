@@ -109,9 +109,18 @@ define(['ep', 'i18n', 'eventbus'],
 
         return retVar;
       },
+      generatePaginationLink: function(uri, pageUri) {
+        var link = '';
+
+        if (uri && pageUri) {
+          link = ep.app.config.routes.category + '/' + ep.ui.encodeUri(uri) + '/' + ep.ui.encodeUri(pageUri);
+        }
+
+        return link;
+      },
       checkForDisabledPaginationBtn: function (link) {
         if (!link) {
-          return 'disabled';
+          return 'pagination-link-disabled';
         }
       }
     };
@@ -123,14 +132,13 @@ define(['ep', 'i18n', 'eventbus'],
       template: '#CategoryDefaultLayoutTemplate',
       regions: {
         categoryTitleRegion: '[data-region="categoryTitleRegion"]',
-        categoryBrowseRegion: '[data-region="categoryBrowseRegion"]',
-        categoryPaginationTopRegion: '[data-region="categoryPaginationTopRegion"]',
-        categoryPaginationBottomRegion: '[data-region="categoryPaginationBottomRegion"]'
       },
       className: 'category-items-container',
       onShow: function () {
         ep.app.addRegions({
-          categoryBrowseRegion: '[data-region="categoryBrowseRegion"]'
+          categoryBrowseRegion: '[data-region="categoryBrowseRegion"]',
+          categoryPaginationTopRegion: '[data-region="categoryPaginationTopRegion"]',
+          categoryPaginationBottomRegion: '[data-region="categoryPaginationBottomRegion"]'
         });
       }
     });

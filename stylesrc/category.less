@@ -33,11 +33,13 @@
 .category-item-title a{
   text-decoration:none;
 }
-.btn-pagination{
-  margin-left:.5rem;
-  margin-right:.5rem;
+
+.pagination-link{
+  margin-left:5rem;
+  margin-right:5rem;
 }
-.paging-results-per-page, .paging-total-results, .paging-current-page, .paging-total-pages{
+
+.paging-total-results{
   font-size:78%;
   color:#444;
 }
@@ -45,6 +47,13 @@
   font-weight:bold;
 }
 
+
+.pagination-link-disabled {
+  pointer-events: none;
+  cursor: default;
+  color: grey;
+  text-decoration: none;
+}
 .pagination-region-hidden{
   display:none;
 }
@@ -55,7 +64,7 @@
   display:inline-block;
 }
 @media only screen and (max-width:60rem) {
-  .btn-pagination{
+  .pagination-link{
     margin-left: .5rem;
     margin-right: .5rem;
   }

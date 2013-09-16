@@ -10,16 +10,34 @@ define(['ep', 'eventbus', 'backbone'],
   function (ep, EventBus, Backbone) {
 
     /*
-     * Category Model (main model fetching info from server)
+     * Category Model (fetching category info from server)
      */
     var categoryModel = Backbone.Model.extend({
-      zoom: '?zoom=items, items:element, items:element:price, items:element:rate, items:element:definition, items:element:definition:assets:element, items:element:availability',
-      paginationZoom: '?zoom=element,element:availability,element:definition,element:definition:assets:element,element:price,element:rate',
+      uri:'', // will be set in parse method
+      getUrl: function (uri) {
+        this.uri = ep.ui.decodeUri(uri);
+        return ep.ui.decodeUri(uri) + '?zoom=items';
+      },
       parse: function (response) {
         var categoryObj = {};
-
         // category title
         categoryObj.title = response['display-name'];
+        categoryObj.itemUri = jsonPath(response, '$._items..self.uri')[0];
+        categoryObj.uri = this.uri;
+
+        return categoryObj;
+      }
+    });
+
+    /*
+     * Category Item Page Model (fetching category item list & pagination info from server)
+     */
+    var categoryItemPageModel = Backbone.Model.extend({
+      getUrl: function (uri) {
+        return ep.app.config.cortexApi.path + ep.ui.decodeUri(uri) + '?zoom=element, element:availability,element:definition,element:definition:assets:element,element:price,element:rate';
+      },
+      parse: function (response) {
+        var categoryObj = {};
 
         /*
          * category pagination
@@ -27,16 +45,9 @@ define(['ep', 'eventbus', 'backbone'],
         categoryObj.pagination = {};
         categoryObj.pagination.stats = {};
         categoryObj.pagination.links = {};
-        var pageStats = jsonPath(response, '$..pagination')[0];
 
-        // FIXME !!!
-        var itemPLinks = jsonPath(response, '$._items[0].links')[0];
-        var pLinks = jsonPath(response, '$.links')[0];
-        if (itemPLinks) {
-          var pageLinks = itemPLinks;
-        } else {
-          var pageLinks = pLinks;
-        }
+        var pageStats = jsonPath(response, '$..pagination')[0];
+        var pageLinks = jsonPath(response, '$.links')[0]; // comment about paging specific
 
         categoryObj.pagination.stats = {
           currentPage: pageStats['current'],
@@ -46,9 +57,8 @@ define(['ep', 'eventbus', 'backbone'],
           totalResults: pageStats['results']
         };
 
-        categoryObj.pagination.links.next = jsonPath(pageLinks, "$.[?(@.rel=='next')].uri");
-        categoryObj.pagination.links.prev = jsonPath(pageLinks, "$.[?(@.rel=='previous')].uri");
-
+        categoryObj.pagination.links.next = jsonPath(pageLinks, "$.[?(@.rel=='next')].uri")[0];
+        categoryObj.pagination.links.prev = jsonPath(pageLinks, "$.[?(@.rel=='previous')].uri")[0];
 
         /*
          * category item browse
@@ -141,20 +151,21 @@ define(['ep', 'eventbus', 'backbone'],
             };
           }
 
-        categoryObj.itemCollection.push(itemObj);
+          categoryObj.itemCollection.push(itemObj);
         }
 
         return categoryObj;
       }
     });
 
-
+    /*
+     * Empty Models that do not fetch.
+     * In controller, will take part of categoryItemPageModel response, and wrap that into Model.
+     */
+    // Category Pagination Model
     var categoryPaginationModel = Backbone.Model.extend({});
 
-
-    /*
-     * Category Item Collection Model
-     */
+    // Category Item Collection Model
     var itemModel = Backbone.Model.extend({});
     var categoryItemCollectionModel = Backbone.Collection.extend({
       model: itemModel
@@ -163,6 +174,7 @@ define(['ep', 'eventbus', 'backbone'],
 
     return{
       CategoryModel: categoryModel,
+      CategoryItemPageModel: categoryItemPageModel,
       CategoryPaginationModel: categoryPaginationModel,
       CategoryItemCollectionModel: categoryItemCollectionModel
     };

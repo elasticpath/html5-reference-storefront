@@ -77,18 +77,18 @@
 
   <!-- Category Pagination Template -->
   <script id="CategoryPaginationTemplate" type="text/template">
-    <div class="paginationStatsContainer">
-      <div class="paging-total-results">
-        <span class="pagingnation-value"><%= E.stats.totalResults %></span>
-        <label class="pagingnation-label"><%= E.getI18nLabel('category.totalResults') %></label>
-        ( <span class="pagingnation-value"><%= E.stats.resultsOnPage %></span>
-        <label class="pagingnation-label"><%= E.getI18nLabel('category.resultsOnPage') %></label> )
+    <div class="paging-total-results">
+      <span class="pagingnation-value"><%= E.stats.totalResults %></span>
+      <label class="pagingnation-label"><%= E.getI18nLabel('category.totalResults') %></label>
+      ( <span class="pagingnation-value"><%= E.stats.resultsOnPage %></span>
+      <label class="pagingnation-label"><%= E.getI18nLabel('category.resultsOnPage') %></label> )
 
-      </div>
     </div>
+
     <div class="pagination-navigation-container">
-      <button class="btn-pagination" value="prev" data-actionlink="<%= E.links.prev %>"
-      <%= E.checkForDisabledPaginationBtn(E.links.prev) %> ><%= E.getI18nLabel('category.prev') %></button>
+      <a href="<%= E.generatePaginationLink(E.categoryUri, E.links.prev) %>"
+         class="pagination-link <%= E.checkForDisabledPaginationBtn(E.links.prev) %>">
+        <%= E.getI18nLabel('category.prev') %></a>
       <span class="pagestate-summary">
         <label class="pagingnation-label"><%= E.getI18nLabel('category.currentPage') %></label>
         <span class="pagingnation-value"><%= E.stats.currentPage %></span>
@@ -97,8 +97,9 @@
 
       </span>
 
-      <button class="btn-pagination" value="next" data-actionlink="<%= E.links.next %>"
-      <%= E.checkForDisabledPaginationBtn(E.links.next) %> ><%= E.getI18nLabel('category.next') %></button>
+      <a href="<%= E.generatePaginationLink(E.categoryUri, E.links.next) %>"
+         class="pagination-link <%= E.checkForDisabledPaginationBtn(E.links.next) %>">
+        <%= E.getI18nLabel('category.next') %></a>
     </div>
   </script>
 </div>
