@@ -103,38 +103,57 @@ define(
           expect(authView.getLoginRequestModel).to.exist;
         });
         it("Login Button and hidden menu container should exist", function () {
-          expect($('.btn-auth-dropdown').html()).to.exist;
+          expect($('.btn-auth-menu').html()).to.exist;
           expect($('.auth-nav-container').html()).to.exist;
         });
-        it("Login Button click should fire auth.btnAuthMenuDropdownClicked", function (done) {
-          EventBus.on('auth.btnAuthMenuDropdownClicked', function () {
+        it("Login Button click should fire auth.btnAuthGlobalMenuItemClicked", function (done) {
+          EventBus.on('auth.btnAuthGlobalMenuItemClicked', function () {
             done();
           });
-          $('button.btn-auth-dropdown').trigger('click');
+          $('button.btn-auth-menu').trigger('click');
         });
 
         it("ep.app.mainAuthRegion should exist", function () {
           expect(ep.app.mainAuthView).to.exist;
         });
-        it("auth.btnAuthMenuDropdownClicked event with PUBLIC state should trigger loadRegionContentRequest with LoginFormView ", function (done) {
-          var state = 'PUBLIC';
+
+
+        describe("Login Global Nav Item Tests",function(){
+          // public (trigger modal)
+
+          // registered (show profile menu)
+          it("auth.btnAuthGlobalMenuItemClicked event with REGISTERED state should trigger loadRegionContentRequest with ProfileMenuView ", function (done) {
+            var state = 'REGISTERED';
+            EventBus.on('layout.loadRegionContentRequest', function (obj) {
+              if (obj.view === 'ProfileMenuView') {
+                done();
+              }
+            });
+            EventBus.trigger('auth.loadAuthMenuRequest', state);
+          });
+
+        });
+
+
+        it("auth.btnAuthGlobalMenuItemClicked event with PUBLIC state should trigger modal with LoginFormView ", function (done) {
+          ep.io.localStore.setItem('oAuthRole','PUBLIC');
+
           EventBus.on('layout.loadRegionContentRequest', function (obj) {
             if (obj.view === 'LoginFormView') {
               done();
             }
           });
-          EventBus.trigger('auth.loadAuthMenuRequest', state);
+          EventBus.trigger('auth.btnAuthGlobalMenuItemClicked');
         });
-        it("auth.btnAuthMenuDropdownClicked event with REGISTERED state should trigger loadRegionContentRequest with ProfileMenuView ", function (done) {
-          var state = 'REGISTERED';
-          EventBus.on('layout.loadRegionContentRequest', function (obj) {
-            if (obj.view === 'ProfileMenuView') {
-              done();
-            }
-          });
-          EventBus.trigger('auth.loadAuthMenuRequest', state);
-        });
+
       });
+
+
+
+
+
+
+
       describe('Auth Models', function () {
         it("LogoutModel should exist", function () {
           expect(authModel.LogoutModel).to.exist;
