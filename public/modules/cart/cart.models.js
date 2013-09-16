@@ -22,7 +22,7 @@ define(['ep', 'eventbus', 'backbone'],
          */
         var lineItemsArray = [];
         var lineItemArrayLen = 0;
-        var lineItemsRoot = jsonPath(cart, "$.['_lineitems'][0]['_element']")[0];
+        var lineItemsRoot = jsonPath(cart, '$._lineitems.._element')[0];
 
         if (lineItemsRoot) {
           lineItemArrayLen = lineItemsRoot.length;
@@ -50,18 +50,18 @@ define(['ep', 'eventbus', 'backbone'],
           /*
            * item display name
            */
-          lineItemObj.displayName = currObj['_item'][0]['_definition'][0]['display-name'];
-          var itemUri = currObj['_item'][0]['_definition'][0].self.uri;
+          lineItemObj.displayName = jsonPath(currObj, '$._item.._definition..display-name')[0];
+          var itemUri = jsonPath(currObj, '$._item.._definition..self.uri')[0];
           lineItemObj.itemDefinitionUri = itemUri;
 
           /*
            * availability
            */
           lineItemObj.availability = {};
-          lineItemObj.availability.state = currObj['_availability'][0]['state'];
+          lineItemObj.availability.state = jsonPath(currObj, '$._availability..state')[0];
 
           lineItemObj.availability.releaseDate = {};
-          var lineItemReleaseDate = currObj['_availability'][0]['release-date'];
+          var lineItemReleaseDate = jsonPath(currObj, '$._availability..release-date')[0];
           if (lineItemReleaseDate) {
             lineItemObj.availability.releaseDate = {
               displayValue: lineItemReleaseDate['display-value'],
@@ -81,8 +81,8 @@ define(['ep', 'eventbus', 'backbone'],
           lineItemObj.unitPrice.listed = {};
           lineItemObj.unitPrice.purchase = {};
 
-          var itemUnitListPrice = currObj['_item'][0]['_price'][0]['list-price'];
-          var itemUnitPurchasePrice = currObj['_item'][0]['_price'][0]['purchase-price'];
+          var itemUnitListPrice = jsonPath(currObj, '$._item.._price..list-price')[0];
+          var itemUnitPurchasePrice = jsonPath(currObj, '$._item.._price..purchase-price')[0];
           if (itemUnitListPrice) {
             lineItemObj.unitPrice.listed = {
               currency: itemUnitListPrice[0].currency,
@@ -106,8 +106,8 @@ define(['ep', 'eventbus', 'backbone'],
           lineItemObj.price.listed = {};
           lineItemObj.price.purchase = {};
 
-          var lineItemListPrice = currObj['_price'][0]['list-price'];
-          var lineItemPurchasePrice = currObj['_price'][0]['purchase-price'];
+          var lineItemListPrice = jsonPath(currObj, '$._price..list-price')[0];
+          var lineItemPurchasePrice = jsonPath(currObj, '$._price..purchase-price')[0];
 
           if (lineItemListPrice) {
             lineItemObj.price.listed = {
@@ -128,7 +128,7 @@ define(['ep', 'eventbus', 'backbone'],
           /*
            * LineItem Uri (for remove lineitem button)
            */
-          lineItemObj.lineitemUri = currObj['self']['uri'];
+          lineItemObj.lineitemUri = currObj.self.uri;
 
           lineItemsArray.push(lineItemObj);
         }
@@ -143,12 +143,12 @@ define(['ep', 'eventbus', 'backbone'],
         /*
          * Cart Summary: total quantity
          */
-        cartObj.cartTotalQuantity = jsonPath(cart, "$.['total-quantity']")[0];
+        cartObj.cartTotalQuantity = jsonPath(cart, '$.total-quantity')[0];
 
         /*
          * Cart Summary: total price (excluding tax)
          */
-        var cartTotal = jsonPath(cart, "$.['_total'][0].['cost'][0]")[0];
+        var cartTotal = jsonPath(cart, '$._total..cost[0]')[0];
         cartObj.cartTotal = {
           currency: cartTotal.currency,
           amount: cartTotal.amount,
