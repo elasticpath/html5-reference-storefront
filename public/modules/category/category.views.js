@@ -212,6 +212,7 @@ define(['ep', 'i18n', 'eventbus'],
       template: '#ItemAvailabilityTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
+      className: 'category-item-availability-container',
       onShow: function () {
         // if no release date, hide dom element with release-date & the label
         if (!viewHelpers.getAvailabilityReleaseDate(this.model.get('releaseDate'))) {
@@ -258,6 +259,7 @@ define(['ep', 'i18n', 'eventbus'],
       template: '#ItemPriceTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
+      className: 'category-item-price-container',
       onShow: function () {
         if (!viewHelpers.getListPrice(this.model.attributes)) {
           $('[data-region="itemListPriceRegion"]', this.el).addClass('itemdetail-list-price-hidden');
@@ -287,7 +289,7 @@ define(['ep', 'i18n', 'eventbus'],
       $('[data-region="categoryPaginationBottomRegion"]').addClass('pagination-region-hidden');
       $('[data-region="categoryPaginationTopRegion"]').addClass('pagination-region-hidden');
 
-    }
+    };
 
     return {
       DefaultView: defaultLayout,
