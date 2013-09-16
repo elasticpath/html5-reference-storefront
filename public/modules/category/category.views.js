@@ -180,7 +180,7 @@ define(['ep', 'i18n', 'eventbus'],
       tagName: 'li',
       onShow: function () {
         // show price
-        var priceRegion = new Marionette.Region({
+        var priceRegion = new Backbone.Marionette.Region({
           el: $('[data-region="priceRegion"]', this.el)
         });
         priceRegion.show(
@@ -195,7 +195,7 @@ define(['ep', 'i18n', 'eventbus'],
 
         // show availability if at least has availability state
         if (this.model.get('availability').state) {
-          var availabilityRegion = new Marionette.Region({
+          var availabilityRegion = new Backbone.Marionette.Region({
             el: $('[data-region="availabilityRegion"]', this.el)
           });
           availabilityRegion.show(
@@ -279,11 +279,22 @@ define(['ep', 'i18n', 'eventbus'],
     });
 
 
+    /*
+     *
+     * FUNCTIONS
+     */
+    var hidePaginationRegion = function() {
+      $('[data-region="categoryPaginationBottomRegion"]').addClass('pagination-region-hidden');
+      $('[data-region="categoryPaginationTopRegion"]').addClass('pagination-region-hidden');
+
+    }
+
     return {
       DefaultView: defaultLayout,
       CategoryTitleView: categoryTitleView,
       CategoryItemCollectionView: categoryItemCollectionView,
       CategoryItemView: categoryItemView,
-      CategoryPaginationView: categoryPaginationView
+      CategoryPaginationView: categoryPaginationView,
+      HidePaginationRegion:hidePaginationRegion
     };
   });

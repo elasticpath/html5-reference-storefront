@@ -86,6 +86,9 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
       ep.logger.info('category browse refreshed.');
     });
 
+    EventBus.on('category.emptyCollectionRendered', function() {
+      View.HidePaginationRegion();
+    });
 
 
 
