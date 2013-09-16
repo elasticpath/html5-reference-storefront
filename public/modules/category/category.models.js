@@ -118,11 +118,18 @@ define(['ep', 'eventbus', 'backbone'],
           // item rate
           itemObj.rate = {};
 
-          var rate = jsonPath(itemArray[i], '$._rate'[0]);
+          var rate = jsonPath(itemArray[i], '$._rate..rate')[0];
 
           if (rate) {
-            itemObj.rate = {
-              display: rate[0].display
+            itemObj.rate.display = rate[0].display;
+            itemObj.rate.cost = {
+              amount: jsonPath(rate, '$..cost..amount')[0],
+              currency: jsonPath(rate, '$..cost..currency')[0],
+              display: jsonPath(rate, '$..cost..display')[0]
+            }
+            itemObj.rate.recurrence = {
+              interval: jsonPath(rate, '$..recurrence..interval')[0],
+              display: jsonPath(rate, '$..recurrence..display')[0]
             }
           }
 

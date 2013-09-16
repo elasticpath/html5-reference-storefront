@@ -76,8 +76,10 @@ define(['ep', 'i18n', 'eventbus'],
       getListPrice: function (priceObj) {
         var retVar = '';
 
-        if (priceObj.listed && priceObj.listed.display) {
-          retVar = priceObj.listed.display;
+        if (priceObj) {
+          if (priceObj.listed && priceObj.listed.display) {
+            retVar = priceObj.listed.display;
+          }
         }
 
         return retVar;
@@ -228,7 +230,7 @@ define(['ep', 'i18n', 'eventbus'],
       },
       onShow: function () {
         // if item has rate, load rate view
-        if (this.model.get('rate').displayValue) {
+        if (this.model.get('rate').display) {
           this.itemRateRegion.show(new itemRateView({
             model: new Backbone.Model(this.model.attributes.rate)
           }));
