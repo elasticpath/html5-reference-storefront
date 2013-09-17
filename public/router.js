@@ -17,12 +17,12 @@ define(['marionette','eventbus'],
           view:'IndexLayout'
         });
       },
-      item: function(id) {
+      item: function(uri) {
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
           module:'item',
           view:'DefaultView',
-          data:id
+          data:uri
         });
       },
       cart: function(){
@@ -151,7 +151,7 @@ define(['marionette','eventbus'],
         'composer/view/:viewName': 'viewComposer',
         'composer2': 'composer2',
         'theme': 'theme',
-        'itemdetail/:id': 'item',
+        'itemdetail/:uri': 'item',
         'settings': 'settings',
         'profile': 'profile',
         'mycart': 'cart',

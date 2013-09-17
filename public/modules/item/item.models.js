@@ -5,6 +5,9 @@ define(['ep','app','backbone','jsonpath'],
 
 
     var itemModel = Backbone.Model.extend({
+      getUrl: function(uri) {
+        return ep.app.config.cortexApi.path + '/' + ep.ui.decodeUri(uri)  + '?zoom=availability,addtocartform,price,definition,definition:assets:element';
+      },
       parse:function(item){
 
 

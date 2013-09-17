@@ -27,7 +27,7 @@ define(['ep','eventbus', 'backbone', 'cortex'],
         var mainNavCollection = [];
         var mainNavItem = {};
 
-        var topLevelCatArray = response._element;
+        var topLevelCatArray = jsonPath(response, '$.._element')[0];
         var arrayLen;
         if (topLevelCatArray) {
           arrayLen = topLevelCatArray.length;
@@ -49,83 +49,9 @@ define(['ep','eventbus', 'backbone', 'cortex'],
       }
     });
 
-    var BrowseCategoryLayout = Backbone.Model.extend({});
-    // generate the tree structure to drive the category browsing
-
-
-
-    // CATEGORY
-    var CategoryItemModel = Cortex.Model.extend({
-      afterParse:function(response, retVal, xhr){
-        ep.logger.info('|');
-        ep.logger.info(' MODEL RESPONSE  ' + response.name);
-        ep.logger.info('|');
-        ep.logger.info('|');
-        ep.logger.info('|');
-        ep.logger.info(' MODEL retVal  ' + JSON.stringify(retVal));
-        ep.logger.info('|');
-        retVal = response;
-        return response;
-      }
-    });
-
-    // build the CATEGORIES data collection
-    var BrowseCategoryCollection = Backbone.Collection.extend({
-      model:CategoryItemModel,
-      parse:function(response, model){
-        response = _.first(jsonPath(response, "$..['_child']"));
-        return response;
-      }
-    });
-
-    // PRODUCT ITEM
-    var ItemModel = Backbone.Model.extend({});
-
-    // Build the PRODUCT ITMES collection
-    var BrowseItemCollection = Cortex.Collection.extend({
-      model:ItemModel,
-      parse:function(response, model){
-        var firstCutArray = jsonPath(response, "$..['_element']");
-
-        retVal = [];
-
-
-        //encodeURIComponent / decodeURIComponent
-        if (firstCutArray){
-          for (var i = 0;i < firstCutArray[0].length;i++){
-            var retItem = {};
-            var item = firstCutArray[0][i];
-            if (item['_definition']){
-              retItem.name = item['_definition'][0]['display-name'];
-              retItem.uri = item['_definition'][0].self.uri;
-              var itemUri = item['_definition'][0].self.uri;
-              var uriCruft = '/itemdefinitions/' +ep.app.config.cortexApi.scope + '/';
-              if (itemUri.indexOf(uriCruft) > -1){
-                var isoId = itemUri.substring(uriCruft.length,itemUri.length);
-                retItem.isoId = isoId;
-              }
-
-
-            }
-            if (item['_price']){
-              retItem.price = item['_price'][0]['purchase-price'][0].display;
-            }
-            retVal.push(retItem);
-          }
-        }
-
-
-        return retVal;
-      }
-    });
-
 
     return {
-      MainNavTopCategoryModel:mainNavTopCategoryModel,
-      BrowseItemCollection:BrowseItemCollection,
-      BrowseCategoryCollection:BrowseCategoryCollection,
-      BrowseCategoryLayout:BrowseCategoryLayout
-
+      MainNavTopCategoryModel:mainNavTopCategoryModel
     };
   }
 );

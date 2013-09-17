@@ -91,12 +91,13 @@ define(['ep','marionette','i18n','eventbus','mediator'],
       },
       getItemUrl:function(uri){
         var retVar;
-        var uriCruft = '/itemdefinitions/' + ep.app.config.cortexApi.scope + '/';
-        if (uri && uri.indexOf(uriCruft) > -1){
-          retVar = '#itemdetail/' + uri.substring(uriCruft.length, uri.length);
+        if (uri) {
+          retVar = ep.app.config.routes.itemDetail + '/' + ep.ui.encodeUri(uri);
         } else {
           retVar = '';
+          ep.logger.warn('[cart]: unable to generate href to item-detail');
         }
+
         return retVar;
       },
       getCortexPath:function(){

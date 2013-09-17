@@ -12,6 +12,17 @@ define(['ep','backbone','eventbus','cortex'],
     var viewHelpers = {
       encodeUri:function(uri){
         return ep.ui.encodeUri(uri);
+      },
+      generateItemHref:function(uri) {
+        var href = '';
+
+        if (uri) {
+          href = ep.app.config.routes.itemDetail + '/' + ep.ui.encodeUri(uri);
+        } else {
+          href = '';
+          ep.logger.warn('[search]: unable to generate href to item-detail');
+        }
+        return href;
       }
     };
 

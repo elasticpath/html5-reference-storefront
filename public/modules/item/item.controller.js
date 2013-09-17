@@ -16,7 +16,7 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
 
 
 
-    var defaultView = function(id){
+    var defaultView = function(uri){
 
       var itemDetailLayout = new View.DefaultView({
         className:''
@@ -24,10 +24,8 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
 
       var itemModel = new Model.ItemModel();
 
-      var itemUrl = ep.app.config.cortexApi.path + '/items/' + ep.app.config.cortexApi.scope + '/' + id  + '?zoom=availability,addtocartform,price,definition,definition:assets:element';
-
       itemModel.fetch({
-        url: itemUrl,
+        url: itemModel.getUrl(uri),
         success:function(response){
 
           // Attribute List Collection

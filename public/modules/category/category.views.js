@@ -100,9 +100,8 @@ define(['ep', 'i18n', 'eventbus'],
       },
       generateItemHref: function (uri) {
         var retVar;
-        var uriCruft = '/items/' + ep.app.config.cortexApi.scope + '/';
-        if (uri && uri.indexOf(uriCruft) > -1) {
-          retVar = ep.app.config.routes.itemDetail + '/' + uri.substring(uriCruft.length, uri.length);
+        if (uri) {
+          retVar = ep.app.config.routes.itemDetail + '/' + ep.ui.encodeUri(uri);
         } else {
           retVar = '';
           ep.logger.warn('[category browse]: unable to generate href to item-detail');

@@ -12,7 +12,7 @@ define(['ep', 'eventbus', 'backbone'],
 
     // Cart Model
     var cartModel = Backbone.Model.extend({
-      url: ep.app.config.cortexApi.path + '/carts/' + ep.app.config.cortexApi.scope + '/default?zoom=total,lineitems:element,lineitems:element:price,lineitems:element:availability,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price,order:purchaseform',
+      url: ep.app.config.cortexApi.path + '/carts/' + ep.app.config.cortexApi.scope + '/default?zoom=total,lineitems:element,lineitems:element:price,lineitems:element:availability,lineitems:element:item,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price,order:purchaseform',
       parse: function (cart) {
 
         var cartObj = {};
@@ -51,8 +51,7 @@ define(['ep', 'eventbus', 'backbone'],
            * item display name
            */
           lineItemObj.displayName = jsonPath(currObj, '$._item.._definition..display-name')[0];
-          var itemUri = jsonPath(currObj, '$._item.._definition..self.uri')[0];
-          lineItemObj.itemDefinitionUri = itemUri;
+          lineItemObj.itemUri = jsonPath(currObj, '$._item..self.uri')[0];
 
           /*
            * availability
