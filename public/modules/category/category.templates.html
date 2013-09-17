@@ -76,21 +76,19 @@
   <!-- Category Pagination Template -->
   <script id="CategoryPaginationTemplate" type="text/template">
     <div class="paginationStatsContainer">
-      <div class="paging-results-per-page">
-        <label class="pagingnation-label"><%= E.getI18nLabel('category.resultsOnPage') %></label> :
-        <span class="pagingnation-value"><%= E.stats.resultsOnPage %></span>
-      </div>
       <div class="paging-total-results">
         <label class="pagingnation-label"><%= E.getI18nLabel('category.totalResults') %></label> :
         <span class="pagingnation-value"><%= E.stats.totalResults %></span>
       </div>
+      <div class="paging-results-per-page">
+      </div>
       <div class="paging-current-page">
         <label class="pagingnation-label"><%= E.getI18nLabel('category.currentPage') %></label> :
         <span class="pagingnation-value"><%= E.stats.currentPage %></span>
-      </div>
-      <div class="paging-total-pages">
         <label class="pagingnation-label"><%= E.getI18nLabel('category.totalPage') %></label> :
         <span class="pagingnation-value"><%= E.stats.numOfPages %></span>
+        ( <label class="pagingnation-label"><%= E.getI18nLabel('category.resultsOnPage') %></label> :
+         <span class="pagingnation-value"><%= E.stats.resultsOnPage %></span> )
       </div>
     </div>
     <div class="pagination-navigation-container">
