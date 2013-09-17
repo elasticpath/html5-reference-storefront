@@ -31,12 +31,12 @@
     "emptyCartMsg": "Your shopping cart is empty."
   },
   "category": {
-    "next": "Next",
-    "prev": "Previous",
-    "currentPage": "Page",
+    "next": "Next >|",
+    "prev": "|< Previous",
+    "currentPage": "page",
     "totalPage": "of",
-    "resultsOnPage": "Results Per Page",
-    "totalResults": "Total Results",
+    "resultsOnPage": "results per page",
+    "totalResults": "results",
     "emptyViewMsg": "No item currently in this category"
   },
   "itemDetail": {
