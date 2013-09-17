@@ -2649,6 +2649,9 @@ header.app-header .row {
 .pagination-navigation-container {
   text-align: center;
 }
+.pagestate-summary {
+  display: inline-block;
+}
 @media only screen and (max-width: 60rem) {
   .btn-pagination {
     margin-left: .5rem;
