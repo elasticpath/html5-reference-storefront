@@ -15,6 +15,7 @@ require.config({
     'marionette'      : 'scripts/lib/backbone.marionette',
     'modernizr'       : 'scripts/lib/modernizr-latest',
     'pace'            : 'scripts/lib/pace.min',
+    'bootstrap'       : 'scripts/lib/bootstrap.min',
     'URI'             : 'scripts/lib/URI',
     'router'          : 'router',
     'ep'              : 'ep.client',
@@ -62,13 +63,17 @@ require.config({
       deps: ['jquery'],
       exports: 'i18n'
     },
+    bootstrap: {
+      deps: ['jquery'],
+      exports: 'bootstrap'
+    },
     'underscore': {
       'exports': '_'
     }
   }
 });
 
-require(['app','eventbus','i18n'],
+require(['app','eventbus','i18n','bootstrap'],
   function (App,EventBus,i18n){
 
     // Application DOM container is ready (viewport)
