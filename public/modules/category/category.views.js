@@ -194,7 +194,7 @@ define(['ep', 'i18n', 'eventbus'],
           new itemPriceLayout({
             model: new Backbone.Model({
               price: this.model.attributes.price,
-              rate: this.model.attributes.rate
+              rateCollection: this.model.attributes.rateCollection
             })
           })
         );
@@ -239,10 +239,10 @@ define(['ep', 'i18n', 'eventbus'],
       },
       onShow: function () {
         // if item has rate, load rate view
-        if (this.model.get('rate').display) {
+        if (this.model.attributes.rateCollection.length > 0) {
           this.itemRateRegion.show(
-            new itemRateView({
-              model: new Backbone.Model(this.model.attributes.rate)
+            new itemRateCollectionView({
+              collection: new Backbone.Collection(this.model.attributes.rateCollection)
             })
           );
         }
@@ -274,10 +274,17 @@ define(['ep', 'i18n', 'eventbus'],
       }
     });
 
-    // Item Rate View
-    var itemRateView = Backbone.Marionette.ItemView.extend({
+    // Item Rate ItemView
+    var itemRateItemView = Backbone.Marionette.ItemView.extend({
       template: '#ItemRateTemplate',
       templateHelpers: viewHelpers,
+      tagName: 'li'
+    });
+
+    // Item Rate CollectionView
+    var itemRateCollectionView = Backbone.Marionette.CollectionView.extend({
+      itemView: itemRateItemView,
+      tagName: 'ul',
       className: 'category-item-rate-container'
     });
 

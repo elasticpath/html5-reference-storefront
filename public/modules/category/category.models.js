@@ -125,27 +125,35 @@ define(['ep', 'eventbus', 'backbone'],
             }
           }
 
-          // item rate
-          // [!] currently works for only 1 rate per item; needs more work to display multiple rates
-          itemObj.rate = {};
+          // item rate collection
+          itemObj.rateCollection = [];
+          var rates = jsonPath(itemArray[i], '$._rate..rate')[0];
+          var ratesArrayLen = 0;
 
-          var rate = jsonPath(itemArray[i], '$._rate..rate')[0];
+          if (rates) {
+            ratesArrayLen = rates.length;
+          }
 
-          if (rate) {
-            itemObj.rate.display = rate[0].display;
-            itemObj.rate.cost = {
-              amount: jsonPath(rate, '$..cost..amount')[0],
-              currency: jsonPath(rate, '$..cost..currency')[0],
-              display: jsonPath(rate, '$..cost..display')[0]
+          for (var x = 0; x < ratesArrayLen; x++) {
+            var rateObj = {};
+
+            rateObj.display = rates[x].display;
+            rateObj.cost = {
+              amount: jsonPath(rates[x], '$.cost..amount')[0],
+              currency: jsonPath(rates[x], '$.cost..currency')[0],
+              display: jsonPath(rates[x], '$.cost..display')[0]
             }
-            itemObj.rate.recurrence = {
-              interval: jsonPath(rate, '$..recurrence..interval')[0],
-              display: jsonPath(rate, '$..recurrence..display')[0]
+
+            rateObj.recurrence = {
+              interval: jsonPath(rates[x], '$.recurrence..interval')[0],
+              display: jsonPath(rates[x], '$.recurrence..display')[0]
             }
+
+            itemObj.rateCollection.push(rateObj);
           }
 
           // fake a price object when neither rate nor price present
-          if (!(purchasePrice || itemObj.rate.display)) {
+          if (!purchasePrice && ratesArrayLen == 0) {
             itemObj.price.purchase = {
               display: 'none'
             };
