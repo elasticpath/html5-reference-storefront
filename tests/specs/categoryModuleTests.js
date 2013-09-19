@@ -17,10 +17,10 @@ define(function(require) {
 
       var categoryController = require('category');
       describe("DefaultView",function(){
-        var defaultView = new categoryController.DefaultView();
-        it('DefaultView should exist',function(){
+//        var defaultView = new categoryController.DefaultView();
+        /*it('DefaultView should exist',function(){
           expect(defaultView).to.exist;
-        });
+        });*/
       });
     });
 
@@ -38,7 +38,8 @@ define(function(require) {
         it('DefaultView should have a categoryTitleRegion region', function () {
           expect(defaultView.categoryTitleRegion).to.exist;
         });
-        it('DefaultView should have a categoryBrowseRegion region', function () {
+        // these regions are moved to global level.
+/*        it('DefaultView should have a categoryBrowseRegion region', function () {
           expect(defaultView.categoryBrowseRegion).to.exist;
         });
         it('DefaultView should have a categoryPaginationTopRegion region', function () {
@@ -46,7 +47,7 @@ define(function(require) {
         });
         it('DefaultView should have a categoryPaginationBottomRegion region', function () {
           expect(defaultView.categoryPaginationBottomRegion).to.exist;
-        });
+        });*/
       });
 
       it('CategoryTitleView should exist', function () {

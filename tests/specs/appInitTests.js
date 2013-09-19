@@ -22,12 +22,13 @@ define(function (require) {
     it('ep.app.cortexApi property should exist', function () {
       expect(ep.app.config.cortexApi).to.be.ok;
     });
-    it('ep.app.cortexApi.host property should exist', function () {
+    // cortexApi.host and port are currently removed since we don't seem to use them.
+/*    it('ep.app.cortexApi.host property should exist', function () {
       expect(ep.app.config.cortexApi.host).to.be.ok;
     });
     it('ep.app.cortexApi.port property should exist', function () {
       expect(ep.app.config.cortexApi.port).to.be.ok;
-    });
+    });*/
     it('ep.app.cortexApi.path property should exist', function () {
       expect(ep.app.config.cortexApi.path).to.be.ok;
     });
