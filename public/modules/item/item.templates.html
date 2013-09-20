@@ -13,9 +13,8 @@
             <img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>
           </div>
         </div>
-        <div class="itemdetail-price-container" data-region="itemDetialPriceRegion"></div>
+        <div data-region="itemDetailPriceRegion"></div>
         <div data-region="itemDetailAvailabilityRegion"></div>
-        <div data-region="itemDetail.SubscriptionRegion"></div>
         <div data-region="itemDetailAttributeRegion"></div>
 
       </div>
@@ -45,28 +44,38 @@
     </td>
   </script>
 
-  <!-- Default Item Detail Availability Template -->
-  <script id="DefaultItemDetailAvailabilityTemplate" type="text/template">
-    <ul>
-      <li class="itemdetail-availability-state"><%= E.getAvailabilityDisplayText(E.availability.state) %></li>
-      <li data-region="defaultItemDetailReleaseDateRegion" class="itemdetail-release-date"></li>
-    </ul>
+  <!-- Item Availability Template -->
+  <script id="ItemAvailabilityTemplate" type="text/template">
+    <li class="itemdetail-availability itemdetail-availability-state"><%= E.getAvailabilityDisplayText(E.state) %>
+    </li>
+    <li class="itemdetail-release-date" data-region="itemAvailabilityDescriptionRegion">
+      <label class="itemdetail-releaseDate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
+      <span class="itemdetail-releaseDate-value"><%= E.getAvailabilityReleaseDate(E.releaseDate) %></span>
+    </li>
   </script>
 
-  <!-- Default Item Detail Price Template -->
-  <script id="DefaultItemDetailPriceTemplate" type="text/template">
-    <ul>
-      <li data-region="defaultItemDetailListPriceRegion" class="price-list-item"></li>
-      <li class="price-purchase-item">
-        <label class="itemdetail-label itemdetail-purchase-price-label"><%= E.getI18nLabel('itemDetail.purchasePrice') %></label>
-        <span class="itemdetail-value itemdetail-purchase-price"><%= E.getPurchasePrice(E.price) %></span>
-      </li>
-    </ul>
+  <!-- Item Price Master Template -->
+  <script id="ItemPriceMasterViewTemplate" type="text/template">
+    <div data-region="itemPriceRegion"></div>
+    <div data-region="itemRateRegion"></div>
   </script>
 
-  <!-- Default Item Detail Subscription Template -->
-  <script id="DefaultItemDetailSubscriptionTemplate" type="text/template">
-    <div>[subscription info goes here]</div>
+  <!-- Item Rate Template -->
+  <script id="ItemRateTemplate" type="text/template">
+    <label class="itemdetail-rate-label"><%= E.getI18nLabel('itemDetail.rate') %></label>
+    <span class="itemdetail-rate"><%= E.display %></span>
+  </script>
+
+  <!-- Item Price Template -->
+  <script id="ItemPriceTemplate" type="text/template">
+    <li class="itemdetail-list-price" data-region="itemListPriceRegion">
+      <label class="itemdetail-list-price-label"><%= E.getI18nLabel('itemDetail.listPrice') %></label>
+      <span class="itemdetail-list-price-value"><%= E.getListPrice(E) %></span>
+    </li>
+    <li class="itemdetail-purchase-price">
+      <label class="itemdetail-purchase-price-label"><%= E.getI18nLabel('itemDetail.purchasePrice') %></label>
+      <span class="itemdetail-purchase-price-value"><%= E.getPurchasePrice(E) %></span>
+    </li>
   </script>
 
   <!-- Default Item Detail Add To Cart Template -->
@@ -93,18 +102,6 @@
         </li>
       </ul>
     </form>
-  </script>
-
-  <!-- Default Item Detault Release Date Template -->
-  <script id="DefaultItemDetailReleaseDateTemplate" type="text/template">
-    <label class="itemdetail-releasedate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
-    <span class="cart-lineitem-releasedate-value"><%= E.getAvailabilityReleaseDate(E.availability.releaseDate) %></span>
-  </script>
-
-  <!-- Default Item Detault List Price Template -->
-  <script id="DefaultItemDetailListPriceTemplate" type="text/template">
-    <label class="itemdetail-label itemdetail-list-price-label"><%= E.getI18nLabel('itemDetail.listPrice') %></label>
-    <span class="itemdetail-value itemdetail-list-price"><%= E.getListPrice(E.price) %></span>
   </script>
 </div>
 .

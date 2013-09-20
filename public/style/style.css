@@ -2315,11 +2315,9 @@ header.app-header .row {
   border: 1px solid #eeeeee;
   border-radius: 1rem;
 }
-.itemdetail-availability {
+.itemdetail-availability-container {
   margin-bottom: 1rem;
-}
-.itemdetail-availability ul {
-  margin: 0;
+  margin-left: 0;
 }
 .itemdetail-availability-state {
   text-align: center;
@@ -2334,11 +2332,10 @@ header.app-header .row {
 .itemdetail-release-date-hidden {
   display: none;
 }
-.itemdetail-price-container {
+.itemdetail-price-container,
+.itemdetail-rate-container {
   margin-top: 1rem;
-}
-.itemdetail-price-container ul {
-  margin: 0;
+  margin-left: 0;
 }
 .itemdetail-list-price {
   text-decoration: line-through;

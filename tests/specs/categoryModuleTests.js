@@ -29,6 +29,7 @@ define(function(require) {
      */
     describe ('UI Storefront Category View', function () {
       var categoryViews = require('modules/category/category.views');
+      var ep = require('ep');
 
       describe('DefaultView and Regions', function () {
         var defaultView = new categoryViews.DefaultView();
@@ -38,15 +39,16 @@ define(function(require) {
         it('DefaultView should have a categoryTitleRegion region', function () {
           expect(defaultView.categoryTitleRegion).to.exist;
         });
-        // these regions are moved to global level.
-/*        it('DefaultView should have a categoryBrowseRegion region', function () {
-          expect(defaultView.categoryBrowseRegion).to.exist;
+        // these regions are moved to global level. Failing test because it's
+        // declared to ep.app in categoryView's onShow function. Currently not testable.
+ /*       it('categoryBrowseRegion should exist', function () {
+          expect(ep.app.categoryBrowseRegion).to.exist;
         });
-        it('DefaultView should have a categoryPaginationTopRegion region', function () {
-          expect(defaultView.categoryPaginationTopRegion).to.exist;
+        it('categoryPaginationTopRegion should exist', function () {
+          expect(ep.app.categoryPaginationTopRegion).to.exist;
         });
-        it('DefaultView should have a categoryPaginationBottomRegion region', function () {
-          expect(defaultView.categoryPaginationBottomRegion).to.exist;
+        it('categoryPaginationBottomRegion should exist', function () {
+          expect(ep.app.categoryPaginationBottomRegion).to.exist;
         });*/
       });
 

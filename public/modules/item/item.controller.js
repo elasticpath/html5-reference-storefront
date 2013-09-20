@@ -5,70 +5,76 @@
  * Date: 04/04/13
  * Time: 9:16 AM
  *
- * 
+ *
  */
-define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', 'modules/item/item.views', 'text!modules/item/item.templates.html','i18n'],
-  function($, ep, App, EventBus, Cortex, Model, View, template,i18n){
+define(['jquery', 'ep', 'app', 'eventbus', 'cortex', 'modules/item/item.models', 'modules/item/item.views', 'text!modules/item/item.templates.html', 'i18n'],
+  function ($, ep, App, EventBus, Cortex, Model, View, template, i18n) {
 
     $('#TemplateContainer').append(template);
 
     _.templateSettings.variable = 'E';
 
 
-
-    var defaultView = function(uri){
+    var defaultView = function (uri) {
 
       var itemDetailLayout = new View.DefaultView({
-        className:''
+        className: ''
       });
 
       var itemModel = new Model.ItemModel();
 
       itemModel.fetch({
         url: itemModel.getUrl(uri),
-        success:function(response){
+        success: function (response) {
 
           // Attribute List Collection
           var attribsList = new Model.ItemAttributeCollection(response.attributes.details);
 
           // Title View
           var titleView = new View.DefaultItemTitleView({
-            model:itemModel
+            model: itemModel
           });
 
           // Asset Imge Url Processing
           var urlVal = itemModel.attributes.asset.url;
-          var modelObject = {src:urlVal};
+          var modelObject = {src: urlVal};
           var assetView = new View.DefaultItemAssetView({
-            model:new Backbone.Model(itemModel)
+            model: new Backbone.Model(itemModel)
           });
           // Attribute View
           var attributeView = new View.DefaultItemAttributeView({
-            collection:attribsList
+            collection: attribsList
           });
-          // Availability View
-          var availabilityView = new View.DefaultItemAvailabilityView({
-            model:itemModel
-          });
+
           // Price View
           var priceView = new View.DefaultItemPriceView({
-            model:itemModel
+            model: new Backbone.Model({
+              price: response.attributes.price,
+              rateCollection: response.attributes.rateCollection
+            })
           });
           // Add To Cart View
           var addToCartView = new View.DefaultItemAddToCartView({
-            model:itemModel
+            model: itemModel
           });
 
           itemDetailLayout.itemDetailTitleRegion.show(titleView);
           itemDetailLayout.itemDetailAssetRegion.show(assetView);
           itemDetailLayout.itemDetailAttributeRegion.show(attributeView);
-          itemDetailLayout.itemDetailAvailabilityRegion.show(availabilityView);
           itemDetailLayout.itemDetailPriceRegion.show(priceView);
           itemDetailLayout.itemDetailAddToCartRegion.show(addToCartView);
 
+          if (response.get('availability').state) {
+            // Availability View
+            var availabilityView = new View.DefaultItemAvailabilityView({
+              model: new Backbone.Model(response.get('availability'))
+            });
+            itemDetailLayout.itemDetailAvailabilityRegion.show(availabilityView);
+          }
+
 
         },
-        error:function(response){
+        error: function (response) {
           ep.logger.info('ERROR GETTING THE ITEM: ' + response);
         }
       });
@@ -78,35 +84,35 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
     };
 
     /*
-    *
-    *
-    *   EVENT LISTENERS
-    *
-    * */
+     *
+     *
+     *   EVENT LISTENERS
+     *
+     * */
 
-    EventBus.on('item.loadDefaultCartRequest',function(){
+    EventBus.on('item.loadDefaultCartRequest', function () {
       var test = 'test';
       // request cart data from Coretext
       document.location.href = '/#mycart';
       // render cart view in main nav
     });
-    EventBus.on('item.addToCartBtnClicked',function(event){
+    EventBus.on('item.addToCartBtnClicked', function (event) {
       var formActionLink = $(event.target).data('actionlink');
 
-      if (formActionLink){
+      if (formActionLink) {
 
         var qty = View.getAddToCartQuantity();
 
-        if (qty > 0){
+        if (qty > 0) {
 
-          var obj = '{quantity:' + qty +'}';
+          var obj = '{quantity:' + qty + '}';
           // TODO improve robustness of oauth token when we work on that story
           ep.io.ajax({
-            type:'POST',
-            contentType:'application/json',
-            url:formActionLink,
-            data:obj,
-            success:function(response,x, y){
+            type: 'POST',
+            contentType: 'application/json',
+            url: formActionLink,
+            data: obj,
+            success: function (response, x, y) {
               // follow link response
               ep.logger.info('Success posting to cart - go to cart view');
 
@@ -116,10 +122,10 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
               ep.logger.info(JSON.stringify(y));
               var lineItemUrl = y.getResponseHeader('Location');
               ep.logger.info(lineItemUrl);
-              if (lineItemUrl){
+              if (lineItemUrl) {
                 EventBus.trigger('item.loadDefaultCartRequest');
               }
-              else{
+              else {
                 ep.logger.warn('add to cart success but no cart url returned');
               }
 
@@ -127,15 +133,14 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
               ep.logger.info('we are done load the cart view');
 
 
-
             },
-            error:function(response){
+            error: function (response) {
               ep.logger.error('error posting item to cart: ' + response);
             }
           });
 
         }
-        else{
+        else {
           ep.logger.warn('add to cart called with no quantity');
         }
 
@@ -144,7 +149,7 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', '
 
 
     return {
-      DefaultView:defaultView
+      DefaultView: defaultView
     };
   }
 );

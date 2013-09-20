@@ -6,7 +6,7 @@ define(['ep','app','backbone','jsonpath'],
 
     var itemModel = Backbone.Model.extend({
       getUrl: function(uri) {
-        return ep.app.config.cortexApi.path + '/' + ep.ui.decodeUri(uri)  + '?zoom=availability,addtocartform,price,definition,definition:assets:element';
+        return ep.app.config.cortexApi.path + '/' + ep.ui.decodeUri(uri)  + '?zoom=availability,addtocartform,price,rate,definition,definition:assets:element';
       },
       parse:function(item){
 
@@ -107,7 +107,7 @@ define(['ep','app','backbone','jsonpath'],
          *
          * */
         itemObj.price = {};
-        itemObj.price.list = {};
+        itemObj.price.listed = {};
         itemObj.price.purchase = {};
 
         var listPriceObject = jsonPath(item, "$.['_price'].['list-price']")[0];
@@ -117,7 +117,7 @@ define(['ep','app','backbone','jsonpath'],
         *   List Price
         * */
         if (listPriceObject){
-          itemObj.price.list = {
+          itemObj.price.listed = {
             currency:listPriceObject[0].currency,
             amount:listPriceObject[0].amount,
             display:listPriceObject[0].display
@@ -134,6 +134,11 @@ define(['ep','app','backbone','jsonpath'],
             display:purchasePriceObject[0].display
           };
         }
+
+
+        var rates = jsonPath(item, '$._rate..rate')[0];
+        itemObj.rateCollection = parseRates(rates);
+
 
         return itemObj;
       },
@@ -170,6 +175,34 @@ define(['ep','app','backbone','jsonpath'],
 
     var listPriceModel = Backbone.Model.extend();
 
+    var parseRates = function(rates) {
+      var ratesArrayLen = 0;
+      var rateCollection = [];
+
+      if (rates) {
+        ratesArrayLen = rates.length;
+      }
+
+      for (var i = 0; i < ratesArrayLen; i++) {
+        var rateObj = {};
+
+        rateObj.display = rates[i].display;
+        rateObj.cost = {
+          amount: jsonPath(rates[i], '$.cost..amount')[0],
+          currency: jsonPath(rates[i], '$.cost..currency')[0],
+          display: jsonPath(rates[i], '$.cost..display')[0]
+        }
+
+        rateObj.recurrence = {
+          interval: jsonPath(rates[i], '$.recurrence..interval')[0],
+          display: jsonPath(rates[i], '$.recurrence..display')[0]
+        }
+
+        rateCollection.push(rateObj);
+      }
+
+      return rateCollection;
+    }
 	// Required, return the module for AMD compliance
 	return {
     ItemModel:itemModel,

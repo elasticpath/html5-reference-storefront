@@ -51,11 +51,36 @@ define(['ep','marionette','i18n','eventbus'],
         }
         return retVal;
       },
-      getAvailabilityReleaseDate:function(releaseDate){
+      getAvailabilityReleaseDate: function (releaseDate) {
         var retVar = '';
 
-        if (releaseDate && releaseDate.displayValue){
+        if (releaseDate && releaseDate.displayValue) {
           retVar = releaseDate.displayValue;
+        }
+
+        return retVar;
+      },
+      getListPrice: function (priceObj) {
+        var retVar = '';
+
+        if (priceObj) {
+          if (priceObj.listed && priceObj.listed.display) {
+            retVar = priceObj.listed.display;
+          }
+        }
+
+        return retVar;
+      },
+      getPurchasePrice: function (priceObj) {
+        var retVar = '';
+
+        if (priceObj) {
+          if (priceObj.purchase && priceObj.purchase.amount >= 0) {
+            retVar = priceObj.purchase.display;
+          }
+          else {
+            retVar = this.getI18nLabel('itemDetail.noPrice');
+          }
         }
 
         return retVar;
@@ -82,22 +107,6 @@ define(['ep','marionette','i18n','eventbus'],
           }
 
 
-      },
-      getListPrice:function(priceObj){
-        if (priceObj.list && priceObj.list.display){
-          return priceObj.list.display;
-        }
-        else{
-          return '';
-        }
-      },
-      getPurchasePrice:function(priceObj){
-        if (priceObj.purchase && priceObj.purchase.display){
-          return priceObj.purchase.display;
-        }
-        else{
-          return this.getI18nLabel('itemDetail.noPrice');
-        }
       },
       getDefaultImagePath:function(thumbnail){
         if (thumbnail && (thumbnail.length > 0)){
@@ -134,8 +143,7 @@ define(['ep','marionette','i18n','eventbus'],
         itemDetailTitleRegion:'[data-region="itemDetailTitleRegion"]',
         itemDetailAssetRegion:'[data-region="itemDetailAssetRegion"]',
         itemDetailAttributeRegion:'[data-region="itemDetailAttributeRegion"]',
-        itemDetailPriceRegion:'[data-region="itemDetialPriceRegion"]',
-        itemDetailSubscriptionRegion:'[data-region="itemDetailSubscriptionRegion"]',
+        itemDetailPriceRegion:'[data-region="itemDetailPriceRegion"]',
         itemDetailAvailabilityRegion:'[data-region="itemDetailAvailabilityRegion"]',
         itemDetailQuantityRegion:'[data-region="itemDetailQuantityRegion"]',
         itemDetailAddToCartRegion:'[data-region="itemDetailAddToCartRegion"]'
@@ -170,61 +178,76 @@ define(['ep','marionette','i18n','eventbus'],
 
     // Default Item Availability View
     var defaultItemAvailabilityView = Backbone.Marionette.ItemView.extend({
-      template:'#DefaultItemDetailAvailabilityTemplate',
-      className:'itemdetail-availability',
-      tagName:'div',
-      templateHelpers:viewHelpers,
-      onShow:function() {
-        // check if there is releaseDate in model
-        // if so inject view to display availability release date
-        if (viewHelpers.getAvailabilityReleaseDate(this.model.attributes.availability.releaseDate)) {
-          var releaseDateView = new defaultItemdetailReleaseDateView({
-            model:this.model
-          });
-          releaseDateView.render();
-          $('li[data-region="defaultItemDetailReleaseDateRegion"]').html(releaseDateView.el);
-        }
-        else {
-          $('li[data-region="defaultItemDetailReleaseDateRegion"]').hide();
+      template: '#ItemAvailabilityTemplate',
+      templateHelpers: viewHelpers,
+      tagName: 'ul',
+      className: 'itemdetail-availability-container',
+      onShow: function () {
+        // if no release date, hide dom element with release-date & the label
+        if (!viewHelpers.getAvailabilityReleaseDate(this.model.get('releaseDate'))) {
+          $('[data-region="itemAvailabilityDescriptionRegion"]', this.el).addClass('itemdetail-release-date-hidden');
         }
       }
     });
 
-    // Default Item Release Date View
-    var defaultItemdetailReleaseDateView = Backbone.Marionette.ItemView.extend({
-      template:'#DefaultItemDetailReleaseDateTemplate',
-      templateHelpers:viewHelpers
-    })
+    //
+    // price master view
+    //
+    var defaultItemPriceView = Backbone.Marionette.Layout.extend({
+      template: '#ItemPriceMasterViewTemplate',
+      regions: {
+        itemPriceRegion: $('[data-region="itemPriceRegion"]', this.el),
+        itemRateRegion: $('[data-region="itemRateRegion"]', this.el)
+      },
+      onShow: function () {
+        // if item has rate, load rate view
+        if (this.model.attributes.rateCollection.length > 0) {
+          this.itemRateRegion.show(
+            new itemRateCollectionView({
+              collection: new Backbone.Collection(this.model.attributes.rateCollection)
+            })
+          );
+        }
 
-    // Default Item Price View
-    var defaultItemPriceView = Backbone.Marionette.ItemView.extend({
-      template:'#DefaultItemDetailPriceTemplate',
-      templateHelpers:viewHelpers,
-      onShow:function(){
-        // check if there is list price data
-        // if not then turn off the item
-        if (viewHelpers.getListPrice(this.model.attributes.price)){
-          var listPriceView = new defaultItemdetailListPriceView({
-            model:this.model
-          });
+        // if item has one-time purchase price, load price view
+        if (this.model.get('price').purchase.display) {
+          this.itemPriceRegion.show(
+            new itemPriceView({
+              model: new Backbone.Model(this.model.attributes.price)
+            })
+          );
+        }
 
-          listPriceView.render();
-          $('li[data-region="defaultItemDetailListPriceRegion"]').html(listPriceView.el);
-        } else {
-          $('li[data-region="defaultItemDetailListPriceRegion"]').hide();
+        // no price nor rate scenario is handled at model level
+        // an item price object is created with artificial display value
+      }
+    });
+
+    // Item Price View
+    var itemPriceView = Backbone.Marionette.ItemView.extend({
+      template: '#ItemPriceTemplate',
+      templateHelpers: viewHelpers,
+      tagName: 'ul',
+      className: 'itemdetail-price-container',
+      onShow: function () {
+        if (!viewHelpers.getListPrice(this.model.attributes)) {
+          $('[data-region="itemListPriceRegion"]', this.el).addClass('itemdetail-list-price-hidden');
         }
       }
     });
 
-    // Default Item List Price View
-    var defaultItemdetailListPriceView = Backbone.Marionette.ItemView.extend({
-      template:'#DefaultItemDetailListPriceTemplate',
-      templateHelpers:viewHelpers
+    // Item Rate ItemView
+    var itemRateItemView = Backbone.Marionette.ItemView.extend({
+      template: '#ItemRateTemplate',
+      templateHelpers: viewHelpers,
+      tagName: 'li'
     });
 
-    // Default Item Subscription View
-    var defaultItemSubscriptionView = Backbone.Marionette.ItemView.extend({
-      template:'#DefaultItemDetailSubscriptionTemplate'
+    // Item Rate CollectionView
+    var itemRateCollectionView = Backbone.Marionette.CollectionView.extend({
+      itemView: itemRateItemView,
+      tagName: 'ul',
+      className: 'itemdetail-rate-container'
     });
 
     // Default Item Add to Cart View
@@ -251,7 +274,6 @@ define(['ep','marionette','i18n','eventbus'],
       DefaultItemAttributeView:defaultItemAttributeListView,
       DefaultItemAvailabilityView:defaultItemAvailabilityView,
       DefaultItemPriceView:defaultItemPriceView,
-      DefaultItemSubscriptionView:defaultItemSubscriptionView,
       DefaultItemAddToCartView:defaultItemAddToCartView,
       getAddToCartQuantity:getAddToCartQuantity
 

@@ -31,9 +31,6 @@ define(function (require) {
     it('should have a price region', function () {
       expect(defaultView.itemDetailPriceRegion).to.be.ok;
     });
-    it('should have a subscription region', function () {
-      expect(defaultView.itemDetailSubscriptionRegion).to.be.ok;
-    });
     it('should have an add to cart region', function () {
       expect(defaultView.itemDetailAddToCartRegion).to.be.ok;
     });
@@ -57,9 +54,6 @@ define(function (require) {
     });
     it('DefaultItemPriceView should exist', function () {
       expect(itemViews.DefaultItemPriceView).to.be.ok;
-    });
-    it('DefaultItemSubscriptionView should exist', function () {
-      expect(itemViews.DefaultItemSubscriptionView).to.be.ok;
     });
     it('DefaultItemAddToCartView should exist', function () {
       expect(itemViews.DefaultItemAddToCartView).to.be.ok;
