@@ -80,15 +80,10 @@
     <div data-region="itemUnitRateRegion"></div>
   </script>
 
-  <!-- Item Price Template -->
+  <!-- Item Unit Price Template -->
   <script id="ItemUnitPriceTemplate" type="text/template">
-    <li class="cart-list-price" data-region="itemListPriceRegion"><%= E.getListPrice(E) %></li>
-    <li class="cart-purchase-price"><%= E.getPurchasePrice(E) %></li>
-  </script>
-
-  <!-- Item Rate Template -->
-  <script id="ItemUnitRateTemplate" type="text/template">
-    <%= E.display %>
+    <li class="cart-unit-list-price" data-region="itemListPriceRegion"><%= E.getListPrice(E) %></li>
+    <li class="cart-unit-purchase-price"><%= E.getPurchasePrice(E) %></li>
   </script>
 
   <!-- Cart LineItem Total Price Master Template -->
@@ -97,14 +92,14 @@
     <div data-region="itemTotalRateRegion"></div>
   </script>
 
-  <!-- Item Price Template -->
+  <!-- Item Total Price Template -->
   <script id="ItemTotalPriceTemplate" type="text/template">
-    <li class="cart-list-price" data-region="itemListPriceRegion"><%= E.getListPrice(E) %></li>
-    <li class="cart-purchase-price"><%= E.getPurchasePrice(E) %></li>
+    <li class="cart-total-list-price" data-region="itemListPriceRegion"><%= E.getListPrice(E) %></li>
+    <li class="cart-total-purchase-price"><%= E.getPurchasePrice(E) %></li>
   </script>
 
   <!-- Item Rate Template -->
-  <script id="ItemTotalRateTemplate" type="text/template">
+  <script id="ItemRateTemplate" type="text/template">
     <%= E.display %>
   </script>
 

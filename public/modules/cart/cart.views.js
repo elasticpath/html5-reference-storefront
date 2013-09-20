@@ -180,57 +180,152 @@ define(['ep','marionette','i18n','eventbus','mediator'],
         }
       },
       onShow:function(){
-        // check if there is releaseDate in model
-        // if so inject view to display availability release date
-        if (viewHelpers.getAvailabilityReleaseDate(this.model.attributes.availability.releaseDate)) {
-          var childReleaseDateView = new cartLineItemReleaseDateView({
-            model:this.model
+        // show availability if at least has availability state
+        if (this.model.get('availability').state) {
+          var availabilityRegion = new Backbone.Marionette.Region({
+            el: $('[data-region="cartLineitemAvailabilityRegion"]', this.el)
           });
-          childReleaseDateView.render();
-          $('li[data-region="cartLineitemReleaseDateRegion"]', this.el).html(childReleaseDateView.el);
+          availabilityRegion.show(
+            new itemAvailabilityView({
+              model: new Backbone.Model(this.model.get('availability'))
+            })
+          );
         }
-        else {
-          $('li[data-region="cartLineitemReleaseDateRegion"]', this.el).hide();
-        }
 
-        // check if there is list price data (unit price or total price)
-        // if so inject view to display list price
-        if (viewHelpers.getListPrice(this.model.attributes.price)){
-          var childTotalListPriceView = new cartLineitemTotalListPriceView({
-            model:this.model
-          });
-          var childUnitListPriceView = new cartLineitemUnitListPriceView({
-            model:this.model
-          });
+        // show unit price
+        var unitPriceRegion = new Backbone.Marionette.Region({
+          el: $('[data-region="cartLineitemUnitPriceRegion"]', this.el)
+        });
+        unitPriceRegion.show(
+          new itemUnitPriceLayout({
+            model: new Backbone.Model({
+              price: this.model.attributes.unitPrice,
+              rateCollection: this.model.attributes.unitRateCollection
+            })
+          })
+        );
 
-          childTotalListPriceView.render();
-          childUnitListPriceView.render();
+        // show total price
+        var totalPriceRegion = new Backbone.Marionette.Region({
+          el: $('[data-region="cartLineitemTotalPriceRegion"]', this.el)
+        });
+        totalPriceRegion.show(
+          new itemTotalPriceLayout({
+            model: new Backbone.Model({
+              price: this.model.attributes.price,
+              rateCollection: this.model.attributes.rateCollection
+            })
+          })
+        );
 
-          $('li[data-region="cartLineitemTotalListPrice"]', this.el).html(childTotalListPriceView.el);
-          $('li[data-region="cartLineitemUnitListPrice"]', this.el).html(childUnitListPriceView.el);
-        } else {
-          $('li[data-region="cartLineitemTotalListPrice"]', this.el).hide();
-          $('li[data-region="cartLineitemUnitListPrice"]', this.el).hide();
+      }
+    });
+
+    // Item Availability
+    var itemAvailabilityView = Backbone.Marionette.ItemView.extend({
+      template: '#ItemAvailabilityTemplate',
+      templateHelpers: viewHelpers,
+      tagName: 'ul',
+      className: 'cart-lineitem-availability-container',
+      onShow: function () {
+        // if no release date, hide dom element with release-date & the label
+        if (!viewHelpers.getAvailabilityReleaseDate(this.model.get('releaseDate'))) {
+          $('[data-region="itemAvailabilityDescriptionRegion"]', this.el).addClass('itemdetail-release-date-hidden');
         }
       }
     });
 
-    // Cart Line Item Release Date View
-    var cartLineItemReleaseDateView = Backbone.Marionette.ItemView.extend({
-      template:'#CartLineitemReleaseDateTemplate',
-      templateHelpers:viewHelpers
+    //
+    // price master view
+    //
+    var itemUnitPriceLayout = Backbone.Marionette.Layout.extend({
+      template: '#CartLineItemUnitPriceMasterTemplate',
+      regions: {
+        itemPriceRegion: $('[data-region="itemUnitPriceRegion"]', this.el),
+        itemRateRegion: $('[data-region="itemUnitRateRegion"]', this.el)
+      },
+      onShow: function () {
+        // if item has rate, load rate view
+        if (this.model.attributes.rateCollection.length > 0) {
+          this.itemRateRegion.show(
+            new itemRateCollectionView({
+              className: 'cart-lineitem-unit-rate cart-lineitem-rate-container',
+              collection: new Backbone.Collection(this.model.attributes.rateCollection)
+            })
+          );
+        }
+
+        // if item has one-time purchase price, load price view
+        if (this.model.get('price').purchase.display) {
+          this.itemPriceRegion.show(
+            new itemPriceView({
+              template: '#ItemUnitPriceTemplate',
+              model: new Backbone.Model(this.model.attributes.price)
+            })
+          );
+        }
+
+        // no price nor rate scenario is handled at model level
+        // an item price object is created with artificial display value
+      }
     });
 
-    // Cart Line Item List Price (unit price) View
-    var cartLineitemUnitListPriceView = Backbone.Marionette.ItemView.extend({
-      template:'#CartLineitemUnitListPriceTemplate',
-      templateHelpers:viewHelpers
+    var itemTotalPriceLayout = Backbone.Marionette.Layout.extend({
+      template: '#CartLineItemTotalPriceMasterTemplate',
+      regions: {
+        itemPriceRegion: $('[data-region="itemTotalPriceRegion"]', this.el),
+        itemRateRegion: $('[data-region="itemTotalRateRegion"]', this.el)
+      },
+      onShow: function () {
+        // if item has rate, load rate view
+        if (this.model.attributes.rateCollection.length > 0) {
+          this.itemRateRegion.show(
+            new itemRateCollectionView({
+              className: 'cart-lineitem-total-rate cart-lineitem-rate-container',
+              collection: new Backbone.Collection(this.model.attributes.rateCollection)
+            })
+          );
+        }
+
+        // if item has one-time purchase price, load price view
+        if (this.model.get('price').purchase.display) {
+          this.itemPriceRegion.show(
+            new itemPriceView({
+              template: '#ItemTotalPriceTemplate',
+              model: new Backbone.Model(this.model.attributes.price)
+            })
+          );
+        }
+
+        // no price nor rate scenario is handled at model level
+        // an item price object is created with artificial display value
+      }
     });
 
-    // Cart Line Item List Price (total price) View
-    var cartLineitemTotalListPriceView = Backbone.Marionette.ItemView.extend({
-      template:'#CartLineitemTotalListPriceTemplate',
-      templateHelpers:viewHelpers
+
+    // Item Price View
+    var itemPriceView = Backbone.Marionette.ItemView.extend({
+      templateHelpers: viewHelpers,
+      className: 'cart-lineitem-price-container',
+      tagName: 'ul',
+      onShow: function () {
+        if (!viewHelpers.getListPrice(this.model.attributes)) {
+          $('[data-region="itemListPriceRegion"]', this.el).addClass('itemdetail-list-price-hidden');
+        }
+      }
+    });
+
+    // Item Rate ItemView
+    var itemRateItemView = Backbone.Marionette.ItemView.extend({
+      template: '#ItemRateTemplate',
+      templateHelpers: viewHelpers,
+      tagName: 'li'
+    });
+
+    // Item Rate CollectionView
+    var itemRateCollectionView = Backbone.Marionette.CollectionView.extend({
+      itemView: itemRateItemView,
+      tagName: 'ul'
     });
 
     // Empty Cart View
