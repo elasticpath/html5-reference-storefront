@@ -12,7 +12,10 @@ define(['ep', 'eventbus', 'backbone'],
 
     // Cart Model
     var cartModel = Backbone.Model.extend({
-      url: ep.app.config.cortexApi.path + '/carts/' + ep.app.config.cortexApi.scope + '/default?zoom=total,lineitems:element,lineitems:element:price,lineitems:element:availability,lineitems:element:item,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price,order:purchaseform',
+      url: ep.app.config.cortexApi.path + '/carts/' + ep.app.config.cortexApi.scope + '/default?zoom=total,' +
+        'lineitems:element,lineitems:element:price,lineitems:element:rate,lineitems:element:availability,' +
+        'lineitems:element:item,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price,lineitems:element:item:rate,' +
+        'order:purchaseform',
       parse: function (cart) {
 
         var cartObj = {};
@@ -125,6 +128,17 @@ define(['ep', 'eventbus', 'backbone'],
           }
 
           /*
+           * Rates
+           */
+          // Item unit rates
+          var itemRates = jsonPath(currObj, '$._item.._rate..rate')[0];
+          lineItemObj.unitRateCollection = parseRates(itemRates);
+
+          // LineItem rates
+          var lineItemRates = jsonPath(currObj, '$._rate..rate')[0];
+          lineItemObj.rateCollection = parseRates(lineItemRates);
+
+          /*
            * LineItem Uri (for remove lineitem button)
            */
           lineItemObj.lineitemUri = currObj.self.uri;
@@ -176,6 +190,34 @@ define(['ep', 'eventbus', 'backbone'],
       }
     });
 
+    var parseRates = function(rates) {
+      var ratesArrayLen = 0;
+      var rateCollection = [];
+
+      if (rates) {
+        ratesArrayLen = rates.length;
+      }
+
+      for (var i = 0; i < ratesArrayLen; i++) {
+        var rateObj = {};
+
+        rateObj.display = rates[i].display;
+        rateObj.cost = {
+          amount: jsonPath(rates[i], '$.cost..amount')[0],
+          currency: jsonPath(rates[i], '$.cost..currency')[0],
+          display: jsonPath(rates[i], '$.cost..display')[0]
+        }
+
+        rateObj.recurrence = {
+          interval: jsonPath(rates[i], '$.recurrence..interval')[0],
+          display: jsonPath(rates[i], '$.recurrence..display')[0]
+        }
+
+        rateCollection.push(rateObj);
+      }
+
+      return rateCollection;
+    }
 
     return {
       CartModel:cartModel,

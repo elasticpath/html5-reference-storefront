@@ -44,30 +44,39 @@ define(['ep','marionette','i18n','eventbus','mediator'],
         }
         return retVal;
       },
-      getAvailabilityReleaseDate:function(releaseDate){
+      getAvailabilityReleaseDate: function (releaseDate) {
         var retVar = '';
 
-        if (releaseDate && releaseDate.displayValue){
+        if (releaseDate && releaseDate.displayValue) {
           retVar = releaseDate.displayValue;
         }
 
         return retVar;
       },
-      getListPrice:function(priceObj){
-        if (priceObj.listed && priceObj.listed.display){
-          return priceObj.listed.display;
+      getListPrice: function (priceObj) {
+        var retVar = '';
+
+        if (priceObj) {
+          if (priceObj.listed && priceObj.listed.display) {
+            retVar = priceObj.listed.display;
+          }
         }
-        else{
-          return '';
-        }
+
+        return retVar;
       },
-      getPurchasePrice:function(priceObj){
-        if (priceObj.purchase && priceObj.purchase.display){
-          return priceObj.purchase.display;
+      getPurchasePrice: function (priceObj) {
+        var retVar = '';
+
+        if (priceObj) {
+          if (priceObj.purchase && priceObj.purchase.amount >= 0) {
+            retVar = priceObj.purchase.display;
+          }
+          else {
+            retVar = this.getI18nLabel('itemDetail.noPrice');
+          }
         }
-        else{
-          return '';
-        }
+
+        return retVar;
       },
       getDefaultImagePath:function(thumbnail){
         var retVar;
