@@ -10,19 +10,44 @@
     </div>
     <div data-region="cartSummaryRegion" class="cart-summary-container"></div>
     <div data-region="cartCheckoutActionRegion" class="cart-checkout-container"></div>
-
   </script>
+
 
   <!-- Cart Title Template -->
   <script id="CartTitleTemplate" type="text/template">
     <h1 class="view-title"><%= E.getI18nLabel('cart.viewTitle') %></h1>
   </script>
 
+
+  <!-- Main Cart Template -->
+  <script id="MainCartTemplate" type="text/template">
+    <table>
+      <thead class="cart-lineitem-table-headings">
+      <tr>
+        <th><span class="lineitem-asset-col"><%= E.getI18nLabel('cart.product') %></span></th>
+        <th><%= E.getI18nLabel('cart.name') %></th>
+        <th><%= E.getI18nLabel('cart.availability') %></th>
+        <th><%= E.getI18nLabel('cart.itemPrice') %></th>
+        <th><%= E.getI18nLabel('cart.quantity') %></th>
+        <th><%= E.getI18nLabel('cart.itemTotal') %></th>
+        <th><%= E.getI18nLabel('cart.remove') %></th>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </script>
+
+  <!-- Empty Cart Template -->
+  <script id="EmptyCartTemplate" type="text/template">
+    <b><%= E.getI18nLabel('cart.emptyCartMsg') %></b>
+  </script>
+
   <!-- Cart Line Item Template -->
   <script id="CartLineItemTemplate" type="text/template">
     <!-- Cart Line Item Thumbnail -->
     <td class="cart-lineitem-thumbnail-col">
-      <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>" class="cart-lineitem-thumbnail"/>
+      <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>"
+           class="cart-lineitem-thumbnail"/>
     </td>
 
     <!-- Cart Line Item Display Name -->
@@ -30,56 +55,70 @@
       <a href="<%= E.getItemUrl(E.itemUri) %>"><%= E.displayName %></a>
     </td>
 
-    <!-- Cart Line Item Availability -->
-    <td class="cart-lineitem-availability-col">
-      <ul>
-        <li class="cart-lineitem-availability"><%= E.getAvailabilityDisplayText(E.availability.state) %></li>
-        <li data-region="cartLineitemReleaseDateRegion" class="cart-lineitem-release-date"></li>
-      </ul>
-    </td>
-
-    <!-- Cart Line Item Unit Price -->
-    <td class="cart-lineitem-unit-price-col">
-      <ul>
-        <li data-region="cartLineitemUnitListPrice" class="cart-lineitem-list-price"></li>
-        <li class="cart-lineitem-purchase-price"><%= E.getPurchasePrice(E.unitPrice) %></li>
-      </ul>
-    </td>
+    <!-- Cart Line Item Availability Region -->
+    <td data-region="cartLineitemAvailabilityRegion"></td>
+    <!-- Cart Line Item Unit Price Region-->
+    <td data-region="cartLineitemUnitPriceRegion"></td>
 
     <!-- Cart Line Item Quantity -->
     <td class="cart-lineitem-quantity-col"><%= E.quantity %></td>
 
-    <!-- Cart Line Item Total Price -->
-    <td class="cart-lineitem-total-price-col">
-      <ul>
-        <li data-region="cartLineitemTotalListPrice" class="cart-lineitem-list-price"></li>
-        <li class="cart-lineitem-purchase-price"><%= E.getPurchasePrice(E.price) %></li>
-      </ul>
-    </td>
+    <!-- Cart Line Item Total Price Region -->
+    <td data-region="cartLineitemTotalPriceRegion"></td>
 
     <!-- Cart Line Item Remove Button -->
     <td class="cart-lineitem-remove-btn-col">
-      <button class="btn-round btn btn-cart-removelineitem" data-actionlink="<%= E.getCortexPath() %><%= E.lineitemUri %>"><%= E.getI18nLabel('cart.remove') %></button>
+      <button class="btn-round btn btn-cart-removelineitem"
+              data-actionlink="<%= E.getCortexPath() %><%= E.lineitemUri %>"><%= E.getI18nLabel('cart.remove') %>
+      </button>
     </td>
   </script>
 
-  <!-- Main Cart Template -->
-  <script id="MainCartTemplate" type="text/template">
-    <table>
-      <thead class="cart-lineitem-table-headings">
-        <tr>
-          <th><span class="lineitem-asset-col"><%= E.getI18nLabel('cart.product') %></span></th>
-          <th><%= E.getI18nLabel('cart.name') %></th>
-          <th><%= E.getI18nLabel('cart.availability') %></th>
-          <th><%= E.getI18nLabel('cart.itemPrice') %></th>
-          <th><%= E.getI18nLabel('cart.quantity') %></th>
-          <th><%= E.getI18nLabel('cart.itemTotal') %></th>
-          <th><%= E.getI18nLabel('cart.remove') %></th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+  <!-- Cart LineItem Unit Price Master Template -->
+  <script id="CartLineItemUnitPriceMasterTemplate" type="text/template">
+    <div data-region="itemUnitPriceRegion"></div>
+    <div data-region="itemUnitRateRegion"></div>
   </script>
+
+  <!-- Item Price Template -->
+  <script id="ItemUnitPriceTemplate" type="text/template">
+    <li class="cart-list-price" data-region="itemListPriceRegion"><%= E.getListPrice(E) %></li>
+    <li class="cart-purchase-price"><%= E.getPurchasePrice(E) %></li>
+  </script>
+
+  <!-- Item Rate Template -->
+  <script id="ItemUnitRateTemplate" type="text/template">
+    <%= E.display %>
+  </script>
+
+  <!-- Cart LineItem Total Price Master Template -->
+  <script id="CartLineItemTotalPriceMasterTemplate" type="text/template">
+    <div data-region="itemTotalPriceRegion"></div>
+    <div data-region="itemTotalRateRegion"></div>
+  </script>
+
+  <!-- Item Price Template -->
+  <script id="ItemTotalPriceTemplate" type="text/template">
+    <li class="cart-list-price" data-region="itemListPriceRegion"><%= E.getListPrice(E) %></li>
+    <li class="cart-purchase-price"><%= E.getPurchasePrice(E) %></li>
+  </script>
+
+  <!-- Item Rate Template -->
+  <script id="ItemTotalRateTemplate" type="text/template">
+    <%= E.display %>
+  </script>
+
+  <!-- Item Availability Template -->
+  <script id="ItemAvailabilityTemplate" type="text/template">
+    <li class="cart-lineitem-availability itemdetail-availability-state"><%= E.getAvailabilityDisplayText(E.state) %>
+    </li>
+    <li class="category-item-release-date" data-region="itemAvailabilityDescriptionRegion">
+      <label class="cart-lineitem-releasedate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
+      <span class="cart-lineitem-releasedate-value"><%= E.getAvailabilityReleaseDate(E.releaseDate) %></span>
+    </li>
+  </script>
+
+
 
   <!-- Cart Summary Template -->
   <script id="CartSummaryTemplate" type="text/template">
@@ -93,51 +132,31 @@
         <span class="cart-summary-value-col"><%= E.cartTotal.display %></span>
       </li>
     </ul>
-
   </script>
+
 
   <!-- Cart Checkout Action Template -->
   <script id="CartCheckoutActionTemplate" type="text/template">
-    <button class="btn btn-round btn-primary btn-cmd-checkout" <%= E.getCheckoutButtonDisabledAttrib(E) %>><%= E.getI18nLabel('cart.checkout') %></button>
+    <button class="btn btn-round btn-primary btn-cmd-checkout"
+    <%= E.getCheckoutButtonDisabledAttrib(E) %>><%= E.getI18nLabel('cart.checkout') %></button>
   </script>
 
   <!-- Cart Activity Indicator Template -->
   <script id="CartActivityIndicatorTemplate" type="text/template">
-    <img src="/images/activity-indicator-strobe.gif" />
-  </script>
-
-
-
-  <!-- Empty Cart Template -->
-  <script id="EmptyCartTemplate" type="text/template">
-    <b><%= E.getI18nLabel('cart.emptyCartMsg') %></b>
-  </script>
-
-  <!-- Cart Lineitem Release Date Template -->
-  <script id="CartLineitemReleaseDateTemplate" type="text/template">
-    <label class="cart-lineitem-releasedate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
-    <span class="cart-lineitem-releasedate-value"><%= E.getAvailabilityReleaseDate(E.availability.releaseDate) %></span>
-  </script>
-
-  <!-- Cart Lineitem Total List Price Template -->
-  <script id="CartLineitemTotalListPriceTemplate" type="text/template">
-    <span class="cart-list-price"><%= E.getListPrice(E.price) %></span>
-  </script>
-
-  <!-- Cart Lineitem Unit List Price Template -->
-  <script id="CartLineitemUnitListPriceTemplate" type="text/template">
-    <span class="cart-list-price"><%= E.getListPrice(E.unitPrice) %></span>
+    <img src="/images/activity-indicator-strobe.gif"/>
   </script>
 
   <!-- Purchase Confirmation Layout Template -->
   <script id="PurchaseConfirmationLayoutTemplate" type="text/temmplate">
     <p>Thank you for your order it has been processed</p>
+
     <div data-region="purchaseConfirmationRegion"></div>
   </script>
 
   <!-- Purchase Confirmation Template -->
   <script id="PurchaseConfirmationTemplate" type="text/template">
     <p>status: <span><%= E.status %></span></p>
+
     <p>Order #: <span><%= E.purchaseNumber %></span></p>
   </script>
 
