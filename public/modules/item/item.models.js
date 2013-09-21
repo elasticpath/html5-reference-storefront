@@ -88,17 +88,8 @@ define(['ep','app','backbone','jsonpath'],
          * Availability
          *
          * */
-        //itemObj.availability = item['_availability'][0]['state'];
-        itemObj.availability = {};
-        itemObj.availability.state = jsonPath(item, "$.['_availability'][0]['state']")[0];
-        itemObj.availability.releaseDate = {};
-        var itemReleaseDate = jsonPath(item, "$._availability..release-date");
-        if (itemReleaseDate) {
-          itemObj.availability.releaseDate = {
-            displayValue:itemReleaseDate[0]['display-value'],
-            value:itemReleaseDate[0]['value']
-          };
-        }
+        var availabilityObj = jsonPath(item, '$._availability')[0];
+        itemObj.availability = parseAvailability(availabilityObj);
 
 
         /*
@@ -107,38 +98,23 @@ define(['ep','app','backbone','jsonpath'],
          *
          * */
         itemObj.price = {};
-        itemObj.price.listed = {};
-        itemObj.price.purchase = {};
 
         var listPriceObject = jsonPath(item, "$.['_price'].['list-price']")[0];
+        itemObj.price.listed = parsePrice(listPriceObject);
+
         var purchasePriceObject = jsonPath(item, "$.['_price'].['purchase-price']")[0];
-
-        /*
-        *   List Price
-        * */
-        if (listPriceObject){
-          itemObj.price.listed = {
-            currency:listPriceObject[0].currency,
-            amount:listPriceObject[0].amount,
-            display:listPriceObject[0].display
-          };
-        }
-
-        /*
-        *   Purchase Price
-        * */
-        if (purchasePriceObject){
-          itemObj.price.purchase = {
-            currency:purchasePriceObject[0].currency,
-            amount:purchasePriceObject[0].amount,
-            display:purchasePriceObject[0].display
-          };
-        }
-
+        itemObj.price.purchase = parsePrice(purchasePriceObject);
 
         var rates = jsonPath(item, '$._rate..rate')[0];
         itemObj.rateCollection = parseRates(rates);
 
+
+        // fake a price object when neither rate nor price present
+        if (!purchasePriceObject && itemObj.rateCollection.length == 0) {
+          itemObj.price.purchase = {
+            display: 'none'
+          };
+        }
 
         return itemObj;
       },
@@ -175,6 +151,41 @@ define(['ep','app','backbone','jsonpath'],
 
     var listPriceModel = Backbone.Model.extend();
 
+
+    // function to parse availability (states and release-date)
+    var parseAvailability = function(availabilityObj) {
+      var availability = {};
+
+      if (availabilityObj) {
+        availability.state = jsonPath(availabilityObj, '$..state')[0];
+        var releaseDate = jsonPath(availabilityObj, '$..release-date')[0];
+        if (releaseDate) {
+          availability.releaseDate = {
+            displayValue: releaseDate['display-value'],
+            value: releaseDate['value']
+          };
+        }
+      }
+
+      return availability;
+    };
+
+    // function to parse one-time price (list or purchase)
+    var parsePrice = function(priceObj) {
+      var price = {};
+
+      if (priceObj) {
+        price = {
+          currency: priceObj[0].currency,
+          amount: priceObj[0].amount,
+          display: priceObj[0].display
+        }
+      }
+
+      return price;
+    };
+
+    // function to parse rates collection
     var parseRates = function(rates) {
       var ratesArrayLen = 0;
       var rateCollection = [];
@@ -203,6 +214,7 @@ define(['ep','app','backbone','jsonpath'],
 
       return rateCollection;
     }
+
 	// Required, return the module for AMD compliance
 	return {
     ItemModel:itemModel,

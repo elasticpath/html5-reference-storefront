@@ -74,15 +74,9 @@ define(['ep', 'eventbus', 'backbone'],
           var itemObj = {};
 
           // item thumbnail
-          itemObj.thumbnail = {};
-          var thumbnail = jsonPath(itemArray[i], '$._definition.._assets.._element[?(@.name="default-image")]')[0];
-          if (thumbnail) {
-            itemObj.thumbnail = {
-              absolutePath: thumbnail['content-location'],
-              relativePath: thumbnail['relative-location'],
-              name: thumbnail['name']
-            };
-          }
+          var defaultImgObj = jsonPath(itemArray[i], '$._definition.._assets.._element[?(@.name="default-image")]')[0];
+          itemObj.thumbnail = parseDefaultImg(defaultImgObj);
+
 
           // item name
           itemObj.name = jsonPath(itemArray[i], '$._definition..display-name')[0];
@@ -91,69 +85,24 @@ define(['ep', 'eventbus', 'backbone'],
           itemObj.uri = jsonPath(itemArray[i], '$.self.uri')[0];
 
           // item availability
-          itemObj.availability = {}
-          itemObj.availability.state = jsonPath(itemArray[i], '$._availability..state')[0];
-          var releaseDate = jsonPath(itemArray[i], '$._availability..release-date')[0];
-          if (releaseDate) {
-            itemObj.availability.releaseDate = {
-              displayValue: releaseDate['display-value'],
-              value: releaseDate['value']
-            };
-          }
+          var availabilityObj = jsonPath(itemArray[i], '$._availability')[0];
+          itemObj.availability = parseAvailability(availabilityObj);
+
 
           // item prices
           itemObj.price = {};
-          itemObj.price.listed = {};
-          itemObj.price.purchase = {};
-
           var listPrice = jsonPath(itemArray[i], '$._price..list-price')[0];
+          itemObj.price.listed = parsePrice(listPrice)
+
           var purchasePrice = jsonPath(itemArray[i], '$._price..purchase-price')[0];
-
-          if (listPrice) {
-            itemObj.price.listed = {
-              currency: listPrice[0].currency,
-              amount: listPrice[0].amount,
-              display: listPrice[0].display
-            }
-          }
-
-          if (purchasePrice) {
-            itemObj.price.purchase = {
-              currency: purchasePrice[0].currency,
-              amount: purchasePrice[0].amount,
-              display: purchasePrice[0].display
-            }
-          }
+          itemObj.price.purchase = parsePrice(purchasePrice);
 
           // item rate collection
-          itemObj.rateCollection = [];
           var rates = jsonPath(itemArray[i], '$._rate..rate')[0];
-          var ratesArrayLen = 0;
-
-          if (rates) {
-            ratesArrayLen = rates.length;
-          }
-
-          for (var x = 0; x < ratesArrayLen; x++) {
-            var rateObj = {};
-
-            rateObj.display = rates[x].display;
-            rateObj.cost = {
-              amount: jsonPath(rates[x], '$.cost..amount')[0],
-              currency: jsonPath(rates[x], '$.cost..currency')[0],
-              display: jsonPath(rates[x], '$.cost..display')[0]
-            }
-
-            rateObj.recurrence = {
-              interval: jsonPath(rates[x], '$.recurrence..interval')[0],
-              display: jsonPath(rates[x], '$.recurrence..display')[0]
-            }
-
-            itemObj.rateCollection.push(rateObj);
-          }
+          itemObj.rateCollection = parseRates(rates);
 
           // fake a price object when neither rate nor price present
-          if (!purchasePrice && ratesArrayLen == 0) {
+          if (!purchasePrice && itemObj.rateCollection.length == 0) {
             itemObj.price.purchase = {
               display: 'none'
             };
@@ -179,6 +128,83 @@ define(['ep', 'eventbus', 'backbone'],
       model: itemModel
     });
 
+    // function to parse default image
+    var parseDefaultImg = function(imgObj) {
+      var defaultImg = {};
+
+      if (imgObj) {
+        defaultImg = {
+          absolutePath: imgObj['content-location'],
+          relativePath: imgObj['relative-location'],
+          name: imgObj['name']
+        };
+      }
+
+      return defaultImg;
+    };
+
+    // function to parse availability (states and release-date)
+    var parseAvailability = function(availabilityObj) {
+      var availability = {};
+
+      if (availabilityObj) {
+        availability.state = jsonPath(availabilityObj, '$..state')[0];
+        var releaseDate = jsonPath(availabilityObj, '$..release-date')[0];
+        if (releaseDate) {
+          availability.releaseDate = {
+            displayValue: releaseDate['display-value'],
+            value: releaseDate['value']
+          };
+        }
+      }
+
+      return availability;
+    };
+
+    // function to parse one-time price (list or purchase)
+    var parsePrice = function(priceObj) {
+      var price = {};
+
+      if (priceObj) {
+        price = {
+          currency: priceObj[0].currency,
+          amount: priceObj[0].amount,
+          display: priceObj[0].display
+        }
+      }
+
+      return price;
+    };
+
+    // function to parse rates collection
+    var parseRates = function(rates) {
+      var ratesArrayLen = 0;
+      var rateCollection = [];
+
+      if (rates) {
+        ratesArrayLen = rates.length;
+      }
+
+      for (var i = 0; i < ratesArrayLen; i++) {
+        var rateObj = {};
+
+        rateObj.display = rates[i].display;
+        rateObj.cost = {
+          amount: jsonPath(rates[i], '$.cost..amount')[0],
+          currency: jsonPath(rates[i], '$.cost..currency')[0],
+          display: jsonPath(rates[i], '$.cost..display')[0]
+        }
+
+        rateObj.recurrence = {
+          interval: jsonPath(rates[i], '$.recurrence..interval')[0],
+          display: jsonPath(rates[i], '$.recurrence..display')[0]
+        }
+
+        rateCollection.push(rateObj);
+      }
+
+      return rateCollection;
+    };
 
     return{
       CategoryModel: categoryModel,

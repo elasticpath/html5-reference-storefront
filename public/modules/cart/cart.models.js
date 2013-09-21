@@ -39,16 +39,8 @@ define(['ep', 'eventbus', 'backbone'],
           /*
            * item default image thumbnail
            */
-          lineItemObj.thumbnail = {};
-          var assetsArray = jsonPath(currObj, "$._item.._definition.._assets.._element")[0];
-          if (assetsArray) {
-            var defaultImg = jsonPath(assetsArray, "$.[?(@.name='default-image')]")[0];
-            lineItemObj.thumbnail = {
-              name: defaultImg['name'],
-              absolutePath: defaultImg['content-location'],
-              relativePath: defaultImg['relative-location']
-            }
-          }
+          var defaultImgObj = jsonPath(currObj, '$._item.._definition.._assets.._element[?(@.name="default-image")]')[0];
+          lineItemObj.thumbnail = parseDefaultImg(defaultImgObj);
 
           /*
            * item display name
@@ -59,17 +51,8 @@ define(['ep', 'eventbus', 'backbone'],
           /*
            * availability
            */
-          lineItemObj.availability = {};
-          lineItemObj.availability.state = jsonPath(currObj, '$._availability..state')[0];
-
-          lineItemObj.availability.releaseDate = {};
-          var lineItemReleaseDate = jsonPath(currObj, '$._availability..release-date')[0];
-          if (lineItemReleaseDate) {
-            lineItemObj.availability.releaseDate = {
-              displayValue: lineItemReleaseDate['display-value'],
-              value: lineItemReleaseDate['value']
-            }
-          }
+          var availabilityObj = jsonPath(currObj, '$._availability')[0];
+          lineItemObj.availability = parseAvailability(availabilityObj);
 
           /*
            * quantity
@@ -80,52 +63,23 @@ define(['ep', 'eventbus', 'backbone'],
            * item unit price
            */
           lineItemObj.unitPrice = {};
-          lineItemObj.unitPrice.listed = {};
-          lineItemObj.unitPrice.purchase = {};
 
           var itemUnitListPrice = jsonPath(currObj, '$._item.._price..list-price')[0];
-          var itemUnitPurchasePrice = jsonPath(currObj, '$._item.._price..purchase-price')[0];
-          if (itemUnitListPrice) {
-            lineItemObj.unitPrice.listed = {
-              currency: itemUnitListPrice[0].currency,
-              amount: itemUnitListPrice[0].amount,
-              display: itemUnitListPrice[0].display
-            }
-          }
+          lineItemObj.unitPrice.listed = parsePrice(itemUnitListPrice);
 
-          if (itemUnitPurchasePrice) {
-            lineItemObj.unitPrice.purchase = {
-              currency: itemUnitPurchasePrice[0].currency,
-              amount: itemUnitPurchasePrice[0].amount,
-              display: itemUnitPurchasePrice[0].display
-            }
-          }
+          var itemUnitPurchasePrice = jsonPath(currObj, '$._item.._price..purchase-price')[0];
+          lineItemObj.unitPrice.purchase = parsePrice(itemUnitPurchasePrice);
 
           /*
            * item-total (list price & purchase price)
            */
           lineItemObj.price = {};
-          lineItemObj.price.listed = {};
-          lineItemObj.price.purchase = {};
 
           var lineItemListPrice = jsonPath(currObj, '$._price..list-price')[0];
+          lineItemObj.price.listed = parsePrice(lineItemListPrice);
+
           var lineItemPurchasePrice = jsonPath(currObj, '$._price..purchase-price')[0];
-
-          if (lineItemListPrice) {
-            lineItemObj.price.listed = {
-              currency: lineItemListPrice[0].currency,
-              amount: lineItemListPrice[0].amount,
-              display: lineItemListPrice[0].display
-            }
-          }
-
-          if (lineItemPurchasePrice) {
-            lineItemObj.price.purchase = {
-              currency: lineItemPurchasePrice[0].currency,
-              amount: lineItemPurchasePrice[0].amount,
-              display: lineItemPurchasePrice[0].display
-            }
-          }
+          lineItemObj.price.purchase = parsePrice(lineItemPurchasePrice);
 
           /*
            * Rates
@@ -137,6 +91,17 @@ define(['ep', 'eventbus', 'backbone'],
           // LineItem rates
           var lineItemRates = jsonPath(currObj, '$._rate..rate')[0];
           lineItemObj.rateCollection = parseRates(lineItemRates);
+
+          // fake a price object when neither rate nor price present
+          if (!lineItemPurchasePrice && lineItemObj.rateCollection.length == 0) {
+            lineItemObj.price.purchase = {
+              display: 'none'
+            };
+
+            lineItemObj.unitPrice.purchase = {
+              display: 'none'
+            };
+          }
 
           /*
            * LineItem Uri (for remove lineitem button)
@@ -190,6 +155,56 @@ define(['ep', 'eventbus', 'backbone'],
       }
     });
 
+
+    // function to parse default image
+    var parseDefaultImg = function(imgObj) {
+      var defaultImg = {};
+
+      if (imgObj) {
+        defaultImg = {
+          absolutePath: imgObj['content-location'],
+          relativePath: imgObj['relative-location'],
+          name: imgObj['name']
+        };
+      }
+
+      return defaultImg;
+    };
+
+    // function to parse availability (states and release-date)
+    var parseAvailability = function(availabilityObj) {
+      var availability = {};
+
+      if (availabilityObj) {
+        availability.state = jsonPath(availabilityObj, '$..state')[0];
+        var releaseDate = jsonPath(availabilityObj, '$..release-date')[0];
+        if (releaseDate) {
+          availability.releaseDate = {
+            displayValue: releaseDate['display-value'],
+            value: releaseDate['value']
+          };
+        }
+      }
+
+      return availability;
+    };
+
+    // function to parse one-time price (list or purchase)
+    var parsePrice = function(priceObj) {
+      var price = {};
+
+      if (priceObj) {
+        price = {
+          currency: priceObj[0].currency,
+          amount: priceObj[0].amount,
+          display: priceObj[0].display
+        }
+      }
+
+      return price;
+    };
+
+    // function to parse rates collection
     var parseRates = function(rates) {
       var ratesArrayLen = 0;
       var rateCollection = [];
