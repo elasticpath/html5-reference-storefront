@@ -6,8 +6,8 @@
  * Time: 9:16 AM
  *
  */
-define(['ep','marionette','i18n','eventbus'],
-  function(ep,Marionette,i18n,EventBus){
+define(['ep','marionette','i18n','eventbus','pace'],
+  function(ep,Marionette,i18n,EventBus,pace){
     //console.log('fuck:  ' + i18n);
     var viewHelpers = {
       getDisplayType:function(bHasChildren){
@@ -153,7 +153,10 @@ define(['ep','marionette','i18n','eventbus'],
 
     // Default Title View
     var defaultItemTitleView = Backbone.Marionette.ItemView.extend({
-      template:'#DefaultItemTitleTemplate'
+      template:'#DefaultItemTitleTemplate',
+      onShow:function(){
+        pace.stop();
+      }
     });
 
     // Default Asset View

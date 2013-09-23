@@ -7,15 +7,16 @@
  *
  *
  */
-define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models', 'modules/cart/cart.views', 'text!modules/cart/cart.templates.html'],
-  function (ep, App, EventBus, Mediator, Cortex, Model, View, template) {
-
+define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models', 'modules/cart/cart.views', 'text!modules/cart/cart.templates.html','pace'],
+  function (ep, App, EventBus, Mediator, Cortex, Model, View, template,pace) {
+    pace.start();
     $('#TemplateContainer').append(template);
 
     _.templateSettings.variable = 'E';
 
 
     var defaultView = function () {
+      pace.start();
       var cartLayout = new View.DefaultView();
       var cartModel = new Model.CartModel();
 
@@ -39,6 +40,7 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
 
           if (response.attributes.lineItems.length > 0) {
             cartLayout.mainCartRegion.show(mainCartView);
+
           } else {
             cartLayout.mainCartRegion.show(new View.EmptyCartView());
           }
@@ -147,6 +149,7 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
 
     // Checkout Button Clicked
     EventBus.on('cart.checkoutBtnClicked', function (model) {
+
       View.setCheckoutButtonProcessing();
       EventBus.trigger('cart.checkoutRequest', model);
     });
@@ -155,6 +158,7 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
     EventBus.on('cart.checkoutRequest', function (model) {
       // if cortex says it's ok
       if (model.get('submitOrderActionUri')) {
+
         // submit request to uri
         EventBus.trigger('cart.submitOrderRequest', model.get('submitOrderActionUri'));
       }
@@ -206,6 +210,7 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
       var orderSummaryUri = obj.XHR.getResponseHeader('Location');
       if (orderSummaryUri){
         Mediator.fire('mediator.orderProcessSuccess',orderSummaryUri);
+        pace.stop();
       }
       var t = orderSummaryUri;
       ep.logger.info('ORDER SUMMARY URL - ' + t);

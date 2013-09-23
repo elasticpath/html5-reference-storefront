@@ -2315,9 +2315,11 @@ header.app-header .row {
   border: 1px solid #eeeeee;
   border-radius: 1rem;
 }
-.itemdetail-availability-container {
+.itemdetail-availability {
   margin-bottom: 1rem;
-  margin-left: 0;
+}
+.itemdetail-availability ul {
+  margin: 0;
 }
 .itemdetail-availability-state {
   text-align: center;
@@ -2332,12 +2334,13 @@ header.app-header .row {
 .itemdetail-release-date-hidden {
   display: none;
 }
-.itemdetail-price-container,
-.itemdetail-rate-container {
+.itemdetail-price-container {
   margin-top: 1rem;
-  margin-left: 0;
 }
-.itemdetail-list-price-value {
+.itemdetail-price-container ul {
+  margin: 0;
+}
+.itemdetail-list-price {
   text-decoration: line-through;
 }
 .itemdetail-list-price-hidden {
@@ -2413,16 +2416,19 @@ header.app-header .row {
   font-size: 100%;
   font-weight: bold;
 }
+.cart-lineitem-availability-col ul {
+  margin: 0rem;
+}
 .cart-lineitem-releasedate-label {
   display: block;
 }
-.cart-lineitem-availability-container,
-.cart-lineitem-price-container,
-.cart-lineitem-rate-container {
+.cart-lineitem-unit-price-col ul {
   margin: 0rem;
 }
-.cart-unit-list-price,
-.cart-total-list-price {
+.cart-lineitem-total-price-col ul {
+  margin: 0rem;
+}
+.cart-list-price {
   text-decoration: line-through;
 }
 .cart-summary-list {
@@ -2435,7 +2441,7 @@ header.app-header .row {
 }
 .cart-summary-label-col {
   display: inline-block;
-  width: 10rem;
+  width: 7rem;
 }
 .cart-summary-value-col {
   display: inline-block;
@@ -2522,24 +2528,19 @@ header.app-header .row {
 .category-item-title a {
   text-decoration: none;
 }
-.pagination-link {
-  margin-left: 5rem;
-  margin-right: 5rem;
+.btn-pagination {
+  margin-left: .5rem;
+  margin-right: .5rem;
 }
-.paging-total-results {
+.paging-results-per-page,
+.paging-total-results,
+.paging-current-page,
+.paging-total-pages {
   font-size: 78%;
   color: #444;
 }
 .pagingnation-value {
   font-weight: bold;
-}
-.pagination-link-disabled {
-  cursor: default;
-  color: grey;
-  text-decoration: none;
-}
-a:hover.pagination-link-disabled {
-  color: grey;
 }
 .pagination-region-hidden {
   display: none;
@@ -2551,7 +2552,7 @@ a:hover.pagination-link-disabled {
   display: inline-block;
 }
 @media only screen and (max-width: 60rem) {
-  .pagination-link {
+  .btn-pagination {
     margin-left: .5rem;
     margin-right: .5rem;
   }
@@ -2811,15 +2812,4 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
 .activity-indicator {
   margin-left: auto;
   margin-right: auto;
-}
-.pace .pace-progress {
-  background: #29d;
-  position: fixed;
-  z-index: 100;
-  top: 0;
-  left: 0;
-  height: 2px;
-}
-.pace-inactive {
-  display: none;
 }

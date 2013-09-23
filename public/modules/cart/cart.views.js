@@ -6,8 +6,9 @@
  * Time: 9:16 AM
  *
  */
-define(['ep','marionette','i18n','eventbus','mediator'],
-  function(ep,Marionette,i18n,EventBus,Mediator){
+define(['ep','marionette','i18n','eventbus','mediator','pace'],
+  function(ep,Marionette,i18n,EventBus,Mediator,pace){
+    pace.start();
     var viewHelpers = {
       getI18nLabel:function(key){
         var retVal = key;
@@ -138,6 +139,7 @@ define(['ep','marionette','i18n','eventbus','mediator'],
     * */
     // Set Checkout Button to Processing State
     function setCheckoutButtonProcessing(){
+
       $('.btn-cmd-checkout').html('<img src="/images/activity-indicator-strobe.gif" />');
 
     }
@@ -158,6 +160,7 @@ define(['ep','marionette','i18n','eventbus','mediator'],
       },
       onShow:function(){
         Mediator.fire('mediator.cart.DefaultViewRendered');
+
 
       }
     });
@@ -340,7 +343,10 @@ define(['ep','marionette','i18n','eventbus','mediator'],
       template:'#MainCartTemplate',
       itemView:cartLineItemView,
       itemViewContainer:'tbody',
-      templateHelpers:viewHelpers
+      templateHelpers:viewHelpers,
+      onShow:function(){
+        pace.stop();
+      }
     });
 
     // Cart Summary View

@@ -6,8 +6,8 @@
  * Time: 1:32 PM
  *
  */
-define(['ep', 'i18n', 'eventbus'],
-  function (ep, i18n, EventBus) {
+define(['ep', 'i18n', 'eventbus','pace'],
+  function (ep, i18n, EventBus,pace) {
 
     var viewHelpers = {
       getI18nLabel: function (key) {
@@ -294,7 +294,10 @@ define(['ep', 'i18n', 'eventbus'],
     var categoryItemCollectionView = Backbone.Marionette.CollectionView.extend({
       itemView: categoryItemView,
       emptyView: categoryItemCollectionEmptyView,
-      tagName: 'ul'
+      tagName: 'ul',
+      onShow:function(){
+        pace.stop();
+      }
     });
 
 

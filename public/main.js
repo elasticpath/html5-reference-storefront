@@ -14,6 +14,7 @@ require.config({
     'backbone'        : 'scripts/lib/backbone',
     'marionette'      : 'scripts/lib/backbone.marionette',
     'modernizr'       : 'scripts/lib/modernizr-latest',
+    'pace'            : 'scripts/lib/pace.min',
     'URI'             : 'scripts/lib/URI',
     'router'          : 'router',
     'ep'              : 'ep.client',
@@ -29,10 +30,7 @@ require.config({
     'cortex'          : 'modules/cortex/cortex.controller',
     'home'            : 'modules/home/home.controller',
     'item'            : 'modules/item/item.controller',
-    'composer'        : 'modules/composer/composer.controller',
-    'composer2'       : 'modules/composer2/composer.controller',
     'category'        : 'modules/category/category.controller',
-    'theme'           : 'modules/theme/theme.controller',
     'appheader'       : 'modules/appheader/appheader.controller',
     'uiform'          : 'modules/ui/ui.form.controller',
     'uieditor'        : 'modules/ui/ui.codeeditor.controller',
@@ -45,8 +43,7 @@ require.config({
     'auth'            : 'modules/auth/auth.controller',
     'tabs'            : 'scripts/lib/plugins/kube.tabs',
     'contextmenu'     : 'scripts/lib/plugins/jquery.contextmenu',
-    'debug'           : 'modules/debug/debug.controller',
-    'ace'             : 'http://rawgithub.com/ajaxorg/ace-builds/master/src-noconflict/ace'
+    'debug'           : 'modules/debug/debug.controller'
   },
   shim: {
     'backbone': {
@@ -71,7 +68,7 @@ require.config({
   }
 });
 
-define(['app','eventbus','i18n'],
+require(['app','eventbus','i18n'],
   function (App,EventBus,i18n){
 
     // Application DOM container is ready (viewport)

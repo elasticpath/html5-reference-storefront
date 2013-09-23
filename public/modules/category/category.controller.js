@@ -6,8 +6,8 @@
  * Time: 1:31 PM
  *
  */
-define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/category/category.views', 'text!modules/category/category.templates.html'],
-  function (App, ep, EventBus, Model, View, template) {
+define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/category/category.views', 'text!modules/category/category.templates.html', 'pace'],
+  function (App, ep, EventBus, Model, View, template, pace) {
 
     $('#TemplateContainer').append(template);
     _.templateSettings.variable = 'E';
@@ -19,6 +19,7 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
      *
      */
     var defaultView = function (uriObj) {
+      pace.start();
       var categoryLayout = new View.DefaultView();
       var categoryModel = new Model.CategoryModel();
 
@@ -64,7 +65,8 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
      *
      *
      */
-    EventBus.on('category.fetchCategoryItemPageModelRequest', function(reqObj) {
+    EventBus.on('category.fetchCategoryItemPageModelRequest', function (reqObj) {
+      pace.start();
       var categoryItemModel = new Model.CategoryItemPageModel();
       categoryItemModel.fetch({
         url: categoryItemModel.getUrl(reqObj.fetchUri),
@@ -93,9 +95,18 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
       });
     });
 
+    // pagination btn is clicked
+    EventBus.on('category.paginationBtnClicked', function (direction, uri) {
+      ep.logger.info(direction + ' btn clicked.');
+
+      EventBus.trigger('category.reloadCategoryViewsRequest', uri);
+
+    });
+
     // Hide pagination regions when empty collection rendered
     EventBus.on('category.emptyCollectionRendered', function () {
       View.HidePaginationRegion();
+      pace.stop();
     });
 
     return {

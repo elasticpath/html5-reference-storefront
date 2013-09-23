@@ -7,16 +7,16 @@
  *
  *
  */
-define(['jquery', 'ep', 'app', 'eventbus', 'cortex', 'modules/item/item.models', 'modules/item/item.views', 'text!modules/item/item.templates.html', 'i18n'],
-  function ($, ep, App, EventBus, Cortex, Model, View, template, i18n) {
+define(['jquery','ep','app', 'eventbus', 'cortex', 'modules/item/item.models', 'modules/item/item.views', 'text!modules/item/item.templates.html','i18n','pace'],
+  function($, ep, App, EventBus, Cortex, Model, View, template,i18n,pace){
 
     $('#TemplateContainer').append(template);
 
     _.templateSettings.variable = 'E';
 
 
-    var defaultView = function (uri) {
-
+    var defaultView = function(uri){
+      pace.start();
       var itemDetailLayout = new View.DefaultView({
         className: ''
       });
