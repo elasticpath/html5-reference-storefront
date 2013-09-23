@@ -223,7 +223,7 @@ define(['ep','marionette','i18n','eventbus','mediator'],
 
     // Item Availability
     var itemAvailabilityView = Backbone.Marionette.ItemView.extend({
-      template: '#ItemAvailabilityTemplate',
+      template: '#CartLineItemAvailabilityTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
       className: 'cart-lineitem-availability-container',
@@ -259,7 +259,7 @@ define(['ep','marionette','i18n','eventbus','mediator'],
         if (this.model.get('price').purchase.display) {
           this.itemPriceRegion.show(
             new itemPriceView({
-              template: '#ItemUnitPriceTemplate',
+              template: '#CartLineItemUnitPriceTemplate',
               model: new Backbone.Model(this.model.attributes.price)
             })
           );
@@ -291,7 +291,7 @@ define(['ep','marionette','i18n','eventbus','mediator'],
         if (this.model.get('price').purchase.display) {
           this.itemPriceRegion.show(
             new itemPriceView({
-              template: '#ItemTotalPriceTemplate',
+              template: '#CartLineItemTotalPriceTemplate',
               model: new Backbone.Model(this.model.attributes.price)
             })
           );
@@ -317,7 +317,7 @@ define(['ep','marionette','i18n','eventbus','mediator'],
 
     // Item Rate ItemView
     var itemRateItemView = Backbone.Marionette.ItemView.extend({
-      template: '#ItemRateTemplate',
+      template: '#CartLineItemRateTemplate',
       templateHelpers: viewHelpers,
       tagName: 'li'
     });

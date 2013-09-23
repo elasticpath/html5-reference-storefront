@@ -82,7 +82,7 @@
   </script>
 
   <!-- Item Unit Price Template -->
-  <script id="ItemUnitPriceTemplate" type="text/template">
+  <script id="CartLineItemUnitPriceTemplate" type="text/template">
     <li class="cart-unit-list-price" data-region="itemListPriceRegion"><%= E.getListPrice(E) %></li>
     <li class="cart-unit-purchase-price"><%= E.getPurchasePrice(E) %></li>
   </script>
@@ -94,23 +94,23 @@
   </script>
 
   <!-- Item Total Price Template -->
-  <script id="ItemTotalPriceTemplate" type="text/template">
+  <script id="CartLineItemTotalPriceTemplate" type="text/template">
     <li class="cart-total-list-price" data-region="itemListPriceRegion"><%= E.getListPrice(E) %></li>
     <li class="cart-total-purchase-price"><%= E.getPurchasePrice(E) %></li>
   </script>
 
   <!-- Item Rate Template -->
-  <script id="ItemRateTemplate" type="text/template">
+  <script id="CartLineItemRateTemplate" type="text/template">
     <%= E.display %>
   </script>
 
   <!-- Item Availability Template -->
-  <script id="ItemAvailabilityTemplate" type="text/template">
+  <script id="CartLineItemAvailabilityTemplate" type="text/template">
     <li class="cart-lineitem-availability itemdetail-availability-state"><%= E.getAvailabilityDisplayText(E.state) %>
     </li>
     <li class="category-item-release-date" data-region="itemAvailabilityDescriptionRegion">
       <label class="cart-lineitem-releasedate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
-      <span class="cart-lineitem-releasedate-value"><%= E.getAvailabilityReleaseDate(E.releaseDate) %></span>
+      <span class="cart-lineitem-release-date-value"><%= E.getAvailabilityReleaseDate(E.releaseDate) %></span>
     </li>
   </script>
 

@@ -2337,7 +2337,7 @@ header.app-header .row {
   margin-top: 1rem;
   margin-left: 0;
 }
-.itemdetail-list-price {
+.itemdetail-list-price-value {
   text-decoration: line-through;
 }
 .itemdetail-list-price-hidden {
@@ -2421,7 +2421,8 @@ header.app-header .row {
 .cart-lineitem-rate-container {
   margin: 0rem;
 }
-.cart-list-price {
+.cart-unit-list-price,
+.cart-total-list-price {
   text-decoration: line-through;
 }
 .cart-summary-list {
