@@ -134,7 +134,7 @@ define(['ep', 'i18n', 'eventbus','pace'],
       regions: {
         categoryTitleRegion: '[data-region="categoryTitleRegion"]',
       },
-      className: 'category-items-container',
+      className: 'category-items-container container',
       onShow: function () {
         ep.app.addRegions({
           categoryBrowseRegion: '[data-region="categoryBrowseRegion"]',

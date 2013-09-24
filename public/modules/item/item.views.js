@@ -148,7 +148,7 @@ define(['ep','marionette','i18n','eventbus','pace'],
         itemDetailQuantityRegion:'[data-region="itemDetailQuantityRegion"]',
         itemDetailAddToCartRegion:'[data-region="itemDetailAddToCartRegion"]'
       },
-      className:'itemdetail-container'
+      className:'itemdetail-container container'
     });
 
     // Default Title View

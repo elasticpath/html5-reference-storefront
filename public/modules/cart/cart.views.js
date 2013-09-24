@@ -151,7 +151,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     // Default Layout
     var defaultView = Backbone.Marionette.Layout.extend({
       template:'#DefaultCartLayoutTemplate',
-      className:'cart-container',
+      className:'cart-container container',
       regions:{
         cartTitleRegion:'[data-region="cartTitleRegion"]',
         mainCartRegion:'[data-region="mainCartRegion"]',

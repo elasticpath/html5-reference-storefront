@@ -1,9 +1,9 @@
 @import 'variables';
-@import 'elements';
+// @import 'elements';
 /*@import 'kube';
 @import 'accordion.style.less';*/
 /*@import 'mainnav';*/
-@import 'appheader';
+// @import 'appheader';
 @import 'itemdetail';
 @import 'cart';
 @import 'auth';
@@ -25,6 +25,12 @@
 reference:
 http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of-ems/
 */
+
+
+body{
+  margin-top: 104px;
+}
+
 ul{
   list-style: none;
 }
@@ -43,19 +49,26 @@ ul{
     background:rgba(150,150,150,.4);
     text-shadow:7px 7px 12px rgba(150, 150, 150, 1);
 }
+.app-main{
+  // .container; // apply BOOTSTRAP container styling
+  // max-width: @container-lg-desktop; // set BOOTSTRAP default container width constraint
+  padding-bottom: 6rem;
+}
 .category-items-container, .search-results-container, .purchase-confirmation-container{
-  margin-left:auto;
-  margin-right:auto;
-  margin-top:1rem;
-  border:1px solid #dddddd;
-  border-radius:4rem;
-  max-width:80rem;
-  padding:1rem 4rem 4rem 4rem;
+  // margin-left:auto;
+  // margin-right:auto;
+  // margin-top:1rem;
+  // border:1px solid #dddddd;
+  // border-radius:4rem;
+  // max-width:80rem;
+  // padding:1rem 4rem 4rem 4rem;
+
+  // .make-row(); // apply BOOTSTRAP row styling
 }
 .view-title{
   color:@viewTitleColor;
   text-transform: capitalize;
-  text-shadow: 1px 1px 0px rgb(21, 25, 26), 2px 2px 0px rgb(128, 87, 87);
+  // text-shadow: 1px 1px 0px rgb(21, 25, 26), 2px 2px 0px rgb(128, 87, 87);
 }
 
 
