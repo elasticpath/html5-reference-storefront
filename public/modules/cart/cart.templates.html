@@ -2,14 +2,16 @@
 
   <!-- Default Cart Layout Template -->
   <script id="DefaultCartLayoutTemplate" type="text/template">
-    <div data-region="cartTitleRegion" class="cart-title-container"></div>
-    <div data-region="mainCartRegion" class="cart-main-container">
-      <!--<div class="activity-indicator-container">-->
-        <!--<img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>-->
-      <!--</div>-->
+    <div class="cart-container-inner">
+      <div data-region="cartTitleRegion" class="cart-title-container"></div>
+      <div data-region="mainCartRegion" class="cart-main-container table-responsive">
+        <!--<div class="activity-indicator-container">-->
+          <!--<img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>-->
+        <!--</div>-->
+      </div>
+      <div data-region="cartSummaryRegion" class="cart-summary-container"></div>
+      <div data-region="cartCheckoutActionRegion" class="cart-checkout-container"></div>
     </div>
-    <div data-region="cartSummaryRegion" class="cart-summary-container"></div>
-    <div data-region="cartCheckoutActionRegion" class="cart-checkout-container"></div>
   </script>
 
 
@@ -18,24 +20,6 @@
     <h1 class="view-title"><%= E.getI18nLabel('cart.viewTitle') %></h1>
   </script>
 
-
-  <!-- Main Cart Template -->
-  <script id="MainCartTemplate" type="text/template">
-    <table>
-      <thead class="cart-lineitem-table-headings">
-      <tr>
-        <th><span class="lineitem-asset-col"><%= E.getI18nLabel('cart.product') %></span></th>
-        <th><%= E.getI18nLabel('cart.name') %></th>
-        <th><%= E.getI18nLabel('cart.availability') %></th>
-        <th><%= E.getI18nLabel('cart.itemPrice') %></th>
-        <th><%= E.getI18nLabel('cart.quantity') %></th>
-        <th><%= E.getI18nLabel('cart.itemTotal') %></th>
-        <th><%= E.getI18nLabel('cart.remove') %></th>
-      </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </script>
 
   <!-- Empty Cart Template -->
   <script id="EmptyCartTemplate" type="text/template">
@@ -69,9 +53,7 @@
 
     <!-- Cart Line Item Remove Button -->
     <td class="cart-lineitem-remove-btn-col">
-      <button class="btn-round btn btn-cart-removelineitem"
-              data-actionlink="<%= E.getCortexPath() %><%= E.lineitemUri %>"><%= E.getI18nLabel('cart.remove') %>
-      </button>
+    <button class="btn btn-cart-removelineitem" data-actionlink="<%= E.getCortexPath() %><%= E.lineitemUri %>"><span class="icon"></span><span class="btn-text"><%= E.getI18nLabel('cart.remove') %></span></button>
     </td>
   </script>
 
@@ -104,6 +86,24 @@
     <%= E.display %>
   </script>
 
+  <!-- Main Cart Template -->
+  <script id="MainCartTemplate" type="text/template">
+    <table class="table">
+      <thead class="cart-lineitem-table-headings">
+        <tr>
+          <th class="cart-heading-product"><span class="lineitem-asset-col"><%= E.getI18nLabel('cart.product') %></span></th>
+          <th class="cart-heading-name"><%= E.getI18nLabel('cart.name') %></th>
+          <th class="cart-heading-availability"><%= E.getI18nLabel('cart.availability') %></th>
+          <th class="cart-heading-item-price"><%= E.getI18nLabel('cart.itemPrice') %></th>
+          <th class="cart-heading-quantity"><%= E.getI18nLabel('cart.quantity') %></th>
+          <th class="cart-heading-item-total"><%= E.getI18nLabel('cart.itemTotal') %></th>
+          <th class="cart-heading-remove"><%= E.getI18nLabel('cart.remove') %></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </script>
+
   <!-- Item Availability Template -->
   <script id="CartLineItemAvailabilityTemplate" type="text/template">
     <li class="cart-lineitem-availability itemdetail-availability-state"><%= E.getAvailabilityDisplayText(E.state) %>
@@ -118,6 +118,7 @@
 
   <!-- Cart Summary Template -->
   <script id="CartSummaryTemplate" type="text/template">
+   <div class="cart-summary-container-inner">
     <ul class="cart-summary-list">
       <li class="cart-total-quantity">
         <label class="cart-summary-label-col"><%= E.getI18nLabel('cart.totalQuantity') %>: </label>
@@ -128,13 +129,13 @@
         <span class="cart-summary-value-col"><%= E.cartTotal.display %></span>
       </li>
     </ul>
+   </div>
   </script>
 
 
   <!-- Cart Checkout Action Template -->
   <script id="CartCheckoutActionTemplate" type="text/template">
-    <button class="btn btn-round btn-primary btn-cmd-checkout"
-    <%= E.getCheckoutButtonDisabledAttrib(E) %>><%= E.getI18nLabel('cart.checkout') %></button>
+    <button class="btn btn-primary btn-cmd-checkout" <%= E.getCheckoutButtonDisabledAttrib(E) %>><%= E.getI18nLabel('cart.checkout') %></button>
   </script>
 
   <!-- Cart Activity Indicator Template -->

@@ -1,0 +1,106 @@
+/* start main nav*/
+/* end main nav*/
+/* Start Item Detail  */
+/* End Item Detail */
+/* Start Cart */
+/* End Cart */
+/* Start Auth */
+/* End Auth */
+/* apply a natural box layout model to all elements */
+/* line 4, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+@-ms-viewport {
+  width: device-width;
+}
+@-o-viewport {
+  width: device-width;
+}
+@viewport {
+  width: device-width;
+}
+/* line 14, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+body {
+  font-size: 100%;
+  background-color: #ffffff;
+  color: #444444;
+}
+/* line 20, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+h1 {
+  font-size: 2.5rem;
+}
+/*36/16*/
+/* line 21, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+h2 {
+  font-size: 1.5rem;
+}
+/*24/16*/
+/* line 22, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+h3 {
+  font-size: 1.3125rem;
+}
+/*21/16*/
+/* line 23, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+h4 {
+  font-size: 1.125rem;
+}
+/*18/16*/
+/* line 24, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+h5 {
+  font-size: 1rem;
+}
+/*16/16*/
+/* line 26, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+a {
+  color: #070ca6;
+}
+/* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+ul {
+  list-style: none;
+  margin-bottom: 0;
+}
+/* line 36, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+.viewport {
+  min-width: 320px;
+  max-width: 90rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* just examples */
+@media only screen and (max-width: 59rem) {
+  
+}
+@media only screen and (min-width: 60rem) {
+  
+}
+/* override some kube stuff */
+/* line 55, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+.viewport .row {
+  background: transparent;
+}
+/* line 60, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+button.btn-primary[disabled=disabled] {
+  background: #cccccc;
+  color: #aaaaaa;
+}
+/* line 64, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+.btn-primary {
+  background: #33349a;
+  color: #eeeeee;
+}
+/* line 68, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+.btn-primary:hover {
+  background: #3333ff;
+  color: #eeeeee;
+}
+/* line 72, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/base-bak.less */
+.btn-primary:active {
+  background: #0000aa;
+  color: #ffffff;
+  text-shadow: 3px 3px 2px #fadcdc;
+}

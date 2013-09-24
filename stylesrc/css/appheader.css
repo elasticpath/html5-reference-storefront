@@ -1,0 +1,110 @@
+/* start main nav*/
+/* end main nav*/
+/* Start Item Detail  */
+/* End Item Detail */
+/* Start Cart */
+/* End Cart */
+/* Start Auth */
+/* End Auth */
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+/* line 3, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+.app-header {
+  border-top: 1px solid #fff;
+  position: relative;
+  min-height: 4em;
+  padding-top: .2rem;
+  border-bottom: 0px solid #333;
+  /*.gradient(@headerBgColorDefault, @headerBgColorStart, @headerBgColorStop);
+  background-image: linear-gradient(bottom, rgb(0,0,0) 41%, rgb(66,66,66) 71%);
+  background-image: -o-linear-gradient(bottom, rgb(0,0,0) 41%, rgb(66,66,66) 71%);
+  background-image: -moz-linear-gradient(bottom, rgb(0,0,0) 41%, rgb(66,66,66) 71%);
+  background-image: -webkit-linear-gradient(bottom, rgb(0,0,0) 41%, rgb(66,66,66) 71%);
+  background-image: -ms-linear-gradient(bottom, rgb(0,0,0) 41%, rgb(66,66,66) 71%);
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.41, rgb(0,0,0)),
+    color-stop(0.71, rgb(66,66,66))
+  );
+  */
+
+}
+/* line 26, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+header.app-header .row {
+  margin-bottom: 0;
+  background: transparent;
+}
+@media only screen and (max-width: 60rem) {
+  /* line 31, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+  .logo-container {
+    display: none;
+  }
+}
+@media only screen and (max-width: 44rem) {
+  /* line 36, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+  .main-search-container {
+    display: none;
+  }
+}
+/* line 40, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+.logo-container {
+  float: left;
+}
+/* line 44, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+.cmd-home-logo img {
+  height: 3rem;
+}
+/* line 49, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+.btn-link-cmd {
+  background: transparent;
+  border: 0;
+  color: #444444;
+}
+/* line 55, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+.main-search-container {
+  float: right;
+  line-height: 3rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+/* line 61, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+.main-search-container .btn-header-search {
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  background-color: #aaaaaa;
+}
+/* line 67, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+.global-nav-container {
+  float: right;
+  margin-right: 1rem;
+}
+/* line 71, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+.global-nav-container {
+  list-style: none;
+}
+/* line 74, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+.global-nav-container > li {
+  display: inline-block;
+  margin: .3rem;
+  line-height: 3rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+/* line 81, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+.global-nav-container > a {
+  color: #070ca6;
+}
+/* line 84, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+.global-nav-container a {
+  text-decoration: none;
+}
+/* line 87, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/appheader.less */
+.global-nav-container a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,210 @@
+@import 'variables';
+@import 'mixins';
+// @import 'elements';
+// @import 'kube';
+// @import 'accordion.style.less';
+// @import 'mainnav';
+// @import 'appheader';
+
+@import 'itemdetail';
+@import 'auth';
+@import 'category';
+
+// custom load Bootstrap 3 less/css chunks
+@import 'load-bootstrap';
+
+// styles built out assuming/overriding Bootstrap 3
+@import 'nav-ep';
+@import 'cart';
+
+/*
+--- plugin css files
+*/
+@import 'jquery.toastmessage.less';
+
+
+/*
+reference:
+http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of-ems/
+*/
+
+
+// --------- General Bootstrap 3.0 Overrides
+
+.btn,
+.btn-lg{
+    // tweak default radius, other appearance
+    border-radius: 2px;
+    text-shadow: 1px 2px rgba(0,0,0,0.2);
+
+    // add faint shadow to bottom of buttons
+    -webkit-box-shadow:  0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+    box-shadow:          0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+}
+
+.row{
+    margin-bottom: 1rem;
+}
+
+.container{
+
+}
+
+hr{
+    margin: 60px 0;
+}
+
+
+
+// --------- End General Bootstrap 3.0 Overrides
+
+
+body{
+  margin-top: 104px;
+}
+
+ul{
+  list-style: none;
+}
+.btn-cmd{
+    border:0 solid grey;
+    font-size:100%;
+    background:transparent;
+    color:@defaultLinkColor;
+}
+.btn-cmd:hover{
+    border:0;
+    background:rgba(150,150,150,.3);
+}
+.btn-cmd:active{
+    border:0;
+    background:rgba(150,150,150,.4);
+    text-shadow:7px 7px 12px rgba(150, 150, 150, 1);
+}
+.app-main{
+  // .container; // apply BOOTSTRAP container styling
+  // max-width: @container-lg-desktop; // set BOOTSTRAP default container width constraint
+  padding-bottom: 6rem;
+}
+.category-items-container, .search-results-container, .purchase-confirmation-container{
+  // margin-left:auto;
+  // margin-right:auto;
+  // margin-top:1rem;
+  // border:1px solid #dddddd;
+  // border-radius:4rem;
+  // max-width:80rem;
+  // padding:1rem 4rem 4rem 4rem;
+
+  // .make-row(); // apply BOOTSTRAP row styling
+}
+.view-title{
+  color:@viewTitleColor;
+  text-transform: capitalize;
+  // text-shadow: 1px 1px 0px rgb(21, 25, 26), 2px 2px 0px rgb(128, 87, 87);
+}
+
+
+#contextmenu{
+  margin:0;
+  padding:0;
+  border: 1px solid #000;
+  background:@contextMenuBgColorDefault;
+}
+#contextmenu li {
+  list-style-type:none;
+  margin:1px;
+  padding:2px;
+  color:@contextMenuItemColorDefault;
+  cursor:pointer;
+}
+#contextmenu li.hover{
+  background: #ddd;
+}
+.modal-container{
+  display:none;
+}
+#simplemodal-overlay {background-color:#000;}
+#simplemodal-container {
+  background-color:#fff;
+  border:8px solid #444;
+  padding:12px;
+  width:auto !important;
+  height:auto !important;
+}
+#simplemodal-container a.modalCloseImg {
+  background:url(images/x.png) no-repeat; /* adjust url as required */
+  width:25px;
+  height:29px;
+  display:inline;
+  z-index:3200;
+  position:absolute;
+  top:-15px;
+  right:-18px;
+  cursor:pointer;
+}
+.home-container{
+  background:url(images/hm-commerce-software-bb.jpg) no-repeat;
+  min-height:500px;
+  background-size: 100%;
+  text-align:center;
+}
+.field-content{
+
+  max-width:75rem;
+  color:#ffffff;
+  margin:0 auto;
+  font-family: 'ProximaNova-Regular',Helvetica,Arial,sans-serif;
+  padding-top:8rem;
+
+}
+.field-content h2{
+  font-size: 48px;
+  line-height: 47px;
+}
+.theme-variable-item-value-dark .btn-cmd{
+    color:#111111;
+}
+.theme-variable-item-value-light .btn-cmd{
+    color:#eeeeee;
+}
+/*
+  Begin Login Form
+*/
+  /* oAuth Form Feedback */
+.feedback-label{
+  color:red;
+}
+
+.dropdown-menu{
+  display:none;
+  position:absolute;
+  background-color:@bodyBgColor;
+}
+.oAuth-logout{
+  display:none;
+}
+
+/*end login form*/
+
+
+.activity-indicator-container{
+  text-align: center;
+}
+.activity-indicator{
+  margin-left:auto;
+  margin-right: auto;
+}
+
+.pace .pace-progress {
+  background: #29d;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  height: 2px;
+}
+
+.pace-inactive {
+  display: none;
+}
+
