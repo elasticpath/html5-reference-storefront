@@ -4,3 +4,5 @@ logs
 .idea/
 *.log
 target/
+
+*.DS_Store
