@@ -216,7 +216,7 @@ define(['ep', 'i18n', 'eventbus'],
 
     // Item Availability
     var itemAvailabilityView = Backbone.Marionette.ItemView.extend({
-      template: '#ItemAvailabilityTemplate',
+      template: '#CategoryItemAvailabilityTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
       className: 'category-item-availability-container',
@@ -232,7 +232,7 @@ define(['ep', 'i18n', 'eventbus'],
     // price master view
     //
     var itemPriceLayout = Backbone.Marionette.Layout.extend({
-      template: '#ItemPriceMasterViewTemplate',
+      template: '#CategoryItemPriceMasterViewTemplate',
       regions: {
         itemPriceRegion: $('[data-region="itemPriceRegion"]', this.el),
         itemRateRegion: $('[data-region="itemRateRegion"]', this.el)
@@ -263,7 +263,7 @@ define(['ep', 'i18n', 'eventbus'],
 
     // Item Price View
     var itemPriceView = Backbone.Marionette.ItemView.extend({
-      template: '#ItemPriceTemplate',
+      template: '#CategoryItemPriceTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
       className: 'category-item-price-container',
@@ -276,7 +276,7 @@ define(['ep', 'i18n', 'eventbus'],
 
     // Item Rate ItemView
     var itemRateItemView = Backbone.Marionette.ItemView.extend({
-      template: '#ItemRateTemplate',
+      template: '#CategoryItemRateTemplate',
       templateHelpers: viewHelpers,
       tagName: 'li'
     });

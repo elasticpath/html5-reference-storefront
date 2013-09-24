@@ -36,19 +36,19 @@
   </script>
 
   <!-- Item Price Master Template -->
-  <script id="ItemPriceMasterViewTemplate" type="text/template">
+  <script id="CategoryItemPriceMasterViewTemplate" type="text/template">
     <div data-region="itemPriceRegion"></div>
     <div data-region="itemRateRegion"></div>
   </script>
 
   <!-- Item Rate Template -->
-  <script id="ItemRateTemplate" type="text/template">
+  <script id="CategoryItemRateTemplate" type="text/template">
     <label class="category-item-rate-label"><%= E.getI18nLabel('itemDetail.rate') %></label>
-    <span class="category-item-rate"><%= E.display %></span>
+    <span class="category-item-rate-value"><%= E.display %></span>
   </script>
 
   <!-- Item Price Template -->
-  <script id="ItemPriceTemplate" type="text/template">
+  <script id="CategoryItemPriceTemplate" type="text/template">
     <li class="category-item-list-price" data-region="itemListPriceRegion">
       <label class="category-item-list-price-label"><%= E.getI18nLabel('itemDetail.listPrice') %></label>
       <span class="category-item-list-price-value"><%= E.getListPrice(E) %></span>
@@ -60,7 +60,7 @@
   </script>
 
   <!-- Item Availability Template -->
-  <script id="ItemAvailabilityTemplate" type="text/template">
+  <script id="CategoryItemAvailabilityTemplate" type="text/template">
     <li class="category-item-availability itemdetail-availability-state"><%= E.getAvailabilityDisplayText(E.state) %>
     </li>
     <li class="category-item-release-date" data-region="itemAvailabilityDescriptionRegion">
@@ -78,27 +78,27 @@
   <!-- Category Pagination Template -->
   <script id="CategoryPaginationTemplate" type="text/template">
     <div class="paging-total-results">
-      <span class="pagingnation-value"><%= E.stats.totalResults %></span>
+      <span class="pagingnation-value pagination-total-results-value"><%= E.stats.totalResults %></span>
       <label class="pagingnation-label"><%= E.getI18nLabel('category.totalResults') %></label>
-      ( <span class="pagingnation-value"><%= E.stats.resultsOnPage %></span>
+      ( <span class="pagingnation-value pagination-results-displayed-value"><%= E.stats.resultsOnPage %></span>
       <label class="pagingnation-label"><%= E.getI18nLabel('category.resultsOnPage') %></label> )
 
     </div>
 
     <div class="pagination-navigation-container">
       <a href="<%= E.generatePaginationLink(E.categoryUri, E.links.prev) %>"
-         class="pagination-link <%= E.checkForDisabledPaginationBtn(E.links.prev) %>">
+         class="pagination-link <%= E.checkForDisabledPaginationBtn(E.links.prev) %>" data-i18n="category.prev">
         <%= E.getI18nLabel('category.prev') %></a>
       <span class="pagestate-summary">
         <label class="pagingnation-label"><%= E.getI18nLabel('category.currentPage') %></label>
-        <span class="pagingnation-value"><%= E.stats.currentPage %></span>
+        <span class="pagingnation-value pagination-curr-page-value"><%= E.stats.currentPage %></span>
         <label class="pagingnation-label"><%= E.getI18nLabel('category.totalPage') %></label>
-        <span class="pagingnation-value"><%= E.stats.numOfPages %></span>
+        <span class="pagingnation-value pagination-total-pages-value"><%= E.stats.numOfPages %></span>
 
       </span>
 
       <a href="<%= E.generatePaginationLink(E.categoryUri, E.links.next) %>"
-         class="pagination-link <%= E.checkForDisabledPaginationBtn(E.links.next) %>">
+         class="pagination-link <%= E.checkForDisabledPaginationBtn(E.links.next) %>" data-i18n="category.next">
         <%= E.getI18nLabel('category.next') %></a>
     </div>
   </script>
