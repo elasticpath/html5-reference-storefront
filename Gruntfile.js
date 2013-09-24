@@ -14,51 +14,20 @@ module.exports = function(grunt){
     requirejs: {
       compile: {
         options: {
-          appDir:"public",
-          baseUrl: "modules",
-          dir:"build",
+//          appDir:"",
+          baseUrl: "public",
+         // dir:"build",
           mainConfigFile: "public/main.js",
-  //        name:"main",
-    //      out: "public/build/app-optimized.js",
-          modules:[
-            {
-              name:"app"
-            },
-            {
-              name:"appheader"
-            },
-            {
-              name:"auth/auth.controller"
-            },
-            {
-              name:"cart/cart.controller"
-            },
-            {
-              name:"category/category.controller"
-            },
-            {
-              name:"cortex/cortex.controller"
-            },
-            {
-              name:"home/home.controller"
-            },
-            {
-              name:"ia/ia.controller"
-            },
-            {
-              name:"item/item.controller"
-            },
-            {
-              name:"profile/profile.controller"
-            },
-            {
-              name:"search/search.controller"
-            },
-            {
-              name:"ui/ui.modal.controller"
-            }
-
-          ]
+          name:"main",
+          out: "public/buildt/app-optimized.js",
+//          modules:[
+//            {
+//              name:"main",
+//              include: ["app"]
+//            }
+//
+//          ],
+          findNestedDependencies: true
         }
       }
     },
@@ -90,5 +59,5 @@ module.exports = function(grunt){
 
   grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-  grunt.registerTask('default', ['requirejs']);
+  grunt.registerTask('default', ['watch']);
 };

@@ -1,0 +1,65 @@
+<header class="app-header navbar navbar-fixed-top navbar-inverse" data-region="appHeader"><!--  added bootstrap '.navbar, .navbar-fixed-top, .navbar-inverse' classes -->
+    <div class="container"> <!-- bootstrap: '.container' — constrains grid width  -->
+        <!-- Logo Container -->
+        <div class="logo-container"> <!-- removed inline style declaration -->
+            <div>
+                <a href="/" class="cmd-home-logo"><img src="style/images/elastic-path-logo.png"></a>
+            </div>
+        </div>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">  <!-- bootstrap: '.collapse' — necessary for 'collapse' component -->
+            <!-- Main Search Container -->
+            <div class="main-search-container"> <!-- removed inline style declaration -->
+                <form class="navbar-form" role="search">
+                    <div class="form-group">
+                        <input class="input-search header-search-input" type="text" placeholder="search">
+                    </div>
+                    <button class="btn-header-search">search</button>
+                </form>
+            </div>
+            <!-- Global Nav Container -->
+            <ul class="global-nav-container btn-group">  <!-- added bootstrap '.btn-group' class -->
+                <li class="global-nav-cart-nav">
+                    <button class="global-nav-link global-nav-cart" onclick="location.href='#mycart'"><span class="icon"></span><span>Shopping Cart</span></button>
+                    <!-- ^^^ added '.global-nav-link and .global-nav-cart' classes as styling selectors -->
+                    <!-- <a class="global-nav-link" href="#mycart"><span>Shopping Cart</span></a> -->
+                </li>
+                <li data-region="authMenuItemRegion" ><!--  removed inline style declaration -->
+                    <div class="auth-container">
+                        <button class="global-nav-link global-nav-login btn-cmd btn-auth-menu" data-toggle="modal" data-target="#login-modal" data-i18n="auth.loginMenu"><span class="icon"></span>Login</button>
+                        <!-- ^^^ added '.global-nav-link and .global-nav-cart' classes as styling selectors -->
+                        <div data-region="authMainRegion" class="auth-nav-container"></div>
+                    </div>
+                </li>
+            </ul>
+            <!-- Main Nav Container -->
+            <div class="main-nav-container" data-region="mainNavRegion" ><!-- removed inline style declaration -->
+                <div>
+                    <nav class="main-nav">
+                        <button class="btn-main-nav-toggle btn-link-cmd" style="display: none;">Categories</button>
+                        <ul class="main-nav-list nav navbar-nav" data-region="mainNavList">
+                            <li data-name="Games">
+                                <a href="#category/cortex%2Fnavigations%2Fmobee%2Fi5qw2zlt%3D" class="nav-item" title="Games"><span>Games</span></a>
+                            </li>
+                            <li data-name="Accessories">
+                                <a href="#category/cortex%2Fnavigations%2Fmobee%2Fifrwgzltonxxe2lfom%3D" class="nav-item" title="Accessories"><span>Accessories</span></a>
+                            </li>
+                            <li data-name="Smart-phonés">
+                                <a href="#category/cortex%2Fnavigations%2Fmobee%2Fknwwc4tuobug63tfom%3D" class="nav-item" title="Smart-phonés"><span>Smart-phonés</span></a>
+                            </li>
+                            <li data-name="Movies">
+                                <a href="#category/cortex%2Fnavigations%2Fmobee%2Fjvxxm2lfom%3D" class="nav-item" title="Movies"><span>Movies</span></a>
+                            </li>
+                            <li data-name="TV Series">
+                                <a href="#category/cortex%2Fnavigations%2Fmobee%2Fkrla%3D" class="nav-item" title="TV Series"><span>TV Series</span></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div> <!-- end bootstrap .collapse -->
+    </div> <!-- end bootstrap .container -->
+<!-- ----- END BOOTSTRAP COLLAPSING MENU CONTENT -->
+</header>
