@@ -39,6 +39,7 @@ require.config({
     'uiaccordion'     : 'modules/ui/ui.accordion.controller',
     'settings'        : 'modules/settings/settings.controller',
     'search'          : 'modules/search/search.controller',
+    'profile'         : 'modules/profile/profile.controller',
     'cart'            : 'modules/cart/cart.controller',
     'user'            : 'modules/user/user.controller',
     'auth'            : 'modules/auth/auth.controller',
@@ -73,6 +74,7 @@ require.config({
   }
 });
 
+//require(['app','eventbus','i18n'],
 require(['app','eventbus','i18n','bootstrap'],
   function (App,EventBus,i18n){
 

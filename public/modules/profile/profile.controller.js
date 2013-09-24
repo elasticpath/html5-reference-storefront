@@ -7,7 +7,7 @@
  *
  * 
  */
-define(['app', 'eventbus', 'cortex', 'modules/profile/tmpl.models', 'modules/profile/tmpl.views', 'text!modules/_template/tmpl.templates.html'],
+define(['app', 'eventbus', 'cortex', 'modules/profile/profile.models', 'modules/profile/profile.views', 'text!modules/profile/profile.templates.html'],
   function(App, EventBus, Cortex, Model, View, template){
 
     $('#TemplateContainer').append(template);
@@ -17,14 +17,14 @@ define(['app', 'eventbus', 'cortex', 'modules/profile/tmpl.models', 'modules/pro
     var defaultView = function(){
       var defaultLayout = new View.DefaultLayout();
 
-      return defaultLayout
+      return defaultLayout;
 
     };
 
 
 
     return {
-      DefaultView:defaultLayout
+      DefaultView:defaultView
 
     };
   }

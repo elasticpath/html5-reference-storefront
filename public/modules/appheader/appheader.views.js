@@ -27,6 +27,7 @@ define(['ep', 'mediator', 'eventbus','backbone','marionette','i18n','modules/app
     var PageHeaderView = Backbone.Marionette.Layout.extend({
       template:'#AppHeaderDefaultTemplateContainer',
       templateHelpers:viewHelpers,
+      className:'container',
       onShow:function(){
         var elementWidth = $('.logo-container').outerWidth();
         EventBus.trigger('view.headerLogoViewRendered', elementWidth);

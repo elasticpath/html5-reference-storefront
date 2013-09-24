@@ -2,8 +2,20 @@
 
   <!-- Default Auth Main Template -->
   <script id="DefaultAuthLayoutTemplate" type="text/template">
-    <button class="btn-cmd btn-auth-menu" data-i18n="<%= E.getMenuItemText() %>"><%= E.getLoginText() %></button>
-    <div data-region="authMainRegion" class="auth-nav-container"></div>
+
+
+
+
+
+    <div class="auth-container">
+      <button class="global-nav-link global-nav-login btn-cmd btn-auth-menu" data-toggle="modal" data-target="#login-modal" data-i18n="<%= E.getMenuItemText() %>">
+        <span class="icon"></span><%= E.getLoginText() %>
+      </button>
+      <!-- ^^^ added '.global-nav-link and .global-nav-cart' classes as styling selectors -->
+      <div data-region="authMainRegion" class="auth-nav-container"></div>
+    </div>
+
+
   </script>
 
   <!-- Auth Login Form Template -->
@@ -35,7 +47,7 @@
 
   <!-- Auth Profile Menu Template -->
   <script id="AuthProfileMenuTemplate" type="text/template">
-      <li><button disabled="disabled">Profile</button></li>
+      <li><a  href="/#profile">Profile</a></li>
       <li><button class="btn-cmd btn-auth-logout"><%= E.getI18nLabel('auth.logout') %></button></li>
   </script>
 </div>

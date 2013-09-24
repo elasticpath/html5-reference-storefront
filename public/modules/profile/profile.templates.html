@@ -4,7 +4,35 @@
 
     <div class="profile-container">profile</div>
 
-    <div data-region="profileSummaryRegion"></div>
+    <div data-region="profileSummaryRegion">
+      <h2>Personal Information</h2>
+      <ul>
+        <li>
+          <label>First Name</label><span>Ben</span>
+        </li>
+        <li>
+          <label>Last Name</label><span>Boxer</span>
+        </li>
+      </ul>
+    </div>
+    <div data-region="profileSubscriptionSummaryRegion">
+      <table>
+        <thead>
+          <tr>
+            <th>Subscription</th>
+            <th>Details</th>
+            <th>Subscription</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Times Newspaper Subscription</td>
+            <td>Subscription</td>
+            <td>Subscription</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div data-region="profileShippingAddressRegion"></div>
     <div data-region="profileBillingAddressRegion"></div>
     <div data-region="profilePaymentMethodRegion"></div>
@@ -25,7 +53,7 @@
 
 
   <!-- Profile Billing Address Form -->
-  <div id="ProfileBillingAddressFormTemplate" type="text/template">
+  <script id="ProfileBillingAddressFormTemplate" type="text/template">
     <form class="form column-form">
       <ul>
         <li class="required-field">
@@ -66,11 +94,11 @@
         </li>
       </ul>
     </form>
-  </div>
+  </script>
   <!-- Profile Billing Address View -->
   <!-- Profile Shipping Address View -->
   <!-- Profile Shipping Address Form -->
-  <div id="ProfileShippingAddressFormTemplate" type="text/template">
+  <script id="ProfileShippingAddressFormTemplate" type="text/template">
     <form class="form column-form">
       <ul>
         <li class="required-field">
@@ -111,7 +139,7 @@
         </li>
       </ul>
     </form>
-  </div>
+  </script>
   <!-- Profile Payment Method View -->
   <!-- Profile Payment Method Form -->
   <script id="PaymentMethodFormTemplate" type="text/template">
