@@ -15,17 +15,28 @@ define(['marionette'],
       template:'#ProfileMainTemplate',
       regions:{
         profileSummaryRegion:'[data-region="profileSummaryRegion"]',
+        profileSubscriptionSummaryRegion:'[data-region="profileSubscriptionSummaryRegion"]',
         profileShippingAddressRegion:'[data-region="profileShippingAddressRegion"]',
         profileBillingAddressRegion:'[data-region="profileBillingAddressRegion"]',
         profilePaymentMethodRegion:'[data-region="profilePaymentMethodRegion"]'
       }
     });
 
+    var profileSubscriptionSummaryView = Backbone.Marionette.ItemView.extend({
+      template:'#ProfileSubscriptionSummaryTemplate'
+    });
+
+    // Profile Summary View
+    var profileSummaryView = Backbone.Marionette.ItemView.extend({
+      template:'#ProfileSummaryViewTemplate'
+    });
 
 
 
     return {
-      DefaultLayout:defaultLayout
+      DefaultLayout:defaultLayout,
+      ProfileSubscriptionSummaryView:profileSubscriptionSummaryView,
+      ProfileSummaryView:profileSummaryView
 
     };
   }

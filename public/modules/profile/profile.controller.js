@@ -7,8 +7,8 @@
  *
  * 
  */
-define(['app', 'eventbus', 'cortex', 'modules/profile/profile.models', 'modules/profile/profile.views', 'text!modules/profile/profile.templates.html'],
-  function(App, EventBus, Cortex, Model, View, template){
+define(['ep','app', 'eventbus', 'cortex', 'modules/profile/profile.models', 'modules/profile/profile.views', 'text!modules/profile/profile.templates.html'],
+  function(ep, App, EventBus, Cortex, Model, View, template){
 
     $('#TemplateContainer').append(template);
 
@@ -16,6 +16,25 @@ define(['app', 'eventbus', 'cortex', 'modules/profile/profile.models', 'modules/
 
     var defaultView = function(){
       var defaultLayout = new View.DefaultLayout();
+
+      var profileModel = new Model.ProfileModel();
+
+      var profileSummaryRegion = new Marionette.Region({
+        el:'[data-region="profileSummaryRegion"]'
+      });
+      var profileSummaryView = new View.ProfileSummaryView({
+        model:profileModel
+      });
+
+      profileModel.fetch({
+        success:function(response){
+          profileSummaryRegion.show(profileSummaryView);
+
+        },
+        error:function(response){
+          ep.logger.error('Error getting profile subscription model');
+        }
+      });
 
       return defaultLayout;
 

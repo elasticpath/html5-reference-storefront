@@ -2,36 +2,11 @@
 
   <script type="text/template" id="ProfileMainTemplate">
 
-    <div class="profile-container">profile</div>
-
     <div data-region="profileSummaryRegion">
-      <h2>Personal Information</h2>
-      <ul>
-        <li>
-          <label>First Name</label><span>Ben</span>
-        </li>
-        <li>
-          <label>Last Name</label><span>Boxer</span>
-        </li>
-      </ul>
+
     </div>
     <div data-region="profileSubscriptionSummaryRegion">
-      <table>
-        <thead>
-          <tr>
-            <th>Subscription</th>
-            <th>Details</th>
-            <th>Subscription</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Times Newspaper Subscription</td>
-            <td>Subscription</td>
-            <td>Subscription</td>
-          </tr>
-        </tbody>
-      </table>
+
     </div>
     <div data-region="profileShippingAddressRegion"></div>
     <div data-region="profileBillingAddressRegion"></div>
@@ -39,9 +14,18 @@
 
   </script>
 
-  <!-- Profile Info View Template -->
-  <script id="ProfileInfoViewTemplate" type="text/template">
 
+  <!-- Profile Summary View Template -->
+  <script id="ProfileSummaryViewTemplate" type="text/template">
+    <h2>Personal Information</h2>
+    <ul>
+      <li>
+        <label>First Name</label><span><%= E.givenName %></span>
+      </li>
+      <li>
+        <label>Last Name</label><span><%= E.familyName %></span>
+      </li>
+    </ul>
   </script>
 
   <!-- Profile Info Form Template -->
@@ -49,7 +33,26 @@
 
   </script>
 
-  <!--  -->
+  <!-- ProfileSubscriptionSummaryTemplate  -->
+  <script id="ProfileSubscriptionSummaryTemplate" type="text/template">
+    <table>
+      <thead>
+        <tr>
+          <th>Subscription</th>
+          <th>Details</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Times Newspaper Subscription</td>
+          <td>evey other monday until tuesday</td>
+          <td>Active</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </script>
 
 
   <!-- Profile Billing Address Form -->
