@@ -150,7 +150,9 @@ define(['ep', 'eventbus', 'backbone'],
         var retVal = {};
         retVal.status = response.status;
         retVal.purchaseNumber = response['purchase-number'];
-
+        retVal.orderTotal = jsonPath(response, '$.monetary-total[0].display')[0];
+        retVal.purchaseDate = jsonPath(response, '$.purchase-date.display-value')[0];
+        retVal.taxTotal = jsonPath(response, '$.tax-total.display');
         return retVal;
       }
     });

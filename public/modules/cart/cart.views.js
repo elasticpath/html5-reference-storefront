@@ -370,7 +370,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     // Purchase Confirmation Layout
     var purchaseConfirmationLayout = Backbone.Marionette.Layout.extend({
       template:'#PurchaseConfirmationLayoutTemplate',
-      className:'purchase-confirmation-container'
+      className:'purchase-confirmation-container container'
     });
 
     // Purchase Confirmation View
