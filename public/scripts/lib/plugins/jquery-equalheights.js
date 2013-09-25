@@ -30,6 +30,8 @@ $.fn.equalHeights = function(px) {
 
 	// scan elements for largest height
 	$(this).each(function(){
+		$(this).css({'min-height': 0});
+
 		$elHeight = $(this).outerHeight();
 		$maxHeight = window.currentTallest;
 
