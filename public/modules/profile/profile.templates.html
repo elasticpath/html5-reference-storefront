@@ -2,7 +2,11 @@
 
   <script type="text/template" id="ProfileMainTemplate">
 
-    <div data-region="profileSummaryRegion"></div>
+    <div data-region="profileSummaryRegion">
+      <div class="activity-indicator-container">
+        <img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>
+      </div>
+    </div>
     <div data-region="profileSubscriptionSummaryRegion"></div>
     <div data-region="profilePaymentMethodsRegion"></div>
     <div data-region="profileShippingAddressRegion"></div>
@@ -29,22 +33,26 @@
 
   </script>
 
+  <!-- Subscription Item Template -->
+  <script id="SubscriptionItemTemplate" type="text/template">
+    <td><%= E.displayName %></td>
+    <td><%= E.quantity %></td>
+    <td><%= E.nextBillingDate %></td>
+  </script>
+
   <!-- ProfileSubscriptionSummaryTemplate  -->
   <script id="ProfileSubscriptionSummaryTemplate" type="text/template">
-    <table>
+    <h2>Subscriptions</h2>
+    <table class="table table-condensed striped-table">
       <thead>
         <tr>
           <th>Subscription</th>
-          <th>Details</th>
-          <th>Status</th>
+          <th>Quantity</th>
+          <th>Next Billing Date</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Times Newspaper Subscription</td>
-          <td>evey other monday until tuesday</td>
-          <td>Active</td>
-        </tr>
+
       </tbody>
     </table>
 

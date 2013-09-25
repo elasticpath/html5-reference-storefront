@@ -50,16 +50,17 @@ define(['ep','eventbus', 'backbone'],
           profileObj.subscriptions = [];
           for (var i = 0;i < subsLength;i++){
             var subObj = {};
-            if (subscriptionsArray[i]['display-name']){
-              subObj.displayName = subscriptionsArray[i]['display-name'];
+            var targetObj = subscriptionsArray[i][0];
+            if (targetObj['display-name']){
+              subObj.displayName = targetObj['display-name'];
             }
-            if (subscriptionsArray[i].quantity){
-              subObj.quantity = subscriptionsArray[i].quantity;
+            if (targetObj.quantity){
+              subObj.quantity = targetObj.quantity;
             }
-            if (subscriptionsArray[i]['next-billing-date']){
-              subObj.nextBillingDate = subscriptionsArray[i]['next-billing-date']['display-value'];
+            if (targetObj['next-billing-date']){
+              subObj.nextBillingDate = targetObj['next-billing-date']['display-value'];
             }
-
+            profileObj.subscriptions.push(subObj);
           }
         }
 

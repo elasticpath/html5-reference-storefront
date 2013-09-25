@@ -29,8 +29,16 @@ define(['marionette'],
       className:'container'
     });
 
-    var profileSubscriptionSummaryView = Backbone.Marionette.ItemView.extend({
-      template:'#ProfileSubscriptionSummaryTemplate'
+    var profileSubscriptionItemView = Backbone.Marionette.ItemView.extend({
+      template:'#SubscriptionItemTemplate',
+      tagName:'tr',
+      templateHelpers:viewHelpers
+    });
+    var profileSubscriptionSummaryView = Backbone.Marionette.CompositeView.extend({
+      template:'#ProfileSubscriptionSummaryTemplate',
+      itemView:profileSubscriptionItemView,
+      itemViewContainer:'tbody',
+      className:'table-responsive'
     });
 
     // Profile Summary View

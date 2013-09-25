@@ -25,6 +25,9 @@ define(['ep','app', 'eventbus', 'cortex', 'modules/profile/profile.models', 'mod
       var profilePaymentMethodsRegion = new Marionette.Region({
         el:'[data-region="profilePaymentMethodsRegion"]'
       });
+      var profileSubscriptionSummaryRegion = new Marionette.Region({
+        el:'[data-region="profileSubscriptionSummaryRegion"]'
+      });
       var profileSummaryView = new View.ProfileSummaryView({
         model:profileModel
       });
@@ -32,7 +35,18 @@ define(['ep','app', 'eventbus', 'cortex', 'modules/profile/profile.models', 'mod
 
       profileModel.fetch({
         success:function(response){
+          // Profile Summary
           profileSummaryRegion.show(profileSummaryView);
+
+          // Profile Subscriptions
+          var profileSubs = profileModel.get('subscriptions');
+          if (profileSubs){
+            profileSubscriptionSummaryRegion.show( new View.ProfileSubscriptionSummaryView({
+              collection:new Backbone.Collection(profileModel.get('subscriptions'))
+            }));
+          }
+
+          // Profile Payment Methods
           profilePaymentMethodsRegion.show( new View.PaymentMethodsView({
             collection:new Backbone.Collection(profileModel.get('paymentMethods'))
           }));
