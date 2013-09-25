@@ -22,13 +22,20 @@ define(['ep','app', 'eventbus', 'cortex', 'modules/profile/profile.models', 'mod
       var profileSummaryRegion = new Marionette.Region({
         el:'[data-region="profileSummaryRegion"]'
       });
+      var profilePaymentMethodsRegion = new Marionette.Region({
+        el:'[data-region="profilePaymentMethodsRegion"]'
+      });
       var profileSummaryView = new View.ProfileSummaryView({
         model:profileModel
       });
 
+
       profileModel.fetch({
         success:function(response){
           profileSummaryRegion.show(profileSummaryView);
+          profilePaymentMethodsRegion.show( new View.PaymentMethodsView({
+            collection:new Backbone.Collection(profileModel.get('paymentMethods'))
+          }));
 
         },
         error:function(response){

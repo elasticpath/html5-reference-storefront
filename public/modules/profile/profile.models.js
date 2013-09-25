@@ -13,10 +13,63 @@ define(['ep','eventbus', 'backbone'],
     var profileModel = Backbone.Model.extend({
       url:ep.app.config.cortexApi.path + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=purchases:element,paymentmethods:element,subscriptions:element,emails,addresses:billingaddresses,addresses:shippingaddresses',
       parse:function(response){
-        var x  = response;
         var profileObj = {};
+
+        // Profile Summary Info
         profileObj.familyName = response["family-name"];
         profileObj.givenName = response["given-name"];
+
+        // Profile Payment Info
+        profileObj.paymentMethods = [];
+        var localPaymentMethods = jsonPath(response, '$._paymentmethods.._element')[0];
+        var paymentMethodsLength = localPaymentMethods.length;
+        for(var i = 0;i < paymentMethodsLength;i++){
+          var paymentMethodObj = {};
+
+          try{
+            paymentMethodObj.cardNumber = localPaymentMethods[i]["card-number"];
+            paymentMethodObj.cardType = localPaymentMethods[i]["card-type"];
+            paymentMethodObj.cardHolderName = localPaymentMethods[i]["cardholder-name"];
+            paymentMethodObj.expiryMonth = localPaymentMethods[i]["expiry-month"];
+            paymentMethodObj.expiryYear = localPaymentMethods[i]["expiry-year"];
+
+            profileObj.paymentMethods.push(paymentMethodObj);
+          }
+          catch(error){
+            ep.logger.error('Error building payment method object: ' + error.message);
+          }
+
+        }
+
+
+
+        // Profile Subscription Info
+        var subscriptionsArray = jsonPath(response, '$._subscriptions.._element');
+        if (subscriptionsArray){
+          var subsLength = subscriptionsArray.length;
+          profileObj.subscriptions = [];
+          for (var i = 0;i < subsLength;i++){
+            var subObj = {};
+            if (subscriptionsArray[i]['display-name']){
+              subObj.displayName = subscriptionsArray[i]['display-name'];
+            }
+            if (subscriptionsArray[i].quantity){
+              subObj.quantity = subscriptionsArray[i].quantity;
+            }
+            if (subscriptionsArray[i]['next-billing-date']){
+              subObj.nextBillingDate = subscriptionsArray[i]['next-billing-date']['display-value'];
+            }
+
+          }
+        }
+
+        // Profile Addresses
+        // Profile Billing Address
+
+        // Profile Shipping Address
+
+
+
         return profileObj;
       }
     });

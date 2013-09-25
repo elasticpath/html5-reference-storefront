@@ -9,6 +9,12 @@
 define(['marionette'],
   function(Marionette){
 
+    var viewHelpers = {
+      wtf:function(model){
+        var x = model;
+        return x;
+      }
+    };
 
     // Default Profile Layout
     var defaultLayout = Backbone.Marionette.Layout.extend({
@@ -19,7 +25,8 @@ define(['marionette'],
         profileShippingAddressRegion:'[data-region="profileShippingAddressRegion"]',
         profileBillingAddressRegion:'[data-region="profileBillingAddressRegion"]',
         profilePaymentMethodRegion:'[data-region="profilePaymentMethodRegion"]'
-      }
+      },
+      className:'container'
     });
 
     var profileSubscriptionSummaryView = Backbone.Marionette.ItemView.extend({
@@ -31,12 +38,27 @@ define(['marionette'],
       template:'#ProfileSummaryViewTemplate'
     });
 
+    // Profile Payment Method Item View
+    var paymentMethodItemView = Backbone.Marionette.ItemView.extend({
+      template:'#ProfilePaymentMethodTemplate',
+      templateHelpers:viewHelpers
+
+    });
+
+    // Profile Payment Method View
+    var paymentMethodsView = Backbone.Marionette.CompositeView.extend({
+      template:'#ProfilePaymentMethodsTemplate',
+      itemView:paymentMethodItemView,
+      itemViewContainer:'ul',
+      templateHelpers:viewHelpers
+    });
 
 
     return {
       DefaultLayout:defaultLayout,
       ProfileSubscriptionSummaryView:profileSubscriptionSummaryView,
-      ProfileSummaryView:profileSummaryView
+      ProfileSummaryView:profileSummaryView,
+      PaymentMethodsView:paymentMethodsView
 
     };
   }
