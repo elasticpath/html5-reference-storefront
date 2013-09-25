@@ -27,7 +27,7 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
           retVar = thumbnail.absolutePath;
         }
         else {
-          retVar = '/images/img-placeholder.png';
+          retVar = '/images/img-placeholder-noborder.png';
         }
         return retVar;
       },
@@ -188,6 +188,7 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
       className: 'category-item-container',
       tagName: 'li',
       onShow: function () {
+
         // show price
         var priceRegion = new Backbone.Marionette.Region({
           el: $('[data-region="priceRegion"]', this.el)
@@ -273,6 +274,7 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
         if (!viewHelpers.getListPrice(this.model.attributes)) {
           $('[data-region="itemListPriceRegion"]', this.el).addClass('itemdetail-list-price-hidden');
         }
+
       }
     });
 
@@ -299,6 +301,9 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
       className: 'category-items-listing equalize',
       onShow:function(){
         pace.stop();
+        setTimeout(function(){$('.category-item-inner').equalHeights(true);},3000);
+        $('.category-item-inner').equalHeights(true);
+        $(window).resize(function(){$('.category-item-inner').equalHeights(true);});
       }
     });
 

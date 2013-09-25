@@ -3,26 +3,33 @@
   <!-- Default Item Detail Layout Template -->
   <script id="DefaultItemDetailLayoutTemplate" type="text/template">
 
-    <div class="row itemdetail-container">
-      <div class="quarter">
-        <div data-region="itemDetailAssetRegion"></div>
-      </div>
-      <div class="half">
-        <div data-region="itemDetailTitleRegion">
-          <!--<div class="activity-indicator-container">-->
-            <!--<img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>-->
-          <!--</div>-->
-        </div>
-        <div data-region="itemDetailPriceRegion"></div>
-        <div data-region="itemDetailAvailabilityRegion"></div>
-        <div data-region="itemDetailAttributeRegion"></div>
+    <div class="container"> <!-- bootstrap container -->
 
-      </div>
-      <div class="quarter">
-        <div data-region="itemDetailAddToCartRegion"></div>
-      </div>
-    </div>
+        <div class="itemdetail-container row">
+          <div class="itemdetail-asset">
+            <div data-region="itemDetailAssetRegion"></div>
+          </div>
+          <div class="itemdetail-details">
+            <div data-region="itemDetailTitleRegion">
+              <!--<div class="activity-indicator-container">-->
+                <!--<img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>-->
+              <!--</div>-->
+            </div>
+            <div data-region="itemDetailPriceRegion"></div>
+            <div data-region="itemDetailAvailabilityRegion"></div>
+            <div data-region="itemDetailAttributeRegion"></div>
+
+            <div data-region="itemDetailAttributeRegion"></div>
+
+          </div>
+          <div class="itemdetail-transactional">
+            <div data-region="itemDetailAddToCartRegion"></div>
+          </div>
+        </div>
+    </div> <!-- end bootstrap container -->
+
   </script>
+
 
   <!-- Default Item Detail Title Template -->
   <script id="DefaultItemTitleTemplate" type="text/template">
@@ -80,27 +87,31 @@
 
   <!-- Default Item Detail Add To Cart Template -->
   <script id="DefaultItemDetailAddToCartTemplate" type="text/template">
-    <form class="itemdetail-addtocart-form">
-      <ul>
-        <li>
-          <label for="itemdetail-select-quantity"><%= E.getI18nLabel('itemDetail.quantity') %></label>
-          <select id="itemdetail-select-quantity" name="itemdetail-select-quantity">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
-        </li>
-        <li>
+    <form class="itemdetail-addtocart-form form-horizontal">
+
+    <div class="form-group">
+      <label class="control-label" for="itemdetail-select-quantity"><%= E.getI18nLabel('itemDetail.quantity') %></label>
+      <div class="form-content">
+        <select class="form-control" id="itemdetail-select-quantity" name="itemdetail-select-quantity">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group form-group-submit">
+      <div class="form-content form-content-submit">
           <button class="btn-round btn btn-primary btn-itemdetail-addtocart" data-actionlink="<%= E.getCortexPath() %><%= E.addtocart.actionlink %>" <%= E.checkForDisabledAddToCart(E) %> ><%= E.getI18nLabel('itemDetail.addToCart') %></button>
-        </li>
-      </ul>
+      </div>
+    </div>
+
     </form>
   </script>
 </div>

@@ -28,28 +28,29 @@
 $.fn.equalHeights = function(px) {
 	window.currentTallest = 0;
 
+	// scan elements for largest height
+	$(this).each(function(){
+		$elHeight = $(this).outerHeight();
+		$maxHeight = window.currentTallest;
+
+		if ($elHeight > $maxHeight) {
+			window.currentTallest = $elHeight;
+			// alert('upping max to: ' + window.currentTallest);
+		}
+	});
+	// alert('tallest: ' + window.currentTallest);
+
+
+	// apply largest found height to all elements
 	$(this).each(function(){
 
-			$(this).css({'min-height': 0});
+		$(this).css({'min-height': 0});
 
-			$elHeight = $(this).outerHeight();
-			$curHeight = window.currentTallest;
-
-			// alert('actual: ' + $elHeight);
-			// alert('tallest: ' + $curHeight);
-
-			if ($elHeight > $curHeight) {
-				window.currentTallest = $elHeight;
-				// alert('resizing to: ' + window.currentTallest);
-			}else{
-				// alert('smaller... not resizing');
-			}
-
-	    if (!px && Number.prototype.pxToEm) currentTallest = currentTallest.pxToEm(); //use ems unless px is specified
 		// for ie6, set height since min-height isn't supported
 		if ($.browser.msie && $.browser.version == 6.0) { $(this).css({'height': currentTallest}); }
 
-		$(this).css({'min-height': currentTallest});
+		$(this).css({'min-height': window.currentTallest});
 	});
+
 	return this;
 };

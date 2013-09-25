@@ -22,14 +22,24 @@
   <script id="CategoryItemTemplate" type="text/template">
     <div class="category-item-inner">
 
-        <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>"
-             class="category-item-thumbnail img-responsive"/>
+        <div class="category-item-thumbnail-container">
+          <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>"
+                class="category-item-thumbnail img-responsive"/>
+
+      <!--
+          <div  alt="<%= E.getDefaultImageName(E.thumbnail) %>"
+               class="category-item-thumbnail img-responsive"  style="background-image:url(<%= E.getDefaultImagePath(E.thumbnail) %>)"/></div>
+        -->
+       </div>
+
+
 
         <div class="category-item-title">
           <a href="<%= E.generateItemHref(E.uri) %>"><%= E.name %></a>
         </div>
-        <div data-region="availabilityRegion"></div>
         <div data-region="priceRegion"></div>
+        <div data-region="availabilityRegion"></div>
+
 
     </div>
   </script>
@@ -42,29 +52,29 @@
 
   <!-- Item Rate Template -->
   <script id="CategoryItemRateTemplate" type="text/template">
-    <label class="category-item-rate-label"><%= E.getI18nLabel('itemDetail.rate') %></label>
-    <span class="category-item-rate-value"><%= E.display %></span>
+    <label class="item-meta category-item-rate-label"><%= E.getI18nLabel('itemDetail.rate') %></label>
+    <span class="item-meta category-item-rate"><%= E.display %></span>
   </script>
 
   <!-- Item Price Template -->
   <script id="CategoryItemPriceTemplate" type="text/template">
     <li class="category-item-list-price" data-region="itemListPriceRegion">
-      <label class="category-item-list-price-label"><%= E.getI18nLabel('itemDetail.listPrice') %></label>
-      <span class="category-item-list-price-value"><%= E.getListPrice(E) %></span>
+      <label class="item-meta category-item-list-price-label"><%= E.getI18nLabel('itemDetail.listPrice') %></label>
+      <span class="item-meta category-item-list-price-value"><%= E.getListPrice(E) %></span>
     </li>
     <li class="category-item-purchase-price">
-      <label class="category-item-purchase-price-label"><%= E.getI18nLabel('itemDetail.purchasePrice') %></label>
-      <span class="category-item-purchase-price-value"><%= E.getPurchasePrice(E) %></span>
+      <label class="item-meta category-item-purchase-price-label"><%= E.getI18nLabel('itemDetail.purchasePrice') %></label>
+      <span class="item-meta category-item-purchase-price-value"><%= E.getPurchasePrice(E) %></span>
     </li>
   </script>
 
   <!-- Item Availability Template -->
   <script id="CategoryItemAvailabilityTemplate" type="text/template">
-    <li class="category-item-availability itemdetail-availability-state"><%= E.getAvailabilityDisplayText(E.state) %>
+    <li class="category-item-availability itemdetail-availability-state"><label><span class="icon"></span><%= E.getAvailabilityDisplayText(E.state) %></label>
     </li>
     <li class="category-item-release-date" data-region="itemAvailabilityDescriptionRegion">
-      <label class="category-item-releaseDate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
-      <span class="category-item-releaseDate-value"><%= E.getAvailabilityReleaseDate(E.releaseDate) %></span>
+      <label class="item-meta category-item-releaseDate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
+      <span class="item-meta category-item-releaseDate-value"><%= E.getAvailabilityReleaseDate(E.releaseDate) %></span>
     </li>
   </script>
 
@@ -85,9 +95,8 @@
     </div>
 
     <div class="pagination-navigation-container">
-      <a <%= E.generatePaginationLink(E.categoryUri, E.links.prev) %>
-         class="pagination-link <%= E.checkForDisabledPaginationBtn(E.links.prev) %>" data-i18n="category.prev">
-        <%= E.getI18nLabel('category.prev') %></a>
+      <a class="btn-pagination btn-pagination-prev pagination-link <%= E.checkForDisabledPaginationBtn(E.links.prev) %>" data-i18n="category.prev"
+        <%= E.generatePaginationLink(E.categoryUri, E.links.prev) %> > <%= E.getI18nLabel('category.prev') %></a>
       <span class="pagestate-summary">
         <label class="pagingnation-label"><%= E.getI18nLabel('category.currentPage') %></label>
         <span class="pagingnation-value pagination-curr-page-value"><%= E.stats.currentPage %></span>
@@ -96,9 +105,8 @@
 
       </span>
 
-      <a <%= E.generatePaginationLink(E.categoryUri, E.links.next) %>
-         class="pagination-link <%= E.checkForDisabledPaginationBtn(E.links.next) %>" data-i18n="category.next">
-        <%= E.getI18nLabel('category.next') %></a>
+      <a class="btn-pagination btn-pagination-next pagination-link <%= E.checkForDisabledPaginationBtn(E.links.next) %>" data-i18n="category.next"
+          <%= E.generatePaginationLink(E.categoryUri, E.links.next) %> ><%= E.getI18nLabel('category.next') %></a>
     </div>
   </script>
 

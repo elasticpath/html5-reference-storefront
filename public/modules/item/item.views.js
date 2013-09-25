@@ -176,7 +176,7 @@ define(['ep','marionette','i18n','eventbus','pace'],
     var defaultItemAttributeListView = Backbone.Marionette.CollectionView.extend({
       itemView:defaultItemAttributeView,
       tagName:'table',
-      className:'striped'
+      className:'table table-striped table-condensed'
     });
 
     // Default Item Availability View
