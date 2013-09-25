@@ -145,19 +145,25 @@
 
   <!-- Purchase Confirmation Layout Template -->
   <script id="PurchaseConfirmationLayoutTemplate" type="text/temmplate">
-    <p>Thank you for your order it has been processed</p>
-
+    <p class="lead">Thank you. Your order has been processed</p>
     <div data-region="purchaseConfirmationRegion"></div>
   </script>
 
   <!-- Purchase Confirmation Template -->
   <script id="PurchaseConfirmationTemplate" type="text/template">
-    <p>status: <span><%= E.status %></span></p>
+    <dl class="row">
+      <dt class="col-xs-4 col-xs-offset-2">Status:</dt>
+      <dd class="col-xs-6"><%= E.status %></dd>
+      <dt class="col-xs-4 col-xs-offset-2">Order Number:</dt>
+      <dd class="col-xs-6"><%= E.purchaseNumber %></dd>
+      <dt class="col-xs-4 col-xs-offset-2">Order Tax Total:</dt>
+      <dd class="col-xs-6"><%= E.taxTotal %></dd>
+      <dt class="col-xs-4 col-xs-offset-2">Order Purchase Date:</dt>
+      <dd class="col-xs-6"><%= E.purchaseDate %></dd>
+      <dt class="col-xs-4 col-xs-offset-2">Order Total:</dt>
+      <dd class="col-xs-6"><%= E.orderTotal %></dd>
 
-    <p>Order #: <span><%= E.purchaseNumber %></span></p>
-    <p>Order Tax Total: <span><%= E.taxTotal %></span></p>
-    <p>Order Purchase Date: <span><%= E.purchaseDate %></span></p>
-    <p>Order Total: <span><%= E.orderTotal %></span></p>
+    </dl>
   </script>
 
 </div>

@@ -18,14 +18,12 @@
   <!-- Profile Summary View Template -->
   <script id="ProfileSummaryViewTemplate" type="text/template">
     <h2>Personal Information</h2>
-    <ul>
-      <li>
-        <label>First Name</label><span><%= E.givenName %></span>
-      </li>
-      <li>
-        <label>Last Name</label><span><%= E.familyName %></span>
-      </li>
-    </ul>
+    <dl class="row">
+      <dt class="col-xs-4 col-xs-offset-2">First Name</dt>
+      <dd class="col-xs-6"><%= E.givenName %></dd>
+      <dt class="col-xs-4 col-xs-offset-2">Last Name</dt>
+      <dd class="col-xs-6"><%= E.familyName %></dd>
+    </dl>
   </script>
 
   <!-- Profile Info Form Template -->
@@ -169,15 +167,15 @@
   <script id="ProfilePaymentMethodTemplate" type="text/template">
 
     <dl class="row">
-      <dt class="col-xs-6">Card Number</dt>
+      <dt class="col-xs-4 col-xs-offset-2">Card Number</dt>
       <dd class="col-xs-6"><%= E.cardNumber%></dd>
-      <dt class="col-xs-6">Card Type</dt>
+      <dt class="col-xs-4 col-xs-offset-2">Card Type</dt>
       <dd class="col-xs-6"><%= E.cardType%></dd>
-      <dt class="col-xs-6">Card Holder</dt>
+      <dt class="col-xs-4 col-xs-offset-2">Card Holder</dt>
       <dd class="col-xs-6"><%= E.cardHolderName%></dd>
-      <dt class="col-xs-6">Expiry Month</dt>
+      <dt class="col-xs-4 col-xs-offset-2">Expiry Month</dt>
       <dd class="col-xs-6"><%= E.expiryMonth%></dd>
-      <dt class="col-xs-6">Expiry Year</dt>
+      <dt class="col-xs-4 col-xs-offset-2">Expiry Year</dt>
       <dd class="col-xs-6"><%= E.expiryYear%></dd>
     </dl>
 
