@@ -158,13 +158,7 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
     var categoryPaginationView = Backbone.Marionette.ItemView.extend({
       template: '#CategoryPaginationTemplate',
       templateHelpers: viewHelpers,
-      className: 'pagination-container',
-      events: {
-        'click .btn-pagination': function (event) {
-          event.preventDefault();
-          EventBus.trigger('category.paginationBtnClicked', event.target.value, $(event.target).data('actionlink'));
-        }
-      }
+      className: 'pagination-container'
     });
 
 
