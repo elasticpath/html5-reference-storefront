@@ -5,28 +5,29 @@
 
     <div class="container"> <!-- bootstrap container -->
 
-        <div class="itemdetail-container row">
-          <div class="itemdetail-asset">
-            <div data-region="itemDetailAssetRegion"></div>
-          </div>
-          <div class="itemdetail-details">
-            <div data-region="itemDetailTitleRegion">
-              <!--<div class="activity-indicator-container">-->
-                <!--<img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>-->
-              <!--</div>-->
-            </div>
-            <div data-region="itemDetailPriceRegion"></div>
-            <div data-region="itemDetailAvailabilityRegion"></div>
-            <div data-region="itemDetailAttributeRegion"></div>
-
-            <div data-region="itemDetailAttributeRegion"></div>
-
-          </div>
-          <div class="itemdetail-transactional">
-            <div data-region="itemDetailAddToCartRegion"></div>
-          </div>
+      <div class="itemdetail-container row">
+        <div class="itemdetail-asset">
+          <div data-region="itemDetailAssetRegion"></div>
         </div>
-    </div> <!-- end bootstrap container -->
+        <div class="itemdetail-details">
+          <div data-region="itemDetailTitleRegion">
+            <!--<div class="activity-indicator-container">-->
+            <!--<img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>-->
+            <!--</div>-->
+          </div>
+          <div data-region="itemDetailPriceRegion"></div>
+          <div data-region="itemDetailAvailabilityRegion"></div>
+          <div data-region="itemDetailAttributeRegion"></div>
+
+          <div data-region="itemDetailAttributeRegion"></div>
+
+        </div>
+        <div class="itemdetail-transactional">
+          <div data-region="itemDetailAddToCartRegion"></div>
+        </div>
+      </div>
+    </div>
+    <!-- end bootstrap container -->
 
   </script>
 
@@ -38,7 +39,8 @@
 
   <!-- Default Item Detail Asset Template -->
   <script id="DefaultItemAssetTemplate" type="text/template">
-    <img src="<%- E.getDefaultImagePath(E.attributes.assets) %>" alt="<%= E.getDefaultImageName(E.attributes.assets) %>" class="itemdetail-main-img" />
+    <img src="<%- E.getDefaultImagePath(E.attributes.assets) %>" alt="<%= E.getDefaultImageName(E.attributes.assets) %>"
+         class="itemdetail-main-img"/>
   </script>
 
   <!-- Default Item Detail Attribute Template -->
@@ -53,13 +55,14 @@
 
   <!-- Item Availability Template -->
   <script id="ItemAvailabilityTemplate" type="text/template">
-    <li class="itemdetail-availability itemdetail-availability-state"><%= E.getAvailabilityDisplayText(E.state) %>
-    </li>
+    <li class="itemdetail-availability itemdetail-availability-state">
+      <label><span class="icon"></span><%= E.getAvailabilityDisplayText(E.availability.state) %></label></li>
     <li class="itemdetail-release-date" data-region="itemAvailabilityDescriptionRegion">
       <label class="itemdetail-release-date-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
       <span class="itemdetail-release-date-value"><%= E.getAvailabilityReleaseDate(E.releaseDate) %></span>
     </li>
   </script>
+
 
   <!-- Item Price Master Template -->
   <script id="ItemPriceMasterViewTemplate" type="text/template">
@@ -87,30 +90,32 @@
 
   <!-- Default Item Detail Add To Cart Template -->
   <script id="DefaultItemDetailAddToCartTemplate" type="text/template">
-    <form class="itemdetail-addtocart-form form-horizontal">
+    <form class="itemdetail-addtocart-form form-horizontal" role="form">
 
-    <div class="form-group">
-      <label class="control-label" for="itemdetail-select-quantity"><%= E.getI18nLabel('itemDetail.quantity') %></label>
-      <div class="form-content">
-        <select class="form-control" id="itemdetail-select-quantity" name="itemdetail-select-quantity">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="itemdetail-select-quantity"><%= E.getI18nLabel('itemDetail.quantity') %></label>
+
+        <div class="form-content col-sm-8">
+          <select class="form-control" id="itemdetail-select-quantity" name="itemdetail-select-quantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
       </div>
-    </div>
-    <div class="form-group form-group-submit">
-      <div class="form-content form-content-submit">
-          <button class="btn-round btn btn-primary btn-itemdetail-addtocart" data-actionlink="<%= E.getCortexPath() %><%= E.addtocart.actionlink %>" <%= E.checkForDisabledAddToCart(E) %> ><%= E.getI18nLabel('itemDetail.addToCart') %></button>
+      <div class="form-group form-group-submit">
+        <div class="form-content form-content-submit col-sm-8 col-sm-offset-4">
+          <button class="btn-round btn btn-primary btn-itemdetail-addtocart" data-actionlink="<%= E.getCortexPath() %><%= E.addtocart.actionlink %>"
+          <%= E.checkForDisabledAddToCart(E) %> ><%= E.getI18nLabel('itemDetail.addToCart') %></button>
+        </div>
       </div>
-    </div>
 
     </form>
   </script>

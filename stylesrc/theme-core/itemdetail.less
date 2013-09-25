@@ -86,10 +86,15 @@
 
 
 .itemdetail-details{
-    .make-sm-column(5);
+    .make-sm-column(6);
 
     ul{
         padding: 0;
+    }
+
+    table{
+        font-size: 1.2rem;
+        color: @gray-dark;
     }
 
 }
@@ -97,8 +102,8 @@
 
 .itemdetail-transactional{
 
-    .make-sm-column(4);
-        .chromed(5px,20px);
+    .make-sm-column(3);
+
     margin-top: 4rem;
 
     ul{
@@ -110,8 +115,32 @@
     }
 
     .itemdetail-addtocart-form{
+        margin-top: 4rem;
+       .chromed(5px,20px);
 
-        // .form-horizontal;
+    }
 
+}
+
+.itemdetail-availability-state{
+    padding: 0;
+
+    label{
+        display: inline-block;
+        font-size: 1rem;
+        text-transform: uppercase;
+        border-radius: 1rem;
+        color: #fff;
+        background-color: @brand-success;
+        padding: 5px 8px;
+        line-height: 10px;
+    }
+
+    .icon{
+        display: inline-block;
+        .glyphicon;
+        .glyphicon-ok;
+        margin-right: 6px;
+        margin-top: -4px;
     }
 }
