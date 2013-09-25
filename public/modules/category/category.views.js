@@ -110,13 +110,14 @@ define(['ep', 'i18n', 'eventbus'],
         return retVar;
       },
       generatePaginationLink: function(uri, pageUri) {
-        var link = '';
+        var href = '';
 
         if (uri && pageUri) {
-          link = ep.app.config.routes.category + '/' + ep.ui.encodeUri(uri) + '/' + ep.ui.encodeUri(pageUri);
+          var link = ep.app.config.routes.category + '/' + ep.ui.encodeUri(uri) + '/' + ep.ui.encodeUri(pageUri);
+          href = 'href="' + link + '"';
         }
 
-        return link;
+        return href;
       },
       checkForDisabledPaginationBtn: function (link) {
         if (!link) {

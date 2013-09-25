@@ -86,7 +86,7 @@
     </div>
 
     <div class="pagination-navigation-container">
-      <a href="<%= E.generatePaginationLink(E.categoryUri, E.links.prev) %>"
+      <a <%= E.generatePaginationLink(E.categoryUri, E.links.prev) %>
          class="pagination-link <%= E.checkForDisabledPaginationBtn(E.links.prev) %>" data-i18n="category.prev">
         <%= E.getI18nLabel('category.prev') %></a>
       <span class="pagestate-summary">
@@ -97,7 +97,7 @@
 
       </span>
 
-      <a href="<%= E.generatePaginationLink(E.categoryUri, E.links.next) %>"
+      <a <%= E.generatePaginationLink(E.categoryUri, E.links.next) %>
          class="pagination-link <%= E.checkForDisabledPaginationBtn(E.links.next) %>" data-i18n="category.next">
         <%= E.getI18nLabel('category.next') %></a>
     </div>
