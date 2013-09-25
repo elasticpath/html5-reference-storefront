@@ -6,8 +6,8 @@
  * Time: 1:32 PM
  *
  */
-define(['ep', 'i18n', 'eventbus','pace'],
-  function (ep, i18n, EventBus,pace) {
+define(['ep', 'i18n', 'eventbus','pace','equalize'],
+  function (ep, i18n, EventBus, pace, equalize) {
 
     var viewHelpers = {
       getI18nLabel: function (key) {
@@ -141,6 +141,7 @@ define(['ep', 'i18n', 'eventbus','pace'],
           categoryPaginationTopRegion: '[data-region="categoryPaginationTopRegion"]',
           categoryPaginationBottomRegion: '[data-region="categoryPaginationBottomRegion"]'
         });
+
       }
     });
 
@@ -295,6 +296,7 @@ define(['ep', 'i18n', 'eventbus','pace'],
       itemView: categoryItemView,
       emptyView: categoryItemCollectionEmptyView,
       tagName: 'ul',
+      className: 'category-items-listing equalize',
       onShow:function(){
         pace.stop();
       }

@@ -20,18 +20,17 @@
 
   <!-- Category Item Template -->
   <script id="CategoryItemTemplate" type="text/template">
-    <div class="row">
-      <div class="quarter">
+    <div class="category-item-inner">
+
         <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>"
-             class="category-item-thumbnail"/>
-      </div>
-      <div class="threequarter">
+             class="category-item-thumbnail img-responsive"/>
+
         <div class="category-item-title">
           <a href="<%= E.generateItemHref(E.uri) %>"><%= E.name %></a>
         </div>
         <div data-region="availabilityRegion"></div>
         <div data-region="priceRegion"></div>
-      </div>
+
     </div>
   </script>
 
@@ -102,4 +101,6 @@
         <%= E.getI18nLabel('category.next') %></a>
     </div>
   </script>
+
+
 </div>

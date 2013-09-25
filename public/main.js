@@ -17,6 +17,7 @@ require.config({
     'pace'            : 'scripts/lib/pace.min',
     'bootstrap'       : 'scripts/lib/bootstrap.min',
     'URI'             : 'scripts/lib/URI',
+    'equalize'        : 'scripts/lib/plugins/jquery-equalheights',
     'router'          : 'router',
     'ep'              : 'ep.client',
     'mediator'        : 'ep.mediator',

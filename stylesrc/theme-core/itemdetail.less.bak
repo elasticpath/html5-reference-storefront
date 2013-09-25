@@ -24,9 +24,12 @@
   border:1px solid #eeeeee;
   border-radius:1rem;
 }
-.itemdetail-availability-container{
+.itemdetail-availability{
   margin-bottom:1rem;
-  margin-left:0;
+}
+
+.itemdetail-availability ul {
+  margin: 0;
 }
 
 .itemdetail-availability-state {
@@ -43,11 +46,13 @@
   display: none;
 }
 
-.itemdetail-price-container, .itemdetail-rate-container{
+.itemdetail-price-container{
   margin-top:1rem;
-  margin-left:0;
 }
-.itemdetail-list-price-value{
+.itemdetail-price-container ul{
+  margin:0;
+}
+.itemdetail-list-price{
   text-decoration: line-through;
 }
 .itemdetail-list-price-hidden{
