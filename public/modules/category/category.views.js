@@ -220,7 +220,7 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
       onShow: function () {
         // if no release date, hide dom element with release-date & the label
         if (!viewHelpers.getAvailabilityReleaseDate(this.model.get('releaseDate'))) {
-          $('[data-region="itemAvailabilityDescriptionRegion"]', this.el).addClass('itemdetail-release-date-hidden');
+          $('[data-region="itemAvailabilityDescriptionRegion"]', this.el).addClass('is-hidden');
         }
       }
     });
@@ -266,7 +266,7 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
       className: 'category-item-price-container',
       onShow: function () {
         if (!viewHelpers.getListPrice(this.model.attributes)) {
-          $('[data-region="itemListPriceRegion"]', this.el).addClass('itemdetail-list-price-hidden');
+          $('[data-region="itemListPriceRegion"]', this.el).addClass('is-hidden');
         }
 
       }
