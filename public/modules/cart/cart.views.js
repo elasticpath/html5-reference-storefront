@@ -180,7 +180,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         'click .btn-cart-removelineitem':function(event){
           event.preventDefault();
 
-          var actionLink = $(event.target.parentElement).data("actionlink");
+          var actionLink = $(event.currentTarget).data("actionlink");
           EventBus.trigger('cart.removeLineItemBtnClicked', actionLink);
         }
       },
