@@ -7039,26 +7039,6 @@ td.visible-print {
     display: none !important;
   }
 }
-/* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/mixins.less */
-.separated {
-  position: relative;
-}
-/* line 32, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/mixins.less */
-.separated:before {
-  position: relative;
-  top: 0px;
-  border-top: 1px solid #ddd;
-  display: block;
-  width: 100%;
-  height: 100%;
-  margin-left: 0!important;
-  margin-right: 0!important;
-  background-color: #888;
-}
-/* line 54, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/mixins.less */
-.flatform {
-  background: red;
-}
 /*
   auth view
 */
@@ -7111,7 +7091,27 @@ td.visible-print {
   background: transparent;
   text-align: left;
 }
-/* line 10, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/mixins.less */
+.separated {
+  position: relative;
+}
+/* line 32, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/mixins.less */
+.separated:before {
+  position: relative;
+  top: 0px;
+  border-top: 1px solid #ddd;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin-left: 0!important;
+  margin-right: 0!important;
+  background-color: #888;
+}
+/* line 54, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/mixins.less */
+.flatform {
+  background: red;
+}
+/* line 10, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar {
   min-height: 100px;
   background-color: rgba(47, 157, 204, 0.85);
@@ -7120,16 +7120,16 @@ td.visible-print {
   -webkit-border-radius: 0;
 }
 @media (max-width: 768px) {
-  /* line 12, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 12, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar {
     min-height: 50px;
   }
 }
-/* line 24, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 24, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar.navbar-inverse .navbar-nav .active a {
   background: rgba(0, 0, 0, 0.4);
 }
-/* line 29, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 29, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar.navbar-inverse .navbar-nav a {
   background: rgba(0, 0, 0, 0.1);
   color: white;
@@ -7137,7 +7137,7 @@ td.visible-print {
   font-size: 1.1rem;
   text-transform: uppercase;
 }
-/* line 39, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 39, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar .navbar-toggle {
   border-color: rgba(0, 0, 0, 0.2);
   position: absolute;
@@ -7146,11 +7146,11 @@ td.visible-print {
   padding: 0;
   margin: 0;
 }
-/* line 40, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 40, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar .navbar-toggle:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
-/* line 50, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 50, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar .navbar-toggle .icon {
   margin: 0;
   padding: 4px 8px;
@@ -7168,12 +7168,12 @@ td.visible-print {
 .navbar .navbar-toggle .icon:before {
   content: "\e056";
 }
-/* line 64, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 64, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .logo-container {
   width: 200px;
   margin: 15px 0 0 15px;
 }
-/* line 67, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 67, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .logo-container a {
   display: inline-block;
   width: 100%;
@@ -7207,13 +7207,13 @@ td.visible-print {
 .logo-container a:after {
   clear: both;
 }
-/* line 73, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 73, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .logo-container img {
   display: block;
   max-width: 100%;
   height: auto;
 }
-/* line 79, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 79, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container {
   position: absolute;
   display: inline-block;
@@ -7221,7 +7221,7 @@ td.visible-print {
   right: 0px;
 }
 @media (max-width: 768px) {
-  /* line 85, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 85, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .global-nav-container {
     position: relative;
     display: block;
@@ -7260,24 +7260,24 @@ td.visible-print {
     clear: both;
   }
 }
-/* line 96, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 96, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container li {
   display: inline-block;
   margin: 0 0 0 -4px;
   padding: 0;
   list-style-type: none;
 }
-/* line 103, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 103, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container li:first-child .global-nav-link {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
-/* line 110, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 110, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container li:last-child .global-nav-link {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
-/* line 117, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 117, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-link {
   display: inline-block;
   padding: 6px 12px;
@@ -7337,7 +7337,7 @@ fieldset[disabled] .global-nav-container .global-nav-link {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 123, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 123, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-cart {
   color: #ffffff;
   background-color: #5bc0de;
@@ -7378,7 +7378,7 @@ fieldset[disabled] .global-nav-container .global-nav-cart.active {
   background-color: #5bc0de;
   border-color: #46b8da;
 }
-/* line 125, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 125, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-cart .icon {
   position: relative;
   top: 1px;
@@ -7394,7 +7394,7 @@ fieldset[disabled] .global-nav-container .global-nav-cart.active {
 .global-nav-container .global-nav-cart .icon:before {
   content: "\e116";
 }
-/* line 132, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 132, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-login {
   padding: 5px 10px;
   font-size: 12px;
@@ -7440,7 +7440,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 136, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 136, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-login .icon {
   position: relative;
   top: 1px;
@@ -7455,21 +7455,21 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
 .global-nav-container .global-nav-login .icon:before {
   content: "\e008";
 }
-/* line 143, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 143, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-nav-container {
   position: absolute;
   left: 0;
   bottom: 0;
 }
 @media (max-width: 768px) {
-  /* line 148, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 148, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .main-nav-container {
     position: relative;
     left: auto;
     bottom: auto;
   }
 }
-/* line 155, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 155, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-search-container {
   position: absolute;
   right: 0;
@@ -7547,7 +7547,7 @@ td.main-search-container {
   }
 }
 @media (max-width: 768px) {
-  /* line 163, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 163, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .main-search-container {
     position: relative;
     display: block;
@@ -7586,12 +7586,12 @@ td.main-search-container {
     clear: both;
   }
 }
-/* line 174, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 174, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-search-container .form-group {
   padding-right: 0;
   margin-right: 0;
 }
-/* line 180, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 180, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .btn-header-search {
   display: inline-block;
   padding: 6px 12px;
@@ -7693,7 +7693,7 @@ fieldset[disabled] .btn-header-search.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 198, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 198, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .header-search-input {
   display: block;
   width: 100%;
@@ -7764,12 +7764,12 @@ select.header-search-input {
 textarea.header-search-input {
   height: auto;
 }
-/* line 209, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 209, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar-collapse {
   position: relative;
   min-height: 50px;
 }
-/* line 213, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 213, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar-collapse .navbar-form {
   display: block;
   border: 0;
@@ -7778,11 +7778,11 @@ textarea.header-search-input {
   padding: 12px 0;
 }
 @media (max-width: 768px) {
-  /* line 221, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 221, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form .form-group {
     display: inline-block;
   }
-  /* line 223, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 223, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form .form-group .form-control {
     width: 60%;
     min-width: 200px;
@@ -7790,31 +7790,31 @@ textarea.header-search-input {
   }
 }
 @media (max-width: 768px) {
-  /* line 232, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 232, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form button {
     display: inline-block;
   }
 }
-/* line 2, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 5, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-outer {
   background: transparent url(images/bg-vector-splat.jpg) no-repeat center top;
   background-size: cover;
   padding-top: 60px;
 }
-/* line 11, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 14, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container h1 {
   margin: 0 0 3rem 0;
 }
-/* line 15, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 18, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container ul {
   list-style-type: none;
   padding: 0;
 }
-/* line 18, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 21, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container ul li {
   list-style-type: none;
 }
-/* line 23, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 26, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table {
   margin-bottom: 0;
 }
@@ -7823,33 +7823,33 @@ textarea.header-search-input {
 .cart-container table > tbody > tr:nth-child(odd) > th {
   background-color: #e9e9e9;
 }
-/* line 27, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table thead {
   background: rgba(0, 163, 221, 0.667);
 }
-/* line 31, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 34, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table thead th:first-child {
   border-top-left-radius: 6px;
 }
-/* line 34, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 37, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table thead th:last-child {
   border-top-right-radius: 6px;
 }
-/* line 40, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 43, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr {
   border: none;
 }
-/* line 43, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 46, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr th {
   font-size: 1.3rem;
   color: #999999;
   font-weight: 400;
 }
-/* line 48, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 51, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr th:last-child {
   text-align: right;
 }
-/* line 53, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 56, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr td {
   font-size: 1.3rem;
   padding-top: 1rem;
@@ -7857,15 +7857,15 @@ textarea.header-search-input {
   border-bottom: 3px solid #fff;
   border-top: none;
 }
-/* line 61, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 64, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr td.cart-lineitem-title-col {
   font-size: 1.4rem;
 }
-/* line 65, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 68, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr td.cart-lineitem-remove-btn-col {
   font-size: 13px;
 }
-/* line 68, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 71, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem {
   text-shadow: none;
   padding: 0;
@@ -7879,12 +7879,12 @@ textarea.header-search-input {
   box-shadow: none;
   border-bottom: none;
 }
-/* line 87, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 90, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem:hover {
   background-color: #d9534f;
   color: #fff;
 }
-/* line 92, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 95, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .icon {
   position: relative;
   top: 1px;
@@ -7901,29 +7901,29 @@ textarea.header-search-input {
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .icon:before {
   content: "\e014";
 }
-/* line 99, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 102, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .btn-text {
   display: none;
 }
-/* line 107, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 110, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr:last-child td {
   border-bottom: none;
 }
-/* line 114, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 117, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr th:last-child,
 .cart-container table tr td:last-child {
   text-align: center;
 }
-/* line 118, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 121, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr th:first-child,
 .cart-container table tr td:first-child {
   padding-left: 30px;
 }
-/* line 122, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 125, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr th {
   color: #fff;
 }
-/* line 132, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 135, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-main-inner {
   background-color: #eee;
   padding: 0;
@@ -7958,7 +7958,7 @@ textarea.header-search-input {
   border-left: 0;
   border-right: 0;
 }
-/* line 151, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 154, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-lineitem-thumbnail-col img {
   max-width: 60px;
   background-color: #eee;
@@ -7992,14 +7992,14 @@ textarea.header-search-input {
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: none;
 }
-/* line 160, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 163, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-heading-quantity,
 .cart-lineitem-quantity-col,
 .cart-heading-availability,
 .cart-lineitem-availability-col {
   text-align: center;
 }
-/* line 167, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 170, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .btn-cmd-checkout {
   display: inline-block;
   padding: 6px 12px;
@@ -8092,21 +8092,21 @@ fieldset[disabled] .btn-cmd-checkout.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 174, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 177, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-list-price {
   text-decoration: line-through;
   font-size: 0.85em;
   color: #888888;
 }
-/* line 180, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 183, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-lineitem-purchase-price {
   font-weight: bold;
 }
-/* line 185, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 188, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-lineitem-table-headings {
   border: none;
 }
-/* line 192, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 195, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container-inner {
   margin-left: -15px;
   margin-right: -15px;
@@ -8139,7 +8139,7 @@ fieldset[disabled] .btn-cmd-checkout.active {
 .cart-container-inner:after {
   clear: both;
 }
-/* line 196, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 199, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-title-container {
   position: relative;
   float: left;
@@ -8148,7 +8148,7 @@ fieldset[disabled] .btn-cmd-checkout.active {
   padding-left: 15px;
   padding-right: 15px;
 }
-/* line 199, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 202, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-title-container h1 {
   position: relative;
   float: left;
@@ -8160,7 +8160,7 @@ fieldset[disabled] .btn-cmd-checkout.active {
   margin-bottom: 4rem;
   color: #555555;
 }
-/* line 207, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 210, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-main-container {
   position: relative;
   float: left;
@@ -8177,15 +8177,15 @@ fieldset[disabled] .btn-cmd-checkout.active {
     width: 75%;
   }
 }
-/* line 213, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 216, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-summary-container {
   display: inline-block;
 }
-/* line 219, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 222, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-checkout-container {
   margin-top: 2rem;
 }
-/* line 226, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 229, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-sidebar {
   position: relative;
   float: left;
@@ -8201,7 +8201,7 @@ fieldset[disabled] .btn-cmd-checkout.active {
     width: 25%;
   }
 }
-/* line 230, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 233, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-sidebar .cart-sidebar-inner {
   display: inline-block;
   padding: 2rem;
@@ -8209,17 +8209,17 @@ fieldset[disabled] .btn-cmd-checkout.active {
   border-radius: 6px;
   background-color: rgba(255, 255, 255, 0.6);
 }
-/* line 237, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 240, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-sidebar .cart-sidebar-inner h3 {
   margin: 0 0 2rem 0;
 }
-/* line 243, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 246, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-unit-list-price,
 .cart-total-list-price {
   text-decoration: line-through;
   color: #808080;
 }
-/* line 249, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+/* line 252, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-unit-purchase-price,
 .cart-total-purchase-price {
   font-weight: bold;
@@ -8441,24 +8441,24 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .control-label {
   color: #6f6f6f;
 }
-/* line 2, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 5, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-list-price-value {
   text-decoration: line-through;
 }
-/* line 5, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 8, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-purchase-price {
   font-weight: bold;
 }
-/* line 8, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 11, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-title {
   font-size: 134%;
   padding: 1rem;
 }
-/* line 12, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 15, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-title a {
   text-decoration: none;
 }
-/* line 16, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 19, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-items-listing {
   padding: 4rem 0;
   margin-left: -15px;
@@ -8492,7 +8492,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-items-listing:after {
   clear: both;
 }
-/* line 20, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 23, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-container {
   margin-bottom: 3rem;
   float: left;
@@ -8524,13 +8524,13 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   }
 }
 @media only screen and (max-width: 60rem) {
-  /* line 28, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+  /* line 31, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
   .pagination-link {
     margin-left: .5rem;
     margin-right: .5rem;
   }
 }
-/* line 33, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 36, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-inner {
   background-color: #eee;
   padding: 5px;
@@ -8563,7 +8563,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   height: 100%;
 }
-/* line 38, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 41, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-thumbnail {
   display: block;
   max-width: 1000%;
@@ -8574,7 +8574,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   background-repeat: no-repeat;
   background-position: center center;
 }
-/* line 50, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 53, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-thumbnail-container {
   position: relative;
   width: 100%;
@@ -8585,7 +8585,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   background: #fff;
   border-radius: 3px;
 }
-/* line 67, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 70, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-inner {
   background-color: #eee;
   padding: 5px;
@@ -8618,11 +8618,11 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   height: 100%;
 }
-/* line 70, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 73, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-inner ul {
   padding: 0;
 }
-/* line 80, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 83, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-list-row {
   margin-left: 0;
   margin-right: 0;
@@ -8655,13 +8655,13 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-list-row:after {
   clear: both;
 }
-/* line 84, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 87, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-price-container {
   border-bottom: 1px solid #ddd;
   padding-bottom: 2rem;
   margin-bottom: 1rem;
 }
-/* line 90, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 93, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-list-price,
 .category-item-purchase-price,
 .category-item-availability,
@@ -8715,7 +8715,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-release-date:after {
   clear: both;
 }
-/* line 98, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 101, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-list-price label.item-meta,
 .category-item-purchase-price label.item-meta,
 .category-item-availability label.item-meta,
@@ -8728,7 +8728,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   font-size: 1.2rem;
   color: #333333;
 }
-/* line 105, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 108, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-list-price label.item-meta:nth-of-type(2n),
 .category-item-purchase-price label.item-meta:nth-of-type(2n),
 .category-item-availability label.item-meta:nth-of-type(2n),
@@ -8739,7 +8739,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-release-date span.item-meta:nth-of-type(2n) {
   background-color: #aaa;
 }
-/* line 111, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 114, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-list-price label.item-meta,
 .category-item-purchase-price label.item-meta,
 .category-item-availability label.item-meta,
@@ -8752,7 +8752,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   padding-right: 0;
   color: #999999;
 }
-/* line 116, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 119, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-list-price span.item-meta,
 .category-item-purchase-price span.item-meta,
 .category-item-availability span.item-meta,
@@ -8764,7 +8764,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   padding-left: 8px;
   padding-right: 8px;
 }
-/* line 121, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 124, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-list-price:last-child label.item-meta,
 .category-item-purchase-price:last-child label.item-meta,
 .category-item-availability:last-child label.item-meta,
@@ -8775,13 +8775,13 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-release-date:last-child span.item-meta {
   border-bottom: none;
 }
-/* line 128, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 131, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-title {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #ddd;
 }
-/* line 134, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
+/* line 137, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-list-price-value {
   text-decoration: line-through;
 }
@@ -9175,7 +9175,7 @@ fieldset[disabled] .btn-pagination.pagination-link-disabled.active {
 reference:
 http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of-ems/
 */
-/* line 35, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 34, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .btn,
 .btn-lg {
   border-radius: 2px;
@@ -9183,57 +9183,57 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
-/* line 46, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 45, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .row {
   margin-bottom: 1rem;
 }
-/* line 54, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 53, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 hr {
   margin: 60px 0;
 }
-/* line 63, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 62, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 body {
   margin-top: 104px;
 }
-/* line 67, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 66, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 ul {
   list-style: none;
 }
-/* line 70, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 69, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .btn-cmd {
   border: 0 solid grey;
   font-size: 100%;
   background: transparent;
   color: #070ca6;
 }
-/* line 76, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 75, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .btn-cmd:hover {
   border: 0;
   background: rgba(150, 150, 150, 0.3);
 }
-/* line 80, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 79, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .btn-cmd:active {
   border: 0;
   background: rgba(150, 150, 150, 0.4);
   text-shadow: 7px 7px 12px #969696;
 }
-/* line 85, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 84, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .app-main {
   padding-bottom: 6rem;
 }
-/* line 101, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 100, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .view-title {
   color: #000000;
   text-transform: capitalize;
 }
-/* line 108, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 107, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 #contextmenu {
   margin: 0;
   padding: 0;
   border: 1px solid #000;
   background: #dddddd;
 }
-/* line 114, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 113, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 #contextmenu li {
   list-style-type: none;
   margin: 1px;
@@ -9241,19 +9241,19 @@ ul {
   color: #000000;
   cursor: pointer;
 }
-/* line 121, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 120, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 #contextmenu li.hover {
   background: #ddd;
 }
-/* line 124, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 123, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .modal-container {
   display: none;
 }
-/* line 127, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 126, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 #simplemodal-overlay {
   background-color: #000;
 }
-/* line 128, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 127, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 #simplemodal-container {
   background-color: #fff;
   border: 8px solid #444;
@@ -9261,7 +9261,7 @@ ul {
   width: auto !important;
   height: auto !important;
 }
-/* line 135, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 134, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 #simplemodal-container a.modalCloseImg {
   background: url(images/x.png) no-repeat;
   /* adjust url as required */
@@ -9275,14 +9275,14 @@ ul {
   right: -18px;
   cursor: pointer;
 }
-/* line 146, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 145, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .home-container {
   background: url(images/hm-commerce-software-bb.jpg) no-repeat;
   min-height: 500px;
   background-size: 100%;
   text-align: center;
 }
-/* line 152, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 151, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .field-content {
   max-width: 75rem;
   color: #ffffff;
@@ -9290,16 +9290,16 @@ ul {
   font-family: 'ProximaNova-Regular', Helvetica, Arial, sans-serif;
   padding-top: 8rem;
 }
-/* line 161, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 160, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .field-content h2 {
   font-size: 48px;
   line-height: 47px;
 }
-/* line 165, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 164, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .theme-variable-item-value-dark .btn-cmd {
   color: #111111;
 }
-/* line 168, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 167, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .theme-variable-item-value-light .btn-cmd {
   color: #eeeeee;
 }
@@ -9307,31 +9307,31 @@ ul {
   Begin Login Form
 */
 /* oAuth Form Feedback */
-/* line 175, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 174, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .feedback-label {
   color: red;
 }
-/* line 179, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 178, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .dropdown-menu {
   display: none;
   position: absolute;
   background-color: #ffffff;
 }
-/* line 184, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 183, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .oAuth-logout {
   display: none;
 }
 /*end login form*/
-/* line 191, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 190, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .activity-indicator-container {
   text-align: center;
 }
-/* line 194, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 193, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .activity-indicator {
   margin-left: auto;
   margin-right: auto;
 }
-/* line 199, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 198, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .pace .pace-progress {
   background: red;
   position: fixed;
@@ -9340,15 +9340,15 @@ ul {
   left: 0;
   height: 2px;
 }
-/* line 208, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 207, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .pace-inactive {
   display: none;
 }
-/* line 212, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 211, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .itemdetail-availability-state {
   padding: 0;
 }
-/* line 215, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 214, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .itemdetail-availability-state label {
   display: inline-block;
   font-size: 1rem;
@@ -9359,7 +9359,7 @@ ul {
   padding: 5px 8px;
   line-height: 10px;
 }
-/* line 226, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 225, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .itemdetail-availability-state .icon {
   position: relative;
   top: 1px;
@@ -9376,7 +9376,7 @@ ul {
 .itemdetail-availability-state .icon:before {
   content: "\e013";
 }
-/* line 235, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 234, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .is-hidden {
   display: none;
 }
