@@ -28,8 +28,8 @@ define(['ep','backbone','eventbus','cortex'],
 
     var HeaderSearchView = Backbone.Marionette.ItemView.extend({
       template:'#SearchModuleDefaultTemplate',
-      className:'navbar-form',
       tagName:'form',
+      className:'navbar-form',
       events: {
         'click .btn-header-search': 'keywordSearch'
       },
