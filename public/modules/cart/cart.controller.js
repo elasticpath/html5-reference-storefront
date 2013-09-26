@@ -120,10 +120,7 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
     });
 
     // Remove Line Item Request
-    EventBus.on('cart.removeLineItemRequest', function (event) {
-      var deleteActionLink = $(event.target).data('actionlink');
-
-
+    EventBus.on('cart.removeLineItemRequest', function (deleteActionLink) {
       // FIXME move logic to a method
       ep.io.ajax({
         type: 'DELETE',
@@ -140,10 +137,10 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
     });
 
     // Remove Line Item Button Clicked
-    EventBus.on('cart.removeLineItemBtnClicked', function (event) {
+    EventBus.on('cart.removeLineItemBtnClicked', function (actionLink) {
       var confirmation = window.confirm("Do you really want to delete this item");
       if (confirmation) {
-        EventBus.trigger('cart.removeLineItemRequest', event);
+        EventBus.trigger('cart.removeLineItemRequest', actionLink);
       }
     });
 

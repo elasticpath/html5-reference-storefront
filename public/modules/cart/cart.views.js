@@ -179,7 +179,9 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       events:{
         'click .btn-cart-removelineitem':function(event){
           event.preventDefault();
-          EventBus.trigger('cart.removeLineItemBtnClicked', event);
+
+          var actionLink = $(event.target.parentElement).data("actionlink");
+          EventBus.trigger('cart.removeLineItemBtnClicked', actionLink);
         }
       },
       onShow:function(){
@@ -233,7 +235,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       onShow: function () {
         // if no release date, hide dom element with release-date & the label
         if (!viewHelpers.getAvailabilityReleaseDate(this.model.get('releaseDate'))) {
-          $('[data-region="itemAvailabilityDescriptionRegion"]', this.el).addClass('itemdetail-release-date-hidden');
+          $('[data-region="itemAvailabilityDescriptionRegion"]', this.el).addClass('is-hidden');
         }
       }
     });
@@ -313,7 +315,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       tagName: 'ul',
       onShow: function () {
         if (!viewHelpers.getListPrice(this.model.attributes)) {
-          $('[data-region="itemListPriceRegion"]', this.el).addClass('itemdetail-list-price-hidden');
+          $('[data-region="itemListPriceRegion"]', this.el).addClass('is-hidden');
         }
       }
     });

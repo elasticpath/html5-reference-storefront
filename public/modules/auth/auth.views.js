@@ -114,6 +114,9 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
         'click .btn-auth-logout':function(event){
           event.preventDefault();
           EventBus.trigger("auth.logoutBtnClicked");
+        },
+        'click .profile-link':function(event){
+          $('.auth-nav-container').hide(250);
         }
       }
     });

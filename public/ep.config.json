@@ -1,0 +1,23 @@
+{
+  "logging":{
+    "logInfo":true,
+    "logWarnings":true,
+    "logErrors":true
+  },
+  "debug":{
+    "showInstrumentation":false
+  },
+  "cortexApi":{
+    "path":"integrator",
+    "scope":"telcooperative"
+  },
+  "deployMode":"development",
+  "requireAuthToCheckout":true,
+  "viewFadeInValue":500,
+  "routes": {
+    "cart":"#mycart",
+    "category":"#category",
+    "categorypage":"#categorypage",
+    "itemDetail":"#itemdetail"
+  }
+}
