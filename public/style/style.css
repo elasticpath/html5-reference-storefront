@@ -7730,3 +7730,6 @@ ul {
 .itemdetail-availability-state .icon:before {
   content: "\e013";
 }
+.is-hidden {
+  display: none;
+}
