@@ -22,24 +22,27 @@ define(['ep','eventbus', 'backbone'],
         // Profile Payment Info
         profileObj.paymentMethods = [];
         var localPaymentMethods = jsonPath(response, '$._paymentmethods.._element')[0];
-        var paymentMethodsLength = localPaymentMethods.length;
-        for(var i = 0;i < paymentMethodsLength;i++){
-          var paymentMethodObj = {};
+        if (localPaymentMethods){
+          var paymentMethodsLength = localPaymentMethods.length;
+          for(var i = 0;i < paymentMethodsLength;i++){
+            var paymentMethodObj = {};
 
-          try{
-            paymentMethodObj.cardNumber = localPaymentMethods[i]["card-number"];
-            paymentMethodObj.cardType = localPaymentMethods[i]["card-type"];
-            paymentMethodObj.cardHolderName = localPaymentMethods[i]["cardholder-name"];
-            paymentMethodObj.expiryMonth = localPaymentMethods[i]["expiry-month"];
-            paymentMethodObj.expiryYear = localPaymentMethods[i]["expiry-year"];
+            try{
+              paymentMethodObj.cardNumber = localPaymentMethods[i]["card-number"];
+              paymentMethodObj.cardType = localPaymentMethods[i]["card-type"];
+              paymentMethodObj.cardHolderName = localPaymentMethods[i]["cardholder-name"];
+              paymentMethodObj.expiryMonth = localPaymentMethods[i]["expiry-month"];
+              paymentMethodObj.expiryYear = localPaymentMethods[i]["expiry-year"];
 
-            profileObj.paymentMethods.push(paymentMethodObj);
+              profileObj.paymentMethods.push(paymentMethodObj);
+            }
+            catch(error){
+              ep.logger.error('Error building payment method object: ' + error.message);
+            }
+
           }
-          catch(error){
-            ep.logger.error('Error building payment method object: ' + error.message);
-          }
-
         }
+
 
 
 
