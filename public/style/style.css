@@ -7111,19 +7111,38 @@ td.visible-print {
   background: transparent;
   text-align: left;
 }
-/* line 9, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
-.app-header {
+/* line 10, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+.navbar {
+  min-height: 100px;
   background-color: rgba(47, 157, 204, 0.85);
   margin: 0;
   border-radius: 0;
   -webkit-border-radius: 0;
 }
-/* line 20, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+@media (max-width: 768px) {
+  /* line 12, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  .navbar {
+    min-height: 50px;
+  }
+}
+/* line 24, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+.navbar.navbar-inverse .navbar-nav .active a {
+  background: rgba(0, 0, 0, 0.4);
+}
+/* line 29, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+.navbar.navbar-inverse .navbar-nav a {
+  background: rgba(0, 0, 0, 0.1);
+  color: white;
+  padding: 10px 10px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+/* line 44, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .logo-container {
   width: 200px;
   margin: 15px 0 0 15px;
 }
-/* line 23, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 47, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .logo-container a {
   display: inline-block;
   width: 100%;
@@ -7157,13 +7176,13 @@ td.visible-print {
 .logo-container a:after {
   clear: both;
 }
-/* line 29, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 53, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .logo-container img {
   display: block;
   max-width: 100%;
   height: auto;
 }
-/* line 34, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 58, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .navbar-toggle {
   border-color: rgba(0, 0, 0, 0.2);
   position: absolute;
@@ -7172,11 +7191,11 @@ td.visible-print {
   padding: 0;
   margin: 0;
 }
-/* line 35, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 59, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .navbar-toggle:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
-/* line 48, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 69, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .navbar-toggle .icon {
   margin: 0;
   padding: 4px 8px;
@@ -7194,7 +7213,7 @@ td.visible-print {
 .navbar-toggle .icon:before {
   content: "\e056";
 }
-/* line 58, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 78, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container {
   position: absolute;
   display: inline-block;
@@ -7202,7 +7221,7 @@ td.visible-print {
   right: 30px;
 }
 @media (max-width: 768px) {
-  /* line 66, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 84, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .global-nav-container {
     position: relative;
     display: block;
@@ -7241,24 +7260,24 @@ td.visible-print {
     clear: both;
   }
 }
-/* line 79, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 95, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container li {
   display: inline-block;
   margin: 0 0 0 -4px;
   padding: 0;
   list-style-type: none;
 }
-/* line 86, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 102, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container li:first-child .global-nav-link {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
-/* line 93, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 109, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container li:last-child .global-nav-link {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
-/* line 100, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 116, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container .global-nav-link {
   display: inline-block;
   padding: 6px 12px;
@@ -7318,7 +7337,7 @@ fieldset[disabled] .global-nav-container .global-nav-link {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 106, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 122, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container .global-nav-cart {
   color: #ffffff;
   background-color: #5bc0de;
@@ -7359,7 +7378,7 @@ fieldset[disabled] .global-nav-container .global-nav-cart.active {
   background-color: #5bc0de;
   border-color: #46b8da;
 }
-/* line 108, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 124, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container .global-nav-cart .icon {
   position: relative;
   top: 1px;
@@ -7375,7 +7394,7 @@ fieldset[disabled] .global-nav-container .global-nav-cart.active {
 .global-nav-container .global-nav-cart .icon:before {
   content: "\e116";
 }
-/* line 115, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 131, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container .global-nav-login {
   padding: 5px 10px;
   font-size: 12px;
@@ -7421,7 +7440,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 119, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 135, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container .global-nav-login .icon {
   position: relative;
   top: 1px;
@@ -7436,22 +7455,96 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
 .global-nav-container .global-nav-login .icon:before {
   content: "\e008";
 }
-/* line 127, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 142, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .main-nav-container {
-  margin-top: 5px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }
-/* line 136, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+@media (max-width: 768px) {
+  /* line 147, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  .main-nav-container {
+    position: relative;
+    left: auto;
+    bottom: auto;
+  }
+}
+/* line 154, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .main-search-container {
   float: right !important;
+  display: block !important;
 }
-@media (max-width: 992px) {
-  /* line 139, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 508, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+tr.main-search-container {
+  display: table-row !important;
+}
+/* line 509, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+th.main-search-container,
+td.main-search-container {
+  display: table-cell !important;
+}
+@media (max-width: 767px) {
+  /* line 147, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/responsive-utilities.less */
+  .main-search-container.hidden-xs {
+    display: none !important;
+  }
+  /* line 515, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  tr.main-search-container.hidden-xs {
+    display: none !important;
+  }
+  /* line 516, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  th.main-search-container.hidden-xs,
+  td.main-search-container.hidden-xs {
+    display: none !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  /* line 151, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/responsive-utilities.less */
   .main-search-container {
-    display: none;
+    display: none !important;
+  }
+  /* line 515, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  tr.main-search-container {
+    display: none !important;
+  }
+  /* line 516, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  th.main-search-container,
+  td.main-search-container {
+    display: none !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  /* line 155, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/responsive-utilities.less */
+  .main-search-container.hidden-md {
+    display: none !important;
+  }
+  /* line 515, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  tr.main-search-container.hidden-md {
+    display: none !important;
+  }
+  /* line 516, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  th.main-search-container.hidden-md,
+  td.main-search-container.hidden-md {
+    display: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 160, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/responsive-utilities.less */
+  .main-search-container.hidden-lg {
+    display: none !important;
+  }
+  /* line 515, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  tr.main-search-container.hidden-lg {
+    display: none !important;
+  }
+  /* line 516, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  th.main-search-container.hidden-lg,
+  td.main-search-container.hidden-lg {
+    display: none !important;
   }
 }
 @media (max-width: 768px) {
-  /* line 142, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 159, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .main-search-container {
     position: relative;
     display: block;
@@ -7490,7 +7583,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
     clear: both;
   }
 }
-/* line 156, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 171, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .btn-header-search {
   display: inline-block;
   padding: 6px 12px;
@@ -7587,7 +7680,7 @@ fieldset[disabled] .btn-header-search.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 163, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 177, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .header-search-input {
   display: block;
   width: 100%;
@@ -7653,22 +7746,23 @@ select.header-search-input {
 textarea.header-search-input {
   height: auto;
 }
-/* line 168, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 182, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .navbar-collapse {
   position: relative;
+  min-height: 50px;
 }
-/* line 170, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 186, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .navbar-collapse .navbar-form {
   display: block;
   border: 0;
   box-shadow: none;
 }
 @media (max-width: 768px) {
-  /* line 177, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 192, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .navbar-collapse .navbar-form .form-group {
     display: inline-block;
   }
-  /* line 179, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 194, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .navbar-collapse .navbar-form .form-group .form-control {
     width: 60%;
     min-width: 200px;
@@ -7676,22 +7770,10 @@ textarea.header-search-input {
   }
 }
 @media (max-width: 768px) {
-  /* line 189, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 203, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .navbar-collapse .navbar-form button {
     display: inline-block;
   }
-}
-/* line 202, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
-.navbar.navbar-inverse .navbar-nav .active a {
-  background: rgba(0, 0, 0, 0.4);
-}
-/* line 207, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
-.navbar.navbar-inverse .navbar-nav a {
-  background: rgba(0, 0, 0, 0.1);
-  color: white;
-  padding: 10px 10px;
-  font-size: 1.1rem;
-  text-transform: uppercase;
 }
 /* line 2, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-outer {
