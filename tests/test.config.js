@@ -47,7 +47,9 @@ requirejs.config({
     'itemviews': 'modules/item/item.views',
     'debug': 'modules/debug/debug.controller',
     'itemdata': './tests/data/item',
-    'ace': 'http://rawgithub.com/ajaxorg/ace-builds/master/src-noconflict/ace'
+    'pace'            : 'scripts/lib/pace.min',
+    'equalize'        : 'scripts/lib/plugins/jquery-equalheights'
+
   },
   shim: {
     'backbone': {
