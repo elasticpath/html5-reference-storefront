@@ -295,9 +295,9 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
       className: 'category-items-listing equalize',
       onShow:function(){
         pace.stop();
-        setTimeout(function(){$('.category-item-inner').equalHeights(true);},3000);
-        $('.category-item-inner').equalHeights(true);
-        $(window).resize(function(){$('.category-item-inner').equalHeights(true);});
+        // setTimeout(function(){$('.category-item-inner').equalHeights(true);},3000);
+        $('.category-item-inner').equalHeights();
+        $(window).resize(function(){$('.category-item-inner').equalHeights();});
       }
     });
 
