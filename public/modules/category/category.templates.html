@@ -53,7 +53,7 @@
   <!-- Item Rate Template -->
   <script id="CategoryItemRateTemplate" type="text/template">
     <label class="item-meta category-item-rate-label"><%= E.getI18nLabel('itemDetail.rate') %></label>
-    <span class="item-meta category-item-rate"><%= E.display %></span>
+    <span class="item-meta category-item-rate-value"><%= E.display %></span>
   </script>
 
   <!-- Item Price Template -->
@@ -70,7 +70,8 @@
 
   <!-- Item Availability Template -->
   <script id="CategoryItemAvailabilityTemplate" type="text/template">
-    <li class="category-item-availability itemdetail-availability-state"><label><span class="icon"></span><%= E.getAvailabilityDisplayText(E.state) %></label>
+    <li class="category-item-availability itemdetail-availability-state" data-i18n="<%= E.state %>">
+      <label><span class="icon"></span><%= E.getAvailabilityDisplayText(E.state) %></label>
     </li>
     <li class="category-item-release-date" data-region="itemAvailabilityDescriptionRegion">
       <label class="item-meta category-item-releaseDate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
