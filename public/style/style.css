@@ -7218,7 +7218,7 @@ td.visible-print {
   position: absolute;
   display: inline-block;
   top: -36px;
-  right: 30px;
+  right: 0px;
 }
 @media (max-width: 768px) {
   /* line 84, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
@@ -7471,7 +7471,10 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
 }
 /* line 154, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .main-search-container {
-  float: right !important;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0 0 0 0;
   display: block !important;
 }
 /* line 508, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
@@ -7544,7 +7547,7 @@ td.main-search-container {
   }
 }
 @media (max-width: 768px) {
-  /* line 159, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 162, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .main-search-container {
     position: relative;
     display: block;
@@ -7583,7 +7586,12 @@ td.main-search-container {
     clear: both;
   }
 }
-/* line 171, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 173, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+.main-search-container .form-group {
+  padding-right: 0;
+  margin-right: 0;
+}
+/* line 179, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .btn-header-search {
   display: inline-block;
   padding: 6px 12px;
@@ -7613,6 +7621,11 @@ td.main-search-container {
   color: #ffffff;
   background-color: #5cb85c;
   border-color: #4cae4c;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -5px;
+  -webkit-box-shadow: inset 1px 0px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 1px 0px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
 /* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/buttons.less */
 .btn-header-search:focus {
@@ -7680,7 +7693,7 @@ fieldset[disabled] .btn-header-search.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 177, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 197, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .header-search-input {
   display: block;
   width: 100%;
@@ -7702,6 +7715,11 @@ fieldset[disabled] .btn-header-search.active {
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
+  -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-right: 0;
 }
 /* line 57, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
 .header-search-input:-moz-placeholder {
@@ -7746,23 +7764,25 @@ select.header-search-input {
 textarea.header-search-input {
   height: auto;
 }
-/* line 182, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 208, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .navbar-collapse {
   position: relative;
   min-height: 50px;
 }
-/* line 186, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 212, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .navbar-collapse .navbar-form {
   display: block;
   border: 0;
   box-shadow: none;
+  margin: 0;
+  padding: 12px 0;
 }
 @media (max-width: 768px) {
-  /* line 192, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 220, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .navbar-collapse .navbar-form .form-group {
     display: inline-block;
   }
-  /* line 194, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 222, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .navbar-collapse .navbar-form .form-group .form-control {
     width: 60%;
     min-width: 200px;
@@ -7770,7 +7790,7 @@ textarea.header-search-input {
   }
 }
 @media (max-width: 768px) {
-  /* line 203, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 231, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .navbar-collapse .navbar-form button {
     display: inline-block;
   }

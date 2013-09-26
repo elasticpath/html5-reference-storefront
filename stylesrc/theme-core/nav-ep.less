@@ -79,7 +79,7 @@
   position: absolute;
   display: inline-block;
   top: -36px;
-  right: 30px;
+  right: 0px;
 
   @media (max-width: @grid-float-breakpoint) {
     position: relative;
@@ -152,7 +152,10 @@
 }
 
 .main-search-container{
-  .pull-right;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0 0 0 0;
 
   .hidden-sm; // bootstrap class, hides element on tablet viewport
 
@@ -166,17 +169,40 @@
     float: none!important;
     border: none;
   }
+
+  .form-group{
+    padding-right: 0;
+    margin-right: 0;
+  }
 }
 
 .btn-header-search{
   .btn;
   .btn-sm;
   .btn-success;
+  // border-bottom: 0!important;
+  // box-shadow: none;
+  // -webkit-box-shadow: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -5px; // scooch the button over to butt up to the form input
+
+  -webkit-box-shadow: inset 1px 0px 1px 0px rgba(0, 0, 0, 0.1),
+                      0px 2px 0px 0px rgba(0, 0, 0, 0.2);  //inner left shadow + external bottom shadow
+
+  box-shadow:         inset 1px 0px 1px 0px rgba(0, 0, 0, 0.1),
+                      0px 2px 0px 0px rgba(0, 0, 0, 0.2);  //inner left shadow + external bottom shadow
 }
 
 .header-search-input{
   .form-control;
   .input-sm;
+  // add faint shadow to match buttons
+  -webkit-box-shadow:  0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  box-shadow:          0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-right: 0;
 }
 
 .navbar-collapse{
@@ -187,6 +213,8 @@
     display: block;
     border: 0;
     box-shadow: none;
+    margin: 0;
+    padding: 12px 0;
 
     @media (max-width: @grid-float-breakpoint) {
       .form-group{
