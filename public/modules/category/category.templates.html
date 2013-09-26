@@ -89,7 +89,7 @@
   <script id="CategoryPaginationTemplate" type="text/template">
     <div class="paging-total-results">
       <span class="pagingnation-value pagination-total-results-value"><%= E.stats.totalResults %></span>
-      <label class="pagingnation-label"><%= E.getI18nLabel('category.totalResults') %></label>
+      <label class="pagingnation-label pagination-total-results-label"><%= E.getI18nLabel('category.totalResults') %></label>
       ( <span class="pagingnation-value pagination-results-displayed-value"><%= E.stats.resultsOnPage %></span>
       <label class="pagingnation-label"><%= E.getI18nLabel('category.resultsOnPage') %></label> )
 
@@ -97,7 +97,7 @@
 
     <div class="pagination-navigation-container">
       <a class="btn-pagination btn-pagination-prev pagination-link <%= E.checkForDisabledPaginationBtn(E.links.prev) %>" data-i18n="category.prev"
-        <%= E.generatePaginationLink(E.categoryUri, E.links.prev) %> > <%= E.getI18nLabel('category.prev') %></a>
+        <%= E.generatePaginationLink(E.categoryUri, E.links.prev) %> > <span class="icon"></span><%= E.getI18nLabel('category.prev') %></a>
       <span class="pagestate-summary">
         <label class="pagingnation-label"><%= E.getI18nLabel('category.currentPage') %></label>
         <span class="pagingnation-value pagination-curr-page-value"><%= E.stats.currentPage %></span>
@@ -107,7 +107,7 @@
       </span>
 
       <a class="btn-pagination btn-pagination-next pagination-link <%= E.checkForDisabledPaginationBtn(E.links.next) %>" data-i18n="category.next"
-          <%= E.generatePaginationLink(E.categoryUri, E.links.next) %> ><%= E.getI18nLabel('category.next') %></a>
+          <%= E.generatePaginationLink(E.categoryUri, E.links.next) %> ><%= E.getI18nLabel('category.next') %><span class="icon"></span></a>
     </div>
   </script>
 

@@ -5,23 +5,22 @@
 // @import 'accordion.style.less';
 // @import 'mainnav';
 // @import 'appheader';
-
-
 @import 'auth';
-@import 'category';
+
 
 // custom load Bootstrap 3 less/css chunks
 @import 'load-bootstrap';
+
 
 // styles built assuming/overriding Bootstrap 3
 @import 'nav-ep';
 @import 'cart';
 @import 'itemdetail';
 @import 'category';
+@import 'pagination';
 
-/*
---- plugin css files
-*/
+
+// css for plugins
 @import 'jquery.toastmessage.less';
 
 
@@ -210,3 +209,25 @@ ul{
   display: none;
 }
 
+.itemdetail-availability-state{
+    padding: 0;
+
+    label{
+        display: inline-block;
+        font-size: 1rem;
+        text-transform: uppercase;
+        border-radius: 1rem;
+        color: #fff;
+        background-color: @brand-success;
+        padding: 5px 8px;
+        line-height: 10px;
+    }
+
+    .icon{
+        display: inline-block;
+        .glyphicon;
+        .glyphicon-ok;
+        margin-right: 6px;
+        margin-top: -4px;
+    }
+}
