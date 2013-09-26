@@ -35,6 +35,26 @@
       }
     }
   }
+
+  .navbar-toggle{
+    &:hover{
+      background-color: rgba(0,0,0,0.2);
+    }
+    border-color: rgba(0,0,0,0.2);
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    padding: 0;
+    margin: 0;
+
+    .icon{
+      margin: 0;
+      padding: 4px 8px;
+      color: #fff;
+      .glyphicon;
+      .glyphicon-list;
+    }
+  }
 }
 
 .app-header{
@@ -55,25 +75,6 @@
   }
 }
 
-.navbar-toggle{
-  &:hover{
-    background-color: rgba(0,0,0,0.2);
-  }
-  border-color: rgba(0,0,0,0.2);
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  padding: 0;
-  margin: 0;
-
-  .icon{
-    margin: 0;
-    padding: 4px 8px;
-    color: #fff!important;
-    .glyphicon;
-    .glyphicon-list;
-  }
-}
 
 .global-nav-container{ // global nav styles
   position: absolute;

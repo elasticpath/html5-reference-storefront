@@ -7137,12 +7137,43 @@ td.visible-print {
   font-size: 1.1rem;
   text-transform: uppercase;
 }
-/* line 44, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 39, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+.navbar .navbar-toggle {
+  border-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  padding: 0;
+  margin: 0;
+}
+/* line 40, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+.navbar .navbar-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+/* line 50, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+.navbar .navbar-toggle .icon {
+  margin: 0;
+  padding: 4px 8px;
+  color: #fff;
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+/* line 91, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/glyphicons.less */
+.navbar .navbar-toggle .icon:before {
+  content: "\e056";
+}
+/* line 64, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .logo-container {
   width: 200px;
   margin: 15px 0 0 15px;
 }
-/* line 47, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 67, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .logo-container a {
   display: inline-block;
   width: 100%;
@@ -7176,44 +7207,13 @@ td.visible-print {
 .logo-container a:after {
   clear: both;
 }
-/* line 53, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 73, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .logo-container img {
   display: block;
   max-width: 100%;
   height: auto;
 }
-/* line 58, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
-.navbar-toggle {
-  border-color: rgba(0, 0, 0, 0.2);
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  padding: 0;
-  margin: 0;
-}
-/* line 59, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
-.navbar-toggle:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-}
-/* line 69, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
-.navbar-toggle .icon {
-  margin: 0;
-  padding: 4px 8px;
-  color: #fff!important;
-  position: relative;
-  top: 1px;
-  display: inline-block;
-  font-family: 'Glyphicons Halflings';
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-}
-/* line 91, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/glyphicons.less */
-.navbar-toggle .icon:before {
-  content: "\e056";
-}
-/* line 78, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 79, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container {
   position: absolute;
   display: inline-block;
@@ -7221,7 +7221,7 @@ td.visible-print {
   right: 0px;
 }
 @media (max-width: 768px) {
-  /* line 84, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 85, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .global-nav-container {
     position: relative;
     display: block;
@@ -7260,24 +7260,24 @@ td.visible-print {
     clear: both;
   }
 }
-/* line 95, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 96, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container li {
   display: inline-block;
   margin: 0 0 0 -4px;
   padding: 0;
   list-style-type: none;
 }
-/* line 102, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 103, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container li:first-child .global-nav-link {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
-/* line 109, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 110, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container li:last-child .global-nav-link {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
-/* line 116, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 117, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container .global-nav-link {
   display: inline-block;
   padding: 6px 12px;
@@ -7337,7 +7337,7 @@ fieldset[disabled] .global-nav-container .global-nav-link {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 122, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 123, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container .global-nav-cart {
   color: #ffffff;
   background-color: #5bc0de;
@@ -7378,7 +7378,7 @@ fieldset[disabled] .global-nav-container .global-nav-cart.active {
   background-color: #5bc0de;
   border-color: #46b8da;
 }
-/* line 124, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 125, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container .global-nav-cart .icon {
   position: relative;
   top: 1px;
@@ -7394,7 +7394,7 @@ fieldset[disabled] .global-nav-container .global-nav-cart.active {
 .global-nav-container .global-nav-cart .icon:before {
   content: "\e116";
 }
-/* line 131, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 132, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container .global-nav-login {
   padding: 5px 10px;
   font-size: 12px;
@@ -7440,7 +7440,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 135, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 136, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .global-nav-container .global-nav-login .icon {
   position: relative;
   top: 1px;
@@ -7455,21 +7455,21 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
 .global-nav-container .global-nav-login .icon:before {
   content: "\e008";
 }
-/* line 142, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 143, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .main-nav-container {
   position: absolute;
   left: 0;
   bottom: 0;
 }
 @media (max-width: 768px) {
-  /* line 147, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 148, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .main-nav-container {
     position: relative;
     left: auto;
     bottom: auto;
   }
 }
-/* line 154, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 155, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .main-search-container {
   position: absolute;
   right: 0;
@@ -7547,7 +7547,7 @@ td.main-search-container {
   }
 }
 @media (max-width: 768px) {
-  /* line 162, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 163, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .main-search-container {
     position: relative;
     display: block;
@@ -7586,12 +7586,12 @@ td.main-search-container {
     clear: both;
   }
 }
-/* line 173, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 174, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .main-search-container .form-group {
   padding-right: 0;
   margin-right: 0;
 }
-/* line 179, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 180, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .btn-header-search {
   display: inline-block;
   padding: 6px 12px;
@@ -7693,7 +7693,7 @@ fieldset[disabled] .btn-header-search.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 197, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 198, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .header-search-input {
   display: block;
   width: 100%;
@@ -7764,12 +7764,12 @@ select.header-search-input {
 textarea.header-search-input {
   height: auto;
 }
-/* line 208, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 209, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .navbar-collapse {
   position: relative;
   min-height: 50px;
 }
-/* line 212, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 213, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .navbar-collapse .navbar-form {
   display: block;
   border: 0;
@@ -7778,11 +7778,11 @@ textarea.header-search-input {
   padding: 12px 0;
 }
 @media (max-width: 768px) {
-  /* line 220, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 221, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .navbar-collapse .navbar-form .form-group {
     display: inline-block;
   }
-  /* line 222, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 223, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .navbar-collapse .navbar-form .form-group .form-control {
     width: 60%;
     min-width: 200px;
@@ -7790,7 +7790,7 @@ textarea.header-search-input {
   }
 }
 @media (max-width: 768px) {
-  /* line 231, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 232, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .navbar-collapse .navbar-form button {
     display: inline-block;
   }
