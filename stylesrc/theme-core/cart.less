@@ -42,7 +42,7 @@
 
             th{
                 font-size: 1.3rem;
-                color: @grey-mdlt;
+                color: @gray-light;
                 font-weight: 400;
 
                 &:last-child{
@@ -72,8 +72,8 @@
                         padding: 0;
                         height: 21px;
                         width: 21px;
-                        color: @grey-lt;
-                        background-color: @grey-mdlt;
+                        color: @gray-lighter;
+                        background-color: @gray-light;
                         border: none;
                         border-radius: 2px;
                         text-align: middle;
@@ -132,7 +132,7 @@
 .cart-main-inner{
     // background: #f2f2f2;
     // font-size: 1.3rem;
-    // color: @grey-md;
+    // color: @gray;
     // border-radius: 6px;
     // -webkit-box-shadow:  0px 0px 10px 3px rgba(0, 0, 0, 0.17);
     // box-shadow:  0px 0px 10px 3px rgba(0, 0, 0, 0.17);
@@ -174,7 +174,7 @@
 .cart-list-price{
     text-decoration: line-through;
     font-size: 0.85em;
-    color: lighten(@grey-md, 20%);
+    color: lighten(@gray, 20%);
 }
 
 .cart-lineitem-purchase-price{
@@ -200,7 +200,7 @@
         .make-xs-column(12);
         margin-top: 4rem;
         margin-bottom: 4rem;
-        color: @grey-md;
+        color: @gray;
     }
 }
 
@@ -238,4 +238,15 @@
             margin: 0 0 2rem 0;
         }
     }
+}
+
+.cart-unit-list-price,
+.cart-total-list-price{
+    text-decoration: line-through;
+    color: darken(@gray-light, 10%);
+}
+
+.cart-unit-purchase-price,
+.cart-total-purchase-price{
+    font-weight: bold;
 }

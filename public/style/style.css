@@ -7842,7 +7842,7 @@ textarea.header-search-input {
 /* line 43, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-container table tr th {
   font-size: 1.3rem;
-  color: #aaaaaa;
+  color: #999999;
   font-weight: 400;
 }
 /* line 48, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
@@ -7872,7 +7872,7 @@ textarea.header-search-input {
   height: 21px;
   width: 21px;
   color: #eeeeee;
-  background-color: #aaaaaa;
+  background-color: #999999;
   border: none;
   border-radius: 2px;
   text-align: middle;
@@ -8096,7 +8096,7 @@ fieldset[disabled] .btn-cmd-checkout.active {
 .cart-list-price {
   text-decoration: line-through;
   font-size: 0.85em;
-  color: #aaaaaa;
+  color: #888888;
 }
 /* line 180, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-lineitem-purchase-price {
@@ -8158,7 +8158,7 @@ fieldset[disabled] .btn-cmd-checkout.active {
   padding-right: 15px;
   margin-top: 4rem;
   margin-bottom: 4rem;
-  color: #777777;
+  color: #555555;
 }
 /* line 207, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-main-container {
@@ -8212,6 +8212,17 @@ fieldset[disabled] .btn-cmd-checkout.active {
 /* line 237, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-sidebar .cart-sidebar-inner h3 {
   margin: 0 0 2rem 0;
+}
+/* line 243, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+.cart-unit-list-price,
+.cart-total-list-price {
+  text-decoration: line-through;
+  color: #808080;
+}
+/* line 249, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
+.cart-unit-purchase-price,
+.cart-total-purchase-price {
+  font-weight: bold;
 }
 /* line 1, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/itemdetail.less */
 .itemdetail-container {
