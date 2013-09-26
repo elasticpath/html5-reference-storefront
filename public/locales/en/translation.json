@@ -31,8 +31,8 @@
     "emptyCartMsg": "Your shopping cart is empty."
   },
   "category": {
-    "next": "Next > ",
-    "prev": " < Previous",
+    "next": "Next",
+    "prev": "Previous",
     "currentPage": "page",
     "totalPage": "of",
     "resultsOnPage": "results per page",
