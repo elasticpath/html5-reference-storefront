@@ -179,7 +179,9 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       events:{
         'click .btn-cart-removelineitem':function(event){
           event.preventDefault();
-          EventBus.trigger('cart.removeLineItemBtnClicked', event);
+
+          var actionLink = $(event.target.parentElement).data("actionlink");
+          EventBus.trigger('cart.removeLineItemBtnClicked', actionLink);
         }
       },
       onShow:function(){
