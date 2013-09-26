@@ -7436,18 +7436,22 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
 .global-nav-container .global-nav-login .icon:before {
   content: "\e008";
 }
-/* line 132, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 127, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+.main-nav-container {
+  margin-top: 5px;
+}
+/* line 136, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .main-search-container {
   float: right !important;
 }
 @media (max-width: 992px) {
-  /* line 135, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 139, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .main-search-container {
     display: none;
   }
 }
 @media (max-width: 768px) {
-  /* line 138, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 142, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .main-search-container {
     position: relative;
     display: block;
@@ -7486,7 +7490,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
     clear: both;
   }
 }
-/* line 152, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 156, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .btn-header-search {
   display: inline-block;
   padding: 6px 12px;
@@ -7583,7 +7587,7 @@ fieldset[disabled] .btn-header-search.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 159, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 163, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .header-search-input {
   display: block;
   width: 100%;
@@ -7649,22 +7653,22 @@ select.header-search-input {
 textarea.header-search-input {
   height: auto;
 }
-/* line 164, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 168, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .navbar-collapse {
   position: relative;
 }
-/* line 166, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 170, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .navbar-collapse .navbar-form {
   display: block;
   border: 0;
   box-shadow: none;
 }
 @media (max-width: 768px) {
-  /* line 173, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 177, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .navbar-collapse .navbar-form .form-group {
     display: inline-block;
   }
-  /* line 175, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 179, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .navbar-collapse .navbar-form .form-group .form-control {
     width: 60%;
     min-width: 200px;
@@ -7672,16 +7676,16 @@ textarea.header-search-input {
   }
 }
 @media (max-width: 768px) {
-  /* line 185, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+  /* line 189, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
   .navbar-collapse .navbar-form button {
     display: inline-block;
   }
 }
-/* line 198, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 202, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .navbar.navbar-inverse .navbar-nav .active a {
   background: rgba(0, 0, 0, 0.4);
 }
-/* line 203, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
+/* line 207, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/nav-ep.less */
 .navbar.navbar-inverse .navbar-nav a {
   background: rgba(0, 0, 0, 0.1);
   color: white;
