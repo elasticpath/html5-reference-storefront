@@ -7111,7 +7111,7 @@ td.visible-print {
 .flatform {
   background: red;
 }
-/* line 10, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 12, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar {
   min-height: 100px;
   background-color: rgba(47, 157, 204, 0.85);
@@ -7120,16 +7120,16 @@ td.visible-print {
   -webkit-border-radius: 0;
 }
 @media (max-width: 768px) {
-  /* line 12, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 14, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar {
     min-height: 50px;
   }
 }
-/* line 24, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 26, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar.navbar-inverse .navbar-nav .active a {
   background: rgba(0, 0, 0, 0.4);
 }
-/* line 29, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 31, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar.navbar-inverse .navbar-nav a {
   background: rgba(0, 0, 0, 0.1);
   color: white;
@@ -7137,7 +7137,7 @@ td.visible-print {
   font-size: 1.1rem;
   text-transform: uppercase;
 }
-/* line 39, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 41, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar .navbar-toggle {
   border-color: rgba(0, 0, 0, 0.2);
   position: absolute;
@@ -7146,11 +7146,11 @@ td.visible-print {
   padding: 0;
   margin: 0;
 }
-/* line 40, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 42, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar .navbar-toggle:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
-/* line 50, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 52, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar .navbar-toggle .icon {
   margin: 0;
   padding: 4px 8px;
@@ -7168,12 +7168,12 @@ td.visible-print {
 .navbar .navbar-toggle .icon:before {
   content: "\e056";
 }
-/* line 64, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 66, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .logo-container {
   width: 200px;
   margin: 15px 0 0 15px;
 }
-/* line 67, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 69, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .logo-container a {
   display: inline-block;
   width: 100%;
@@ -7207,13 +7207,13 @@ td.visible-print {
 .logo-container a:after {
   clear: both;
 }
-/* line 73, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 75, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .logo-container img {
   display: block;
   max-width: 100%;
   height: auto;
 }
-/* line 79, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 81, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container {
   position: absolute;
   display: inline-block;
@@ -7221,7 +7221,7 @@ td.visible-print {
   right: 0px;
 }
 @media (max-width: 768px) {
-  /* line 85, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 87, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .global-nav-container {
     position: relative;
     display: block;
@@ -7260,24 +7260,24 @@ td.visible-print {
     clear: both;
   }
 }
-/* line 96, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 98, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container li {
   display: inline-block;
   margin: 0 0 0 -4px;
   padding: 0;
   list-style-type: none;
 }
-/* line 103, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 105, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container li:first-child .global-nav-link {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
-/* line 110, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 112, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container li:last-child .global-nav-link {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
-/* line 117, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 119, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-link {
   display: inline-block;
   padding: 6px 12px;
@@ -7337,7 +7337,7 @@ fieldset[disabled] .global-nav-container .global-nav-link {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 123, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 125, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-cart {
   color: #ffffff;
   background-color: #5bc0de;
@@ -7378,7 +7378,7 @@ fieldset[disabled] .global-nav-container .global-nav-cart.active {
   background-color: #5bc0de;
   border-color: #46b8da;
 }
-/* line 125, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 127, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-cart .icon {
   position: relative;
   top: 1px;
@@ -7394,7 +7394,7 @@ fieldset[disabled] .global-nav-container .global-nav-cart.active {
 .global-nav-container .global-nav-cart .icon:before {
   content: "\e116";
 }
-/* line 132, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 134, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-login {
   padding: 5px 10px;
   font-size: 12px;
@@ -7440,7 +7440,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 136, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 138, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-login .icon {
   position: relative;
   top: 1px;
@@ -7455,21 +7455,21 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
 .global-nav-container .global-nav-login .icon:before {
   content: "\e008";
 }
-/* line 143, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 145, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-nav-container {
   position: absolute;
   left: 0;
   bottom: 0;
 }
 @media (max-width: 768px) {
-  /* line 148, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 150, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .main-nav-container {
     position: relative;
     left: auto;
     bottom: auto;
   }
 }
-/* line 155, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 157, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-search-container {
   position: absolute;
   right: 0;
@@ -7547,7 +7547,7 @@ td.main-search-container {
   }
 }
 @media (max-width: 768px) {
-  /* line 163, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 165, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .main-search-container {
     position: relative;
     display: block;
@@ -7586,12 +7586,12 @@ td.main-search-container {
     clear: both;
   }
 }
-/* line 174, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 176, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-search-container .form-group {
   padding-right: 0;
   margin-right: 0;
 }
-/* line 180, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 182, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .btn-header-search {
   display: inline-block;
   padding: 6px 12px;
@@ -7693,7 +7693,7 @@ fieldset[disabled] .btn-header-search.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 198, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 200, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .header-search-input {
   display: block;
   width: 100%;
@@ -7764,12 +7764,12 @@ select.header-search-input {
 textarea.header-search-input {
   height: auto;
 }
-/* line 209, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 211, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar-collapse {
   position: relative;
   min-height: 50px;
 }
-/* line 213, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 215, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar-collapse .navbar-form {
   display: block;
   border: 0;
@@ -7778,11 +7778,11 @@ textarea.header-search-input {
   padding: 12px 0;
 }
 @media (max-width: 768px) {
-  /* line 221, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 223, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form .form-group {
     display: inline-block;
   }
-  /* line 223, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 225, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form .form-group .form-control {
     width: 60%;
     min-width: 200px;
@@ -7790,7 +7790,7 @@ textarea.header-search-input {
   }
 }
 @media (max-width: 768px) {
-  /* line 232, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 234, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form button {
     display: inline-block;
   }
@@ -8440,6 +8440,15 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 /* line 64, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/itemdetail.less */
 .control-label {
   color: #6f6f6f;
+}
+/* line 68, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/itemdetail.less */
+.itemdetail-list-price-value {
+  text-decoration: line-through;
+  color: #808080;
+}
+/* line 73, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/itemdetail.less */
+.itemdetail-purchase-price-value {
+  font-weight: bold;
 }
 /* line 5, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/category.less */
 .category-item-list-price-value {
