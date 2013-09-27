@@ -7252,10 +7252,12 @@ td.visible-print {
 }
 /* line 126, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .logo-container {
+  position: relative;
   width: 200px;
   margin: 15px 0 0 15px;
+  z-index: 1031;
 }
-/* line 129, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 130, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .logo-container a {
   display: inline-block;
   width: 100%;
@@ -7289,21 +7291,21 @@ td.visible-print {
 .logo-container a:after {
   clear: both;
 }
-/* line 135, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 136, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .logo-container img {
   display: block;
   max-width: 100%;
   height: auto;
 }
-/* line 141, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 143, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container {
   position: absolute;
   display: inline-block;
   top: 12px;
-  right: 0px;
+  right: 260px;
 }
 @media (max-width: 768px) {
-  /* line 147, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 149, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .global-nav-container {
     position: relative;
     display: block;
@@ -7342,24 +7344,24 @@ td.visible-print {
     clear: both;
   }
 }
-/* line 158, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 160, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container li {
   display: inline-block;
   margin: 0 0 0 -4px;
   padding: 0;
   list-style-type: none;
 }
-/* line 165, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 167, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container li:first-child .global-nav-link {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
-/* line 172, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 174, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container li:last-child .global-nav-link {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
-/* line 179, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 181, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-link {
   display: inline-block;
   padding: 6px 12px;
@@ -7419,7 +7421,7 @@ fieldset[disabled] .global-nav-container .global-nav-link {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 185, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 187, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-cart {
   color: #ffffff;
   background-color: #5bc0de;
@@ -7460,7 +7462,7 @@ fieldset[disabled] .global-nav-container .global-nav-cart.active {
   background-color: #5bc0de;
   border-color: #46b8da;
 }
-/* line 187, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 189, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-cart .icon {
   position: relative;
   top: 1px;
@@ -7476,7 +7478,7 @@ fieldset[disabled] .global-nav-container .global-nav-cart.active {
 .global-nav-container .global-nav-cart .icon:before {
   content: "\e116";
 }
-/* line 194, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 196, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-login {
   padding: 5px 10px;
   font-size: 12px;
@@ -7522,7 +7524,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 198, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 200, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .global-nav-container .global-nav-login .icon {
   position: relative;
   top: 1px;
@@ -7538,88 +7540,18 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
 .global-nav-container .global-nav-login .icon:before {
   content: "\e008";
 }
-/* line 207, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 209, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-search-container {
   position: absolute;
-  right: 190px;
+  right: 0px;
   top: 0px;
   margin: 0 0 0 0;
-  display: block !important;
 }
 @media (max-width: 768px) {
   
 }
-/* line 508, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-tr.main-search-container {
-  display: table-row !important;
-}
-/* line 509, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-th.main-search-container,
-td.main-search-container {
-  display: table-cell !important;
-}
-@media (max-width: 767px) {
-  /* line 147, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/responsive-utilities.less */
-  .main-search-container.hidden-xs {
-    display: none !important;
-  }
-  /* line 515, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-  tr.main-search-container.hidden-xs {
-    display: none !important;
-  }
-  /* line 516, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-  th.main-search-container.hidden-xs,
-  td.main-search-container.hidden-xs {
-    display: none !important;
-  }
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  /* line 151, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/responsive-utilities.less */
-  .main-search-container {
-    display: none !important;
-  }
-  /* line 515, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-  tr.main-search-container {
-    display: none !important;
-  }
-  /* line 516, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-  th.main-search-container,
-  td.main-search-container {
-    display: none !important;
-  }
-}
-@media (min-width: 992px) and (max-width: 1199px) {
-  /* line 155, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/responsive-utilities.less */
-  .main-search-container.hidden-md {
-    display: none !important;
-  }
-  /* line 515, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-  tr.main-search-container.hidden-md {
-    display: none !important;
-  }
-  /* line 516, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-  th.main-search-container.hidden-md,
-  td.main-search-container.hidden-md {
-    display: none !important;
-  }
-}
-@media (min-width: 1200px) {
-  /* line 160, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/responsive-utilities.less */
-  .main-search-container.hidden-lg {
-    display: none !important;
-  }
-  /* line 515, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-  tr.main-search-container.hidden-lg {
-    display: none !important;
-  }
-  /* line 516, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-  th.main-search-container.hidden-lg,
-  td.main-search-container.hidden-lg {
-    display: none !important;
-  }
-}
 @media (max-width: 768px) {
-  /* line 220, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 222, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .main-search-container {
     position: relative;
     display: block;
@@ -7660,12 +7592,12 @@ td.main-search-container {
     clear: both;
   }
 }
-/* line 233, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 235, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-search-container .form-group {
   padding-right: 0;
   margin-right: 0;
 }
-/* line 239, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 241, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .btn-header-search {
   display: inline-block;
   padding: 6px 12px;
@@ -7769,7 +7701,7 @@ fieldset[disabled] .btn-header-search.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 258, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 260, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .btn-header-search .icon {
   position: relative;
   top: 1px;
@@ -7785,7 +7717,7 @@ fieldset[disabled] .btn-header-search.active {
 .btn-header-search .icon:before {
   content: "\e003";
 }
-/* line 266, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 268, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .header-search-input {
   display: block;
   width: 100%;
@@ -7843,7 +7775,7 @@ fieldset[disabled] .header-search-input {
 textarea.header-search-input {
   height: auto;
 }
-/* line 278, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 280, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar-collapse {
   position: absolute;
   top: 0;
@@ -7852,7 +7784,7 @@ textarea.header-search-input {
   min-height: 100px;
 }
 @media (max-width: 768px) {
-  /* line 285, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 287, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse {
     position: relative;
     top: auto;
@@ -7861,7 +7793,7 @@ textarea.header-search-input {
     min-height: 50px;
   }
 }
-/* line 293, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 295, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar-collapse .navbar-form {
   display: block;
   border: 0;
@@ -7870,11 +7802,11 @@ textarea.header-search-input {
   padding: 12px 0;
 }
 @media (max-width: 768px) {
-  /* line 301, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 303, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form .form-group {
     display: inline-block;
   }
-  /* line 303, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 305, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form .form-group .form-control {
     width: 60%;
     min-width: 200px;
@@ -7882,16 +7814,16 @@ textarea.header-search-input {
   }
 }
 @media (max-width: 768px) {
-  /* line 312, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 314, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form button {
     display: inline-block;
   }
 }
-/* line 319, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 321, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .appheader-container {
   position: relative;
 }
-/* line 323, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 325, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 nav.main-nav {
   position: relative;
 }

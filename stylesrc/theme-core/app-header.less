@@ -124,6 +124,7 @@
 }
 
 .logo-container{
+  position: relative;
   width: 200px;
   margin: 15px 0 0 15px;
   a{
@@ -135,6 +136,7 @@
   img{
     .img-responsive;
   }
+  z-index: (@zindex-navbar-fixed + 1); //ensures that logo is in higher z-index than bootstrap's default fixed navbar z-index.
 }
 
 
@@ -142,7 +144,7 @@
   position: absolute;
   display: inline-block;
   top: 12px;
-  right: 0px;
+  right: 260px;
 
   @media (max-width: @grid-float-breakpoint) {
     position: relative;
@@ -206,7 +208,7 @@
 
 .main-search-container{
   position: absolute;
-  right: 190px;
+  right: 0px;
   top: 0px;
   margin: 0 0 0 0;
   @media (max-width: @grid-float-breakpoint) {
@@ -215,7 +217,7 @@
     // top: 0px;
   }
 
-  .hidden-sm; // bootstrap class, hides element on tablet viewport
+
 
   @media (max-width: @grid-float-breakpoint) { // set up alternative display for collapsed state
     position: relative;
