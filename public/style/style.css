@@ -7450,12 +7450,13 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   font-weight: normal;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
+  margin-right: 4px;
 }
 /* line 46, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/glyphicons.less */
 .global-nav-container .global-nav-login .icon:before {
   content: "\e008";
 }
-/* line 145, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 146, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-nav-container {
   display: block;
   position: absolute;
@@ -7465,7 +7466,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   width: 100%;
 }
 @media (max-width: 768px) {
-  /* line 155, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 156, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .main-nav-container {
     position: relative;
     left: auto;
@@ -7474,7 +7475,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
     width: auto;
   }
 }
-/* line 164, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 165, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-search-container {
   position: absolute;
   right: 190px;
@@ -7555,7 +7556,7 @@ td.main-search-container {
   }
 }
 @media (max-width: 768px) {
-  /* line 177, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 178, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .main-search-container {
     position: relative;
     display: block;
@@ -7596,12 +7597,12 @@ td.main-search-container {
     clear: both;
   }
 }
-/* line 190, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 191, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-search-container .form-group {
   padding-right: 0;
   margin-right: 0;
 }
-/* line 196, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 197, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .btn-header-search {
   display: inline-block;
   padding: 6px 12px;
@@ -7705,7 +7706,23 @@ fieldset[disabled] .btn-header-search.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 217, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 216, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+.btn-header-search .icon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  margin-right: 4px;
+}
+/* line 42, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/glyphicons.less */
+.btn-header-search .icon:before {
+  content: "\e003";
+}
+/* line 224, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .header-search-input {
   display: block;
   width: 100%;
@@ -7763,7 +7780,7 @@ fieldset[disabled] .header-search-input {
 textarea.header-search-input {
   height: auto;
 }
-/* line 229, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 236, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar-collapse {
   position: absolute;
   top: 0;
@@ -7772,7 +7789,7 @@ textarea.header-search-input {
   min-height: 100px;
 }
 @media (max-width: 768px) {
-  /* line 236, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 243, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse {
     position: relative;
     top: auto;
@@ -7781,7 +7798,7 @@ textarea.header-search-input {
     min-height: 50px;
   }
 }
-/* line 244, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 251, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar-collapse .navbar-form {
   display: block;
   border: 0;
@@ -7790,11 +7807,11 @@ textarea.header-search-input {
   padding: 12px 0;
 }
 @media (max-width: 768px) {
-  /* line 252, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 259, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form .form-group {
     display: inline-block;
   }
-  /* line 254, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 261, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form .form-group .form-control {
     width: 60%;
     min-width: 200px;
@@ -7802,16 +7819,16 @@ textarea.header-search-input {
   }
 }
 @media (max-width: 768px) {
-  /* line 263, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 270, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form button {
     display: inline-block;
   }
 }
-/* line 270, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 277, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .appheader-container {
   position: relative;
 }
-/* line 274, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 281, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 nav.main-nav {
   position: relative;
 }
