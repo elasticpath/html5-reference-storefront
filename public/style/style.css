@@ -7217,7 +7217,7 @@ td.visible-print {
 .global-nav-container {
   position: absolute;
   display: inline-block;
-  top: -36px;
+  top: 12px;
   right: 0px;
 }
 @media (max-width: 768px) {
@@ -7457,25 +7457,33 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
 }
 /* line 145, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-nav-container {
+  display: block;
   position: absolute;
   left: 0;
+  right: 0;
   bottom: 0;
+  width: 100%;
 }
 @media (max-width: 768px) {
-  /* line 150, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 155, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .main-nav-container {
     position: relative;
     left: auto;
+    right: auto;
     bottom: auto;
+    width: auto;
   }
 }
-/* line 157, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 164, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-search-container {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: 190px;
+  top: 0px;
   margin: 0 0 0 0;
   display: block !important;
+}
+@media (max-width: 768px) {
+  
 }
 /* line 508, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
 tr.main-search-container {
@@ -7547,15 +7555,17 @@ td.main-search-container {
   }
 }
 @media (max-width: 768px) {
-  /* line 165, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 177, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .main-search-container {
     position: relative;
     display: block;
     width: 100%;
     top: auto;
     left: auto;
+    right: auto;
     float: none!important;
     border: none;
+    margin-left: -4px;
   }
   /* line 20, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
   .main-search-container:before,
@@ -7586,12 +7596,12 @@ td.main-search-container {
     clear: both;
   }
 }
-/* line 176, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 190, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .main-search-container .form-group {
   padding-right: 0;
   margin-right: 0;
 }
-/* line 182, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 196, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .btn-header-search {
   display: inline-block;
   padding: 6px 12px;
@@ -7621,6 +7631,8 @@ td.main-search-container {
   color: #ffffff;
   background-color: #5cb85c;
   border-color: #4cae4c;
+  height: 22px;
+  padding: 0px 5px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   margin-left: -5px;
@@ -7693,7 +7705,7 @@ fieldset[disabled] .btn-header-search.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 200, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 217, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .header-search-input {
   display: block;
   width: 100%;
@@ -7710,11 +7722,7 @@ fieldset[disabled] .btn-header-search.active {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  height: 30px;
-  padding: 5px 10px;
-  font-size: 12px;
-  line-height: 1.5;
-  border-radius: 3px;
+  height: 22px;
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   border-top-right-radius: 0;
@@ -7755,21 +7763,25 @@ fieldset[disabled] .header-search-input {
 textarea.header-search-input {
   height: auto;
 }
-/* line 715, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-select.header-search-input {
-  height: 30px;
-  line-height: 30px;
-}
-/* line 720, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-textarea.header-search-input {
-  height: auto;
-}
-/* line 211, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+/* line 229, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar-collapse {
-  position: relative;
-  min-height: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100px;
 }
-/* line 215, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+@media (max-width: 768px) {
+  /* line 236, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  .navbar-collapse {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    min-height: 50px;
+  }
+}
+/* line 244, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
 .navbar-collapse .navbar-form {
   display: block;
   border: 0;
@@ -7778,11 +7790,11 @@ textarea.header-search-input {
   padding: 12px 0;
 }
 @media (max-width: 768px) {
-  /* line 223, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 252, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form .form-group {
     display: inline-block;
   }
-  /* line 225, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 254, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form .form-group .form-control {
     width: 60%;
     min-width: 200px;
@@ -7790,10 +7802,18 @@ textarea.header-search-input {
   }
 }
 @media (max-width: 768px) {
-  /* line 234, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+  /* line 263, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
   .navbar-collapse .navbar-form button {
     display: inline-block;
   }
+}
+/* line 270, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+.appheader-container {
+  position: relative;
+}
+/* line 274, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/app-header.less */
+nav.main-nav {
+  position: relative;
 }
 /* line 5, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/cart.less */
 .cart-outer {

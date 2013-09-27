@@ -81,7 +81,7 @@
 .global-nav-container{ // global nav styles
   position: absolute;
   display: inline-block;
-  top: -36px;
+  top: 12px;
   right: 0px;
 
   @media (max-width: @grid-float-breakpoint) {
@@ -143,22 +143,34 @@
 } // end global nav styles
 
 .main-nav-container{
+  display: block;
   position: absolute;
   left: 0;
+  right: 0;
   bottom: 0;
+  width: 100%;
+
+
 
   @media (max-width: @grid-float-breakpoint) {
     position: relative;  // kill absolute positioning when in collapsed state to allow collapse panel to display properly
     left: auto;
+    right: auto;
     bottom: auto;
+    width: auto;
   }
 }
 
 .main-search-container{
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: 190px;
+  top: 0px;
   margin: 0 0 0 0;
+  @media (max-width: @grid-float-breakpoint) {
+    // position: relative;
+    // right: 190px;
+    // top: 0px;
+  }
 
   .hidden-sm; // bootstrap class, hides element on tablet viewport
 
@@ -169,8 +181,10 @@
     width: 100%;
     top: auto;
     left: auto;
+    right: auto;
     float: none!important;
     border: none;
+    margin-left: -4px;
   }
 
   .form-group{
@@ -183,6 +197,9 @@
   .btn;
   .btn-sm;
   .btn-success;
+  height: 22px;
+  padding: 0px 5px;
+  // line-height: 24px;
   // border-bottom: 0!important;
   // box-shadow: none;
   // -webkit-box-shadow: none;
@@ -199,7 +216,8 @@
 
 .header-search-input{
   .form-control;
-  .input-sm;
+  // .input-sm;
+  height: 22px;
   // add faint shadow to match buttons
   -webkit-box-shadow:  0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow:          0px 2px 0px 0px rgba(0, 0, 0, 0.2);
@@ -209,8 +227,19 @@
 }
 
 .navbar-collapse{
-  position: relative;
-  min-height: 50px;
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  min-height: 100px;
+
+  @media (max-width: @grid-float-breakpoint) {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    min-height: 50px;
+  }
 
   .navbar-form{
     display: block;
@@ -238,5 +267,10 @@
   }
 }
 
+.appheader-container{
+  position: relative;
+}
 
-
+nav.main-nav{
+  position: relative;
+}
