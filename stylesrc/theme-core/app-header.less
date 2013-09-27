@@ -14,27 +14,65 @@
   @media (max-width: @grid-float-breakpoint) {
     min-height: 50px;
   }
+  @media (min-width: @grid-float-breakpoint) {
+    -webkit-box-shadow:  0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+
+        box-shadow:  0px 4px 4px 0px rgba(0, 0, 0, 0.3);
+  }
 
   background-color: @navbar-background;
   margin: 0;
   border-radius: 0;
   -webkit-border-radius: 0;
 
+  .navbar-nav{
+    .clearfix;
+  }
+
   &.navbar-inverse{
     .navbar-nav{
       .active{
         a{
-          background: rgba(0,0,0,0.4);
+          background: darken(@brand-primary,10%);
         }
       }
 
-      a{
-        background: rgba(0,0,0,0.1);
-        color: white;
-        padding: 10px 10px;
-        font-size: 1.1rem;
-        text-transform: uppercase;
+      li{
+        // border-right: 1px solid darken(@brand-primary, 12%);
+        border-right: 1px solid lighten(@brand-primary, 1%);
+        -webkit-box-shadow: inset -1px 0px 0px 0px darken(@brand-primary, 6%);
+        box-shadow: inset -1px 0px 0px 0px darken(@brand-primary, 6%);
+
+
+        &:first-child{
+          a{
+            border-top-left-radius: (4px);
+          }
+        }
+        &:last-child{
+          a{
+            // border-top-right-radius: (4px);
+          }
+        }
+        a{
+          // background: rgba(0,0,0,0.1);
+          // background: darken(@brand-primary, 5%);
+
+          color: white;
+          padding: 7px 7px;
+          font-size: 1.3rem;
+          // text-transform: uppercase;
+          @media screen and (max-width: @screen-desktop) and (min-width: @screen-tablet){
+            font-size: 1.2rem;
+            padding: 7px 6px;
+          }
+
+          &:hover{
+            background: darken(@brand-primary, 10%);
+          }
+        }
       }
+
     }
   }
 
@@ -59,8 +97,30 @@
   }
 }
 
-.app-header{
- // moved styles to navbar class rules
+.main-nav-container{
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background: darken(@brand-primary, 5%);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border: 1px solid darken(@brand-primary, 5%);
+  border-bottom: 1px solid: #000;
+  margin-bottom: 1px;
+
+  @media (max-width: @grid-float-breakpoint) {
+    position: relative;  // kill absolute positioning when in collapsed state to allow collapse panel to display properly
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: auto;
+    background: none;
+    border: none;
+    margin-bottom: 0px;
+  }
 }
 
 .logo-container{
@@ -143,24 +203,6 @@
   }
 } // end global nav styles
 
-.main-nav-container{
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-
-
-
-  @media (max-width: @grid-float-breakpoint) {
-    position: relative;  // kill absolute positioning when in collapsed state to allow collapse panel to display properly
-    left: auto;
-    right: auto;
-    bottom: auto;
-    width: auto;
-  }
-}
 
 .main-search-container{
   position: absolute;
