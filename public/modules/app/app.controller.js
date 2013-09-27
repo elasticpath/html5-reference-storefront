@@ -22,7 +22,8 @@ define(['ep','eventbus','modules/app/app.models','modules/app/app.views','text!m
     Marionette.Region.prototype.open = function(view){
       this.$el.hide();
       this.$el.html(view.el);
-      this.$el.fadeIn(ep.app.config.viewFadeInValue);
+   //  this.$el.removeAttr('style');
+      this.$el.show(ep.app.config.viewFadeInValue);
     }
 
     /*

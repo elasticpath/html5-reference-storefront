@@ -135,7 +135,7 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
     var defaultLayout = Backbone.Marionette.Layout.extend({
       template: '#CategoryDefaultLayoutTemplate',
       regions: {
-        categoryTitleRegion: '[data-region="categoryTitleRegion"]',
+        categoryTitleRegion: '[data-region="categoryTitleRegion"]'
       },
       className: 'category-items-container container',
       onShow: function () {
@@ -323,9 +323,8 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
      * FUNCTIONS
      */
     var hidePaginationRegion = function() {
-      $('[data-region="categoryPaginationBottomRegion"]').addClass('is-hidden');
-      $('[data-region="categoryPaginationTopRegion"]').addClass('is-hidden');
-
+      $('[data-region="categoryPaginationBottomRegion"]').hide();
+      $('[data-region="categoryPaginationTopRegion"]').hide();
     };
 
     return {

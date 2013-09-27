@@ -82,12 +82,12 @@ define(['app', 'ep', 'eventbus', 'modules/category/category.models', 'modules/ca
           });
 
           ep.app.categoryPaginationTopRegion.show(paginationTopView);
+          ep.app.categoryPaginationBottomRegion.show(paginationBottomView);
           ep.app.categoryBrowseRegion.show(
             new View.CategoryItemCollectionView({
               collection: new Model.CategoryItemCollectionModel(itemResponse.attributes.itemCollection)
             })
           );
-          ep.app.categoryPaginationBottomRegion.show(paginationBottomView);
         },
         error: function (response) {
           ep.logger.error('error fetch category items model ' + response);
