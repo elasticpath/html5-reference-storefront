@@ -155,13 +155,21 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       regions:{
         cartTitleRegion:'[data-region="cartTitleRegion"]',
         mainCartRegion:'[data-region="mainCartRegion"]',
-        cartSummaryRegion:'[data-region="cartSummaryRegion"]',
-        cartCheckoutActionRegion:'[data-region="cartCheckoutActionRegion"]'
+        cartCheckoutMasterRegion:'[data-region="cartCheckoutMasterRegion"]'
       },
       onShow:function(){
         Mediator.fire('mediator.cart.DefaultViewRendered');
 
 
+      }
+    });
+
+    // Cart Checkout Master View
+    var cartCheckoutMasterView = Backbone.Marionette.Layout.extend({
+      template:'#CartCheckoutMasterLayoutTemplate',
+      regions:{
+        cartSummaryRegion:'[data-region="cartSummaryRegion"]',
+        cartCheckoutActionRegion:'[data-region="cartCheckoutActionRegion"]'
       }
     });
 
@@ -395,6 +403,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
       DefaultView:defaultView,
+      CartCheckoutMasterView:cartCheckoutMasterView,
       PurchaseConfirmationView:purchaseConfirmationView,
       PurchaseConfirmationLayout:purchaseConfirmationLayout,
       CartActivityIndicatorView:cartActivityIndicatorView,

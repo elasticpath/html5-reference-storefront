@@ -33,10 +33,16 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
           });
 
           cartLayout.cartTitleRegion.show(new View.CartTitleView());
-          cartLayout.cartSummaryRegion.show(summaryView);
-          cartLayout.cartCheckoutActionRegion.show(new View.CartCheckoutActionView({
-            model: cartModel
-          }));
+          var cartCheckoutMasterView = new View.CartCheckoutMasterView();
+          cartCheckoutMasterView.on('show',function(){
+            cartCheckoutMasterView.cartSummaryRegion.show(summaryView);
+            cartCheckoutMasterView.cartCheckoutActionRegion.show(new View.CartCheckoutActionView({
+              model: cartModel
+            }));
+          });
+          cartLayout.cartCheckoutMasterRegion.show(cartCheckoutMasterView);
+
+
 
           if (response.attributes.lineItems.length > 0) {
             cartLayout.mainCartRegion.show(mainCartView);

@@ -12,13 +12,18 @@
         </div>
       </div>
 
-      <div class="cart-sidebar">
-        <div class="cart-sidebar-inner">
-          <div data-region="cartSummaryRegion" class="cart-summary-container"></div>
-          <div data-region="cartCheckoutActionRegion" class="cart-checkout-container"></div>
-        </div>
+      <div class="cart-sidebar" data-region="cartCheckoutMasterRegion">
+
       </div>
 
+    </div>
+  </script>
+
+  <!-- Cart Checkout Master Layout Template -->
+  <script id="CartCheckoutMasterLayoutTemplate" type="text/template">
+    <div class="cart-sidebar-inner">
+      <div data-region="cartSummaryRegion" class="cart-summary-container"></div>
+      <div data-region="cartCheckoutActionRegion" class="cart-checkout-container"></div>
     </div>
   </script>
 
