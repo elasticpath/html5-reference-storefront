@@ -33,9 +33,9 @@
   "category": {
     "next": "Next",
     "prev": "Previous",
-    "currentPage": "page",
-    "totalPage": "of",
-    "resultsOnPage": "results per page",
+    "page": "page",
+    "of": "of",
+    "resultsOnPage": "results on page",
     "totalResults": "results",
     "emptyViewMsg": "No item currently in this category"
   },

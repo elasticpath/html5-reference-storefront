@@ -99,9 +99,9 @@
       <a class="btn-pagination btn-pagination-prev pagination-link <%= E.checkForDisabledPaginationBtn(E.links.prev) %>" data-i18n="category.prev"
         <%= E.generatePaginationLink(E.categoryUri, E.links.prev) %> > <span class="icon"></span><%= E.getI18nLabel('category.prev') %></a>
       <span class="pagestate-summary">
-        <label class="pagingnation-label"><%= E.getI18nLabel('category.currentPage') %></label>
+        <label class="pagingnation-label"><%= E.getI18nLabel('category.page') %></label>
         <span class="pagingnation-value pagination-curr-page-value"><%= E.stats.currentPage %></span>
-        <label class="pagingnation-label"><%= E.getI18nLabel('category.totalPage') %></label>
+        <label class="pagingnation-label"><%= E.getI18nLabel('category.of') %></label>
         <span class="pagingnation-value pagination-total-pages-value"><%= E.stats.numOfPages %></span>
 
       </span>

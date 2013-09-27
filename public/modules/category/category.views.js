@@ -11,6 +11,9 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
 
     var viewHelpers = {
       getI18nLabel: function (key) {
+        // segmented localization e.g. page n of n not well handled
+        // in future, needs to look into more elegant solution that
+        // taking multiple parameters, and accessed with 1 key
         var retVal = key;
         try {
           retVal = i18n.t(key);
@@ -320,8 +323,8 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
      * FUNCTIONS
      */
     var hidePaginationRegion = function() {
-      $('[data-region="categoryPaginationBottomRegion"]').addClass('pagination-region-hidden');
-      $('[data-region="categoryPaginationTopRegion"]').addClass('pagination-region-hidden');
+      $('[data-region="categoryPaginationBottomRegion"]').addClass('is-hidden');
+      $('[data-region="categoryPaginationTopRegion"]').addClass('is-hidden');
 
     };
 
