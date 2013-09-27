@@ -66,6 +66,12 @@
             font-size: 1.2rem;
             padding: 7px 6px;
           }
+          @media screen and (max-width: @screen-tablet){
+            font-size: 1.5rem;
+            padding: 8px 15px;
+            margin: 2px 0;
+            background: darken(@brand-primary, 6%);
+          }
 
           &:hover{
             background: darken(@brand-primary, 10%);
@@ -215,6 +221,7 @@
     // position: relative;
     // right: 190px;
     // top: 0px;
+
   }
 
 
@@ -222,12 +229,12 @@
   @media (max-width: @grid-float-breakpoint) { // set up alternative display for collapsed state
     position: relative;
     .clearfix;
-    display: block;
-    width: 100%;
+    // display: inline-block!important;
+    // width: 100%;
     top: auto;
     left: auto;
     right: auto;
-    float: none!important;
+    // float: right!important;
     border: none;
     margin-left: -4px;
   }
@@ -290,6 +297,7 @@
     left: auto;
     right: auto;
     min-height: 50px;
+    background: darken(@brand-primary, 5%)
   }
 
   .navbar-form{
