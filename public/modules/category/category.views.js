@@ -295,9 +295,22 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
       className: 'category-items-listing equalize',
       onShow:function(){
         pace.stop();
-        // setTimeout(function(){$('.category-item-inner').equalHeights(true);},3000);
-        $('.category-item-inner').equalHeights();
-        $(window).resize(function(){$('.category-item-inner').equalHeights();});
+
+        // setup function to encapsulate all element height-matching calls
+        var matchHeights = function(){
+          $('.category-item-title').equalHeights();
+          $('.category-item-inner').equalHeights();
+          $('.category-item-price-container').equalHeights();
+        }
+        matchHeights();
+
+        // run height-matching function on window resize
+        $(window).resize(
+          function(){
+            matchHeights();
+          }
+        );
+
       }
     });
 
