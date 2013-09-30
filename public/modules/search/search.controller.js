@@ -6,7 +6,7 @@
  * Time: 3:07 PM
  *
  */
-define(['ep','eventbus','modules/search/search.views','modules/search/search.models','text!modules/search/search.templates.html'],
+define(['ep','eventbus','search.views','search.models','text!modules/search/search.templates.html'],
   function(ep,EventBus,View,Model,template){
 
     $('#TemplateContainer').append(template);

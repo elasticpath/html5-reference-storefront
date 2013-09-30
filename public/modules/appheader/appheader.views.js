@@ -7,7 +7,7 @@
  *
  */
 
-define(['ep', 'mediator', 'eventbus','backbone','marionette','i18n','modules/appheader/appheader.models'],
+define(['ep', 'mediator', 'eventbus','backbone','marionette','i18n','appheader.models'],
   function(ep, Mediator, EventBus,Backbone, Marionette,i18n,Model){
     var viewHelpers = {
       getI18nLabel:function(key){

@@ -7,7 +7,7 @@
  *
  *
  */
-define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models', 'modules/cart/cart.views', 'text!modules/cart/cart.templates.html','pace'],
+define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'cart.models', 'cart.views', 'text!modules/cart/cart.templates.html','pace'],
   function (ep, App, EventBus, Mediator, Cortex, Model, View, template,pace) {
     pace.start();
     $('#TemplateContainer').append(template);

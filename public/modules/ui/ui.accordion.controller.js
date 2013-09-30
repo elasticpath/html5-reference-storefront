@@ -6,7 +6,7 @@
  * Time: 8:13 AM
  *
  */
-define(['app','eventbus','modules/ui/ui.accordion.models','modules/ui/ui.accordion.views','text!modules/ui/ui.accordion.templates.html'],
+define(['app','eventbus','ui.accordion.models','ui.accordion.views','text!modules/ui/ui.accordion.templates.html'],
   function(App, EventBus, Model, View, template){
     var anchorSelector = '#TemplateContainer';
 

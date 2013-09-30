@@ -7,7 +7,7 @@
  *
  * 
  */
-define(['app', 'eventbus', 'cortex', 'modules/ui/ui.modal.models', 'modules/ui/ui.modal.views', 'text!modules/ui/ui.modal.templates.html'],
+define(['app', 'eventbus', 'cortex', 'ui.modal.models', 'ui.modal.views', 'text!modules/ui/ui.modal.templates.html'],
   function(App, EventBus, Cortex, Model, View, template){
 
     $('#TemplateContainer').append(template);

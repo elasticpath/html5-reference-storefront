@@ -15,11 +15,11 @@ module.exports = function(grunt){
       compile: {
         options: {
 //          appDir:"",
-          baseUrl: "public",
+          baseUrl: "",
          // dir:"build",
           mainConfigFile: "public/main.js",
           name:"main",
-          out: "public/buildt/app-optimized.js",
+          out: "public/build/app-optimized.js",
 //          modules:[
 //            {
 //              name:"main",
