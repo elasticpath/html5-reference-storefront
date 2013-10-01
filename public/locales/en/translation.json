@@ -47,5 +47,39 @@
     "noPrice":"n/a",
     "noImgLabel": "No Image Available",
     "quantity": "Quantity"
+  },
+  "confirm":{
+    "pageTitle":"Thank you. Your order has been processed",
+    "summaryTitle":"Summary",
+    "itemsTitle": "Items",
+    "billingTitle": "Billing Information",
+    "paymentMethodTitle": "Payment Method Summary",
+    "orderStatus": "Status",
+    "orderNumber": "Order Number",
+    "orderTaxTotal": "Order Tax Total",
+    "orderDate":"Order Purchase Date",
+    "orderTotal": "Order Total",
+    "itemName": "Name",
+    "itemQuantity": "Quantity",
+    "itemSubTotal": "Sub-total",
+    "itemTax": "Tax",
+    "Item Total": "Item Total"
+  },
+  "profile":{
+    "personalInfoTitle": "Personal Information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "subscriptionsTitle": "Subscriptions",
+    "subscriptionHeader": "Subscription",
+    "subscriptionQuanity": "Quantity",
+    "subscriptionNextBillingDate": "Next Billing Date",
+    "paymentMethodsTitle": "Payment Methods",
+    "paymentCardNumber":"Card Number",
+    "paymentCardType": "Card Type",
+    "paymentCardHolder": "Card Holder",
+    "paymentExpiryMonth": "Expiry Month",
+    "paymentExpiryYear": "Expiry Year"
+
+
   }
 }

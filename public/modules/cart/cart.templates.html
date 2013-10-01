@@ -162,14 +162,14 @@
 
   <!-- Purchase Confirmation Layout Template -->
   <script id="PurchaseConfirmationLayoutTemplate" type="text/temmplate">
-    <h2>Thank you. Your order has been processed</h2>
-    <h3>Summary</h3>
+    <h2><%= E.getI18nLabel('confirm.pageTitle') %></h2>
+    <h3><%= E.getI18nLabel('confirm.summaryTitle') %></h3>
     <div data-region="purchaseConfirmationRegion"></div>
-    <h3>Items</h3>
+    <h3><%= E.getI18nLabel('confirm.itemsTitle') %></h3>
     <div data-region="confirmationLineItemsRegion" class="purchaseconfirm-items-container"></div>
-    <h3>Billing Information</h3>
+    <h3><%= E.getI18nLabel('confirm.billingTitle') %></h3>
     <div data-region="confirmationBillingAddressRegion"></div>
-    <h3>Payment Method Summary</h3>
+    <h3><%= E.getI18nLabel('confirm.paymentMethodTitle') %></h3>
     <div data-region="confirmationPaymentMethodsRegion"></div>
 
   </script>
@@ -179,22 +179,22 @@
     <table class="table table-striped">
       <tbody>
         <tr>
-          <td class="col-xs-4 col-xs-offset-2">Status:</td>
+          <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('confirm.orderStatus') %>:</td>
           <td class="col-xs-6"><%= E.status %></td>
         </tr>
         <tr>
-          <td class="col-xs-4 col-xs-offset-2">Order Number:</td>
+          <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('confirm.orderNumber') %>:</td>
           <td class="col-xs-6"><%= E.purchaseNumber %></td>
         </tr>
-          <td class="col-xs-4 col-xs-offset-2">Order Tax Total:</td>
+          <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('confirm.orderTaxTotal') %>:</td>
           <td class="col-xs-6"><%= E.taxTotal %></td>
         </tr>
         <tr>
-          <td class="col-xs-4 col-xs-offset-2">Order Purchase Date:</td>
+          <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('confirm.orderDate') %>:</td>
           <td class="col-xs-6"><%= E.purchaseDate %></td>
         </tr>
         <tr>
-          <td class="col-xs-4 col-xs-offset-2">Order Total:</td>
+          <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('confirm.orderTotal') %>:</td>
           <td class="col-xs-6"><%= E.orderTotal %></td>
         </tr>
       </tbody>
@@ -222,31 +222,31 @@
       <tbody>
         <tr>
           <td class="row">
-            <label class="col-xs-2 col-xs-offset-2">Name:</label>
+            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('confirm.itemName') %>:</label>
             <span class="col-xs-8"><%= E.name %></span>
           </td>
         </tr>
         <tr>
           <td class="row">
-            <label class="col-xs-2 col-xs-offset-2">Quantity:</label>
+            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('confirm.itemQuantity') %>:</label>
             <span class="col-xs-8"><%= E.quantity %></span>
           </td>
         </tr>
         <tr>
           <td class="row  <%= E.checkIfVisible(E) %>">
-            <label class="col-xs-2 col-xs-offset-2">Sub-total:</label>
+            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('confirm.itemSubTotal') %>:</label>
             <span class="col-xs-8 <%= E.checkIfVisible(E) %>">&nbsp;<%= E.amount.display %></span>
           </td>
         </tr>
         <tr>
           <td class="row  <%= E.checkIfVisible(E) %>">
-            <label class="col-xs-2 col-xs-offset-2">Tax:</label>
+            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('confirm.itemTax') %>:</label>
             <span class="col-xs-8 <%= E.checkIfVisible(E) %>">&nbsp;<%= E.tax.display %></span>
           </td>
         </tr>
         <tr>
           <td class="row">
-            <label class="col-xs-2 col-xs-offset-2">Item Total:</label>
+            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('confirm.itemTotal') %>:</label>
             <span class="col-xs-8"><%= E.total.display %></span>
           </td>
         </tr>

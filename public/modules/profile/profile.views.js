@@ -6,13 +6,21 @@
  * Time: 9:16 AM
  *
  */
-define(['marionette'],
-  function(Marionette){
+define(['marionette','i18n'],
+  function(Marionette, i18n){
 
     var viewHelpers = {
-      wtf:function(model){
-        var x = model;
-        return x;
+      getI18nLabel:function(key){
+        var retVal = key;
+        try{
+          retVal = i18n.t(key);
+        }
+        catch(e){
+          // slient failure on label rendering
+        }
+
+        return retVal;
+
       }
     };
 
@@ -26,7 +34,9 @@ define(['marionette'],
         profileBillingAddressRegion:'[data-region="profileBillingAddressRegion"]',
         profilePaymentMethodRegion:'[data-region="profilePaymentMethodRegion"]'
       },
-      className:'container'
+      className:'container',
+      templateHelpers:viewHelpers
+
     });
 
     var profileSubscriptionItemView = Backbone.Marionette.ItemView.extend({
@@ -38,13 +48,17 @@ define(['marionette'],
       template:'#ProfileSubscriptionSummaryTemplate',
       itemView:profileSubscriptionItemView,
       itemViewContainer:'tbody',
-      className:'table-responsive'
+      className:'table-responsive',
+      templateHelpers:viewHelpers
+
     });
 
     // Profile Summary View
     var profileSummaryView = Backbone.Marionette.ItemView.extend({
-      template:'#ProfileSummaryViewTemplate'
-    });
+      template:'#ProfileSummaryViewTemplate',
+      templateHelpers:viewHelpers
+
+  });
 
     // Profile Payment Method Item View
     var paymentMethodItemView = Backbone.Marionette.ItemView.extend({

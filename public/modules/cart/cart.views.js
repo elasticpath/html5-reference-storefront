@@ -383,7 +383,9 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     // Purchase Confirmation Layout
     var purchaseConfirmationLayout = Backbone.Marionette.Layout.extend({
       template:'#PurchaseConfirmationLayoutTemplate',
-      className:'purchase-confirmation-container container'
+      className:'purchase-confirmation-container container',
+      templateHelpers:viewHelpers
+
     });
 
     // Purchase Confirmation View
@@ -394,7 +396,9 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
 
     // Purchase Confirmation Billing Address View
     var purchaseConfirmationBillingAddressView = Backbone.Marionette.ItemView.extend({
-      template:'#PurchaseConfirmationBillingAddress'
+      template:'#PurchaseConfirmationBillingAddress',
+      templateHelpers:viewHelpers
+
     });
 
     // Purchase Confirmation Line Item View
@@ -407,7 +411,9 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     var purchaseConfirmationLineItemsContainerView = Backbone.Marionette.CollectionView.extend({
       tagName:'ul',
       className:'purchaseconfirmation-items-list',
-      itemView:purchaseConfirmationLineItemView
+      itemView:purchaseConfirmationLineItemView,
+      templateHelpers:viewHelpers
+
     });
 
     // Activity Indicator View

@@ -17,11 +17,11 @@
 
   <!-- Profile Summary View Template -->
   <script id="ProfileSummaryViewTemplate" type="text/template">
-    <h2>Personal Information</h2>
+    <h2><%= E.getI18nLabel('profile.personalInfoTitle') %></h2>
     <dl class="row">
-      <dt class="col-xs-4 col-xs-offset-2">First Name</dt>
+      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.firstName') %>:</dt>
       <dd class="col-xs-6"><%= E.givenName %></dd>
-      <dt class="col-xs-4 col-xs-offset-2">Last Name</dt>
+      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.lastName') %>:</dt>
       <dd class="col-xs-6"><%= E.familyName %></dd>
     </dl>
   </script>
@@ -40,13 +40,13 @@
 
   <!-- ProfileSubscriptionSummaryTemplate  -->
   <script id="ProfileSubscriptionSummaryTemplate" type="text/template">
-    <h2>Subscriptions</h2>
+    <h2><%= E.getI18nLabel('profile.subscriptionsTitle') %></h2>
     <table class="table table-condensed striped-table">
       <thead>
         <tr>
-          <th>Subscription</th>
-          <th>Quantity</th>
-          <th>Next Billing Date</th>
+          <th><%= E.getI18nLabel('profile.subscriptionHeader') %></th>
+          <th><%= E.getI18nLabel('profile.subscriptionQuanity') %></th>
+          <th><%= E.getI18nLabel('profile.subscriptionNextBillingDate') %></th>
         </tr>
       </thead>
       <tbody>
@@ -57,7 +57,9 @@
   </script>
 
 
-  <!-- Profile Billing Address Form -->
+  <!-- Profile Billing Address Form
+  Not used yet
+  -->
   <script id="ProfileBillingAddressFormTemplate" type="text/template">
     <form class="form column-form">
       <ul>
@@ -102,7 +104,9 @@
   </script>
   <!-- Profile Billing Address View -->
   <!-- Profile Shipping Address View -->
-  <!-- Profile Shipping Address Form -->
+  <!-- Profile Shipping Address Form
+  not used yet
+   -->
   <script id="ProfileShippingAddressFormTemplate" type="text/template">
     <form class="form column-form">
       <ul>
@@ -146,36 +150,19 @@
     </form>
   </script>
 
-  <!-- Profile Payment Container Template -->
-  <script id="ProfilePaymentContainerTemplate" type="text/template">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
-        </tr>
-      </thead>
-      <tbody>
-
-      </tbody>
-      </table>
-  </script>
-
   <!-- Profile Payment Method View -->
   <script id="ProfilePaymentMethodTemplate" type="text/template">
 
     <dl class="row">
-      <dt class="col-xs-4 col-xs-offset-2">Card Number</dt>
+      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.paymentCardNumber') %>:</dt>
       <dd class="col-xs-6"><%= E.cardNumber%></dd>
-      <dt class="col-xs-4 col-xs-offset-2">Card Type</dt>
+      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.paymentCardType') %>:</dt>
       <dd class="col-xs-6"><%= E.cardType%></dd>
-      <dt class="col-xs-4 col-xs-offset-2">Card Holder</dt>
+      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.paymentCardHolder') %>:</dt>
       <dd class="col-xs-6"><%= E.cardHolderName%></dd>
-      <dt class="col-xs-4 col-xs-offset-2">Expiry Month</dt>
+      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.paymentExpiryMonth') %>:</dt>
       <dd class="col-xs-6"><%= E.expiryMonth%></dd>
-      <dt class="col-xs-4 col-xs-offset-2">Expiry Year</dt>
+      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.paymentExpiryYear') %>:</dt>
       <dd class="col-xs-6"><%= E.expiryYear%></dd>
     </dl>
 
@@ -184,13 +171,15 @@
   <!-- ProfilePaymentMethodsTemplate -->
   <script id="ProfilePaymentMethodsTemplate" type="text/template">
 
-    <h2>Payment Methods</h2>
+    <h2><%= E.getI18nLabel('profile.paymentMethodsTitle') %></h2>
     <ul></ul>
 
   </script>
 
 
-  <!-- Profile Payment Method Form -->
+  <!-- Profile Payment Method Form
+  not used yet
+  -->
   <script id="PaymentMethodFormTemplate" type="text/template">
     <form class="form columnar">
       <ul>
