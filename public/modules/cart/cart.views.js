@@ -127,9 +127,11 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         return  retVar;
 
       },
-      fuck:function(model){
-        var x = model;
-        return JSON.stringify(x);
+      checkIfVisible:function(model){
+        if (model.amount.display){
+         return null;
+        }
+        return 'is-hidden';
       }
     };
 
@@ -390,6 +392,24 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       templateHelpers:viewHelpers
     });
 
+    // Purchase Confirmation Billing Address View
+    var purchaseConfirmationBillingAddressView = Backbone.Marionette.ItemView.extend({
+      template:'#PurchaseConfirmationBillingAddress'
+    });
+
+    // Purchase Confirmation Line Item View
+    var purchaseConfirmationLineItemView = Backbone.Marionette.ItemView.extend({
+      template:'#PurchaseConfirmationLineItem',
+      tagName:'li',
+      templateHelpers:viewHelpers
+    });
+    // Purchase Confirmation Line Item Container View
+    var purchaseConfirmationLineItemsContainerView = Backbone.Marionette.CollectionView.extend({
+      tagName:'ul',
+      className:'purchaseconfirmation-items-list',
+      itemView:purchaseConfirmationLineItemView
+    });
+
     // Activity Indicator View
     var cartActivityIndicatorView = Backbone.Marionette.ItemView.extend({
       template:'#CartActivityIndicatorTemplate'
@@ -408,7 +428,9 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       PurchaseConfirmationLayout:purchaseConfirmationLayout,
       CartActivityIndicatorView:cartActivityIndicatorView,
       setCheckoutButtonProcessing:setCheckoutButtonProcessing,
-      resetCheckoutButtonText:resetCheckoutButtonText
+      resetCheckoutButtonText:resetCheckoutButtonText,
+      PurchaseConfirmationBillingAddressView:purchaseConfirmationBillingAddressView,
+      PurchaseConfirmationLineItemsContainerView:purchaseConfirmationLineItemsContainerView
     };
   }
 );
