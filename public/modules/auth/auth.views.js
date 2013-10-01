@@ -36,6 +36,9 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'modules/auth/auth.models'],
           retVal = 'auth.loginMenu';
         }
         return retVal;
+      },
+      generateHref: function (route) {
+        return '/' + ep.app.config.routes[route] || null;
       }
     };
 

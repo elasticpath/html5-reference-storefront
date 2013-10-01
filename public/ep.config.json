@@ -17,7 +17,7 @@
   "routes": {
     "cart":"#mycart",
     "category":"#category",
-    "categorypage":"#categorypage",
+    "profile":"#profile",
     "itemDetail":"#itemdetail"
   }
 }

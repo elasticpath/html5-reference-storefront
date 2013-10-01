@@ -183,8 +183,6 @@ define(['ep', 'eventbus', 'backbone'],
             // check if subscription or one-time item
             if(lineItemRef._rate && lineItemRef._rate[0]){
               // rate may have multiple items in array
-//              var tempRateValue = lineItemRef._rate[0].rate;
-
               if (lineItemRef._rate[0].rate && lineItemRef._rate[0].rate[0]){
                 lineItemObj.total.display = lineItemRef._rate[0].rate[0].display;
               }
@@ -219,7 +217,7 @@ define(['ep', 'eventbus', 'backbone'],
         confirmationObj.billingAddress = {};
         if (jsonPath(response, '$._billingaddress')){
           var rawBillingAddress = jsonPath(response, '$._billingaddress[0]')[0];
-//          if ()
+
           var firstName = rawBillingAddress.name['given-name'] || null;
           var lastName = rawBillingAddress.name['family-name'] || null;
           confirmationObj.billingAddress.name = firstName + ' ' + lastName;

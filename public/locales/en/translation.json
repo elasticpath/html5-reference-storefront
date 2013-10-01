@@ -63,7 +63,7 @@
     "itemQuantity": "Quantity",
     "itemSubTotal": "Sub-total",
     "itemTax": "Tax",
-    "Item Total": "Item Total"
+    "itemTotal": "Item Total"
   },
   "profile":{
     "personalInfoTitle": "Personal Information",
