@@ -49,7 +49,7 @@ define(['ep','eventbus'],
       templateHelper:viewHelpers,
       onShow:function(){
         $('.btn-main-nav-toggle').hide();
-        ep.logger.info('main nav on show, toggle btn hidden.');
+
 
       }
     });
