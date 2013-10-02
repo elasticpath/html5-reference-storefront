@@ -36,7 +36,7 @@ define(['marionette','eventbus','pace'],
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
           module:'receipt',
-          view:'PurchaseConfirmationView',
+          view:'DefaultView',
           data:id
         });
       },

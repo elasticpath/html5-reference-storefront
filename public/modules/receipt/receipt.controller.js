@@ -15,7 +15,7 @@ define(['app', 'ep', 'i18n', 'eventbus', 'cortex', 'modules/receipt/receipt.mode
     _.templateSettings.variable = 'E';
 
     // Purchase Confirmation View
-    var purchaseConfirmationView = function(uri){
+    var defaultView = function(uri){
 
 
       if (ep.app.isUserLoggedIn()) {
@@ -74,7 +74,7 @@ define(['app', 'ep', 'i18n', 'eventbus', 'cortex', 'modules/receipt/receipt.mode
 
 
     return {
-      PurchaseConfirmationView:purchaseConfirmationView
+      DefaultView:defaultView
 
     };
   }

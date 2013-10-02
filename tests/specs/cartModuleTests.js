@@ -56,6 +56,10 @@ define(function (require) {
       it('CartCheckoutActionView should exist', function () {
         expect(cartViews.CartCheckoutActionView).to.exist;
       });
+      it('EmptyCartView should exist', function () {
+        expect(cartViews.EmptyCartView).to.exist;
+      });
+
 
     });
     describe("Cart Models",function(){
