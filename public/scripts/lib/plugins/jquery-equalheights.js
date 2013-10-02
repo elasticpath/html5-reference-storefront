@@ -6,7 +6,6 @@
 --------------------------------------------------------------------*/
 
 $.fn.equalHeights = function() {
-	console.log('|||| RESIZING ELEMENTS');
 	window.currentTallest = 0;
 
 	// scan elements for largest height
@@ -15,16 +14,11 @@ $.fn.equalHeights = function() {
 
 		$elHeight = $(this).outerHeight();
 		$maxHeight = window.currentTallest;
-		// console.log('|||| current element height: '+$elHeight);
-		// console.log('|||| largest element height: '+$maxHeight);
 
 		if ($elHeight > $maxHeight) {
 			window.currentTallest = $elHeight;
 		}
 	});
-	console.log('||||    max height found: '+window.currentTallest);
-	console.log('||||    applying max height: '+window.currentTallest);
-
 
 	// apply largest found height to all elements
 	$(this).each(function(){
