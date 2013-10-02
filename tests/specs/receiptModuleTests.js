@@ -40,6 +40,16 @@ define(function (require) {
           expect(PurchaseConfirmationLayout.confirmationPaymentMethodsRegion).to.exist;
         });
       });
+      it('PurchaseConfirmationBillingAddressView should exist', function () {
+        expect(receiptViews.PurchaseConfirmationBillingAddressView).to.exist;
+      });
+      it('PurchaseConfirmationLineItemsContainerView should exist', function () {
+        expect(receiptViews.PurchaseConfirmationLineItemsContainerView).to.exist;
+      });
+      it('PurchaseConfirmationView should exist', function () {
+        expect(receiptViews.PurchaseConfirmationView).to.exist;
+      });
+
     });
     // Receipt Models
     describe('Receipt Models',function(){
