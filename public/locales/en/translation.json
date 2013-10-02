@@ -5,6 +5,7 @@
     "logout": "Logout",
     "userName": "Username",
     "password": "Password",
+    "profile":"Profile",
     "loginFormMissingFieldsErrMsg": "Username or password are missing. ",
     "badCredentialErrMsg": "Your username or password is invalid. "
   },

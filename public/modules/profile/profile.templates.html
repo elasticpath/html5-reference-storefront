@@ -24,10 +24,10 @@
   <script id="ProfileSummaryViewTemplate" type="text/template">
     <h2><%= E.getI18nLabel('profile.personalInfoTitle') %></h2>
     <dl class="row">
-      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.firstName') %>:</dt>
-      <dd class="col-xs-6"><%= E.givenName %></dd>
-      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.lastName') %>:</dt>
-      <dd class="col-xs-6"><%= E.familyName %></dd>
+      <dt class="col-xs-4 col-xs-offset-2" data-el-label="profile.firstName"><%= E.getI18nLabel('profile.firstName') %>:</dt>
+      <dd class="col-xs-6" data-el-value="givenName"><%= E.givenName %></dd>
+      <dt class="col-xs-4 col-xs-offset-2" data-el-label="profile.lastName"><%= E.getI18nLabel('profile.lastName') %>:</dt>
+      <dd class="col-xs-6" data-el-value="familyName"><%= E.familyName %></dd>
     </dl>
   </script>
 
@@ -38,9 +38,9 @@
 
   <!-- Subscription Item Template -->
   <script id="SubscriptionItemTemplate" type="text/template">
-    <td><%= E.displayName %></td>
-    <td><%= E.quantity %></td>
-    <td><%= E.nextBillingDate %></td>
+    <td data-el-value="subscriptions.displayName"><%= E.displayName %></td>
+    <td data-el-value="subscriptions.quantity"><%= E.quantity %></td>
+    <td data-el-value="subscriptions.nextBillingDate"><%= E.nextBillingDate %></td>
   </script>
 
   <!-- ProfileSubscriptionSummaryTemplate  -->

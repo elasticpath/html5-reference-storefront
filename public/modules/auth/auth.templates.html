@@ -8,7 +8,7 @@
 
 
     <div class="auth-container">
-      <button class="global-nav-link global-nav-login btn-auth-menu" data-toggle="modal" data-target="#login-modal" data-i18n="<%= E.getMenuItemText() %>">
+      <button class="global-nav-link global-nav-login btn-auth-menu" data-toggle="modal" data-target="#login-modal" data-i18n="<%= E.getMenuItemText() %>" data-el-label="global.profile">
         <span class="icon"></span><%= E.getLoginText() %>
       </button>
       <!-- ^^^ added '.global-nav-link and .global-nav-cart' classes as styling selectors -->
@@ -47,7 +47,7 @@
 
   <!-- Auth Profile Menu Template -->
   <script id="AuthProfileMenuTemplate" type="text/template">
-      <li><a  href="<%= E.generateHref('profile') %>" class="profile-link">Profile</a></li>
-      <li><button class="btn-cmd btn-auth-logout"><%= E.getI18nLabel('auth.logout') %></button></li>
+      <li><a href="<%= E.generateHref('profile') %>" class="profile-link" data-el-label="auth.profile"><%= E.getI18nLabel('auth.profile') %></a></li>
+      <li><button class="btn-cmd btn-auth-logout" data-el-label="auth.logout"><%= E.getI18nLabel('auth.logout') %></button></li>
   </script>
 </div>
