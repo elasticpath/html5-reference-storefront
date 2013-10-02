@@ -264,7 +264,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         if (this.model.attributes.rateCollection.length > 0) {
           this.itemRateRegion.show(
             new itemRateCollectionView({
-              className: 'cart-lineitem-unit-rate cart-lineitem-rate-container',
+              className: 'cart-lineitem-unit-rate-container',
               collection: new Backbone.Collection(this.model.attributes.rateCollection)
             })
           );
@@ -296,7 +296,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         if (this.model.attributes.rateCollection.length > 0) {
           this.itemRateRegion.show(
             new itemRateCollectionView({
-              className: 'cart-lineitem-total-rate cart-lineitem-rate-container',
+              className: 'cart-lineitem-total-rate-container',
               collection: new Backbone.Collection(this.model.attributes.rateCollection)
             })
           );
@@ -334,6 +334,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     var itemRateItemView = Backbone.Marionette.ItemView.extend({
       template: '#CartLineItemRateTemplate',
       templateHelpers: viewHelpers,
+      className: 'cart-lineitem-rate',
       tagName: 'li'
     });
 
