@@ -33,12 +33,10 @@ define(function (require) {
         it('DefaultView should have a mainCartRegion region', function () {
           expect(defaultView.mainCartRegion).to.exist;
         });
-        it('DefaultView should have a cartSummaryRegion region', function () {
-          expect(defaultView.cartSummaryRegion).to.exist;
+        it('DefaultView should have a cartCheckoutMasterRegion region', function () {
+          expect(defaultView.cartCheckoutMasterRegion).to.exist;
         });
-        it('DefaultView should have a cartCheckoutRegion region', function () {
-          expect(defaultView.cartCheckoutActionRegion).to.exist;
-        });
+
       });
       it('CartTitleView should exist', function () {
         expect(cartViews.CartTitleView).to.exist;
@@ -52,9 +50,13 @@ define(function (require) {
       it('CartSummaryView should exist', function () {
         expect(cartViews.CartSummaryView).to.exist;
       });
+      it('CartCheckoutMasterView should exist', function () {
+        expect(cartViews.CartCheckoutMasterView).to.exist;
+      });
       it('CartCheckoutActionView should exist', function () {
         expect(cartViews.CartCheckoutActionView).to.exist;
       });
+
     });
     describe("Cart Models",function(){
       var cartModel = require('modules/cart/cart.models');
