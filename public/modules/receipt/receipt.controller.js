@@ -21,15 +21,15 @@ define(['app', 'ep', 'i18n', 'eventbus', 'cortex', 'modules/receipt/receipt.mode
       if (ep.app.isUserLoggedIn()) {
         var purchaseConfirmationModel = new Model.PurchaseConfirmationModel();
         var purchaseConfirmationLayout = new View.PurchaseConfirmationLayout();
-        var confirmationRegion = new Marionette.Region({
-          el:'[data-region="purchaseConfirmationRegion"]'
-        });
-        var billingAddressRegion = new Marionette.Region({
-          el:'[data-region="confirmationBillingAddressRegion"]'
-        });
-        var purchaseConfirmationlineItemsRegion = new Marionette.Region({
-          el:'[data-region="confirmationLineItemsRegion"]'
-        });
+//        var confirmationRegion = new Marionette.Region({
+//          el:'[data-region="purchaseConfirmationRegion"]'
+//        });
+//        var billingAddressRegion = new Marionette.Region({
+//          el:'[data-region="confirmationBillingAddressRegion"]'
+//        });
+//        var purchaseConfirmationlineItemsRegion = new Marionette.Region({
+//          el:'[data-region="confirmationLineItemsRegion"]'
+//        });
         var purchaseConfirmationView = new View.PurchaseConfirmationView({
           model:purchaseConfirmationModel
         });
@@ -40,15 +40,13 @@ define(['app', 'ep', 'i18n', 'eventbus', 'cortex', 'modules/receipt/receipt.mode
           url:zoomedUri,
           success:function(response){
 
-            confirmationRegion.show(purchaseConfirmationView);
-            billingAddressRegion.show(new View.PurchaseConfirmationBillingAddressView({
+            purchaseConfirmationLayout.purchaseConfirmationRegion.show(purchaseConfirmationView);
+            purchaseConfirmationLayout.confirmationBillingAddressRegion.show(new View.PurchaseConfirmationBillingAddressView({
               model:new Backbone.Model(purchaseConfirmationModel.get('billingAddress'))
             }));
-            purchaseConfirmationlineItemsRegion.show(new View.PurchaseConfirmationLineItemsContainerView({
+            purchaseConfirmationLayout.confirmationLineItemsRegion.show(new View.PurchaseConfirmationLineItemsContainerView({
               collection:new Backbone.Collection(purchaseConfirmationModel.get('lineItems'))
             }));
-
-
 
           },
           error:function(response){

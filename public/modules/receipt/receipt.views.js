@@ -33,6 +33,12 @@ define(['marionette', 'i18n'],
     var purchaseConfirmationLayout = Backbone.Marionette.Layout.extend({
       template:'#PurchaseConfirmationLayoutTemplate',
       className:'purchase-confirmation-container container',
+      regions:{
+        purchaseConfirmationRegion:'[data-region="purchaseConfirmationRegion"]',
+        confirmationLineItemsRegion:'[data-region="confirmationLineItemsRegion"]',
+        confirmationBillingAddressRegion:'[data-region="confirmationBillingAddressRegion"]',
+        confirmationPaymentMethodsRegion:'[data-region="confirmationPaymentMethodsRegion"]'
+      },
       templateHelpers:viewHelpers
 
     });
