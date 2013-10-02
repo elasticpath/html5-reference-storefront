@@ -28,6 +28,7 @@ define(['marionette','i18n'],
     var defaultLayout = Backbone.Marionette.Layout.extend({
       template:'#ProfileMainTemplate',
       regions:{
+        profileTitleRegion:'[data-region="profileTitleRegion"]',
         profileSummaryRegion:'[data-region="profileSummaryRegion"]',
         profileSubscriptionSummaryRegion:'[data-region="profileSubscriptionSummaryRegion"]',
         profileShippingAddressRegion:'[data-region="profileShippingAddressRegion"]',
@@ -37,6 +38,12 @@ define(['marionette','i18n'],
       className:'container',
       templateHelpers:viewHelpers
 
+    });
+
+    var profileTitleView = Backbone.Marionette.ItemView.extend({
+      template:'#ProfileTitleTemplate',
+      tagName:'h1',
+      templateHelpers:viewHelpers
     });
 
     var profileSubscriptionItemView = Backbone.Marionette.ItemView.extend({
@@ -78,6 +85,7 @@ define(['marionette','i18n'],
 
     return {
       DefaultLayout:defaultLayout,
+      ProfileTitleView: profileTitleView,
       ProfileSubscriptionSummaryView:profileSubscriptionSummaryView,
       ProfileSummaryView:profileSummaryView,
       PaymentMethodsView:paymentMethodsView

@@ -31,10 +31,15 @@ define(['ep','app', 'eventbus', 'cortex', 'modules/profile/profile.models', 'mod
       var profileSummaryView = new View.ProfileSummaryView({
         model:profileModel
       });
+      var profileTitleView =new View.ProfileTitleView({});
 
 
       profileModel.fetch({
         success:function(response){
+          // Profile Title
+
+          defaultLayout.profileTitleRegion.show(profileTitleView);
+
           // Profile Summary
           profileSummaryRegion.show(profileSummaryView);
 

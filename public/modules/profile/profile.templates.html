@@ -2,6 +2,7 @@
 
   <script type="text/template" id="ProfileMainTemplate">
 
+    <div data-region="profileTitleRegion"></div>
     <div data-region="profileSummaryRegion">
       <div class="activity-indicator-container">
         <img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>
@@ -14,6 +15,10 @@
 
   </script>
 
+  <!-- Profile Title Template -->
+  <script id="ProfileTitleTemplate" type="text/template">
+    <%= E.getI18nLabel('profile.title') %>
+  </script>
 
   <!-- Profile Summary View Template -->
   <script id="ProfileSummaryViewTemplate" type="text/template">

@@ -39,15 +39,6 @@
     "totalResults": "results",
     "emptyViewMsg": "No item currently in this category"
   },
-  "itemDetail": {
-    "addToCart": "Add to Cart",
-    "purchasePrice": "Price",
-    "listPrice": "Original Price",
-    "rate":"Rate",
-    "noPrice":"n/a",
-    "noImgLabel": "No Image Available",
-    "quantity": "Quantity"
-  },
   "confirm":{
     "pageTitle":"Thank you. Your order has been processed",
     "summaryTitle":"Summary",
@@ -65,7 +56,17 @@
     "itemTax": "Tax",
     "itemTotal": "Item Total"
   },
+  "itemDetail": {
+    "addToCart": "Add to Cart",
+    "purchasePrice": "Price",
+    "listPrice": "Original Price",
+    "rate":"Rate",
+    "noPrice":"n/a",
+    "noImgLabel": "No Image Available",
+    "quantity": "Quantity"
+  },
   "profile":{
+    "title":"Profile",
     "personalInfoTitle": "Personal Information",
     "firstName": "First Name",
     "lastName": "Last Name",
@@ -79,7 +80,5 @@
     "paymentCardHolder": "Card Holder",
     "paymentExpiryMonth": "Expiry Month",
     "paymentExpiryYear": "Expiry Year"
-
-
   }
 }
