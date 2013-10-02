@@ -381,41 +381,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       }
     });
 
-    // Purchase Confirmation Layout
-    var purchaseConfirmationLayout = Backbone.Marionette.Layout.extend({
-      template:'#PurchaseConfirmationLayoutTemplate',
-      className:'purchase-confirmation-container container',
-      templateHelpers:viewHelpers
 
-    });
-
-    // Purchase Confirmation View
-    var purchaseConfirmationView = Backbone.Marionette.ItemView.extend({
-      template:'#PurchaseConfirmationTemplate',
-      templateHelpers:viewHelpers
-    });
-
-    // Purchase Confirmation Billing Address View
-    var purchaseConfirmationBillingAddressView = Backbone.Marionette.ItemView.extend({
-      template:'#PurchaseConfirmationBillingAddress',
-      templateHelpers:viewHelpers
-
-    });
-
-    // Purchase Confirmation Line Item View
-    var purchaseConfirmationLineItemView = Backbone.Marionette.ItemView.extend({
-      template:'#PurchaseConfirmationLineItem',
-      tagName:'li',
-      templateHelpers:viewHelpers
-    });
-    // Purchase Confirmation Line Item Container View
-    var purchaseConfirmationLineItemsContainerView = Backbone.Marionette.CollectionView.extend({
-      tagName:'ul',
-      className:'purchaseconfirmation-items-list',
-      itemView:purchaseConfirmationLineItemView,
-      templateHelpers:viewHelpers
-
-    });
 
     // Activity Indicator View
     var cartActivityIndicatorView = Backbone.Marionette.ItemView.extend({
@@ -431,13 +397,9 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       CartCheckoutActionView:cartCheckoutActionView,
       DefaultView:defaultView,
       CartCheckoutMasterView:cartCheckoutMasterView,
-      PurchaseConfirmationView:purchaseConfirmationView,
-      PurchaseConfirmationLayout:purchaseConfirmationLayout,
       CartActivityIndicatorView:cartActivityIndicatorView,
       setCheckoutButtonProcessing:setCheckoutButtonProcessing,
-      resetCheckoutButtonText:resetCheckoutButtonText,
-      PurchaseConfirmationBillingAddressView:purchaseConfirmationBillingAddressView,
-      PurchaseConfirmationLineItemsContainerView:purchaseConfirmationLineItemsContainerView
+      resetCheckoutButtonText:resetCheckoutButtonText
     };
   }
 );

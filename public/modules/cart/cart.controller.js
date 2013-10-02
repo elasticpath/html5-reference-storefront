@@ -58,62 +58,7 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
       return cartLayout;
     };
 
-    // Purchase Confirmation View
-    var purchaseConfirmationView = function(uri){
 
-
-      if (ep.app.isUserLoggedIn()) {
-        var purchaseConfirmationModel = new Model.PurchaseConfirmationModel();
-        var purchaseConfirmationLayout = new View.PurchaseConfirmationLayout();
-        var confirmationRegion = new Marionette.Region({
-          el:'[data-region="purchaseConfirmationRegion"]'
-        });
-        var billingAddressRegion = new Marionette.Region({
-          el:'[data-region="confirmationBillingAddressRegion"]'
-        });
-        var purchaseConfirmationlineItemsRegion = new Marionette.Region({
-          el:'[data-region="confirmationLineItemsRegion"]'
-        });
-        var purchaseConfirmationView = new View.PurchaseConfirmationView({
-          model:purchaseConfirmationModel
-        });
-
-        var rawUri = ep.ui.decodeUri(uri);
-        var zoomedUri = rawUri + '?zoom=billingaddress, paymentmethods:element, lineitems:element, lineitems:element:rate';
-        purchaseConfirmationModel.fetch({
-          url:zoomedUri,
-          success:function(response){
-
-            confirmationRegion.show(purchaseConfirmationView);
-            billingAddressRegion.show(new View.PurchaseConfirmationBillingAddressView({
-              model:new Backbone.Model(purchaseConfirmationModel.get('billingAddress'))
-            }));
-            purchaseConfirmationlineItemsRegion.show(new View.PurchaseConfirmationLineItemsContainerView({
-              collection:new Backbone.Collection(purchaseConfirmationModel.get('lineItems'))
-            }));
-
-
-
-          },
-          error:function(response){
-            ep.logger.error('Error retrieving purchase confirmation response');
-          }
-        });
-        return purchaseConfirmationLayout;
-      }
-      else{
-        // trigger login
-        EventBus.trigger('layout.loadRegionContentRequest', {
-          region: 'appModalRegion',
-          module: 'auth',
-          view: 'LoginFormView'
-        });
-
-      }
-
-
-
-    };
 
     /*
      *
@@ -237,8 +182,7 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'modules/cart/cart.models
     });
 
     return {
-      DefaultView: defaultView,
-      PurchaseConfirmationView:purchaseConfirmationView
+      DefaultView: defaultView
     };
   }
 );

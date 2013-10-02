@@ -44,6 +44,7 @@ require.config({
     'cart'            : 'modules/cart/cart.controller',
     'user'            : 'modules/user/user.controller',
     'auth'            : 'modules/auth/auth.controller',
+    'receipt'         : 'modules/receipt/receipt.controller',
     'tabs'            : 'scripts/lib/plugins/kube.tabs',
     'contextmenu'     : 'scripts/lib/plugins/jquery.contextmenu',
     'debug'           : 'modules/debug/debug.controller'

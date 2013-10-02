@@ -39,7 +39,7 @@
     "totalResults": "results",
     "emptyViewMsg": "No item currently in this category"
   },
-  "confirm":{
+  "receipt":{
     "pageTitle":"Thank you. Your order has been processed",
     "summaryTitle":"Summary",
     "itemsTitle": "Items",

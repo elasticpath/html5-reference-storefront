@@ -35,7 +35,7 @@ define(['marionette','eventbus','pace'],
       confirmation: function(id){
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
-          module:'cart',
+          module:'receipt',
           view:'PurchaseConfirmationView',
           data:id
         });

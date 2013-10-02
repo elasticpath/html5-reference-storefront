@@ -1,0 +1,104 @@
+<div id="ReceiptTemplateContainer">
+
+  <script type="text/template" id="ReceiptMainTemplate">
+
+    <div class="receipt-container">TMPL</div>
+
+  </script>
+
+  <!-- Purchase Confirmation Layout Template -->
+  <script id="PurchaseConfirmationLayoutTemplate" type="text/temmplate">
+    <h2><%= E.getI18nLabel('receipt.pageTitle') %></h2>
+    <h3><%= E.getI18nLabel('receipt.summaryTitle') %></h3>
+    <div data-region="purchaseConfirmationRegion"></div>
+    <h3><%= E.getI18nLabel('receipt.itemsTitle') %></h3>
+    <div data-region="confirmationLineItemsRegion" class="purchaseconfirm-items-container"></div>
+    <h3><%= E.getI18nLabel('receipt.billingTitle') %></h3>
+    <div data-region="confirmationBillingAddressRegion"></div>
+    <h3><%= E.getI18nLabel('receipt.paymentMethodTitle') %></h3>
+    <div data-region="confirmationPaymentMethodsRegion"></div>
+
+  </script>
+
+  <!-- Purchase Confirmation Template -->
+  <script id="PurchaseConfirmationTemplate" type="text/template">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('receipt.orderStatus') %>:</td>
+          <td class="col-xs-6"><%= E.status %></td>
+        </tr>
+        <tr>
+          <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('receipt.orderNumber') %>:</td>
+          <td class="col-xs-6"><%= E.purchaseNumber %></td>
+        </tr>
+        <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('receipt.orderTaxTotal') %>:</td>
+        <td class="col-xs-6"><%= E.taxTotal %></td>
+        </tr>
+        <tr>
+          <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('receipt.orderDate') %>:</td>
+          <td class="col-xs-6"><%= E.purchaseDate %></td>
+        </tr>
+        <tr>
+          <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('receipt.orderTotal') %>:</td>
+          <td class="col-xs-6"><%= E.orderTotal %></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+  </script>
+
+
+  <!-- Purchase Confirmation Billing Address -->
+  <script id="PurchaseConfirmationBillingAddress" type="text/template">
+    <p><%= E.name %></p>
+    <p><%= E.streetAddress %></p>
+    <p><%= E.extendedAddress %></p>
+    <p><%= E.locality %></p>
+    <p><%= E.region %></p>
+    <p><%= E.coutry %></p>
+    <p><%= E.postalCode %></p>
+  </script>
+
+  <!-- Purchase Confirmation Line Item -->
+  <script id="PurchaseConfirmationLineItem" type="text/template">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td class="row">
+            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('receipt.itemName') %>:</label>
+            <span class="col-xs-8"><%= E.name %></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="row">
+            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('receipt.itemQuantity') %>:</label>
+            <span class="col-xs-8"><%= E.quantity %></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="row  <%= E.checkIfVisible(E) %>">
+            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('receipt.itemSubTotal') %>:</label>
+            <span class="col-xs-8 <%= E.checkIfVisible(E) %>">&nbsp;<%= E.amount.display %></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="row  <%= E.checkIfVisible(E) %>">
+            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('receipt.itemTax') %>:</label>
+            <span class="col-xs-8 <%= E.checkIfVisible(E) %>">&nbsp;<%= E.tax.display %></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="row">
+            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('receipt.itemTotal') %>:</label>
+            <span class="col-xs-8"><%= E.total.display %></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </script>
+
+</div>
