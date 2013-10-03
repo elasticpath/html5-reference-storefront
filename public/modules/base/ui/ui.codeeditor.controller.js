@@ -7,7 +7,7 @@
  *
  * 
  */
-define(['app', 'eventbus', 'cortex', 'ui.codeeditor.models', 'ui.codeeditor.views', 'text!modules/ui/ui.codeeditor.templates.html'],
+define(['app', 'eventbus', 'cortex', 'ui.codeeditor.models', 'ui.codeeditor.views', 'text!modules/base/ui/ui.codeeditor.templates.html'],
   function(App, EventBus, Cortex, Model, View, template){
 
     $('#TemplateContainer').append(template);

@@ -6,7 +6,7 @@
  * Time: 7:59 AM
  *
  */
-define(['app','eventbus','ui.form.models','ui.form.views','text!modules/ui/ui.form.templates.html'],
+define(['app','eventbus','ui.form.models','ui.form.views','text!modules/base/ui/ui.form.templates.html'],
   function(App, EventBus, Model, View, template){
     var anchorSelector = '#TemplateContainer';
 
