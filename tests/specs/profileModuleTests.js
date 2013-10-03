@@ -29,7 +29,7 @@ define(function (require) {
     });
     // Receipt Views
     describe('Profile Views',function(){
-      var profileViews = require('modules/profile/profile.views');
+      var profileViews = require('profile.views');
       describe('DefaultLayout ', function () {
         var DefaultLayout = new profileViews.DefaultLayout();
         it('DefaultLayout should exist', function () {
@@ -69,7 +69,7 @@ define(function (require) {
     });
     // Receipt Models
     describe('Receipt Models',function(){
-      var profileModels = require('modules/profile/profile.models');
+      var profileModels = require('profile.models');
       it("ProfileModel should exist",function(){
         expect(profileModels.ProfileModel).to.exist;
       });

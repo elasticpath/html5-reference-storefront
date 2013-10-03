@@ -12,10 +12,10 @@ define(
     var ep = require('ep');
     var $ = require('jquery');
     var EventBus = require('eventbus');
-    var templates = require('text!modules/auth/auth.templates.html');
-    var authController = require('modules/auth/auth.controller');
-    var authView = require('modules/auth/auth.views');
-    var authModel = require('modules/auth/auth.models');
+    var templates = require('text!modules/base/auth/auth.templates.html');
+    var authController = require('auth');
+    var authView = require('auth.views');
+    var authModel = require('auth.models');
 
     describe('UI Storefront Auth Module', function () {
 
@@ -124,6 +124,7 @@ define(
           // registered (show profile menu)
           it("auth.btnAuthGlobalMenuItemClicked event with REGISTERED state should trigger loadRegionContentRequest with ProfileMenuView ", function (done) {
             var state = 'REGISTERED';
+
             EventBus.on('layout.loadRegionContentRequest', function (obj) {
               if (obj.view === 'ProfileMenuView') {
                 done();
@@ -137,7 +138,9 @@ define(
 
         it("auth.btnAuthGlobalMenuItemClicked event with PUBLIC state should trigger modal with LoginFormView ", function (done) {
           ep.io.localStore.setItem('oAuthRole','PUBLIC');
-
+//          ep.app.addRegions({
+//            appModalRegion:'[data-region="authMenuItemRegion"]'
+//          });
           EventBus.on('layout.loadRegionContentRequest', function (obj) {
             if (obj.view === 'LoginFormView') {
               done();

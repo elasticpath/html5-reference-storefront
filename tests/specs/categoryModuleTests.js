@@ -28,7 +28,7 @@ define(function(require) {
      * Test presence of Category Views and Regions
      */
     describe ('UI Storefront Category View', function () {
-      var categoryViews = require('modules/category/category.views');
+      var categoryViews = require('category.views');
       var ep = require('ep');
 
       describe('DefaultView and Regions', function () {
@@ -71,7 +71,7 @@ define(function(require) {
      * Test Category Model
      */
     describe ('UI Storefront Category Model', function () {
-      var categoryModel = require('modules/category/category.models');
+      var categoryModel = require('category.models');
       it("CategoryModel should exist",function(){
         expect(categoryModel.CategoryModel).to.exist;
       });

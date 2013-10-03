@@ -21,7 +21,7 @@ define(function (require) {
     });
 
     describe("IA Views",function(){
-      var iaViews = require('modules/ia/ia.views');
+      var iaViews = require('ia.views');
       it("MainNavView view should exist",function(){
         expect(iaViews.MainNavView).to.exist;
       });
@@ -34,7 +34,7 @@ define(function (require) {
 
     });
     describe("IA Models",function(){
-      var iaModel = require('modules/ia/ia.models');
+      var iaModel = require('ia.models');
 
         it("MainNavTopCategoryModel should exist",function(){
           expect(iaModel.MainNavTopCategoryModel).to.exist;

@@ -10,7 +10,7 @@ define(function (require) {
   var ep = require('ep');
   var EventBus = require('eventbus');
   var app = require('app');
-  var appview = require('modules/app/app.views');
+  var appview = require('app.views');
 
 
   describe('EP App module view default layout regions ', function () {

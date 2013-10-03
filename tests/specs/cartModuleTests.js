@@ -21,7 +21,7 @@ define(function (require) {
 
     });
     describe('Cart Views', function () {
-      var cartViews = require('modules/cart/cart.views');
+      var cartViews = require('cart.views');
       describe('DefaultView ', function () {
         var defaultView = new cartViews.DefaultView();
         it('DefaultView should exist', function () {
@@ -63,7 +63,7 @@ define(function (require) {
 
     });
     describe("Cart Models",function(){
-      var cartModel = require('modules/cart/cart.models');
+      var cartModel = require('cart.models');
       it("CartModel should exist",function(){
         expect(cartModel.CartModel).to.exist;
       });

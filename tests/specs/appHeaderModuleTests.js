@@ -26,7 +26,7 @@ define(
       });
       // Module Views
       describe("AppHeader Views",function(){
-        var appHeaderViews = require('modules/appheader/appheader.views');
+        var appHeaderViews = require('appheader.views');
         var ep = require('ep');
 
         it('PageHeaderView should exist', function () {
@@ -43,7 +43,7 @@ define(
       });
       // Module Models
       describe("AppHeader Models",function(){
-        var appHeaderModels = require('modules/appheader/appheader.models');
+        var appHeaderModels = require('appheader.models');
         it('LogoModel should exist', function () {
           expect(appHeaderModels.LogoModel).to.exist;
         });

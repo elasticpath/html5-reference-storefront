@@ -8,9 +8,9 @@
  */
 define(function (require) {
   var cartController = require('cart');
-  var cartViews = require('modules/cart/cart.views');
-  var cartModel = require('modules/cart/cart.models');
-  var templates = require('text!modules/cart/cart.templates.html');
+  var cartViews = require('cart.views');
+  var cartModel = require('cart.models');
+  var templates = require('text!modules/base/cart/cart.templates.html');
 
   describe('UI Storefront Create Purchase Tests', function () {
 

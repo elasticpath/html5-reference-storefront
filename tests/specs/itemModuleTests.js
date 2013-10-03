@@ -8,8 +8,8 @@
  */
 
 define(function (require) {
-  var itemViews = require('modules/item/item.views');
-  var itemModel = require('modules/item/item.models');
+  var itemViews = require('item.views');
+  var itemModel = require('item.models');
 
   describe('UI Storefront Item Detail - Default Layout ', function () {
     var defaultView = new itemViews.DefaultView();
