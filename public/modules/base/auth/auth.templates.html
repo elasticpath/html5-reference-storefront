@@ -4,11 +4,9 @@
   <script id="DefaultAuthLayoutTemplate" type="text/template">
 
 
-
-
-
     <div class="auth-container">
-      <button class="global-nav-link global-nav-login btn-auth-menu" data-toggle="modal" data-target="#login-modal" data-i18n="<%= E.getMenuItemText() %>" data-el-label="global.profile">
+      <button class="global-nav-link global-nav-login btn-auth-menu" data-toggle="modal" data-target="#login-modal"
+              data-i18n="<%= E.getMenuItemText() %>" data-el-label="global.profile">
         <span class="icon"></span><%= E.getLoginText() %>
       </button>
       <!-- ^^^ added '.global-nav-link and .global-nav-cart' classes as styling selectors -->
@@ -20,34 +18,36 @@
 
   <!-- Auth Login Form Template -->
   <script id="AuthLoginFormTemplate" type="text/template">
-        <div class="auth-feedback-container" data-i18n=""></div>
+    <h2>Login</h2>
+    <div class="auth-feedback-container" data-i18n=""></div>
 
-        <form class="auth-login-form">
-          <ul>
-            <li>
-              <label for="OAuthUserName"><%= E.getI18nLabel('auth.userName') %>:</label>
-              <input class="auth-input-field" id="OAuthUserName" name="OAuthUserName" type="text" autofocus="autofocus" />
-            </li>
-            <li>
-              <label for="OAuthPassword"><%= E.getI18nLabel('auth.password') %>:</label>
-              <input class="auth-input-field" id="OAuthPassword" name="OAuthPassword" type="password"/>
-            </li>
-            <li>
-              <input id="OAuthScope" name="OAuthScope" list="oAuthScopeList" type="hidden" value="<%= E.scope%>">
-            </li>
-            <li>
-              <input id="OAuthRole" name="OAuthRole" list="oAuthRoleList" type="hidden" value="REGISTERED">
-            </li>
-            <li>
-              <button class="btn btn-round btn-primary btn-auth-login" data-cmd="login" ><%= E.getI18nLabel('auth.login') %></button>
-            </li>
-          </ul>
-        </form>
+    <form role="form">
+      <div class="form-group">
+        <label for="OAuthUserName"><%= E.getI18nLabel('auth.userName') %>:</label>
+        <input class="form-control" id="OAuthUserName" name="OAuthUserName" type="text" autofocus="autofocus"/>
+      </div>
+      <div class="form-group">
+        <label for="OAuthPassword"><%= E.getI18nLabel('auth.password') %>:</label>
+        <input class="form-control" id="OAuthPassword" name="OAuthPassword" type="password"/>
+      </div>
+      <input id="OAuthScope" name="OAuthScope" list="oAuthScopeList" type="hidden" value="<%= E.scope%>">
+      <input id="OAuthRole" name="OAuthRole" list="oAuthRoleList" type="hidden" value="REGISTERED">
+      <div class="row">
+        <div class="col-md-3 .col-md-offset-3">
+          <button  class="btn btn-lg btn-primary" data-cmd="login"><%= E.getI18nLabel('auth.login') %></button>
+
+        </div>
+      </div>
+
+    </form>
   </script>
 
   <!-- Auth Profile Menu Template -->
   <script id="AuthProfileMenuTemplate" type="text/template">
-      <li><a href="<%= E.generateHref('profile') %>" class="profile-link" data-el-label="auth.profile"><%= E.getI18nLabel('auth.profile') %></a></li>
-      <li><button class="btn-cmd btn-auth-logout" data-el-label="auth.logout"><%= E.getI18nLabel('auth.logout') %></button></li>
+    <li><a href="<%= E.generateHref('profile') %>" class="profile-link" data-el-label="auth.profile"><%=
+      E.getI18nLabel('auth.profile') %></a></li>
+    <li>
+      <button class="btn-cmd btn-auth-logout" data-el-label="auth.logout"><%= E.getI18nLabel('auth.logout') %></button>
+    </li>
   </script>
 </div>

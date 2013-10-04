@@ -43,7 +43,7 @@ module.exports = function(grunt){
     },
     watch: {
       scripts:{
-        files: ['stylesrc/*.less'],
+        files: ['stylesrc/theme-core/*.less'],
         tasks: ['less']
       }
     }

@@ -54,17 +54,19 @@ define(['ep','eventbus','app.models','app.views','text!modules/base/app/app.temp
 
         this.$el.modal({
           autoResize: true,
-          minWidth: 700,
           modal: true,
-          position:'auto',
           onShow: function(dialog){
 
           },
           onOpen:function(dialog){
+
             dialog.overlay.fadeIn('fast',function(){
               dialog.data.hide();
               dialog.container.fadeIn('fast',function(){
-                dialog.data.slideDown('fast');
+
+                dialog.data.slideDown('fast',function(){
+                  $(window).resize();
+                });
               });
             });
           },
