@@ -75,6 +75,7 @@ define(['ep','eventbus','app.models','app.views','text!modules/base/app/app.temp
               dialog.container.hide('fast',function(){
                 dialog.overlay.slideUp('fast',function(){
                   $.modal.close();
+                  $('[data-region="modalRegion"]').empty();
                   EventBus.trigger('ui.modalWindowClosed');
                 });
               });

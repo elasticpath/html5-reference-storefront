@@ -94,8 +94,11 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
      */
     var loginFormView = Backbone.Marionette.ItemView.extend({
       template:'#AuthLoginFormTemplate',
-      className:'auth-login-container',
       templateHelpers:viewHelpers,
+      className:'auth-login-container',
+      attributes: {
+        "data-el-container":"global.loginMenu"
+      },
       events:{
         'click .btn-auth-login':function(event) {
           event.preventDefault();
@@ -113,6 +116,9 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
       templateHelpers:viewHelpers,
       tagName:'ul',
       className: 'auth-profile-menu-list',
+      attributes:{
+        "data-el-container":"global.profileMenu"
+      },
       events:{
         'click .btn-auth-logout':function(event){
           event.preventDefault();
