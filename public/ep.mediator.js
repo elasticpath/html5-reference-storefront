@@ -65,6 +65,12 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
 //          data:uri
 //        });
       }
+    },
+    'mediator.logoutSuccess':function(){
+      require(['auth'],function(mod){
+        EventBus.trigger('auth.generatePublicAuthTokenRequest');
+        document.location.href = '/';
+      });
     }
 
   };

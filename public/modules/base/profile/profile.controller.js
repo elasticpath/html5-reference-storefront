@@ -68,7 +68,11 @@ define(['ep','app', 'eventbus', 'cortex', 'profile.models', 'profile.views', 'te
         return defaultLayout;
       }
       else{
-        document.location.href = '/';
+        EventBus.trigger('layout.loadRegionContentRequest', {
+          region: 'appModalRegion',
+          module: 'auth',
+          view: 'LoginFormView'
+        });
       }
 
 

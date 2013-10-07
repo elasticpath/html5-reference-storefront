@@ -64,14 +64,13 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
             ep.io.localStore.removeItem('oAuthScope');
             ep.io.localStore.removeItem('oAuthToken');
             ep.io.localStore.removeItem('oAuthUserName');
+
+            Mediator.fire('mediator.logoutSuccess');
           }
           catch(err){
-            ep.logger.error('Error - removing authentication tokens from local storage');
+            ep.logger.error('Error - removing authentication tokens from local storage: ' + err.message);
           }
 
-          // redirect to home page on logout
-          document.location.href = '/';
-          ep.logger.info('LOGOUT REQUEST CAME BACK.');
         }
       }
     });
