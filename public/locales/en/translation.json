@@ -2,6 +2,7 @@
   "auth": {
     "loginMenu": "Login",
     "login": "Login",
+    "loginTitle":"Login",
     "logout": "Logout",
     "userName": "Username",
     "password": "Password",

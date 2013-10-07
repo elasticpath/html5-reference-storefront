@@ -15,54 +15,63 @@ define(['ep','app', 'eventbus', 'cortex', 'profile.models', 'profile.views', 'te
     _.templateSettings.variable = 'E';
 
     var defaultView = function(){
-      var defaultLayout = new View.DefaultLayout();
 
-      var profileModel = new Model.ProfileModel();
+      // ensure the user is authenticated befor continuing to process the request
+      if(ep.app.isUserLoggedIn()){
+        var defaultLayout = new View.DefaultLayout();
 
-      var profileSummaryRegion = new Marionette.Region({
-        el:'[data-region="profileSummaryRegion"]'
-      });
-      var profilePaymentMethodsRegion = new Marionette.Region({
-        el:'[data-region="profilePaymentMethodsRegion"]'
-      });
-      var profileSubscriptionSummaryRegion = new Marionette.Region({
-        el:'[data-region="profileSubscriptionSummaryRegion"]'
-      });
-      var profileSummaryView = new View.ProfileSummaryView({
-        model:profileModel
-      });
-      var profileTitleView =new View.ProfileTitleView({});
+        var profileModel = new Model.ProfileModel();
+
+        var profileSummaryRegion = new Marionette.Region({
+          el:'[data-region="profileSummaryRegion"]'
+        });
+        var profilePaymentMethodsRegion = new Marionette.Region({
+          el:'[data-region="profilePaymentMethodsRegion"]'
+        });
+        var profileSubscriptionSummaryRegion = new Marionette.Region({
+          el:'[data-region="profileSubscriptionSummaryRegion"]'
+        });
+        var profileSummaryView = new View.ProfileSummaryView({
+          model:profileModel
+        });
+        var profileTitleView =new View.ProfileTitleView({});
 
 
-      profileModel.fetch({
-        success:function(response){
-          // Profile Title
+        profileModel.fetch({
+          success:function(response){
+            // Profile Title
 
-          defaultLayout.profileTitleRegion.show(profileTitleView);
+            defaultLayout.profileTitleRegion.show(profileTitleView);
 
-          // Profile Summary
-          profileSummaryRegion.show(profileSummaryView);
+            // Profile Summary
+            profileSummaryRegion.show(profileSummaryView);
 
-          // Profile Subscriptions
-          var profileSubs = profileModel.get('subscriptions');
-          if (profileSubs){
-            profileSubscriptionSummaryRegion.show( new View.ProfileSubscriptionSummaryView({
-              collection:new Backbone.Collection(profileModel.get('subscriptions'))
+            // Profile Subscriptions
+            var profileSubs = profileModel.get('subscriptions');
+            if (profileSubs){
+              profileSubscriptionSummaryRegion.show( new View.ProfileSubscriptionSummaryView({
+                collection:new Backbone.Collection(profileModel.get('subscriptions'))
+              }));
+            }
+
+            // Profile Payment Methods
+            profilePaymentMethodsRegion.show( new View.PaymentMethodsView({
+              collection:new Backbone.Collection(profileModel.get('paymentMethods'))
             }));
+
+          },
+          error:function(response){
+            ep.logger.error('Error getting profile subscription model');
           }
+        });
 
-          // Profile Payment Methods
-          profilePaymentMethodsRegion.show( new View.PaymentMethodsView({
-            collection:new Backbone.Collection(profileModel.get('paymentMethods'))
-          }));
+        return defaultLayout;
+      }
+      else{
+        document.location.href = '/';
+      }
 
-        },
-        error:function(response){
-          ep.logger.error('Error getting profile subscription model');
-        }
-      });
 
-      return defaultLayout;
 
     };
 
