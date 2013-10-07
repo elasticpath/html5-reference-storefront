@@ -69,7 +69,8 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
             ep.logger.error('Error - removing authentication tokens from local storage');
           }
 
-          EventBus.trigger('auth.generatePublicAuthTokenRequest');
+          // redirect to home page on logout
+          document.location.href = '/';
           ep.logger.info('LOGOUT REQUEST CAME BACK.');
         }
       }

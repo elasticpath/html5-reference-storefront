@@ -122,6 +122,11 @@ define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'auth.models', 'auth.view
 
     /*
      * Generate Public Authentication Request
+     *
+     * handles both login and logout requests
+     * uses different verbs - (POST/DELETE)
+     *
+     *
      */
     EventBus.on('auth.generatePublicAuthTokenRequest', function() {
       var authString = 'grant_type=password&scope=' + ep.app.config.cortexApi.scope + '&role=PUBLIC';
