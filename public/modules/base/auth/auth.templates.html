@@ -21,7 +21,7 @@
     <h2>Login</h2>
     <div class="auth-feedback-container" data-i18n=""></div>
 
-    <form role="form">
+    <form role="form" method="POST">
       <div class="form-group">
         <label for="OAuthUserName"><%= E.getI18nLabel('auth.userName') %>:</label>
         <input class="form-control" id="OAuthUserName" name="OAuthUserName" type="text" autofocus="autofocus"/>
@@ -34,7 +34,7 @@
       <input id="OAuthRole" name="OAuthRole" list="oAuthRoleList" type="hidden" value="REGISTERED">
       <div class="row">
         <div class="col-md-3 .col-md-offset-3">
-          <button  class="btn btn-lg btn-primary" data-cmd="login"><%= E.getI18nLabel('auth.login') %></button>
+          <button  class="btn btn-lg btn-primary btn-auth-login" data-cmd="login"><%= E.getI18nLabel('auth.login') %></button>
 
         </div>
       </div>
