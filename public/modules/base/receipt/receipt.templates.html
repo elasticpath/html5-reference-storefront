@@ -25,23 +25,24 @@
     <table class="table table-striped">
       <tbody>
         <tr>
-          <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('receipt.orderStatus') %>:</td>
-          <td class="col-xs-6" data-el-value="status"><%= E.status %></td>
+          <td><%= E.getI18nLabel('receipt.orderStatus') %>:</td>
+          <td data-el-value="status"><%= E.status %></td>
+        </tr>
+        <tr class="<%= E.isContainerVisisble(E.purchaseNumber) %>" data-el-container="purchaseNumber">
+          <td ><%= E.getI18nLabel('receipt.orderNumber') %>:</td>
+          <td data-el-value="purchaseNumber"><%= E.purchaseNumber %></td>
+        </tr>
+        <tr class="<%= E.isContainerVisisble(E.taxTotal) %>" data-el-container="taxTotal">
+          <td><%= E.getI18nLabel('receipt.orderTaxTotal') %>:</td>
+          <td data-el-value="taxTotal"><%= E.taxTotal %></td>
         </tr>
         <tr>
-          <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('receipt.orderNumber') %>:</td>
-          <td class="col-xs-6" data-el-value="purchaseNumber"><%= E.purchaseNumber %></td>
+          <td><%= E.getI18nLabel('receipt.orderDate') %>:</td>
+          <td data-el-value="purchaseDate"><%= E.purchaseDate %></td>
         </tr>
-        <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('receipt.orderTaxTotal') %>:</td>
-        <td class="col-xs-6" data-el-value="taxTotal"><%= E.taxTotal %></td>
-        </tr>
-        <tr>
-          <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('receipt.orderDate') %>:</td>
-          <td class="col-xs-6" data-el-value="purchaseDate"><%= E.purchaseDate %></td>
-        </tr>
-        <tr>
-          <td class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('receipt.orderTotal') %>:</td>
-          <td class="col-xs-6" data-el-value="orderTotal"><%= E.orderTotal %></td>
+        <tr class="<%= E.isContainerVisisble(E.orderTotal) %>" data-el-container="orderTotal">
+          <td><%= E.getI18nLabel('receipt.orderTotal') %>:</td>
+          <td data-el-value="orderTotal"><%= E.orderTotal %></td>
         </tr>
       </tbody>
     </table>
@@ -67,33 +68,43 @@
     <table class="table">
       <tbody>
         <tr>
-          <td class="row">
-            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('receipt.itemName') %>:</label>
-            <span class="col-xs-8" data-el-value="lineItem.name"><%= E.name %></span>
+          <td>
+            <label><%= E.getI18nLabel('receipt.itemName') %>:</label>
+          </td>
+          <td>
+            <span data-el-value="lineItem.name"><%= E.name %></span>
           </td>
         </tr>
         <tr>
-          <td class="row">
-            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('receipt.itemQuantity') %>:</label>
-            <span class="col-xs-8" data-el-value="lineItem.quantity"><%= E.quantity %></span>
+          <td>
+            <label><%= E.getI18nLabel('receipt.itemQuantity') %>:</label>
+          </td>
+          <td>
+            <span data-el-value="lineItem.quantity"><%= E.quantity %></span>
+          </td>
+        </tr>
+        <tr class="<%= E.isContainerVisisble(E.amount.display) %>" data-el-container="lineItem.itemSubTotal">
+          <td>
+            <label><%= E.getI18nLabel('receipt.itemSubTotal') %>:</label>
+          </td>
+          <td>
+            <span class="<%= E.checkIfVisible(E) %>" data-el-value="lineItem.amount">&nbsp;<%= E.amount.display %></span>
+          </td>
+        </tr>
+        <tr class="<%= E.isContainerVisisble(E.tax.display) %>" data-el-container="lineItem.itemTax">
+          <td>
+            <label><%= E.getI18nLabel('receipt.itemTax') %>:</label>
+          </td>
+          <td>
+            <span data-el-value="lineItem.tax">&nbsp;<%= E.tax.display %></span>
           </td>
         </tr>
         <tr>
-          <td class="row  <%= E.checkIfVisible(E) %>">
-            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('receipt.itemSubTotal') %>:</label>
-            <span class="col-xs-8 <%= E.checkIfVisible(E) %>" data-el-value="lineItem.amount">&nbsp;<%= E.amount.display %></span>
+          <td>
+            <label><%= E.getI18nLabel('receipt.itemTotal') %>:</label>
           </td>
-        </tr>
-        <tr>
-          <td class="row  <%= E.checkIfVisible(E) %>">
-            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('receipt.itemTax') %>:</label>
-            <span class="col-xs-8 <%= E.checkIfVisible(E) %>" data-el-value="lineItem.tax">&nbsp;<%= E.tax.display %></span>
-          </td>
-        </tr>
-        <tr>
-          <td class="row">
-            <label class="col-xs-2 col-xs-offset-2"><%= E.getI18nLabel('receipt.itemTotal') %>:</label>
-            <span class="col-xs-8" data-el-value="lineItem.total"><%= E.total.display %></span>
+          <td>
+            <span data-el-value="lineItem.total"><%= E.total.display %></span>
           </td>
         </tr>
       </tbody>

@@ -22,6 +22,12 @@ define(['marionette', 'i18n'],
         return retVal;
 
       },
+      isContainerVisisble:function(value){
+        if (value){
+          return null;
+        }
+        return 'is-hidden';
+      },
        checkIfVisible:function(model){
         if (model.amount.display){
           return null;
