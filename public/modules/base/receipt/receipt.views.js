@@ -59,8 +59,11 @@ define(['marionette', 'i18n'],
     // Purchase Confirmation Line Item View
     var purchaseConfirmationLineItemView = Backbone.Marionette.ItemView.extend({
       template:'#PurchaseConfirmationLineItem',
+      templateHelpers:viewHelpers,
       tagName:'li',
-      templateHelpers:viewHelpers
+      attributes: {
+        "data-el-container":"receipt.lineItem"
+      }
     });
     // Purchase Confirmation Line Item Container View
     var purchaseConfirmationLineItemsContainerView = Backbone.Marionette.CollectionView.extend({
