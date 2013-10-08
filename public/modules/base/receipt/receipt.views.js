@@ -61,6 +61,11 @@ define(['marionette', 'i18n'],
       templateHelpers:viewHelpers
 
     });
+    // Payment Means View
+    var purchaseConfirmationPaymentMeansView = Backbone.Marionette.ItemView.extend({
+      template:'#PurchaseConfirmationPaymentMeans',
+      templateHelpers:viewHelpers
+    });
 
     // Purchase Confirmation Line Item View
     var purchaseConfirmationLineItemView = Backbone.Marionette.ItemView.extend({
@@ -87,7 +92,8 @@ define(['marionette', 'i18n'],
       PurchaseConfirmationBillingAddressView:purchaseConfirmationBillingAddressView,
       PurchaseConfirmationLineItemsContainerView:purchaseConfirmationLineItemsContainerView,
       PurchaseConfirmationView:purchaseConfirmationView,
-      PurchaseConfirmationLayout:purchaseConfirmationLayout
+      PurchaseConfirmationLayout:purchaseConfirmationLayout,
+      PurchaseConfirmationPaymentMeansView:purchaseConfirmationPaymentMeansView
     };
   }
 );

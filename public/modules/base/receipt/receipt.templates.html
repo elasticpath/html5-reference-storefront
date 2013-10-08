@@ -13,9 +13,7 @@
     <div data-region="purchaseConfirmationRegion"></div>
     <h3><%= E.getI18nLabel('receipt.itemsTitle') %></h3>
     <div data-region="confirmationLineItemsRegion" class="purchaseconfirm-items-container"></div>
-    <h3><%= E.getI18nLabel('receipt.billingTitle') %></h3>
     <div data-region="confirmationBillingAddressRegion"></div>
-    <h3><%= E.getI18nLabel('receipt.paymentMethodTitle') %></h3>
     <div data-region="confirmationPaymentMethodsRegion"></div>
 
   </script>
@@ -51,9 +49,9 @@
 
   </script>
 
-
   <!-- Purchase Confirmation Billing Address -->
   <script id="PurchaseConfirmationBillingAddress" type="text/template">
+    <h3><%= E.getI18nLabel('receipt.billingTitle') %></h3>
     <p data-el-value="billingAddress.name"><%= E.name %></p>
     <p data-el-value="billingAddress.streetAddress"><%= E.streetAddress %></p>
     <p data-el-value="billingAddress.extendedAddress"><%= E.extendedAddress %></p>
@@ -61,6 +59,13 @@
     <p data-el-value="billingAddress.region"><%= E.region %></p>
     <p data-el-value="billingAddress.country"><%= E.country %></p>
     <p data-el-value="billingAddress.postalCode"><%= E.postalCode %></p>
+  </script>
+
+  <!-- Purchase Confirmation Payment Means -->
+  <script id="PurchaseConfirmationPaymentMeans" type="text/template">
+    <h3><%= E.getI18nLabel('receipt.paymentMethodTitle') %></h3>
+    <p data-el-value="paymentMeans.display"><%= E.displayValue %></p>
+
   </script>
 
   <!-- Purchase Confirmation Line Item -->

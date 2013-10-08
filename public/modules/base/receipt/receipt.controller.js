@@ -35,7 +35,9 @@ define(['app', 'ep', 'i18n', 'eventbus', 'cortex', 'receipt.models', 'receipt.vi
         });
 
         var rawUri = ep.ui.decodeUri(uri);
-        var zoomedUri = rawUri + '?zoom=billingaddress, paymentmethods:element, lineitems:element, lineitems:element:rate';
+
+        var zoomedUri = rawUri + '?zoom=billingaddress,paymentmeans:element,lineitems:element,lineitems:element:rates';
+       // var zoomedUri = rawUri + '?zoom=billingaddress, paymentmeans, lineitems:element, lineitems:element:rate';
         purchaseConfirmationModel.fetch({
           url:zoomedUri,
           success:function(response){
@@ -47,6 +49,11 @@ define(['app', 'ep', 'i18n', 'eventbus', 'cortex', 'receipt.models', 'receipt.vi
             purchaseConfirmationLayout.confirmationLineItemsRegion.show(new View.PurchaseConfirmationLineItemsContainerView({
               collection:new Backbone.Collection(purchaseConfirmationModel.get('lineItems'))
             }));
+            if (purchaseConfirmationModel.get('paymentMeans').displayValue ){
+              purchaseConfirmationLayout.confirmationPaymentMethodsRegion.show(new View.PurchaseConfirmationPaymentMeansView({
+                model:new Backbone.Model(purchaseConfirmationModel.get('paymentMeans'))
+              }));
+            }
 
           },
           error:function(response){

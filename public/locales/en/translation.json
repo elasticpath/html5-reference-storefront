@@ -46,7 +46,7 @@
     "summaryTitle":"Summary",
     "itemsTitle": "Items",
     "billingTitle": "Billing Information",
-    "paymentMethodTitle": "Payment Method Summary",
+    "paymentMethodTitle": "Payment Method",
     "orderStatus": "Status",
     "orderNumber": "Order Number",
     "orderTaxTotal": "Order Tax Total",

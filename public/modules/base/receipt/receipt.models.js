@@ -93,9 +93,12 @@ define(['eventbus', 'backbone'],
           confirmationObj.billingAddress.region = rawBillingAddress.address.region || null;
         }
 
-
-        // Payment Method
-        // TBD
+        // Payment Means
+        confirmationObj.paymentMeans = {};
+        var paymentDisplay = jsonPath(response, '$._paymentmeans[0].._element[0]')[0];
+        if (paymentDisplay && paymentDisplay['display-value']){
+          confirmationObj.paymentMeans.displayValue = paymentDisplay['display-value'];
+        }
 
         return confirmationObj;
       }
