@@ -19,25 +19,6 @@
 
 
 
-h1,h2,h3,h4,h5{
-  color: @highlight-primary;
-
-  a{
-    color: @highlight-primary;
-    font-weight: 100;
-    &:hover{
-      color:   darken(@highlight-primary,15%);
-    }
-  }
-}
-
-.view-title{
-  // color:@viewTitleColor;
-  font-weight: 100;
-  text-transform: capitalize;
-  // font-weight: 400;
-  // text-shadow: 1px 1px 0px rgb(21, 25, 26), 2px 2px 0px rgb(128, 87, 87);
-}
 
 // --------- General Bootstrap 3.0 Overrides
 
@@ -76,6 +57,35 @@ body{
   @media (max-width: @grid-float-breakpoint) {
     margin-top: 60px; //tuck the page top margin up when the nav collapses
   }
+
+  font-family: @font-sans;
+
+  h1,h2,h3,h4,h5,h6{
+    color: @highlight-primary;
+    font-family: @font-sans;
+    a{
+      color: @highlight-primary;
+      font-weight: 300;
+      &:hover{
+        color:   darken(@highlight-primary,15%);
+      }
+    }
+  }
+
+  .view-title{
+    // color:@viewTitleColor;
+    font-weight: 100;
+    text-transform: capitalize;
+    // font-weight: 400;
+    // text-shadow: 1px 1px 0px rgb(21, 25, 26), 2px 2px 0px rgb(128, 87, 87);
+  }
+
+
+
+
+
+
+
 }
 
 ul{

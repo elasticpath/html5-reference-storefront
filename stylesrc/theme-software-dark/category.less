@@ -14,15 +14,19 @@
   .border-dot-bottom;
 
 }
-.category-item-title a{
-  text-decoration:none;
-  text-transform: uppercase;
-  font-size: 1.7rem;
-  color: @highlight-primary;
+.category-item-title{
+    a{
+        display: block;
+      text-decoration:none;
+      text-transform: uppercase;
+      font-size: 1.7rem;
+      line-height: 1.9rem;
+      color: @highlight-primary;
 
-  &:hover{
-    color: darken(@highlight-primary, 15%);
-  }
+      &:hover{
+        color: darken(@highlight-primary, 15%);
+      }
+    }
 }
 
 .category-items-listing{  // ul containing cat items

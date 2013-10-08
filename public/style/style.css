@@ -7104,14 +7104,6 @@ td.visible-print {
  *
  * Designed and built with all the love in the world by @mdo and @fat.
  */
-/* start main nav*/
-/* end main nav*/
-/* Start Item Detail  */
-/* End Item Detail */
-/* Start Cart */
-/* End Cart */
-/* Start Auth */
-/* End Auth */
 /* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .separated {
   position: relative;
@@ -7470,6 +7462,10 @@ td.visible-print {
   margin: 0 0 10px 0;
 }
 /* line 254, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+.global-nav-container .global-nav-cart:hover {
+  color: #0079a9;
+}
+/* line 258, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .global-nav-container .global-nav-cart .icon {
   position: relative;
   top: 1px;
@@ -7485,7 +7481,7 @@ td.visible-print {
 .global-nav-container .global-nav-cart .icon:before {
   content: "\e116";
 }
-/* line 263, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 267, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .global-nav-container .global-nav-login {
   display: inline-block;
   color: #0079a9;
@@ -7522,11 +7518,15 @@ td.visible-print {
 .global-nav-container .global-nav-login:after {
   clear: both;
 }
-/* line 272, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 276, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+.global-nav-container .global-nav-login:hover {
+  color: #005476;
+}
+/* line 280, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .global-nav-container .global-nav-login .icon {
   display: none;
 }
-/* line 281, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 289, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .main-search-container {
   display: none!important;
   position: absolute;
@@ -7538,7 +7538,7 @@ td.visible-print {
   
 }
 @media (max-width: 768px) {
-  /* line 295, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  /* line 303, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
   .main-search-container {
     position: relative;
     top: auto;
@@ -7576,12 +7576,12 @@ td.visible-print {
     clear: both;
   }
 }
-/* line 308, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 316, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .main-search-container .form-group {
   padding-right: 0;
   margin-right: 0;
 }
-/* line 314, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 322, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .btn-header-search {
   display: inline-block;
   padding: 6px 12px;
@@ -7685,7 +7685,7 @@ fieldset[disabled] .btn-header-search.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 333, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 341, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .btn-header-search .icon {
   position: relative;
   top: 1px;
@@ -7701,7 +7701,7 @@ fieldset[disabled] .btn-header-search.active {
 .btn-header-search .icon:before {
   content: "\e003";
 }
-/* line 341, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 349, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .header-search-input {
   display: block;
   width: 100%;
@@ -7759,7 +7759,7 @@ fieldset[disabled] .header-search-input {
 textarea.header-search-input {
   height: auto;
 }
-/* line 353, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 361, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .navbar-collapse {
   position: absolute;
   top: 0;
@@ -7768,7 +7768,7 @@ textarea.header-search-input {
   min-height: 100px;
 }
 @media (max-width: 768px) {
-  /* line 362, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  /* line 370, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
   .navbar-collapse {
     position: relative;
     top: auto;
@@ -7778,7 +7778,7 @@ textarea.header-search-input {
     background: #1c1c1c;
   }
 }
-/* line 371, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 379, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .navbar-collapse .navbar-form {
   display: block;
   border: 0;
@@ -7787,11 +7787,11 @@ textarea.header-search-input {
   padding: 12px 0;
 }
 @media (max-width: 768px) {
-  /* line 379, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  /* line 387, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
   .navbar-collapse .navbar-form .form-group {
     display: inline-block;
   }
-  /* line 381, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  /* line 389, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
   .navbar-collapse .navbar-form .form-group .form-control {
     width: 60%;
     min-width: 200px;
@@ -7799,24 +7799,24 @@ textarea.header-search-input {
   }
 }
 @media (max-width: 768px) {
-  /* line 390, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  /* line 398, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
   .navbar-collapse .navbar-form button {
     display: inline-block;
   }
 }
-/* line 397, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 405, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .appheader-container {
   position: relative;
 }
-/* line 401, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 409, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 nav.main-nav {
   position: relative;
 }
-/* line 405, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 413, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .simplemodal-overlay {
   z-index: 9321 !important;
 }
-/* line 408, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 416, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .simplemodal-container {
   z-index: 9322 !important;
 }
@@ -8502,18 +8502,20 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   -o-border-image: url(images/line-dot-blue.gif) 1 round;
   border-image: url(images/line-dot-blue.gif) 1 fill round;
 }
-/* line 17, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 18, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-title a {
+  display: block;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 1.7rem;
+  line-height: 1.9rem;
   color: #ec316a;
 }
-/* line 23, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 26, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-title a:hover {
   color: #bf1246;
 }
-/* line 28, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 32, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-items-listing {
   padding: 4rem 0;
   margin-left: -15px;
@@ -8547,7 +8549,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-items-listing:after {
   clear: both;
 }
-/* line 33, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 37, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-container {
   margin-bottom: 3rem;
   float: left;
@@ -8579,17 +8581,17 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   }
 }
 @media only screen and (max-width: 60rem) {
-  /* line 41, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+  /* line 45, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
   .pagination-link {
     margin-left: .5rem;
     margin-right: .5rem;
   }
 }
-/* line 46, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 50, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-inner {
   height: 100%;
 }
-/* line 51, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 55, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-thumbnail {
   display: block;
   max-width: 1000%;
@@ -8600,7 +8602,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   background-repeat: no-repeat;
   background-position: center center;
 }
-/* line 63, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 67, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-thumbnail-container {
   position: relative;
   width: 100%;
@@ -8611,11 +8613,11 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   background: transparent;
   border-radius: 3px;
 }
-/* line 75, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 79, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-thumbnail-container img {
   border: none!important;
 }
-/* line 81, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 85, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-inner {
   background-color: #eee;
   padding: 5px;
@@ -8648,21 +8650,21 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   height: 100%;
 }
-/* line 84, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 88, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-inner ul {
   padding: 0;
 }
-/* line 91, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 95, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-availability-container {
   position: relative;
   display: block;
 }
-/* line 96, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 100, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-availability-container .category-item-availability {
   display: block;
   margin: 3px 1rem 0 0;
 }
-/* line 103, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 107, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-availability-container .category-item-availability label {
   height: auto;
   display: inline-block;
@@ -8677,7 +8679,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   white-space: nowrap;
   padding: 0;
 }
-/* line 117, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 121, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-availability-container .category-item-availability label .icon {
   font-size: 1.2em;
   line-height: 1.7rem;
@@ -8687,7 +8689,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-availability-container .category-item-availability label .icon:before {
   content: "\e125";
 }
-/* line 137, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 141, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-row {
   margin-left: 0;
   margin-right: 0;
@@ -8720,12 +8722,12 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-list-row:after {
   clear: both;
 }
-/* line 141, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 145, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-price-container {
   padding-bottom: 2rem;
   margin-bottom: 0rem;
 }
-/* line 150, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 154, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .price-availability-wrapper {
   border-style: solid;
   border-width: 1px 0px 1px 0px ;
@@ -8765,7 +8767,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .price-availability-wrapper:after {
   clear: both;
 }
-/* line 157, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 161, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .price-availability-wrapper .price-wrapper {
   position: relative;
   min-height: 1px;
@@ -8779,7 +8781,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
     width: 41.66666666666667%;
   }
 }
-/* line 161, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 165, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .price-availability-wrapper .availability-wrapper {
   position: relative;
   min-height: 1px;
@@ -8793,19 +8795,19 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
     width: 58.333333333333336%;
   }
 }
-/* line 168, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 172, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-price-value {
   text-decoration: line-through;
   color: #999999;
   font-size: 1.2rem;
 }
-/* line 174, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 178, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-purchase-price {
   font-size: 1.8rem;
   font-weight: 300;
   color: #009ddc;
 }
-/* line 180, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 184, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-price,
 .category-item-purchase-price,
 .category-item-availability,
@@ -8859,7 +8861,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-release-date:after {
   clear: both;
 }
-/* line 188, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 192, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-price label.item-meta,
 .category-item-purchase-price label.item-meta,
 .category-item-availability label.item-meta,
@@ -8870,7 +8872,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-release-date span.item-meta {
   padding: 0px 0;
 }
-/* line 195, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 199, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-price label.item-meta:nth-of-type(2n),
 .category-item-purchase-price label.item-meta:nth-of-type(2n),
 .category-item-availability label.item-meta:nth-of-type(2n),
@@ -8881,7 +8883,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-release-date span.item-meta:nth-of-type(2n) {
   background-color: #aaa;
 }
-/* line 201, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 205, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-price label.item-meta,
 .category-item-purchase-price label.item-meta,
 .category-item-availability label.item-meta,
@@ -8895,7 +8897,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   color: #999999;
   display: none;
 }
-/* line 207, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 211, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-price span.item-meta,
 .category-item-purchase-price span.item-meta,
 .category-item-availability span.item-meta,
@@ -8907,7 +8909,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   padding-left: 8px;
   padding-right: 8px;
 }
-/* line 212, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 216, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-price:last-child label.item-meta,
 .category-item-purchase-price:last-child label.item-meta,
 .category-item-availability:last-child label.item-meta,
@@ -8920,147 +8922,37 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 }
 /* line 2, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
 .pagination-container {
+  position: relative;
   font-size: 1.3rem;
-  color: #999999;
+  color: #004a76;
   display: inline-block;
-  background-color: #eee;
-  padding: 15px;
-  border-radius: 5px;
-  border: 1px solid #dddddd;
-  background: #ffffff;
-  /* Old browsers */
-
-  background: -moz-linear-gradient(-45deg, #ffffff 0%, #ffffff 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #ffffff), color-stop(100%, #ffffff));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(-45deg, #ffffff 0%, #ffffff 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(-45deg, #ffffff 0%, #ffffff 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(-45deg, #ffffff 0%, #ffffff 100%);
-  /* IE10+ */
-
-  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
-  /* W3C */
-
-  -webkit-box-shadow: inset 0px 0px 0 2px rgba(255, 255, 255, 0);
-  box-shadow: inset 0px 0px 0 2px rgba(255, 255, 255, 0);
-  -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  text-align: left;
   margin: 10px 0;
+  padding: 40px;
 }
-/* line 11, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+/* line 14, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
 .paginationStatsContainer {
   margin-bottom: 10px;
 }
-/* line 15, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+/* line 18, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
 .btn-pagination {
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.428571429;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  border-radius: 2px;
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
-  color: #ffffff;
-  background-color: #009ddc;
-  border-color: #008bc3;
-  padding: 5px 10px;
-  font-size: 12px;
-  line-height: 1.5;
-  border-radius: 3px;
+  text-indent: -99999px;
+  position: absolute;
+  top: 0;
+  height: 36px;
+  width: 15px;
+  background: transparent url(images/theme-software-dark/pagination-prevnext-sprite.png) no-repeat 0 0;
 }
-/* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/buttons.less */
-.btn-pagination:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-/* line 29, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/buttons.less */
-.btn-pagination:hover,
-.btn-pagination:focus {
-  color: #333333;
+/* line 27, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+.btn-pagination:hover {
   text-decoration: none;
 }
-/* line 35, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/buttons.less */
-.btn-pagination:active,
-.btn-pagination.active {
-  outline: 0;
-  background-image: none;
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-}
-/* line 42, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/buttons.less */
-.btn-pagination.disabled,
-.btn-pagination[disabled],
-fieldset[disabled] .btn-pagination {
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.65;
-  filter: alpha(opacity=65);
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-/* line 412, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.btn-pagination:hover,
-.btn-pagination:focus,
-.btn-pagination:active,
-.btn-pagination.active,
-.open .dropdown-toggle.btn-pagination {
-  color: #ffffff;
-  background-color: #0080b3;
-  border-color: #005f85;
-}
-/* line 421, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.btn-pagination:active,
-.btn-pagination.active,
-.open .dropdown-toggle.btn-pagination {
-  background-image: none;
-}
-/* line 429, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.btn-pagination.disabled,
-.btn-pagination[disabled],
-fieldset[disabled] .btn-pagination,
-.btn-pagination.disabled:hover,
-.btn-pagination[disabled]:hover,
-fieldset[disabled] .btn-pagination:hover,
-.btn-pagination.disabled:focus,
-.btn-pagination[disabled]:focus,
-fieldset[disabled] .btn-pagination:focus,
-.btn-pagination.disabled:active,
-.btn-pagination[disabled]:active,
-fieldset[disabled] .btn-pagination:active,
-.btn-pagination.disabled.active,
-.btn-pagination[disabled].active,
-fieldset[disabled] .btn-pagination.active {
-  background-color: #009ddc;
-  border-color: #008bc3;
-}
-/* line 23, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+/* line 32, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
 .btn-pagination.btn-pagination-next {
+  right: 0;
   margin-left: 1rem;
 }
-/* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+/* line 35, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
 .btn-pagination.btn-pagination-next .icon {
   position: relative;
   top: 1px;
@@ -9075,11 +8967,12 @@ fieldset[disabled] .btn-pagination.active {
 .btn-pagination.btn-pagination-next .icon:before {
   content: "\e080";
 }
-/* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+/* line 40, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
 .btn-pagination.btn-pagination-prev {
+  left: 0;
   margin-right: 1rem;
 }
-/* line 32, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+/* line 43, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
 .btn-pagination.btn-pagination-prev .icon {
   position: relative;
   top: 1px;
@@ -9094,73 +8987,54 @@ fieldset[disabled] .btn-pagination.active {
 .btn-pagination.btn-pagination-prev .icon:before {
   content: "\e079";
 }
-/* line 37, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+/* line 48, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
 .btn-pagination.pagination-link-disabled {
   cursor: default;
-  color: #333333;
-  background-color: #ffffff;
-  border-color: #cccccc;
   opacity: 0.5;
 }
-/* line 412, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.btn-pagination.pagination-link-disabled:hover,
-.btn-pagination.pagination-link-disabled:focus,
-.btn-pagination.pagination-link-disabled:active,
-.btn-pagination.pagination-link-disabled.active,
-.open .dropdown-toggle.btn-pagination.pagination-link-disabled {
-  color: #333333;
-  background-color: #ebebeb;
-  border-color: #adadad;
-}
-/* line 421, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.btn-pagination.pagination-link-disabled:active,
-.btn-pagination.pagination-link-disabled.active,
-.open .dropdown-toggle.btn-pagination.pagination-link-disabled {
-  background-image: none;
-}
-/* line 429, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.btn-pagination.pagination-link-disabled.disabled,
-.btn-pagination.pagination-link-disabled[disabled],
-fieldset[disabled] .btn-pagination.pagination-link-disabled,
-.btn-pagination.pagination-link-disabled.disabled:hover,
-.btn-pagination.pagination-link-disabled[disabled]:hover,
-fieldset[disabled] .btn-pagination.pagination-link-disabled:hover,
-.btn-pagination.pagination-link-disabled.disabled:focus,
-.btn-pagination.pagination-link-disabled[disabled]:focus,
-fieldset[disabled] .btn-pagination.pagination-link-disabled:focus,
-.btn-pagination.pagination-link-disabled.disabled:active,
-.btn-pagination.pagination-link-disabled[disabled]:active,
-fieldset[disabled] .btn-pagination.pagination-link-disabled:active,
-.btn-pagination.pagination-link-disabled.disabled.active,
-.btn-pagination.pagination-link-disabled[disabled].active,
-fieldset[disabled] .btn-pagination.pagination-link-disabled.active {
-  background-color: #ffffff;
-  border-color: #cccccc;
-}
-/* line 41, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+/* line 51, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
 .btn-pagination.pagination-link-disabled:hover {
   background: #fff;
 }
-/* line 47, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
-.paging-total-results {
-  margin-bottom: 1rem;
-}
-/* line 51, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
-.paging-total-results .pagination-total-results-value,
-.paging-total-results .pagination-total-results-label {
-  color: #000;
-}
 /* line 57, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
-.pagingnation-value {
-  font-weight: bold;
+.paging-total-results {
+  margin-bottom: 0;
 }
-/* line 61, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+/* line 60, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+.paging-total-results .pagingnation-label {
+  color: #004a76;
+  margin-bottom: 0;
+}
+/* line 69, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+.paging-total-results .pagination-total-results-value.pagingnation-label,
+.paging-total-results .pagination-total-results-label.pagingnation-label,
+.paging-total-results .pagination-results-displayed-value.pagingnation-label,
+.paging-total-results .pagination-total-results-value.pagingnation-value,
+.paging-total-results .pagination-total-results-label.pagingnation-value,
+.paging-total-results .pagination-results-displayed-value.pagingnation-value {
+  color: #004a76;
+}
+/* line 78, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
 .pagination-region-hidden {
   display: none;
 }
-/* line 64, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+/* line 81, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
 .pagination-navigation-container {
-  text-align: center;
+  text-align: left;
+}
+/* line 84, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+.pagination-navigation-container .pagingnation-label {
+  color: #009ddc;
+  font-size: 1.4rem;
+  font-weight: 300;
+}
+/* line 91, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
+.pagination-navigation-container .pagingnation-value {
+  font-weight: 300;
+  font-size: 1.6rem;
+  color: #009ddc;
+  text-transform: capitalize;
+  margin: 0 4px;
 }
 /* line 1, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/jquery.toastmessage.less */
 .toast-container {
@@ -9304,37 +9178,7 @@ fieldset[disabled] .btn-pagination.pagination-link-disabled.active {
   margin-top: -40px;
   top: 50%;
 }
-/* line 22, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
-h1,
-h2,
-h3,
-h4,
-h5 {
-  color: #ec316a;
-}
 /* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
-h1 a,
-h2 a,
-h3 a,
-h4 a,
-h5 a {
-  color: #ec316a;
-  font-weight: 100;
-}
-/* line 28, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
-h1 a:hover,
-h2 a:hover,
-h3 a:hover,
-h4 a:hover,
-h5 a:hover {
-  color: #bf1246;
-}
-/* line 34, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
-.view-title {
-  font-weight: 100;
-  text-transform: capitalize;
-}
-/* line 44, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .btn,
 .btn-lg {
   border-radius: 2px;
@@ -9342,59 +9186,94 @@ h5 a:hover {
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
-/* line 55, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 36, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .row {
   margin-bottom: 1rem;
 }
-/* line 63, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 44, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 hr {
   margin: 60px 0;
 }
-/* line 72, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 53, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 body {
   margin-top: 130px;
   background: #000000 url(images/theme-software-dark/bg-twinkle-dark.gif) repeat left top;
+  font-family: 'proxima-nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 @media (max-width: 768px) {
-  /* line 76, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+  /* line 57, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
   body {
     margin-top: 60px;
   }
 }
-/* line 81, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 63, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6 {
+  color: #ec316a;
+  font-family: 'proxima-nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+/* line 66, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+body h1 a,
+body h2 a,
+body h3 a,
+body h4 a,
+body h5 a,
+body h6 a {
+  color: #ec316a;
+  font-weight: 300;
+}
+/* line 69, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+body h1 a:hover,
+body h2 a:hover,
+body h3 a:hover,
+body h4 a:hover,
+body h5 a:hover,
+body h6 a:hover {
+  color: #bf1246;
+}
+/* line 75, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+body .view-title {
+  font-weight: 100;
+  text-transform: capitalize;
+}
+/* line 91, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 ul {
   list-style: none;
 }
-/* line 84, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 94, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .btn-cmd {
   border: 0 solid grey;
   font-size: 100%;
   background: transparent;
   color: #070ca6;
 }
-/* line 90, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 100, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .btn-cmd:hover {
   border: 0;
   background: rgba(150, 150, 150, 0.3);
 }
-/* line 94, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 104, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .btn-cmd:active {
   border: 0;
   background: rgba(150, 150, 150, 0.4);
   text-shadow: 7px 7px 12px #969696;
 }
-/* line 99, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 109, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .app-main {
   padding-bottom: 6rem;
 }
-/* line 117, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 127, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 #contextmenu {
   margin: 0;
   padding: 0;
   border: 1px solid #000;
   background: #dddddd;
 }
-/* line 123, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 133, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 #contextmenu li {
   list-style-type: none;
   margin: 1px;
@@ -9402,20 +9281,20 @@ ul {
   color: #000000;
   cursor: pointer;
 }
-/* line 130, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 140, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 #contextmenu li.hover {
   background: #ddd;
 }
-/* line 133, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 143, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .modal-container {
   display: none;
   min-width: 20rem;
 }
-/* line 137, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 147, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 #simplemodal-overlay {
   background-color: #000;
 }
-/* line 138, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 148, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 #simplemodal-container {
   background-color: #fff;
   border: 8px solid #444;
@@ -9423,7 +9302,7 @@ ul {
   width: auto !important;
   height: auto !important;
 }
-/* line 145, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 155, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 #simplemodal-container a.modalCloseImg {
   background: url(images/x.png) no-repeat;
   /* adjust url as required */
@@ -9437,14 +9316,14 @@ ul {
   right: -18px;
   cursor: pointer;
 }
-/* line 156, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 166, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .home-container {
   background: url(images/hm-commerce-software-bb.jpg) no-repeat;
   min-height: 500px;
   background-size: 100%;
   text-align: center;
 }
-/* line 162, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 172, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .field-content {
   max-width: 75rem;
   color: #ffffff;
@@ -9452,16 +9331,16 @@ ul {
   font-family: 'ProximaNova-Regular', Helvetica, Arial, sans-serif;
   padding-top: 8rem;
 }
-/* line 171, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 181, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .field-content h2 {
   font-size: 48px;
   line-height: 47px;
 }
-/* line 175, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 185, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .theme-variable-item-value-dark .btn-cmd {
   color: #111111;
 }
-/* line 178, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 188, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .theme-variable-item-value-light .btn-cmd {
   color: #eeeeee;
 }
@@ -9469,31 +9348,31 @@ ul {
   Begin Login Form
 */
 /* oAuth Form Feedback */
-/* line 185, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 195, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .feedback-label {
   color: red;
 }
-/* line 189, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 199, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .dropdown-menu {
   display: none;
   position: absolute;
   background-color: #ffffff;
 }
-/* line 194, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 204, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .oAuth-logout {
   display: none;
 }
 /*end login form*/
-/* line 201, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 211, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .activity-indicator-container {
   text-align: center;
 }
-/* line 204, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 214, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .activity-indicator {
   margin-left: auto;
   margin-right: auto;
 }
-/* line 209, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 219, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .pace .pace-progress {
   background: red;
   position: fixed;
@@ -9502,15 +9381,15 @@ ul {
   left: 0;
   height: 2px;
 }
-/* line 218, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 228, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .pace-inactive {
   display: none;
 }
-/* line 222, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 232, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .itemdetail-availability-state {
   padding: 0;
 }
-/* line 225, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 235, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .itemdetail-availability-state label {
   display: inline-block;
   font-size: 1rem;
@@ -9521,7 +9400,7 @@ ul {
   padding: 5px 8px;
   line-height: 10px;
 }
-/* line 236, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 246, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .itemdetail-availability-state .icon {
   position: relative;
   top: 1px;
@@ -9538,7 +9417,7 @@ ul {
 .itemdetail-availability-state .icon:before {
   content: "\e013";
 }
-/* line 245, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 255, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .is-hidden {
   display: none;
 }
