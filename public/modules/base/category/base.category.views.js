@@ -30,7 +30,7 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
           retVar = thumbnail.absolutePath;
         }
         else {
-          retVar = '/images/img-placeholder-noborder.png';
+          retVar = '/images/img-placeholder-noborder-dark.gif';
         }
         return retVar;
       },
