@@ -88,10 +88,10 @@
   <!-- Category Pagination Template -->
   <script id="CategoryPaginationTemplate" type="text/template">
     <div class="paging-total-results">
-      <span class="pagingnation-value pagination-total-results-value"><%= E.stats.totalResults %></span>
-      <label class="pagingnation-label pagination-total-results-label"><%= E.getI18nLabel('category.totalResults') %></label>
-      ( <span class="pagingnation-value pagination-results-displayed-value"><%= E.stats.resultsOnPage %></span>
-      <label class="pagingnation-label"><%= E.getI18nLabel('category.resultsOnPage') %></label> )
+      <span class="pagination-value pagination-total-results-value"><%= E.stats.totalResults %></span>
+      <label class="pagination-label pagination-total-results-label"><%= E.getI18nLabel('category.totalResults') %></label>
+      ( <span class="pagination-value pagination-results-displayed-value"><%= E.stats.resultsOnPage %></span>
+      <label class="pagination-label"><%= E.getI18nLabel('category.resultsOnPage') %></label> )
 
     </div>
 
@@ -99,10 +99,10 @@
       <a class="btn-pagination btn-pagination-prev pagination-link <%= E.checkForDisabledPaginationBtn(E.links.prev) %>" data-i18n="category.prev"
         <%= E.generatePaginationLink(E.categoryUri, E.links.prev) %> > <span class="icon"></span><%= E.getI18nLabel('category.prev') %></a>
       <span class="pagestate-summary">
-        <label class="pagingnation-label"><%= E.getI18nLabel('category.page') %></label>
-        <span class="pagingnation-value pagination-curr-page-value"><%= E.stats.currentPage %></span>
-        <label class="pagingnation-label"><%= E.getI18nLabel('category.of') %></label>
-        <span class="pagingnation-value pagination-total-pages-value"><%= E.stats.numOfPages %></span>
+        <label class="pagination-label"><%= E.getI18nLabel('category.page') %></label>
+        <span class="pagination-value pagination-curr-page-value"><%= E.stats.currentPage %></span>
+        <label class="pagination-label"><%= E.getI18nLabel('category.of') %></label>
+        <span class="pagination-value pagination-total-pages-value"><%= E.stats.numOfPages %></span>
 
       </span>
 
