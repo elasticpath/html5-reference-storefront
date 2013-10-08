@@ -7164,7 +7164,7 @@ td.visible-print {
   min-height: 125px;
   box-shadow: 0px 5px 45px 5px rgba(0, 157, 220, 0.4);
   -webkit-box-shadow: 0px 5px 45px 5px rgba(0, 157, 220, 0.35);
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
   margin: 0;
   border-radius: 0;
   -webkit-border-radius: 0;
@@ -7241,8 +7241,8 @@ td.visible-print {
 .main-nav-container {
   display: block;
   position: absolute;
-  left: 245px;
-  top: 47px;
+  left: 10px;
+  top: 55px;
   bottom: 0;
   background: transparent;
   border: none;
@@ -7298,7 +7298,7 @@ td.visible-print {
 .logo-container {
   position: absolute;
   width: 200px;
-  top: 45px;
+  top: 22px;
   left: 15px;
   z-index: 1031;
 }
@@ -7355,19 +7355,28 @@ td.visible-print {
 .global-nav-container {
   position: absolute;
   display: inline-block;
-  top: 12px;
-  right: 275px;
+  top: 0px;
+  right: 0px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #002a43;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  text-align: right;
+  padding: 0;
 }
 @media (max-width: 768px) {
-  /* line 170, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  /* line 180, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
   .global-nav-container {
     position: relative;
     display: block;
     width: 100%;
     top: auto;
     left: 0;
-    margin: 0px 0 20px 0;
-    padding: 0;
+    margin: 15px 0 15px 0;
+    padding: 0 6px;
+    text-align: left;
   }
   /* line 20, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
   .global-nav-container:before,
@@ -7398,125 +7407,69 @@ td.visible-print {
     clear: both;
   }
 }
-/* line 181, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 192, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .global-nav-container li {
-  display: inline-block;
-  margin: 0 0 0 -4px;
+  width: 100%;
+  margin: 0 0 0 0;
   padding: 0;
   list-style-type: none;
+  text-align: right;
 }
-/* line 188, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+@media (min-width: 980px) {
+  /* line 199, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  .global-nav-container li {
+    display: block;
+  }
+}
+@media (max-width: 980px) {
+  /* line 203, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  .global-nav-container li {
+    width: auto;
+    display: inline-block;
+  }
+  /* line 207, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  .global-nav-container li .global-nav-login,
+  .global-nav-container li .global-nav-cart {
+    margin: 6px;
+    padding: 0;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #009ddc;
+  }
+}
+@media (max-width: 768px) {
+  /* line 217, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  .global-nav-container li {
+    text-align: left!important;
+  }
+}
+/* line 222, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .global-nav-container li:first-child .global-nav-link {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
-/* line 195, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 229, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .global-nav-container li:last-child .global-nav-link {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
-/* line 202, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 236, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .global-nav-container .global-nav-link {
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.428571429;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  border-radius: 2px;
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
-  padding: 5px 10px;
-  font-size: 12px;
-  line-height: 1.5;
-  border-radius: 3px;
-  padding: 1px 5px;
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0 10px 0 10px;
 }
-/* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/buttons.less */
-.global-nav-container .global-nav-link:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-/* line 29, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/buttons.less */
-.global-nav-container .global-nav-link:hover,
-.global-nav-container .global-nav-link:focus {
-  color: #333333;
-  text-decoration: none;
-}
-/* line 35, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/buttons.less */
-.global-nav-container .global-nav-link:active,
-.global-nav-container .global-nav-link.active {
-  outline: 0;
-  background-image: none;
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-}
-/* line 42, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/buttons.less */
-.global-nav-container .global-nav-link.disabled,
-.global-nav-container .global-nav-link[disabled],
-fieldset[disabled] .global-nav-container .global-nav-link {
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.65;
-  filter: alpha(opacity=65);
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-/* line 208, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 246, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .global-nav-container .global-nav-cart {
-  color: #ffffff;
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  display: inline-block;
+  color: #009ddc;
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
 }
-/* line 412, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.global-nav-container .global-nav-cart:hover,
-.global-nav-container .global-nav-cart:focus,
-.global-nav-container .global-nav-cart:active,
-.global-nav-container .global-nav-cart.active,
-.open .dropdown-toggle.global-nav-container .global-nav-cart {
-  color: #ffffff;
-  background-color: #39b3d7;
-  border-color: #269abc;
-}
-/* line 421, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.global-nav-container .global-nav-cart:active,
-.global-nav-container .global-nav-cart.active,
-.open .dropdown-toggle.global-nav-container .global-nav-cart {
-  background-image: none;
-}
-/* line 429, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.global-nav-container .global-nav-cart.disabled,
-.global-nav-container .global-nav-cart[disabled],
-fieldset[disabled] .global-nav-container .global-nav-cart,
-.global-nav-container .global-nav-cart.disabled:hover,
-.global-nav-container .global-nav-cart[disabled]:hover,
-fieldset[disabled] .global-nav-container .global-nav-cart:hover,
-.global-nav-container .global-nav-cart.disabled:focus,
-.global-nav-container .global-nav-cart[disabled]:focus,
-fieldset[disabled] .global-nav-container .global-nav-cart:focus,
-.global-nav-container .global-nav-cart.disabled:active,
-.global-nav-container .global-nav-cart[disabled]:active,
-fieldset[disabled] .global-nav-container .global-nav-cart:active,
-.global-nav-container .global-nav-cart.disabled.active,
-.global-nav-container .global-nav-cart[disabled].active,
-fieldset[disabled] .global-nav-container .global-nav-cart.active {
-  background-color: #5bc0de;
-  border-color: #46b8da;
-}
-/* line 210, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 254, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .global-nav-container .global-nav-cart .icon {
   position: relative;
   top: 1px;
@@ -7532,70 +7485,50 @@ fieldset[disabled] .global-nav-container .global-nav-cart.active {
 .global-nav-container .global-nav-cart .icon:before {
   content: "\e116";
 }
-/* line 217, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 263, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .global-nav-container .global-nav-login {
-  padding: 5px 10px;
-  font-size: 12px;
-  line-height: 1.5;
-  border-radius: 3px;
-  padding: 1px 5px;
-  color: #ffffff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
-}
-/* line 412, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.global-nav-container .global-nav-login:hover,
-.global-nav-container .global-nav-login:focus,
-.global-nav-container .global-nav-login:active,
-.global-nav-container .global-nav-login.active,
-.open .dropdown-toggle.global-nav-container .global-nav-login {
-  color: #ffffff;
-  background-color: #47a447;
-  border-color: #398439;
-}
-/* line 421, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.global-nav-container .global-nav-login:active,
-.global-nav-container .global-nav-login.active,
-.open .dropdown-toggle.global-nav-container .global-nav-login {
-  background-image: none;
-}
-/* line 429, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.global-nav-container .global-nav-login.disabled,
-.global-nav-container .global-nav-login[disabled],
-fieldset[disabled] .global-nav-container .global-nav-login,
-.global-nav-container .global-nav-login.disabled:hover,
-.global-nav-container .global-nav-login[disabled]:hover,
-fieldset[disabled] .global-nav-container .global-nav-login:hover,
-.global-nav-container .global-nav-login.disabled:focus,
-.global-nav-container .global-nav-login[disabled]:focus,
-fieldset[disabled] .global-nav-container .global-nav-login:focus,
-.global-nav-container .global-nav-login.disabled:active,
-.global-nav-container .global-nav-login[disabled]:active,
-fieldset[disabled] .global-nav-container .global-nav-login:active,
-.global-nav-container .global-nav-login.disabled.active,
-.global-nav-container .global-nav-login[disabled].active,
-fieldset[disabled] .global-nav-container .global-nav-login.active {
-  background-color: #5cb85c;
-  border-color: #4cae4c;
-}
-/* line 221, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
-.global-nav-container .global-nav-login .icon {
-  position: relative;
-  top: 1px;
   display: inline-block;
-  font-family: 'Glyphicons Halflings';
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  margin-right: 4px;
+  color: #0079a9;
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 26px 0 0 0;
 }
-/* line 46, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/glyphicons.less */
-.global-nav-container .global-nav-login .icon:before {
-  content: "\e008";
+/* line 20, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+.global-nav-container .global-nav-login:before,
+.global-nav-container .global-nav-login:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
 }
-/* line 232, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+.global-nav-container .global-nav-login:after {
+  clear: both;
+}
+/* line 20, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+.global-nav-container .global-nav-login:before,
+.global-nav-container .global-nav-login:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+/* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+.global-nav-container .global-nav-login:after {
+  clear: both;
+}
+/* line 272, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+.global-nav-container .global-nav-login .icon {
+  display: none;
+}
+/* line 281, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .main-search-container {
+  display: none!important;
   position: absolute;
   right: 15px;
   top: 0px;
@@ -7605,7 +7538,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   
 }
 @media (max-width: 768px) {
-  /* line 245, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  /* line 295, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
   .main-search-container {
     position: relative;
     top: auto;
@@ -7643,12 +7576,12 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
     clear: both;
   }
 }
-/* line 258, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 308, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .main-search-container .form-group {
   padding-right: 0;
   margin-right: 0;
 }
-/* line 264, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 314, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .btn-header-search {
   display: inline-block;
   padding: 6px 12px;
@@ -7752,7 +7685,7 @@ fieldset[disabled] .btn-header-search.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 283, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 333, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .btn-header-search .icon {
   position: relative;
   top: 1px;
@@ -7768,7 +7701,7 @@ fieldset[disabled] .btn-header-search.active {
 .btn-header-search .icon:before {
   content: "\e003";
 }
-/* line 291, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 341, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .header-search-input {
   display: block;
   width: 100%;
@@ -7826,7 +7759,7 @@ fieldset[disabled] .header-search-input {
 textarea.header-search-input {
   height: auto;
 }
-/* line 303, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 353, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .navbar-collapse {
   position: absolute;
   top: 0;
@@ -7835,7 +7768,7 @@ textarea.header-search-input {
   min-height: 100px;
 }
 @media (max-width: 768px) {
-  /* line 312, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  /* line 362, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
   .navbar-collapse {
     position: relative;
     top: auto;
@@ -7845,7 +7778,7 @@ textarea.header-search-input {
     background: #1c1c1c;
   }
 }
-/* line 321, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 371, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .navbar-collapse .navbar-form {
   display: block;
   border: 0;
@@ -7854,11 +7787,11 @@ textarea.header-search-input {
   padding: 12px 0;
 }
 @media (max-width: 768px) {
-  /* line 329, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  /* line 379, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
   .navbar-collapse .navbar-form .form-group {
     display: inline-block;
   }
-  /* line 331, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  /* line 381, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
   .navbar-collapse .navbar-form .form-group .form-control {
     width: 60%;
     min-width: 200px;
@@ -7866,18 +7799,26 @@ textarea.header-search-input {
   }
 }
 @media (max-width: 768px) {
-  /* line 340, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+  /* line 390, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
   .navbar-collapse .navbar-form button {
     display: inline-block;
   }
 }
-/* line 347, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 397, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .appheader-container {
   position: relative;
 }
-/* line 351, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+/* line 401, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 nav.main-nav {
   position: relative;
+}
+/* line 405, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+.simplemodal-overlay {
+  z-index: 9321 !important;
+}
+/* line 408, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
+.simplemodal-container {
+  z-index: 9322 !important;
 }
 /* line 5, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-outer {

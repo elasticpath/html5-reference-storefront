@@ -11,8 +11,8 @@
 // outer navbar styles
 .navbar{
   min-height: 125px;
-       box-shadow:  0px 5px 45px 5px rgba(0, 157, 220, .4);
-     -webkit-box-shadow:  0px 5px 45px 5px rgba(0, 157, 220, .35);
+  box-shadow:  0px 5px 45px 5px rgba(0, 157, 220, .4);
+  -webkit-box-shadow:  0px 5px 45px 5px rgba(0, 157, 220, .35);
 
   @media (max-width: @grid-float-breakpoint) {
     min-height: 50px;
@@ -65,8 +65,8 @@
 .main-nav-container{
   display: block;
   position: absolute;
-  left: 245px;
-  top: 47px;
+  left: 10px;
+  top: 55px;
   bottom: 0;
 
   background: transparent;
@@ -136,7 +136,7 @@
 .logo-container{
   position: absolute;
   width: 200px;
-  top: 45px;
+  top: 22px;
   left: 15px;
 
   @media (max-width: @grid-float-breakpoint) {
@@ -164,8 +164,18 @@
 .global-nav-container{
   position: absolute;
   display: inline-block;
-  top: 12px;
-  right: 275px;
+  top: 0px;
+  right: 0px;
+  // min-height: 80px;
+  // min-width: 135px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid darken(@brand-secondary, 10%);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  text-align: right;
+  padding: 0;
 
   @media (max-width: @grid-float-breakpoint) {
     position: relative;
@@ -173,16 +183,40 @@
     width: 100%;
     top: auto;
     left: 0;
-    margin: 0px 0 20px 0;
-    padding: 0;
+    margin: 15px 0 15px 0;
+    padding: 0 6px;
     .clearfix;
+    text-align: left;
   }
 
   li{
-    display: inline-block;
-    margin: 0 0 0 -4px;
+    width: 100%;
+    margin: 0 0 0 0;
     padding: 0;
     list-style-type: none;
+    text-align: right;
+
+    @media (min-width: 980px){
+      display: block;
+    }
+
+    @media (max-width: 980px) {
+      width: auto;
+      display: inline-block;
+
+      .global-nav-login,
+      .global-nav-cart{
+        margin: 6px;
+        padding:0;
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: @brand-primary;
+      }
+    }
+
+      @media (max-width: @grid-float-breakpoint) {
+        text-align: left!important;
+      }
 
     &:first-child{
       .global-nav-link{
@@ -200,13 +234,23 @@
   }
 
   .global-nav-link{
-    .btn;
-    .btn-sm;
-    .btn-group-xs > .btn;
+    // .btn;
+    // .btn-sm;
+    // .btn-group-xs > .btn;
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0 10px 0 10px;
   }
 
   .global-nav-cart{
-    .btn-info;
+    display: inline-block;
+    color: darken(@brand-primary, 0%);
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+
     .icon{
       .glyphicon;
       .glyphicon-shopping-cart;
@@ -214,14 +258,19 @@
     }
   }
 
+
+
   .global-nav-login{
-    .btn-group-xs > .btn;
-    .btn-success;
+    display: inline-block;
+    .clearfix;
+    color: darken(@brand-primary, 10%);
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 26px 0 0 0;
 
     .icon{
-        .glyphicon;
-        .glyphicon-user;
-        margin-right: 4px;
+        display: none;
     }
   }
 } // end global nav styles
@@ -230,6 +279,7 @@
 
 
 .main-search-container{
+  display: none!important;
   position: absolute;
   right: 15px;
   top: 0px;
@@ -350,4 +400,11 @@
 
 nav.main-nav{
   position: relative;
+}
+
+.simplemodal-overlay{
+  z-index: 9321 !important;
+}
+.simplemodal-container{
+  z-index: 9322 !important;
 }
