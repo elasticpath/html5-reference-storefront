@@ -20,8 +20,8 @@ define(['marionette','eventbus','pace'],
       item: function(uri) {
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
-          module:'item',
-          view:'DefaultView',
+          module:'extItem',
+          view:'customerView',
           data:uri
         });
       },

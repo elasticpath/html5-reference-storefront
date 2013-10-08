@@ -42,6 +42,8 @@ require.config({
     'item'            : 'modules/base/item/item.controller',
     'item.models'     : 'modules/base/item/item.models',
     'item.views'      : 'modules/base/item/item.views',
+    'extItem'         : 'modules/item/ext.item.controller',
+    'extItem.views'   : 'modules/item/ext.item.views',
     'category'        : 'modules/base/category/category.controller',
     'category.models' : 'modules/base/category/category.models',
     'category.views'  : 'modules/base/category/category.views',
