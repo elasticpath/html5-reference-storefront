@@ -165,7 +165,12 @@
   position: absolute;
   display: inline-block;
   top: 0px;
-  right: 0px;
+  right: 230px;
+
+  @media (min-width: @screen-desktop){
+    right: 0px;
+  }
+
   // min-height: 80px;
   // min-width: 135px;
   background: rgba(0,0,0,0.4);
@@ -196,11 +201,11 @@
     list-style-type: none;
     text-align: right;
 
-    @media (min-width: 980px){
+    @media (min-width: @screen-desktop){
       display: block;
     }
 
-    @media (max-width: 980px) {
+    @media (max-width: @screen-desktop) {
       width: auto;
       display: inline-block;
 
@@ -287,16 +292,52 @@
 
 
 .main-search-container{
-  display: none!important;
+  // display: none!important;
   position: absolute;
-  right: 15px;
-  top: 0px;
+  right: 0px;
+  bottom: 10px;
   margin: 0 0 0 0;
-  @media (max-width: @grid-float-breakpoint) {
-    // position: relative;
-    // right: 190px;
-    // top: 0px;
+
+
+// adjust styles for collapsed state
+@media (max-width: @grid-float-breakpoint) {
+  position: relative;
+  top: auto;
+  left: auto;
+  margin: 30px 0 0 0!important;
+  padding: 0;
+
+  .btn-header-search{
+    height: 32px;
+    border-top-right-radius: 3px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    margin-top: -1px;
   }
+  .header-search-input{
+    height: 32px;
+    border-top-left-radius: 3px;
+  }
+}
+
+
+// adjust styles for intermediate state btwn tablet and desktop to avoid nav collisions
+@media (max-width: @screen-desktop) and (min-width: @screen-tablet){
+  // position: relative;
+  top: 0px;
+  right: 0px;
+
+  .btn-header-search{
+    height: 32px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 3px;
+  }
+
+  .header-search-input{
+    height: 32px;
+    border-top-left-radius: 0px;
+  }
+}
 
 
 
@@ -322,13 +363,18 @@
 .btn-header-search{
   .btn;
   .btn-sm;
-  .btn-success;
+
+  background-color: @brand-secondary;
+  color: @brand-primary;
+
+  &:hover{
+    background-color: darken(@brand-secondary,10%);
+    color: darken(@brand-primary,10%);
+  }
+
   height: 22px;
   padding: 0px 5px;
-  // line-height: 24px;
-  // border-bottom: 0!important;
-  // box-shadow: none;
-  // -webkit-box-shadow: none;
+
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   margin-left: -5px; // scooch the button over to butt up to the form input
@@ -346,15 +392,41 @@
 
 }
 
+
+// input:-webkit-input-placeholder{color:@brand-secondary}
+// input:-moz-placeholder{color:@brand-secondary}
+// input:-ms-input-placeholder{color:@brand-secondary}
+
+.main-search-container{
+
+  input[type="text"]{
+    color: @brand-primary;
+  }
+
+}
+
 .header-search-input{
   .form-control;
   // .input-sm;
   height: 22px;
+  background-color: #000;
+  background-color: rgba(0,0,0,0.4);
+  color: @brand-primary;
+  // border: 1px solid @brand-secondary;
+  border: 1px solid darken(@brand-secondary, 10%);
+
+
+
+
   // add faint shadow to match buttons
   -webkit-box-shadow:  0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow:          0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+
   margin-right: 0;
 }
 
@@ -363,7 +435,7 @@
   top:0;
   left: 0;
   right: 0;
-  min-height: 100px;
+  min-height: 125px;
 
   // margin: 15px;
 
@@ -373,7 +445,7 @@
     left: auto;
     right: auto;
     min-height: 50px;
-    background: #1c1c1c;
+    background: rgba(20,20,20,0.8);
   }
 
   .navbar-form{
@@ -381,7 +453,7 @@
     border: 0;
     box-shadow: none;
     margin: 0;
-    padding: 12px 0;
+    padding: 0px 0;
 
     @media (max-width: @grid-float-breakpoint) {
       .form-group{

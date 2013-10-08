@@ -30,7 +30,7 @@
 }
 
 .category-items-listing{  // ul containing cat items
-    padding: 4rem 0;
+    padding: 2rem 0;
     .make-row();
 }
 
@@ -96,6 +96,7 @@
     position: relative;
     display: block;
     // height: 40px;
+    margin: -3px 10px 0 0;
 
     .category-item-availability{
         // text-align: right;
@@ -105,6 +106,7 @@
         margin: 3px 1rem 0 0;
 
         label{
+            position: relative;
             height: auto;
             display: inline-block;
             background-color: transparent;
@@ -115,19 +117,22 @@
             font-weight: 300;
             color: @availability-color-available;
             line-height: 1.5rem;
-            white-space: nowrap;
-            padding: 0;
+            // white-space: nowrap;
+            padding: 3px 0 0 22px;
 
             .icon{
+                position: absolute;
+                display: inline-block;
+                left: 0;
+                top: 0px;
                 font-size: 1.2em;
                 .glyphicon-thumbs-up;
                 // margin-bottom: -5px;
                 line-height: 1.7rem;
                 // .pull-right;
-                margin-left: 8px;
+                margin: 0px;
             }
         }
-
     }
 }
 
@@ -145,6 +150,9 @@
 .category-item-price-container{
     // border-bottom: 1px dotted @brand-primary;
 
+    label.item-meta{
+        display: none;
+    }
 
 
     padding-bottom: 2rem;
@@ -159,12 +167,23 @@
     .make-row(0);
 
     .price-wrapper{
-        .make-lg-column(5,0);
+        .make-lg-column(4,0);
     }
 
     .availability-wrapper{
         position: relative;
-        .make-lg-column(7,0);
+        .make-lg-column(8,0);
+    }
+}
+
+.category-item-release-date{
+    label.item-meta,
+    span.item-meta{
+        font-size: 1.2rem;
+    }
+
+    span.item-meta{
+        color: @gray;
     }
 }
 
@@ -179,6 +198,10 @@
     font-size: 1.8rem;
     font-weight:300;
     color: @brand-primary;
+}
+
+.category-item-purchase-price-value{
+    font-size: 1.6rem;
 }
 
 .category-item-list-price,
@@ -206,7 +229,7 @@
         .make-xs-column(5, 0);
         // text-align: right;
         color: @gray-light;
-        display: none;
+        // display: none;
     }
     span.item-meta{
         .make-xs-column(7, 16px);

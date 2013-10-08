@@ -7,7 +7,7 @@
     // .box-neon(3px, 10px);
     text-align: left;
     margin: 10px 0;
-    padding: 40px;
+    padding: 0 25px;
 
 }
 
@@ -16,22 +16,32 @@
 }
 
 .btn-pagination{
-    text-indent: -99999px;
+    // text-indent: -99999px;
+
+    /* Hide the text. */
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    /* hidey text over */
+
     position: absolute;
-    top:0;
+    top: 5px;
     height: 36px;
     width: 15px;
-    background: transparent  url(images/theme-software-dark/pagination-prevnext-sprite.png) no-repeat 0 0;
+
     // content: "";
 
       &:hover{
         text-decoration: none;
+        background-color: transparent;
+        opacity: .8;
       }
 
 
     &.btn-pagination-next{
       right: 0;
-        margin-left: 1rem;
+      margin-left: 1rem;
+      background: transparent  url(images/theme-software-dark/pagination-prevnext-sprite.png) no-repeat -16px 0;
         .icon{
           .glyphicon;
           .glyphicon-chevron-right;
@@ -39,7 +49,8 @@
     }
     &.btn-pagination-prev{
       left: 0;
-        margin-right: 1rem;
+      margin-right: 1rem;
+      background: transparent  url(images/theme-software-dark/pagination-prevnext-sprite.png) no-repeat 0 0;
         .icon{
           .glyphicon;
           .glyphicon-chevron-left;
@@ -49,7 +60,7 @@
       cursor: default;
       opacity: 0.5;
       &:hover{
-        background: #fff;
+        // background: #fff;
       }
     }
 }
@@ -57,7 +68,7 @@
 .paging-total-results{
   margin-bottom: 0;
 
-  .pagingnation-label{
+  .pagination-label{
     color: @brand-secondary;
     margin-bottom: 0;
   }
@@ -66,8 +77,8 @@
   .pagination-total-results-label,
   .pagination-results-displayed-value{
 
-    &.pagingnation-label,
-    &.pagingnation-value{
+    &.pagination-label,
+    &.pagination-value{
       color: @brand-secondary;
     }
   }
@@ -78,21 +89,26 @@
 .pagination-region-hidden{
   display:none;
 }
+
+
 .pagination-navigation-container{
   text-align:left;
 
-  .pagingnation-label{
+  .pagination-label{
     color: @brand-primary;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 300;
-    // text-transform: capitalize;
+    text-transform: capitalize;
+    &:last-of-type{
+      text-transform: none;
+    }
   }
 
-  .pagingnation-value{
+  .pagination-value{
     font-weight:300;
     font-size: 1.6rem;
     color: @brand-primary;
     text-transform: capitalize;
-    margin: 0 4px;
+    margin: 0 2px;
   }
 }
