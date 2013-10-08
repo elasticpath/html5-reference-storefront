@@ -1,0 +1,267 @@
+//
+// ELastic Path UI Storefront Cart View
+//
+
+.cart-outer{
+    background: transparent url(images/bg-vector-splat.jpg) no-repeat center top;
+    background-size: cover;
+    padding-top: 60px;
+}
+
+.cart-container{
+
+
+    h1{
+        margin: 0 0 3rem 0;
+    }
+
+    ul{
+        list-style-type: none;
+        padding: 0;
+        li{
+            list-style-type: none;
+        }
+    }
+
+    table{
+        .table-striped;
+        margin-bottom: 0;
+
+        thead{
+            background: rgba(0, 163, 221, 0.667);
+
+            th{
+                &:first-child{
+                    border-top-left-radius: 6px;
+                }
+                &:last-child{
+                    border-top-right-radius: 6px;
+                }
+            }
+        }
+
+        tr{
+            border: none;
+
+            th{
+                font-size: 1.3rem;
+                color: @gray-light;
+                font-weight: 400;
+
+                &:last-child{
+                    text-align: right;
+                }
+            }
+
+            td{
+                // border: 1px dotted pink;
+                font-size: 1.3rem;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                border-bottom: 3px solid #fff;
+                border-top: none;
+
+                &.cart-lineitem-title-col{
+                    font-size: 1.4rem;
+                }
+
+                &.cart-lineitem-remove-btn-col{
+                    font-size: 13px;
+
+                    .btn-cart-removelineitem{
+                        text-shadow: none;
+                        // margin-top: 5px;
+                        // padding: 0 0 2px 0px;
+                        padding: 0;
+                        height: 21px;
+                        width: 21px;
+                        color: @gray-lighter;
+                        background-color: @gray-light;
+                        border: none;
+                        border-radius: 2px;
+                        text-align: middle;
+
+
+                            box-shadow: none;
+                            border-bottom: none;
+
+
+
+                        &:hover{
+                            background-color: @brand-danger;
+                            color: #fff;
+                        }
+
+                        .icon{
+                            .glyphicon;
+                            .glyphicon-remove;
+                            margin: auto;
+                            padding: 2px 0 0 0;
+                        }
+
+                        .btn-text{
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            &:last-child{
+                td{
+                    border-bottom: none;
+                }
+            }
+
+            th,
+            td{
+                &:last-child{
+                    text-align: center;
+                    // padding-right: 30px;
+                }
+                &:first-child{
+                    padding-left: 30px;
+                }
+            }
+            th{
+                            color: #fff;
+            }
+        }
+    }
+}
+
+
+
+
+.cart-main-inner{
+    // background: #f2f2f2;
+    // font-size: 1.3rem;
+    // color: @gray;
+    // border-radius: 6px;
+    // -webkit-box-shadow:  0px 0px 10px 3px rgba(0, 0, 0, 0.17);
+    // box-shadow:  0px 0px 10px 3px rgba(0, 0, 0, 0.17);
+
+    .box-neon(6px,0);
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.cart-summary-container-inner{
+ //now defunct... but for how long?!
+}
+
+.cart-lineitem-thumbnail-col{
+    img{
+        max-width: 60px;
+        .box-neon(2px,2px,#fff,#fff);
+        box-shadow: none;
+    }
+}
+
+
+
+.cart-heading-quantity,
+.cart-lineitem-quantity-col,
+.cart-heading-availability,
+.cart-lineitem-availability-col{
+    text-align: center;
+}
+
+.btn-cmd-checkout{
+    .btn;
+    // .btn-lg;
+    .btn-success;
+}
+
+
+.cart-list-price{
+    text-decoration: line-through;
+    font-size: 0.85em;
+    color: lighten(@gray, 20%);
+}
+
+.cart-lineitem-purchase-price{
+    font-weight: bold;
+}
+
+
+.cart-lineitem-table-headings{
+    border: none;
+}
+
+
+
+//------------------ grid
+.cart-container-inner{ //wraps title, main cart table, summary/checkout --- applies bootstrap row
+    .make-row();
+}
+
+.cart-title-container{ // wraps title --- applies bootstrap column classes
+    // .make-row();
+    .make-xs-column(12);
+    h1{
+        .make-xs-column(12);
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+        color: @gray;
+    }
+}
+
+.cart-main-container{ //wraps main cart table --- applies bootstrap column classes
+    .make-md-column(9);
+    .make-xs-column(12);
+    margin-bottom: 2em;
+}
+
+.cart-summary-container{ //wraps cart summary
+    // .make-md-column(3);
+    // .make-xs-column(12);
+    display: inline-block;
+}
+
+.cart-checkout-container{ //wraps cart summary
+    // .make-sm-column(3);
+    margin-top: 2rem;
+    // display: inline-block;
+    // .clearfix;
+}
+
+.cart-sidebar{ // wraps cart summary + cart checkout --- applies bootstrap column classes
+    .make-md-column(3);
+    .make-xs-column(12);
+
+    .cart-sidebar-inner{
+        display: inline-block;
+        padding: 2rem;
+        border: 3px solid @brand-primary;
+        border-radius: 6px;
+        background-color: rgba(255,255,255,0.6);
+
+        h3{
+            margin: 0 0 2rem 0;
+        }
+    }
+}
+
+.cart-unit-list-price,
+.cart-total-list-price{
+    text-decoration: line-through;
+    color: darken(@gray-light, 10%);
+}
+
+.cart-unit-purchase-price,
+.cart-total-purchase-price{
+    font-weight: bold;
+}
+/*
+Purchase Confirmation
+*/
+.purchaseconfirm-items-container .row{ // this should to be more specific
+  margin-bottom: 0;
+}
+.purchaseconfirm-items-container hr{ // this should to be more specific
+  margin: 1rem;
+}
+.purchaseconfirmation-items-list li:nth-child(even){
+  background:#fafafe;
+}
