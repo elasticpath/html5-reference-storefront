@@ -303,73 +303,7 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
         });
 
 
-        /*
-         *
-         * UI related calculations and methods
-         *
-         * */
-        var rem = (function rem() {
-          var html = document.getElementsByTagName('html')[0];
 
-          return function () {
-            return parseInt(window.getComputedStyle(html)['fontSize']);
-          };
-        }());
-        // This function will convert pixel to rem
-        function toRem(length) {
-          return (parseInt(length) / rem());
-        }
-
-        ep.ui.getRenderProfile = function () {
-          var curRemWidth = ep.ui.remWidth();
-          switch (true) {
-            case (curRemWidth < 31):
-              // phone
-              return 'phone';
-              break;
-
-            case (curRemWidth > 30 && curRemWidth < 46):
-              // mini tab
-              return 'tab';
-              break;
-
-            case (curRemWidth > 45 && curRemWidth < 64):
-              // tablet
-              return 'ltab';
-              break;
-
-            case (curRemWidth > 63):
-              // tablet landscape
-              return 'full';
-              break;
-
-            default:
-              break;
-          }
-
-        };
-        ep.ui.remWidth = function () {
-          var pxWidth = $(window).width();
-          return toRem(pxWidth);
-        };
-        ep.ui.width = function () {
-          var pxWidth = $(window).width();
-          return pxWidth;
-        };
-        ep.ui.screenwidth = function () {
-          var pxWidth = window.screen.width();
-          return pxWidth;
-        };
-        ep.ui.ppi = function () {
-          var dpr = 1;
-          if (window.devicePixelRatio !== undefined) {
-            dpr = window.devicePixelRatio;
-          }
-          return dpr;
-        };
-        $(window).resize(function () {
-          EventBus.trigger('layout.windowResized', ep.ui.remWidth());
-        });
 
 
         EventBus.trigger('ep.startAppRequest');
