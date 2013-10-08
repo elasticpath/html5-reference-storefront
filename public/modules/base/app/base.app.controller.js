@@ -122,6 +122,41 @@ define(['ep','eventbus', 'router', 'base.app.models','base.app.views','text!modu
       EventBus.trigger('app.baseLayoutRenderSuccess');
     });
 
+
+
+
+    // bootstrap initialization complete (main.js)
+    // time to start up the application
+    EventBus.on('app.bootstrapInitSuccess',
+      function () {
+        // when ready start the router
+        ep.app.addInitializer(function (options) {
+          // do useful stuff here
+          ep.router = new Router.AppRouter();
+        });
+        // wait until the application and DOM are spun up
+        // then start the history manager
+        ep.app.on("initialize:after", function () {
+          if (Backbone.history) {
+            //Backbone.history.start({ pushState: true });
+            Backbone.history.start();
+          }
+        });
+
+        EventBus.trigger('ep.startAppRequest');
+      }
+    );
+
+    EventBus.on('ep.startAppRequest', function () {
+      // turn the key and give 'er some gass
+      try {
+        ep.app.start();
+      }
+      catch (e) {
+
+      }
+    });
+
     return{
       config:Model.config
     };

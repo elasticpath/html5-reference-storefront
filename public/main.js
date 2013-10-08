@@ -8,6 +8,7 @@
  */
 
 
+
 var dependencies = config.baseDependencyConfig;
 var basePaths = config.baseDependencyConfig.paths;
 var extensionPaths = {

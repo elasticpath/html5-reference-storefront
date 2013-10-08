@@ -8,7 +8,7 @@
  */
 define(['ep','marionette','i18n','eventbus','pace'],
   function(ep,Marionette,i18n,EventBus,pace){
-    //console.log('fuck:  ' + i18n);
+
     var viewHelpers = {
       getDisplayType:function(bHasChildren){
         if (bHasChildren){
@@ -279,6 +279,8 @@ define(['ep','marionette','i18n','eventbus','pace'],
       DefaultItemPriceView:defaultItemPriceView,
       DefaultItemAddToCartView:defaultItemAddToCartView,
       getAddToCartQuantity:getAddToCartQuantity
+
+
 
 
     };

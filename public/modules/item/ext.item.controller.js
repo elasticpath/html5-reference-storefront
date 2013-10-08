@@ -1,4 +1,5 @@
 /**
+<<<<<<< HEAD
  * Copyright Elastic Path Software 2013.
 
  * User: sbrookes
@@ -7,13 +8,13 @@
  *
  *
  */
-define(['jquery','ep','app', 'eventbus', 'cortex', 'item.models', 'ext.item.views', 'text!modules/item/ext.item.templates.html','i18n','pace'],
+define(['jquery','ep','app', 'eventbus', 'cortex', 'item.models', 'ext.item.views', 'text!modules/ext/item/ext.item.templates.html','i18n','pace'],
   function($, ep, App, EventBus, Cortex, Model, View, template,i18n,pace){
+
 
     $('#TemplateContainer').append(template);
 
     _.templateSettings.variable = 'E';
-
 
     var defaultView = function(uri){
       pace.start();
@@ -97,14 +98,7 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'item.models', 'ext.item.view
       // render cart view in main nav
     });
     EventBus.on('item.addToCartBtnClicked', function (event) {
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('| THIS ONE CLICKED TOO');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|');
+
       var formActionLink = $(event.target).data('actionlink');
 
       if (formActionLink) {
@@ -161,3 +155,4 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'item.models', 'ext.item.view
     };
   }
 );
+
