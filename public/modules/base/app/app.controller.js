@@ -6,8 +6,8 @@
  * Time: 2:53 PM
  *
  */
-define(['ep','eventbus','app.models','app.views','text!modules/base/app/app.templates.html','modalwin'],
-  function(ep,EventBus,Model,View,template){
+define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/app/app.templates.html','modalwin'],
+  function(ep,EventBus, AppRouter, Model,View,template){
 
     _.templateSettings.variable = 'E';
 
@@ -121,7 +121,7 @@ define(['ep','eventbus','app.models','app.views','text!modules/base/app/app.temp
       // assign to ep.app.userPrefs
 
       ep.app.viewPortRegion.show(baseLayout);
-      EventBus.bind('app.baseLayoutRenderSuccess',function(){
+      EventBus.on('app.baseLayoutRenderSuccess',function(){
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appHeaderRegion',
           module:'extAppheader',
