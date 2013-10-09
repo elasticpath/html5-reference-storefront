@@ -292,6 +292,7 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
       ep.app.addInitializer(function (options) {
         // do useful stuff here
         ep.router = new Router.AppRouter();
+
       });
       // wait until the application and DOM are spun up
       // then start the history manager
@@ -303,7 +304,6 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
       });
 
       EventBus.trigger('ep.startAppRequest');
-
 
     });
 
