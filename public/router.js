@@ -20,22 +20,22 @@ define(['marionette','eventbus','pace'],
       item: function(uri) {
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
-          module:'extItem',
-          view:'customerView',
+          module:'ext.item',
+          view:'DefaultView',
           data:uri
         });
       },
       cart: function(){
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
-          module:'cart',
+          module:'ext.cart',
           view:'DefaultView'
         });
       },
       confirmation: function(id){
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
-          module:'receipt',
+          module:'ext.receipt',
           view:'DefaultView',
           data:id
         });
@@ -44,7 +44,7 @@ define(['marionette','eventbus','pace'],
         pace.start();
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
-          module:'extCategory',
+          module:'ext.category',
           view:'DefaultView',
           data: {
             uri: uri,
@@ -63,7 +63,7 @@ define(['marionette','eventbus','pace'],
       profile: function(){
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
-          module:'profile',
+          module:'ext.profile',
           view:'DefaultView'
         });
       },

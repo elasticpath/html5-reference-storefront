@@ -6,7 +6,7 @@
  * Time: 1:54 PM
  *
  */
-define(['ep', 'mediator', 'app', 'eventbus', 'extAppheader.models', 'extAppheader.views',  'text!modules/appheader/appheader.templates.html'],
+define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'ext.appheader.views',  'text!modules/appheader/ext.appheader.templates.html'],
   function(ep, Mediator, App, EventBus, Model, View, template){
 
     $('#TemplateContainer').append(template);
@@ -50,7 +50,7 @@ define(['ep', 'mediator', 'app', 'eventbus', 'extAppheader.models', 'extAppheade
         // load main nav
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'mainNavRegion',
-          module:'ia',
+          module:'ext.ia',
           view:'MainNavView'
         });
         logoContainer = $('.logo-container');

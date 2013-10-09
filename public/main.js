@@ -11,14 +11,22 @@
 var dependencies = config.baseDependencyConfig;
 var basePaths = config.baseDependencyConfig.paths;
 var extensionPaths = {
-  'extItem': 'modules/item/ext.item.controller',
-  'extItem.views': 'modules/item/ext.item.views',
-  'extCategory': 'modules/category/category.controller',
-  'extCategory.views': 'modules/category/category.views',
-  'extCategory.models': 'modules/category/category.models',
-  'extAppheader'       : 'modules/appheader/appheader.controller',
-  'extAppheader.models': 'modules/appheader/appheader.models',
-  'extAppheader.views' : 'modules/appheader/appheader.views'
+  'ext.item'              : 'modules/item/ext.item.controller',
+  'ext.item.views'        : 'modules/item/ext.item.views',
+  'ext.category'          : 'modules/category/ext.category.controller',
+  'ext.category.views'    : 'modules/category/ext.category.views',
+  'ext.appheader'         : 'modules/appheader/ext.appheader.controller',
+  'ext.appheader.views'   : 'modules/appheader/ext.appheader.views',
+  'ext.ia'                : 'modules/ia/ext.ia.controller',
+  'ext.ia.views'          : 'modules/ia/ext.ia.views',
+  'ext.profile'           : 'modules/profile/ext.profile.controller',
+  'ext.profile.views'     : 'modules/profile/ext.profile.views',
+  'ext.receipt'           : 'modules/receipt/ext.receipt.controller',
+  'ext.receipt.views'     : 'modules/receipt/ext.receipt.views',
+  'ext.cart'              : 'modules/cart/ext.cart.controller',
+  'ext.cart.views'        : 'modules/cart/ext.cart.views',
+  'ext.app'               : 'modules/app/ext.app.controller',
+  'ext.app.views'        : 'modules/app/ext.app.views'
 
 };
 
@@ -26,7 +34,7 @@ var dependencyPaths = _.extend(basePaths, extensionPaths);
 dependencies.paths = dependencyPaths;
 require.config(dependencies);
 
-require(['app', 'eventbus', 'i18n', 'bootstrap'],
+require(['ext.app', 'eventbus', 'i18n', 'bootstrap'],
   function (App, EventBus, i18n) {
 
     // Application DOM container is ready (viewport)
