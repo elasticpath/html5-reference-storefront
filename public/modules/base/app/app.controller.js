@@ -19,13 +19,13 @@ define(['ep','eventbus','app.models','app.views','text!modules/base/app/app.temp
     // attach the module template markup to the DOM
     $(anchorSelector).append(baseMarkup);
 
-    Marionette.Region.prototype.open = function(view){
-      this.$el.hide();
-      this.$el.html(view.el);
-   //  this.$el.removeAttr('style');
-      //this.$el.show(ep.app.config.viewFadeInValue);
-      this.$el.fadeIn(ep.app.config.viewFadeInValue);
-    };
+   //  Marionette.Region.prototype.open = function(view){
+   //    this.$el.hide();
+   //    this.$el.html(view.el);
+   // //  this.$el.removeAttr('style');
+   //    //this.$el.show(ep.app.config.viewFadeInValue);
+   //    this.$el.fadeIn(ep.app.config.viewFadeInValue);
+   //  };
 
     /*
     * User Preferences
