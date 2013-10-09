@@ -15,10 +15,10 @@ define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/a
 
     var baseMarkup = $(template);
 
-    var displayModeFull = true;
     // attach the module template markup to the DOM
     $(anchorSelector).append(baseMarkup);
 
+    // animated loading of views
     Marionette.Region.prototype.open = function(view){
       this.$el.hide();
       this.$el.html(view.el);
@@ -26,11 +26,6 @@ define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/a
       //this.$el.show(ep.app.config.viewFadeInValue);
       this.$el.fadeIn(ep.app.config.viewFadeInValue);
     };
-
-    /*
-    * User Preferences
-    * */
-    ep.app.epUserPrefs = {};
 
     /*
     * Modal Region
@@ -97,13 +92,12 @@ define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/a
       }
     });
 
-
-
-
     /*
     * Start App Listener
     * */
     ep.app.on('start',function(options){
+
+
       // base application layout
       var baseLayout = new View.BaseLayout();
       baseLayout.render();
@@ -116,10 +110,6 @@ define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/a
 
       });
 
-      // test forlocalStorage
-      // if exists pull userprefs obj
-      // assign to ep.app.userPrefs
-
       ep.app.viewPortRegion.show(baseLayout);
       EventBus.on('app.baseLayoutRenderSuccess',function(){
         EventBus.trigger('layout.loadRegionContentRequest',{
@@ -129,10 +119,8 @@ define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/a
         });
       });
 
-
       EventBus.trigger('app.baseLayoutRenderSuccess');
     });
-
 
     return{
       config:Model.config
