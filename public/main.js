@@ -104,7 +104,6 @@ require.config({
   }
 });
 
-//require(['app','eventbus','i18n'],
 require(['app','eventbus','i18n','bootstrap'],
   function (App,EventBus,i18n){
 
