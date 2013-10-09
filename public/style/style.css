@@ -9008,19 +9008,36 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
     float: none;
   }
 }
-/* line 269, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 268, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+.item-addtocart-container .item-quantity-container input[type="number"] {
+  border: 1px solid #004a76;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  color: #009ddc;
+  background: rgba(0, 0, 0, 0.4);
+  padding-left: 8px;
+  line-height: 28px;
+}
+/* line 278, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+.item-addtocart-container .item-quantity-container .item-quantity-label {
+  margin-top: 3px;
+  color: #999999;
+}
+/* line 284, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-quantity-label {
   margin-right: 6px;
 }
-/* line 273, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 288, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-addcart-button {
   border: 1px solid #33ff66;
   background: rgba(0, 0, 0, 0.4);
   color: #33ff66;
   float: right !important;
+  line-height: 30px;
+  padding: 0 8px;
 }
 @media only screen and (max-width: 1200px) {
-  /* line 279, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+  /* line 296, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
   .item-addtocart-container .item-addcart-button {
     display: block;
     width: 100%;
@@ -9028,7 +9045,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
     margin-top: 10px;
   }
 }
-/* line 286, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 303, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-addcart-button .icon {
   position: relative;
   top: 1px;
@@ -9044,7 +9061,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .item-addtocart-container .item-addcart-button .icon:before {
   content: "\e116";
 }
-/* line 292, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 309, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-addcart-button .btn-text {
   text-transform: uppercase;
 }

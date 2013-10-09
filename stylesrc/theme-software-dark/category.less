@@ -264,6 +264,21 @@
             float: none;
             // margin-top: 10px;
         }
+
+        input[type="number"]{
+            border: 1px solid @brand-secondary;
+            border-radius: 2px;
+            -webkit-border-radius: 2px;
+            color: @brand-primary;
+            background: rgba(0,0,0,0.4);
+            padding-left: 8px;
+            line-height: 28px;
+        }
+
+        .item-quantity-label{
+            margin-top: 3px;
+            color: @gray-light;
+        }
     }
 
     .item-quantity-label{
@@ -275,6 +290,8 @@
         background: rgba(0,0,0,0.4);
         color: @highlight-secondary;
         .pull-right;
+        line-height: 30px;
+        padding: 0 8px;
 
         @media only screen and (max-width: @screen-lg) {
             display: block;
