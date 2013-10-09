@@ -7,7 +7,22 @@
  *
  */
 
-require.config({
+(function () {
+
+  var script = document.createElement('script');
+  script.src = 'ep.config.json';
+  script.async = true;
+
+  var entry = document.getElementsByTagName('script')[0];
+  entry.parentNode.insertBefore(script, entry);
+//
+//  entry = document.getElementsByTagName('script')[0];
+//  entry.parentNode.insertBefore(script, entry);
+
+
+}());
+
+var baseDependencyConfig = {
   paths: {
     'jquery'          : 'scripts/lib/jquery-1.8.3',
     'underscore'      : 'scripts/lib/underscore',
@@ -104,7 +119,8 @@ require.config({
       'exports': '_'
     }
   }
-});
+};
+require.config(baseDependencyConfig);
 
 require(['app','eventbus','i18n','bootstrap'],
   function (App,EventBus,i18n){

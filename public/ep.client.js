@@ -300,10 +300,6 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
         }
       });
 
-
-
-
-
       EventBus.trigger('ep.startAppRequest');
 
 
