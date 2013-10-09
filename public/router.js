@@ -44,7 +44,7 @@ define(['marionette','eventbus','pace'],
         pace.start();
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
-          module:'category',
+          module:'extCategory',
           view:'DefaultView',
           data: {
             uri: uri,
