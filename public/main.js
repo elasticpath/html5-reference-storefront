@@ -11,6 +11,7 @@
 var dependencies = config.baseDependencyConfig;
 var basePaths = config.baseDependencyConfig.paths;
 var extensionPaths = {
+
   'ext.item'              : 'modules/item/ext.item.controller',
   'ext.item.views'        : 'modules/item/ext.item.views',
   'ext.category'          : 'modules/category/ext.category.controller',
@@ -29,6 +30,10 @@ var extensionPaths = {
   'ext.app.views'        : 'modules/app/ext.app.views'
 
 };
+
+var dependencyPaths = _.extend(basePaths, extensionPaths);
+dependencies.paths = dependencyPaths;
+require.config(dependencies);
 
 var dependencyPaths = _.extend(basePaths, extensionPaths);
 dependencies.paths = dependencyPaths;
