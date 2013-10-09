@@ -11,7 +11,6 @@
 var dependencies = config.baseDependencyConfig;
 var basePaths = config.baseDependencyConfig.paths;
 var extensionPaths = {
-
   'ext.item'              : 'modules/item/ext.item.controller',
   'ext.item.views'        : 'modules/item/ext.item.views',
   'ext.category'          : 'modules/category/ext.category.controller',
@@ -35,11 +34,7 @@ var dependencyPaths = _.extend(basePaths, extensionPaths);
 dependencies.paths = dependencyPaths;
 require.config(dependencies);
 
-var dependencyPaths = _.extend(basePaths, extensionPaths);
-dependencies.paths = dependencyPaths;
-require.config(dependencies);
-
-require(['ext.app', 'eventbus', 'i18n', 'bootstrap'],
+require(['app', 'eventbus', 'i18n', 'bootstrap'],
   function (App, EventBus, i18n) {
 
     // Application DOM container is ready (viewport)
