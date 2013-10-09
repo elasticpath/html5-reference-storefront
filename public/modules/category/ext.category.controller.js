@@ -6,7 +6,7 @@
  * Time: 1:31 PM
  *
  */
-define(['app', 'ep', 'eventbus', 'extCategory.models', 'extCategory.views', 'text!modules/category/category.templates.html', 'pace'],
+define(['app', 'ep', 'eventbus', 'category.models', 'ext.category.views', 'text!modules/category/ext.category.templates.html', 'pace'],
   function (App, ep, EventBus, Model, View, template, pace) {
 
     $('#TemplateContainer').append(template);

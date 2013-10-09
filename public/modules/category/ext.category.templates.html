@@ -2,6 +2,7 @@
 
   <!-- Category Default Layout Template -->
   <script id="CategoryDefaultLayoutTemplate" type="text/template">
+
     <div data-region="categoryTitleRegion"></div>
     <div data-region="categoryPaginationTopRegion"></div>
     <div data-region="categoryBrowseRegion">
@@ -22,10 +23,6 @@
   <script id="CategoryItemTemplate" type="text/template">
     <div class="category-item-inner">
 
-        <div class="category-item-title">
-          <a href="<%= E.generateItemHref(E.uri) %>"><%= E.name %></a>
-        </div>
-
         <div class="category-item-thumbnail-container">
           <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>"
                 class="category-item-thumbnail img-responsive"/>
@@ -38,10 +35,11 @@
 
 
 
-       <div class="price-availability-wrapper">
-          <div class="price-wrapper" data-region="priceRegion"></div>
-          <div class="availability-wrapper" data-region="availabilityRegion"></div>
+        <div class="category-item-title">
+          <a href="<%= E.generateItemHref(E.uri) %>"><%= E.name %></a>
         </div>
+        <div data-region="priceRegion"></div>
+        <div data-region="availabilityRegion"></div>
 
 
         <div class="item-addtocart-container">
