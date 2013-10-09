@@ -100,8 +100,7 @@ define(['ep','eventbus','app.models','app.views','text!modules/base/app/app.temp
 
     // bootstrap initialization complete (main.js)
     // time to start up the application
-    EventBus.on('app.bootstrapInitSuccess',
-      function () {
+    EventBus.on('app.bootstrapInitSuccess', function () {
         // when ready start the router
         ep.app.addInitializer(function (options) {
           // do useful stuff here
@@ -123,8 +122,7 @@ define(['ep','eventbus','app.models','app.views','text!modules/base/app/app.temp
         EventBus.trigger('ep.startAppRequest');
 
 
-      }
-    );
+      });
 
     EventBus.on('ep.startAppRequest', function () {
       // turn the key and give 'er some gass
@@ -135,7 +133,6 @@ define(['ep','eventbus','app.models','app.views','text!modules/base/app/app.temp
 
       }
     });
-
 
     /*
     * Start App Listener
