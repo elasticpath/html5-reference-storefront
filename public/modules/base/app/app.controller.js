@@ -124,7 +124,7 @@ define(['ep','eventbus','app.models','app.views','text!modules/base/app/app.temp
       EventBus.bind('app.baseLayoutRenderSuccess',function(){
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appHeaderRegion',
-          module:'appheader',
+          module:'extAppheader',
           view:'AppHeaderView'
         });
       });
