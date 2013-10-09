@@ -24,9 +24,7 @@ define(['ep','eventbus', 'router', 'base.app.models','base.app.views','text!modu
    // //  this.$el.removeAttr('style');
    //    //this.$el.show(ep.app.config.viewFadeInValue);
    //    this.$el.fadeIn(ep.app.config.viewFadeInValue);
-
    //  };
-
 
     /*
     * User Preferences
