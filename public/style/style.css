@@ -8963,6 +8963,91 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-release-date:last-child span.item-meta {
   border-bottom: none;
 }
+/* line 252, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+.item-addtocart-container {
+  padding: 10px 6px;
+}
+/* line 20, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+.item-addtocart-container:before,
+.item-addtocart-container:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+/* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+.item-addtocart-container:after {
+  clear: both;
+}
+/* line 20, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+.item-addtocart-container:before,
+.item-addtocart-container:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+/* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+.item-addtocart-container:after {
+  clear: both;
+}
+/* line 257, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+.item-addtocart-container .item-quantity-container {
+  display: inline-block;
+  float: left !important;
+}
+@media only screen and (max-width: 1200px) {
+  /* line 261, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+  .item-addtocart-container .item-quantity-container {
+    display: block;
+    width: 100%;
+    float: none;
+  }
+}
+/* line 269, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+.item-addtocart-container .item-quantity-label {
+  margin-right: 6px;
+}
+/* line 273, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+.item-addtocart-container .item-addcart-button {
+  border: 1px solid #33ff66;
+  background: rgba(0, 0, 0, 0.4);
+  color: #33ff66;
+  float: right !important;
+}
+@media only screen and (max-width: 1200px) {
+  /* line 279, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+  .item-addtocart-container .item-addcart-button {
+    display: block;
+    width: 100%;
+    float: none;
+    margin-top: 10px;
+  }
+}
+/* line 286, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+.item-addtocart-container .item-addcart-button .icon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  margin-right: 6px;
+}
+/* line 145, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/glyphicons.less */
+.item-addtocart-container .item-addcart-button .icon:before {
+  content: "\e116";
+}
+/* line 292, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+.item-addtocart-container .item-addcart-button .btn-text {
+  text-transform: uppercase;
+}
 /* line 2, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/pagination.less */
 .pagination-container {
   position: relative;
