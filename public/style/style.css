@@ -7151,6 +7151,11 @@ td.visible-print {
   -o-border-image: url(images/line-dot-blue.gif) 1 round;
   border-image: url(images/line-dot-blue.gif) 1 fill round;
 }
+/* line 87, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+.view-title {
+  color: #ec316a;
+  font-weight: 100;
+}
 /* line 12, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/app-header.less */
 .navbar {
   min-height: 125px;
@@ -8290,6 +8295,11 @@ Purchase Confirmation
 .itemdetail-container {
   margin-top: 4rem;
 }
+/* line 5, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+.itemdetail-title {
+  color: #ec316a;
+  font-weight: 100;
+}
 /* line 9, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-assets {
   position: relative;
@@ -8301,16 +8311,22 @@ Purchase Confirmation
   /* line 594, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
   .itemdetail-assets {
     float: left;
-    width: 25%;
+    width: 33.33333333333333%;
   }
 }
-/* line 12, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+@media (min-width: 992px) {
+  /* line 607, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  .itemdetail-assets {
+    left: 41.66666666666667%;
+  }
+}
+/* line 13, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-assets .itemdetail-main-img {
   display: block;
   max-width: 100%;
   height: auto;
 }
-/* line 19, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 20, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-details {
   position: relative;
   min-height: 1px;
@@ -8321,19 +8337,35 @@ Purchase Confirmation
   /* line 594, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
   .itemdetail-details {
     float: left;
-    width: 50%;
+    width: 41.66666666666667%;
   }
 }
-/* line 22, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+@media (min-width: 992px) {
+  /* line 612, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  .itemdetail-details {
+    right: 33.33333333333333%;
+  }
+}
+/* line 26, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-details ul {
   padding: 0;
 }
-/* line 26, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-details table {
-  font-size: 1.2rem;
-  color: #333333;
+  font-size: 1.4rem;
+  color: #fff;
 }
-/* line 33, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 36, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+.itemdetail-details table.table-striped > tbody > tr:nth-child(odd) > td,
+.itemdetail-details table.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: rgba(0, 74, 118, 0.19999999999999996);
+}
+/* line 42, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+.itemdetail-details table.table-striped td {
+  border: none;
+  padding: 10px;
+}
+/* line 51, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-addtocart {
   position: relative;
   min-height: 1px;
@@ -8348,16 +8380,16 @@ Purchase Confirmation
     width: 25%;
   }
 }
-/* line 39, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 57, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-addtocart ul {
   padding: 0;
   margin: 0;
 }
-/* line 42, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 60, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-addtocart ul li {
   padding: 1rem 0;
 }
-/* line 47, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 65, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-addtocart .itemdetail-addtocart-form {
   margin-top: 4rem;
   background-color: #eee;
@@ -8390,7 +8422,7 @@ Purchase Confirmation
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
-/* line 56, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 74, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .btn-itemdetail-addtocart {
   display: inline-block;
   padding: 6px 12px;
@@ -8483,7 +8515,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 60, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 78, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .btn-itemdetail-addtocart .icon {
   position: relative;
   top: 1px;
@@ -8499,16 +8531,16 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .btn-itemdetail-addtocart .icon:before {
   content: "\e116";
 }
-/* line 68, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 86, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .control-label {
   color: #6f6f6f;
 }
-/* line 72, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 90, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-list-price-value {
   text-decoration: line-through;
   color: #808080;
 }
-/* line 77, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 95, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-purchase-price-value {
   font-weight: bold;
 }
@@ -9392,6 +9424,7 @@ body h6 a:hover {
 }
 /* line 75, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 body .view-title {
+  color: #ec316a;
   font-weight: 100;
   text-transform: capitalize;
 }
