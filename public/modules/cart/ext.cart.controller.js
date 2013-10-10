@@ -7,17 +7,21 @@
  *
  *
  */
-define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'cart.models', 'ext.cart.views', 'text!modules/cart/ext.cart.templates.html','pace'],
-  function (ep, App, EventBus, Mediator, Cortex, Model, View, template,pace) {
+define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'cart.models', 'cart.views', 'text!modules/cart/ext.cart.templates.html', 'text!modules/base/cart/cart.templates.html','pace'],
+  function (ep, App, EventBus, Mediator, Cortex, Model, View, template, basetemplate,pace) {
     pace.start();
     $('#TemplateContainer').append(template);
+    $('#TemplateContainer').append(basetemplate);
+
 
     _.templateSettings.variable = 'E';
 
 
     var defaultView = function () {
       pace.start();
-      var cartLayout = new View.DefaultView();
+      var cartLayout = new View.DefaultView({
+        template:'#ExtDefaultCartLayoutTemplate'
+      });
       var cartModel = new Model.CartModel();
 
       cartModel.fetch({
