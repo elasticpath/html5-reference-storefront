@@ -6,7 +6,7 @@
  * Time: 9:16 AM
  *
  */
-define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
+define(['ep', 'marionette', 'eventbus', 'i18n', 'base.auth.models'],
   function(ep, Marionette, EventBus, i18n, Model){
 
     var viewHelpers = {
