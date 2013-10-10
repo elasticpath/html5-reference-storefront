@@ -121,7 +121,7 @@ define(['ep','eventbus', 'router', 'base.app.models','base.app.views','text!modu
       EventBus.on('app.baseLayoutRenderSuccess',function(){
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appHeaderRegion',
-          module:'extAppheader',
+          module:'base.appheader',
           view:'AppHeaderView'
         });
       });

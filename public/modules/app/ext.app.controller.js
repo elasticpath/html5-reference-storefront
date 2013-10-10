@@ -6,7 +6,7 @@
  * Time: 2:53 PM
  *
  */
-define(['ep','eventbus','app.models','ext.app.views','text!modules/app/ext.app.templates.html','modalwin'],
+define(['ep','eventbus','base.app.models','ext.app.views','text!modules/app/ext.app.templates.html','modalwin'],
   function(ep,EventBus,Model,View,template){
 
     _.templateSettings.variable = 'E';

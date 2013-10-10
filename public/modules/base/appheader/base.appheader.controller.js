@@ -50,7 +50,7 @@ define(['ep', 'mediator', 'app', 'eventbus', 'base.appheader.models', 'base.apph
         // load main nav
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'mainNavRegion',
-          module:'ia',
+          module:'base.ia',
           view:'MainNavView'
         });
         logoContainer = $('.logo-container');
@@ -88,7 +88,7 @@ define(['ep', 'mediator', 'app', 'eventbus', 'base.appheader.models', 'base.apph
     EventBus.bind('appheader.loadSearchComponent',function(){
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'headerSearchRegion',
-        module:'search',
+        module:'base.search',
         view:'DefaultSearchView'
       });
     });
