@@ -6,7 +6,7 @@
  * Time: 3:07 PM
  *
  */
-define(['ep','eventbus','base.home.views','text!modules/base/home/base.home.templates.html'],
+define(['ep','eventbus','home.views','text!modules/base/home/base.home.templates.html'],
   function(ep,EventBus,View,template){
 
     $('#TemplateContainer').append(template);

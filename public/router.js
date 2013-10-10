@@ -13,7 +13,7 @@ define(['marionette','eventbus','pace'],
       index: function() {
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
-          module:'base.home',
+          module:'home',
           view:'IndexLayout'
         });
       },
@@ -55,7 +55,7 @@ define(['marionette','eventbus','pace'],
       search: function(keywords) {
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
-          module:'base.search',
+          module:'search',
           view:'SearchResultsView',
           data:keywords
         });
@@ -70,7 +70,7 @@ define(['marionette','eventbus','pace'],
       settings: function() {
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
-          module:'base.settings',
+          module:'settings',
           view:'IndexLayout'
         });
       }

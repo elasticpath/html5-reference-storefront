@@ -6,7 +6,7 @@
  * Time: 1:54 PM
  *
  */
-define(['ep', 'mediator', 'app', 'eventbus', 'base.appheader.models', 'base.appheader.views',  'text!modules/base/appheader/base.appheader.templates.html'],
+define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.views',  'text!modules/base/appheader/base.appheader.templates.html'],
   function(ep, Mediator, App, EventBus, Model, View, template){
 
     $('#TemplateContainer').append(template);
@@ -50,7 +50,7 @@ define(['ep', 'mediator', 'app', 'eventbus', 'base.appheader.models', 'base.apph
         // load main nav
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'mainNavRegion',
-          module:'base.ia',
+          module:'ia',
           view:'MainNavView'
         });
         logoContainer = $('.logo-container');
@@ -88,7 +88,7 @@ define(['ep', 'mediator', 'app', 'eventbus', 'base.appheader.models', 'base.apph
     EventBus.bind('appheader.loadSearchComponent',function(){
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'headerSearchRegion',
-        module:'base.search',
+        module:'search',
         view:'DefaultSearchView'
       });
     });

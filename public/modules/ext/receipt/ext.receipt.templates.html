@@ -10,7 +10,11 @@
   <script id="PurchaseConfirmationLayoutTemplate" type="text/temmplate">
     <h2><%= E.getI18nLabel('receipt.pageTitle') %></h2>
     <h3><%= E.getI18nLabel('receipt.summaryTitle') %></h3>
-    <div data-region="purchaseConfirmationRegion"></div>
+    <div data-region="purchaseConfirmationRegion">
+      <div class="activity-indicator-container">
+        <img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>
+      </div>
+    </div>
     <h3><%= E.getI18nLabel('receipt.itemsTitle') %></h3>
     <div data-region="confirmationLineItemsRegion" class="purchaseconfirm-items-container"></div>
     <div data-region="confirmationBillingAddressRegion"></div>

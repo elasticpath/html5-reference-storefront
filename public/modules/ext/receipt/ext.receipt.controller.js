@@ -7,7 +7,7 @@
  *
  * 
  */
-define(['app', 'ep', 'i18n', 'eventbus', 'cortex', 'receipt.models', 'ext.receipt.views', 'text!modules/receipt/ext.receipt.templates.html'],
+define(['app', 'ep', 'i18n', 'eventbus', 'cortex', 'receipt.models', 'ext.receipt.views', 'text!modules/ext/receipt/ext.receipt.templates.html'],
   function(App, ep, i18n, EventBus, Cortex, Model, View, template){
 
     $('#TemplateContainer').append(template);

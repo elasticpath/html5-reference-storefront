@@ -7,7 +7,7 @@
  *
  * 
  */
-define(['ep','app', 'eventbus', 'cortex', 'base.profile.models', 'base.profile.views', 'text!modules/base/profile/base.profile.templates.html'],
+define(['ep','app', 'eventbus', 'cortex', 'profile.models', 'profile.views', 'text!modules/base/profile/base.profile.templates.html'],
   function(ep, App, EventBus, Cortex, Model, View, template){
 
     $('#TemplateContainer').append(template);

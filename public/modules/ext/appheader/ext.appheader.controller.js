@@ -6,7 +6,7 @@
  * Time: 1:54 PM
  *
  */
-define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'ext.appheader.views',  'text!modules/appheader/ext.appheader.templates.html'],
+define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'ext.appheader.views',  'text!modules/ext/appheader/ext.appheader.templates.html'],
   function(ep, Mediator, App, EventBus, Model, View, template){
 
     $('#TemplateContainer').append(template);
