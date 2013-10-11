@@ -36,8 +36,8 @@ define(['app', 'ep', 'i18n', 'eventbus', 'cortex', 'receipt.models', 'receipt.vi
 
         var rawUri = ep.ui.decodeUri(uri);
 
-        var zoomedUri = rawUri + '?zoom=billingaddress,paymentmeans:element,lineitems:element,lineitems:element:rates';
-       // var zoomedUri = rawUri + '?zoom=billingaddress, paymentmeans, lineitems:element, lineitems:element:rate';
+//        var zoomedUri = rawUri + '?zoom=billingaddress,paymentmeans:element,lineitems:element,lineitems:element:rates';
+       var zoomedUri = rawUri + '?zoom=billingaddress, paymentmeans, lineitems:element, lineitems:element:rate';
         purchaseConfirmationModel.fetch({
           url:zoomedUri,
           success:function(response){
