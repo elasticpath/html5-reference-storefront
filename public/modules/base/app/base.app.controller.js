@@ -6,7 +6,7 @@
  * Time: 2:53 PM
  *
  */
-define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/app/app.templates.html','modalwin'],
+define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/app/base.app.templates.html','modalwin'],
   function(ep,EventBus, AppRouter, Model,View,template){
 
     _.templateSettings.variable = 'E';
@@ -18,7 +18,7 @@ define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/a
     // attach the module template markup to the DOM
     $(anchorSelector).append(baseMarkup);
 
-    // animated loading of views
+    // animated loading of views  // commented our on branch
     Marionette.Region.prototype.open = function(view){
       this.$el.hide();
       this.$el.html(view.el);
@@ -26,6 +26,12 @@ define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/a
       //this.$el.show(ep.app.config.viewFadeInValue);
       this.$el.fadeIn(ep.app.config.viewFadeInValue);
     };
+
+    // TODO exist on branch, but not on master
+    /*
+     * User Preferences
+     * */
+//    ep.app.epUserPrefs = {};
 
     /*
     * Modal Region

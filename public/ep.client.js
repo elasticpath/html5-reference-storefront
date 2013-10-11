@@ -283,6 +283,8 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
      * end user prefs
      * */
 
+
+
     // bootstrap initialization complete (main.js)
     // time to start up the application
     EventBus.on('app.bootstrapInitSuccess', function () {

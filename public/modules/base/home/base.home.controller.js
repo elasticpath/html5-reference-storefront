@@ -6,7 +6,7 @@
  * Time: 3:07 PM
  *
  */
-define(['ep','eventbus','settings.views','text!modules/base/settings/settings.templates.html'],
+define(['ep','eventbus','home.views','text!modules/base/home/base.home.templates.html'],
   function(ep,EventBus,View,template){
 
     $('#TemplateContainer').append(template);
@@ -18,13 +18,13 @@ define(['ep','eventbus','settings.views','text!modules/base/settings/settings.te
     };
     var indexLayout = function(){
       var layout = new View.DefaultHomeLayout();
-      layout.render();
+
       var containerRegion = new Marionette.Region({
-        el:'[data-region="main"]'
+        el:'.container'
       });
 
       layout.on('show',function(layout){
-        containerRegion.show(new View.SettingsCSSTheme());
+        containerRegion.show(new View.DefaultHomeView());
       });
 
       return layout;

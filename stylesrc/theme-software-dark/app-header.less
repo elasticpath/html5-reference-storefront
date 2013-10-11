@@ -1,0 +1,490 @@
+//
+// Elastic Path UI Storefront App-header (Nav) styles
+//
+
+//temporary variables -- remove once we've got a proper variables.less file getting compiled
+
+
+
+//end temporary variables
+
+// outer navbar styles
+.navbar{
+  min-height: 125px;
+  box-shadow:  0px 5px 45px 5px rgba(0, 157, 220, .4);
+  -webkit-box-shadow:  0px 5px 45px 5px rgba(0, 157, 220, .35);
+
+  @media (max-width: @grid-float-breakpoint) {
+    min-height: 50px;
+  }
+  @media (min-width: @grid-float-breakpoint) {
+    // -webkit-box-shadow:  0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+     // box-shadow:  0px 4px 4px 0px rgba(0, 0, 0, 0.3);
+
+  }
+
+  background-color: @navbar-background;
+  margin: 0;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+
+  .navbar-nav{
+    .clearfix;
+  }
+
+  &.navbar-inverse{
+  }
+
+  .navbar-toggle{
+    &:hover{
+      background-color: rgba(0,0,0,0.2);
+    }
+    border-color: rgba(0,0,0,0.2);
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    padding: 0;
+    margin: 0;
+
+    .icon{
+      margin: 0;
+      padding: 4px 8px;
+      color: #fff;
+      .glyphicon;
+      .glyphicon-list;
+    }
+  }
+}
+// end outer navbar styles
+
+
+
+
+
+//main nav styles
+.main-nav-container{
+  display: block;
+  position: absolute;
+  left: 10px;
+  top: 55px;
+  bottom: 0;
+
+  background: transparent;
+  border: none;
+
+  margin-bottom: 1px;
+  // margin: 0 15px 1px 15px;
+
+  @media (max-width: @grid-float-breakpoint) {
+    position: relative;  // kill absolute positioning when in collapsed state to allow collapse panel to display properly
+    left: auto;
+    right: auto;
+    bottom: auto;
+    top: auto;
+    width: auto;
+    background: none;
+    border: none;
+    margin-bottom: 0px;
+  }
+
+  .navbar-nav{
+    .active{
+      a{
+        background: darken(@brand-primary,10%);
+      }
+    }
+    li{
+      &:first-child{
+        a{
+          // border-top-left-radius: (4px);
+        }
+      }
+      &:last-child{
+        a{
+          // border-top-right-radius: (4px);
+        }
+      }
+      a{
+        color: @brand-primary;
+        background-color: transparent;
+        padding: 7px 7px;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+
+        @media screen and (max-width: @screen-desktop) and (min-width: @screen-tablet){
+          font-size: 1.2rem;
+          padding: 7px 6px;
+        }
+        @media screen and (max-width: @screen-tablet){
+          font-size: 1.5rem;
+          padding: 8px 15px;
+          margin: 2px 0;
+          // background: darken(@brand-primary, 6%);
+          background: rgba(0,0,0,0.2);
+        }
+        &:hover{
+          color: darken(@brand-primary,13%);
+        }
+      }
+    }
+  }
+}
+//end main nav styles
+
+
+
+.logo-container{
+  position: absolute;
+  width: 200px;
+  top: 22px;
+  left: 15px;
+
+  @media (max-width: @grid-float-breakpoint) {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-top:  10px;
+  }
+
+  a{
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    .clearfix;
+  }
+  img{
+    .img-responsive;
+  }
+  z-index: (@zindex-navbar-fixed + 1); //ensures that logo is in higher z-index than bootstrap's default fixed navbar z-index.
+}
+
+
+
+// global nav styles
+.global-nav-container{
+  position: absolute;
+  display: inline-block;
+  top: 0px;
+  right: 230px;
+
+  @media (min-width: @screen-desktop){
+    right: 0px;
+  }
+
+  // min-height: 80px;
+  // min-width: 135px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid darken(@brand-secondary, 10%);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  text-align: right;
+  padding: 0;
+
+  @media (max-width: @grid-float-breakpoint) {
+    position: relative;
+    display: block;
+    width: 100%;
+    top: auto;
+    left: 0;
+    margin: 15px 0 15px 0;
+    padding: 0 6px;
+    .clearfix;
+    text-align: left;
+  }
+
+  li{
+    width: 100%;
+    margin: 0 0 0 0;
+    padding: 0;
+    list-style-type: none;
+    text-align: right;
+
+    @media (min-width: @screen-desktop){
+      display: block;
+    }
+
+    @media (max-width: @screen-desktop) {
+      width: auto;
+      display: inline-block;
+
+      .global-nav-login,
+      .global-nav-cart{
+        margin: 6px;
+        padding:0;
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: @brand-primary;
+      }
+    }
+
+      @media (max-width: @grid-float-breakpoint) {
+        text-align: left!important;
+      }
+
+    &:first-child{
+      .global-nav-link{
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+      }
+    }
+
+    &:last-child{
+      .global-nav-link{
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+      }
+    }
+  }
+
+  .global-nav-link{
+    // .btn;
+    // .btn-sm;
+    // .btn-group-xs > .btn;
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0 10px 0 10px;
+  }
+
+  .global-nav-cart{
+    display: inline-block;
+    color: darken(@brand-primary, 0%);
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+
+    &:hover{
+      color: darken(@brand-primary,10%);
+    }
+
+    .icon{
+      .glyphicon;
+      .glyphicon-shopping-cart;
+      margin-right: 5px;
+    }
+  }
+
+
+
+  .global-nav-login{
+    display: inline-block;
+    .clearfix;
+    color: darken(@brand-primary, 10%);
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 26px 0 0 0;
+
+    &:hover{
+      color: darken(@brand-primary,20%);
+    }
+
+    .icon{
+        display: none;
+    }
+  }
+} // end global nav styles
+
+
+
+
+.main-search-container{
+  // display: none!important;
+  position: absolute;
+  right: 0px;
+  bottom: 10px;
+  margin: 0 0 0 0;
+
+
+// adjust styles for collapsed state
+@media (max-width: @grid-float-breakpoint) {
+  position: relative;
+  top: auto;
+  left: auto;
+  margin: 30px 0 0 0!important;
+  padding: 0;
+
+  .btn-header-search{
+    height: 32px;
+    border-top-right-radius: 3px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    margin-top: -1px;
+  }
+  .header-search-input{
+    height: 32px;
+    border-top-left-radius: 3px;
+  }
+}
+
+
+// adjust styles for intermediate state btwn tablet and desktop to avoid nav collisions
+@media (max-width: @screen-desktop) and (min-width: @screen-tablet){
+  // position: relative;
+  top: 0px;
+  right: 0px;
+
+  .btn-header-search{
+    height: 32px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 3px;
+  }
+
+  .header-search-input{
+    height: 32px;
+    border-top-left-radius: 0px;
+  }
+}
+
+
+
+  @media (max-width: @grid-float-breakpoint) { // set up alternative display for collapsed state
+    position: relative;
+    .clearfix;
+    // display: inline-block!important;
+    // width: 100%;
+    top: auto;
+    left: auto;
+    right: auto;
+    // float: right!important;
+    border: none;
+    margin-left: -4px;
+  }
+
+  .form-group{
+    padding-right: 0;
+    margin-right: 0;
+  }
+}
+
+.btn-header-search{
+  .btn;
+  .btn-sm;
+
+  background-color: @brand-secondary;
+  color: @brand-primary;
+
+  &:hover{
+    background-color: darken(@brand-secondary,10%);
+    color: darken(@brand-primary,10%);
+  }
+
+  height: 22px;
+  padding: 0px 5px;
+
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -5px; // scooch the button over to butt up to the form input
+
+  -webkit-box-shadow: inset 1px 0px 1px 0px rgba(0, 0, 0, 0.1),
+                      0px 2px 0px 0px rgba(0, 0, 0, 0.2);  //inner left shadow + external bottom shadow
+
+  box-shadow:         inset 1px 0px 1px 0px rgba(0, 0, 0, 0.1),
+                      0px 2px 0px 0px rgba(0, 0, 0, 0.2);  //inner left shadow + external bottom shadow
+  .icon{
+    .glyphicon;
+    .glyphicon-search;
+    margin-right: 4px;
+  }
+
+}
+
+
+// input:-webkit-input-placeholder{color:@brand-secondary}
+// input:-moz-placeholder{color:@brand-secondary}
+// input:-ms-input-placeholder{color:@brand-secondary}
+
+.main-search-container{
+
+  input[type="text"]{
+    color: @brand-primary;
+  }
+
+}
+
+.header-search-input{
+  .form-control;
+  // .input-sm;
+  height: 22px;
+  background-color: #000;
+  background-color: rgba(0,0,0,0.4);
+  color: @brand-primary;
+  // border: 1px solid @brand-secondary;
+  border: 1px solid darken(@brand-secondary, 10%);
+
+
+
+
+  // add faint shadow to match buttons
+  -webkit-box-shadow:  0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  box-shadow:          0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+
+  margin-right: 0;
+}
+
+.navbar-collapse{
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  min-height: 125px;
+
+  // margin: 15px;
+
+  @media (max-width: @grid-float-breakpoint) {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    min-height: 50px;
+    background: rgba(20,20,20,0.8);
+  }
+
+  .navbar-form{
+    display: block;
+    border: 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 0px 0;
+
+    @media (max-width: @grid-float-breakpoint) {
+      .form-group{
+        display: inline-block;
+        .form-control{
+          width: 60%;
+          min-width: 200px;
+          display: inline-block;
+        }
+      }
+    }
+
+    button{
+      @media (max-width: @grid-float-breakpoint) {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+.appheader-container{
+  position: relative;
+}
+
+nav.main-nav{
+  position: relative;
+}
+
+.simplemodal-overlay{
+  z-index: 9321 !important;
+}
+.simplemodal-container{
+  z-index: 9322 !important;
+}

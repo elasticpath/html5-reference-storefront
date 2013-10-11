@@ -7,21 +7,29 @@
     <meta name="description" content="Elastic Path&trade; Visual Cortex - App Framework">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Elastic Path&trade; EP Core UI Application Framework</title>
+    <title>Elastic Path&trade; HTML5 Storefront Reference Application</title>
 
+    <!-- CSS Theme File -->
     <link rel="stylesheet" href="style/style.css">
+    <script type="text/javascript" src="//use.typekit.net/iwa6qvc.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
   </head>
   <body>
+
+    <!-- Viewport -->
     <div class="viewport ui-container" data-region="viewPortRegion"></div>
 
+    <!-- HTML Template Cache -->
     <div id="TemplateContainer"></div>
 
+    <!-- Modal Window PLaceholder -->
     <div data-region="modalRegion" class="modal-container"></div>
 
-
+    <!-- JavaScript Entry Point -->
+    <script src="scripts/lib/underscore.js"></script>
+    <script src="base.dependency.config.js"></script>
     <script data-main="main" src="scripts/lib/require.js"></script>
-    <!--<script data-main="build/app-optimized" src="scripts/lib/require.js"></script>-->
 
   </body>
 </html>
