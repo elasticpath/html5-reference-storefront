@@ -1,0 +1,57 @@
+<div id="AppHeaderTemplateContainer">
+
+  <!-- Header Container -->
+  <script type="text/template" id="AppHeaderDefaultTemplateContainer">
+
+    <!-- Logo Container -->
+    <div class="logo-container">[logo template goes here]</div>
+
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse">  <!-- bootstrap: '.collapse' — necessary for 'collapse' component -->
+
+
+        <!-- Main Search Container -->
+      <div class="main-search-container">[main search goes here]</div>
+
+
+      <ul class="global-nav-container btn-group">  <!-- added bootstrap '.btn-group' class -->
+        <li class="global-nav-cart-nav">
+          <button class="global-nav-link global-nav-cart" onclick="location.href='#mycart'">
+            <span class="icon"></span><span>Shopping Cart</span></button>
+          <!-- ^^^ added '.global-nav-link and .global-nav-cart' classes as styling selectors -->
+          <!-- <a class="global-nav-link" href="#mycart"><span>Shopping Cart</span></a> -->
+        </li>
+        <li data-region="authMenuItemRegion" ><!--  removed inline style declaration -->
+
+        </li>
+      </ul>
+
+
+      <!-- Main Nav Container -->
+      <div class="main-nav-container" data-region="mainNavRegion">
+        <div class="activity-indicator-container">
+          <img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </script>
+
+  <!-- Logo Template -->
+  <script id="LogoTemplateContainer" type="text/template">
+
+    <a href="<%= E.homeUri %>" class="cmd-home-logo">
+      <img src="<%= E.logoImgPath %>" >
+    </a>
+
+  </script>
+
+
+
+</div>
