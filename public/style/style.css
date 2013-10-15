@@ -7113,10 +7113,31 @@ td.visible-print {
 /* Start Auth */
 /* End Auth */
 /* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+.neon-cutcorner {
+  border: 1px solid #004a76;
+}
+/* line 33, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+.neon-cutcorner:before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  border-bottom: 1px solid #004a76;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  /* IE 9 */
+
+  width: 60px;
+  height: 60px;
+  background: url(images/theme-software-dark/bg-twinkle-dark.gif);
+}
+/* line 49, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .separated {
   position: relative;
 }
-/* line 32, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 51, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .separated:before {
   position: relative;
   top: 0px;
@@ -7128,11 +7149,11 @@ td.visible-print {
   margin-right: 0!important;
   background-color: #888;
 }
-/* line 54, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 73, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .flatform {
   background: red;
 }
-/* line 59, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 78, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .border-dot-bottom {
   border-style: solid;
   border-width: 0px 0px 1px 0px ;
@@ -7141,7 +7162,7 @@ td.visible-print {
   -o-border-image: url(images/line-dot-blue.gif) 1 round;
   border-image: url(images/line-dot-blue.gif) 1 fill round;
 }
-/* line 68, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 87, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .border-dot-top {
   border-style: solid;
   border-width: 1px 0px 0px 0px ;
@@ -7150,7 +7171,7 @@ td.visible-print {
   -o-border-image: url(images/line-dot-blue.gif) 1 round;
   border-image: url(images/line-dot-blue.gif) 1 fill round;
 }
-/* line 77, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 96, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .border-dot-top-bottom {
   border-style: solid;
   border-width: 1px 0px 1px 0px ;
@@ -7159,7 +7180,7 @@ td.visible-print {
   -o-border-image: url(images/line-dot-blue.gif) 1 round;
   border-image: url(images/line-dot-blue.gif) 1 fill round;
 }
-/* line 87, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 106, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .view-title {
   color: #ec316a;
   font-weight: 100;
@@ -7988,7 +8009,7 @@ nav.main-nav {
   background-color: #eee;
   padding: 0;
   border-radius: 6px;
-  border: 1px solid rgba(0, 157, 220, 0.19999999999999996);
+  border: 1px solid rgba(0, 157, 220, 0.4);
   background: rgba(0, 0, 0, 0.4);
   /* Old browsers */
 
@@ -8024,7 +8045,7 @@ nav.main-nav {
   background-color: #eee;
   padding: 2px;
   border-radius: 2px;
-  border: 1px solid rgba(0, 157, 220, 0.19999999999999996);
+  border: 1px solid rgba(0, 157, 220, 0.4);
   background: #ffffff;
   /* Old browsers */
 
@@ -8314,6 +8335,7 @@ Purchase Confirmation
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
+  margin-top: 140px;
 }
 @media (min-width: 992px) {
   /* line 594, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
@@ -8328,14 +8350,16 @@ Purchase Confirmation
     left: 41.66666666666667%;
   }
 }
-/* line 13, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 14, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-assets .itemdetail-main-img {
   display: block;
   max-width: 100%;
   height: auto;
+  width: 100%;
 }
-/* line 20, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 21, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-details {
+  overflow: hidden;
   position: relative;
   min-height: 1px;
   padding-left: 15px;
@@ -8354,32 +8378,36 @@ Purchase Confirmation
     right: 33.33333333333333%;
   }
 }
-/* line 26, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 28, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-details ul {
   padding: 0;
 }
-/* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 32, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-details table {
   font-size: 1.4rem;
   color: #fff;
 }
-/* line 35, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 37, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-details table.table-striped > tbody > tr:nth-child(odd) > td,
 .itemdetail-details table.table-striped > tbody > tr:nth-child(odd) > th {
   background-color: rgba(0, 74, 118, 0.19999999999999996);
 }
-/* line 41, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 43, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-details table.table-striped td {
   border: none;
   padding: 10px;
 }
-/* line 50, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 49, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+.itemdetail-details table .itemdetail-attribute-label-col {
+  color: #004a76;
+}
+/* line 56, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-addtocart {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
-  margin-top: 4rem;
+  margin-top: 140px;
 }
 @media (min-width: 992px) {
   /* line 594, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
@@ -8388,49 +8416,41 @@ Purchase Confirmation
     width: 25%;
   }
 }
-/* line 56, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 62, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-addtocart ul {
   padding: 0;
   margin: 0;
 }
-/* line 59, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 65, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-addtocart ul li {
   padding: 1rem 0;
 }
-/* line 64, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 70, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-addtocart .itemdetail-addtocart-form {
-  margin-top: 4rem;
-  background-color: #eee;
-  padding: 20px;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 157, 220, 0.19999999999999996);
-  background: rgba(0, 0, 0, 0.4);
-  /* Old browsers */
-
-  background: -moz-linear-gradient(-45deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(0, 0, 0, 0.4)), color-stop(100%, rgba(0, 0, 0, 0.4)));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(-45deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(-45deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(-45deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
-  /* IE10+ */
-
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
-  /* W3C */
-
-  -webkit-box-shadow: inset 0px 0px 6px 2px rgba(255, 255, 255, 0.5);
-  box-shadow: inset 0px 0px 6px 2px rgba(255, 255, 255, 0.5);
-  -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: 0;
+  display: block;
+  border: 1px solid #004a76;
+  padding: 20px 40px 0px 10px;
 }
-/* line 73, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 33, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+.itemdetail-addtocart .itemdetail-addtocart-form:before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  border-bottom: 1px solid #004a76;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  /* IE 9 */
+
+  width: 60px;
+  height: 60px;
+  background: url(images/theme-software-dark/bg-twinkle-dark.gif);
+}
+/* line 83, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .btn-itemdetail-addtocart {
   display: inline-block;
   padding: 6px 12px;
@@ -8523,7 +8543,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 77, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 87, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .btn-itemdetail-addtocart .icon {
   position: relative;
   top: 1px;
@@ -8539,18 +8559,40 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .btn-itemdetail-addtocart .icon:before {
   content: "\e116";
 }
-/* line 85, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 95, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .control-label {
   color: #6f6f6f;
 }
-/* line 89, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 99, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-list-price-value {
   text-decoration: line-through;
   color: #808080;
 }
-/* line 94, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 104, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-purchase-price-value {
   font-weight: bold;
+}
+/* line 109, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+.itemdetail-inner {
+  position: relative;
+  border: 1px solid #004a76;
+}
+/* line 33, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+.itemdetail-inner:before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  border-bottom: 1px solid #004a76;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  /* IE 9 */
+
+  width: 60px;
+  height: 60px;
+  background: url(images/theme-software-dark/bg-twinkle-dark.gif);
 }
 /* line 6, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-title {
@@ -8684,7 +8726,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   background-color: #eee;
   padding: 5px;
   border-radius: 6px;
-  border: 1px solid rgba(0, 157, 220, 0.19999999999999996);
+  border: 1px solid rgba(0, 157, 220, 0.4);
   background: rgba(0, 0, 0, 0.4);
   /* Old browsers */
 

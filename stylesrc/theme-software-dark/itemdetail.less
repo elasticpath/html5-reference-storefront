@@ -9,15 +9,17 @@
 .itemdetail-assets{
     .make-md-column(4);
     .make-md-column-push(5);
+    margin-top: 140px;
 
     .itemdetail-main-img{
-        .img-responsive;
-        // width: 100%;
+        .img-responsive();
+        width: 100%;
         // height: auto;
     }
 }
 
 .itemdetail-details{
+    overflow: hidden;
     .make-md-column(5);
     .make-md-column-pull(4);
 
@@ -43,6 +45,10 @@
                 padding: 10px;
             }
         }
+
+        .itemdetail-attribute-label-col{
+            color: fadeout(@brand-secondary,0%);
+        }
     }
 
 }
@@ -51,7 +57,7 @@
 
     .make-md-column(3);
 
-    margin-top: 4rem;
+    margin-top: 140px;
 
     ul{
         padding: 0;
@@ -62,8 +68,12 @@
     }
 
     .itemdetail-addtocart-form{
-        margin-top: 4rem;
-       .box-neon(5px,20px);
+        position: relative;
+        margin: 0;
+       // .box-neon(5px,20px);
+       display: block;
+       .neon-cutcorner;
+       padding: 20px 40px 0px 10px;
 
     }
 
@@ -93,4 +103,12 @@
 
 .itemdetail-purchase-price-value{
     font-weight: bold;
+}
+
+
+.itemdetail-inner{
+    position: relative;
+
+    .neon-cutcorner;
+
 }
