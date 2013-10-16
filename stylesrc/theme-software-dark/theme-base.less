@@ -226,24 +226,28 @@ ul{
 .itemdetail-availability-state{
     padding: 0;
 
-    label{
-        display: inline-block;
-        font-size: 1rem;
-        text-transform: uppercase;
-        border-radius: 1rem;
-        color: #fff;
-        background-color: @brand-success;
-        padding: 5px 8px;
-        line-height: 10px;
+    &[data-i18n="AVAILABLE"]{
+      label{
+          display: inline-block;
+          font-size: 1.3rem;
+          font-weight: 400;
+          text-transform: uppercase;
+          color: @availability-color-available;
+      }
+
+      .icon{
+          display: block;
+          width: 100%;
+          // .pull-right;
+          .glyphicon;
+          .glyphicon-thumbs-up;
+          // margin-left: 6px;
+          font-size: 24px;
+          // margin-right: 6px;
+          margin-top: -8px;
+      }
     }
 
-    .icon{
-        display: inline-block;
-        .glyphicon;
-        .glyphicon-ok;
-        margin-right: 6px;
-        margin-top: -4px;
-    }
 }
 
 .is-hidden {

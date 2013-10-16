@@ -2,14 +2,34 @@
 // ELastic Path UI Storefront Cart View
 //
 
+@table-fade: fadeout(@brand-primary,90%) !important;
+
 .cart-outer{
     background: transparent url(images/bg-vector-splat.jpg) no-repeat center top;
     background-size: cover;
     padding-top: 60px;
 }
 
-.cart-container{
+// override BS3 table alternation color
+.cart-container table > tbody > tr:nth-child(odd) > td,
+.cart-container table > tbody > tr:nth-child(odd) > th {
+  background-color: transparent  !important;
+}
 
+
+
+.cart-container table > tbody > tr:nth-child(even) > td,
+.cart-container table > tbody > tr:nth-child(even) > th {
+  background-color: @table-fade !important;
+}
+
+.table thead > tr > th {
+    // border-bottom: none;
+    border-bottom: 1px solid @brand-secondary;
+
+}
+
+.cart-container{
 
     h1{
         margin: 0 0 3rem 0;
@@ -26,26 +46,45 @@
     table{
         .table-striped;
         margin-bottom: 0;
+        position: relative;
+        // border-collapse: collapse;
+        border-collapse: separate;
+        border-spacing: 0px;
+
+            -webkit-box-shadow:
+                0px 0px 10px 3px rgba(0, 0, 0, 0.17),
+                inset 0px 0px 3px 2px rgba(0, 0, 0, 0.4);
+
+    box-shadow:
+                0px 0px 10px 3px rgba(0, 0, 0, 0.17),
+                inset 0px 0px 3px 2px rgba(0, 0, 0, 0.4);
+
+    .box-neon(2px,0);
 
         thead{
-            background: rgba(0, 163, 221, 0.667);
+            // background: rgba(0, 163, 221, 0.667);
+            background: @table-fade;
 
             th{
                 &:first-child{
-                    border-top-left-radius: 6px;
+                    border-top-left-radius: 2px;
                 }
                 &:last-child{
-                    border-top-right-radius: 6px;
+                    border-top-right-radius: 2px;
                 }
             }
         }
 
         tr{
             border: none;
+            position: relative;
+            // display: block;
+
+            // background: transparent url(images/line-dot-blue-single-horz.gif) repeat-x left bottom !important;
 
             th{
-                font-size: 1.3rem;
-                color: @gray-light;
+                font-size: 1.2rem;
+                color: @brand-primary;
                 font-weight: 400;
 
                 &:last-child{
@@ -58,11 +97,35 @@
                 font-size: 1.3rem;
                 padding-top: 1rem;
                 padding-bottom: 1rem;
-                border-bottom: 3px solid #fff;
+                padding-left: 1rem;
+                padding-right: 1rem;
+
                 border-top: none;
+                border-bottom: 1px solid fadeout(@brand-secondary,50%);
+                // margin: 3px 0;
+                // border-right: 1px dotted @brand-secondary;
+
+                // .border-dot-bottom;
+                background-image:  url(images/line-dot-blue-single-vert.png);
+                &.cart-lineitem-quantity-col{
+                    background-image: url(images/theme-software-dark/cart-fake-qty-updown.png),url(images/line-dot-blue-single-vert.png);
+                    background-repeat:  no-repeat,repeat-y;
+                    background-position:  center center,right 5px !important;
+                }
+                background-repeat:  repeat-y;
+                background-position:  right 5px !important;
+                // background-origin: content-box;
+
+                vertical-align: middle;
+
 
                 &.cart-lineitem-title-col{
-                    font-size: 1.4rem;
+                    font-size: 1.5rem;
+                    text-transform: uppercase;
+                    font-weight: 400;
+                    a{
+                        color: @highlight-primary;
+                    }
                 }
 
                 &.cart-lineitem-remove-btn-col{
@@ -75,11 +138,11 @@
                         padding: 0;
                         height: 21px;
                         width: 21px;
-                        color: @gray-lighter;
-                        background-color: @gray-light;
+                        // color: @gray-lighter;
+                        background-color: transparent;
                         border: none;
-                        border-radius: 2px;
-                        text-align: middle;
+                        // border-radius: 2px;
+                        // text-align: middle;
 
 
                             box-shadow: none;
@@ -88,20 +151,44 @@
 
 
                         &:hover{
-                            background-color: @brand-danger;
-                            color: #fff;
+                            // background-color: @brand-danger;
+                            // color: #fff;
+                            .icon{
+                                background: transparent url(images/theme-software-dark/btn-cart-remove.png) no-repeat left -20px;
+                            }
                         }
 
                         .icon{
-                            .glyphicon;
-                            .glyphicon-remove;
+                            // .glyphicon;
+                            // .glyphicon-remove;
+                            display: block;
                             margin: auto;
-                            padding: 2px 0 0 0;
+                            // padding: 2px 0 0 0;
+                            width: 20px;
+                            height: 20px;
+                            background: transparent url(images/theme-software-dark/btn-cart-remove.png) no-repeat  left 0px;
                         }
 
                         .btn-text{
                             display: none;
                         }
+                    }
+                }
+
+                &:last-child{
+                    background-image: none!important;
+                    &:after{
+                        // display: block;
+                        // position: absolute;
+                        // bottom: 0;
+                        // left: 0;
+                        // // top: 0;
+                        // // right: 0;
+                        // height: 2px;
+                        // width: 100%;
+                        // content: " ";
+                        // background: transparent url(images/line-dot-blue-single-horz.gif) repeat-x left bottom !important;
+                        // border-top: 1px solid red;
                     }
                 }
             }
@@ -119,12 +206,10 @@
                     // padding-right: 30px;
                 }
                 &:first-child{
-                    padding-left: 30px;
+                    // padding-left: 30px;
                 }
             }
-            th{
-                            color: #fff;
-            }
+
         }
     }
 }
@@ -133,17 +218,15 @@
 
 
 .cart-main-inner{
-    // background: #f2f2f2;
-    // font-size: 1.3rem;
-    // color: @gray;
-    // border-radius: 6px;
-    // -webkit-box-shadow:  0px 0px 10px 3px rgba(0, 0, 0, 0.17);
-    // box-shadow:  0px 0px 10px 3px rgba(0, 0, 0, 0.17);
+    // -webkit-box-shadow:
+    //             0px 0px 10px 3px rgba(0, 0, 0, 0.17),
+    //             inset 0px 0px 3px 2px rgba(0, 0, 0, 0.4);
 
-    .box-neon(6px,0);
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
+    // box-shadow:
+    //             0px 0px 10px 3px rgba(0, 0, 0, 0.17),
+    //             inset 0px 0px 3px 2px rgba(0, 0, 0, 0.4);
+
+    // .box-neon(2px,0);
 }
 
 .cart-summary-container-inner{
@@ -152,8 +235,8 @@
 
 .cart-lineitem-thumbnail-col{
     img{
-        max-width: 60px;
-        .box-neon(2px,2px,#fff,#fff);
+        max-width: 110px;
+        // .box-neon(2px,2px,#fff,#fff);
         box-shadow: none;
     }
 }
@@ -167,21 +250,36 @@
     text-align: center;
 }
 
+.cart-lineitem-quantity-col{
+    color: white;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.cart-heading-product{
+    span{
+        visibility: hidden;
+    }
+}
+
 .btn-cmd-checkout{
-    .btn;
+    // .btn;
     // .btn-lg;
-    .btn-success;
+    // .btn-success;
+    .btn-dark-primary;
 }
 
 
 .cart-list-price{
     text-decoration: line-through;
     font-size: 0.85em;
-    color: lighten(@gray, 20%);
+    color: lighten(@gray-light, 20%);
 }
 
 .cart-lineitem-purchase-price{
     font-weight: bold;
+    color: @brand-primary;
 }
 
 
@@ -189,6 +287,21 @@
     border: none;
 }
 
+.cart-lineitem-price-container,
+.cart-lineitem-availability-container{
+    margin: 0;
+    padding: 0;
+
+    li{
+        margin: 0;
+        padding: 0;
+    }
+
+    label{
+        margin: 0;
+        padding: 0;
+    }
+}
 
 
 //------------------ grid
@@ -203,7 +316,7 @@
         .make-xs-column(12);
         margin-top: 4rem;
         margin-bottom: 4rem;
-        color: @gray;
+        // color: @gray;
     }
 }
 
@@ -231,11 +344,13 @@
     .make-xs-column(12);
 
     .cart-sidebar-inner{
-        display: inline-block;
+        position: relative;
+        display: block;
         padding: 2rem;
-        border: 3px solid @brand-primary;
-        border-radius: 6px;
-        background-color: rgba(255,255,255,0.6);
+        // border: 3px solid @brand-primary;
+        // border-radius: 2px;
+        // background-color: rgba(255,255,255,0.6);
+        .neon-cutcorner;
 
         h3{
             margin: 0 0 2rem 0;
@@ -246,12 +361,14 @@
 .cart-unit-list-price,
 .cart-total-list-price{
     text-decoration: line-through;
-    color: darken(@gray-light, 10%);
+    color: darken(@gray-light, 0%);
 }
 
 .cart-unit-purchase-price,
 .cart-total-purchase-price{
-    font-weight: bold;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: @brand-primary
 }
 /*
 Purchase Confirmation
@@ -264,4 +381,31 @@ Purchase Confirmation
 }
 .purchaseconfirmation-items-list li:nth-child(even){
   background:#fafafe;
+}
+
+.table-responsive{
+    border: none;
+}
+
+.cart-total-quantity{
+    label,
+    span{
+        font-weight: 400!important;
+        font-size: 1.4rem;
+        color: #fff;
+    }
+}
+
+.cart-subtotal{
+    label,
+    span{
+        font-weight: 400;
+        font-size: 1.7rem;
+    }
+    label{
+        color: @brand-secondary;
+    }
+    span{
+        color: @brand-primary;
+    }
 }

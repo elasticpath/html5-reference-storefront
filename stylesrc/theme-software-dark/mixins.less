@@ -1,3 +1,15 @@
+.btn-dark-primary{
+    display: inline-block;
+    border: 1px solid @highlight-secondary;
+    background: rgba(0,0,0,0.4);
+    color: @highlight-secondary;
+    // .pull-right;
+    line-height: 30px;
+    padding: 0 8px;
+    text-transform: uppercase;
+}
+
+
 .box-neon(@radius:6px,@padding:5px,@colorstart:rgba(0,0,0,0.4),@colorend:rgba(0,0,0,0.4),@glowradius:6px,@glowopacity:0.5,@bordercolor:fadeout(@brand-primary,60%),@borderwidth:1px){
     // chromed panel styling
     // you can feed this mixin several variables (radius, padding, starting color, finishing color, glow radius, glow opacity, border color)
@@ -77,7 +89,18 @@
 
 .border-dot-bottom{
     border-style: solid;
+    border-color: transparent;
     border-width: 0px 0px 1px 0px ;
+    -moz-border-image: url(images/line-dot-blue.gif) 1 round;
+    -webkit-border-image: url(images/line-dot-blue.gif) 1 round;
+    -o-border-image: url(images/line-dot-blue.gif) 1 round;
+    border-image: url(images/line-dot-blue.gif) 1 fill round;
+}
+
+.border-dot-right{
+    border-style: solid;
+    border-color: transparent;
+    border-width: 0px 1px 0px 0px ;
     -moz-border-image: url(images/line-dot-blue.gif) 1 round;
     -webkit-border-image: url(images/line-dot-blue.gif) 1 round;
     -o-border-image: url(images/line-dot-blue.gif) 1 round;

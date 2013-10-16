@@ -7112,11 +7112,21 @@ td.visible-print {
 /* End Cart */
 /* Start Auth */
 /* End Auth */
-/* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 1, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+.btn-dark-primary {
+  display: inline-block;
+  border: 1px solid #33ff66;
+  background: rgba(0, 0, 0, 0.4);
+  color: #33ff66;
+  line-height: 30px;
+  padding: 0 8px;
+  text-transform: uppercase;
+}
+/* line 42, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .neon-cutcorner {
   border: 1px solid #004a76;
 }
-/* line 33, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 45, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .neon-cutcorner:before {
   content: '';
   position: absolute;
@@ -7133,11 +7143,11 @@ td.visible-print {
   height: 60px;
   background: url(images/theme-software-dark/bg-twinkle-dark.gif);
 }
-/* line 49, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 61, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .separated {
   position: relative;
 }
-/* line 51, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 63, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .separated:before {
   position: relative;
   top: 0px;
@@ -7149,20 +7159,31 @@ td.visible-print {
   margin-right: 0!important;
   background-color: #888;
 }
-/* line 73, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 85, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .flatform {
   background: red;
 }
-/* line 78, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 90, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .border-dot-bottom {
   border-style: solid;
+  border-color: transparent;
   border-width: 0px 0px 1px 0px ;
   -moz-border-image: url(images/line-dot-blue.gif) 1 round;
   -webkit-border-image: url(images/line-dot-blue.gif) 1 round;
   -o-border-image: url(images/line-dot-blue.gif) 1 round;
   border-image: url(images/line-dot-blue.gif) 1 fill round;
 }
-/* line 87, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 100, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+.border-dot-right {
+  border-style: solid;
+  border-color: transparent;
+  border-width: 0px 1px 0px 0px ;
+  -moz-border-image: url(images/line-dot-blue.gif) 1 round;
+  -webkit-border-image: url(images/line-dot-blue.gif) 1 round;
+  -o-border-image: url(images/line-dot-blue.gif) 1 round;
+  border-image: url(images/line-dot-blue.gif) 1 fill round;
+}
+/* line 110, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .border-dot-top {
   border-style: solid;
   border-width: 1px 0px 0px 0px ;
@@ -7171,7 +7192,7 @@ td.visible-print {
   -o-border-image: url(images/line-dot-blue.gif) 1 round;
   border-image: url(images/line-dot-blue.gif) 1 fill round;
 }
-/* line 96, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 119, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .border-dot-top-bottom {
   border-style: solid;
   border-width: 1px 0px 1px 0px ;
@@ -7180,7 +7201,7 @@ td.visible-print {
   -o-border-image: url(images/line-dot-blue.gif) 1 round;
   border-image: url(images/line-dot-blue.gif) 1 fill round;
 }
-/* line 106, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 129, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .view-title {
   color: #ec316a;
   font-weight: 100;
@@ -7876,139 +7897,50 @@ nav.main-nav {
 .simplemodal-container {
   z-index: 9322 !important;
 }
-/* line 5, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 7, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-outer {
   background: transparent url(images/bg-vector-splat.jpg) no-repeat center top;
   background-size: cover;
   padding-top: 60px;
 }
 /* line 14, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table > tbody > tr:nth-child(odd) > td,
+.cart-container table > tbody > tr:nth-child(odd) > th {
+  background-color: transparent  !important;
+}
+/* line 21, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table > tbody > tr:nth-child(even) > td,
+.cart-container table > tbody > tr:nth-child(even) > th {
+  background-color: rgba(0, 157, 220, 0.09999999999999998) !important;
+}
+/* line 26, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.table thead > tr > th {
+  border-bottom: 1px solid #004a76;
+}
+/* line 34, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-container h1 {
   margin: 0 0 3rem 0;
 }
-/* line 18, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 38, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-container ul {
   list-style-type: none;
   padding: 0;
 }
-/* line 21, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 41, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-container ul li {
   list-style-type: none;
 }
-/* line 26, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 46, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-container table {
   margin-bottom: 0;
-}
-/* line 111, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/tables.less */
-.cart-container table > tbody > tr:nth-child(odd) > td,
-.cart-container table > tbody > tr:nth-child(odd) > th {
-  background-color: #e9e9e9;
-}
-/* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table thead {
-  background: rgba(0, 163, 221, 0.667);
-}
-/* line 34, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table thead th:first-child {
-  border-top-left-radius: 6px;
-}
-/* line 37, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table thead th:last-child {
-  border-top-right-radius: 6px;
-}
-/* line 43, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr {
-  border: none;
-}
-/* line 46, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr th {
-  font-size: 1.3rem;
-  color: #999999;
-  font-weight: 400;
-}
-/* line 51, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr th:last-child {
-  text-align: right;
-}
-/* line 56, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr td {
-  font-size: 1.3rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 3px solid #fff;
-  border-top: none;
-}
-/* line 64, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr td.cart-lineitem-title-col {
-  font-size: 1.4rem;
-}
-/* line 68, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr td.cart-lineitem-remove-btn-col {
-  font-size: 13px;
-}
-/* line 71, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem {
-  text-shadow: none;
-  padding: 0;
-  height: 21px;
-  width: 21px;
-  color: #eeeeee;
-  background-color: #999999;
-  border: none;
-  border-radius: 2px;
-  text-align: middle;
-  box-shadow: none;
-  border-bottom: none;
-}
-/* line 90, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem:hover {
-  background-color: #d9534f;
-  color: #fff;
-}
-/* line 95, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .icon {
   position: relative;
-  top: 1px;
-  display: inline-block;
-  font-family: 'Glyphicons Halflings';
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  margin: auto;
-  padding: 2px 0 0 0;
-}
-/* line 52, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/glyphicons.less */
-.cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .icon:before {
-  content: "\e014";
-}
-/* line 102, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .btn-text {
-  display: none;
-}
-/* line 110, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr:last-child td {
-  border-bottom: none;
-}
-/* line 117, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr th:last-child,
-.cart-container table tr td:last-child {
-  text-align: center;
-}
-/* line 121, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr th:first-child,
-.cart-container table tr td:first-child {
-  padding-left: 30px;
-}
-/* line 125, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-container table tr th {
-  color: #fff;
-}
-/* line 135, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
-.cart-main-inner {
+  border-collapse: separate;
+  border-spacing: 0px;
+  -webkit-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.17), inset 0px 0px 3px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.17), inset 0px 0px 3px 2px rgba(0, 0, 0, 0.4);
   background-color: #eee;
   padding: 0;
-  border-radius: 6px;
+  border-radius: 2px;
   border: 1px solid rgba(0, 157, 220, 0.4);
   background: rgba(0, 0, 0, 0.4);
   /* Old browsers */
@@ -8035,159 +7967,179 @@ nav.main-nav {
   box-shadow: inset 0px 0px 6px 2px rgba(255, 255, 255, 0.5);
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
 }
-/* line 154, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 111, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/tables.less */
+.cart-container table > tbody > tr:nth-child(odd) > td,
+.cart-container table > tbody > tr:nth-child(odd) > th {
+  background-color: #e9e9e9;
+}
+/* line 64, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table thead {
+  background: rgba(0, 157, 220, 0.09999999999999998);
+}
+/* line 69, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table thead th:first-child {
+  border-top-left-radius: 2px;
+}
+/* line 72, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table thead th:last-child {
+  border-top-right-radius: 2px;
+}
+/* line 78, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr {
+  border: none;
+  position: relative;
+}
+/* line 85, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr th {
+  font-size: 1.2rem;
+  color: #009ddc;
+  font-weight: 400;
+}
+/* line 90, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr th:last-child {
+  text-align: right;
+}
+/* line 95, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr td {
+  font-size: 1.3rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-top: none;
+  border-bottom: 1px solid rgba(0, 74, 118, 0.5);
+  background-image: url(images/line-dot-blue-single-vert.png);
+  background-repeat: repeat-y;
+  background-position: right 5px !important;
+  vertical-align: middle;
+}
+/* line 110, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr td.cart-lineitem-quantity-col {
+  background-image: url(images/theme-software-dark/cart-fake-qty-updown.png), url(images/line-dot-blue-single-vert.png);
+  background-repeat: no-repeat, repeat-y;
+  background-position: center center,right 5px !important;
+}
+/* line 122, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr td.cart-lineitem-title-col {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+/* line 126, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr td.cart-lineitem-title-col a {
+  color: #ec316a;
+}
+/* line 131, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr td.cart-lineitem-remove-btn-col {
+  font-size: 13px;
+}
+/* line 134, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem {
+  text-shadow: none;
+  padding: 0;
+  height: 21px;
+  width: 21px;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  border-bottom: none;
+}
+/* line 156, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem:hover .icon {
+  background: transparent url(images/theme-software-dark/btn-cart-remove.png) no-repeat left -20px;
+}
+/* line 161, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .icon {
+  display: block;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  background: transparent url(images/theme-software-dark/btn-cart-remove.png) no-repeat left 0px;
+}
+/* line 172, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .btn-text {
+  display: none;
+}
+/* line 178, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr td:last-child {
+  background-image: none!important;
+}
+/* line 197, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr:last-child td {
+  border-bottom: none;
+}
+/* line 204, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-container table tr th:last-child,
+.cart-container table tr td:last-child {
+  text-align: center;
+}
+/* line 237, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-lineitem-thumbnail-col img {
-  max-width: 60px;
-  background-color: #eee;
-  padding: 2px;
-  border-radius: 2px;
-  border: 1px solid rgba(0, 157, 220, 0.4);
-  background: #ffffff;
-  /* Old browsers */
-
-  background: -moz-linear-gradient(-45deg, #ffffff 0%, #ffffff 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #ffffff), color-stop(100%, #ffffff));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(-45deg, #ffffff 0%, #ffffff 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(-45deg, #ffffff 0%, #ffffff 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(-45deg, #ffffff 0%, #ffffff 100%);
-  /* IE10+ */
-
-  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
-  /* W3C */
-
-  -webkit-box-shadow: inset 0px 0px 6px 2px rgba(255, 255, 255, 0.5);
-  box-shadow: inset 0px 0px 6px 2px rgba(255, 255, 255, 0.5);
-  -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  max-width: 110px;
   box-shadow: none;
 }
-/* line 163, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 246, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-heading-quantity,
 .cart-lineitem-quantity-col,
 .cart-heading-availability,
 .cart-lineitem-availability-col {
   text-align: center;
 }
-/* line 170, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 253, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-lineitem-quantity-col {
+  color: white;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+/* line 261, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-heading-product span {
+  visibility: hidden;
+}
+/* line 266, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .btn-cmd-checkout {
   display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.428571429;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  border-radius: 2px;
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
-  color: #ffffff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+  border: 1px solid #33ff66;
+  background: rgba(0, 0, 0, 0.4);
+  color: #33ff66;
+  line-height: 30px;
+  padding: 0 8px;
+  text-transform: uppercase;
 }
-/* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/buttons.less */
-.btn-cmd-checkout:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-/* line 29, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/buttons.less */
-.btn-cmd-checkout:hover,
-.btn-cmd-checkout:focus {
-  color: #333333;
-  text-decoration: none;
-}
-/* line 35, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/buttons.less */
-.btn-cmd-checkout:active,
-.btn-cmd-checkout.active {
-  outline: 0;
-  background-image: none;
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-}
-/* line 42, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/buttons.less */
-.btn-cmd-checkout.disabled,
-.btn-cmd-checkout[disabled],
-fieldset[disabled] .btn-cmd-checkout {
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.65;
-  filter: alpha(opacity=65);
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-/* line 412, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.btn-cmd-checkout:hover,
-.btn-cmd-checkout:focus,
-.btn-cmd-checkout:active,
-.btn-cmd-checkout.active,
-.open .dropdown-toggle.btn-cmd-checkout {
-  color: #ffffff;
-  background-color: #47a447;
-  border-color: #398439;
-}
-/* line 421, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.btn-cmd-checkout:active,
-.btn-cmd-checkout.active,
-.open .dropdown-toggle.btn-cmd-checkout {
-  background-image: none;
-}
-/* line 429, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
-.btn-cmd-checkout.disabled,
-.btn-cmd-checkout[disabled],
-fieldset[disabled] .btn-cmd-checkout,
-.btn-cmd-checkout.disabled:hover,
-.btn-cmd-checkout[disabled]:hover,
-fieldset[disabled] .btn-cmd-checkout:hover,
-.btn-cmd-checkout.disabled:focus,
-.btn-cmd-checkout[disabled]:focus,
-fieldset[disabled] .btn-cmd-checkout:focus,
-.btn-cmd-checkout.disabled:active,
-.btn-cmd-checkout[disabled]:active,
-fieldset[disabled] .btn-cmd-checkout:active,
-.btn-cmd-checkout.disabled.active,
-.btn-cmd-checkout[disabled].active,
-fieldset[disabled] .btn-cmd-checkout.active {
-  background-color: #5cb85c;
-  border-color: #4cae4c;
-}
-/* line 177, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 274, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-list-price {
   text-decoration: line-through;
   font-size: 0.85em;
-  color: #888888;
+  color: #cccccc;
 }
-/* line 183, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 280, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-lineitem-purchase-price {
   font-weight: bold;
+  color: #009ddc;
 }
-/* line 188, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 286, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-lineitem-table-headings {
   border: none;
 }
-/* line 195, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 290, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-lineitem-price-container,
+.cart-lineitem-availability-container {
+  margin: 0;
+  padding: 0;
+}
+/* line 295, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-lineitem-price-container li,
+.cart-lineitem-availability-container li {
+  margin: 0;
+  padding: 0;
+}
+/* line 300, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-lineitem-price-container label,
+.cart-lineitem-availability-container label {
+  margin: 0;
+  padding: 0;
+}
+/* line 308, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-container-inner {
   margin-left: -15px;
   margin-right: -15px;
@@ -8220,7 +8172,7 @@ fieldset[disabled] .btn-cmd-checkout.active {
 .cart-container-inner:after {
   clear: both;
 }
-/* line 199, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 312, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-title-container {
   position: relative;
   float: left;
@@ -8229,7 +8181,7 @@ fieldset[disabled] .btn-cmd-checkout.active {
   padding-left: 15px;
   padding-right: 15px;
 }
-/* line 202, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 315, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-title-container h1 {
   position: relative;
   float: left;
@@ -8239,9 +8191,8 @@ fieldset[disabled] .btn-cmd-checkout.active {
   padding-right: 15px;
   margin-top: 4rem;
   margin-bottom: 4rem;
-  color: #555555;
 }
-/* line 210, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 323, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-main-container {
   position: relative;
   float: left;
@@ -8258,15 +8209,15 @@ fieldset[disabled] .btn-cmd-checkout.active {
     width: 75%;
   }
 }
-/* line 216, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 329, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-summary-container {
   display: inline-block;
 }
-/* line 222, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 335, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-checkout-container {
   margin-top: 2rem;
 }
-/* line 229, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 342, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-sidebar {
   position: relative;
   float: left;
@@ -8282,43 +8233,86 @@ fieldset[disabled] .btn-cmd-checkout.active {
     width: 25%;
   }
 }
-/* line 233, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 346, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-sidebar .cart-sidebar-inner {
-  display: inline-block;
+  position: relative;
+  display: block;
   padding: 2rem;
-  border: 3px solid #009ddc;
-  border-radius: 6px;
-  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid #004a76;
 }
-/* line 240, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 45, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+.cart-sidebar .cart-sidebar-inner:before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  border-bottom: 1px solid #004a76;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  /* IE 9 */
+
+  width: 60px;
+  height: 60px;
+  background: url(images/theme-software-dark/bg-twinkle-dark.gif);
+}
+/* line 355, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-sidebar .cart-sidebar-inner h3 {
   margin: 0 0 2rem 0;
 }
-/* line 246, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 361, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-unit-list-price,
 .cart-total-list-price {
   text-decoration: line-through;
-  color: #808080;
+  color: #999999;
 }
-/* line 252, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 367, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-unit-purchase-price,
 .cart-total-purchase-price {
-  font-weight: bold;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #009ddc;
 }
 /*
 Purchase Confirmation
 */
-/* line 259, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 376, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .purchaseconfirm-items-container .row {
   margin-bottom: 0;
 }
-/* line 262, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 379, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .purchaseconfirm-items-container hr {
   margin: 1rem;
 }
-/* line 265, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 382, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .purchaseconfirmation-items-list li:nth-child(even) {
   background: #fafafe;
+}
+/* line 386, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.table-responsive {
+  border: none;
+}
+/* line 391, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-total-quantity label,
+.cart-total-quantity span {
+  font-weight: 400!important;
+  font-size: 1.4rem;
+  color: #fff;
+}
+/* line 400, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-subtotal label,
+.cart-subtotal span {
+  font-weight: 400;
+  font-size: 1.7rem;
+}
+/* line 405, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-subtotal label {
+  color: #004a76;
+}
+/* line 408, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-subtotal span {
+  color: #009ddc;
 }
 /* line 1, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-container {
@@ -8433,7 +8427,7 @@ Purchase Confirmation
   border: 1px solid #004a76;
   padding: 20px 40px 0px 10px;
 }
-/* line 33, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 45, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .itemdetail-addtocart .itemdetail-addtocart-form:before {
   content: '';
   position: absolute;
@@ -8577,7 +8571,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   position: relative;
   border: 1px solid #004a76;
 }
-/* line 33, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 45, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .itemdetail-inner:before {
   content: '';
   position: absolute;
@@ -8600,6 +8594,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   padding: 1rem;
   margin-bottom: 1.5rem;
   border-style: solid;
+  border-color: transparent;
   border-width: 0px 0px 1px 0px ;
   -moz-border-image: url(images/line-dot-blue.gif) 1 round;
   -webkit-border-image: url(images/line-dot-blue.gif) 1 round;
@@ -9111,15 +9106,17 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 }
 /* line 288, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-addcart-button {
+  float: right !important;
+  display: inline-block;
   border: 1px solid #33ff66;
   background: rgba(0, 0, 0, 0.4);
   color: #33ff66;
-  float: right !important;
   line-height: 30px;
   padding: 0 8px;
+  text-transform: uppercase;
 }
 @media only screen and (max-width: 1200px) {
-  /* line 296, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+  /* line 297, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
   .item-addtocart-container .item-addcart-button {
     display: block;
     width: 100%;
@@ -9127,7 +9124,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
     margin-top: 10px;
   }
 }
-/* line 303, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 304, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-addcart-button .icon {
   position: relative;
   top: 1px;
@@ -9143,7 +9140,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .item-addtocart-container .item-addcart-button .icon:before {
   content: "\e116";
 }
-/* line 309, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 310, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-addcart-button .btn-text {
   text-transform: uppercase;
 }
@@ -9621,19 +9618,18 @@ ul {
 .itemdetail-availability-state {
   padding: 0;
 }
-/* line 229, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
-.itemdetail-availability-state label {
+/* line 230, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+.itemdetail-availability-state[data-i18n="AVAILABLE"] label {
   display: inline-block;
-  font-size: 1rem;
+  font-size: 1.3rem;
+  font-weight: 400;
   text-transform: uppercase;
-  border-radius: 1rem;
-  color: #fff;
-  background-color: #5cb85c;
-  padding: 5px 8px;
-  line-height: 10px;
+  color: #33ff66;
 }
-/* line 240, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
-.itemdetail-availability-state .icon {
+/* line 238, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+.itemdetail-availability-state[data-i18n="AVAILABLE"] .icon {
+  display: block;
+  width: 100%;
   position: relative;
   top: 1px;
   display: inline-block;
@@ -9642,14 +9638,14 @@ ul {
   font-weight: normal;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
-  margin-right: 6px;
-  margin-top: -4px;
+  font-size: 24px;
+  margin-top: -8px;
 }
-/* line 51, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/glyphicons.less */
-.itemdetail-availability-state .icon:before {
-  content: "\e013";
+/* line 153, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/glyphicons.less */
+.itemdetail-availability-state[data-i18n="AVAILABLE"] .icon:before {
+  content: "\e125";
 }
-/* line 249, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 253, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .is-hidden {
   display: none;
 }
