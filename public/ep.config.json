@@ -8,8 +8,8 @@
     "showInstrumentation":false
   },
   "cortexApi":{
-    "path":"cortex",
-    "scope":"mobee"
+    "path":"integrator",
+    "scope":"telcooperative"
   },
   "deployMode":"development",
   "requireAuthToCheckout":true,
