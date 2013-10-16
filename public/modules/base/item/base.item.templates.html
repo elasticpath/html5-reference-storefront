@@ -18,7 +18,6 @@
           <div class="itemdetail-price-container" data-region="itemDetailPriceRegion"></div>
           <div data-region="itemDetailAvailabilityRegion"></div>
           <div data-region="itemDetailAttributeRegion"></div>
-          <div data-region="itemDetailAttributeRegion"></div>
         </div>
 
         <div class="itemdetail-addtocart">
@@ -28,10 +27,20 @@
     </div>
     <!-- end bootstrap container -->
 
-    </script> <!-- Default Item Detail Title Template -->
+    </script>
+
+
+  <!-- Default Item Detail Title Template -->
      <script id="DefaultItemTitleTemplate" type="text/template">
 <h1 class="itemdetail-title"><%= E.displayName %></h1>
-    </script> <!-- Default Item Detail Asset Template -->
+  </script>
+
+
+
+
+
+
+  <!-- Default Item Detail Asset Template -->
      <script id="DefaultItemAssetTemplate" type="text/template">
 <img src="<%- E.getDefaultImagePath(E.attributes.assets) %>" alt="<%= E.getDefaultImageName(E.attributes.assets) %>"
          class="itemdetail-main-img"/>

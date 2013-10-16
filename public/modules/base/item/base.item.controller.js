@@ -7,7 +7,7 @@
  *
  *
  */
-define(['jquery','ep','app', 'eventbus', 'cortex', 'item.models', 'item.views', 'text!modules/base/item/item.templates.html','i18n','pace'],
+define(['jquery','ep','app', 'eventbus', 'cortex', 'item.models', 'item.views', 'text!modules/base/item/base.item.templates.html','i18n','pace'],
   function($, ep, App, EventBus, Cortex, Model, View, template,i18n,pace){
 
     $('#TemplateContainer').append(template);
@@ -97,6 +97,14 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'item.models', 'item.views', 
       // render cart view in main nav
     });
     EventBus.on('item.addToCartBtnClicked', function (event) {
+      ep.logger.info('|');
+      ep.logger.info('|');
+      ep.logger.info('|');
+      ep.logger.info('| THIS ONE CLICKED TOO');
+      ep.logger.info('|');
+      ep.logger.info('|');
+      ep.logger.info('|');
+      ep.logger.info('|');
       var formActionLink = $(event.target).data('actionlink');
 
       if (formActionLink) {

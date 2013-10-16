@@ -1,0 +1,114 @@
+
+.pagination-container{
+    position: relative;
+    font-size: 1.3rem;
+    color: @brand-secondary;
+    display: inline-block;
+    // .box-neon(3px, 10px);
+    text-align: left;
+    margin: 10px 0;
+    padding: 0 25px;
+
+}
+
+.paginationStatsContainer{
+    margin-bottom: 10px;
+}
+
+.btn-pagination{
+    // text-indent: -99999px;
+
+    /* Hide the text. */
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    /* hidey text over */
+
+    position: absolute;
+    top: 5px;
+    height: 36px;
+    width: 15px;
+
+    // content: "";
+
+      &:hover{
+        text-decoration: none;
+        background-color: transparent;
+        opacity: .8;
+      }
+
+
+    &.btn-pagination-next{
+      right: 0;
+      margin-left: 1rem;
+      background: transparent  url(images/theme-software-dark/pagination-prevnext-sprite.png) no-repeat -16px 0;
+        .icon{
+          .glyphicon;
+          .glyphicon-chevron-right;
+        }
+    }
+    &.btn-pagination-prev{
+      left: 0;
+      margin-right: 1rem;
+      background: transparent  url(images/theme-software-dark/pagination-prevnext-sprite.png) no-repeat 0 0;
+        .icon{
+          .glyphicon;
+          .glyphicon-chevron-left;
+        }
+    }
+    &.pagination-link-disabled {
+      cursor: default;
+      opacity: 0.5;
+      &:hover{
+        // background: #fff;
+      }
+    }
+}
+
+.paging-total-results{
+  margin-bottom: 0;
+
+  .pagination-label{
+    color: @brand-secondary;
+    margin-bottom: 0;
+  }
+
+  .pagination-total-results-value,
+  .pagination-total-results-label,
+  .pagination-results-displayed-value{
+
+    &.pagination-label,
+    &.pagination-value{
+      color: @brand-secondary;
+    }
+  }
+}
+
+
+
+.pagination-region-hidden{
+  display:none;
+}
+
+
+.pagination-navigation-container{
+  text-align:left;
+
+  .pagination-label{
+    color: @brand-primary;
+    font-size: 1.6rem;
+    font-weight: 300;
+    text-transform: capitalize;
+    &:last-of-type{
+      text-transform: none;
+    }
+  }
+
+  .pagination-value{
+    font-weight:300;
+    font-size: 1.6rem;
+    color: @brand-primary;
+    text-transform: capitalize;
+    margin: 0 2px;
+  }
+}
