@@ -9091,6 +9091,113 @@ fieldset[disabled] .btn-pagination.pagination-link-disabled.active {
 .pagination-navigation-container {
   text-align: center;
 }
+/* line 3, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/search.less */
+.search-results-container h1 {
+  margin-bottom: 3rem;
+}
+/* line 8, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/search.less */
+.search-results-inner {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+/* line 20, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+.search-results-inner:before,
+.search-results-inner:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+/* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+.search-results-inner:after {
+  clear: both;
+}
+/* line 20, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+.search-results-inner:before,
+.search-results-inner:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+/* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+.search-results-inner:after {
+  clear: both;
+}
+/* line 14, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/search.less */
+.search-results-item {
+  float: left;
+  width: 50%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  /* line 561, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  .search-results-item {
+    float: left;
+    width: 33.33333333333333%;
+  }
+}
+@media (min-width: 992px) {
+  /* line 594, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  .search-results-item {
+    float: left;
+    width: 25%;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 627, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  .search-results-item {
+    float: left;
+    width: 25%;
+  }
+}
+/* line 23, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/search.less */
+.search-results-item-inner {
+  background-color: #eee;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #dddddd;
+  background: #eeeeee;
+  /* Old browsers */
+
+  background: -moz-linear-gradient(-45deg, #eeeeee 0%, #e5e5e5 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #eeeeee), color-stop(100%, #e5e5e5));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(-45deg, #eeeeee 0%, #e5e5e5 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(-45deg, #eeeeee 0%, #e5e5e5 100%);
+  /* Opera 11.10+ */
+
+  background: -ms-linear-gradient(-45deg, #eeeeee 0%, #e5e5e5 100%);
+  /* IE10+ */
+
+  background: linear-gradient(135deg, #eeeeee 0%, #e5e5e5 100%);
+  /* W3C */
+
+  -webkit-box-shadow: inset 0px 0px 6px 2px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0px 0px 6px 2px rgba(255, 255, 255, 0.5);
+  -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+}
+/* line 26, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/search.less */
+.search-results-item-inner img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+}
 /* line 1, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/jquery.toastmessage.less */
 .toast-container {
   width: 280px;
@@ -9237,7 +9344,7 @@ fieldset[disabled] .btn-pagination.pagination-link-disabled.active {
 reference:
 http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of-ems/
 */
-/* line 34, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 35, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .btn,
 .btn-lg {
   border-radius: 2px;
@@ -9245,57 +9352,57 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
-/* line 45, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 46, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .row {
   margin-bottom: 1rem;
 }
-/* line 53, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 54, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 hr {
   margin: 60px 0;
 }
-/* line 62, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 63, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 body {
   margin-top: 100px;
 }
-/* line 67, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 68, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 ul {
   list-style: none;
 }
-/* line 70, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 71, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .btn-cmd {
   border: 0 solid grey;
   font-size: 100%;
   background: transparent;
   color: #070ca6;
 }
-/* line 76, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 77, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .btn-cmd:hover {
   border: 0;
   background: rgba(150, 150, 150, 0.3);
 }
-/* line 80, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 81, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .btn-cmd:active {
   border: 0;
   background: rgba(150, 150, 150, 0.4);
   text-shadow: 7px 7px 12px #969696;
 }
-/* line 85, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 86, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .app-main {
   padding-bottom: 6rem;
 }
-/* line 101, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 102, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .view-title {
   color: #000000;
   text-transform: capitalize;
 }
-/* line 108, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 109, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 #contextmenu {
   margin: 0;
   padding: 0;
   border: 1px solid #000;
   background: #dddddd;
 }
-/* line 114, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 115, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 #contextmenu li {
   list-style-type: none;
   margin: 1px;
@@ -9303,20 +9410,20 @@ ul {
   color: #000000;
   cursor: pointer;
 }
-/* line 121, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 122, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 #contextmenu li.hover {
   background: #ddd;
 }
-/* line 124, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 125, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .modal-container {
   display: none;
   min-width: 20rem;
 }
-/* line 128, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 129, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 #simplemodal-overlay {
   background-color: #000;
 }
-/* line 129, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 130, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 #simplemodal-container {
   background-color: #fff;
   border: 8px solid #444;
@@ -9324,7 +9431,7 @@ ul {
   width: auto !important;
   height: auto !important;
 }
-/* line 136, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 137, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 #simplemodal-container a.modalCloseImg {
   background: url(images/x.png) no-repeat;
   /* adjust url as required */
@@ -9338,14 +9445,14 @@ ul {
   right: -18px;
   cursor: pointer;
 }
-/* line 147, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 148, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .home-container {
   background: url(images/hm-commerce-software-bb.jpg) no-repeat;
   min-height: 500px;
   background-size: 100%;
   text-align: center;
 }
-/* line 153, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 154, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .field-content {
   max-width: 75rem;
   color: #ffffff;
@@ -9353,16 +9460,16 @@ ul {
   font-family: 'ProximaNova-Regular', Helvetica, Arial, sans-serif;
   padding-top: 8rem;
 }
-/* line 162, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 163, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .field-content h2 {
   font-size: 48px;
   line-height: 47px;
 }
-/* line 166, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 167, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .theme-variable-item-value-dark .btn-cmd {
   color: #111111;
 }
-/* line 169, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 170, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .theme-variable-item-value-light .btn-cmd {
   color: #eeeeee;
 }
@@ -9370,31 +9477,31 @@ ul {
   Begin Login Form
 */
 /* oAuth Form Feedback */
-/* line 176, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 177, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .feedback-label {
   color: red;
 }
-/* line 180, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 181, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .dropdown-menu {
   display: none;
   position: absolute;
   background-color: #ffffff;
 }
-/* line 185, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 186, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .oAuth-logout {
   display: none;
 }
 /*end login form*/
-/* line 192, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 193, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .activity-indicator-container {
   text-align: center;
 }
-/* line 195, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 196, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .activity-indicator {
   margin-left: auto;
   margin-right: auto;
 }
-/* line 200, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 201, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .pace .pace-progress {
   background: red;
   position: fixed;
@@ -9403,15 +9510,15 @@ ul {
   left: 0;
   height: 2px;
 }
-/* line 209, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 210, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .pace-inactive {
   display: none;
 }
-/* line 213, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 214, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .itemdetail-availability-state {
   padding: 0;
 }
-/* line 216, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 217, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .itemdetail-availability-state label {
   display: inline-block;
   font-size: 1rem;
@@ -9422,7 +9529,7 @@ ul {
   padding: 5px 8px;
   line-height: 10px;
 }
-/* line 227, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 228, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .itemdetail-availability-state .icon {
   position: relative;
   top: 1px;
@@ -9439,7 +9546,7 @@ ul {
 .itemdetail-availability-state .icon:before {
   content: "\e013";
 }
-/* line 236, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
+/* line 237, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-core/theme-base.less */
 .is-hidden {
   display: none;
 }
