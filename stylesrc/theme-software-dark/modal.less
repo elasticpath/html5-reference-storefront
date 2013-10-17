@@ -1,0 +1,35 @@
+#simplemodal-container {
+
+  // background-color:#000;
+  // background-color: rgba(0,0,0,0.4);
+  // border:8px solid #444;
+
+  .box-neon(2px,15px,rgba(0,0,0,.8),rgba(0,0,0,.8));
+  // padding:12px;
+
+  width:auto !important;
+  height:auto !important;
+
+  a{
+    &.modalCloseImg {
+      background:url(images/x.png) no-repeat; /* adjust url as required */
+      width:25px;
+      height:29px;
+      display:inline;
+      z-index:3200;
+      position:absolute;
+      top:-15px;
+      right:-18px;
+      cursor:pointer;
+    }
+  }
+
+  .modal-container {
+    display:none;
+    min-width:20rem;
+  }
+}
+
+#simplemodal-overlay {
+  background-color:#000;
+}
