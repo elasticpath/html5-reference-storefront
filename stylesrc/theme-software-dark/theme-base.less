@@ -12,6 +12,7 @@
 @import "itemdetail";
 @import "category";
 @import "pagination";
+@import "search";
 
 
 // css for plugins
@@ -236,11 +237,33 @@ ul{
       }
 
       .icon{
-          display: block;
-          width: 100%;
+          // display: inline-block;
+          // width: 100%;
           // .pull-right;
           .glyphicon;
           .glyphicon-thumbs-up;
+          // margin-left: 6px;
+          font-size: 24px;
+          // margin-right: 6px;
+          margin-top: -8px;
+      }
+    }
+
+    &[data-i18n="AVAILABLE_FOR_PRE_ORDER"]{
+      label{
+          display: inline-block;
+          font-size: 1.3rem;
+          font-weight: 400;
+          text-transform: uppercase;
+          color: @availability-color-pending;
+      }
+
+      .icon{
+          // display: inline-block;
+          // width: 100%;
+          // .pull-right;
+          .glyphicon;
+          .glyphicon-time;
           // margin-left: 6px;
           font-size: 24px;
           // margin-right: 6px;

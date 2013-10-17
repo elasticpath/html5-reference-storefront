@@ -1,12 +1,24 @@
-.btn-dark-primary{
+.btn-dark-base{
     display: inline-block;
-    border: 1px solid @highlight-secondary;
+    border: 1px solid @gray-light;
+    color: @gray-light;
     background: rgba(0,0,0,0.4);
-    color: @highlight-secondary;
     // .pull-right;
     line-height: 30px;
     padding: 0 8px;
     text-transform: uppercase;
+}
+
+.btn-dark-primary{
+    .btn-dark-base;
+    border: 1px solid @highlight-secondary;
+    color: @highlight-secondary;
+}
+
+.btn-dark-secondary{
+    .btn-dark-base;
+    border: 1px solid @brand-primary;
+    color: @brand-primary;
 }
 
 
