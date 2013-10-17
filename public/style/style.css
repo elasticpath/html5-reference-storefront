@@ -8259,6 +8259,7 @@ nav.main-nav {
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
+  overflow: hidden;
 }
 @media (min-width: 992px) {
   /* line 594, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
@@ -8267,7 +8268,7 @@ nav.main-nav {
     width: 25%;
   }
 }
-/* line 362, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 364, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-sidebar .cart-sidebar-inner {
   position: relative;
   display: block;
@@ -8291,17 +8292,17 @@ nav.main-nav {
   height: 60px;
   background: url(images/theme-software-dark/bg-twinkle-dark.gif);
 }
-/* line 371, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 373, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-sidebar .cart-sidebar-inner h3 {
   margin: 0 0 2rem 0;
 }
-/* line 377, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 379, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-unit-list-price,
 .cart-total-list-price {
   text-decoration: line-through;
   color: #999999;
 }
-/* line 383, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 385, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-unit-purchase-price,
 .cart-total-purchase-price {
   font-weight: 400;
@@ -8311,42 +8312,49 @@ nav.main-nav {
 /*
 Purchase Confirmation
 */
-/* line 392, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 394, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .purchaseconfirm-items-container .row {
   margin-bottom: 0;
 }
-/* line 395, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 397, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .purchaseconfirm-items-container hr {
   margin: 1rem;
 }
-/* line 398, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 400, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .purchaseconfirmation-items-list li:nth-child(even) {
   background: #fafafe;
 }
-/* line 402, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 404, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .table-responsive {
   border: none;
 }
-/* line 407, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 409, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-total-quantity label,
 .cart-total-quantity span {
   font-weight: 400!important;
   font-size: 1.4rem;
   color: #fff;
 }
-/* line 416, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 418, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-subtotal label,
 .cart-subtotal span {
   font-weight: 400;
   font-size: 1.7rem;
 }
-/* line 421, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 423, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-subtotal label {
   color: #004a76;
 }
-/* line 424, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+/* line 426, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
 .cart-subtotal span {
   color: #009ddc;
+}
+/* line 431, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/cart.less */
+.cart-empty-container {
+  font-size: 2rem;
+  font-weight: 400;
+  color: #ec316a;
+  padding: 15px;
 }
 /* line 1, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-container {

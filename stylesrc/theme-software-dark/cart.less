@@ -359,6 +359,8 @@
     .make-md-column(3);
     .make-xs-column(12);
 
+    overflow: hidden;
+
     .cart-sidebar-inner{
         position: relative;
         display: block;
@@ -424,4 +426,11 @@ Purchase Confirmation
     span{
         color: @brand-primary;
     }
+}
+
+.cart-empty-container{
+    font-size: 2rem;
+    font-weight: 400;
+    color: @highlight-primary ;
+    padding: 15px;
 }
