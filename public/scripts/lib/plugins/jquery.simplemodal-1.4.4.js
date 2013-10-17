@@ -188,7 +188,7 @@
 	$.modal.defaults = {
 		appendTo: 'body',
 		focus: true,
-		opacity: 50,
+		opacity: 75,
 		overlayId: 'simplemodal-overlay',
 		overlayCss: {},
 		containerId: 'simplemodal-container',

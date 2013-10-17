@@ -18,12 +18,22 @@
     .btn-dark-base;
     border: 1px solid @highlight-secondary;
     color: @highlight-secondary;
+
+    &:hover{
+        border: 1px solid darken(@highlight-secondary,30%);
+        color:  darken(@highlight-secondary,30%);
+    }
 }
 
 .btn-dark-secondary{
     .btn-dark-base;
     border: 1px solid @brand-primary;
     color: @brand-primary;
+
+    &:hover{
+        border: 1px solid darken(@brand-primary, 20%);
+        color:  darken(@brand-primary, 20%);
+    }
 }
 
 
