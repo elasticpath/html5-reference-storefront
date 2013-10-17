@@ -49,6 +49,7 @@ define(['ep','backbone','eventbus','cortex'],
     });
     var searchResultsItem = Backbone.Marionette.ItemView.extend({
       template:'#SearchResultsItemContainer',
+      className:'search-results-item',
       templateHelpers:viewHelpers
     });
     var noResults = Backbone.Marionette.ItemView.extend({
@@ -58,7 +59,7 @@ define(['ep','backbone','eventbus','cortex'],
     var searchResults = Backbone.Marionette.CompositeView.extend({
       template:'#SearchResultsTemplate',
       itemView:searchResultsItem,
-      className:'search-results-container',
+      className:'search-results-container container',
       emptyView: noResults,
       itemViewContainer:'[data-region="searchResultsList"]',
       onShow:function(){

@@ -9,10 +9,9 @@
 
   <script id="SearchResultsTemplate" type="text/template">
     <h1 class="view-title">Search Results</h1>
-    <div class="row">
-      <div class="fifth"></div>
-      <div class="fourfifth" data-region="searchResultsList"></div>
-    </div>
+
+        <div class="search-results-inner" data-region="searchResultsList"></div>
+
 
   </script>
 
@@ -25,7 +24,7 @@
   </script>
 
   <script id="SearchResultsItemContainer" type="text/template">
-    <div>
+    <div class="search-results-item-inner">
       <img src="/images/img-placeholder.png" class="item-img" />
       <div data-region="displayName"><a href="<%= E.generateItemHref(E.uri) %>"><%= E.name %></a></div>
       <div data-region="price"><%= E.price %></div>
