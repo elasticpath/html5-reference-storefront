@@ -7042,54 +7042,88 @@ td.visible-print {
 /*
   auth view
 */
-/* line 6, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
-.auth-nav-container {
+/* line 7, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+.global-nav-auth-nav {
+  position: relative;
+}
+/* line 10, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+.global-nav-auth-nav .auth-nav-container {
+  background-color: #eee;
+  padding: 15px;
+  border-radius: 2px;
+  border: 1px solid #004a76;
+  background: #000000;
+  /* Old browsers */
+
+  background: -moz-linear-gradient(-45deg, #000000 0%, #000000 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #000000), color-stop(100%, #000000));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(-45deg, #000000 0%, #000000 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(-45deg, #000000 0%, #000000 100%);
+  /* Opera 11.10+ */
+
+  background: -ms-linear-gradient(-45deg, #000000 0%, #000000 100%);
+  /* IE10+ */
+
+  background: linear-gradient(135deg, #000000 0%, #000000 100%);
+  /* W3C */
+
+  -webkit-box-shadow: inset 0px 0px 6px 2px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0px 0px 6px 2px rgba(255, 255, 255, 0.5);
+  -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   display: none;
   position: absolute;
-  background: #ffffff;
+  right: -3px;
+  left: -3px;
+  top: -5px;
+  padding-top: 10px;
   z-index: 1000;
-  min-width: 20rem;
-  border: 1px solid #dddddd;
-  -webkit-box-shadow: -9px 3px 5px rgba(50, 50, 50, 0.75);
-  -moz-box-shadow: -9px 3px 5px rgba(50, 50, 50, 0.75);
-  box-shadow: -9px 3px 5px rgba(50, 50, 50, 0.75);
+  -webkit-box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.75);
+}
+/* line 27, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+.global-nav-auth-nav .auth-nav-container .auth-profile-menu-list {
+  margin: 1rem;
+}
+/* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+.global-nav-auth-nav .auth-nav-container .auth-profile-menu-list li {
+  display: block;
+  text-align: right;
 }
 @media only screen and (max-width: 47rem) {
-  /* line 18, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+  /* line 41, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
   .auth-nav-container {
     right: 1rem;
   }
 }
-/* line 22, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
-.auth-profile-menu-list {
-  margin: 1rem;
-}
-/* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
-.auth-nav-container .auth-profile-menu-list li {
-  display: block;
-  border-bottom: 1px solid #eeeeee;
-}
-/* line 29, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+/* line 47, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
 .auth-login-container {
   min-width: 30rem;
 }
-/* line 32, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+/* line 51, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
 .auth-login-form {
   margin-left: 1rem;
   margin-right: 1rem;
 }
-/* line 37, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+/* line 56, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
 .auth-login-form input {
   display: block;
   width: 16rem;
 }
-/* line 42, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+/* line 61, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
 .auth-feedback-container {
   color: #ff0000;
   padding-left: 1rem;
   padding-right: 1rem;
 }
-/* line 47, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+/* line 66, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
 .auth-profile-menu-list button {
   width: 100%;
   background: transparent;
@@ -9748,7 +9782,11 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   margin-top: -40px;
   top: 50%;
 }
-/* line 25, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 23, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+.app-main {
+  min-height: 900px;
+}
+/* line 29, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .btn,
 .btn-lg {
   border-radius: 2px;
@@ -9756,27 +9794,27 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
-/* line 36, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 40, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .row {
   margin-bottom: 1rem;
 }
-/* line 44, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 48, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 hr {
   margin: 60px 0;
 }
-/* line 53, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 57, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 body {
   margin-top: 130px;
   background: #000000 url(images/theme-software-dark/bg-twinkle-dark.gif) repeat left top;
   font-family: 'proxima-nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 @media (max-width: 768px) {
-  /* line 57, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+  /* line 61, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
   body {
     margin-top: 60px;
   }
 }
-/* line 63, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 67, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 body h1,
 body h2,
 body h3,
@@ -9786,7 +9824,7 @@ body h6 {
   color: #ec316a;
   font-family: 'proxima-nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-/* line 66, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 70, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 body h1 a,
 body h2 a,
 body h3 a,
@@ -9796,7 +9834,7 @@ body h6 a {
   color: #ec316a;
   font-weight: 300;
 }
-/* line 69, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 73, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 body h1 a:hover,
 body h2 a:hover,
 body h3 a:hover,
@@ -9805,40 +9843,40 @@ body h5 a:hover,
 body h6 a:hover {
   color: #bf1246;
 }
-/* line 79, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 83, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 ul {
   list-style: none;
 }
-/* line 82, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 86, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .btn-cmd {
   border: 0 solid grey;
   font-size: 100%;
   background: transparent;
   color: #070ca6;
 }
-/* line 88, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 92, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .btn-cmd:hover {
   border: 0;
   background: rgba(150, 150, 150, 0.3);
 }
-/* line 92, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 96, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .btn-cmd:active {
   border: 0;
   background: rgba(150, 150, 150, 0.4);
   text-shadow: 7px 7px 12px #969696;
 }
-/* line 97, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 101, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .app-main {
   padding-bottom: 6rem;
 }
-/* line 115, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 119, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 #contextmenu {
   margin: 0;
   padding: 0;
   border: 1px solid #000;
   background: #dddddd;
 }
-/* line 121, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 125, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 #contextmenu li {
   list-style-type: none;
   margin: 1px;
@@ -9846,18 +9884,18 @@ ul {
   color: #000000;
   cursor: pointer;
 }
-/* line 128, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 132, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 #contextmenu li.hover {
   background: #ddd;
 }
-/* line 132, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 136, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .home-container {
   background: url(images/hm-commerce-software-bb.jpg) no-repeat;
   min-height: 500px;
   background-size: 100%;
   text-align: center;
 }
-/* line 138, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 142, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .field-content {
   max-width: 75rem;
   color: #ffffff;
@@ -9865,16 +9903,16 @@ ul {
   font-family: 'ProximaNova-Regular', Helvetica, Arial, sans-serif;
   padding-top: 8rem;
 }
-/* line 147, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 151, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .field-content h2 {
   font-size: 48px;
   line-height: 47px;
 }
-/* line 151, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 155, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .theme-variable-item-value-dark .btn-cmd {
   color: #111111;
 }
-/* line 154, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 158, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .theme-variable-item-value-light .btn-cmd {
   color: #eeeeee;
 }
@@ -9882,31 +9920,31 @@ ul {
   Begin Login Form
 */
 /* oAuth Form Feedback */
-/* line 161, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 165, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .feedback-label {
   color: red;
 }
-/* line 165, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 169, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .dropdown-menu {
   display: none;
   position: absolute;
   background-color: #ffffff;
 }
-/* line 170, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 174, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .oAuth-logout {
   display: none;
 }
 /*end login form*/
-/* line 177, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 181, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .activity-indicator-container {
   text-align: center;
 }
-/* line 180, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 184, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .activity-indicator {
   margin-left: auto;
   margin-right: auto;
 }
-/* line 185, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 189, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .pace .pace-progress {
   background: red;
   position: fixed;
@@ -9915,15 +9953,15 @@ ul {
   left: 0;
   height: 2px;
 }
-/* line 194, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 198, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .pace-inactive {
   display: none;
 }
-/* line 198, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 202, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .itemdetail-availability-state {
   padding: 0;
 }
-/* line 202, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 206, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .itemdetail-availability-state[data-i18n="AVAILABLE"] label {
   display: inline-block;
   font-size: 1.3rem;
@@ -9931,7 +9969,7 @@ ul {
   text-transform: uppercase;
   color: #33ff66;
 }
-/* line 210, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 214, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .itemdetail-availability-state[data-i18n="AVAILABLE"] .icon {
   position: relative;
   top: 1px;
@@ -9948,7 +9986,7 @@ ul {
 .itemdetail-availability-state[data-i18n="AVAILABLE"] .icon:before {
   content: "\e125";
 }
-/* line 224, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 228, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .itemdetail-availability-state[data-i18n="AVAILABLE_FOR_PRE_ORDER"] label {
   display: inline-block;
   font-size: 1.3rem;
@@ -9956,7 +9994,7 @@ ul {
   text-transform: uppercase;
   color: #f1a829;
 }
-/* line 232, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 236, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .itemdetail-availability-state[data-i18n="AVAILABLE_FOR_PRE_ORDER"] .icon {
   position: relative;
   top: 1px;
@@ -9973,7 +10011,7 @@ ul {
 .itemdetail-availability-state[data-i18n="AVAILABLE_FOR_PRE_ORDER"] .icon:before {
   content: "\e023";
 }
-/* line 247, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 251, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .is-hidden {
   display: none;
 }

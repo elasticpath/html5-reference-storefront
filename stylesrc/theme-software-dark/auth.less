@@ -3,32 +3,51 @@
 /*
   auth view
 */
-.auth-nav-container {
-  display: none;
-  position: absolute;
-  background: @authNavBackGroundColor;
-  z-index:1000;
-  min-width:20rem;
-  border:1px solid #dddddd;
-  -webkit-box-shadow: -9px 3px 5px rgba(50, 50, 50, 0.75);
-  -moz-box-shadow:    -9px 3px 5px rgba(50, 50, 50, 0.75);
-  box-shadow:         -9px 3px 5px rgba(50, 50, 50, 0.75);
+
+.global-nav-auth-nav{
+  position: relative;
+
+  .auth-nav-container {
+    .box-neon(2px,15px,rgb(0,0,0),rgb(0,0,0) );
+    display: none;
+    position: absolute;
+    right: -3px;
+    left: -3px;
+    top: -5px;
+    padding-top: 10px;
+
+    // background: @authNavBackGroundColor;
+    z-index:1000;
+    // min-width:20rem;
+    // border:1px solid #dddddd;
+    -webkit-box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow:    0px 0px 15px 6px rgba(0, 0, 0, 0.75);
+    box-shadow:         0px 0px 15px 6px rgba(0, 0, 0, 0.75);
+
+    .auth-profile-menu-list {
+      margin: 1rem;
+
+      li{
+        display:block;
+        text-align: right;
+        // border-bottom: 1px solid #eeeeee;
+      }
+    }
+
+  }
 }
+
 @media only screen and (max-width:47rem) {
   .auth-nav-container {
     right:1rem;
   }
 }
-.auth-profile-menu-list {
-  margin: 1rem;
-}
-.auth-nav-container .auth-profile-menu-list li{
-  display:block;
-  border-bottom: 1px solid #eeeeee;
-}
+
+
 .auth-login-container{
   min-width:30rem;
 }
+
 .auth-login-form {
   margin-left: 1rem;
   margin-right: 1rem;
