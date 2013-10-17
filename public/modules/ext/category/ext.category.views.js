@@ -6,8 +6,8 @@
  * Time: 1:32 PM
  *
  */
-define(['ep', 'i18n', 'eventbus','pace','equalize'],
-  function (ep, i18n, EventBus, pace, equalize) {
+define(['ep', 'i18n', 'eventbus', 'mediator', 'pace','equalize'],
+  function (ep, i18n, EventBus, Mediator, pace, equalize) {
 
     var viewHelpers = {
       getI18nLabel: function (key) {
@@ -126,6 +126,14 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
         if (!link) {
           return 'pagination-link-disabled';
         }
+      },
+      checkForDisabledAddToCart:function(model){
+        if (!model.addtocart.actionlink){
+          return 'disabled="disabled"';
+        }
+      },
+      getCortexPath:function(){
+        return ep.app.config.cortexApi.path;
       }
     };
 
@@ -184,6 +192,18 @@ define(['ep', 'i18n', 'eventbus','pace','equalize'],
       templateHelpers: viewHelpers,
       className: 'category-item-container',
       tagName: 'li',
+      events: {
+        'click .item-addcart-button':function(event) {
+          event.preventDefault();
+
+          var formDataObj = {
+            actionLink : $(event.currentTarget).data("actionlink"),
+            qty: $('#item-select-quantity').val() || 0
+          };
+
+          EventBus.trigger('category.addToCartBtnClicked', formDataObj);
+        }
+      },
       onShow: function () {
 
         // show price

@@ -15,6 +15,7 @@ var extensionPaths = {
   'ext.item.views'        : 'modules/ext/item/ext.item.views',
   'ext.category'          : 'modules/ext/category/ext.category.controller',
   'ext.category.views'    : 'modules/ext/category/ext.category.views',
+  'ext.category.models'   : 'modules/ext/category/ext.category.models',
   'ext.appheader'         : 'modules/ext/appheader/ext.appheader.controller',
   'ext.appheader.views'   : 'modules/ext/appheader/ext.appheader.views',
   'ext.ia'                : 'modules/ext/ia/ext.ia.controller',

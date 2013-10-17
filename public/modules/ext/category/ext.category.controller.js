@@ -6,7 +6,7 @@
  * Time: 1:31 PM
  *
  */
-define(['app', 'ep', 'eventbus', 'category.models', 'ext.category.views', 'text!modules/ext/category/ext.category.templates.html', 'pace'],
+define(['app', 'ep', 'eventbus', 'ext.category.models', 'ext.category.views', 'text!modules/ext/category/ext.category.templates.html', 'pace'],
   function (App, ep, EventBus, Model, View, template, pace) {
 
     $('#TemplateContainer').append(template);
@@ -108,6 +108,71 @@ define(['app', 'ep', 'eventbus', 'category.models', 'ext.category.views', 'text!
       View.HidePaginationRegion();
       pace.stop();
     });
+
+    // Add to Cart
+    EventBus.on('category.addToCartBtnClicked', function (formDataObj) {
+      EventBus.trigger('category.submitAddToCartFormRequest', formDataObj);
+    });
+
+    EventBus.on('category.submitAddToCartFormRequest', function (formDataObj) {
+     submitAddToCartForm(formDataObj);
+    });
+
+    EventBus.on('category.loadDefaultCartRequest', function () {
+      var test = 'test';
+      // request cart data from Coretext
+      document.location.href = '/#mycart';
+      // render cart view in main nav
+    });
+
+    var submitAddToCartForm = function(formDataObj) {
+      var formActionLink = formDataObj.actionLink;
+      var qty = formDataObj.qty;
+
+      if (formActionLink) {
+        if (qty > 0) {
+
+          var obj = '{quantity:' + qty + '}';
+          // TODO improve robustness of oauth token when we work on that story
+          ep.io.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: formActionLink,
+            data: obj,
+            success: function (response, x, y) {
+              // follow link response
+              ep.logger.info('Success posting to cart - go to cart view');
+
+              // get the location header
+              ep.logger.info(response);
+              // ep.logger.info(request);
+              ep.logger.info(JSON.stringify(y));
+              var lineItemUrl = y.getResponseHeader('Location');
+              ep.logger.info(lineItemUrl);
+              if (lineItemUrl) {
+                EventBus.trigger('category.loadDefaultCartRequest');
+              }
+              else {
+                ep.logger.warn('add to cart success but no cart url returned');
+              }
+
+
+              ep.logger.info('we are done load the cart view');
+
+
+            },
+            error: function (response) {
+              ep.logger.error('error posting item to cart: ' + response);
+            }
+          });
+
+        }
+        else {
+          ep.logger.warn('add to cart called with no quantity');
+        }
+
+      }
+    };
 
     return {
       DefaultView: defaultView

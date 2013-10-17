@@ -48,8 +48,13 @@
 
 
         <div class="item-addtocart-container">
-          <div class="item-quantity-container"><label class="item-quantity-label">QTY:</label><input type="number" name="quantity" value="1" min="1" max="5"></div>
-          <button class="item-addcart-button"><span class="icon"></span><span class="btn-text">Add To Cart</span></button>
+          <div class="item-quantity-container"><label class="item-quantity-label">QTY:</label><input type="number" id="item-select-quantity" name="quantity" value="1" min="1" max="5"></div>
+          <button class="item-addcart-button">
+            <button class="item-addcart-button" data-actionlink="<%= E.getCortexPath() %><%= E.addtocart.actionlink %>"
+            <%= E.checkForDisabledAddToCart(E) %> >
+            <span class="icon"></span>
+            <span class="btn-text"><%= E.getI18nLabel('itemDetail.addToCart') %></span>
+          </button>
         </div>
 
 
