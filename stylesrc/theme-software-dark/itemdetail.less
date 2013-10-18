@@ -101,9 +101,14 @@
     color: lighten(@gray, 10%);
 }
 
+.itemdetail-list-price-label{
+    color: @brand-secondary;
+}
+
 .itemdetail-list-price-value{
     text-decoration: line-through;
-    color: darken(@gray-light,10%);
+    // color: darken(@gray-light,10%);
+    color: @brand-primary;
 }
 
 
@@ -226,4 +231,12 @@
 .itemdetail-tabcontent{
     padding: 25px 25px 15px 15px;
     color: #fff;
+
+    .tab-content{
+        ul{
+            li{
+                margin-bottom: 2rem;
+            }
+        }
+    }
 }

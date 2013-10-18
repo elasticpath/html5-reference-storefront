@@ -8679,52 +8679,56 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   color: #6f6f6f;
 }
 /* line 104, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+.itemdetail-list-price-label {
+  color: #004a76;
+}
+/* line 108, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-list-price-value {
   text-decoration: line-through;
-  color: #808080;
+  color: #009ddc;
 }
-/* line 110, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 115, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-price-container {
   display: inline-block;
 }
-/* line 114, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 119, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 [data-region="itemDetailAvailabilityRegion"] {
   display: inline-block;
   margin-left: 20px;
 }
-/* line 118, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 123, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 [data-region="itemDetailAvailabilityRegion"] .icon {
   float: right !important;
   margin-left: 6px;
 }
-/* line 124, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 129, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-purchase-price-label {
   display: none;
 }
-/* line 127, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 132, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-purchase-price-value {
   font-weight: 300;
   font-size: 3rem;
   color: #fff;
   display: inline-block;
 }
-/* line 138, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 143, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-inner table {
   display: block;
   width: 100%!important;
 }
-/* line 143, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 148, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-inner table tbody {
   display: block;
   width: 100%!important;
 }
-/* line 149, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 154, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-inner div.mod {
   display: inline;
   max-width: 100%;
   width: 100%;
 }
-/* line 156, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 161, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-inner,
 .itemdetail-tabcontent {
   position: relative;
@@ -8748,19 +8752,19 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   height: 60px;
   background: url(images/theme-software-dark/bg-twinkle-dark.gif);
 }
-/* line 165, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 170, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-tabs {
   margin-top: 40px;
   margin-bottom: 60px;
   position: relative;
 }
-/* line 171, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 176, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-tabs .nav.nav-tabs {
   display: block;
   border-bottom: none;
   position: relative;
 }
-/* line 180, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 185, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-tabs .nav.nav-tabs li a {
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid #004a76;
@@ -8769,13 +8773,13 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   text-transform: uppercase;
   font-size: 1.3rem;
 }
-/* line 188, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 193, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-tabs .nav.nav-tabs li a:hover {
   cursor: pointer;
   background-color: rgba(0, 74, 118, 0.5);
   color: #009ddc;
 }
-/* line 195, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 200, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-tabs .nav.nav-tabs li a:before {
   z-index: 999;
   display: block;
@@ -8787,20 +8791,24 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   bottom: 0px;
   box-shadow: inset 0px -2px 4px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 211, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 216, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-tabs .nav.nav-tabs li.active a {
   background-color: #009ddc;
   border-color: #009ddc;
   color: #fff;
 }
-/* line 216, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 221, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-tabs .nav.nav-tabs li.active a:before {
   display: none;
 }
-/* line 226, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+/* line 231, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
 .itemdetail-tabcontent {
   padding: 25px 25px 15px 15px;
   color: #fff;
+}
+/* line 237, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/itemdetail.less */
+.itemdetail-tabcontent .tab-content ul li {
+  margin-bottom: 2rem;
 }
 /* line 6, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-title {
@@ -8900,41 +8908,33 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
     margin-right: .5rem;
   }
 }
-/* line 50, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
-.category-item-inner {
-  height: 100%;
-}
-/* line 55, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 51, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-thumbnail {
   display: block;
   max-width: 1000%;
   width: 100%;
   height: auto;
-  position: absolute;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
 }
-/* line 67, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 63, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-thumbnail-container {
   position: relative;
   width: 100%;
-  padding-bottom: 70%;
-  border: 1px solid #1c1c1c;
-  overflow: hidden;
+  height: auto;
   margin-bottom: 1rem;
   background: transparent;
-  border-radius: 3px;
 }
-/* line 79, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 76, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-thumbnail-container img {
   border: none!important;
 }
-/* line 85, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 82, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-inner {
   background-color: #eee;
   padding: 5px;
-  border-radius: 6px;
+  border-radius: 2px;
   border: 1px solid #004a76;
   background: rgba(0, 0, 0, 0.4);
   /* Old browsers */
@@ -8963,22 +8963,25 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   height: 100%;
 }
-/* line 88, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 86, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-inner ul {
   padding: 0;
 }
-/* line 95, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 93, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-availability-container {
   position: relative;
   display: block;
-  margin: -3px 10px 0 0;
+  margin: 3px 10px 0 0;
 }
-/* line 101, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+@media screen and (max-width: 1200px) {
+  
+}
+/* line 103, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-availability-container .category-item-availability {
   display: block;
   margin: 3px 1rem 0 0;
 }
-/* line 108, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 110, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-availability-container .category-item-availability label {
   position: relative;
   height: auto;
@@ -8992,12 +8995,12 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   color: #33ff66;
   line-height: 1.5rem;
 }
-/* line 123, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 125, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-availability-container .category-item-availability label .icon {
   float: right !important;
   margin-left: 6px;
 }
-/* line 147, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 149, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-row {
   margin-left: 0;
   margin-right: 0;
@@ -9030,16 +9033,16 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-list-row:after {
   clear: both;
 }
-/* line 151, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 155, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-price-container {
   padding-bottom: 2rem;
   margin-bottom: 0rem;
 }
-/* line 154, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 158, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-price-container label.item-meta {
   display: none;
 }
-/* line 163, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 167, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .price-availability-wrapper {
   border-style: solid;
   border-width: 1px 0px 1px 0px ;
@@ -9079,60 +9082,75 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .price-availability-wrapper:after {
   clear: both;
 }
-/* line 170, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 174, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .price-availability-wrapper .price-wrapper {
   position: relative;
+  float: left;
+  width: 100%;
   min-height: 1px;
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 @media (min-width: 1200px) {
   /* line 627, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
   .price-availability-wrapper .price-wrapper {
     float: left;
-    width: 33.33333333333333%;
+    width: 41.66666666666667%;
   }
 }
-/* line 174, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 179, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .price-availability-wrapper .availability-wrapper {
+  padding-left: 0px;
+  padding-right: 0px;
   position: relative;
+  float: left;
+  width: 100%;
   min-height: 1px;
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 @media (min-width: 1200px) {
   /* line 627, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
   .price-availability-wrapper .availability-wrapper {
     float: left;
-    width: 66.66666666666666%;
+    width: 58.333333333333336%;
   }
 }
-/* line 181, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 190, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+.category-item-release-date {
+  margin-top: 6px;
+}
+/* line 194, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-release-date label.item-meta,
 .category-item-release-date span.item-meta {
   font-size: 1.2rem;
+  line-height: 1.3rem;
 }
-/* line 186, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 202, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+.category-item-release-date label.item-meta {
+  color: #004a76;
+}
+/* line 208, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-release-date span.item-meta {
-  color: #555555;
+  color: #009ddc;
 }
-/* line 192, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 214, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-price-value {
   text-decoration: line-through;
   color: #999999;
   font-size: 1.2rem;
 }
-/* line 198, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 220, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-purchase-price {
   font-size: 1.8rem;
   font-weight: 300;
   color: #009ddc;
 }
-/* line 204, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 226, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-purchase-price-value {
   font-size: 1.6rem;
 }
-/* line 208, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 230, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-price,
 .category-item-purchase-price,
 .category-item-availability,
@@ -9186,18 +9204,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-release-date:after {
   clear: both;
 }
-/* line 216, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
-.category-item-list-price label.item-meta,
-.category-item-purchase-price label.item-meta,
-.category-item-availability label.item-meta,
-.category-item-release-date label.item-meta,
-.category-item-list-price span.item-meta,
-.category-item-purchase-price span.item-meta,
-.category-item-availability span.item-meta,
-.category-item-release-date span.item-meta {
-  padding: 0px 0;
-}
-/* line 223, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 241, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-price label.item-meta:nth-of-type(2n),
 .category-item-purchase-price label.item-meta:nth-of-type(2n),
 .category-item-availability label.item-meta:nth-of-type(2n),
@@ -9208,32 +9215,63 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-release-date span.item-meta:nth-of-type(2n) {
   background-color: #aaa;
 }
-/* line 229, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 247, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-price label.item-meta,
 .category-item-purchase-price label.item-meta,
 .category-item-availability label.item-meta,
 .category-item-release-date label.item-meta {
-  position: relative;
   float: left;
-  width: 41.66666666666667%;
+  width: 100%;
+  position: relative;
   min-height: 1px;
-  padding-left: 0;
-  padding-right: 0;
-  color: #999999;
+  padding-left: 0px;
+  padding-right: 0px;
 }
-/* line 235, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+@media (min-width: 1200px) {
+  /* line 627, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  .category-item-list-price label.item-meta,
+  .category-item-purchase-price label.item-meta,
+  .category-item-availability label.item-meta,
+  .category-item-release-date label.item-meta {
+    float: left;
+    width: 41.66666666666667%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  
+}
+/* line 255, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-price span.item-meta,
 .category-item-purchase-price span.item-meta,
 .category-item-availability span.item-meta,
 .category-item-release-date span.item-meta {
-  position: relative;
   float: left;
-  width: 58.333333333333336%;
+  width: 100%;
+  position: relative;
   min-height: 1px;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
-/* line 240, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+@media (min-width: 1200px) {
+  /* line 627, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/mixins.less */
+  .category-item-list-price span.item-meta,
+  .category-item-purchase-price span.item-meta,
+  .category-item-availability span.item-meta,
+  .category-item-release-date span.item-meta {
+    float: left;
+    width: 58.333333333333336%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  /* line 259, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+  .category-item-list-price span.item-meta,
+  .category-item-purchase-price span.item-meta,
+  .category-item-availability span.item-meta,
+  .category-item-release-date span.item-meta {
+    padding-left: 0px;
+  }
+}
+/* line 265, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .category-item-list-price:last-child label.item-meta,
 .category-item-purchase-price:last-child label.item-meta,
 .category-item-availability:last-child label.item-meta,
@@ -9244,7 +9282,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-release-date:last-child span.item-meta {
   border-bottom: none;
 }
-/* line 253, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 278, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container {
   padding: 10px 6px;
 }
@@ -9276,20 +9314,20 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .item-addtocart-container:after {
   clear: both;
 }
-/* line 258, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 283, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-quantity-container {
   display: inline-block;
   float: left !important;
 }
 @media only screen and (max-width: 1200px) {
-  /* line 262, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+  /* line 287, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
   .item-addtocart-container .item-quantity-container {
     display: block;
     width: 100%;
     float: none;
   }
 }
-/* line 269, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 294, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-quantity-container input[type="number"] {
   border: 1px solid #004a76;
   border-radius: 2px;
@@ -9299,16 +9337,16 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   padding-left: 8px;
   line-height: 28px;
 }
-/* line 279, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 304, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-quantity-container .item-quantity-label {
   margin-top: 3px;
   color: #999999;
 }
-/* line 285, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 310, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-quantity-label {
   margin-right: 6px;
 }
-/* line 289, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 314, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-addcart-button {
   float: right !important;
   display: inline-block;
@@ -9332,7 +9370,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   color: #009926;
 }
 @media only screen and (max-width: 1200px) {
-  /* line 298, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+  /* line 323, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
   .item-addtocart-container .item-addcart-button {
     display: block;
     width: 100%;
@@ -9340,7 +9378,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
     margin-top: 10px;
   }
 }
-/* line 305, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 330, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-addcart-button .icon {
   position: relative;
   top: 1px;
@@ -9356,7 +9394,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .item-addtocart-container .item-addcart-button .icon:before {
   content: "\e116";
 }
-/* line 311, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
+/* line 336, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/category.less */
 .item-addtocart-container .item-addcart-button .btn-text {
   text-transform: uppercase;
 }
@@ -9887,7 +9925,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 }
 /* line 23, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .app-main {
-  min-height: 900px;
+  min-height: 500px;
 }
 /* line 29, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .btn,
@@ -10114,7 +10152,32 @@ ul {
 .itemdetail-availability-state[data-i18n="AVAILABLE_FOR_PRE_ORDER"] .icon:before {
   content: "\e023";
 }
-/* line 251, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+/* line 250, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+.itemdetail-availability-state[data-i18n="NOT_AVAILABLE"] label {
+  display: inline-block;
+  font-size: 1.3rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #555555;
+}
+/* line 258, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
+.itemdetail-availability-state[data-i18n="NOT_AVAILABLE"] .icon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  font-size: 24px;
+  margin-top: -8px;
+}
+/* line 124, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/glyphicons.less */
+.itemdetail-availability-state[data-i18n="NOT_AVAILABLE"] .icon:before {
+  content: "\e090";
+}
+/* line 273, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .is-hidden {
   display: none;
 }

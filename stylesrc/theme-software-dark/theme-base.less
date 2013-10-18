@@ -21,7 +21,7 @@
 
 
 .app-main{
-  min-height: 900px;
+  min-height: 500px;
 }
 
 // --------- General Bootstrap 3.0 Overrides
@@ -239,6 +239,28 @@ ul{
           // .pull-right;
           .glyphicon;
           .glyphicon-time;
+          // margin-left: 6px;
+          font-size: 24px;
+          // margin-right: 6px;
+          margin-top: -8px;
+      }
+    }
+
+    &[data-i18n="NOT_AVAILABLE"]{
+      label{
+          display: inline-block;
+          font-size: 1.3rem;
+          font-weight: 400;
+          text-transform: uppercase;
+          color: @availability-color-unavailable;
+      }
+
+      .icon{
+          // display: inline-block;
+          // width: 100%;
+          // .pull-right;
+          .glyphicon;
+          .glyphicon-ban-circle;
           // margin-left: 6px;
           font-size: 24px;
           // margin-right: 6px;

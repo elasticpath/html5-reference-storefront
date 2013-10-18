@@ -323,7 +323,7 @@ define(['ep', 'i18n', 'eventbus', 'mediator', 'pace','equalize'],
         var matchHeights = function(){
           $('.category-item-title').equalHeights();
           $('.category-item-inner').equalHeights();
-          $('.category-item-price-container').equalHeights();
+
           $('.price-availability-wrapper').equalHeights();
         }
        // setTimeout(function(){matchHeights();},1000);
