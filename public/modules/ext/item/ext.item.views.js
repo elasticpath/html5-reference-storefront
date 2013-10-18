@@ -142,7 +142,8 @@ define(['ep','marionette','i18n','eventbus','pace'],
       regions:{
         itemDetailTitleRegion:'[data-region="itemDetailTitleRegion"]',
         itemDetailAssetRegion:'[data-region="itemDetailAssetRegion"]',
-        itemDetailAttributeRegion:'[data-region="itemDetailAttributeRegion"]',
+        itemDetailAttrTitleRegion:'[data-region="itemDetailAttrTitleRegion"]',
+        itemDetailAttrContentRegion:'[data-region="itemDetailAttrContentRegion"]',
         itemDetailPriceRegion:'[data-region="itemDetailPriceRegion"]',
         itemDetailAvailabilityRegion:'[data-region="itemDetailAvailabilityRegion"]',
         itemDetailQuantityRegion:'[data-region="itemDetailQuantityRegion"]',
@@ -166,17 +167,43 @@ define(['ep','marionette','i18n','eventbus','pace'],
       templateHelpers:viewHelpers
     });
 
-    // Default Attribute item View
-    var defaultItemAttributeView = Backbone.Marionette.ItemView.extend({
-      template:'#DefaultItemAttributeItemTemplate',
-      tagName:'tr'
+    // Extended Item Detail Tab Title View
+    var extItemDetailAttrTitleView = Backbone.Marionette.ItemView.extend({
+      template:'#ExtItemDetailAttrTitleTemplate',
+      tagName:'li'
     });
 
-    // Default Attribute List View
-    var defaultItemAttributeListView = Backbone.Marionette.CollectionView.extend({
-      itemView:defaultItemAttributeView,
-      tagName:'table',
-      className:'table table-striped table-condensed'
+    // Extended Item Detail Tab Title Collection View
+    var extItemDetailAttrTitleCollectionView = Backbone.Marionette.CollectionView.extend({
+      itemView:extItemDetailAttrTitleView,
+      tagName:'ul',
+      className:'nav nav-tabs',
+      onShow: function() {
+        $('.nav-tabs li').first().addClass('active');
+      }
+    });
+
+    // Extended Item Detail Tab Content View
+    var extItemDetailAttrContentView = Backbone.Marionette.ItemView.extend({
+      template:'#ExtItemDetailAttrContentTemplate',
+      tagName:'div',
+      className: 'tab-pane',
+      attributes: function() {
+        return {
+          id: this.model.attributes.attrKey
+        }
+      }
+    });
+
+    // Extended Item Detail Tab Content Collection View
+    var extItemDetailAttrContentCollectionView = Backbone.Marionette.CollectionView.extend({
+      itemView:extItemDetailAttrContentView,
+      tagName:'div',
+      className:'tab-content',
+      onShow: function() {
+        $('.tab-content div').first().addClass('active');
+      }
+
     });
 
     // Default Item Availability View
@@ -274,10 +301,11 @@ define(['ep','marionette','i18n','eventbus','pace'],
       DefaultView:defaultLayout,
       DefaultItemTitleView:defaultItemTitleView,
       DefaultItemAssetView:defaultItemAssetView,
-      DefaultItemAttributeView:defaultItemAttributeListView,
       DefaultItemAvailabilityView:defaultItemAvailabilityView,
       DefaultItemPriceView:defaultItemPriceView,
       DefaultItemAddToCartView:defaultItemAddToCartView,
+      ExtItemDetailAttrTitleCollectionView:extItemDetailAttrTitleCollectionView,
+      ExtItemDetailAttrContentCollectionView:extItemDetailAttrContentCollectionView,
       getAddToCartQuantity:getAddToCartQuantity
 
 
