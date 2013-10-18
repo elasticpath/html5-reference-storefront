@@ -11,10 +11,10 @@
     .box-neon(2px,15px,rgb(0,0,0),rgb(0,0,0) );
     display: none;
     position: absolute;
-    right: -3px;
+    right: auto;
     left: -3px;
-    top: -5px;
-    padding-top: 10px;
+    top: 15px;
+    // padding-top: 10px;
 
     // background: @authNavBackGroundColor;
     z-index:1000;
@@ -26,11 +26,25 @@
 
     .auth-profile-menu-list {
       margin: 1rem;
+      padding: 0;
 
       li{
         display:block;
-        text-align: right;
+        text-align: left;
         // border-bottom: 1px solid #eeeeee;
+
+        .profile-link{
+          color: @highlight-secondary;
+          &:hover{
+            text-decoration: none;
+          }
+          .icon{
+            .glyphicon;
+            .glyphicon-user;
+            margin-right: 6px;
+          }
+
+        }
       }
     }
 
@@ -43,7 +57,9 @@
   }
 }
 
-
+.auth-container{
+  position: relative;
+}
 .auth-login-container{
   min-width:30rem;
 }
@@ -63,10 +79,8 @@
   padding-left:1rem;
   padding-right:1rem;
 }
-.auth-profile-menu-list button{
-  width:100%;
-  background:transparent;
-  text-align: left;
-}
 
-.
+.btn-auth-logout{
+  .btn-dark-tertiary;
+  margin-top: 10px;
+}

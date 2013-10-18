@@ -7079,10 +7079,9 @@ td.visible-print {
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   display: none;
   position: absolute;
-  right: -3px;
+  right: auto;
   left: -3px;
-  top: -5px;
-  padding-top: 10px;
+  top: 15px;
   z-index: 1000;
   -webkit-box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.75);
@@ -7091,43 +7090,89 @@ td.visible-print {
 /* line 27, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
 .global-nav-auth-nav .auth-nav-container .auth-profile-menu-list {
   margin: 1rem;
+  padding: 0;
 }
-/* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+/* line 31, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
 .global-nav-auth-nav .auth-nav-container .auth-profile-menu-list li {
   display: block;
-  text-align: right;
+  text-align: left;
+}
+/* line 36, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+.global-nav-auth-nav .auth-nav-container .auth-profile-menu-list li .profile-link {
+  color: #33ff66;
+}
+/* line 38, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+.global-nav-auth-nav .auth-nav-container .auth-profile-menu-list li .profile-link:hover {
+  text-decoration: none;
+}
+/* line 41, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+.global-nav-auth-nav .auth-nav-container .auth-profile-menu-list li .profile-link .icon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  margin-right: 6px;
+}
+/* line 46, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/bootstrap/less/glyphicons.less */
+.global-nav-auth-nav .auth-nav-container .auth-profile-menu-list li .profile-link .icon:before {
+  content: "\e008";
 }
 @media only screen and (max-width: 47rem) {
-  /* line 41, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+  /* line 55, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
   .auth-nav-container {
     right: 1rem;
   }
 }
-/* line 47, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+/* line 60, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+.auth-container {
+  position: relative;
+}
+/* line 63, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
 .auth-login-container {
   min-width: 30rem;
 }
-/* line 51, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+/* line 67, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
 .auth-login-form {
   margin-left: 1rem;
   margin-right: 1rem;
 }
-/* line 56, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+/* line 72, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
 .auth-login-form input {
   display: block;
   width: 16rem;
 }
-/* line 61, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+/* line 77, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
 .auth-feedback-container {
   color: #ff0000;
   padding-left: 1rem;
   padding-right: 1rem;
 }
-/* line 66, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
-.auth-profile-menu-list button {
-  width: 100%;
-  background: transparent;
-  text-align: left;
+/* line 83, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/auth.less */
+.btn-auth-logout {
+  display: inline-block;
+  border: 1px solid #999999;
+  color: #999999;
+  background: rgba(0, 0, 0, 0.4);
+  line-height: 30px;
+  padding: 0 8px;
+  text-transform: uppercase;
+  border: 1px solid #004a76;
+  color: #004a76;
+  margin-top: 10px;
+}
+/* line 11, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+.btn-auth-logout[disabled="disabled"] {
+  border: 1px solid #555555 !important;
+  color: #555555 !important;
+}
+/* line 44, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+.btn-auth-logout:hover {
+  border: 1px solid #009ddc;
+  color: #009ddc;
 }
 /*!
  * Bootstrap v3.0.0
@@ -7205,11 +7250,33 @@ td.visible-print {
   border: 1px solid #005476;
   color: #005476;
 }
-/* line 69, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 39, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+.btn-dark-tertiary {
+  display: inline-block;
+  border: 1px solid #999999;
+  color: #999999;
+  background: rgba(0, 0, 0, 0.4);
+  line-height: 30px;
+  padding: 0 8px;
+  text-transform: uppercase;
+  border: 1px solid #004a76;
+  color: #004a76;
+}
+/* line 11, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+.btn-dark-tertiary[disabled="disabled"] {
+  border: 1px solid #555555 !important;
+  color: #555555 !important;
+}
+/* line 44, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+.btn-dark-tertiary:hover {
+  border: 1px solid #009ddc;
+  color: #009ddc;
+}
+/* line 80, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .neon-cutcorner {
   border: 1px solid #004a76;
 }
-/* line 72, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 83, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .neon-cutcorner:before {
   content: '';
   position: absolute;
@@ -7226,11 +7293,11 @@ td.visible-print {
   height: 60px;
   background: url(images/theme-software-dark/bg-twinkle-dark.gif);
 }
-/* line 88, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 99, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .separated {
   position: relative;
 }
-/* line 90, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 101, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .separated:before {
   position: relative;
   top: 0px;
@@ -7242,11 +7309,11 @@ td.visible-print {
   margin-right: 0!important;
   background-color: #888;
 }
-/* line 110, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 121, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .flatform {
   background: red;
 }
-/* line 115, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 126, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .border-dot-bottom {
   border-style: solid;
   border-color: transparent;
@@ -7256,7 +7323,7 @@ td.visible-print {
   -o-border-image: url(images/line-dot-blue.gif) 1 round;
   border-image: url(images/line-dot-blue.gif) 1 fill round;
 }
-/* line 125, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 136, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .border-dot-right {
   border-style: solid;
   border-color: transparent;
@@ -7266,7 +7333,7 @@ td.visible-print {
   -o-border-image: url(images/line-dot-blue.gif) 1 round;
   border-image: url(images/line-dot-blue.gif) 1 fill round;
 }
-/* line 135, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 146, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .border-dot-top {
   border-style: solid;
   border-width: 1px 0px 0px 0px ;
@@ -7275,7 +7342,7 @@ td.visible-print {
   -o-border-image: url(images/line-dot-blue.gif) 1 round;
   border-image: url(images/line-dot-blue.gif) 1 fill round;
 }
-/* line 144, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 155, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .border-dot-top-bottom {
   border-style: solid;
   border-width: 1px 0px 1px 0px ;
@@ -7284,7 +7351,7 @@ td.visible-print {
   -o-border-image: url(images/line-dot-blue.gif) 1 round;
   border-image: url(images/line-dot-blue.gif) 1 fill round;
 }
-/* line 153, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 164, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .view-title {
   color: #ec316a;
   font-weight: 100;
@@ -8344,7 +8411,7 @@ nav.main-nav {
   padding: 2rem;
   border: 1px solid #004a76;
 }
-/* line 72, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 83, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .cart-sidebar .cart-sidebar-inner:before {
   content: '';
   position: absolute;
@@ -8548,7 +8615,7 @@ Purchase Confirmation
   border: 1px solid #004a76;
   padding: 20px 40px 0px 10px;
 }
-/* line 72, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 83, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .itemdetail-addtocart .itemdetail-addtocart-form:before {
   content: '';
   position: absolute;
@@ -8734,7 +8801,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   position: relative;
   border: 1px solid #004a76;
 }
-/* line 72, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
+/* line 83, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/mixins.less */
 .itemdetail-inner:before,
 .itemdetail-tabcontent:before {
   content: '';
@@ -10002,24 +10069,6 @@ body h6 a:hover {
 ul {
   list-style: none;
 }
-/* line 86, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
-.btn-cmd {
-  border: 0 solid grey;
-  font-size: 100%;
-  background: transparent;
-  color: #070ca6;
-}
-/* line 92, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
-.btn-cmd:hover {
-  border: 0;
-  background: rgba(150, 150, 150, 0.3);
-}
-/* line 96, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
-.btn-cmd:active {
-  border: 0;
-  background: rgba(150, 150, 150, 0.4);
-  text-shadow: 7px 7px 12px #969696;
-}
 /* line 101, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
 .app-main {
   padding-bottom: 6rem;
@@ -10062,14 +10111,6 @@ ul {
 .field-content h2 {
   font-size: 48px;
   line-height: 47px;
-}
-/* line 155, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
-.theme-variable-item-value-dark .btn-cmd {
-  color: #111111;
-}
-/* line 158, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/theme-base.less */
-.theme-variable-item-value-light .btn-cmd {
-  color: #eeeeee;
 }
 /*
   Begin Login Form

@@ -36,6 +36,17 @@
     }
 }
 
+.btn-dark-tertiary{
+    .btn-dark-base;
+    border: 1px solid @brand-secondary;
+    color: @brand-secondary;
+
+    &:hover{
+        border: 1px solid @brand-primary;
+        color:  @brand-primary;
+    }
+}
+
 
 .box-neon(@radius:6px,@padding:5px,@colorstart:rgba(0,0,0,0.4),@colorend:rgba(0,0,0,0.4),@glowradius:6px,@glowopacity:0.5,@bordercolor:fadeout(@brand-secondary,0%),@borderwidth:1px){
     // chromed panel styling
