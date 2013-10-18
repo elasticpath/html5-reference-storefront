@@ -8,11 +8,12 @@
  *
  *
  */
-define(['jquery','ep','app', 'eventbus', 'cortex', 'ext.item.models', 'ext.item.views', 'text!modules/ext/item/ext.item.templates.html','i18n','pace'],
-  function($, ep, App, EventBus, Cortex, Model, View, template,i18n,pace){
+define(['jquery','ep','app', 'eventbus', 'cortex', 'ext.item.models', 'ext.item.views', 'text!modules/ext/item/ext.item.templates.html', 'text!modules/base/item/base.item.templates.html', 'i18n','pace'],
+  function($, ep, App, EventBus, Cortex, Model, View, template, baseTemplate, i18n,pace){
 
 
     $('#TemplateContainer').append(template);
+    $('#TemplateContainer').append(baseTemplate);
 
     _.templateSettings.variable = 'E';
 

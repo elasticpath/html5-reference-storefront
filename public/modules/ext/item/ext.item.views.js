@@ -137,8 +137,8 @@ define(['ep','marionette','i18n','eventbus','pace'],
     };
 
     // Default Item Detail Layout
-    var defaultLayout = Backbone.Marionette.Layout.extend({
-      template:'#DefaultItemDetailLayoutTemplate',
+    var extendedLayout = Backbone.Marionette.Layout.extend({
+      template:'#ExtItemDetailLayoutTemplate',
       regions:{
         itemDetailTitleRegion:'[data-region="itemDetailTitleRegion"]',
         itemDetailAssetRegion:'[data-region="itemDetailAssetRegion"]',
@@ -281,8 +281,8 @@ define(['ep','marionette','i18n','eventbus','pace'],
     });
 
     // Default Item Add to Cart View
-    var defaultItemAddToCartView = Backbone.Marionette.ItemView.extend({
-      template:'#DefaultItemDetailAddToCartTemplate',
+    var extItemAddToCartView = Backbone.Marionette.ItemView.extend({
+      template:'#ExtItemDetailAddToCartTemplate',
       templateHelpers:viewHelpers,
       events:{
         'click .btn-itemdetail-addtocart':function(event){
@@ -298,12 +298,12 @@ define(['ep','marionette','i18n','eventbus','pace'],
     }
 
     return {
-      DefaultView:defaultLayout,
+      DefaultView:extendedLayout,
       DefaultItemTitleView:defaultItemTitleView,
       DefaultItemAssetView:defaultItemAssetView,
       DefaultItemAvailabilityView:defaultItemAvailabilityView,
       DefaultItemPriceView:defaultItemPriceView,
-      DefaultItemAddToCartView:defaultItemAddToCartView,
+      DefaultItemAddToCartView:extItemAddToCartView,
       ExtItemDetailAttrTitleCollectionView:extItemDetailAttrTitleCollectionView,
       ExtItemDetailAttrContentCollectionView:extItemDetailAttrContentCollectionView,
       getAddToCartQuantity:getAddToCartQuantity
