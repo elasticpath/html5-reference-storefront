@@ -7,10 +7,11 @@
  *
  * 
  */
-define(['ep','app', 'eventbus', 'cortex', 'profile.models', 'ext.profile.views', 'text!modules/ext/profile/ext.profile.templates.html'],
-  function(ep, App, EventBus, Cortex, Model, View, template){
+define(['ep','app', 'eventbus', 'cortex', 'profile.models', 'ext.profile.views', 'text!modules/ext/profile/ext.profile.templates.html', 'text!modules/base/profile/base.profile.templates.html'],
+  function(ep, App, EventBus, Cortex, Model, View, template, baseTemplate){
 
     $('#TemplateContainer').append(template);
+    $('#TemplateContainer').append(baseTemplate);
 
     _.templateSettings.variable = 'E';
 

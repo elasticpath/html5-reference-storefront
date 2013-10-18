@@ -7,10 +7,11 @@
  *
  * 
  */
-define(['app', 'ep', 'i18n', 'eventbus', 'cortex', 'receipt.models', 'ext.receipt.views', 'text!modules/ext/receipt/ext.receipt.templates.html'],
-  function(App, ep, i18n, EventBus, Cortex, Model, View, template){
+define(['app', 'ep', 'i18n', 'eventbus', 'cortex', 'receipt.models', 'ext.receipt.views', 'text!modules/ext/receipt/ext.receipt.templates.html', 'text!modules/base/receipt/base.receipt.templates.html'],
+  function(App, ep, i18n, EventBus, Cortex, Model, View, template, baseTemplate){
 
     $('#TemplateContainer').append(template);
+    $('#TemplateContainer').append(baseTemplate);
 
     _.templateSettings.variable = 'E';
 
@@ -20,7 +21,9 @@ define(['app', 'ep', 'i18n', 'eventbus', 'cortex', 'receipt.models', 'ext.receip
 
       if (ep.app.isUserLoggedIn()) {
         var purchaseConfirmationModel = new Model.PurchaseConfirmationModel();
-        var purchaseConfirmationLayout = new View.PurchaseConfirmationLayout();
+        var purchaseConfirmationLayout = new View.PurchaseConfirmationLayout({
+          template: '#ExtPurchaseConfirmationLayoutTemplate'
+        });
 //        var confirmationRegion = new Marionette.Region({
 //          el:'[data-region="purchaseConfirmationRegion"]'
 //        });

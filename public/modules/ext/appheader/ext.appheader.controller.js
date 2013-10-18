@@ -6,10 +6,11 @@
  * Time: 1:54 PM
  *
  */
-define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'ext.appheader.views',  'text!modules/ext/appheader/ext.appheader.templates.html'],
-  function(ep, Mediator, App, EventBus, Model, View, template){
+define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'ext.appheader.views',  'text!modules/ext/appheader/ext.appheader.templates.html', 'text!modules/base/appheader/base.appheader.templates.html'],
+  function(ep, Mediator, App, EventBus, Model, View, template, baseTemplate){
 
     $('#TemplateContainer').append(template);
+    $('#TemplateContainer').append(baseTemplate);
 
     _.templateSettings.variable = 'E';
 
@@ -38,7 +39,9 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'ext.appheader.
         logoRegion:'.logo-container',
         authMenuItemRegion:'[data-region="authMenuItemRegion"]'
       });
-      var headerView = new View.PageHeaderView();
+      var headerView = new View.PageHeaderView({
+        template: '#ExtAppHeaderDefaultTemplateContainer'
+      });
 
       headerView.on('show',function(layout){
 
