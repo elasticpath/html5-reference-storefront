@@ -9642,7 +9642,18 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .search-results-inner:after {
   clear: both;
 }
-/* line 14, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/search.less */
+/* line 12, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/search.less */
+.no-results-container {
+  position: relative;
+  float: left;
+  width: 100%;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #009ddc;
+  font-size: 1.8rem;
+}
+/* line 18, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/search.less */
 .search-results-item {
   float: left;
   width: 50%;
@@ -9673,7 +9684,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
     width: 25%;
   }
 }
-/* line 23, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/search.less */
+/* line 27, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/search.less */
 .search-results-item-inner {
   background-color: #eee;
   padding: 5px;
@@ -9705,7 +9716,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
-/* line 26, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/search.less */
+/* line 30, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/search.less */
 .search-results-item-inner img {
   display: block;
   max-width: 100%;
@@ -9721,11 +9732,11 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   -o-border-image: url(images/line-dot-blue.gif) 1 round;
   border-image: url(images/line-dot-blue.gif) 1 fill round;
 }
-/* line 39, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/search.less */
+/* line 43, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/search.less */
 .search-results-item-inner .btn-container {
   margin-top: 1rem;
 }
-/* line 43, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/search.less */
+/* line 47, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/search.less */
 .search-results-item-inner .btn-view-item-detail {
   display: inline-block;
   border: 1px solid #999999;
@@ -9747,7 +9758,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   border: 1px solid #009926;
   color: #009926;
 }
-/* line 49, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/search.less */
+/* line 53, /Users/tim/mamp/elasticpath/ui-storefront/stylesrc/theme-software-dark/search.less */
 .search-results-item-inner .btn-addtocart {
   display: inline-block;
   border: 1px solid #999999;
