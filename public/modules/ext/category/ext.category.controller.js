@@ -6,10 +6,12 @@
  * Time: 1:31 PM
  *
  */
-define(['app', 'ep', 'eventbus', 'ext.category.models', 'ext.category.views', 'text!modules/ext/category/ext.category.templates.html', 'pace'],
-  function (App, ep, EventBus, Model, View, template, pace) {
+define(['app', 'ep', 'eventbus', 'ext.category.models', 'ext.category.views', 'text!modules/ext/category/ext.category.templates.html', 'text!modules/base/category/base.category.templates.html', 'pace'],
+  function (App, ep, EventBus, Model, View, template, baseTemplate, pace) {
 
     $('#TemplateContainer').append(template);
+    $('#TemplateContainer').append(baseTemplate);
+
     _.templateSettings.variable = 'E';
 
     /*
