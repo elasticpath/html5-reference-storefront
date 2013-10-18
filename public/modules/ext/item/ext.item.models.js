@@ -66,6 +66,14 @@ define(['ep','app','backbone','jsonpath'],
           }
         }
 
+        if (attributesArray.length == 0) {
+          attributesArray = [{
+            attrKey: 'longDesc',
+            displayName: 'Details',
+            displayValue: 'No Description Available.'
+          }];
+        }
+
         itemObj.details = attributesArray;
 
 

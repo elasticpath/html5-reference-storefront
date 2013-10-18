@@ -1,7 +1,7 @@
-<div id="ItemTemplateContainer">
+<div id="ExtItemTemplateContainer">
 
-  <!-- Default Item Detail Layout Template -->
-  <script id="DefaultItemDetailLayoutTemplate" type="text/template">
+  <!-- Extende Item Detail Layout Template -->
+  <script id="ExtItemDetailLayoutTemplate" type="text/template">
 
     <div class="container"> <!-- bootstrap container -->
       <div class="itemdetail-container row">
@@ -36,19 +36,6 @@
     <!-- end bootstrap container -->
   </script>
 
-
-  <!-- Default Item Detail Title Template -->
-  <script id="DefaultItemTitleTemplate" type="text/template">
-    <h1 class="itemdetail-title"><%= E.displayName %></h1>
-  </script>
-
-
-  <!-- Default Item Detail Asset Template -->
-  <script id="DefaultItemAssetTemplate" type="text/template">
-    <img src="<%- E.getDefaultImagePath(E.attributes.assets) %>" alt="<%= E.getDefaultImageName(E.attributes.assets) %>"
-         class="itemdetail-main-img"/>
-  </script>
-
   <!-- Extended Item Detail Tab Content Template -->
   <script id="ExtItemDetailAttrContentTemplate" type="text/template">
     <%= E.displayValue %>
@@ -60,38 +47,8 @@
   </script>
 
 
-  <!-- Item Availability Template -->
-  <script id="ItemAvailabilityTemplate" type="text/template">
-    <li class="itemdetail-availability itemdetail-availability-state" data-i18n="<%= E.state %>">
-      <label><span class="icon"></span><%= E.getAvailabilityDisplayText(E.state) %></label></li>
-    <li class="itemdetail-release-date" data-region="itemAvailabilityDescriptionRegion">
-      <label class="itemdetail-release-date-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
-      <span class="itemdetail-release-date-value"><%= E.getAvailabilityReleaseDate(E.releaseDate) %></span>
-    </li>
-  </script>
-  <!-- Item Price Master Template -->
-  <script id="ItemPriceMasterViewTemplate" type="text/template">
-    <div data-region="itemPriceRegion"></div>
-    <div data-region="itemRateRegion"></div>
-  </script>
-  <!-- Item Rate Template -->
-  <script id="ItemRateTemplate" type="text/template">
-    <label class="itemdetail-rate-label"><%= E.getI18nLabel('itemDetail.rate') %></label>
-    <span class="itemdetail-rate"><%= E.display %></span>
-  </script>
-  <!-- Item Price Template -->
-  <script id="ItemPriceTemplate" type="text/template">
-    <li class="itemdetail-list-price" data-region="itemListPriceRegion">
-      <label class="itemdetail-list-price-label"><%= E.getI18nLabel('itemDetail.listPrice') %></label>
-      <span class="itemdetail-list-price-value"><%= E.getListPrice(E) %></span>
-    </li>
-    <li class="itemdetail-purchase-price">
-      <label class="itemdetail-purchase-price-label"><%= E.getI18nLabel('itemDetail.purchasePrice') %></label>
-      <span class="itemdetail-purchase-price-value"><%= E.getPurchasePrice(E) %></span>
-    </li>
-  </script>
-  <!-- Default Item Detail Add To Cart Template -->
-  <script id="DefaultItemDetailAddToCartTemplate" type="text/template">
+  <!-- Extended Item Detail Add To Cart Template -->
+  <script id="ExtItemDetailAddToCartTemplate" type="text/template">
     <form class="itemdetail-addtocart-form form-horizontal" role="form">
 
       <div class="form-group">
