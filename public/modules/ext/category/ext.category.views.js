@@ -187,8 +187,8 @@ define(['ep', 'i18n', 'eventbus', 'mediator', 'pace','equalize'],
     });
 
     // Category Item View
-    var categoryItemView = Backbone.Marionette.ItemView.extend({
-      template: '#CategoryItemTemplate',
+    var extCategoryItemView = Backbone.Marionette.ItemView.extend({
+      template: '#ExtCategoryItemTemplate',
       templateHelpers: viewHelpers,
       className: 'category-item-container',
       tagName: 'li',
@@ -312,7 +312,7 @@ define(['ep', 'i18n', 'eventbus', 'mediator', 'pace','equalize'],
 
     // Category Item Collection View
     var categoryItemCollectionView = Backbone.Marionette.CollectionView.extend({
-      itemView: categoryItemView,
+      itemView: extCategoryItemView,
       emptyView: categoryItemCollectionEmptyView,
       tagName: 'ul',
       className: 'category-items-listing equalize',
@@ -354,7 +354,7 @@ define(['ep', 'i18n', 'eventbus', 'mediator', 'pace','equalize'],
       DefaultView: defaultLayout,
       CategoryTitleView: categoryTitleView,
       CategoryItemCollectionView: categoryItemCollectionView,
-      CategoryItemView: categoryItemView,
+      ExtCategoryItemView: extCategoryItemView,
       CategoryPaginationView: categoryPaginationView,
       HidePaginationRegion:hidePaginationRegion
     };
