@@ -1,48 +1,28 @@
 <div id="ItemTemplateContainer">
 
-    <!-- Default Item Detail Layout Template -->
-    <script id="DefaultItemDetailLayoutTemplate" type="text/template">
+  <!-- Default Item Detail Layout Template -->
+  <script id="DefaultItemDetailLayoutTemplate" type="text/template">
 
     <div class="container"> <!-- bootstrap container -->
       <div class="itemdetail-container row">
-
-        <div data-region="itemDetailTitleRegion" class="itemdetail-title-container">
-          <!--<div class="activity-indicator-container">-->
-          <!--<img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>-->
-          <!--</div>-->
-        </div>
 
         <div class="itemdetail-assets">
           <div data-region="itemDetailAssetRegion"></div>
         </div>
 
         <div class="itemdetail-details">
+          <div data-region="itemDetailTitleRegion">
+            <!--<div class="activity-indicator-container">-->
+            <!--<img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>-->
+            <!--</div>-->
+          </div>
+
           <div class="itemdetail-price-container" data-region="itemDetailPriceRegion"></div>
           <div data-region="itemDetailAvailabilityRegion"></div>
 
-<!-- SAMPLE ITEM DETAIL TABS MARKUP -->
-<div class="itemdetail-tabs">
-  <div class="itemdetail-tab-nav">
-      <ul class="nav nav-tabs" id="myTab">
-        <li  class="active"><a data-toggle="tab" data-target="#tab-details">Details</a></li>
-        <li><a data-toggle="tab" data-target="#tab-features">Features</a></li>
-        <li><a data-toggle="tab" data-target="#tab-requirements">Requirements</a></li>
-      </ul>
-  </div>
-  <div class="itemdetail-tabcontent">
-      <div class="tab-content">
-        <div class="tab-pane active" id="tab-details">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempor, lectus nec ullamcorper rutrum, erat nulla feugiat tellus, et placerat magna sapien nec lacus. Suspendisse faucibus non mi vel cursus. Duis a dui a turpis laoreet pharetra. Ut posuere libero et nisl tristique iaculis. Integer tincidunt euismod urna at interdum. </div>
-        <div class="tab-pane" id="tab-features">Vivamus laoreet sapien ac risus dignissim suscipit. Ut magna augue, blandit eu tortor id, dignissim pharetra sem. Nullam eu euismod nisi, ut euismod velit. Ut orci sem, condimentum in rhoncus a, fermentum eget magna. Vivamus luctus vestibulum ante, volutpat congue purus semper sit amet. Maecenas dignissim bibendum urna, sollicitudin imperdiet dolor tincidunt eget. Sed sagittis metus quis magna sollicitudin luctus.</div>
-        <div class="tab-pane" id="tab-requirements">Vivamus laoreet sapien ac risus dignissim suscipit. Ut magna augue, blandit eu tortor id, dignissim pharetra sem. Nullam eu euismod nisi, ut euismod velit. Ut orci sem, condimentum in rhoncus a, fermentum eget magna. Vivamus luctus vestibulum ante, volutpat congue purus semper sit amet. Maecenas dignissim bibendum urna, sollicitudin imperdiet dolor tincidunt eget. Sed sagittis metus quis magna sollicitudin luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempor, lectus nec ullamcorper rutrum, erat nulla feugiat tellus, et placerat magna sapien nec lacus. Suspendisse faucibus non mi vel cursus. Duis a dui a turpis laoreet pharetra. Ut posuere libero et nisl tristique iaculis. Integer tincidunt euismod urna at interdum. </div>
-      </div>
-    </div>
-  </div>
-<!-- END SAMPLE ITEM DETAIL TABS MARKUP -->
-
-
-          <div class="itemdetail-inner">
-              <div data-region="itemDetailAttributeRegion"></div>
-              <div data-region="itemDetailAttributeRegion"></div>
+          <div class="itemdetail-tabs">
+            <div data-region="itemDetailAttrTitleRegion" class="itemdetail-tab-nav"></div>
+            <div data-region="itemDetailAttrContentRegion" class="itemdetail-tabcontent"></div>
           </div>
         </div>
 
@@ -52,8 +32,7 @@
       </div>
     </div>
     <!-- end bootstrap container -->
-
-    </script>
+  </script>
 
 
   <!-- Default Item Detail Title Template -->
@@ -62,23 +41,22 @@
   </script>
 
 
-
-
-
-
   <!-- Default Item Detail Asset Template -->
-     <script id="DefaultItemAssetTemplate" type="text/template">
-<img src="<%- E.getDefaultImagePath(E.attributes.assets) %>" alt="<%= E.getDefaultImageName(E.attributes.assets) %>"
+  <script id="DefaultItemAssetTemplate" type="text/template">
+    <img src="<%- E.getDefaultImagePath(E.attributes.assets) %>" alt="<%= E.getDefaultImageName(E.attributes.assets) %>"
          class="itemdetail-main-img"/>
-    </script> <!-- Default Item Detail Attribute Template -->
-     <script id="DefaultItemAttributeItemTemplate" type="text/template">
-<td class="itemdetail-attribute-label-col">
-      <%= E.displayName %>
-    </td>
-    <td class="itemdetail-attribute-value-col">
-      <%= E.displayValue %>
-    </td>
   </script>
+
+  <!-- Extended Item Detail Tab Content Template -->
+  <script id="ExtItemDetailAttrContentTemplate" type="text/template">
+    <%= E.displayValue %>
+  </script>
+
+  <!-- Extended Item Detail Tab Title Template -->
+  <script id="ExtItemDetailAttrTitleTemplate" type="text/template">
+    <a data-toggle="tab" data-target="#<%= E.attrKey %>"><%= E.displayName %></a>
+  </script>
+
 
   <!-- Item Availability Template -->
   <script id="ItemAvailabilityTemplate" type="text/template">
@@ -88,17 +66,20 @@
       <label class="itemdetail-release-date-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
       <span class="itemdetail-release-date-value"><%= E.getAvailabilityReleaseDate(E.releaseDate) %></span>
     </li>
-    </script> <!-- Item Price Master Template -->
-     <script id="ItemPriceMasterViewTemplate" type="text/template">
-<div data-region="itemPriceRegion"></div>
+  </script>
+  <!-- Item Price Master Template -->
+  <script id="ItemPriceMasterViewTemplate" type="text/template">
+    <div data-region="itemPriceRegion"></div>
     <div data-region="itemRateRegion"></div>
-    </script> <!-- Item Rate Template -->
-     <script id="ItemRateTemplate" type="text/template">
-<label class="itemdetail-rate-label"><%= E.getI18nLabel('itemDetail.rate') %></label>
+  </script>
+  <!-- Item Rate Template -->
+  <script id="ItemRateTemplate" type="text/template">
+    <label class="itemdetail-rate-label"><%= E.getI18nLabel('itemDetail.rate') %></label>
     <span class="itemdetail-rate"><%= E.display %></span>
-    </script> <!-- Item Price Template -->
-     <script id="ItemPriceTemplate" type="text/template">
-<li class="itemdetail-list-price" data-region="itemListPriceRegion">
+  </script>
+  <!-- Item Price Template -->
+  <script id="ItemPriceTemplate" type="text/template">
+    <li class="itemdetail-list-price" data-region="itemListPriceRegion">
       <label class="itemdetail-list-price-label"><%= E.getI18nLabel('itemDetail.listPrice') %></label>
       <span class="itemdetail-list-price-value"><%= E.getListPrice(E) %></span>
     </li>
@@ -106,12 +87,14 @@
       <label class="itemdetail-purchase-price-label"><%= E.getI18nLabel('itemDetail.purchasePrice') %></label>
       <span class="itemdetail-purchase-price-value"><%= E.getPurchasePrice(E) %></span>
     </li>
-    </script> <!-- Default Item Detail Add To Cart Template -->
-     <script id="DefaultItemDetailAddToCartTemplate" type="text/template">
-<form class="itemdetail-addtocart-form form-horizontal" role="form">
+  </script>
+  <!-- Default Item Detail Add To Cart Template -->
+  <script id="DefaultItemDetailAddToCartTemplate" type="text/template">
+    <form class="itemdetail-addtocart-form form-horizontal" role="form">
 
       <div class="form-group">
-        <label class="control-label col-sm-4" for="itemdetail-select-quantity"><%= E.getI18nLabel('itemDetail.quantity') %></label>
+        <label class="control-label col-sm-4" for="itemdetail-select-quantity"><%= E.getI18nLabel('itemDetail.quantity')
+          %></label>
 
         <div class="form-content col-sm-8">
           <select class="form-control" id="itemdetail-select-quantity" name="itemdetail-select-quantity">
@@ -130,22 +113,13 @@
       </div>
       <div class="form-group form-group-submit">
         <div class="form-content form-content-submit col-sm-8 col-sm-offset-4">
-          <button class="btn-round btn btn-primary btn-itemdetail-addtocart" data-actionlink="<%= E.getCortexPath() %><%= E.addtocart.actionlink %>"
+          <button class="btn-round btn btn-primary btn-itemdetail-addtocart"
+                  data-actionlink="<%= E.getCortexPath() %><%= E.addtocart.actionlink %>"
           <%= E.checkForDisabledAddToCart(E) %> ><%= E.getI18nLabel('itemDetail.addToCart') %></button>
         </div>
       </div>
 
     </form>
-    </script>
-
-
-  <!-- Default Item Detail Title Template -->
-  <script id="DefaultItemTitleTemplate2" type="text/template">
-    <h1>this</h1>
-    <h1>is</h1>
-    <h1>A</h1>
-    <h1>title</h1>
-    <h6 class="itemdetail-title">oh yeah <%= E.displayName %></h6>
-    <h1>EXTENSION</h1>
   </script>
+
 </div>

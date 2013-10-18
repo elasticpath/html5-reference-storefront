@@ -8,7 +8,7 @@
  *
  *
  */
-define(['jquery','ep','app', 'eventbus', 'cortex', 'item.models', 'ext.item.views', 'text!modules/ext/item/ext.item.templates.html','i18n','pace'],
+define(['jquery','ep','app', 'eventbus', 'cortex', 'ext.item.models', 'ext.item.views', 'text!modules/ext/item/ext.item.templates.html','i18n','pace'],
   function($, ep, App, EventBus, Cortex, Model, View, template,i18n,pace){
 
 
@@ -42,8 +42,13 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'item.models', 'ext.item.view
           var assetView = new View.DefaultItemAssetView({
             model: new Backbone.Model(itemModel)
           });
-          // Attribute View
-          var attributeView = new View.DefaultItemAttributeView({
+
+          // Attribute Title View
+          var attributeTitleView = new View.ExtItemDetailAttrTitleCollectionView({
+            collection: attribsList
+          });
+
+          var attributeContentView = new View.ExtItemDetailAttrContentCollectionView({
             collection: attribsList
           });
 
@@ -61,7 +66,8 @@ define(['jquery','ep','app', 'eventbus', 'cortex', 'item.models', 'ext.item.view
 
           itemDetailLayout.itemDetailTitleRegion.show(titleView);
           itemDetailLayout.itemDetailAssetRegion.show(assetView);
-          itemDetailLayout.itemDetailAttributeRegion.show(attributeView);
+          itemDetailLayout.itemDetailAttrTitleRegion.show(attributeTitleView);
+          itemDetailLayout.itemDetailAttrContentRegion.show(attributeContentView);
           itemDetailLayout.itemDetailPriceRegion.show(priceView);
           itemDetailLayout.itemDetailAddToCartRegion.show(addToCartView);
 

@@ -13,6 +13,7 @@ var basePaths = config.baseDependencyConfig.paths;
 var extensionPaths = {
   'ext.item'              : 'modules/ext/item/ext.item.controller',
   'ext.item.views'        : 'modules/ext/item/ext.item.views',
+  'ext.item.models'       : 'modules/ext/item/ext.item.models',
   'ext.category'          : 'modules/ext/category/ext.category.controller',
   'ext.category.views'    : 'modules/ext/category/ext.category.views',
   'ext.category.models'   : 'modules/ext/category/ext.category.models',
