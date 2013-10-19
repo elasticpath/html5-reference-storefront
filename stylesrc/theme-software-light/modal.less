@@ -1,0 +1,56 @@
+#simplemodal-container {
+
+  // background-color:#000;
+  // background-color: rgba(0,0,0,0.4);
+  // border:8px solid #444;
+
+  .box-neon(2px,15px,rgba(0,0,0,.8),rgba(0,0,0,.8));
+  // padding:12px;
+
+  width:auto !important;
+  height:auto !important;
+
+  h2{
+    font-weight: 400;
+  }
+
+  a{
+    &.simplemodal-close {
+      background: url(images/theme-software-dark/btn-modal-close.png) no-repeat 0px 0px;
+      width: 15px;
+      height: 15px;
+      display: block;
+      z-index: 3200;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+
+      &:hover{
+        cursor: pointer;
+        background: url(images/theme-software-dark/btn-modal-close.png) no-repeat 0px -15px;
+      }
+    }
+  }
+
+  .modal-container {
+    display:none;
+    min-width:20rem;
+  }
+
+  label{
+    color: @brand-primary;
+  }
+
+  form{
+    margin: 30px 0 0 0;
+  }
+
+  .btn-auth-login{
+    .btn-dark-primary;
+    // .pull-right;
+  }
+}
+
+#simplemodal-overlay {
+  background-color:#000;
+}

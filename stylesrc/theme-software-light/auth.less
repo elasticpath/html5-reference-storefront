@@ -1,0 +1,86 @@
+@import 'variables';
+
+/*
+  auth view
+*/
+
+.global-nav-auth-nav{
+  position: relative;
+
+  .auth-nav-container {
+    .box-neon(2px,15px,rgba(255,255,255,0.9),rgba(255,255,255,0.8) );
+    display: none;
+    position: absolute;
+    right: auto;
+    left: -3px;
+    top: 15px;
+    // padding-top: 10px;
+
+    // background: @authNavBackGroundColor;
+    z-index:1000;
+    // min-width:20rem;
+    // border:1px solid #dddddd;
+    -webkit-box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.45);
+    -moz-box-shadow:    0px 0px 15px 6px rgba(0, 0, 0, 0.45);
+    box-shadow:         0px 0px 15px 6px rgba(0, 0, 0, 0.45);
+
+    .auth-profile-menu-list {
+      margin: 1rem;
+      padding: 0;
+
+      li{
+        display:block;
+        text-align: left;
+        // border-bottom: 1px solid #eeeeee;
+
+        .profile-link{
+          color: @highlight-secondary;
+          &:hover{
+            text-decoration: none;
+          }
+          .icon{
+            .glyphicon;
+            .glyphicon-user;
+            margin-right: 6px;
+          }
+
+        }
+      }
+    }
+
+  }
+}
+
+@media only screen and (max-width:47rem) {
+  .auth-nav-container {
+    right:1rem;
+  }
+}
+
+.auth-container{
+  position: relative;
+}
+.auth-login-container{
+  min-width:30rem;
+}
+
+.auth-login-form {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.auth-login-form input {
+  display:block;
+  width: @authInputWidth;
+}
+
+.auth-feedback-container {
+  color:@authFeedBackErrorMsgColor;
+  padding-left:1rem;
+  padding-right:1rem;
+}
+
+.btn-auth-logout{
+  .btn-dark-tertiary;
+  margin-top: 10px;
+}

@@ -1,0 +1,170 @@
+.btn-dark-base{
+    display: inline-block;
+    border: 1px solid @gray-light;
+    color: @gray-light;
+    background: rgba(0,0,0,0.1);
+    line-height: 30px;
+    padding: 0 8px;
+    text-transform: uppercase;
+
+    // override any subsequent color assignments if button 'disabled' attribute is set by app
+    &[disabled="disabled"]{
+        border: 1px solid @gray !important;
+        color: @gray !important;
+    }
+}
+
+.btn-dark-primary{
+    .btn-dark-base;
+    border: 1px solid @highlight-secondary;
+    color: @highlight-secondary;
+
+    &:hover{
+        border: 1px solid darken(@highlight-secondary,10%);
+        color:  darken(@highlight-secondary,10%);
+    }
+}
+
+.btn-dark-secondary{
+    .btn-dark-base;
+    border: 1px solid @brand-primary;
+    color: @brand-primary;
+
+    &:hover{
+        border: 1px solid darken(@brand-primary, 20%);
+        color:  darken(@brand-primary, 20%);
+    }
+}
+
+.btn-dark-tertiary{
+    .btn-dark-base;
+    border: 1px solid @brand-secondary;
+    color: @brand-secondary;
+
+    &:hover{
+        border: 1px solid @brand-primary;
+        color:  @brand-primary;
+    }
+}
+
+
+.box-neon(@radius:6px,@padding:5px,@colorstart:rgba(0,0,0,0.1),@colorend:rgba(0,0,0,0.1),@glowradius:6px,@glowopacity:0.5,@bordercolor:fadeout(@brand-secondary,0%),@borderwidth:1px){
+    // chromed panel styling
+    // you can feed this mixin several variables (radius, padding, starting color, finishing color, glow radius, glow opacity, border color)
+
+    background-color: #eee;
+    padding: @padding;
+    border-radius: @radius;
+    border: @borderwidth solid @bordercolor;
+
+    // bg diagonal gradient, grey
+    background: @colorstart; /* Old browsers */
+    background: -moz-linear-gradient(-45deg,  @colorstart 0%, @colorend 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,@colorstart), color-stop(100%,@colorend)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg,  @colorstart 0%,@colorend 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg,  @colorstart 0%,@colorend 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg,  @colorstart 0%,@colorend 100%); /* IE10+ */
+    background: linear-gradient(135deg,  @colorstart 0%,@colorend 100%); /* W3C */
+    // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@colorstart', endColorstr='@colorend',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+    // inner glow
+    -webkit-box-shadow: inset 0px 0px @glowradius 2px rgba(255, 255, 255, @glowopacity);
+    box-shadow: inset 0px 0px @glowradius 2px rgba(255, 255, 255, @glowopacity);
+
+    // bottom shadow
+    -webkit-box-shadow:  0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+    box-shadow:          0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+}
+
+
+.neon-cutcorner{
+    border: 1px solid @brand-secondary;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: -30px; right: -30px;
+        border-bottom: 1px solid @brand-secondary;
+        transform:rotate(45deg);
+        -webkit-transform:rotate(45deg);
+        -moz-transform:rotate(45deg);
+        -ms-transform:rotate(45deg); /* IE 9 */
+        // border-left: 80px solid black;
+        width: 60px;
+        height: 60px;
+        background: #fff url(images/theme-software-dark/bg-twinkle-light.gif);
+    }
+}
+
+.separated{
+    position: relative;
+    &:before{
+        position: relative;
+        // left: -9999px;
+        top: 0px;
+        border-top: 1px solid #ddd;
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin-left: 0!important;
+        margin-right: 0!important;
+        background-color: #888;
+    }
+    // margin: 0;
+    // padding: 0;
+}
+
+// style mixins to flatten UI elements
+
+.flat{
+
+    &form{
+        background: red;
+    }
+}
+
+.border-dot-bottom{
+    border-style: solid;
+    border-color: transparent;
+    border-width: 0px 0px 1px 0px ;
+    -moz-border-image: url(images/line-dot-blue.gif) 1 round;
+    -webkit-border-image: url(images/line-dot-blue.gif) 1 round;
+    -o-border-image: url(images/line-dot-blue.gif) 1 round;
+    border-image: url(images/line-dot-blue.gif) 1 fill round;
+}
+
+.border-dot-right{
+    border-style: solid;
+    border-color: transparent;
+    border-width: 0px 1px 0px 0px ;
+    -moz-border-image: url(images/line-dot-blue.gif) 1 round;
+    -webkit-border-image: url(images/line-dot-blue.gif) 1 round;
+    -o-border-image: url(images/line-dot-blue.gif) 1 round;
+    border-image: url(images/line-dot-blue.gif) 1 fill round;
+}
+
+.border-dot-top{
+    border-style: solid;
+    border-width: 1px 0px 0px 0px ;
+    -moz-border-image: url(images/line-dot-blue.gif) 1 round;
+    -webkit-border-image: url(images/line-dot-blue.gif) 1 round;
+    -o-border-image: url(images/line-dot-blue.gif) 1 round;
+    border-image: url(images/line-dot-blue.gif) 1 fill round;
+}
+
+.border-dot-top-bottom{
+    border-style: solid;
+    border-width: 1px 0px 1px 0px ;
+    -moz-border-image: url(images/line-dot-blue.gif) 1 round;
+    -webkit-border-image: url(images/line-dot-blue.gif) 1 round;
+    -o-border-image: url(images/line-dot-blue.gif) 1 round;
+    border-image: url(images/line-dot-blue.gif) 1 fill round;
+}
+
+.view-title{
+color:@viewTitleColor;
+font-weight: 300;
+// text-transform: capitalize;
+// font-weight: 400;
+// text-shadow: 1px 1px 0px rgb(21, 25, 26), 2px 2px 0px rgb(128, 87, 87);
+}
