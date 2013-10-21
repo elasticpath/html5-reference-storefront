@@ -126,12 +126,15 @@ define(['ep', 'eventbus', 'backbone'],
         /*
          * Cart Summary: total price (excluding tax)
          */
+        cartObj.cartTotal = {};
         var cartTotal = jsonPath(cart, '$._total..cost[0]')[0];
-        cartObj.cartTotal = {
-          currency: cartTotal.currency,
-          amount: cartTotal.amount,
-          display: cartTotal.display
-        };
+        if (cartTotal) {
+          cartObj.cartTotal = {
+            currency: cartTotal.currency,
+            amount: cartTotal.amount,
+            display: cartTotal.display
+          };
+        }
 
         return cartObj;
       }
