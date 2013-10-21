@@ -330,15 +330,21 @@ define(['ep', 'i18n', 'eventbus', 'mediator', 'pace','equalize'],
       onShow:function(){
         pace.stop();
 
-        // setup function to encapsulate all element height-matching calls
+        // setup function to encapsulate element height-matching calls
         var matchHeights = function(){
           $('.category-item-title').equalHeights();
           $('.category-item-inner').equalHeights();
           $('.category-item-thumbnail-container').equalHeights();
           $('.price-availability-wrapper').equalHeights();
         }
-       setTimeout(function(){matchHeights();},600);
-       setTimeout(function(){matchHeights();},200);
+        matchHeights();
+
+        // hack:  resize not triggered properly when images load after initial execution of resize.
+        // arbitrary delayed execution(s) help reset display grid.
+        // This should instead get triggered after all images confirmed loaded... somehow...
+        setTimeout(function(){matchHeights();},200);
+        setTimeout(function(){matchHeights();},600);
+
 
 
 
