@@ -183,7 +183,7 @@
   position: absolute;
   display: inline-block;
   top: 0px;
-  right: 230px;
+  right: 180px;
 
   @media (min-width: @screen-desktop){
     right: 0px;
@@ -283,6 +283,17 @@
       .glyphicon-shopping-cart;
       margin-right: 5px;
     }
+
+    @media (min-width: @screen-tablet) and (max-width: @screen-desktop){
+      label{
+        display: none;
+      }
+      .icon{
+         padding-left: 20px;
+         margin-left: 0px;
+         border-left: 1px solid @brand-secondary;
+       }
+    }
   }
 
 
@@ -293,7 +304,7 @@
     color: darken(@brand-primary, 10%);
     font-size: 1.5rem;
     font-weight: 400;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     margin: 26px 0 0 0;
 
     &:hover{
@@ -315,6 +326,8 @@
   right: 0px;
   bottom: 10px;
   margin: 0 0 0 0;
+
+
 
 
 // adjust styles for collapsed state
@@ -354,6 +367,7 @@
   .header-search-input{
     height: 32px;
     border-top-left-radius: 0px;
+    max-width: 100px;
   }
 }
 
