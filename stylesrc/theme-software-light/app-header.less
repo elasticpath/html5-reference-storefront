@@ -215,6 +215,8 @@
     padding: 0 6px;
     .clearfix;
     text-align: left;
+    background: transparent;
+    border: none;
   }
 
   li{
@@ -289,6 +291,18 @@
       .glyphicon-shopping-cart;
       margin-right: 5px;
     }
+
+    @media (min-width: @screen-tablet) and (max-width: @screen-desktop){
+      color: #fff!important;
+      label{
+        display: none;
+      }
+      .icon{
+         padding-left: 20px;
+         margin-left: 0px;
+         border-left: 1px solid @brand-primary;
+       }
+    }
   }
 
 
@@ -296,10 +310,10 @@
   .global-nav-login{
     display: inline-block;
     .clearfix;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.7)!important;
     font-size: 1.5rem;
     font-weight: 400;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     margin: 26px 0 0 0;
 
     &:hover{
