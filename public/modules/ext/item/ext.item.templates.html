@@ -56,7 +56,10 @@
           %></label>
 
         <div class="form-content col-sm-8">
-          <select class="form-control" id="itemdetail-select-quantity" name="itemdetail-select-quantity">
+
+            <input type="number" id="itemdetail-select-quantity" name="quantity" value="1" min="1" max="10">
+
+<!--          <select class="form-control" id="itemdetail-select-quantity" name="itemdetail-select-quantity">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -68,13 +71,15 @@
             <option value="9">9</option>
             <option value="10">10</option>
           </select>
+
+-->
         </div>
       </div>
       <div class="form-group form-group-submit">
         <div class="form-content form-content-submit col-sm-8 col-sm-offset-4">
-          <button class="btn-round btn btn-primary btn-itemdetail-addtocart"
+          <button class="btn-itemdetail-addtocart"
                   data-actionlink="<%= E.getCortexPath() %><%= E.addtocart.actionlink %>"
-          <%= E.checkForDisabledAddToCart(E) %> ><%= E.getI18nLabel('itemDetail.addToCart') %></button>
+          <%= E.checkForDisabledAddToCart(E) %> ><span class="icon"></span><%= E.getI18nLabel('itemDetail.addToCart') %></button>
         </div>
       </div>
 

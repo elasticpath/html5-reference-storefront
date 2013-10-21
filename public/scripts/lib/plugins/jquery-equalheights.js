@@ -15,6 +15,7 @@ define(['jquery'],function(jQuery){
       $elHeight = $(this).outerHeight();
       $maxHeight = window.currentTallest;
 
+
       if ($elHeight > $maxHeight) {
         window.currentTallest = $elHeight;
       }
