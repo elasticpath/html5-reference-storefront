@@ -16,7 +16,7 @@
     "NOT_AVAILABLE": "Out of Stock",
     "AVAILABLE_FOR_BACK_ORDER": "Available for Back Order",
     "AVAILABLE_FOR_PRE_ORDER": "Pre Order",
-    "releasedOn": "Expected Release Date"
+    "releasedOn": "Release Date"
   },
   "cart": {
     "viewTitle": "Shopping Cart",

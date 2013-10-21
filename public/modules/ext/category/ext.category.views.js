@@ -134,6 +134,17 @@ define(['ep', 'i18n', 'eventbus', 'mediator', 'pace','equalize'],
       },
       getCortexPath:function(){
         return ep.app.config.cortexApi.path;
+      },
+      formatDate: function(releaseDateObj) {
+        var retVar = '';
+
+        if (releaseDateObj && releaseDateObj.value) {
+          var dateValue = releaseDateObj.value;
+          var dateObj = new Date(dateValue);
+          retVar = dateObj.toDateString();
+        }
+
+        return retVar;
       }
     };
 
@@ -236,7 +247,7 @@ define(['ep', 'i18n', 'eventbus', 'mediator', 'pace','equalize'],
 
     // Item Availability
     var itemAvailabilityView = Backbone.Marionette.ItemView.extend({
-      template: '#CategoryItemAvailabilityTemplate',
+      template: '#ExtCategoryItemAvailabilityTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
       className: 'category-item-availability-container',
