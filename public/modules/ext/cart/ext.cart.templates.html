@@ -19,7 +19,16 @@
   </script>
 
 
-
+  <!-- Extended Item Availability Template -->
+  <script id="ExtCartLineItemAvailabilityTemplate" type="text/template">
+    <li class="cart-lineitem-availability itemdetail-availability-state" data-i18n="<%= E.state %>">
+      <label><span class="icon"></span><%= E.getAvailabilityDisplayText(E.state) %></label>
+    </li>
+    <li class="category-item-release-date" data-region="itemAvailabilityDescriptionRegion">
+      <label class="cart-lineitem-releasedate-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
+      <span class="cart-lineitem-release-date-value"><%= E.formatDate(E.releaseDate) %></span>
+    </li>
+  </script>
 
 
 </div>

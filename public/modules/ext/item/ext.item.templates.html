@@ -46,6 +46,15 @@
     <a data-toggle="tab" data-target="#<%= E.attrKey %>"><%= E.displayName %></a>
   </script>
 
+  <!-- Extended Item Availability Template -->
+  <script id="ExtItemAvailabilityTemplate" type="text/template">
+    <li class="itemdetail-availability itemdetail-availability-state" data-i18n="<%= E.state %>">
+      <label><span class="icon"></span><%= E.getAvailabilityDisplayText(E.state) %></label></li>
+    <li class="itemdetail-release-date" data-region="itemAvailabilityDescriptionRegion">
+      <label class="itemdetail-release-date-label"><%= E.getI18nLabel('availability.releasedOn') %>: </label>
+      <span class="itemdetail-release-date-value"><%= E.formatDate(E.releaseDate) %></span>
+    </li>
+  </script>
 
   <!-- Extended Item Detail Add To Cart Template -->
   <script id="ExtItemDetailAddToCartTemplate" type="text/template">
