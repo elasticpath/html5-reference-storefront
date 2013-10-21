@@ -326,8 +326,9 @@ define(['ep', 'i18n', 'eventbus', 'mediator', 'pace','equalize'],
           $('.category-item-thumbnail-container').equalHeights();
           $('.price-availability-wrapper').equalHeights();
         }
-       // setTimeout(function(){matchHeights();},1000);
-        matchHeights();
+       setTimeout(function(){matchHeights();},600);
+       setTimeout(function(){matchHeights();},200);
+
 
 
         // run height-matching function on window resize
