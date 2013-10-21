@@ -220,20 +220,10 @@
 
 
 .cart-main-inner{
-    // -webkit-box-shadow:
-    //             0px 0px 10px 3px rgba(0, 0, 0, 0.17),
-    //             inset 0px 0px 3px 2px rgba(0, 0, 0, 0.4);
 
-    // box-shadow:
-    //             0px 0px 10px 3px rgba(0, 0, 0, 0.17),
-    //             inset 0px 0px 3px 2px rgba(0, 0, 0, 0.4);
-
-    // .box-neon(2px,0);
 }
 
-.cart-summary-container-inner{
- //now defunct... but for how long?!
-}
+
 
 .cart-lineitem-thumbnail-col{
     img{
@@ -290,7 +280,9 @@
 }
 
 .cart-lineitem-price-container,
-.cart-lineitem-availability-container{
+.cart-lineitem-availability-container,
+.cart-lineitem-unit-rate-container,
+.cart-lineitem-total-rate-container{
     margin: 0;
     padding: 0;
 
@@ -365,11 +357,13 @@
 .cart-unit-list-price,
 .cart-total-list-price{
     text-decoration: line-through;
-    color: darken(@gray-light, 0%);
+    // color: darken(@gray-light, 0%);
+    color: @brand-secondary;
 }
 
 .cart-unit-purchase-price,
-.cart-total-purchase-price{
+.cart-total-purchase-price,
+.cart-lineitem-rate{
     font-weight: 400;
     font-size: 1.5rem;
     color: @brand-primary
@@ -392,11 +386,18 @@ Purchase Confirmation
 }
 
 .cart-total-quantity{
-    label,
-    span{
-        font-weight: 400!important;
-        font-size: 1.4rem;
-        color: #fff;
+    // label,
+    // span{
+    //     font-weight: 400!important;
+    //     font-size: 1.4rem;
+    //     color: #fff;
+    // }
+
+    .cart-summary-label-col{
+        color: @brand-secondary;
+    }
+    .cart-summary-value-col{
+        color: @brand-primary;
     }
 }
 
