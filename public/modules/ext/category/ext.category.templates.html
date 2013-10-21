@@ -9,8 +9,10 @@
       </div>
 
       <div class="category-item-thumbnail-container">
-        <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>"
+        <a href="<%= E.generateItemHref(E.uri) %>">
+          <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>"
              class="category-item-thumbnail img-responsive"/>
+        </a>
 
         <!--
             <div  alt="<%= E.getDefaultImageName(E.thumbnail) %>"
