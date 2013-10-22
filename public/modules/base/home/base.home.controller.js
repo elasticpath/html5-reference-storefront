@@ -13,25 +13,18 @@ define(['ep','eventbus','home.views','text!modules/base/home/base.home.templates
 
     _.templateSettings.variable = 'E';
 
-    var indexView = function(){
-      return new View.DefaultHomeView();
-    };
     var indexLayout = function(){
       var layout = new View.DefaultHomeLayout();
+      var homeView = new View.DefaultHomeView();
 
-      var containerRegion = new Marionette.Region({
-        el:'.container'
-      });
-
-      layout.on('show',function(layout){
-        containerRegion.show(new View.DefaultHomeView());
+      layout.on('show',function(){
+        layout.homeContentRegion.show(homeView);
       });
 
       return layout;
     };
 
     return {
-      IndexView:indexView,
       IndexLayout:indexLayout
     };
   }
