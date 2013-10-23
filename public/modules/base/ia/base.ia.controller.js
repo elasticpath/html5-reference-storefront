@@ -7,8 +7,8 @@
  *
  * 
  */
-define(['ep', 'app', 'eventbus', 'cortex', 'ia.models', 'ia.views', 'text!modules/base/ia/base.ia.templates.html','contextmenu','modalwin'],
-  function(ep, App, EventBus, Cortex, Model, View, template){
+define(['ep', 'app', 'eventbus', 'ia.models', 'ia.views', 'text!modules/base/ia/base.ia.templates.html'],
+  function(ep, App, EventBus, Model, View, template){
 
     var currentCategoryName;
 

@@ -6,8 +6,8 @@
  * Time: 3:08 PM
  *
  */
-define(['ep','backbone','eventbus','cortex'],
-  function(ep,Backbone,EventBus,Cortex){
+define(['ep','backbone','eventbus'],
+  function(ep,Backbone,EventBus){
 
     var viewHelpers = {
       encodeUri:function(uri){

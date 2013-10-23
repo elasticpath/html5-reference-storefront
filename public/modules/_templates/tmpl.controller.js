@@ -7,8 +7,8 @@
  *
  * 
  */
-define(['app', 'eventbus', 'cortex', 'modules/_template/tmpl.models', 'modules/_template/tmpl.views', 'text!modules/_template/tmpl.templates.html'],
-  function(App, EventBus, Cortex, Model, View, template){
+define(['app', 'eventbus', 'modules/_template/tmpl.models', 'modules/_template/tmpl.views', 'text!modules/_template/tmpl.templates.html'],
+  function(App, EventBus, Model, View, template){
 
     $('#TemplateContainer').append(template);
 

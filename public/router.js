@@ -66,13 +66,6 @@ define(['marionette','eventbus','pace'],
           module:'profile',
           view:'DefaultView'
         });
-      },
-      settings: function() {
-        EventBus.trigger('layout.loadRegionContentRequest',{
-          region:'appMainRegion',
-          module:'settings',
-          view:'IndexLayout'
-        });
       }
     };
 
@@ -86,7 +79,6 @@ define(['marionette','eventbus','pace'],
         'search' : 'search',
         'search/:keywords' : 'search',
         'itemdetail/:uri': 'item',
-        'settings': 'settings',
         'profile': 'profile',
         'mycart': 'cart',
         'confirmation/:id': 'confirmation'

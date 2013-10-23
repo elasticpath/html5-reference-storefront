@@ -7,8 +7,8 @@
  *
  *
  */
-define(['ep', 'app', 'mediator', 'eventbus', 'cortex', 'auth.models', 'auth.views', 'text!modules/base/auth/base.auth.templates.html'],
-  function(ep, App, Mediator, EventBus, Cortex, Model, View, template){
+define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!modules/base/auth/base.auth.templates.html'],
+  function(ep, App, Mediator, EventBus, Model, View, template){
 
     $('#TemplateContainer').append(template);
 

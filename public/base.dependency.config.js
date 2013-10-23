@@ -17,10 +17,8 @@ var config = {
       'modernizr': 'scripts/lib/modernizr-latest',
       'pace': 'scripts/lib/pace.min',
       'bootstrap': 'scripts/lib/bootstrap.min',
-      'URI': 'scripts/lib/URI',
+      'URI': 'scripts/lib/URI',   // used by Cortex module only, remove after redo search
       'equalize': 'scripts/lib/plugins/jquery-equalheights',
-      'tabs': 'scripts/lib/plugins/kube.tabs',
-      'contextmenu': 'scripts/lib/plugins/jquery.contextmenu',
       'router': 'router',
       'ep': 'ep.client',
       'mediator': 'ep.mediator',
@@ -28,7 +26,6 @@ var config = {
       'i18n': 'scripts/lib/i18next.amd-1.6.0',
       'eventbus': 'eventbus',
       'toast': 'scripts/lib/plugins/jquery.toastmessage',
-      'colorpicker': 'scripts/lib/plugins/colorpicker',
       'modalwin': 'scripts/lib/plugins/jquery.simplemodal-1.4.4',
       'app': 'modules/base/app/base.app.controller',
       'app.models': 'modules/base/app/base.app.models',
@@ -36,7 +33,7 @@ var config = {
       'ia': 'modules/base/ia/base.ia.controller',
       'ia.models': 'modules/base/ia/base.ia.models',
       'ia.views': 'modules/base/ia/base.ia.views',
-      'cortex': 'modules/base/cortex/base.cortex.controller',
+      'cortex': 'modules/base/cortex/base.cortex.controller', // used by Search module only, remove after redo search
       'home': 'modules/base/home/base.home.controller',
       'home.models': 'modules/base/home/base.home.models',
       'home.views': 'modules/base/home/base.home.views',
@@ -49,12 +46,6 @@ var config = {
       'appheader': 'modules/base/appheader/base.appheader.controller',
       'appheader.models': 'modules/base/appheader/base.appheader.models',
       'appheader.views': 'modules/base/appheader/base.appheader.views',
-      'uimodal': 'modules/base/ui/base.ui.modal.controller',
-      'uimodal.models': 'modules/base/ui/base.ui.modal.models',
-      'uimodal.views': 'modules/base/ui/base.ui.modal.views',
-      'settings': 'modules/base/settings/base.settings.controller',
-      'settings.models': 'modules/base/settings/base.settings.models',
-      'settings.views': 'modules/base/settings/base.settings.views',
       'search': 'modules/base/search/base.search.controller',
       'search.models': 'modules/base/search/base.search.models',
       'search.views': 'modules/base/search/base.search.views',
@@ -70,9 +61,6 @@ var config = {
       'auth': 'modules/base/auth/base.auth.controller',
       'auth.models': 'modules/base/auth/base.auth.models',
       'auth.views': 'modules/base/auth/base.auth.views',
-      'chai': '/tests/libs/chai',
-      'mocha.common': '/tests/libs/mocha.common',
-      'sinon': 'scripts/lib/sinon-1.7.3'
     },
     shim: {
       'backbone': {

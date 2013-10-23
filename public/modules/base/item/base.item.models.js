@@ -1,5 +1,5 @@
-define(['ep','app','backbone','jsonpath'],
-	function(ep, app, Backbone, Cortex, URI) {
+define(['ep','app','backbone'],
+	function(ep, app, Backbone) {
 		var ItemModels = {};
 
 

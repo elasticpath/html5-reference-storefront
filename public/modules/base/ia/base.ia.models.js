@@ -6,8 +6,8 @@
  * Time: 9:16 AM
  *
  */
-define(['ep','eventbus', 'backbone', 'cortex'],
-  function(ep, EventBus, Backbone, Cortex){
+define(['ep','eventbus', 'backbone'],
+  function(ep, EventBus, Backbone){
 
 
 
