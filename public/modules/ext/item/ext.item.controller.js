@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright Elastic Path Software 2013.
 
  * User: sbrookes
