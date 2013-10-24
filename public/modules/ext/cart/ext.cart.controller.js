@@ -75,7 +75,7 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cortex', 'cart.models', 'ext.cart.
       ep.logger.info('Refreshing view...');
       EventBus.trigger('layout.loadRegionContentRequest', {
         region: 'appMainRegion',
-        module: 'cart',
+        module: 'ext.cart',
         view: 'DefaultView'
       });
     });
