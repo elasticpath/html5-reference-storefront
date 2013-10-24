@@ -7,18 +7,30 @@
  *
  */
 define(function (require) {
-  var home = require('home');
+  describe('UI Storefront Home Module  ', function () {
 
-  describe('EP Home Index View ', function () {
-    it('should exist', function () {
-      var homeIndexView = home.IndexView();
-      expect(homeIndexView).to.be.ok;
+    describe('Home Controller', function () {
+      var home = require('home');
+      describe("DefaultView", function () {
+        var defaultView = new home.IndexLayout();
+        it('DefaultView should exist', function () {
+          expect(defaultView).to.exist;
+        });
+      });
     });
-  });
-  describe('EP Home Index Layout ', function () {
-    it('should exist', function () {
-      var homeIndexLayout = home.IndexLayout();
-      expect(homeIndexLayout).to.be.ok;
+
+    describe('Home Views', function () {
+    var homeView = require('home.views');
+      describe('DefaultView ', function () {
+        var defaultView = new homeView.DefaultHomeLayout();
+        it('DefaultView should exist', function () {
+          expect(defaultView).to.exist;
+        });
+        it('DefaultView should have a homeContentRegion', function () {
+          expect(defaultView.homeContentRegion).to.exist;
+        });
+      });
     });
+
   });
 });

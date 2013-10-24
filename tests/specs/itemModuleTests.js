@@ -59,7 +59,7 @@ define(function (require) {
       expect(itemViews.DefaultItemAddToCartView).to.be.ok;
     });
     // describe('Add to Cart View',function(){
-    // var template = require('text!modules/item/item.templates.html');
+    // var template = require('text!modules/item/base.item.templates.html');
 
     // var x = $(template).find('#DefaultItemDetailAddToCartTemplate');
 //      var addToCartView = new itemViews.DefaultItemAddToCartView({
