@@ -12,7 +12,7 @@ define(
     var ep = require('ep');
     var $ = require('jquery');
     var EventBus = require('eventbus');
-    var templates = require('text!modules/base/auth/auth.templates.html');
+    var templates = require('text!modules/base/auth/base.auth.templates.html');
     var authController = require('auth');
     var authView = require('auth.views');
     var authModel = require('auth.models');
