@@ -6,82 +6,93 @@
  * Time: 9:16 AM
  *
  */
-define(['ep','eventbus', 'backbone'],
-  function(ep,EventBus, Backbone){
+define(['ep', 'eventbus', 'backbone'],
+  function (ep, EventBus, Backbone) {
 
 
     var profileModel = Backbone.Model.extend({
-      url:ep.app.config.cortexApi.path + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=purchases:element,paymentmethods:element,subscriptions:element,emails,addresses:billingaddresses,addresses:shippingaddresses',
-      parse:function(response){
+      url: ep.app.config.cortexApi.path + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=purchases:element,paymentmethods:element,subscriptions:element,emails,addresses:element',
+      parse: function (response) {
         var profileObj = {};
 
         // Profile Summary Info
-        profileObj.familyName = response["family-name"];
-        profileObj.givenName = response["given-name"];
+        profileObj.familyName = jsonPath(response, 'family-name');
+        profileObj.givenName = jsonPath(response, 'given-name');
 
         // Profile Payment Info
-        profileObj.paymentMethods = [];
-        var localPaymentMethods = jsonPath(response, '$._paymentmethods.._element')[0];
-        if (localPaymentMethods){
-          var paymentMethodsLength = localPaymentMethods.length;
-          for(var i = 0;i < paymentMethodsLength;i++){
-            var paymentMethodObj = {};
-
-            try{
-              paymentMethodObj.cardNumber = localPaymentMethods[i]["card-number"];
-              paymentMethodObj.cardType = localPaymentMethods[i]["card-type"];
-              paymentMethodObj.cardHolderName = localPaymentMethods[i]["cardholder-name"];
-              paymentMethodObj.expiryMonth = localPaymentMethods[i]["expiry-month"];
-              paymentMethodObj.expiryYear = localPaymentMethods[i]["expiry-year"];
-
-              profileObj.paymentMethods.push(paymentMethodObj);
-            }
-            catch(error){
-              ep.logger.error('Error building payment method object: ' + error.message);
-            }
-
-          }
-        }
-
-
+        var creditCardsArray = jsonPath(response, '$._paymentmethods.._element')[0];
+        profileObj.paymentMethods = parseHelpers.parseArray(creditCardsArray, 'parseCreditCard');
 
 
         // Profile Subscription Info
-        var subscriptionsArray = jsonPath(response, '$._subscriptions.._element');
-        if (subscriptionsArray){
-          var subsLength = subscriptionsArray.length;
-          profileObj.subscriptions = [];
-          for (var i = 0;i < subsLength;i++){
-            var subObj = {};
-            var targetObj = subscriptionsArray[i][0];
-            if (targetObj['display-name']){
-              subObj.displayName = targetObj['display-name'];
-            }
-            if (targetObj.quantity){
-              subObj.quantity = targetObj.quantity;
-            }
-            if (targetObj['next-billing-date']){
-              subObj.nextBillingDate = targetObj['next-billing-date']['display-value'];
-            }
-            profileObj.subscriptions.push(subObj);
-          }
-        }
+        var subscriptionsArray = jsonPath(response, '$._subscriptions.._element')[0];
+        profileObj.subscriptions = parseHelpers.parseArray(subscriptionsArray, 'parseSubscription');
+
 
         // Profile Addresses
-        // Profile Billing Address
-
-        // Profile Shipping Address
-
+        var addressesArray = jsonPath(response, '$._addresses.._element')[0];
+        profileObj.addresses = parseHelpers.parseArray(addressesArray, 'parseAddress');
 
 
         return profileObj;
       }
     });
 
+    var parseHelpers = {
+      parseArray: function (rawArray, parseFunction) {
+        var parsedArray = [];
+        var arrayLength = 0;
 
+        if (rawArray) {
+          arrayLength = rawArray.length;
+        }
+
+        for (var i = 0; i < arrayLength; i++) {
+          var parsedObject = this[parseFunction](rawArray[i]);
+          parsedArray.push(parsedObject);
+        }
+
+        return parsedArray;
+      },
+      parseSubscription: function (rawObject) {
+        var subscription = {
+          displayName: jsonPath(rawObject, 'display-name')[0],
+          quantity: jsonPath(rawObject, 'quantity')[0],
+          nextBillingDate: jsonPath(rawObject, 'next-billing-date..display-value')[0],
+          status: jsonPath(rawObject, 'status')[0]
+        };
+
+        return subscription;
+      },
+      parseAddress: function (rawObject) {
+        var address = {
+          givenName: jsonPath(rawObject, 'name..given-name')[0],
+          familyName: jsonPath(rawObject, 'name..family-name')[0],
+          streetAddress: jsonPath(rawObject, 'address..street-address')[0],
+          extAddress: jsonPath(rawObject, 'address..extended-address')[0],
+          city: jsonPath(rawObject, 'address..locality')[0],
+          region: jsonPath(rawObject, 'address..region')[0],
+          country: jsonPath(rawObject, 'address..country-name')[0],
+          postalCode: jsonPath(rawObject, 'address..postal-code')[0]
+        };
+
+        return address;
+      },
+      parseCreditCard: function (rawObject) {
+        var creditCard = {
+          cardNumber: jsonPath(rawObject, 'card-number')[0],
+          cardType: jsonPath(rawObject, 'card-type')[0],
+          cardHolderName: jsonPath(rawObject, 'cardholder-name')[0],
+          expiryMonth: jsonPath(rawObject, 'expiry-month')[0],
+          expiryYear: jsonPath(rawObject, 'expiry-year')[0]
+        };
+
+        return creditCard;
+      }
+    };
 
     return {
-      ProfileModel:profileModel
+      ProfileModel: profileModel
 
 
     };

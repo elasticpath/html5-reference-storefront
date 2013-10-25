@@ -44,11 +44,8 @@ define(function (require) {
         it('DefaultLayout should have a profileSubscriptionSummaryRegion region', function () {
           expect(DefaultLayout.profileSubscriptionSummaryRegion).to.exist;
         });
-        it('DefaultLayout should have a profileShippingAddressRegion region', function () {
-          expect(DefaultLayout.profileShippingAddressRegion).to.exist;
-        });
-        it('DefaultLayout should have a profileBillingAddressRegion region', function () {
-          expect(DefaultLayout.profileBillingAddressRegion).to.exist;
+        it('DefaultLayout should have a Address region', function () {
+          expect(DefaultLayout.profileAddressesRegion).to.exist;
         });
         it('PurchaseConfirmationLayout should have a profilePaymentMethodRegion region', function () {
           expect(DefaultLayout.profilePaymentMethodRegion).to.exist;
@@ -66,9 +63,12 @@ define(function (require) {
       it('PaymentMethodsView should exist', function () {
         expect(profileViews.PaymentMethodsView).to.exist;
       });
+      it('A addresses view should exist', function () {
+        expect(profileViews.ProfileAddressesView).to.exist;
+      });
     });
-    // Receipt Models
-    describe('Receipt Models',function(){
+    // Profile Models
+    describe('Profile Models',function(){
       var profileModels = require('profile.models');
       it("ProfileModel should exist",function(){
         expect(profileModels.ProfileModel).to.exist;

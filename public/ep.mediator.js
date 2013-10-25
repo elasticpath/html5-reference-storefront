@@ -71,6 +71,11 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         EventBus.trigger('auth.generatePublicAuthTokenRequest');
         document.location.href = '/';
       });
+    },
+    'mediator.loadAddressesViewRequest':function(addressObj){
+      require(['address'],function(mod){
+        EventBus.trigger('components.loadAddressesViewRequest', addressObj);
+      });
     }
 
   };
@@ -88,17 +93,7 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
       }
 
       mediatorObj[reqEventName](reqEventData);
-
-
-
-
-
-
-
     }
-
-
-
   }
 
 

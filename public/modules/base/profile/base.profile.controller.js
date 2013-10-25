@@ -7,8 +7,18 @@
  *
  * 
  */
-define(['ep','app', 'eventbus', 'profile.models', 'profile.views', 'text!modules/base/profile/base.profile.templates.html'],
-  function(ep, App, EventBus, Model, View, template){
+//define(['ep','app', 'eventbus', 'mediator', 'profile.models', 'profile.views', 'text!modules/base/profile/base.profile.templates.html'],
+//  function(ep, App, EventBus, Mediator,  Model, View, template, addressView, addressTemplate){
+define(function(require) {
+    var ep = require('ep'),
+      App = require('app'),
+      EventBus = require('eventbus'),
+      Mediator = require('mediator'),
+      pace = require('pace'),
+      Backbone = require('backbone'),
+      Model = require('profile.models'),
+      View = require('profile.views'),
+      template = require('text!modules/base/profile/base.profile.templates.html');
 
     $('#TemplateContainer').append(template);
 
@@ -34,8 +44,7 @@ define(['ep','app', 'eventbus', 'profile.models', 'profile.views', 'text!modules
         var profileSummaryView = new View.ProfileSummaryView({
           model:profileModel
         });
-        var profileTitleView =new View.ProfileTitleView({});
-
+        var profileTitleView = new View.ProfileTitleView({});
 
         profileModel.fetch({
           success:function(response){
@@ -48,7 +57,7 @@ define(['ep','app', 'eventbus', 'profile.models', 'profile.views', 'text!modules
 
             // Profile Subscriptions
             var profileSubs = profileModel.get('subscriptions');
-            if (profileSubs){
+            if (profileSubs.length > 0){
               profileSubscriptionSummaryRegion.show( new View.ProfileSubscriptionSummaryView({
                 collection:new Backbone.Collection(profileModel.get('subscriptions'))
               }));
@@ -58,6 +67,13 @@ define(['ep','app', 'eventbus', 'profile.models', 'profile.views', 'text!modules
             profilePaymentMethodsRegion.show( new View.PaymentMethodsView({
               collection:new Backbone.Collection(profileModel.get('paymentMethods'))
             }));
+
+            // Profile Addresses
+            var profileAddressesView = new View.ProfileAddressesView({
+              collection: new Backbone.Collection(profileModel.get('addresses'))
+            });
+
+            defaultLayout.profileAddressesRegion.show(profileAddressesView);
 
           },
           error:function(response){

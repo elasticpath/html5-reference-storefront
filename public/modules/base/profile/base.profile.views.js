@@ -6,8 +6,8 @@
  * Time: 9:16 AM
  *
  */
-define(['marionette','i18n'],
-  function(Marionette, i18n){
+define(['marionette','i18n', 'mediator'],
+  function(Marionette, i18n, Mediator){
 
     var viewHelpers = {
       getI18nLabel:function(key){
@@ -31,8 +31,7 @@ define(['marionette','i18n'],
         profileTitleRegion:'[data-region="profileTitleRegion"]',
         profileSummaryRegion:'[data-region="profileSummaryRegion"]',
         profileSubscriptionSummaryRegion:'[data-region="profileSubscriptionSummaryRegion"]',
-        profileShippingAddressRegion:'[data-region="profileShippingAddressRegion"]',
-        profileBillingAddressRegion:'[data-region="profileBillingAddressRegion"]',
+        profileAddressesRegion:'[data-region="profileAddressesRegion"]',
         profilePaymentMethodRegion:'[data-region="profilePaymentMethodRegion"]'
       },
       className:'container',
@@ -82,14 +81,48 @@ define(['marionette','i18n'],
       templateHelpers:viewHelpers
     });
 
+    // Profile Address Item View (layout)
+    var profileAddressItemView = Backbone.Marionette.Layout.extend({
+      template: '#DefaultProfileAddressLayoutTemplate',
+      tagName: 'li',
+      className: 'profile-address-container',
+      regions: {
+        profileAddressComponentRegion: '[data-region="profileAddressComponentRegion"]'
+      },
+      onShow: function() {
+        // fire event to load the address itemView from component
+        Mediator.fire('mediator.loadAddressesViewRequest', {
+          region: this.profileAddressComponentRegion,
+          model: this.model
+        });
+      }
+    });
+
+    // Profile Addresses Empty View
+    var profileAddressesEmptyView = Backbone.Marionette.ItemView.extend({
+      template: '#DefaultProfileAddressesEmptyViewTemplate',
+      tagName: 'li',
+      className: 'profile-no-address-msg-container container',
+      templateHelpers: viewHelpers
+    });
+
+    // Profile Addresses View (compositeView)
+    var profileAddressesView = Backbone.Marionette.CompositeView.extend({
+      template: '#DefaultProfileAddressesTemplate',
+      emptyView: profileAddressesEmptyView,
+      itemView: profileAddressItemView,
+      itemViewContainer: 'ul',
+      templateHelpers: viewHelpers
+    });
 
     return {
       DefaultLayout:defaultLayout,
       ProfileTitleView: profileTitleView,
       ProfileSubscriptionSummaryView:profileSubscriptionSummaryView,
       ProfileSummaryView:profileSummaryView,
-      PaymentMethodsView:paymentMethodsView
-
+      PaymentMethodsView:paymentMethodsView,
+      ProfileAddressesView: profileAddressesView,
+      ProfileAddressItemView: profileAddressItemView
     };
   }
 );

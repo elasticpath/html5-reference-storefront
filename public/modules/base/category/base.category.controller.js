@@ -6,8 +6,16 @@
  * Time: 1:31 PM
  *
  */
-define(['app', 'ep', 'eventbus', 'category.models', 'category.views', 'text!modules/base/category/base.category.templates.html', 'pace'],
-  function (App, ep, EventBus, Model, View, template, pace) {
+//define(['app', 'ep', 'eventbus', 'category.models', 'category.views', 'text!modules/base/category/base.category.templates.html', 'pace'],
+//  function (App, ep, EventBus, Model, View, template, pace) {
+define(function (require) {
+    var App = require('app'),
+        ep = require('ep'),
+        EventBus = require('eventbus'),
+        pace = require('pace'),
+        Model = require('category.models'),
+        View = require('category.views'),
+        template = require('text!modules/base/category/base.category.templates.html');
 
     $('#TemplateContainer').append(template);
     _.templateSettings.variable = 'E';

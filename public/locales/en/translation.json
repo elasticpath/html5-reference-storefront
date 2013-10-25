@@ -81,6 +81,8 @@
     "paymentCardType": "Card Type",
     "paymentCardHolder": "Card Holder",
     "paymentExpiryMonth": "Expiry Month",
-    "paymentExpiryYear": "Expiry Year"
+    "paymentExpiryYear": "Expiry Year",
+    "addressesTitle": "Addresses",
+    "noAddressMsg": "No Address"
   }
 }

@@ -61,6 +61,8 @@ var config = {
       'auth': 'modules/base/auth/base.auth.controller',
       'auth.models': 'modules/base/auth/base.auth.models',
       'auth.views': 'modules/base/auth/base.auth.views',
+      'address' : 'modules/base/components/address/base.component.address.controller',
+      'address.views' : 'modules/base/components/address/base.component.address.views'
     },
     shim: {
       'backbone': {

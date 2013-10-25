@@ -227,7 +227,7 @@ define(['ep', 'eventbus', 'backbone'],
       }
 
       return rateCollection;
-    }
+    };
 
     return {
       CartModel:cartModel,

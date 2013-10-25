@@ -1,0 +1,34 @@
+[data-region="profileTitleRegion"],
+[data-region="profileSummaryRegion"],
+[data-region="profileSubscriptionSummaryRegion"],
+[data-region="profilePaymentMethodsRegion"],
+[data-region="profileAddressesRegion"]{
+
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+
+  h2{
+    font-size: 2rem;
+  }
+
+  .table-responsive{
+    table{
+      background-color: transparent;
+    }
+  }
+}
+
+[data-region="profileTitleRegion"]{
+  margin-bottom: 0px;
+}
+
+.profile-addresses-listing {
+  padding: 0;
+  .make-row();
+}
+
+.profile-address-container {
+  .make-xs-column(6);
+  .make-sm-column(6);
+  .make-lg-column(6);
+}

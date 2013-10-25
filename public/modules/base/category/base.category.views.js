@@ -6,8 +6,15 @@
  * Time: 1:32 PM
  *
  */
-define(['ep', 'i18n', 'eventbus','pace','equalize'],
-  function (ep, i18n, EventBus, pace, equalize) {
+//define(['ep', 'i18n', 'eventbus','pace','equalize'],
+//  function (ep, i18n, EventBus, pace, equalize) {
+define(function(require) {
+  var ep = require('ep'),
+      i18n = require('i18n'),
+      pace = require('pace'),
+      equalize = require('equalize'),
+      EventBus = require('eventbus'),
+      Backbone = require('backbone');
 
     var viewHelpers = {
       getI18nLabel: function (key) {
