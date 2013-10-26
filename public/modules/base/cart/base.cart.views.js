@@ -376,7 +376,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       events:{
         'click .btn-cmd-checkout':function(event){
           event.preventDefault();
-          EventBus.trigger('cart.checkoutBtnClicked',this.model);
+          EventBus.trigger('cart.checkoutBtnClicked',this.model.get('submitOrderActionUri'));
         }
       }
     });

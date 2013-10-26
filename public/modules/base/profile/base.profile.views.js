@@ -32,7 +32,7 @@ define(['marionette','i18n', 'mediator'],
         profileSummaryRegion:'[data-region="profileSummaryRegion"]',
         profileSubscriptionSummaryRegion:'[data-region="profileSubscriptionSummaryRegion"]',
         profileAddressesRegion:'[data-region="profileAddressesRegion"]',
-        profilePaymentMethodRegion:'[data-region="profilePaymentMethodRegion"]'
+        profilePaymentMethodsRegion:'[data-region="profilePaymentMethodsRegion"]'
       },
       className:'container',
       templateHelpers:viewHelpers
@@ -119,6 +119,7 @@ define(['marionette','i18n', 'mediator'],
       DefaultLayout:defaultLayout,
       ProfileTitleView: profileTitleView,
       ProfileSubscriptionSummaryView:profileSubscriptionSummaryView,
+      ProfileSubscriptionItemView: profileSubscriptionItemView,
       ProfileSummaryView:profileSummaryView,
       PaymentMethodsView:paymentMethodsView,
       ProfileAddressesView: profileAddressesView,

@@ -1,10 +1,6 @@
-.idea
 node_modules
 logs
-.idea/
 *.log
+.idea/
 target/
-
-*.DS_Store
-public/ep.config.json
-docs
+docs/

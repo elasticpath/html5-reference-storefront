@@ -25,6 +25,7 @@
     "grunt-cli": "0.1.9",
     "grunt-contrib-uglify": "~0.2.4",
     "grunt-contrib-less": "~0.7.0",
-    "grunt-contrib-requirejs": "~0.4.1"
+    "grunt-contrib-requirejs": "~0.4.1",
+    "testem": "~0.3.18"
   }
 }

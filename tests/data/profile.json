@@ -1,0 +1,87 @@
+{
+  "_addresses": [
+    {
+      "_element": [
+        {
+          "address": {
+            "country-name": "CA",
+            "extended-address": "Siffon Ville",
+            "locality": "St. Helens",
+            "postal-code": "v8v8v8",
+            "region": "MB",
+            "street-address": "1234 HappyVille Road"
+          },
+          "name": {
+            "family-name": "boxer",
+            "given-name": "ben"
+          }
+        },
+        {
+          "address": {
+            "country-name": "US",
+            "extended-address": "110 Liberty Street",
+            "locality": "New York",
+            "postal-code": "NY 10006",
+            "region": "NY",
+            "street-address": "Hoyip Chinese Restaurant"
+          },
+          "name": {
+            "family-name": "boxer",
+            "given-name": "ben"
+          }
+        }
+      ]
+    }
+  ],
+  "_purchases": [
+    {
+      "_element": [
+        {
+          "monetary-total": [
+            {
+              "amount": 5.19,
+              "currency": "CAD",
+              "display": "$5.19"
+            }
+          ],
+          "purchase-date": {
+            "display-value": "October 28, 2013 8:43:04 PM",
+            "value": 1382992984000
+          },
+          "purchase-number": "20061",
+          "status": "COMPLETED",
+          "tax-total": {
+            "amount": 0.2,
+            "currency": "CAD",
+            "display": "$0.20"
+          }
+        },
+        {
+          "purchase-date": {
+            "display-value": "October 10, 2013 8:58:50 PM",
+            "value": 1381438730357
+          },
+          "purchase-number": "",
+          "status": "COMPLETED"
+        }
+      ]
+    }
+  ],
+  "_subscriptions": [
+    {
+      "_element": [
+        {
+          "display-name": "EP Master Multiple Currency Plan",
+          "next-billing-date": {
+            "display-value": "December 18, 2013",
+            "value": 1387324800000
+          },
+          "quantity": 1,
+          "status": "ACTIVE"
+        }
+      ]
+    }
+  ],
+  "family-name": "boxer",
+  "given-name": "ben"
+}

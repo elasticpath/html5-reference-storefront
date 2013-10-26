@@ -19,23 +19,28 @@
     <script src="test.config.js" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript" charset="utf-8">
+      // bug because test trying to show view which isn't loaded into tests,
+      // they are marked below and commented out for the moment
       require([
         'mocha.common',
+        'sinon',
+        'sinon-chai',
         'jquery',
         'backbone',
         'marionette',
-        'specs/appInitTests.js',
+        'specs/appInitTests.js',  // bug
         'specs/appModuleTests.js',
         'specs/appHeaderModuleTests.js',
         'specs/itemModuleTests.js',
         'specs/cartModuleTests.js',
-        'specs/authModuleTests.js',
+        'specs/authModuleTests.js', // bugs
         'specs/homeModuleTests.js',
         'specs/createPurchaseTests.js',
         'specs/iaModuleTests.js',
         'specs/receiptModuleTests.js',
         'specs/profileModuleTests.js',
-        'specs/categoryModuleTests.js'
+        'specs/categoryModuleTests.js',
+        'specs/addressComponentModuleTest.js'
       ], runMocha);
     </script>
 

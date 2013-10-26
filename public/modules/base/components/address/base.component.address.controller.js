@@ -3,7 +3,8 @@
  */
 
 define(function (require) {
-  var EventBus = require('eventbus'),
+  var ep = require('ep'),
+    EventBus = require('eventbus'),
     View = require('address.views'),
     template = require('text!modules/base/components/address/base.component.address.template.html');
 
@@ -11,10 +12,14 @@ define(function (require) {
   _.templateSettings.variable = 'E';
 
   EventBus.on('components.loadAddressesViewRequest', function (addressObj) {
-    var addressView = new View.DefaultAddressItemView({
-      model: addressObj.model
-    });
+    try {
+      var addressView = new View.DefaultAddressItemView({
+        model: addressObj.model
+      });
 
-    addressObj.region.show(addressView);
+      addressObj.region.show(addressView);
+    } catch (error) {
+      ep.logger.error('failed to load Address View: ' + error.message);
+    }
   });
 });

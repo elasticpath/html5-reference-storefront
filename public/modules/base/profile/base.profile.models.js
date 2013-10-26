@@ -16,8 +16,8 @@ define(['ep', 'eventbus', 'backbone'],
         var profileObj = {};
 
         // Profile Summary Info
-        profileObj.familyName = jsonPath(response, 'family-name');
-        profileObj.givenName = jsonPath(response, 'given-name');
+        profileObj.familyName = jsonPath(response, 'family-name')[0];
+        profileObj.givenName = jsonPath(response, 'given-name')[0];
 
         // Profile Payment Info
         var creditCardsArray = jsonPath(response, '$._paymentmethods.._element')[0];

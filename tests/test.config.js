@@ -55,7 +55,10 @@ requirejs.config({
     'auth'            : 'modules/base/auth/base.auth.controller',
     'auth.models'     : 'modules/base/auth/base.auth.models',
     'auth.views'      : 'modules/base/auth/base.auth.views',
+    'address'         : 'modules/base/components/address/base.component.address.controller',
+    'address.views'   : 'modules/base/components/address/base.component.address.views',
     'chai'            : '/tests/libs/chai',
+    'sinon-chai'      : '/tests/libs/sinon-chai',
     'mocha.common'    : '/tests/libs/mocha.common',
     'sinon'           :  'scripts/lib/sinon-1.7.3'
 
@@ -95,11 +98,19 @@ console = window.console || function () {
 // Don't track
 window.notrack = true;
 
-// Helper... not really needed but in case we want to do something fancy
+// Run the tests
 var runMocha = function () {
+
+  // Add Sinon assertions to Chai
+  setupSinonChai();
   if (window.mochaPhantomJS) {
     mochaPhantomJS.run();
   } else {
     mocha.run();
   }
 };
+
+var setupSinonChai = function () {
+  var sinonChai = require("sinon-chai");
+  chai.use(sinonChai);
+}

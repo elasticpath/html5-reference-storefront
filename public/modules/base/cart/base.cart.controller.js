@@ -113,19 +113,19 @@ define(['ep', 'app', 'eventbus', 'mediator', 'cart.models', 'cart.views', 'text!
     });
 
     // Checkout Button Clicked
-    EventBus.on('cart.checkoutBtnClicked', function (model) {
+    EventBus.on('cart.checkoutBtnClicked', function (submitOrderActionUri) {
 
       View.setCheckoutButtonProcessing();
-      EventBus.trigger('cart.checkoutRequest', model);
+      EventBus.trigger('cart.checkoutRequest', submitOrderActionUri);
     });
 
     // Checkout Request
-    EventBus.on('cart.checkoutRequest', function (model) {
+    EventBus.on('cart.checkoutRequest', function (submitOrderActionUri) {
       // if cortex says it's ok
-      if (model.get('submitOrderActionUri')) {
+      if (submitOrderActionUri) {
 
         // submit request to uri
-        EventBus.trigger('cart.submitOrderRequest', model.get('submitOrderActionUri'));
+        EventBus.trigger('cart.submitOrderRequest', submitOrderActionUri);
       }
       // or
       // user not logged and config set to require login
