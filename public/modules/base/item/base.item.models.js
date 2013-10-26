@@ -171,15 +171,18 @@ define(['ep','app','backbone'],
     };
 
     // function to parse one-time price (list or purchase)
-    var parsePrice = function(priceObj) {
+    var parsePrice = function(rawObject) {
       var price = {};
 
-      if (priceObj) {
+      try {
         price = {
-          currency: priceObj[0].currency,
-          amount: priceObj[0].amount,
-          display: priceObj[0].display
+          currency: jsonPath(rawObject, '$.currency')[0],
+          amount: jsonPath(rawObject, '$.amount')[0],
+          display: jsonPath(rawObject, '$.display')[0]
         }
+      }
+      catch (error) {
+        ep.logger.error('Error building price object: ' + error.message);
       }
 
       return price;

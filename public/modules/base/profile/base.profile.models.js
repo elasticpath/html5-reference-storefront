@@ -55,37 +55,58 @@ define(['ep', 'eventbus', 'backbone'],
         return parsedArray;
       },
       parseSubscription: function (rawObject) {
-        var subscription = {
-          displayName: jsonPath(rawObject, 'display-name')[0],
-          quantity: jsonPath(rawObject, 'quantity')[0],
-          nextBillingDate: jsonPath(rawObject, 'next-billing-date..display-value')[0],
-          status: jsonPath(rawObject, 'status')[0]
-        };
+        var subscription = {};
+
+        try {
+          subscription = {
+            displayName: jsonPath(rawObject, 'display-name')[0],
+            quantity: jsonPath(rawObject, 'quantity')[0],
+            nextBillingDate: jsonPath(rawObject, 'next-billing-date..display-value')[0],
+            status: jsonPath(rawObject, 'status')[0]
+          };
+        }
+        catch (error) {
+          ep.logger.error('Error building subscription object: ' + error.message);
+        }
 
         return subscription;
       },
       parseAddress: function (rawObject) {
-        var address = {
-          givenName: jsonPath(rawObject, 'name..given-name')[0],
-          familyName: jsonPath(rawObject, 'name..family-name')[0],
-          streetAddress: jsonPath(rawObject, 'address..street-address')[0],
-          extAddress: jsonPath(rawObject, 'address..extended-address')[0],
-          city: jsonPath(rawObject, 'address..locality')[0],
-          region: jsonPath(rawObject, 'address..region')[0],
-          country: jsonPath(rawObject, 'address..country-name')[0],
-          postalCode: jsonPath(rawObject, 'address..postal-code')[0]
-        };
+        var address = {};
+
+        try {
+          address = {
+            givenName: jsonPath(rawObject, '$.name..given-name')[0],
+            familyName: jsonPath(rawObject, '$.name..family-name')[0],
+            streetAddress: jsonPath(rawObject, '$.address..street-address')[0],
+            extAddress: jsonPath(rawObject, '$.address..extended-address')[0],
+            city: jsonPath(rawObject, '$.address..locality')[0],
+            region: jsonPath(rawObject, '$.address..region')[0],
+            country: jsonPath(rawObject, '$.address..country-name')[0],
+            postalCode: jsonPath(rawObject, '$.address..postal-code')[0]
+          };
+        }
+        catch (error) {
+          ep.logger.error('Error building address object: ' + error.message);
+        }
 
         return address;
       },
       parseCreditCard: function (rawObject) {
-        var creditCard = {
-          cardNumber: jsonPath(rawObject, 'card-number')[0],
-          cardType: jsonPath(rawObject, 'card-type')[0],
-          cardHolderName: jsonPath(rawObject, 'cardholder-name')[0],
-          expiryMonth: jsonPath(rawObject, 'expiry-month')[0],
-          expiryYear: jsonPath(rawObject, 'expiry-year')[0]
-        };
+        var creditCard = {};
+
+        try {
+          creditCard = {
+            cardNumber: jsonPath(rawObject, 'card-number')[0],
+            cardType: jsonPath(rawObject, 'card-type')[0],
+            cardHolderName: jsonPath(rawObject, 'cardholder-name')[0],
+            expiryMonth: jsonPath(rawObject, 'expiry-month')[0],
+            expiryYear: jsonPath(rawObject, 'expiry-year')[0]
+          };
+        }
+        catch (error) {
+          ep.logger.error('Error building credit card payment method object: ' + error.message);
+        }
 
         return creditCard;
       }

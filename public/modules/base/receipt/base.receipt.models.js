@@ -6,108 +6,171 @@
  * Time: 9:16 AM
  *
  */
-define(['eventbus', 'backbone'],
-  function(EventBus, Backbone){
+define(['underscore', 'ep', 'eventbus', 'backbone'],
+  function (_, ep, EventBus, Backbone) {
 
     var purchaseConfirmationModel = Backbone.Model.extend({
-      parse:function(response){
+      parse: function (response) {
         var confirmationObj = {};
-        // Order Status
-        confirmationObj.status = response.status;
-        // Oder Number
-        confirmationObj.purchaseNumber = response['purchase-number'];
-        // Order Total
-        confirmationObj.orderTotal = jsonPath(response, '$.monetary-total[0].display')[0];
-        // Purchase Date
-        confirmationObj.purchaseDate = jsonPath(response, '$.purchase-date.display-value')[0];
-        // Tax Total
-        confirmationObj.taxTotal = jsonPath(response, '$.tax-total.display');
+
+        var summary = parseHelpers.parseConfirmationSummary(response);
+        // attach summary object's properties to confirmationObj
+        // without override existing properties of confirmationObj
+        _.extend(confirmationObj, summary);
 
         // Line Items
-        confirmationObj.lineItems = [];
         var lineItems = jsonPath(response, '$._lineitems.._element')[0];
-        if (lineItems){
-          for (var i = 0;i < lineItems.length;i++){
-            var lineItemObj = {};
-            var lineItemRef = lineItems[i];
-            // name
-            if(lineItemRef.name){
-              lineItemObj.name = lineItemRef.name;
-            }
-            // quantity
-            if(lineItemRef.quantity){
-              lineItemObj.quantity = lineItemRef.quantity;
-            }
-
-
-            // Line Item Rate / Price
-            lineItemObj.amount = {};
-            lineItemObj.tax = {};
-            lineItemObj.total = {};
-            // check if subscription or one-time item
-            if(lineItemRef._rate && lineItemRef._rate[0]){
-              // rate may have multiple items in array
-              if (lineItemRef._rate[0].rate && lineItemRef._rate[0].rate[0]){
-                lineItemObj.total.display = lineItemRef._rate[0].rate[0].display;
-              }
-            }
-            // non subscription item
-            else{
-              // item total
-              if (lineItemRef['line-extension-total']){
-                var lineTotalObj = {};
-                lineItemObj.total.display = lineItemRef['line-extension-total'][0].display || null;
-                lineItemObj.total.cost = lineItemRef['line-extension-total'][0];
-                //  lineItemObj.total.total.push(lineTotalObj);
-              }
-              // tax
-              if (lineItemRef['line-extension-tax']){
-                lineItemObj.tax.display = lineItemRef['line-extension-tax'][0].display || null;
-                lineItemObj.tax.currency = lineItemRef['line-extension-tax'][0].currency || null;
-                lineItemObj.tax.amount = lineItemRef['line-extension-tax'][0].amount || null;
-              }
-              // item net amount
-              if (lineItemRef['line-extension-amount']){
-                lineItemObj.amount.display = lineItemRef['line-extension-amount'][0].display || null;
-                lineItemObj.amount.currency = lineItemRef['line-extension-amount'][0].currency || null;
-                lineItemObj.amount.amount = lineItemRef['line-extension-amount'][0].amount || null;
-              }
-            }
-            confirmationObj.lineItems.push(lineItemObj);
-          }
-        }
+        confirmationObj.lineItems = parseHelpers.parseArray(lineItems, 'parseReceiptLineItem');
 
         // Billing Address
-        confirmationObj.billingAddress = {};
-        if (jsonPath(response, '$._billingaddress')){
-          var rawBillingAddress = jsonPath(response, '$._billingaddress[0]')[0];
-
-          var firstName = rawBillingAddress.name['given-name'] || null;
-          var lastName = rawBillingAddress.name['family-name'] || null;
-          confirmationObj.billingAddress.name = firstName + ' ' + lastName;
-          confirmationObj.billingAddress.country = rawBillingAddress.address['country-name'] || null;
-          confirmationObj.billingAddress.streetAddress = rawBillingAddress.address['street-address'] || null;
-          confirmationObj.billingAddress.extendedAddress = rawBillingAddress.address['extended-address'] || null;
-          confirmationObj.billingAddress.locality = rawBillingAddress.address.locality || null;
-          confirmationObj.billingAddress.postalCode = rawBillingAddress.address['postal-code'] || null;
-          confirmationObj.billingAddress.region = rawBillingAddress.address.region || null;
-        }
+        var addressObj = jsonPath(response, '$._billingaddress[0]')[0];
+        confirmationObj.billingAddress = parseHelpers.parseAddress(addressObj);
 
         // Payment Means
         confirmationObj.paymentMeans = {};
         var paymentDisplay = jsonPath(response, '$._paymentmeans[0].._element[0]')[0];
-        if (paymentDisplay && paymentDisplay['display-value']){
-          confirmationObj.paymentMeans.displayValue = paymentDisplay['display-value'];
+        if (paymentDisplay) {
+          confirmationObj.paymentMeans.displayValue = jsonPath(paymentDisplay, '$.display-value');
         }
 
         return confirmationObj;
       }
     });
 
+    var parseHelpers = {
+      parseArray: function (rawArray, parseFunctionName) {
+        var parsedArray = [];
+        var arrayLength = 0;
 
+        if (rawArray) {
+          arrayLength = rawArray.length;
+        }
+
+        for (var i = 0; i < arrayLength; i++) {
+          // invoke parse function specified by 'parseFunctionName'
+          var parsedObject = this[parseFunctionName](rawArray[i]);
+          parsedArray.push(parsedObject);
+        }
+
+        return parsedArray;
+      },
+      parseAddress: function (rawObject) {
+        var address = {};
+
+        try {
+          address = {
+            givenName: jsonPath(rawObject, '$.name..given-name')[0],
+            familyName: jsonPath(rawObject, '$.name..family-name')[0],
+            streetAddress: jsonPath(rawObject, '$.address..street-address')[0],
+            extAddress: jsonPath(rawObject, '$.address..extended-address')[0],
+            city: jsonPath(rawObject, '$.address..locality')[0],
+            region: jsonPath(rawObject, '$.address..region')[0],
+            country: jsonPath(rawObject, '$.address..country-name')[0],
+            postalCode: jsonPath(rawObject, '$.address..postal-code')[0]
+          };
+        }
+        catch (error) {
+          ep.logger.error('Error building address object: ' + error.message);
+        }
+
+        return address;
+      },
+      parseConfirmationSummary: function (rawObject) {
+        var confirmationSummary = {};
+
+        try {
+          confirmationSummary = {
+            status: jsonPath(rawObject, '$.status')[0],
+            purchaseNumber: jsonPath(rawObject, '$.purchase-number')[0],  // Oder Number
+            orderTotal: jsonPath(rawObject, '$.monetary-total..display')[0],
+            purchaseDate: jsonPath(rawObject, '$.purchase-date.display-value')[0],
+            taxTotal: jsonPath(rawObject, '$.tax-total.display')[0]
+          };
+
+        }
+        catch (error) {
+          ep.logger.error('Error building purchase confirmation summary object: ' + error.message);
+        }
+
+        return confirmationSummary;
+      },
+      parseReceiptLineItem: function (rawObject) {
+        var lineItemObj = {};
+
+        try {
+          lineItemObj.name = jsonPath(rawObject, '$.name')[0];
+          lineItemObj.quantity = jsonPath(rawObject, '$.quantity')[0];
+
+          // Line Item Rate / Price
+          lineItemObj.amount = {};
+          lineItemObj.tax = {};
+          lineItemObj.total = {};
+
+          // check if subscription or one-time item
+          var ratesArray = jsonPath(rawObject, '$._rate..rate')[0];
+          if (ratesArray) {
+            // rate may have multiple items in array
+            var lineItemRates = this.parseArray(ratesArray, 'parseRate')
+            // but currently cortex only supports 1 rate, so we will take the first 1
+
+            if (lineItemRates.length > 0) {
+              lineItemObj.total = lineItemRates[0];
+            }
+          }
+          // non subscription item
+          else {
+            lineItemObj.amount = this.parsePrice(jsonPath(rawObject, '$.line-extension-amount[0]')[0]);
+            lineItemObj.tax = this.parsePrice(jsonPath(rawObject, '$.line-extension-tax[0]')[0]);
+            lineItemObj.total = this.parsePrice(jsonPath(rawObject, '$.line-extension-total[0]')[0]);
+          }
+        }
+        catch (error) {
+          ep.logger.error('Error building purchase confirmation lineItem object: ' + error.message);
+        }
+
+        return lineItemObj;
+      },
+    parseRate: function(rawObject) {
+      var rate = {};
+      try {
+        rate.display = rawObject.display;
+        rate.cost = {
+          amount: jsonPath(rawObject, '$.cost..amount')[0],
+          currency: jsonPath(rawObject, '$.cost..currency')[0],
+          display: jsonPath(rawObject, '$.cost..display')[0]
+        }
+
+        rate.recurrence = {
+          interval: jsonPath(rawObject, '$.recurrence..interval')[0],
+          display: jsonPath(rawObject, '$.recurrence..display')[0]
+        }
+      }
+      catch (error) {
+        ep.logger.error('Error building rate object: ' + error.message);
+      }
+
+        return rate;
+      },
+      parsePrice: function(rawObject) {
+        var price = {};
+
+        try {
+          price = {
+            currency: jsonPath(rawObject, '$.currency')[0],
+            amount: jsonPath(rawObject, '$.amount')[0],
+            display: jsonPath(rawObject, '$.display')[0]
+          }
+        }
+        catch (error) {
+          ep.logger.error('Error building price object: ' + error.message);
+        }
+
+        return price;
+      }
+    };
 
     return {
-      PurchaseConfirmationModel:purchaseConfirmationModel
+      PurchaseConfirmationModel: purchaseConfirmationModel
 
     };
   }

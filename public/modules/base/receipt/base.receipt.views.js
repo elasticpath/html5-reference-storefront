@@ -6,8 +6,8 @@
  * Time: 9:16 AM
  *
  */
-define(['marionette', 'i18n'],
-  function(Marionette, i18n){
+define(['marionette', 'i18n', 'mediator'],
+  function(Marionette, i18n, Mediator){
 
     var viewHelpers = {
       getI18nLabel:function(key){
@@ -56,10 +56,20 @@ define(['marionette', 'i18n'],
     });
 
     // Purchase Confirmation Billing Address View
-    var purchaseConfirmationBillingAddressView = Backbone.Marionette.ItemView.extend({
+    var purchaseConfirmationBillingAddressView = Backbone.Marionette.Layout.extend({
       template:'#PurchaseConfirmationBillingAddress',
-      templateHelpers:viewHelpers
-
+      templateHelpers:viewHelpers,
+      className: 'purchase-confirmation-billing-address-container',
+      regions: {
+        confirmationAddressComponentRegion: '[data-region="confirmationAddressComponentRegion"]'
+      },
+      onShow: function() {
+        // fire event to load the address itemView from component
+        Mediator.fire('mediator.loadAddressesViewRequest', {
+          region: this.confirmationAddressComponentRegion,
+          model: this.model
+        });
+      }
     });
     // Payment Means View
     var purchaseConfirmationPaymentMeansView = Backbone.Marionette.ItemView.extend({
