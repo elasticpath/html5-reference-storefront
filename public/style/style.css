@@ -8032,8 +8032,9 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
   clear: both;
 }
 .profile-address-container {
+  margin-bottom: 3rem;
   float: left;
-  width: 50%;
+  width: 100%;
   position: relative;
   min-height: 1px;
   padding-left: 15px;

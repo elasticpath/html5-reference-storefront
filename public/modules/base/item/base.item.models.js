@@ -1,14 +1,13 @@
-define(['ep','app','backbone'],
-	function(ep, app, Backbone) {
-		var ItemModels = {};
-
+define(['ep', 'app', 'backbone'],
+  function (ep, app, Backbone) {
+    var ItemModels = {};
 
 
     var itemModel = Backbone.Model.extend({
-      getUrl: function(uri) {
-        return ep.app.config.cortexApi.path + '/' + ep.ui.decodeUri(uri)  + '?zoom=availability,addtocartform,price,rate,definition,definition:assets:element';
+      getUrl: function (uri) {
+        return ep.app.config.cortexApi.path + '/' + ep.ui.decodeUri(uri) + '?zoom=availability,addtocartform,price,rate,definition,definition:assets:element';
       },
-      parse:function(item){
+      parse: function (item) {
 
 
         var itemObj = {};
@@ -19,7 +18,7 @@ define(['ep','app','backbone'],
          * Display Name
          *
          * */
-        itemObj.displayName  = jsonPath(item, "$.['_definition'][0]['display-name']")[0];
+        itemObj.displayName = jsonPath(item, "$.['_definition'][0]['display-name']")[0];
         //itemObj.displayName = item['_definition'][0]['display-name'];
 
         /*
@@ -30,11 +29,11 @@ define(['ep','app','backbone'],
         var detailsArray = [];
         var detailsRoot = jsonPath(item, "$.['_definition'][0]['details']")[0];
         //if (item['_definition'][0]['details']){
-        if (detailsRoot){
+        if (detailsRoot) {
           //var detailsRoot = item['_definition'][0]['details'];
 
           var detailsAttribsArrayLen = detailsRoot.length;
-          for (var x = 0;x < detailsAttribsArrayLen;x++){
+          for (var x = 0; x < detailsAttribsArrayLen; x++) {
             var currObj = detailsRoot[x];
             var detailObject = {};
             detailObject.displayName = currObj['display-name'];
@@ -46,18 +45,17 @@ define(['ep','app','backbone'],
         itemObj.details = detailsArray;
 
         /*
-        *
-        * Add to Cart Action test
-        *
-        * */
+         *
+         * Add to Cart Action test
+         *
+         * */
         itemObj.addtocart = {};
         itemObj.addtocart.actionlink = null;
         var addToCartFormAction = jsonPath(item, "$._addtocartform..links[?(@.rel='addtodefaultcartaction')].rel")[0];
-        if (addToCartFormAction){
-          itemObj.addtocart.actionlink = jsonPath(item, "$._addtocartform..links[?(@.rel='addtodefaultcartaction')].uri")[0];;
+        if (addToCartFormAction) {
+          itemObj.addtocart.actionlink = jsonPath(item, "$._addtocartform..links[?(@.rel='addtodefaultcartaction')].uri")[0];
+          ;
         }
-
-
 
 
         /*
@@ -69,7 +67,7 @@ define(['ep','app','backbone'],
         itemObj.asset.url = '';
         var assetsListArray = [];
         var assetsArray = jsonPath(item, "$._definition.._assets.._element")[0];
-        if (assetsArray){
+        if (assetsArray) {
           var defaultImage = jsonPath(item, "$._definition.._assets.._element[?(@.name='default-image')]")[0];
           var assetObj = {};
 
@@ -89,7 +87,9 @@ define(['ep','app','backbone'],
          *
          * */
         var availabilityObj = jsonPath(item, '$._availability')[0];
-        itemObj.availability = parseAvailability(availabilityObj);
+        if (availabilityObj) {
+          itemObj.availability = parseAvailability(availabilityObj);
+        }
 
 
         /*
@@ -98,12 +98,19 @@ define(['ep','app','backbone'],
          *
          * */
         itemObj.price = {};
+        itemObj.price.listed = {};
+        itemObj.price.purchase = {};
+        itemObj.rateCollection = [];
 
-        var listPriceObject = jsonPath(item, "$.['_price'].['list-price']")[0];
-        itemObj.price.listed = parsePrice(listPriceObject);
+        var listPriceObject = jsonPath(item, '$._price..list-price[0]')[0];
+        if (listPriceObject) {
+          itemObj.price.listed = parsePrice(listPriceObject);
+        }
 
-        var purchasePriceObject = jsonPath(item, "$.['_price'].['purchase-price']")[0];
-        itemObj.price.purchase = parsePrice(purchasePriceObject);
+        var purchasePriceObject = jsonPath(item, '$._price..purchase-price[0]')[0];
+        if (purchasePriceObject) {
+          itemObj.price.purchase = parsePrice(purchasePriceObject);
+        }
 
         var rates = jsonPath(item, '$._rate..rate')[0];
         itemObj.rateCollection = parseRates(rates);
@@ -118,11 +125,11 @@ define(['ep','app','backbone'],
 
         return itemObj;
       },
-      getDefaultImage:function(){
+      getDefaultImage: function () {
         var retVal = null;
-        if(this.attributes.assets && (this.attributes.assets.length > 0)){
-          for (var i = 0;i < this.attributes.assets.length;i++){
-            if (this.attributes.assets[i].name === 'default-image'){
+        if (this.attributes.assets && (this.attributes.assets.length > 0)) {
+          for (var i = 0; i < this.attributes.assets.length; i++) {
+            if (this.attributes.assets[i].name === 'default-image') {
               retVal = this.attributes.assets[i];
               break;
             }
@@ -130,10 +137,10 @@ define(['ep','app','backbone'],
         }
         return retVal;
       },
-      isAddToCartEnabled:function(){
+      isAddToCartEnabled: function () {
         var retVal = false;
-        if (this.attributes.addtocart){
-          if(this.attributes.addtocart.actionlink){
+        if (this.attributes.addtocart) {
+          if (this.attributes.addtocart.actionlink) {
             return true;
           }
         }
@@ -143,8 +150,8 @@ define(['ep','app','backbone'],
 
     var itemAttributeModel = Backbone.Model.extend();
     var itemAttributeCollection = Backbone.Collection.extend({
-      model:itemAttributeModel,
-      parse:function(collection){
+      model: itemAttributeModel,
+      parse: function (collection) {
         return collection;
       }
     });
@@ -153,7 +160,7 @@ define(['ep','app','backbone'],
 
 
     // function to parse availability (states and release-date)
-    var parseAvailability = function(availabilityObj) {
+    var parseAvailability = function (availabilityObj) {
       var availability = {};
 
       if (availabilityObj) {
@@ -171,7 +178,7 @@ define(['ep','app','backbone'],
     };
 
     // function to parse one-time price (list or purchase)
-    var parsePrice = function(rawObject) {
+    var parsePrice = function (rawObject) {
       var price = {};
 
       try {
@@ -189,7 +196,7 @@ define(['ep','app','backbone'],
     };
 
     // function to parse rates collection
-    var parseRates = function(rates) {
+    var parseRates = function (rates) {
       var ratesArrayLen = 0;
       var rateCollection = [];
 
@@ -218,11 +225,11 @@ define(['ep','app','backbone'],
       return rateCollection;
     }
 
-	// Required, return the module for AMD compliance
-	return {
-    ItemModel:itemModel,
-    ItemAttributeCollection:itemAttributeCollection,
-    ListPriceModel:listPriceModel
-  };
-});
+    // Required, return the module for AMD compliance
+    return {
+      ItemModel: itemModel,
+      ItemAttributeCollection: itemAttributeCollection,
+      ListPriceModel: listPriceModel
+    };
+  });
 
