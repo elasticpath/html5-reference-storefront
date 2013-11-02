@@ -1,7 +1,11 @@
 Theming
 ====================
-Introduction to hour our storefront theming works.
+Introduction to how our storefront theming works.
 
+The Basics
+---------------------
+Overview of how out Theming layer works.
++ pictures of the different layout locations
 
 Extention Model
 ---------------------

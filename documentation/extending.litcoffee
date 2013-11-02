@@ -2,10 +2,14 @@ Customizing HTML5 Features
 ====================
 Introduction to how to customize the HTML5 features.
 
-
-Extention Model
+The Basics
 ---------------------
--Overview of our theme customizing/extension model
+Overview of our MVC Framework and how the views are populated.
+
+
+Extension Model
+---------------------
+-Overview of our theme customizing/extension model (where to build things out)
 
 Tutorial: ??????????
 ---------------------

@@ -1,9 +1,8 @@
-HTML5 Storefront Technologies
+HTML5 Storefront Technology Overview
 ====================
-The HTML5 Storefront technologies are chosen for their.....
-Standard, advanced technologies, chosen for their
-Describe our methodology/concept for using these technologies
-
+The HTML5 Storefront technologies were chosen for their robustness, popularity, and extensibility. We want your
+JavaScript developers to get up to speed and as quickly as possible begin extending/customizing
+your HTML5 Storefront.
 
 Platform Architecture
 ---------------------
@@ -58,6 +57,13 @@ dependencies.</p>
 </td>
 <td>0.4.x</td>
 </tr>
+<tr>
+<td><strong><a href="http://lesscss.org/">{less}</a></strong></td>
+<td>
+<p>Extends CSS with dynamic behavior, utilizing variables, mixins, operations, and functions.</p>
+</td>
+<td>1.3.3</td>
+</tr>
 </tbody>
 </table>
 
@@ -92,19 +98,14 @@ HTML5 Code Structure
 ---------------------
 ![codeStructure](img/fileStructure.png)
 
-Feature Guide
----------------------
-- list of the OOTB features
-
 Platform Support
 ---------------------
-
 <table>
 <tbody>
 <tr>
 <th align="center" valign="middle"></th>
-<th align="center" valign="middle">Certified</th>
-<th align="center" valign="middle">Compatible</th>
+<th align="center" valign="middle">Certified*</th>
+<th align="center" valign="middle">Compatible*</th>
 <th align="center" valign="middle">Not Supported</th>
 </tr>
 <tr>
@@ -146,3 +147,6 @@ Platform Support
 </tr>
 </tbody>
 </table>
+**Certified* - Works and is Tested
+
+**Compatible* - Base functionality works, but not tested.
