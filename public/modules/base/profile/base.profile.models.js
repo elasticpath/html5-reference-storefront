@@ -9,7 +9,10 @@
 define(['ep', 'eventbus', 'backbone'],
   function (ep, EventBus, Backbone) {
 
-
+    /**
+     * Defines url to fetch model from, and parse the response.
+     * Backbone.Model
+     */
     var profileModel = Backbone.Model.extend({
       url: ep.app.config.cortexApi.path + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=purchases:element,paymentmethods:element,subscriptions:element,emails,addresses:element',
       parse: function (response) {
@@ -38,7 +41,17 @@ define(['ep', 'eventbus', 'backbone'],
       }
     });
 
+    /**
+     * Collection of helper functions to parse the model.
+     * @type {{parseArray: Function, parseSubscription: Function, parseAddress: Function, parseCreditCard: Function}}
+     */
     var parseHelpers = {
+      /**
+       * Parse an array of objects.
+       * @param rawArray  the raw array response to be parsed.
+       * @param parseFunction the name of function to parse the objects in array
+       * @returns Array of parsed objects
+       */
       parseArray: function (rawArray, parseFunction) {
         var parsedArray = [];
         var arrayLength = 0;
@@ -54,6 +67,11 @@ define(['ep', 'eventbus', 'backbone'],
 
         return parsedArray;
       },
+      /**
+       * Parse a subscription object.
+       * @param rawObject raw subscription JOSN response
+       * @returns Object - parsed subscription object
+       */
       parseSubscription: function (rawObject) {
         var subscription = {};
 
@@ -71,6 +89,11 @@ define(['ep', 'eventbus', 'backbone'],
 
         return subscription;
       },
+      /**
+       * Parse an address object.
+       * @param rawObject raw address JSON response
+       * @returns Object - parsed address object
+       */
       parseAddress: function (rawObject) {
         var address = {};
 
@@ -92,6 +115,11 @@ define(['ep', 'eventbus', 'backbone'],
 
         return address;
       },
+      /**
+       * Parse an credit card object.
+       * @param rawObject raw credit card JSON response
+       * @returns Object - parsed credit card object
+       */
       parseCreditCard: function (rawObject) {
         var creditCard = {};
 
@@ -114,7 +142,6 @@ define(['ep', 'eventbus', 'backbone'],
 
     return {
       ProfileModel: profileModel
-
 
     };
   }

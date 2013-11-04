@@ -62,6 +62,7 @@
 
   <!-- Default Profile Addresses Template -->
   <script id="DefaultProfileAddressesTemplate" type="text/template">
+    <!-- defaultView, itemView tagName: div -->
     <h2><%= E.getI18nLabel('profile.addressesTitle') %></h2>
     <ul class="profile-addresses-listing">
       <!-- collection target region -->
@@ -71,13 +72,13 @@
 
   <!--Default Profile Address Layout Template-->
   <script id="DefaultProfileAddressLayoutTemplate" type="text/template">
-    <!-- itemView tagName: li, class: profile-address-container-->
+    <!-- defaultView, itemView tagName: li, class: profile-address-container-->
       <div data-region="profileAddressComponentRegion"></div>
   </script>
 
   <!-- Default Profile Addresses EmptyView Template -->
   <script id="DefaultProfileAddressesEmptyViewTemplate" type="text/template">
-    <!-- itemView tagName: li, class: profile-no-address-msg-container-->
+    <!-- defaultView, itemView tagName: li, class: profile-no-address-msg-container-->
     <%= E.getI18nLabel('profile.noAddressMsg') %>
   </script>
 

@@ -7,23 +7,30 @@
  *
  * 
  */
-//define(['ep','app', 'eventbus', 'mediator', 'profile.models', 'profile.views', 'text!modules/base/profile/base.profile.templates.html'],
-//  function(ep, App, EventBus, Mediator,  Model, View, template, addressView, addressTemplate){
 define(function(require) {
     var ep = require('ep'),
-      App = require('app'),
       EventBus = require('eventbus'),
-      Mediator = require('mediator'),
       pace = require('pace'),
       Backbone = require('backbone'),
       Model = require('profile.models'),
       View = require('profile.views'),
       template = require('text!modules/base/profile/base.profile.templates.html');
 
+    /**
+     * Inject the address template into TemplateContainer for the views to reference
+     */
     $('#TemplateContainer').append(template);
 
+    /**
+     * Creates namespace to template to reference model and viewHelpers
+     */
     _.templateSettings.variable = 'E';
 
+    /**
+     * Renders the DefaultLayout of profile module, and fetch model from backend;
+     * upon model fetch success, renders profile views in destinated regions.
+     * @returns {View.DefaultLayout}
+     */
     var defaultView = function(){
 
       // ensure the user is authenticated befor continuing to process the request

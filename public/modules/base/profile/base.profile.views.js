@@ -1,15 +1,20 @@
 /**
  * Copyright Elastic Path Software 2013.
-
- * User: sbrookes
- * Date: 04/04/13
- * Time: 9:16 AM
- *
+ * Default Profile Views & viewHelpers
  */
 define(['marionette','i18n', 'mediator'],
   function(Marionette, i18n, Mediator){
 
+    /**
+     * Template helper functions
+     * @type {{getI18nLabel: Function}}
+     */
     var viewHelpers = {
+      /**
+       * Get the localized version of text corresponding the key given.
+       * @param key the key of JSON 'key/value' pair to corresponding localized text
+       * @returns   the localized text or the i18n key in error
+       */
       getI18nLabel:function(key){
         var retVal = key;
         try{
@@ -81,7 +86,12 @@ define(['marionette','i18n', 'mediator'],
       templateHelpers:viewHelpers
     });
 
-    // Profile Address Item View (layout)
+    /**
+     * Profile Address Item View
+     * make mediator request to load an address view in region: profileAddressComponentRegion,
+     * will render a wrapper around an address view
+     * @type Marionette.Layout
+     */
     var profileAddressItemView = Backbone.Marionette.Layout.extend({
       template: '#DefaultProfileAddressLayoutTemplate',
       tagName: 'li',
@@ -98,7 +108,11 @@ define(['marionette','i18n', 'mediator'],
       }
     });
 
-    // Profile Addresses Empty View
+    /**
+     * Profile Addresses Empty View
+     * will render a no-address-message when addresses collection is empty
+     * @type Marionette.ItemView
+     */
     var profileAddressesEmptyView = Backbone.Marionette.ItemView.extend({
       template: '#DefaultProfileAddressesEmptyViewTemplate',
       tagName: 'li',
@@ -106,7 +120,12 @@ define(['marionette','i18n', 'mediator'],
       templateHelpers: viewHelpers
     });
 
-    // Profile Addresses View (compositeView)
+    /**
+     * Profile Addresses View
+     * will render a collection of addresses with surrounding element such as heading,
+     * will render emptyView if collection empty.
+     * @type Marionette.CompositeView
+     */
     var profileAddressesView = Backbone.Marionette.CompositeView.extend({
       template: '#DefaultProfileAddressesTemplate',
       emptyView: profileAddressesEmptyView,
