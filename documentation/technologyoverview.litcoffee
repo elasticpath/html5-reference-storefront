@@ -1,8 +1,7 @@
-HTML5 Storefront Technology Overview
+HTML5 Storefront Technology
 ====================
-The HTML5 Storefront technologies were chosen for their robustness, popularity, and extensibility. We want your
-JavaScript developers to get up to speed and as quickly as possible begin extending/customizing
-your HTML5 Storefront.
+The HTML5 Storefront technologies were chosen for their robustness, popularity, and extensibility.
+The idea is that your JavaScript developers already know these technologies, so they can start extending and customizing your HTML5 Storefront as quickly as possible.
 
 Platform Architecture
 ---------------------
@@ -89,7 +88,7 @@ Testing Frameworks
 <tr>
 <td><strong>Selenium</strong></td>
 <td>Automated testing of the browser components.</td>
-<td></td>
+<td>2.35.0</td>
 </tr>
 </tbody>
 </table>
@@ -147,6 +146,6 @@ Platform Support
 </tr>
 </tbody>
 </table>
-**Certified* - Works and is Tested
+**Certified* - Officially Supported and Tested
 
-**Compatible* - Base functionality works, but not tested.
+**Compatible* - Base functionality works - Not tested.
