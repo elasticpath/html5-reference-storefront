@@ -48,7 +48,7 @@ app.configure('development', function(){
  * ROUTES
  *
  * */
-require('./routes/routes-config')(app);
+//require('./routes/routes-config')(app);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("EP UI Storefront listening on port " + app.get('port'));
