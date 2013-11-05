@@ -5,7 +5,7 @@ The idea is that your JavaScript developers already know these technologies, so 
 
 Platform Architecture
 ---------------------
--pics and stuff go here!
+![codeStructure](img/architecture.png)
 
 Technology Stack
 ---------------------
@@ -18,7 +18,7 @@ Technology Stack
 </tr>
 <tr>
 <td><strong><a href="http://requirejs.org/">require.js</a></strong></td>
-<td>JavaScript library facilitating asynchronous module management: <a href="http://en.wikipedia.org/wiki/Asynchronous_module_definition">AMD (asynchronous module definition)</a> .
+<td>JavaScript library facilitating asynchronous module definition <a href="http://en.wikipedia.org/wiki/Asynchronous_module_definition">(AMD)</a> .
 </td>
 <td>2.0</td>
 </tr>
