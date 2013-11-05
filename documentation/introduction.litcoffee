@@ -11,8 +11,8 @@ With a simple html/css layer it should make it easier for designer to customize 
 What is the Cortex API?
 -------------------
 Cortex API is Elastic Path's powerful REST e-commerce API. The API is designed to surface any e-commerce backend system systems data in a RESTful manner.
-The HTML5 Storefront rests ontop of the Cortex API to serve up e-commerce websites.
-To learn more about the Cortex API, see <a href="http://api-cortex-developers.docs.elasticpath.com">api-cortex-developers.docs.elasticpath.com</a>
+The HTML5 Storefront rests ontop of Cortex API to serve up e-commerce websites.
+To learn more aboutb Cortex API, see <a href="http://api-cortex-developers.docs.elasticpath.com">api-cortex-developers.docs.elasticpath.com</a>
 ![Cortex](img/cortex-page-diagram.png)
 
 
