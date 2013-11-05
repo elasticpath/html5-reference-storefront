@@ -1,11 +1,5 @@
 <div id="ReceiptTemplateContainer">
 
-  <script type="text/template" id="ReceiptMainTemplate">
-
-    <div class="receipt-container">TMPL</div>
-
-  </script>
-
   <!-- Purchase Confirmation Layout Template -->
   <script id="PurchaseConfirmationLayoutTemplate" type="text/temmplate">
     <h2><%= E.getI18nLabel('receipt.pageTitle') %></h2>
@@ -54,16 +48,6 @@
     <h3><%= E.getI18nLabel('receipt.billingTitle') %></h3>
     <div data-region="confirmationAddressComponentRegion"></div>
   </script>
-
-  <!--
-    <p data-el-value="billingAddress.name"><%= E.name %></p>
-    <p data-el-value="billingAddress.streetAddress"><%= E.streetAddress %></p>
-    <p data-el-value="billingAddress.extendedAddress"><%= E.extendedAddress %></p>
-    <p data-el-value="billingAddress.locality"><%= E.locality %></p>
-    <p data-el-value="billingAddress.region"><%= E.region %></p>
-    <p data-el-value="billingAddress.country"><%= E.country %></p>
-    <p data-el-value="billingAddress.postalCode"><%= E.postalCode %></p>
-  -->
 
   <!-- Purchase Confirmation Payment Means -->
   <script id="PurchaseConfirmationPaymentMeans" type="text/template">

@@ -4,6 +4,7 @@
  */
 define(['marionette'],
   function(Marionette) {
+
     /**
      * Default Address ItemView
      * Will render an default address
