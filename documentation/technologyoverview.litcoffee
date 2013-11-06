@@ -9,7 +9,7 @@ Platform Architecture
 
 Technology Stack
 ---------------------
-<table border="1" cellpadding="3" cellspacing="0" style="; width: 100%; border: 1px solid #000000">
+<table border="1" cellpadding="3" cellspacing="0" style="; width: 80%; border: 1px solid #000000">
 <tbody>
 <tr>
 <th align="center" valign="middle">Technology</th>
@@ -45,11 +45,6 @@ dependencies.</p>
 <td>0.8.x</td>
 </tr>
 <tr>
-<td><strong><a href="http://lesscss.org/">less css</a></strong></td>
-<td>CSS pre-processor. JavaScript based CSS compiler for flexible styling and theming via variables and mixins.</td>
-<td>1.3.x</td>
-</tr>
-<tr>
 <td><strong><a href="http://gruntjs.com/">grunt.js</a></strong></td>
 <td>
 <p>Build and configuration tool.<em>Dependencies</em>: <em><strong>nodejs 1.8.x</strong></em></p>
@@ -68,7 +63,7 @@ dependencies.</p>
 
 Testing Frameworks
 ---------------------
-<table border="1" cellpadding="3" cellspacing="0" style="; width: 100%; border: 1px solid #000000">
+<table border="1" cellpadding="3" cellspacing="0" style="; width: 80%; border: 1px solid #000000">
 <tbody>
 <tr>
 <th align="center" valign="middle">Technology</th>
@@ -101,7 +96,7 @@ Platform Support
 ---------------------
 <table>
 <tbody>
-<tr>
+<tr align="center">
 <th align="center" valign="middle"></th>
 <th align="center" valign="middle">Certified*</th>
 <th align="center" valign="middle">Compatible*</th>
@@ -110,38 +105,38 @@ Platform Support
 <tr>
 <td ><strong>Browsers</strong></td>
 <td>
-<ul>
-<li>IE 10+</li>
-<li>Chrome</li>
-<li>Safari</li>
-</ul>
+
+* IE 10+
+* Chrome
+* Safari
+
 </td>
 <td>
-<ul>
-<li>Firefox</li>
-</ul>
+
+* Firefox
+
 </td>
 <td></td>
 </tr>
 <tr>
 <td><strong>Devices</strong></td>
 <td>
-<ul>
-<li>Android tablets 10" & 7"</li>
-<li>iOS tablest 10" & 7"</li>
-</ul>
+
+* Android tablets 10" & 7"
+* iOS tablest 10" & 7"
+
 </td>
 <td>
-<ul>
-<li>Android Phones</li>
-<li>iOS Phones</li>
-</ul>
+
+* Android Phones
+* iOS Phones
+
 </td>
 <td>
-<ul>
-<li>Windows Tablets</li>
-<li>Windows Phones</li>
-</ul>
+
+* Windows Tablets
+* Windows Phones
+
 </td>
 </tr>
 </tbody>
