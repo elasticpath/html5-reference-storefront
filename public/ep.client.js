@@ -6,14 +6,25 @@
  * Time: 8:25 AM
  *
  */
-define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus', 'router', 'text!ep.config.json', 'jsonpath', 'modernizr'],
-  function ($, _, Backbone, Marionette, Mediator, EventBus, Router, config) {
+define(function (reqiure) {
+    var $ = require('jquery'),
+        _ = require('underscore'),
+        Backbone = require('backbone'),
+        Marionette = require('marionette'),
+        Mediator = require('mediator'),
+        EventBus = require('eventbus'),
+        Router = require('router'),
+        config = require('text!ep.config.json');
+
+    // require the follow is necessary to use their functions, but no need to variablize it.
+    require('toast');
+    require('jsonpath');
 
     // root application namespace
     var ep = {};
     ep.ui = {};
     ep.io = {};
-    ep.app = new Backbone.Marionette.Application();
+    ep.app = new Marionette.Application();
 
 
     // presentation dom container region
@@ -37,7 +48,6 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
       }
       return false;
     };
-
 
 
     ep.ui.encodeUri = function (uri) {
@@ -231,12 +241,12 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
     };
 
     /*
-    * Is IUser
-    * */
-    ep.app.isUserLoggedIn = function(){
+     * Is IUser
+     * */
+    ep.app.isUserLoggedIn = function () {
       var retVar = false;
       // check if there is an auth token
-      if (ep.io.localStore.getItem('oAuthRole') && ep.io.localStore.getItem('oAuthRole') === 'REGISTERED'){
+      if (ep.io.localStore.getItem('oAuthRole') && ep.io.localStore.getItem('oAuthRole') === 'REGISTERED') {
         retVar = true;
       }
 
@@ -284,7 +294,6 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
      * */
 
 
-
     // bootstrap initialization complete (main.js)
     // time to start up the application
     EventBus.on('app.bootstrapInitSuccess', function () {
@@ -316,7 +325,6 @@ define(['jquery', 'underscore', 'backbone', 'marionette', 'mediator', 'eventbus'
 
       }
     });
-
 
 
     // recieves an object literal with refrence to

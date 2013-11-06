@@ -60,6 +60,8 @@ requirejs.config({
     'chai'            : '/tests/libs/chai',
     'sinon-chai'      : '/tests/libs/sinon-chai',
     'mocha.common'    : '/tests/libs/mocha.common',
+    'EventTestFactory': '/tests/TestHelpers/EventTestFactory',
+    'EventTestHelpers': '/tests/TestHelpers/EventTestHelpers',
     'sinon'           :  'scripts/lib/sinon-1.7.3'
 
   },

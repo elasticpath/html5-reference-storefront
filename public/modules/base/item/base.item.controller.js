@@ -97,14 +97,6 @@ define(['jquery','ep','app', 'eventbus', 'item.models', 'item.views', 'text!modu
       // render cart view in main nav
     });
     EventBus.on('item.addToCartBtnClicked', function (event) {
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('| THIS ONE CLICKED TOO');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|');
-      ep.logger.info('|');
       var formActionLink = $(event.target).data('actionlink');
 
       if (formActionLink) {
@@ -121,15 +113,11 @@ define(['jquery','ep','app', 'eventbus', 'item.models', 'item.views', 'text!modu
             url: formActionLink,
             data: obj,
             success: function (response, x, y) {
-              // follow link response
-              ep.logger.info('Success posting to cart - go to cart view');
-
               // get the location header
-              ep.logger.info(response);
+//              ep.logger.info(response);
               // ep.logger.info(request);
               ep.logger.info(JSON.stringify(y));
               var lineItemUrl = y.getResponseHeader('Location');
-              ep.logger.info(lineItemUrl);
               if (lineItemUrl) {
                 EventBus.trigger('item.loadDefaultCartRequest');
               }

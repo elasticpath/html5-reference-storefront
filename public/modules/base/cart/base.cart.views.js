@@ -132,6 +132,22 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
          return null;
         }
         return 'is-hidden';
+      },
+      createQuantityOptions:function(min, max, quantity) {
+        var optionHtml = '';
+        var selected = '';
+
+        for (var i = min; i <= max; i++) {
+          // e.g. <option value="1" selcted="selected">1</option>
+          if (i === quantity) {
+            selected = 'selected="selected"';
+          } else {
+            selected = '';
+          }
+          optionHtml += '<option value="' + i + '"' + selected + ' >' + i + '</option>' ;
+        }
+
+        return optionHtml;
       }
     };
 
@@ -151,7 +167,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     }
 
     // Default Layout
-    var defaultView = Backbone.Marionette.Layout.extend({
+    var defaultLayout = Backbone.Marionette.Layout.extend({
       template:'#DefaultCartLayoutTemplate',
       className:'cart-container container',
       regions:{
@@ -182,25 +198,35 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     });
 
     // Cart Line Item View
-    var cartLineItemView = Backbone.Marionette.ItemView.extend({
+    var cartLineItemView = Backbone.Marionette.Layout.extend({
       template:'#CartLineItemTemplate',
       tagName:'tr',
       templateHelpers:viewHelpers,
+      regions: {
+        cartLineitemAvailabilityRegion: '[data-region="cartLineitemAvailabilityRegion"]',
+        cartLineitemUnitPriceRegion: '[data-region="cartLineitemUnitPriceRegion"]',
+        cartLineitemTotalPriceRegion: '[data-region="cartLineitemTotalPriceRegion"]'
+      },
       events:{
         'click .btn-cart-removelineitem':function(event){
           event.preventDefault();
 
           var actionLink = $(event.currentTarget).data("actionlink");
           EventBus.trigger('cart.removeLineItemBtnClicked', actionLink);
+        },
+
+        'change .cart-lineitem-quantity-select': function(event) {
+          event.preventDefault();
+
+          var actionLink = viewHelpers.getCortexPath() + this.model.get('lineitemUri');
+          var newQty = $(event.target).val();
+          EventBus.trigger('cart.lineItemQuantityChanged', actionLink, newQty);
         }
       },
       onShow:function(){
         // show availability if at least has availability state
         if (this.model.get('availability').state) {
-          var availabilityRegion = new Backbone.Marionette.Region({
-            el: $('[data-region="cartLineitemAvailabilityRegion"]', this.el)
-          });
-          availabilityRegion.show(
+          this.cartLineitemAvailabilityRegion.show(
             new itemAvailabilityView({
               model: new Backbone.Model(this.model.get('availability'))
             })
@@ -208,10 +234,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         }
 
         // show unit price
-        var unitPriceRegion = new Backbone.Marionette.Region({
-          el: $('[data-region="cartLineitemUnitPriceRegion"]', this.el)
-        });
-        unitPriceRegion.show(
+        this.cartLineitemUnitPriceRegion.show(
           new itemUnitPriceLayout({
             model: new Backbone.Model({
               price: this.model.attributes.unitPrice,
@@ -221,10 +244,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         );
 
         // show total price
-        var totalPriceRegion = new Backbone.Marionette.Region({
-          el: $('[data-region="cartLineitemTotalPriceRegion"]', this.el)
-        });
-        totalPriceRegion.show(
+        this.cartLineitemTotalPriceRegion.show(
           new itemTotalPriceLayout({
             model: new Backbone.Model({
               price: this.model.attributes.price,
@@ -382,24 +402,32 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     });
 
 
-
     // Activity Indicator View
     var cartActivityIndicatorView = Backbone.Marionette.ItemView.extend({
       template:'#CartActivityIndicatorTemplate'
     });
 
+    /* ********* Helper functions ********* */
+    /**
+     * Reset a lineItem's quantity to original value when first rendered on page.
+     */
+    function resetQuantity() {
+      $('[data-el-value="lineItem.quantity"] option[selected="selected"]').prop('selected', true);
+    }
+
     return {
+      DefaultLayout:defaultLayout,
       CartTitleView:cartTitleView,
       MainCartView:mainCartView,
       CartLineItemView:cartLineItemView,
       EmptyCartView:emptyCartView,
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
-      DefaultView:defaultView,
       CartCheckoutMasterView:cartCheckoutMasterView,
       CartActivityIndicatorView:cartActivityIndicatorView,
       setCheckoutButtonProcessing:setCheckoutButtonProcessing,
-      resetCheckoutButtonText:resetCheckoutButtonText
+      resetCheckoutButtonText:resetCheckoutButtonText,
+      resetQuantity: resetQuantity
     };
   }
 );

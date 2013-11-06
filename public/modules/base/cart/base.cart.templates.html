@@ -42,13 +42,13 @@
   <!-- Cart Line Item Template -->
   <script id="CartLineItemTemplate" type="text/template">
     <!-- Cart Line Item Thumbnail -->
-    <td class="cart-lineitem-thumbnail-col">
+    <td class="cart-lineitem-thumbnail-col" data-el-value="lineItem.thumbnail">
       <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>"
            class="cart-lineitem-thumbnail"/>
     </td>
 
     <!-- Cart Line Item Display Name -->
-    <td class="cart-lineitem-title-col">
+    <td class="cart-lineitem-title-col" data-el-value="lineItem.displayName">
       <a href="<%= E.getItemUrl(E.itemUri) %>"><%= E.displayName %></a>
     </td>
 
@@ -59,14 +59,18 @@
     <td class="cart-lineitem-unit-price-col" data-region="cartLineitemUnitPriceRegion"></td>
 
     <!-- Cart Line Item Quantity -->
-    <td class="cart-lineitem-quantity-col"><%= E.quantity %></td>
+    <td class="cart-lineitem-quantity-col" data-el-value="lineItem.quantity">
+      <select class="cart-lineitem-quantity-select form-control" id="cart-lineItem-select-quantity" name="cart-lineItem-select-quantity">
+        <%= E.createQuantityOptions(0, 10, E.quantity) %>
+      </select>
+    </td>
 
     <!-- Cart Line Item Total Price Region -->
     <td class="cart-lineitem-total-price-col" data-region="cartLineitemTotalPriceRegion"></td>
 
     <!-- Cart Line Item Remove Button -->
     <td class="cart-lineitem-remove-btn-col">
-    <button class="btn btn-cart-removelineitem" data-actionlink="<%= E.getCortexPath() %><%= E.lineitemUri %>">
+    <button class="btn btn-cart-removelineitem" data-el-label="lineItem.removeBtn" data-actionlink="<%= E.getCortexPath() %><%= E.lineitemUri %>">
       <span class="icon"></span>
       <span class="btn-text"><%= E.getI18nLabel('cart.remove') %></span>
     </button>

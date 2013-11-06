@@ -67,11 +67,11 @@ define(function (require) {
           givenName: 'ben',
           familyName: 'boxer',
           streetAddress: '1234 HappyVille Road',
-          "extendedAddress": 'Siffon Ville',
-          "city": "Vancouver",
-          "region": "BC",
-          "country": "CA",
-          "postalCode": "v8v8v8"
+          extendedAddress: 'Siffon Ville',
+          city: "Vancouver",
+          region: "BC",
+          country: "CA",
+          postalCode: "v8v8v8"
         });
 
         before(function () {
