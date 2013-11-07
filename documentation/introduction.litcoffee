@@ -1,43 +1,48 @@
-Introduction
+Introducing the HTML5 Reference Storefront
 ====================
-Welcome to the Elastic Path's HTML5 Storefront!
+Welcome to the Elastic Path's HTML5 Reference Storefront!
 
-The HTML5 Storefront is an extensible e-commerce website backed by Elastic Path's Cortex API.
-The Storefront is comprised of the latest technologies (JavaScript, HTML5, jQuery, CSS3, {less}, Marrionette, Node.js, etc)
- and is designed for extensibility.
+The HTML5 Storefront is an flexible e-commerce website backed by Elastic Path's Cortex API.
+The HTML5 Storefront, comprised of the latest technologies (JavaScript, HTML5, jQuery, CSS3, {less}, Marrionette, Node.js, etc), is designed for extensibility.
 
 E-commerce functionality (cart, authentication, profile, search, etc) is separated from the website's presentation, allowing
 front-end developers to work on the CSS without having to touch the JavaScript, while JavaScript developers can develop
 functionality without having to touch the front end. Each customization layer is separated from the HTML5's core code, so
-neither developers have to touch the Storefront's engine.
+neither developer has to touch the Storefront's engine.
 
 ###Customization Layers
-The two customization layers of interest for JavaScript developers and front-end developers are the Module Layer and the Presentation Layer.
-Take a look at the <a href="technologyoverview.html#platformArchitecture">Platform Architecture</a> to see where these two layers are positioned in regards to the rest of the system.
+Two customization layers of interest for JavaScript developers and front-end developers are the Module Layer and the Presentation Layer.
+Take a look at the <a href="technologyoverview.html#platformArchitecture">Platform Architecture</a> to see where the layers are positioned in regards to the rest of the system.
 
 ####Module Layer
-This layer is where JavaScript developers build out/extend the HTML5 Storefront's functionality. Each module is an independent unit of code that does one thing.
-Together, all the modules comprise the HTML5 Storefront's features. JS developers write and create these modules to enhance/create HTML5 Storefront functionality.
+This layer is where JavaScript developers build/extend the HTML5 Storefront's functionality.
+Generally, JavaScript modules are independent units of code that that represent distinct pieces of functionality.
+Together, the modules comprise the entire system of HTML5 Storefront functionality.
+For more information on extending/customizing modules, see <a href="extending.html">Customizing Storefront Features</a>.
 
 **What are HTML5 Storefront modules?**
 
-Basically, an HTML5 Storefront module is the view, plus the code backing the view. For example, carts
-For more information on extending/customizing modules, see <a href="extending.html">Customizing Storefront Features</a>
+An HTML5 Storefront module is the view, plus the code backing the view. For example, the cart module is
+comprised of the `cart.controller.js`, `cart.model.js`, `cart.templates.html`, and the `cart.view.js`.
+
+![Cart Module](img/cartModule.png)
+
+Cart functionality such as checkout, item prices, item availability, lineitems, etc are provided by the modules' `cart.controller` and `cart.model`.
+While the view, the output representations of these features, is handled by the `cart.templates.html`, and the `cart.view.js`.
+Cart look and feel, the CSS presentation, is handled by the themes, which are described below.
+
+
+**Why combine view and code (model, controller) into one module?**
+
+This makes the modules as self-contained as possible, minimizes the references required to other modules, and saves the JS developer from having to customize the
+Storefront's engine controller every time a module is added or changed.
 
 ####Presentation Layer
 
-Themes are the look and feel of the website.
-<a href="theming.html">Theming</a>
+The HTML5 Storefront has a simple Presentation Layer (html/css), allowing front-end developers to customize the the look and feel without having to touch the JS code.
+Front-end developers can create different themes to give the HTML5 Storefront different look and feels. For more information on creating a theme, see the <a href="theming.html#tutorialTheme">Theming Tutorial</a>
 
 
-What are themes?
-With a simple html/css layer it should make it easier for designer to customize the presentation without having to touch the JS code.
-
-The HTML is contained in module specific html template files and the engine is in fact underscore.
-It is simple and provides for some basic logic (loops, helper functions, etc).
-I try to avoid getting too clever with markup/templates as that is the place where developers and designers typically
-meet so the less 'technology' between a designer and the markup/css the better.
-With a simple html/css layer it should make it easier for designer to customize the presentation without having to touch the JS code.
 
 
 What is the Cortex API?
@@ -70,4 +75,4 @@ This document is not a primer for JavaScript, CSS, etc. Before you begin, you sh
 
 Audience
 ---------------------
-This document is written for experienced JavaScript developers and front-end UI developers who want to learn how to customize/extend the HTML5 Storefront.
+This document is written for experienced JavaScript developers and front-end UI developers who want to learn how to customize/extend the HTML5 Reference Storefront.
