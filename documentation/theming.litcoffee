@@ -7,9 +7,6 @@ The Basics
 Overview of how out Theming layer works.
 + pictures of the different layout locations
 
-Extention Model
----------------------
--Overview of our theme customizing/extension model
 
 Tutorial: ??????????
 ---------------------
