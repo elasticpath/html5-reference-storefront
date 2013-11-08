@@ -55,7 +55,7 @@ To learn more aboutb Cortex API, see <a href="http://api-cortex-developers.docs.
 ![Cortex](img/cortex-page-diagram.png)
 
 
-Feature Guide
+HTML5 Reference Storefront Features
 ---------------------
 ![Feature Guide](img/featureSupport.png)
 
