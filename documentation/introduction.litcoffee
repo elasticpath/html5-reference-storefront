@@ -11,24 +11,25 @@ functionality without having to touch the front end. Each customization layer is
 neither developer has to touch the Storefront's engine.
 
 ###Customization Layers
-Two customization layers of interest for JavaScript developers and front-end developers are the Module Layer and the Presentation Layer.
+JavaScript developers make their customizations in the Module Layer, while front-end developers customize the Presentation Layer.
 Take a look at the <a href="technologyoverview.html#platformArchitecture">Platform Architecture</a> to see where the layers are positioned in regards to the rest of the system.
 
 ####Module Layer
 This layer is where JavaScript developers build/extend the HTML5 Storefront's functionality.
-Generally, JavaScript modules are independent units of code that that represent distinct pieces of functionality.
+JavaScript modules are independent units of code that represent distinct pieces of functionality.
 Together, the modules comprise the entire system of HTML5 Storefront functionality.
 For more information on extending/customizing modules, see <a href="extending.html">Customizing Storefront Features</a>.
 
 **What are HTML5 Storefront modules?**
 
 An HTML5 Storefront module is the view, plus the code backing the view. For example, the cart module is
-comprised of the `cart.controller.js`, `cart.model.js`, `cart.templates.html`, and the `cart.view.js`.
+comprised of the `cart.controller.js`, `cart.model.js`, `cart.templates.html`, and the `cart.view.js`:
 
 ![Cart Module](img/cartModule.png)
 
-Cart functionality such as checkout, item prices, item availability, lineitems, etc are provided by the modules' `cart.controller` and `cart.model`.
+Cart functionality such as checkout, item prices, item availability, lineitems, etc is provided by the modules' `cart.controller` and `cart.model`.
 While the view, the output representations of these features, is handled by the `cart.templates.html`, and the `cart.view.js`.
+The view is the framework, or regions, of the cart's view pieces will be located. The view's look and feel, i.e CSS
 Cart look and feel, the CSS presentation, is handled by the themes, which are described below.
 
 
@@ -39,8 +40,8 @@ Storefront's engine controller every time a module is added or changed.
 
 ####Presentation Layer
 
-The HTML5 Storefront has a simple Presentation Layer (html/css), allowing front-end developers to customize the the look and feel without having to touch the JS code.
-Front-end developers can create different themes to give the HTML5 Storefront different look and feels. For more information on creating a theme, see the <a href="theming.html#tutorialTheme">Theming Tutorial</a>
+The HTML5 Storefront has a simple Presentation Layer (html/css), allowing front-end developers to customize the look and feel without having to touch the JS code.
+Front-end developers can create themes to give the HTML5 Storefront different look and feels. For more information on creating a theme, see the <a href="theming.html#tutorialTheme">Theming Tutorial</a>
 
 
 
@@ -63,9 +64,7 @@ HTML5 Reference Storefront Features
 About the Documentation
 ---------------------
 This document is written for knowledgeable JavaScript developers who are extending/customizing the HTML5 Storefront modules and
-for knowledgeable front-end developers who are extending/customizing the HTML5 Storefront themes.
-
-This document is not a primer for JavaScript, CSS, etc. Before you begin, you should have working knowledge of the following technologies:
+for knowledgeable front-end developers who are extending/customizing the HTML5 Storefront themes. This document is not a primer for JavaScript, CSS, etc. Before you begin, you should have working knowledge of the following technologies:
 
 * Backbone.js
 * jQuery.js
