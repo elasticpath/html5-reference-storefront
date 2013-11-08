@@ -5,7 +5,7 @@
         <borderStyle>none</borderStyle>
         <markup>true</markup>
         <state>up</state>
-        <text>F%20modules%0A%20F%20base%20%0A%20%20F%20modules%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20F%20cart%0A%20%20%20%20-%20base.cart.controller.js%0A%20%20%20%20-%20base.cart.model.js%0A%20%20%20%20-%20base.cart.templates.html%0A%20%20%20%20-%20base.cart.views.js</text>
+        <text>F%20modules%0A%20F%20base%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20F%20cart%0A%20%20%20%20-%20base.cart.controller.js%0A%20%20%20%20-%20base.cart.model.js%0A%20%20%20%20-%20base.cart.templates.html%0A%20%20%20%20-%20base.cart.views.js</text>
         <value>0</value>
         <verticalScrollbar>false</verticalScrollbar>
       </controlProperties>
