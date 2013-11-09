@@ -3,9 +3,9 @@ Introducing the HTML5 Reference Storefront
 Welcome to the Elastic Path's HTML5 Reference Storefront!
 
 The HTML5 Storefront is an flexible e-commerce website backed by Elastic Path's Cortex API.
-The HTML5 Storefront, comprised of the latest technologies (JavaScript, HTML5, jQuery, CSS3, {less}, Marrionette, Node.js, etc), is designed for extensibility.
+The HTML5 Storefront, comprised of the latest technologies (JavaScript, HTML5, jQuery, CSS3, {less}, Marionette, Node.js, etc.), is designed for extensibility.
 
-E-commerce functionality (cart, authentication, profile, search, etc) is separated from the website's presentation, allowing
+E-commerce functionality (cart, authentication, profile, search, etc.) is separated from the website's presentation, allowing
 front-end developers to work on the CSS without having to touch the JavaScript, while JavaScript developers can develop
 functionality without having to touch the front end. Each customization layer is separated from the HTML5's core code, so
 neither developer has to touch the Storefront's engine.
@@ -27,13 +27,12 @@ comprised of the `cart.controller.js`, `cart.model.js`, `cart.templates.html`, a
 
 ![Cart Module](img/cartModule.png)
 
-Cart functionality such as checkout, item prices, item availability, lineitems, etc is provided by the modules' `cart.controller` and `cart.model`.
+Cart functionality such as checkout, item prices, item availability, lineitems, etc. is provided by the `cart.controller` and `cart.model`.
 While the view, the output representations of these features, is handled by the `cart.templates.html`, and the `cart.view.js`.
-The view is the framework, or regions, of the cart's view pieces will be located. The view's look and feel, i.e CSS
-Cart look and feel, the CSS presentation, is handled by the themes, which are described below.
+The HTML5 Storefront views only define the regions where the cart representation appears, while the cart's look and feel is defined through the Presentation Layer with a theme.
 
 
-**Why combine view and code (model, controller) into one module?**
+**Why combine view, model, controller into one module?**
 
 This makes the modules as self-contained as possible, minimizes the references required to other modules, and saves the JS developer from having to customize the
 Storefront's engine controller every time a module is added or changed.
@@ -64,11 +63,11 @@ HTML5 Reference Storefront Features
 About the Documentation
 ---------------------
 This document is written for knowledgeable JavaScript developers who are extending/customizing the HTML5 Storefront modules and
-for knowledgeable front-end developers who are extending/customizing the HTML5 Storefront themes. This document is not a primer for JavaScript, CSS, etc. Before you begin, you should have working knowledge of the following technologies:
+for knowledgeable front-end developers who are extending/customizing the HTML5 Storefront themes. This document is not a primer for JavaScript, CSS, etc.. Before you begin, you should have working knowledge of the following technologies:
 
 * Backbone.js
 * jQuery.js
-* Marrionette.js
+* Marionette.js
 * CSS/{less}
 * DOM/CRUD Operations
 

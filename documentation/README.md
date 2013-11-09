@@ -3,7 +3,7 @@ Generate the documentation using DOCCO (http://jashkenas.github.io/docco/).
 To generate the documentation:
 
 1. Install DOCCO: npm install -g docco
-2. From cygwin command prompt, run "docco ui-storefront/documentation/*.litcoffee"
+2. From cygwin command prompt, run "docco ui-storefront/documentation/*.md"
 
 Files generate to: ui-storefront/docs
 
