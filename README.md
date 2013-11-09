@@ -8,7 +8,7 @@ The HTML5 Storefront, comprised of the latest technologies (JavaScript, HTML5, j
 E-commerce functionality (cart, authentication, profile, search, etc.) is separated from the website's presentation, allowing
 front-end developers to work on the CSS without having to touch the JavaScript, while JavaScript developers can develop
 functionality without having to touch the front end. Each customization layer is separated from the HTML5's core code, so
-neither developer has to touch the Storefront's engine. For more information on the customization layers, see <a href="introduction.md">Introduction</a>.
+neither developer has to touch the Storefront's engine. For more information on the customization layers, see <a href="documentation/introduction.md">Introduction</a>.
 
 
 Installing
