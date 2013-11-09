@@ -14,7 +14,7 @@ Before you begin, you need the following running locally
 -Installing HTML5 (locally) Cortex + DCE expected be running locally
 - search
 
-# Fetch the HTML5 Reference Store from git
+Fetch the HTML5 Reference Store from git
 
 
 Documentation

@@ -25,7 +25,7 @@ For more information on extending/customizing modules, see <a href="extending.ht
 An HTML5 Storefront module is the view, plus the code backing the view. For example, the cart module is
 comprised of the `cart.controller.js`, `cart.model.js`, `cart.templates.html`, and the `cart.view.js`:
 
-![Cart Module](img/cartModule.png)
+![Cart Module](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/cartModule.png)
 
 Cart functionality such as checkout, item prices, item availability, lineitems, etc. is provided by the `cart.controller` and `cart.model`.
 While the view, the output representations of these features, is handled by the `cart.templates.html`, and the `cart.view.js`.
@@ -52,12 +52,12 @@ The API can surface up data from any e-commerce backend system in a RESTful mann
 
 To learn more aboutb Cortex API, see <a href="http://api-cortex-developers.docs.elasticpath.com">api-cortex-developers.docs.elasticpath.com</a>
 
-![Cortex](img/cortex-page-diagram.png)
+![Cortex](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/cortex-page-diagram.png)
 
 
 HTML5 Reference Storefront Features
 ---------------------
-![Feature Guide](img/featureSupport.png)
+![Feature Guide](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/featureSupport.png)
 
 
 About the Documentation
