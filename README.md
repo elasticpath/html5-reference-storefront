@@ -1,18 +1,24 @@
 HTML5 Reference Storefront
 =============
+Welcome to the Elastic Path's HTML5 Reference Storefront!
+
+The HTML5 Storefront is an flexible e-commerce website backed by Elastic Path's Cortex API.
+The HTML5 Storefront, comprised of the latest technologies (JavaScript, HTML5, jQuery, CSS3, {less}, Marionette, Node.js, etc.), is designed for extensibility.
+
+E-commerce functionality (cart, authentication, profile, search, etc.) is separated from the website's presentation, allowing
+front-end developers to work on the CSS without having to touch the JavaScript, while JavaScript developers can develop
+functionality without having to touch the front end. Each customization layer is separated from the HTML5's core code, so
+neither developer has to touch the Storefront's engine. For more information on the customization layers, see <a href="introduction.md">Introduction</a>.
 
 
 Installing
 ====================
-This document assumes you are setting up and installing the HTML5 Reference Storefront locally.
-Before you begin, you need the following running locally
+This document assumes you are installing the HTML5 Reference Storefront locally and you have the following running locally:
 
 * The Cortex API
 * Commerce Engine
 * Search Server
 
--Installing HTML5 (locally) Cortex + DCE expected be running locally
-- search
 
 Fetch the HTML5 Reference Store from git
 
@@ -28,8 +34,7 @@ To generate the documentation:
 
 Files generate to: ui-storefront/docs
 
+**Notes:**
 
-Notes
-----
 - Use cygwin for the windows command prompt. Windows command prompt can't handle the * character
 - DOCCO does not copy the image files to the output folder. Copy over manually.
