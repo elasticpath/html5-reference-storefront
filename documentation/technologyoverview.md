@@ -89,7 +89,7 @@ Testing Frameworks
 
 HTML5 Code Structure
 ---------------------
-![codeStructure](img/fileStructure.png)
+![codeStructure](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/fileStructure.png)
 
 Platform Support
 ---------------------
