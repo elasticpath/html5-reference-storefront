@@ -5,9 +5,9 @@
  * Date: 04/04/13
  * Time: 9:16 AM
  *
- * 
+ *
  */
-define(function(require) {
+define(function (require) {
     var ep = require('ep'),
       EventBus = require('eventbus'),
       pace = require('pace'),
@@ -31,30 +31,30 @@ define(function(require) {
      * upon model fetch success, renders profile views in destinated regions.
      * @returns {View.DefaultLayout}
      */
-    var defaultView = function(){
+    var defaultView = function () {
 
       // ensure the user is authenticated befor continuing to process the request
-      if(ep.app.isUserLoggedIn()){
+      if (ep.app.isUserLoggedIn()) {
         var defaultLayout = new View.DefaultLayout();
 
         var profileModel = new Model.ProfileModel();
 
         var profileSummaryRegion = new Marionette.Region({
-          el:'[data-region="profileSummaryRegion"]'
+          el: '[data-region="profileSummaryRegion"]'
         });
         var profilePaymentMethodsRegion = new Marionette.Region({
-          el:'[data-region="profilePaymentMethodsRegion"]'
+          el: '[data-region="profilePaymentMethodsRegion"]'
         });
         var profileSubscriptionSummaryRegion = new Marionette.Region({
-          el:'[data-region="profileSubscriptionSummaryRegion"]'
+          el: '[data-region="profileSubscriptionSummaryRegion"]'
         });
         var profileSummaryView = new View.ProfileSummaryView({
-          model:profileModel
+          model: profileModel
         });
         var profileTitleView = new View.ProfileTitleView({});
 
         profileModel.fetch({
-          success:function(response){
+          success: function (response) {
             // Profile Title
 
             defaultLayout.profileTitleRegion.show(profileTitleView);
@@ -64,15 +64,15 @@ define(function(require) {
 
             // Profile Subscriptions
             var profileSubs = profileModel.get('subscriptions');
-            if (profileSubs.length > 0){
-              profileSubscriptionSummaryRegion.show( new View.ProfileSubscriptionSummaryView({
-                collection:new Backbone.Collection(profileModel.get('subscriptions'))
+            if (profileSubs.length > 0) {
+              profileSubscriptionSummaryRegion.show(new View.ProfileSubscriptionSummaryView({
+                collection: new Backbone.Collection(profileModel.get('subscriptions'))
               }));
             }
 
             // Profile Payment Methods
-            profilePaymentMethodsRegion.show( new View.PaymentMethodsView({
-              collection:new Backbone.Collection(profileModel.get('paymentMethods'))
+            profilePaymentMethodsRegion.show(new View.PaymentMethodsView({
+              collection: new Backbone.Collection(profileModel.get('paymentMethods'))
             }));
 
             // Profile Addresses
@@ -83,14 +83,14 @@ define(function(require) {
             defaultLayout.profileAddressesRegion.show(profileAddressesView);
 
           },
-          error:function(response){
+          error: function (response) {
             ep.logger.error('Error getting profile subscription model');
           }
         });
 
         return defaultLayout;
       }
-      else{
+      else {
         EventBus.trigger('layout.loadRegionContentRequest', {
           region: 'appModalRegion',
           module: 'auth',
@@ -99,14 +99,21 @@ define(function(require) {
       }
 
 
-
     };
 
+    /* ********* EVENT LISTENERS ************ */
+    var addressFormModal = {
+      region: 'appModalRegion',
+      module: 'address',
+      view: 'DefaultCreateAddressView'
+    };
 
+    EventBus.on('profile.addNewAddressBtnClicked', function() {
+      EventBus.trigger('layout.loadRegionContentRequest', addressFormModal);
+    });
 
     return {
-      DefaultView:defaultView
-
+      DefaultView: defaultView
     };
   }
 );

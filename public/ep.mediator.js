@@ -74,7 +74,7 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
     },
     'mediator.loadAddressesViewRequest':function(addressObj){
       require(['address'],function(mod){
-        EventBus.trigger('components.loadAddressesViewRequest', addressObj);
+        EventBus.trigger('address.loadAddressesViewRequest', addressObj);
       });
     }
 

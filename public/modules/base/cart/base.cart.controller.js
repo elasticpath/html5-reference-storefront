@@ -20,9 +20,19 @@ define(function (require) {
       template = require('text!modules/base/cart/base.cart.templates.html');
 
 
+    /**
+     * Starts the loading indicator
+     */
     pace.start();
+
+    /**
+     * Inject the address template into TemplateContainer for the views to reference
+     */
     $('#TemplateContainer').append(template);
 
+    /**
+     * Creates namespace to template to reference model and viewHelpers
+     */
     _.templateSettings.variable = 'E';
 
 

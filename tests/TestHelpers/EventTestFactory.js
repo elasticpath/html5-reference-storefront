@@ -8,6 +8,36 @@ define(function (require) {
 
   return {
     /**
+     * Create a simple test that test a button click will trigger an event.
+     *
+     * @param eventToTrigger  event expected to be triggered.
+     * @param btnSelector     jquery selector pattern to find the button to trigger test.
+     * @returns {Function}    a simple test of button trigger event
+     */
+    simpleBtnClickTest: function (eventToTrigger, btnSelector) {
+      return function() {
+        before(function () {
+          sinon.spy(EventBus, 'trigger');
+
+          // isolate unit by unbinding subsequent triggered events
+          EventTestHelpers.unbind(eventToTrigger);
+
+          // select a different value
+          this.view.$el.find(btnSelector).trigger('click');
+        });
+
+        after(function () {
+          EventBus.trigger.restore();
+          EventTestHelpers.reset();
+        });
+
+        it('should trigger event: ' + eventToTrigger, function () {
+          expect(EventBus.trigger).to.be.calledWithExactly(eventToTrigger);
+        });
+      };
+    },
+
+    /**
      * Create a simple test to test if another Event is triggered.
      *
      * @param eventToTrigger  event expected to be triggered.

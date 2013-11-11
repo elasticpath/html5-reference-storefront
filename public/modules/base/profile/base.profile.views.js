@@ -2,8 +2,8 @@
  * Copyright Elastic Path Software 2013.
  * Default Profile Views & viewHelpers
  */
-define(['marionette','i18n', 'mediator'],
-  function(Marionette, i18n, Mediator){
+define(['marionette','i18n', 'mediator', 'eventbus'],
+  function(Marionette, i18n, Mediator, EventBus){
 
     /**
      * Template helper functions
@@ -117,7 +117,10 @@ define(['marionette','i18n', 'mediator'],
       template: '#DefaultProfileAddressesEmptyViewTemplate',
       tagName: 'li',
       className: 'profile-no-address-msg-container container',
-      templateHelpers: viewHelpers
+      templateHelpers: viewHelpers,
+      attributes: {
+        'data-el-label' : 'profile.noAddressMsg'
+      }
     });
 
     /**
@@ -131,7 +134,13 @@ define(['marionette','i18n', 'mediator'],
       emptyView: profileAddressesEmptyView,
       itemView: profileAddressItemView,
       itemViewContainer: 'ul',
-      templateHelpers: viewHelpers
+      templateHelpers: viewHelpers,
+      events: {
+        'click [data-el-label="profile.addNewAddressBtn"]': function(event) {
+          event.preventDefault();
+          EventBus.trigger('profile.addNewAddressBtnClicked');
+        }
+      }
     });
 
     return {

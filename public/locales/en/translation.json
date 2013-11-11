@@ -1,4 +1,14 @@
 {
+  "addressForm": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "streetAddress": "Street Address",
+    "extendedAddress": "Extended Address",
+    "city": "City",
+    "region": "Province",
+    "postalCode": "Postal Code",
+    "generalSaveAddressFailedErrMsg": "I'm sorry, there was an error saving this address. Please try again or contact your system administrator"
+  },
   "auth": {
     "loginMenu": "Login",
     "login": "Login",
@@ -78,7 +88,7 @@
     "lastName": "Last Name",
     "subscriptionsTitle": "Subscriptions",
     "subscriptionHeader": "Subscription",
-    "subscriptionQuanity": "Quantity",
+    "subscriptionQuantity": "Quantity",
     "subscriptionNextBillingDate": "Next Billing Date",
     "paymentMethodsTitle": "Payment Methods",
     "paymentCardNumber":"Card Number",
@@ -87,6 +97,7 @@
     "paymentExpiryMonth": "Expiry Month",
     "paymentExpiryYear": "Expiry Year",
     "addressesTitle": "Addresses",
-    "noAddressMsg": "You have no saved addresses."
+    "noAddressMsg": "You have no saved addresses.",
+    "newAddressBtn":"Add a New Address"
   }
 }

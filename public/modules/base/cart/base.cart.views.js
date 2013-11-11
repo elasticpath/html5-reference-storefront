@@ -133,6 +133,13 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         }
         return 'is-hidden';
       },
+      /**
+       * generate HTML markup for options inside a select of a given range
+       * @param min     minimum number of option range
+       * @param max     maximum number of option range
+       * @param quantity  initial selected quantity
+       * @returns {string}  options HTML markup of a given range
+       */
       createQuantityOptions:function(min, max, quantity) {
         var optionHtml = '';
         var selected = '';
