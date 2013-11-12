@@ -13,14 +13,22 @@ neither developer has to touch the Storefront's engine. For more information on 
 
 Installing
 ====================
-This document assumes you are installing the HTML5 Reference Storefront locally and you have the following running locally:
+Before you begin, the following must be already installed and running locally:
 
-* The Cortex API
-* Commerce Engine
-* Search Server
+* Cortex API (https://docs.elasticpath.com/display/EPCAPIDEV/Installation+and+Configuration+Guide)
+* Commerce Engine (https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide)
+* Search Server (https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide)
+* GIT Client (http://git-scm.com/downloads)
+* Node.js (http://nodejs.org/)
 
+To install and run HTML5 Reference Storefront:
+<ol>
+<li>Fetch the HTML5 Reference Store sources </br>
+<code>git clone https://github.com/dotcloud/docker.git</code>
+</li>
+<li>Using your command prompt, navigate to the HTML5 Reference Storefront directory</li>
+</ol>
 
-Fetch the HTML5 Reference Store from git
 
 
 Documentation
