@@ -1,21 +1,21 @@
 HTML5 Reference Storefront
 =============
 Welcome to the Elastic Path's HTML5 Reference Storefront!
+The documentation is available in the following locations:
 
-The HTML5 Storefront is an flexible e-commerce website backed by Elastic Path's Cortex API.
-The HTML5 Storefront, comprised of the latest technologies (JavaScript, HTML5, jQuery, CSS3, {less}, Marionette, Node.js, etc.), is designed for extensibility.
-
-E-commerce functionality (cart, authentication, profile, search, etc.) is separated from the website's presentation, allowing
-front-end developers to work on the CSS without having to touch the JavaScript, while JavaScript developers can develop
-functionality without having to touch the front end. Each customization layer is separated from the HTML5's core code, so
-neither developer has to touch the Storefront's engine. For more information on the customization layers, see <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/introduction.md">Introduction</a>.
+* <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/introduction.md">Introduction</a> ->
+* HTML5 Storefront Technology ->
+* Extending HTML5 Storefront Features ->
+* Theming ->
+* Testing ->
+* How Tos ->
 
 
 Installing
 ====================
 Before you begin, the following must be already installed and running locally:
 
-* Cortex API (https://docs.elasticpath.com/display/EPCAPIDEV/Installation+and+Configuration+Guide)
+* <a href="https://docs.elasticpath.com/display/EPCAPIDEV/Installation+and+Configuration+Guide" target="_blank">Cortex API</a>
 * Commerce Engine (https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide)
 * Search Server (https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide)
 * GIT Client (http://git-scm.com/downloads)
