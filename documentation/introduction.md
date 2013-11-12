@@ -12,13 +12,13 @@ neither developer has to touch the Storefront's engine.
 
 ###Customization Layers
 JavaScript developers make their customizations in the Module Layer, while front-end developers customize the Presentation Layer.
-Take a look at the <a href="technologyoverview.html#platformArchitecture">Platform Architecture</a> to see where the layers are positioned in regards to the rest of the system.
+Take a look at the <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/technologyoverview.md">Platform Architecture</a> to see where the layers are positioned in regards to the rest of the system.
 
 ####Module Layer
 This layer is where JavaScript developers build/extend the HTML5 Storefront's functionality.
 JavaScript modules are independent units of code that represent distinct pieces of functionality.
 Together, the modules comprise the entire system of HTML5 Storefront functionality.
-For more information on extending/customizing modules, see <a href="extending.html">Customizing Storefront Features</a>.
+For more information on extending/customizing modules, see <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/extending.md">Customizing Storefront Features</a>.
 
 **What are HTML5 Storefront modules?**
 
