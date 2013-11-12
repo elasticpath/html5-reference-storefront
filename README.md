@@ -24,9 +24,10 @@ Before you begin, the following must be already installed and running locally:
 To install and run HTML5 Reference Storefront:
 <ol>
 <li>Fetch the HTML5 Reference Store sources </br>
-<code>git clone https://github.com/dotcloud/docker.git</code>
+<code>https://github.elasticpath.net/cortex/ui-storefront</code>
 </li>
 <li>Using your command prompt, navigate to the HTML5 Reference Storefront directory</li>
+<li></li>
 </ol>
 
 
