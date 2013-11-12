@@ -1,6 +1,6 @@
 HTML5 Storefront Technology
 ====================
-The HTML5 Storefront technologies were chosen for their robustness, popularity, and extensibility.
+HTML5 Storefront technologies were chosen for their robustness, popularity, and extensibility.
 The idea is that your JavaScript developers and front-end developers already know these technologies, so they can start extending and customizing your HTML5 Storefront as quickly as possible.
 
 <h2 id="platformArchitecture">Platform Architecture</h2>

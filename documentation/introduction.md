@@ -1,13 +1,13 @@
-Introducing the HTML5 Reference Storefront
+Introducing HTML5 Reference Storefront
 ====================
 Welcome to the Elastic Path's HTML5 Reference Storefront!
 
-The HTML5 Storefront is an flexible e-commerce website backed by Elastic Path's Cortex API.
-The HTML5 Storefront, comprised of the latest technologies (JavaScript, HTML5, jQuery, CSS3, {less}, Marionette, Node.js, etc.), is designed for extensibility.
+HTML5 Storefront is an flexible e-commerce website backed by Elastic Path's Cortex API.
+HTML5 Storefront, comprised of the latest technologies (JavaScript, HTML5, jQuery, CSS3, {less}, Marionette, Node.js, etc.), is designed for extensibility.
 
 E-commerce functionality (cart, authentication, profile, search, etc.) is separated from the website's presentation, allowing
 front-end developers to work on the CSS without having to touch the JavaScript, while JavaScript developers can develop
-functionality without having to touch the front end. Each customization layer is separated from the HTML5's core code, so
+functionality without having to touch the front end. Each customization layer is separated from HTML5 Storefront's core code, so
 neither developer has to touch the Storefront's engine.
 
 ###Customization Layers
@@ -15,7 +15,7 @@ JavaScript developers make their customizations in the Module Layer, while front
 Take a look at the <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/technologyoverview.md">Platform Architecture</a> to see where the layers are positioned in regards to the rest of the system.
 
 ####Module Layer
-This layer is where JavaScript developers build/extend the HTML5 Storefront's functionality.
+This layer is where JavaScript developers build/extend HTML5 Storefront's functionality.
 JavaScript modules are independent units of code that represent distinct pieces of functionality.
 Together, the modules comprise the entire system of HTML5 Storefront functionality.
 For more information on extending/customizing modules, see <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/extending.md">Customizing Storefront Features</a>.
@@ -29,7 +29,7 @@ comprised of the `cart.controller.js`, `cart.model.js`, `cart.templates.html`, a
 
 Cart functionality such as checkout, item prices, item availability, lineitems, etc. is provided by the `cart.controller` and `cart.model`.
 While the view, the output representations of these features, is handled by the `cart.templates.html`, and the `cart.view.js`.
-The HTML5 Storefront views only define the regions where the cart representation appears, while the cart's look and feel is defined through the Presentation Layer with a theme.
+HTML5 Storefront views only define the regions where the cart representation appears, while the cart's look and feel is defined through the Presentation Layer with a theme.
 
 
 **Why combine view, model, controller into one module?**
@@ -39,8 +39,8 @@ Storefront's engine controller every time a module is added or changed.
 
 ####Presentation Layer
 
-The HTML5 Storefront has a simple Presentation Layer (html/css), allowing front-end developers to customize the look and feel without having to touch the JS code.
-Front-end developers can create themes to give the HTML5 Storefront different look and feels. For more information on creating a theme, see the <a href="theming.html#tutorialTheme">Theming Tutorial</a>
+HTML5 Storefront has a simple Presentation Layer (html/css), allowing front-end developers to customize the look and feel without having to touch the JS code.
+Front-end developers can create themes to give HTML5 Storefront different look and feels. For more information on creating a theme, see the <a href="theming.html#tutorialTheme">Theming Tutorial</a>
 
 
 
@@ -62,8 +62,8 @@ HTML5 Reference Storefront Features
 
 About the Documentation
 ---------------------
-This document is written for knowledgeable JavaScript developers who are extending/customizing the HTML5 Storefront modules and
-for knowledgeable front-end developers who are extending/customizing the HTML5 Storefront themes. This document is not a primer for JavaScript, CSS, etc.. Before you begin, you should have working knowledge of the following technologies:
+This document is written for knowledgeable JavaScript developers who are extending/customizing HTML5 Storefront modules and
+for knowledgeable front-end developers who are extending/customizing HTML5 Storefront themes. This document is not a primer for JavaScript, CSS, etc.. Before you begin, you should have working knowledge of the following technologies:
 
 * Backbone.js
 * jQuery.js
@@ -73,4 +73,4 @@ for knowledgeable front-end developers who are extending/customizing the HTML5 S
 
 Audience
 ---------------------
-This document is written for experienced JavaScript developers and front-end UI developers who want to learn how to customize/extend the HTML5 Reference Storefront.
+This document is written for experienced JavaScript developers and front-end UI developers who want to learn how to customize/extend HTML5 Reference Storefront.

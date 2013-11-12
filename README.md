@@ -1,19 +1,19 @@
 HTML5 Reference Storefront
 =============
 Welcome to the Elastic Path's HTML5 Reference Storefront!
-The documentation is at these locations:
+The documentation is available in these locations:
 
-* <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/introduction.md">Introduction</a></br>
+* <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/introduction.md">Introduction</a> - </br>
 HTML5 Storefront introduction, overview of the Storefront's customization layers, Cortex API introduction, HTML5 Reference Storefront feature list, and documentation notes.
-* <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/technologyoverview.md">HTML5 Storefront Technology</a></br>
+* <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/technologyoverview.md">HTML5 Storefront Technology</a> - </br>
 Platform architecture, technology stack, testing frameworks, project code structure, platform support.
-* <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/extending.md">Extending HTML5 Storefront Features</a></br>
-Overview of the HTML5 Storefront's MVC framework, snopsis of the Storefront's extension model, and a tutorial that teaches how to create an extension to Items.
-* <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/theming.md">Theming</a></br>
-Introduction to the HTML5 Storefront presentation layer, basics of Storefront themes, and a tutorial on creating a theme.
-* <a href="">Testing</a></br>
-Introduction to the HTML5 Storefront testing framework, overview of unit testing, and steps on how to add a new test to the testing framework.
-* <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/howTOs.md">How Tos</a></br>
+* <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/extending.md">Extending HTML5 Storefront Features</a> - </br>
+Overview of HTML5 Storefront's MVC framework, snopsis of the Storefront's extension model, and a tutorial that teaches how to create an extension to Items.
+* <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/theming.md">Theming</a> - </br>
+Introduction to HTML5 Storefront presentation layer, basics of Storefront themes, and a tutorial on creating a theme.
+* <a href="">Testing</a> - </br>
+Introduction to HTML5 Storefront testing framework, overview of unit testing, and steps on how to add a new test to the testing framework.
+* <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/howTOs.md">How Tos</a> - </br>
 Describes how to code your JavaScript for some of the more advanced Cortex API features: selectors, forms, searches, authentication, and so on.
 
 
@@ -29,20 +29,20 @@ Before you begin, the following must be already installed and running locally:
 
 To install and run HTML5 Reference Storefront:
 <ol>
-<li>Fetch the HTML5 Reference Store sources </br>
+<li>Fetch HTML5 Reference Storefront sources </br>
 <code>https://github.elasticpath.net/cortex/ui-storefront</code>
 </li>
-<li>Using your command prompt, navigate to the HTML5 Reference Storefront directory and run the following command:</br>
+<li>Using your command prompt, navigate to HTML5 Reference Storefront directory and run the following command to install all the Storefront's dependencies on your local:</br>
 <code>npm install</code>
 </li>
-<li></li>
+<li>Set up </li>
 </ol>
 
 
 
 Documentation
 =============
-The documentation is available online through the HTML5 Reference Storefront GITHUB: https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md
+The documentation is available online through GITHUB: https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md
 
 Alternatively, you can generate the documentation locally using DOCCO (http://jashkenas.github.io/docco/).
 
