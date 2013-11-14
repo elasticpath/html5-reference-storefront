@@ -169,11 +169,14 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     // Default Layout
     var defaultLayout = Backbone.Marionette.Layout.extend({
       template:'#DefaultCartLayoutTemplate',
+      templateHelpers:viewHelpers,
       className:'cart-container container',
       regions:{
         cartTitleRegion:'[data-region="cartTitleRegion"]',
         mainCartRegion:'[data-region="mainCartRegion"]',
-        cartCheckoutMasterRegion:'[data-region="cartCheckoutMasterRegion"]'
+        cartCheckoutMasterRegion:'[data-region="cartCheckoutMasterRegion"]',
+        chosenBillingAddressRegion:'[data-region="chosenBillingAddressRegion"]',
+        choiceBillingAddressesRegion:'[data-region="choiceBillingAddressesRegion"]'
       },
       onShow:function(){
         Mediator.fire('mediator.cart.DefaultViewRendered');
@@ -407,6 +410,38 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       template:'#CartActivityIndicatorTemplate'
     });
 
+    /**
+     * Cart Billing Address View
+     * make mediator request to load an address view in region: billingAddressComponentRegion,
+     * will render a wrapper around an address view
+     * @type Marionette.Layout
+     */
+    var cartBillingAddressItemView = Backbone.Marionette.Layout.extend({
+      template: '#CartBillingAddressTemplate',
+      tagName: 'li',
+      regions: {
+        billingAddressComponentRegion: '[data-region="billingAddressComponentRegion"]'
+      },
+      onShow: function() {
+        // fire event to load the address itemView from component
+        Mediator.fire('mediator.loadAddressesViewRequest', {
+          region: this.billingAddressComponentRegion,
+            model: this.model
+        });
+      }
+    });
+
+    /**
+     * Billing Addresses View
+     * will render a collection of billing addresses with surrounding element such as heading.
+     * @type Marionette.CompositeView
+     */
+    var cartBillingAddressesView = Backbone.Marionette.CompositeView.extend({
+      template: '#CartBillingAddressesTemplate',
+      itemView: cartBillingAddressItemView,
+      itemViewContainer: 'ul'
+    });
+
     /* ********* Helper functions ********* */
     /**
      * Reset a lineItem's quantity to original value when first rendered on page.
@@ -423,6 +458,8 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       EmptyCartView:emptyCartView,
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
+      CartBillingAddressItemView:cartBillingAddressItemView,
+      CartBillingAddressesView:cartBillingAddressesView,
       CartCheckoutMasterView:cartCheckoutMasterView,
       CartActivityIndicatorView:cartActivityIndicatorView,
       setCheckoutButtonProcessing:setCheckoutButtonProcessing,

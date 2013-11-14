@@ -32,7 +32,9 @@
     "checkout": "Complete Purchase",
     "emptyCartMsg": "Your shopping cart is empty.",
     "deletedLineItemUpdateErrMsg": "The lineItem you were trying to update doesn't exist anymore.",
-    "genericUpdateErrMsg": "I'm sorry, there was an error updating the lineItem quantity. Please contact your system administrator."
+    "genericUpdateErrMsg": "I'm sorry, there was an error updating the lineItem quantity. Please contact your system administrator.",
+    "chosenBillingAddress": "Selected Billing Address",
+    "choiceBillingAddresses": "Other Billing Addresses"
   },
   "category": {
     "next": "Next",

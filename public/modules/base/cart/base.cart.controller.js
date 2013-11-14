@@ -53,6 +53,16 @@ define(function (require) {
           });
           cartLayout.cartCheckoutMasterRegion.show(cartCheckoutMasterView);
 
+          // Display the selected (chosen) billing addresses
+          cartLayout.chosenBillingAddressRegion.show(new View.CartBillingAddressesView({
+            collection: new Backbone.Collection(cartModel.get('billingAddresses').chosenBillingAddress)
+          }));
+          // Display alternative (choice) billing addresses
+          if (response.attributes.billingAddresses.choiceBillingAddresses.length > 0) {
+            cartLayout.choiceBillingAddressesRegion.show(new View.CartBillingAddressesView({
+              collection: new Backbone.Collection(cartModel.get('billingAddresses').choiceBillingAddresses)
+            }));
+          }
 
           if (response.attributes.lineItems.length > 0) {
             cartLayout.mainCartRegion.show(mainCartView);

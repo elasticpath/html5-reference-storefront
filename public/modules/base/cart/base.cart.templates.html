@@ -10,10 +10,19 @@
         <div class="activity-indicator-container">
           <img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>
         </div>
+
       </div>
 
       <div class="cart-sidebar" data-region="cartCheckoutMasterRegion">
 
+      </div>
+
+      <!-- TODO: move this area to the appropriate step of the checkout process and add CSS styling -->
+      <div style="clear:left;display:none;">  <!-- TODO: remove these inline styles when we move this section -->
+        <h2><%= E.getI18nLabel('cart.chosenBillingAddress') %></h2>
+        <div data-region="chosenBillingAddressRegion"></div>
+        <h2><%= E.getI18nLabel('cart.choiceBillingAddresses') %></h2>
+        <div data-region="choiceBillingAddressesRegion"></div>
       </div>
 
     </div>
@@ -164,7 +173,16 @@
     <img src="/images/activity-indicator-strobe.gif"/>
   </script>
 
+  <!--Cart Billing Addresses Template-->
+  <script id="CartBillingAddressesTemplate" type="text/template">
+    <ul class="cart-billing-address-list">
+    </ul>
+  </script>
 
+  <!--Cart Billing Address Layout Template-->
+  <script id="CartBillingAddressTemplate" type="text/template">
+    <div data-region="billingAddressComponentRegion"></div>
+  </script>
 
 </div>
 

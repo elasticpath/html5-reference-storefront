@@ -15,7 +15,7 @@ define(['ep', 'eventbus', 'backbone'],
       url: ep.app.config.cortexApi.path + '/carts/' + ep.app.config.cortexApi.scope + '/default?zoom=total,' +
         'lineitems:element,lineitems:element:price,lineitems:element:rate,lineitems:element:availability,' +
         'lineitems:element:item,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price,lineitems:element:item:rate,' +
-        'order:purchaseform',
+        'order:purchaseform,order:billingaddressinfo:selector:chosen:description,order:billingaddressinfo:selector:choice:description',
       parse: function (cart) {
 
         var cartObj = {};
@@ -136,6 +136,32 @@ define(['ep', 'eventbus', 'backbone'],
           };
         }
 
+        /*
+         * Billing Addresses
+         */
+        // There will only ever be one currently selected (chosen) address
+        var chosenAddress = jsonPath(cart, '$.._billingaddressinfo[0].._chosen.._description[0]')[0];
+        // Array of alternative (choice) billing addresses
+        var choiceAddressesArray = [];
+
+        // Build array of choice billing addresses
+        var choiceAddressesRootLen = 0;
+        var choiceAddressesRoot = jsonPath(cart, '$.._billingaddressinfo[0].._choice.._description');
+
+        if (choiceAddressesRoot) {
+          choiceAddressesRootLen = choiceAddressesRoot.length;
+        }
+
+        for (var x = 0; x < choiceAddressesRootLen; x++) {
+          var currObj = choiceAddressesRoot[x];
+          choiceAddressesArray.push(parseAddress(currObj[0]));
+        }
+
+        cartObj.billingAddresses = {
+          chosenBillingAddress: parseAddress(chosenAddress),
+          choiceBillingAddresses: choiceAddressesArray
+        };
+
         return cartObj;
       }
     });
@@ -227,6 +253,34 @@ define(['ep', 'eventbus', 'backbone'],
       }
 
       return rateCollection;
+    };
+
+    /**
+     * Parse an address object.
+     * @param rawObject raw address JSON response
+     * @returns Object - parsed address object
+     */
+    var parseAddress = function (rawObject) {
+
+      var address = {};
+
+      try {
+        address = {
+          givenName: jsonPath(rawObject, '$.name..given-name')[0],
+          familyName: jsonPath(rawObject, '$.name..family-name')[0],
+          streetAddress: jsonPath(rawObject, '$.address..street-address')[0],
+          extendedAddress: jsonPath(rawObject, '$.address..extended-address')[0],
+          city: jsonPath(rawObject, '$.address..locality')[0],
+          region: jsonPath(rawObject, '$.address..region')[0],
+          country: jsonPath(rawObject, '$.address..country-name')[0],
+          postalCode: jsonPath(rawObject, '$.address..postal-code')[0]
+        };
+      }
+      catch (error) {
+        ep.logger.error('Error building address object: ' + error.message);
+      }
+
+      return address;
     };
 
     return {
