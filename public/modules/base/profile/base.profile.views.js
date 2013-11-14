@@ -100,7 +100,6 @@ define(['marionette','i18n', 'mediator', 'eventbus'],
         profileAddressComponentRegion: '[data-region="profileAddressComponentRegion"]'
       },
       onShow: function() {
-        // fire event to load the address itemView from component
         Mediator.fire('mediator.loadAddressesViewRequest', {
           region: this.profileAddressComponentRegion,
           model: this.model

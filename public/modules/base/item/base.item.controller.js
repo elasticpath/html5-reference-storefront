@@ -106,7 +106,8 @@ define(['jquery','ep','app', 'eventbus', 'item.models', 'item.views', 'text!modu
         if (qty > 0) {
 
           var obj = '{quantity:' + qty + '}';
-          // TODO improve robustness of oauth token when we work on that story
+          // FIXME improve robustness of oauth token when we work on that story
+          // FIXME use ajax model
           ep.io.ajax({
             type: 'POST',
             contentType: 'application/json',

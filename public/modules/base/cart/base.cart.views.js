@@ -134,6 +134,14 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         return 'is-hidden';
       },
       /**
+       * append cortex context path to url
+       * @param link  action link to make request to
+       * @returns {String} full relative path with context path
+       */
+      makeActionLink: function(link){
+        return ep.app.config.cortexApi.path + link;
+      },
+      /**
        * generate HTML markup for options inside a select of a given range
        * @param min     minimum number of option range
        * @param max     maximum number of option range
@@ -228,9 +236,12 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         'change .cart-lineitem-quantity-select': function(event) {
           event.preventDefault();
 
-          var actionLink = viewHelpers.getCortexPath() + this.model.get('lineitemUri');
-          var newQty = $(event.target).val();
-          EventBus.trigger('cart.lineItemQuantityChanged', actionLink, newQty);
+          var actionLink = viewHelpers.makeActionLink(this.model.get('lineitemUri'));
+          var quantities = {
+            original: this.model.get('quantity'),
+            changeTo: $(event.target).val()
+          };
+          EventBus.trigger('cart.lineItemQuantityChanged', actionLink, quantities);
         }
       },
       onShow:function(){
@@ -451,10 +462,10 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
 
     /* ********* Helper functions ********* */
     /**
-     * Reset a lineItem's quantity to original value when first rendered on page.
+     * Reset a lineItem's quantity to original value recorded in model.
      */
-    function resetQuantity() {
-      $('[data-el-value="lineItem.quantity"] option[selected="selected"]').prop('selected', true);
+    function resetQuantity(originalQty) {
+      $('[data-el-value="lineItem.quantity"] option[value="' + originalQty + '"]').prop('selected', true);
     }
 
     return {

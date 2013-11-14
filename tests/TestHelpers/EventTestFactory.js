@@ -10,17 +10,18 @@ define(function (require) {
     /**
      * Create a simple test that test a button click will trigger an event.
      *
-     * @param eventToTrigger  event expected to be triggered.
+     * @param expectedEvent  event expected to be triggered.
      * @param btnSelector     jquery selector pattern to find the button to trigger test.
      * @returns {Function}    a simple test of button trigger event
      */
-    simpleBtnClickTest: function (eventToTrigger, btnSelector) {
+    simpleBtnClickTest: function (expectedEvent, btnSelector) {
       return function() {
         before(function () {
           sinon.spy(EventBus, 'trigger');
 
           // isolate unit by unbinding subsequent triggered events
-          EventTestHelpers.unbind(eventToTrigger);
+          // first argument should be event name
+          EventTestHelpers.unbind(expectedEvent);
 
           // select a different value
           this.view.$el.find(btnSelector).trigger('click');
@@ -31,8 +32,8 @@ define(function (require) {
           EventTestHelpers.reset();
         });
 
-        it('should trigger event: ' + eventToTrigger, function () {
-          expect(EventBus.trigger).to.be.calledWithExactly(eventToTrigger);
+        it('should trigger event: ' + expectedEvent, function () {
+          expect(EventBus.trigger).to.be.calledWithExactly(expectedEvent);
         });
       };
     },
@@ -40,29 +41,29 @@ define(function (require) {
     /**
      * Create a simple test to test if another Event is triggered.
      *
-     * @param eventToTrigger  event expected to be triggered.
+     * @param expectedEvent  event expected to be triggered.
      * @param testFn          test function (include assertions & test triggering action.
      * @returns {Function}    a simple EventBus unit test.
      */
-    simpleTriggerEventTest: function (eventToTrigger, testFn) {
+    simpleTriggerEventTest: function (expectedEvent, testFn) {
       return function () {
-        var isSpied = false;
+        var isSpying = false;
 
         before(function () {
           // make sure EventBus.trigger isn't spied already outside
           if (EventBus.trigger.toString() !== 'trigger') {
             sinon.spy(EventBus, 'trigger');
-            isSpied = true;
+            isSpying = true;
           }
 
           // isolate unit by unbinding subsequent triggered events
-          EventTestHelpers.unbind(eventToTrigger);
+          EventTestHelpers.unbind(expectedEvent);
         });
 
         after(function () {
           EventTestHelpers.reset();
 
-          if (isSpied) {
+          if (isSpying) {
             EventBus.trigger.restore();
           }
         });
@@ -73,26 +74,45 @@ define(function (require) {
 
     /**
      * Create a simple test to test if tested event listener triggers another event.
-     * @param eventToTrigger        event expected to be triggered in listener
+     * @param expectedEvent        event expected to be triggered in listener
      * @param testTriggerEventName  name of event triggering test function.
      * @returns {Function}          a simple EventBus listen and trigger unit test.
      */
-    simpleEventChainTest: function (eventToTrigger, testTriggerEventName) {
-      return this.simpleTriggerEventTest(eventToTrigger, function () {
+    simpleEventTriggersEventTest: function (expectedEvent, testTriggerEventName) {
+      return this.simpleTriggerEventTest(expectedEvent, function () {
 
         it("registers correct event listener", function () {
           expect(EventBus._events[testTriggerEventName]).to.have.length(1);
         });
 
-        it('should trigger event: ' + eventToTrigger, function () {
+        it('should trigger event: ' + expectedEvent, function () {
           // trigger callback function on ajax call success
           EventBus.trigger(testTriggerEventName);
 
-          expect(EventBus.trigger).to.be.calledWithExactly(eventToTrigger);
+          expect(EventBus.trigger).to.be.calledWithExactly(expectedEvent);
+        });
+      });
+    },
+
+    // FIXME check with arguments
+    simpleEventTriggersMultiArgsEventTest: function (expectedEvent, expectedArguments, testTriggerEventName) {
+      return this.simpleTriggerEventTest(expectedEvent, function () {
+
+        it("registers correct event listener", function () {
+          expect(EventBus._events[testTriggerEventName]).to.have.length(1);
+        });
+
+        it('should trigger event: ' + expectedEvent, function () {
+          // trigger callback function on ajax call success
+          EventBus.trigger(testTriggerEventName);
+
+          expect(EventBus.trigger).to.be.calledWith(expectedEvent);
+          expectedArguments.forEach(function(expectedArgument) {
+            expect(EventBus.trigger).to.be.calledWith(expectedArgument);
+          });
         });
       });
     }
-
     // test triggered with event name, and other options, triggering with exact parameter
   };
 });

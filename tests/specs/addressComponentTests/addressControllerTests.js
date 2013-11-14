@@ -91,7 +91,7 @@ define(function (require) {
     });
 
     describe('responds to event: address.createAddressBtnClicked',
-      EventTestFactory.simpleEventChainTest('address.getAddressFormRequest', 'address.createAddressBtnClicked'));
+      EventTestFactory.simpleEventTriggersEventTest('address.getAddressFormRequest', 'address.createAddressBtnClicked'));
 
     describe('responds to event: address.getAddressFormRequest', function() {
       before(function () {

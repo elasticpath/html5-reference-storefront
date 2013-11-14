@@ -20,19 +20,10 @@ define(function (require) {
       template = require('text!modules/base/cart/base.cart.templates.html');
 
 
-    /**
-     * Starts the loading indicator
-     */
     pace.start();
 
-    /**
-     * Inject the address template into TemplateContainer for the views to reference
-     */
     $('#TemplateContainer').append(template);
 
-    /**
-     * Creates namespace to template to reference model and viewHelpers
-     */
     _.templateSettings.variable = 'E';
 
 
@@ -115,32 +106,54 @@ define(function (require) {
      * @param actionLink  link to post request to.
      * @param qty         new qty to update with.
      */
-    function updateLineItemQty (actionLink, qty) {
-      if (actionLink && qty) {
-        ep.io.ajax({
-          type: 'PUT',
-          contentType: 'application/json',
-          url: actionLink,
-          data: "{quantity:" + qty + "}",
-          success: function (data, textStatus, XHR) {
-            EventBus.trigger('cart.updateLineItemQtySuccess');
-          },
-          error: function (response) {
-            if (response.status === 404) {  // lineItem to update doesn't exist
-              EventBus.trigger('cart.updateLineItemQtyFailed.ItemDeleted');
-            }
-            else {
-              EventBus.trigger('cart.updateLineItemQtyFailed.OtherErr');
-            }
-            EventBus.trigger('cart.updateLineItemQtyFailed', response.status, response.responseText);
+    function updateLineItemQty(actionLink, qty) {
+      if (reportMissingArgs(arguments, ['actionLink', 'quantity'])) {
+        return;
+      }
+
+      var ajaxModel = new ep.io.defaultAjaxModel({
+        type: 'PUT',
+        url: actionLink,
+        data: "{quantity:" + qty.changeTo + "}",
+        success: function () {
+          EventBus.trigger('cart.updateLineItemQtySuccess');
+        },
+        customErrorFn: function (response) {
+          if (response.status === 404) {  // lineItem to update doesn't exist
+            EventBus.trigger('cart.updateLineItemQtyFailed.ItemDeleted');
           }
-        });
+          else {
+            EventBus.trigger('cart.updateLineItemQtyFailed', qty.original);
+          }
+        }
+      });
+
+      ep.io.ajax(ajaxModel.toJSON());
+    }
+
+    // FIXME make this a global helper function
+    /**
+     * log missing arguments in console, and set flag to terminate function if missing arguments.
+     * @param args  arguments to check.
+     * @param argNames  corresponding names of the arguments.
+     * @returns {boolean} if function should be terminated.
+     */
+    function reportMissingArgs(args, argNames) {
+      var terminateFn = false;
+      var missing = [];
+
+      for (var i = 0; i < args.length; i++) {
+        if (!args[i]) {
+          missing.push(argNames[i]);
+        }
       }
-      else {
-        var missingQty = !qty ? 'quantity' : '';
-        var missingActionLink = !actionLink ? ' actionLink' : '';
-        ep.logger.error('update lineItem quantity request missing ' + missingQty + missingActionLink);
+
+      if (missing.length > 0) {
+        ep.logger.error('request missing ' + missing.join());
+        terminateFn = true;
       }
+
+      return terminateFn;
     }
 
     /**
@@ -181,6 +194,7 @@ define(function (require) {
      * Listening to update lineItem quantity failed signal(reason: lineItem deleted),
      * will make request to load cart view, and display error message after page refresh.
      */
+      // FIXME decouple specific callback from event (set a flag which is processed regardless how/when the page is reloaded)
     EventBus.on('cart.updateLineItemQtyFailed.ItemDeleted', function () {
       var cartViewWithCallBack = _.extend({callback: itemDeletedErrMsg}, cartView);
 
@@ -191,20 +205,14 @@ define(function (require) {
      * Listening to update lineItem quantity failed signal(technical reasons do not want to surface for user),
      * will reset the quantity to original, & display error message
      */
-    EventBus.on('cart.updateLineItemQtyFailed.OtherErr', function() {
-      View.resetQuantity(); // reset quantity
+    EventBus.on('cart.updateLineItemQtyFailed', function (originalQty) {
+      // FIXME more efficient way of accessing the original quantity from model, currently this value travel a long winded way from model -> controller (DefaultView) -> view -> Events
+      if (reportMissingArgs(arguments, ['original quantity'])) {
+        return;
+      }
+      View.resetQuantity(originalQty); // reset quantity
       stickyErrMsg(i18n.t('cart.genericUpdateErrMsg'));
     });
-
-    /**
-     * Listening to update lineItem quantity failed signal(for any reasons)
-     * will log error in console
-     */
-    EventBus.on('cart.updateLineItemQtyFailed', function (errCode, errMsg) {
-      // log error in console
-      ep.logger.error('response code ' + errCode + ': ' + errMsg);
-    });
-
 
     /* ********** EVENT LISTENERS ************ */
     /**
@@ -229,8 +237,9 @@ define(function (require) {
     });
 
     // Remove Line Item Request
+    // FIXME use ep.io.ajaxModel
+    // FIXME move logic to a method
     EventBus.on('cart.removeLineItemRequest', function (deleteActionLink) {
-      // FIXME move logic to a method
       ep.io.ajax({
         type: 'DELETE',
         contentType: 'application/json',
@@ -285,6 +294,7 @@ define(function (require) {
     });
 
     // Submit Order Request
+    // FIXME use ep.io.ajaxModel
     EventBus.on('cart.submitOrderRequest', function (uri) {
       if (uri) {
         uri = ep.app.config.cortexApi.path + uri;

@@ -10,10 +10,8 @@ define(function (require) {
   var View = require('address.views');
   var template = require('text!modules/base/components/address/base.component.address.template.html');
 
-  // Inject the address template into TemplateContainer for the views to reference
   $('#TemplateContainer').append(template);
 
-  // Creates namespace to template to reference model and viewHelpers
   _.templateSettings.variable = 'E';
 
   /**
@@ -52,6 +50,7 @@ define(function (require) {
    * Currently, only information used is the uri to POST or PUT address form to.
    */
   function getAddressForm() {
+    // CHECKIN use ajax model
     ep.io.ajax({
       type: 'GET',
       contentType: 'application/json',
@@ -75,6 +74,7 @@ define(function (require) {
     var addressModel = View.getAddressModel();
 
     ep.io.ajax({
+      // CHECKIN use ajax model
       type: 'PUT',
       contentType: 'application/json',
       url: actionLink,

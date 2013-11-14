@@ -8,6 +8,7 @@ define(function (require) {
       Backbone = require('backbone'),
       ep = require('ep'),
       EventTestHelpers = require('EventTestHelpers');
+  var EventTestFactory = require('EventTestFactory');
 
   describe('Cart Module: Views', function () {
     var cartViews = require('cart.views');
@@ -187,13 +188,17 @@ define(function (require) {
         });
 
         it('should trigger triggers cart.lineItemQuantityChanged event', function() {
-          var expectedQty = this.view.$el.find('[data-el-value="lineItem.quantity"] select').val();
+          var quantities  = {
+            original: this.model.get('quantity'),
+            changeTo: this.view.$el.find('[data-el-value="lineItem.quantity"] select').val()
+          };
           var actionLink = ep.app.config.cortexApi.path + this.model.get('lineitemUri');
-          expect(EventBus.trigger).to.be.calledWithExactly('cart.lineItemQuantityChanged', actionLink, expectedQty);
+          expect(EventBus.trigger).to.be.calledWithExactly('cart.lineItemQuantityChanged', actionLink, quantities);
         });
       });
 
       describe('resetQuantity helper function', function() {
+        var qty = 3;
         before(function() {
           $("#Fixtures").append('<div id="renderedView"></div>');
           $("#renderedView").append(this.view.$el);
@@ -212,7 +217,7 @@ define(function (require) {
 
         it ('and should reset lineItem quantity', function() {
           assert.equal(this.selectEl.val(), this.changedQty, 'quantity should be changed by test');
-          cartViews.resetQuantity();
+          cartViews.resetQuantity(qty);
           assert.equal(this.selectEl.val(), this.originalQty, 'quantity should reset to original');
         });
       });

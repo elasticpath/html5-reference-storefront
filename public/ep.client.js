@@ -72,6 +72,16 @@ define(function (reqiure) {
      * */
     // io namespace
     // reserved for any io but simple jQuery ajax wrapper out of the gate
+    ep.io.defaultAjaxModel = Backbone.Model.extend({
+      defaults: {
+        contentType: 'application/json',
+        error: function(response) {
+          this.customErrorFn(response);
+          ep.logger.error('response code ' + response.status + ': ' + response.responseText);
+        },
+        customErrorFn: function() {}
+      }
+    });
 
     // AJAX lives here!
     ep.io.ajax = function (ioObj) {

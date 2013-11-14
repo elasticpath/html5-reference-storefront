@@ -50,15 +50,18 @@ define(function (require) {
     });
 
     // Event Listener: cart.lineItemQuantityChanged
-    describe('cart.lineItemQuantityChanged event works', function () {
+    describe('Responds to event: cart.lineItemQuantityChanged', function () {
       var unboundEventKey = 'cart.updateLineItemQtyRequest';
       var actionLink = 'actionLinkIsLineItemUri';
-      var qty = 3;
+      var quantities = {
+        original: 2,
+        changeTo: 5
+      };
 
       before(function () {
         sinon.spy(EventBus, 'trigger');
         EventTestHelpers.unbind(unboundEventKey); // isolate event
-        EventBus.trigger('cart.lineItemQuantityChanged', actionLink, qty);  // trigger test event
+        EventBus.trigger('cart.lineItemQuantityChanged', actionLink, quantities);  // trigger test event
       });
 
       after(function () {
@@ -70,7 +73,7 @@ define(function (require) {
         expect(EventBus._events['cart.lineItemQuantityChanged']).to.have.length(1);
       });
       it("triggers " + unboundEventKey, sinon.test(function () {
-        expect(EventBus.trigger).to.be.calledWithExactly(unboundEventKey, actionLink, qty);
+        expect(EventBus.trigger).to.be.calledWithExactly(unboundEventKey, actionLink, quantities);
       }));
     });
 
@@ -78,7 +81,10 @@ define(function (require) {
     // Event Listener: cart.updateLineItemQtyRequest
     describe('Responds to event: cart.updateLineItemQtyRequest', function () {
       var actionLink = 'actionLinkIsLineItemUri';
-      var qty = 2;
+      var quantities = {
+        original: 2,
+        changeTo: 5
+      };
 
       before(function () {
         sinon.spy(EventBus, 'trigger');
@@ -105,7 +111,7 @@ define(function (require) {
           expect(ep.logger.error).to.be.calledOnce;
         });
         it('should log error about missing action in request', function () {
-          EventBus.trigger('cart.updateLineItemQtyRequest', undefined, qty);
+          EventBus.trigger('cart.updateLineItemQtyRequest', undefined, quantities);
           expect(ep.logger.error).to.be.calledOnce;
         });
         it('should log error about missing action & qty in request', function () {
@@ -117,7 +123,7 @@ define(function (require) {
       describe('handles valid event', function () {
         before(function () {
           sinon.stub(ep.io, 'ajax');
-          EventBus.trigger('cart.updateLineItemQtyRequest', actionLink, qty);
+          EventBus.trigger('cart.updateLineItemQtyRequest', actionLink, quantities);
           // get first argument passed to ep.io.ajax,
           // args[0] gets arguments passed in the first time ep.io.ajax is called
           // args[0][0] gets the first argument of the first time arguments
@@ -136,12 +142,12 @@ define(function (require) {
           it('with a valid request', function () {
             expect(this.ajaxArgs.type).to.be.string('PUT');
             expect(this.ajaxArgs.contentType).to.be.string('application/json');
-            expect(this.ajaxArgs.data).to.be.equal('{quantity:' + qty + '}');
+            expect(this.ajaxArgs.data).to.be.equal('{quantity:' + quantities.changeTo + '}');
             expect(this.ajaxArgs.url).to.be.equal(actionLink);
           });
           it('with required callback functions', function () {
-            expect(this.ajaxArgs.success).to.be.ok;
-            expect(this.ajaxArgs.error).to.be.ok;
+            expect(this.ajaxArgs.success).to.exist;
+            expect(this.ajaxArgs.error).to.exist;
           });
         });
 
@@ -156,52 +162,36 @@ define(function (require) {
             });
           }));
 
-        describe('and on failure with 404 status code', function () {
-          before(function () {
-            EventTestHelpers.unbind('cart.updateLineItemQtyFailed.ItemDeleted', 'cart.updateLineItemQtyFailed');
-            this.ajaxArgs.error({
-              status: 404
+        describe('and on failure with 404 status code',
+          EventTestFactory.simpleTriggerEventTest('cart.updateLineItemQtyFailed.ItemDeleted', function () {
+            var testEventName = 'cart.updateLineItemQtyFailed.ItemDeleted';
+
+            it('should trigger ' + testEventName + ' event', function () {
+              this.ajaxArgs.error({
+                status: 404
+              });
+              expect(EventBus.trigger).to.be.calledWithExactly(testEventName);
             });
-          });
+          }));
 
-          after(function () {
-            EventTestHelpers.reset();
-          });
+        describe('and on failure with other status code',
+          EventTestFactory.simpleTriggerEventTest('cart.updateLineItemQtyFailed', function () {
+            var testEventName = 'cart.updateLineItemQtyFailed';
 
-          it('should trigger cart.updateLineItemQtyFailed.ItemDeleted', function () {
-            expect(EventBus.trigger).to.be.calledWithExactly('cart.updateLineItemQtyFailed.ItemDeleted');
-          });
-          it('should trigger cart.updateLineItemQtyFailed', function () {
-            expect(EventBus.trigger).to.be.calledWith('cart.updateLineItemQtyFailed');
-          });
-        });
-
-        describe('and on failure with other status code', function () {
-          before(function () {
-            EventTestHelpers.unbind('cart.updateLineItemQtyFailed.OtherErr', 'cart.updateLineItemQtyFailed');
-            this.ajaxArgs.error({
-              status: 'any other error code'
+            it('should trigger ' + testEventName + ' event', function () {
+              this.ajaxArgs.error({
+                status: 'any other error code'
+              });
+              expect(EventBus.trigger).to.be.calledWithExactly(testEventName, quantities.original);
             });
-          });
-
-          after(function () {
-            EventTestHelpers.reset();
-          });
-
-          it('should trigger cart.updateLineItemQtyFailed.OtherErr', function () {
-            expect(EventBus.trigger).to.be.calledWithExactly('cart.updateLineItemQtyFailed.OtherErr');
-          });
-          it('should trigger cart.updateLineItemQtyFailed', function () {
-            expect(EventBus.trigger).to.be.calledWith('cart.updateLineItemQtyFailed');
-          });
-        });
+          }));
       });
     });
 
 
     // Event Listener: cart.updateLineItemQtySuccess
     describe('Responds to event: cart.updateLineItemQtySuccess',
-      EventTestFactory.simpleEventChainTest('cart.reloadCartViewRequest', 'cart.updateLineItemQtySuccess'));
+      EventTestFactory.simpleEventTriggersEventTest('cart.reloadCartViewRequest', 'cart.updateLineItemQtySuccess'));
 
 
 
@@ -239,12 +229,14 @@ define(function (require) {
 
 
 
-    // Event Listener: cart.updateLineItemQtyFailed.OtherErr
-    describe('Responds to event: cart.updateLineItemQtyFailed.OtherErr', function () {
+    // Event Listener: cart.updateLineItemQtyFailed
+    describe('Responds to event: cart.updateLineItemQtyFailed', function () {
+      var originalQty = 5;
+
       before(function() {
         sinon.spy(View, 'resetQuantity');
         sinon.stub($.fn, 'toastmessage'); // underlying function of $().toastmessage
-        EventBus.trigger('cart.updateLineItemQtyFailed.OtherErr');
+        EventBus.trigger('cart.updateLineItemQtyFailed', originalQty);
       });
 
       after(function() {
@@ -253,40 +245,13 @@ define(function (require) {
       });
 
       it ('should reset lineItem quantity', function() {
-        expect(View.resetQuantity).to.be.calledOnce;
+        expect(View.resetQuantity).to.be.calledWith(originalQty);
       });
       it ('and display error message', function() {
         expect($().toastmessage).to.be.calledOnce;
       });
     });
 
-
-
-    // Event Listener: cart.updateLineItemQtyFailed
-    describe('Responds to event: cart.updateLineItemQtyFailed', function () {
-      var errCode = '404';
-      var errMsg = 'error message';
-      before(function () {
-        sinon.stub(ep.logger, 'error');
-
-        EventBus.trigger('cart.updateLineItemQtyFailed', errCode, errMsg);
-      });
-
-      after(function () {
-        ep.logger.error.restore();
-      });
-
-      it('should log error in console', function () {
-        expect(ep.logger.error).to.be.calledOnce;
-      });
-      it('with error status code and error message', function () {
-        // args[0] gets arguments passed in the first time ep.logger.error is called
-        // args[0][0] gets the first argument of the first time arguments
-        var args = ep.logger.error.args[0][0];
-        expect(args).to.be.be.string(errCode)
-          .and.to.be.string(errMsg);
-      });
-    });
 
 
     // Event Listener: cart.checkoutBtnClicked
