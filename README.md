@@ -10,7 +10,7 @@ Platform architecture, technology stack, testing frameworks, project code struct
 * <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/extending.md">Extending HTML5 Storefront Features</a> <br/>
 Overview of HTML5 Storefront's MVC framework, synopsis of the Storefront's extension model, and a tutorial that teaches how to create an extension to Items.
 * <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/theming.md">Theming</a>  <br/>
-Introduction to HTML5 Storefront presentation layer, basics of Storefront themes, and a tutorial on creating a theme.
+Introduction to HTML5 Storefront presentation layer, theme basics, and a tutorial on creating a theme.
 * <a href="">Testing</a>  <br/>
 Introduction to HTML5 Storefront testing framework, overview of unit testing, and steps on how to add a new test to the testing framework.
 * <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/howTOs.md">How Tos</a>  <br/>
@@ -25,13 +25,14 @@ The HTML5 Reference Storefront requires the following installed:
 * <a href="http://nodejs.org/" target="_blank">Node.js <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a>
 
 
-Once those are installed, proceed to install the HTML5 Reference Storefront and then run it either **locally** or **remotely**.
+Once those are installed, proceed to install HTML5 Reference Storefront sources and then run it either
+<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#running-html5-reference-storefront-locally"><b>locally</b></a> or <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#running-html5-reference-storefront-remotely"><b>remotely</b></a>.
 
 **NOTE:** Due to <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>, you must set up a proxy to handle the requests between Cortex API and HTML5 Storefront.
 We use Apache HTTP Server 2.4 in the instructions below. For convenience/reference, we provide pre-configured Apache config files you can copy over to your local Apache deployment.
 Any proxy works, but Apache HTTP Server is the only server we test.
 
-<h3>Installing HTML5 Reference Storefront</h3>
+<h3>Installing HTML5 Reference Storefront Sources</h3>
 <ol>
 <li>Fetch HTML5 Reference Storefront sources: <br/>
 
@@ -67,7 +68,7 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 <li><b>Configure HTML5 Reference Storefront for the Cortex mobee Store</b>
 <ol>
 <li>With a text editor, open <code>ui-storefront/public/ep.config.json</code>
-<li>Change the cortexAPI JSON element to look like the following:<br/>
+<li>Change the cortexAPI JSON element to the following:<br/>
 <pre>
 "cortexApi":{
 "path":"cortex",
@@ -87,7 +88,7 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 <li><b>Access HTML5 Reference Storefront</b>
 <ul>
 <li>Open your browser and navigate to<br/>
-<code>localhost/html5storefront</code>
+<code>localhost/html5storefront/</code>
 </li>
 </ul>
 </li>
@@ -95,8 +96,8 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 
 
 <h3 id="remote">Running HTML5 Reference Storefront Remotely</h3>
-Running remotely means your HTML5 Reference Storefront is running locally, but Cortex API, Search, Commerce Engine, etc, runs on an external server.
-We expect your Cortex API is using the Integrator
+Running remotely means your HTML5 Reference Storefront is running locally, but Cortex API, Search, Commerce Engine, etc, run on an external server.
+When running remotely, we expect your Cortex API is using the Integrator project. For more information on the Integrator, see http://docs.elasticpath.com
 
 <b>To run remotely:</b>
 <ul>
