@@ -1,0 +1,14 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="603" measuredH="596" mockupW="595" mockupH="596">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Tree" x="8" y="0" w="595" h="596" measuredW="300" measuredH="600" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <markup>true</markup>
+        <state>up</state>
+        <text>F%20cortex-ui%0A%20F%20public%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//web%20server%20accessible%20files%0A.._%20...%0A%20%20F%20style%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//compiled%20css%2C%20fonts%2C%20compressed%20images%20%28theme%20specific%29%0A%20%20%20f%20fonts%0A%20%20%20f%20images%0A%20%20%20-%20mocha.css%0A%20%20%20-%20style.css%0A.._%20...%0A%20F%20stylesrc%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//css%20%7Bless%7D%20source%20files%0A%20%20f%20bootstrap%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//default%20theme%20bootstrap%20files%0A%20%20%20f%20less%0A%20%20f%20theme-core%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//default%20store%20theme%0A%20%20%20-%20app-header.less%0A%20%20%20-%20auth.less%0A%20%20%20-%20cart.less%0A%20%20%20-%20category.less%0A%20%20%20-%20components.less%0A%20%20%20-%20itemdetails.less%0A%20%20%20-%20jquery.toastmessage.less%0A%20%20%20-%20load-bootstrap.less%0A%20%20%20-%20mixins.less%0A%20%20%20-%20pagination.less%0A%20%20%20-%20profile.less%0A%20%20%20-%20search.less%0A%20%20%20-%20theme-base.less%0A%20%20%20-%20variables.less%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20-%20style.less%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//style%20controller%20file</text>
+        <value>0</value>
+        <verticalScrollbar>false</verticalScrollbar>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
