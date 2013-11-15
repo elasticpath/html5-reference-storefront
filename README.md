@@ -8,7 +8,7 @@ HTML5 Storefront introduction, overview of the Storefront's customization layers
 * <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/technologyoverview.md">HTML5 Storefront Technology</a>  <br/>
 Platform architecture, technology stack, testing frameworks, project code structure, platform support.
 * <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/extending.md">Extending HTML5 Storefront Features</a> <br/>
-Overview of HTML5 Storefront's MVC framework, snopsis of the Storefront's extension model, and a tutorial that teaches how to create an extension to Items.
+Overview of HTML5 Storefront's MVC framework, synopsis of the Storefront's extension model, and a tutorial that teaches how to create an extension to Items.
 * <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/theming.md">Theming</a>  <br/>
 Introduction to HTML5 Storefront presentation layer, basics of Storefront themes, and a tutorial on creating a theme.
 * <a href="">Testing</a>  <br/>
@@ -58,9 +58,22 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 <li>Download Apache 2.4 zip from (http://www.apachelounge.com/download/)</li>
 <li>Extract the Apache24 folder locally to `C:\Apache24`</li>
 <li>Copy over the reference configuration files (<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>) to <code>C:\Apache24\conf</code><br/>
-**NOTE:** The configurations files are set to run on your local, so no extra setup is required here.</li>
-<li>Run the proxy: open a command line, navigate to `C:\Apache24\bin`, and run<br/>
+<b>NOTE:</b> The configurations files are set to run on your local, so no extra setup is required here.</li>
+<li>Run the proxy: open a command line, navigate to <code>C:\Apache24\bin</code>, and run<br/>
 <code>httpd.exe</code>
+</li>
+</ol>
+</li>
+<li><b>Configure HTML5 Reference Storefront for the Cortex mobee Store</b>
+<ol>
+<li>With a text editor, open <code>ui-storefront/public/ep.config.json</code>
+<li>Change the cortexAPI JSON element to look like the following:<br/>
+<pre>
+"cortexApi":{
+"path":"cortex",
+"scope":"mobee"
+},
+</pre>
 </li>
 </ol>
 </li>
@@ -83,7 +96,7 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 
 <h3 id="remote">Running HTML5 Reference Storefront Remotely</h3>
 Running remotely means your HTML5 Reference Storefront is running locally, but Cortex API, Search, Commerce Engine, etc, runs on an external server.
-We are expecting that your Cortex API Integrator
+We expect your Cortex API is using the Integrator
 
 <b>To run remotely:</b>
 <ul>
@@ -92,8 +105,10 @@ We are expecting that your Cortex API Integrator
 <li>Download Apache 2.4 zip from (http://www.apachelounge.com/download/)</li>
 <li>Extract the Apache24 folder locally to `C:\Apache24`</li>
 <li>Copy over the reference configuration files (<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>) to <code>C:\Apache24\conf</code><br/>
-**NOTE:** The configurations files are set to run on your local, so no extra setup is required here.</li>
-<li>Run the proxy: open a command line, navigate to `C:\Apache24\bin`, and run<br/>
+</li>
+<li>In <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a>,
+comment out </li>
+<li>Run the proxy: open a command line, navigate to <code>C:\Apache24\bin</code>, and run<br/>
 <code>httpd.exe</code>
 </li>
 </ol>

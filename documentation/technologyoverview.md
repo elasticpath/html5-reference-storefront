@@ -104,42 +104,42 @@ Platform Support
 <tr>
 <td ><strong>Browsers</strong></td>
 <td>
-
-* IE 10+
-* Chrome
-* Safari
-
+<ul>
+<li>IE 10+</li>
+<li>Chrome</li>
+<li>Safari</li>
+</ul>
 </td>
 <td>
-
-* Firefox
-
+<ul>
+<li>Firefox</li>
+</ul>
 </td>
 <td></td>
 </tr>
 <tr>
 <td><strong>Devices</strong></td>
 <td>
-
-* Android tablets 10" & 7"
-* iOS tablest 10" & 7"
-
+<ul>
+<li>Android tablets 10" & 7"</li>
+<li>iOS tablest 10" & 7"</li>
+</ul>
 </td>
 <td>
-
-* Android Phones
-* iOS Phones
-
+<ul>
+<li>Android Phones</li>
+<li>iOS Phones</li>
+</ul>
 </td>
 <td>
-
-* Windows Tablets
-* Windows Phones
-
+<ul>
+<li>Windows Tablets</li>
+<li>Windows Phones</li>
+</ul>
 </td>
 </tr>
 </tbody>
 </table>
-**Certified* - Officially Supported and Tested
+*<b>Certified</b> - Officially Supported and Tested
 
-**Compatible* - Base functionality works - Not tested.
+*<b>Compatible</b> - Base functionality works - Not tested.
