@@ -142,11 +142,11 @@ Alternatively, you can generate the documentation locally using DOCCO (http://ja
 To generate the documentation locally:
 
 1. Install DOCCO: <code>npm install -g docco</code>
-2. From cygwin command prompt, run <code>docco ui-storefront/documentation/*.litcoffee</code>
+2. From cygwin command line, run <code>docco ui-storefront/documentation/*.litcoffee</code>
 
 Files generate to: ui-storefront/docs
 
 **Notes:**
 
-- Use cygwin for the windows command prompt. Windows command prompt can't handle the * character
+- Use cygwin for the windows command line. Windows command line can't handle the * character
 - DOCCO does not copy the image files to the output folder. Copy over manually.
