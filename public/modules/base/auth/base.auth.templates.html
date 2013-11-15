@@ -32,13 +32,9 @@
       </div>
       <input id="OAuthScope" name="OAuthScope" list="oAuthScopeList" type="hidden" value="<%= E.scope%>">
       <input id="OAuthRole" name="OAuthRole" list="oAuthRoleList" type="hidden" value="REGISTERED">
-      <div class="row">
-        <div class="col-md-3 .col-md-offset-3">
+      <div class="form-group">
           <button  class="btn-auth-login" data-cmd="login"><%= E.getI18nLabel('auth.login') %></button>
-
-        </div>
       </div>
-
     </form>
   </script>
 
