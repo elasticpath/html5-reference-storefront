@@ -6750,6 +6750,9 @@ nav.main-nav {
 .cart-lineitem-availability-col {
   text-align: center;
 }
+.cart-lineitem-quantity-select {
+  min-width: 70px;
+}
 .btn-cmd-checkout {
   display: inline-block;
   padding: 6px 12px;

@@ -379,7 +379,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       template:'#MainCartTemplate',
       itemView:cartLineItemView,
       itemViewContainer:'tbody',
-      className:'cart-main-inner',
+      className:'cart-main-inner table-responsive',
       templateHelpers:viewHelpers,
       onShow:function(){
         pace.stop();
