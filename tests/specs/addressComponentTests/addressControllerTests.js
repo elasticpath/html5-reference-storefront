@@ -97,6 +97,7 @@ define(function (require) {
       before(function () {
         sinon.spy(EventBus, 'trigger');
         sinon.stub(ep.io, 'ajax');
+        sinon.stub(ep.logger, 'error');
         EventBus.trigger('address.getAddressFormRequest');
 
         // get first argument passed to ep.io.ajax,
@@ -108,6 +109,7 @@ define(function (require) {
       after(function () {
         EventBus.trigger.restore();
         ep.io.ajax.restore();
+        ep.logger.error.restore();
       });
 
       it('registers correct event listener', function () {
@@ -149,6 +151,8 @@ define(function (require) {
               status: 'any error code'
             });
             expect(EventBus.trigger).to.be.calledWithExactly(testEventName);
+            expect(ep.logger.error).to.be.calledOnce
+              .and.to.be.calledWithMatch('any error code');
           });
         }));
     });
@@ -160,6 +164,7 @@ define(function (require) {
       before(function () {
         sinon.stub(addressView, 'getAddressModel', function() {return fakeAddressModel;});
         sinon.stub(ep.io, 'ajax');
+        sinon.stub(ep.logger, 'error');
         EventBus.trigger('address.createNewAddressRequest', actionLink);
 
         // get first argument passed to ep.io.ajax,
@@ -171,6 +176,7 @@ define(function (require) {
       after(function () {
         addressView.getAddressModel.restore();
         ep.io.ajax.restore();
+        ep.logger.error.restore();
       });
 
       it('registers correct event listener', function () {
@@ -211,11 +217,14 @@ define(function (require) {
           var testEventName = 'address.submitAddressFormFailed.invalidFields';
 
           it('should trigger ' + testEventName + ' event', function () {
+            ep.logger.error.reset();  // make sure other test's logger call doesn't interfere
             this.ajaxArgs.error({
               status: 400,
               responseText: 'some error message'
             });
             expect(EventBus.trigger).to.be.calledWithExactly(testEventName, 'some error message');
+            expect(ep.logger.error).to.be.calledOnce
+              .and.to.be.calledWithMatch('400');
           });
         }));
 
@@ -224,10 +233,13 @@ define(function (require) {
           var testEventName = 'address.submitAddressFormFailed';
 
           it('should trigger ' + testEventName + ' event', function () {
+            ep.logger.error.reset();  // make sure other test's logger call doesn't interfere
             this.ajaxArgs.error({
               status: 'any error code'
             });
             expect(EventBus.trigger).to.be.calledWithExactly(testEventName);
+            expect(ep.logger.error).to.be.calledOnce
+              .and.to.be.calledWithMatch('any error code');
           });
         }));
     });

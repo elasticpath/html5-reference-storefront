@@ -89,8 +89,8 @@ define(function (reqiure) {
 
       if (ioObj) {
         // if passed ajax request doesn't have an error handle function, use default below
-        if (!ioObj.error) { // FIXME simplify logic
-          ioObj.error = function (response) { // FIXME fire a set of default error handle events
+        if (!ioObj.error) { // FIXME remove this if block after all ajax call use ajax model
+          ioObj.error = function (response) {
             ep.logger.error('response code ' + response.status + ': ' + response.responseText);
           };
         }

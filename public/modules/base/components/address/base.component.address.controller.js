@@ -50,20 +50,19 @@ define(function (require) {
    * Currently, only information used is the uri to POST or PUT address form to.
    */
   function getAddressForm() {
-    // CHECKIN use ajax model
-    ep.io.ajax({
+    var ajaxModel = new ep.io.defaultAjaxModel({
       type: 'GET',
-      contentType: 'application/json',
       url: ep.app.config.cortexApi.path + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=addresses:addressform',
       success: function (response) {
         var addressFormUri = jsonPath(response, '$.._addresses.._addressform..self..uri')[0];
         EventBus.trigger('address.createNewAddressRequest', addressFormUri);
       },
-      error: function (response) {
+      customErrorFn: function (response) {
         EventBus.trigger('address.submitAddressFormFailed');
-        ep.logger.error('error code ' + response.status + ': ' + response.responseText);
       }
     });
+
+    ep.io.ajax(ajaxModel.toJSON());
   }
 
   /**
@@ -73,16 +72,14 @@ define(function (require) {
   function createNewAddress(actionLink) {
     var addressModel = View.getAddressModel();
 
-    ep.io.ajax({
-      // CHECKIN use ajax model
+    var ajaxModel = new ep.io.defaultAjaxModel({
       type: 'PUT',
-      contentType: 'application/json',
       url: actionLink,
       data: JSON.stringify(addressModel),
       success: function (data, textStatus, XHR) {
         EventBus.trigger('address.submitAddressFormSuccess');
       },
-      error: function (response) {
+      customErrorFn: function (response) {
         if (response.status === 400) {
           // FIXME Currently cortex provide no way to differentiate missing and invalid fields
           EventBus.trigger('address.submitAddressFormFailed.invalidFields', response.responseText);
@@ -90,10 +87,10 @@ define(function (require) {
         else {
           EventBus.trigger('address.submitAddressFormFailed');
         }
-
-        ep.logger.error('error code ' + response.status + ': ' + response.responseText);
       }
     });
+
+    ep.io.ajax(ajaxModel.toJSON());
   }
 
   /* *************** Event Listeners: create address  *************** */
