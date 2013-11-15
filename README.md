@@ -19,51 +19,72 @@ Describes how to code your JavaScript for some of the more advanced Cortex API f
 
 Installing and Running
 ====================
-Before you begin, the following must already be installed and running locally:
+The HTML5 Reference Storefront requires the following installed:
 
-* <a href="https://docs.elasticpath.com/display/EPCAPIDEV/Installation+and+Configuration+Guide" target="_blank">Cortex API <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port `9080`
-* <a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Search Server <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port `8080`
-* <a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Commerce Engine <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a>
-* <a href="http://git-scm.com/downloads" target="_blank">GIT Client <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"> </a>
+* <a href="http://git-scm.com/downloads" target="_blank">GIT Client <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a>
 * <a href="http://nodejs.org/" target="_blank">Node.js <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a>
 
-<br/>
 
-**Installing HTML5 Reference Storefront:**<br/>
+Once those are installed, proceed to install the HTML5 Reference Storefront and then run it either **locally** or **remotely**.
+
+**NOTE:** Due to <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>, you must set up a proxy to handle the requests between Cortex API and HTML5 Storefront.
+We use Apache HTTP Server 2.4 in the instructions below. For convience/reference, we provide pre-configured Apache config files that you can copy over.
+You can use your own proxy, but Apache HTTP Server is the only server we test.
+
+<h3>Installing HTML5 Reference Storefront</h3>
 <ol>
 <li>Fetch HTML5 Reference Storefront sources: <br/>
 
 <code>https://github.elasticpath.net/cortex/ui-storefront</code>
 </li>
-<li>Install the Storefront's required dependencies by navigating to HTML5 Reference Storefront directory and running:<br/>
+<li>Install the Storefront's dependencies by navigating to HTML5 Reference Storefront directory and running:<br/>
 <code>npm install</code>
 </li>
 </ol>
 
-<br/>
-**Running HTML5 Reference Storefront:**<br/>
-Due to <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing"> CORS</a>, you must set up an proxy to handle Cortex API and HTML5 Storefront requests. <br/>
-**NOTE:**
+<h3 id="local">Running HTML5 Reference Storefront Locally</h3>
+Running locally means all your applications, Cortex API, Search, HTML5 Storefront, etc, are running on your local computer on these ports:
 
 
-To setup the Apache Proxy:
+* <a href="https://docs.elasticpath.com/display/EPCAPIDEV/Installation+and+Configuration+Guide" target="_blank">Cortex API <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port `9080`
+* <a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Search Server <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port `8080`
+* <a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Commerce Engine <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a>
+
+
+To run locally:
+<ul>
+<li>**Install and configure Apache 2.4 HTTP Server**
 <ol>
-<li>Download Apache 2.4 zip file from (http://www.apachelounge.com/download/)</li>
+<li>Download Apache 2.4 zip from (http://www.apachelounge.com/download/)</li>
 <li>Extract the Apache24 folder locally to `C:\Apache24`</li>
-<li>Uncomment the following filters from `C:\Apache24\conf\http.conf`<br/>
-<code>
-LoadModule substitute_module modules/mod_substitute.so<br/>
-LoadModule ext_filter_module modules/mod_ext_filter.so<br/>
-LoadModule filter_module modules/mod_filter.so<br/>
-LoadModule proxy_http_module modules/mod_proxy_http.so<br/>
-LoadModule proxy_module modules/mod_proxy.so<br/>
-LoadModule headers_module modules/mod_headers.so
-</code>
-</li>
-<li>Add the following line to the end of `http.conf`<br/>
-<code>Include conf/ep-cortex-proxy.conf</code>
+<li>Copy over the reference configuration files (<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf">`ep-cortex-proxy.conf`</a>  and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf">`httpd.conf`</a>) to `C:\Apache24\conf` <br/>
+**NOTE:** The configurations files are set to run on your local, so no setup is required here.</li>
+<li>Run the proxy: open a command line, navigate to `C:\Apache24\bin`, and run<br/>
+<code>httpd.exe</code>
 </li>
 </ol>
+</li>
+<li>**Start up the Node.js**
+<ul>
+<li>Open a command line, navigate to your HTML5 Storefront directory, and run<br/>
+<code>node app</code>
+</li>
+</ul>
+</li>
+<li>**Access HTML5 Reference Storefront**
+<ul>
+<li>Open your browser and navigate to<br/>
+<code>localhost/html5storefront</code>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h3 id="remote">Running HTML5 Reference Storefront Remotely</h3>
+Running remotely means your HTML5 Reference Storefront is running locally, but Cortex API, Search, Commerce Engine, etc, runs on an external server.
+
+
 
 
 
