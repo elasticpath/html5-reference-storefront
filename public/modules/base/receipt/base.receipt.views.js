@@ -6,35 +6,24 @@
  * Time: 9:16 AM
  *
  */
-define(['marionette', 'i18n', 'mediator'],
-  function(Marionette, i18n, Mediator){
+define(['marionette', 'i18n', 'mediator', 'viewHelpers'],
+  function(Marionette, i18n, Mediator, ViewHelpers){
 
-    var viewHelpers = {
-      getI18nLabel:function(key){
-        var retVal = key;
-        try{
-          retVal = i18n.t(key);
-        }
-        catch(e){
-          // slient failure on label rendering
-        }
-
-        return retVal;
-
-      },
+    var viewHelpers = ViewHelpers.extend({
       isContainerVisisble:function(value){
         if (value){
           return null;
         }
         return 'is-hidden';
       },
-       checkIfVisible:function(model){
+      checkIfVisible:function(model){
         if (model.amount.display){
           return null;
         }
         return 'is-hidden';
       }
-    };
+    });
+
     // Purchase Confirmation Layout
     var purchaseConfirmationLayout = Backbone.Marionette.Layout.extend({
       template:'#PurchaseConfirmationLayoutTemplate',

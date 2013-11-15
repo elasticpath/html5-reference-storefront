@@ -76,6 +76,26 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
       require(['address'],function(mod){
         EventBus.trigger('address.loadAddressesViewRequest', addressObj);
       });
+    },
+    /**
+     * Listen to load Create Address Form View request,
+     * will load DefaultCreateAddressView into modal region
+     */
+    'mediator.loadCreateAddressFormViewRequest':function(){
+      EventBus.trigger('layout.loadRegionContentRequest', {
+        region: 'appModalRegion',
+        module: 'address',
+        view: 'DefaultCreateAddressView'
+      });
+    },
+    /**
+     * Listen to address form saved (successfully) signal,
+     * will notify modules that needs to update.
+     */
+    'mediator.addressFormSaved': function() {
+      /*require(['profile'], function(mod){
+        EventBus.trigger('profile.addressesUpdated');
+      });*/
     }
 
   };

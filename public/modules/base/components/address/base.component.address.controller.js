@@ -5,6 +5,7 @@
 define(function (require) {
   var ep = require('ep');
   var EventBus = require('eventbus');
+  var Mediator = require('mediator');
   var i18n = require('i18n');
 
   var View = require('address.views');
@@ -54,7 +55,8 @@ define(function (require) {
       type: 'GET',
       url: ep.app.config.cortexApi.path + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=addresses:addressform',
       success: function (response) {
-        var addressFormUri = jsonPath(response, '$.._addresses.._addressform..self..uri')[0];
+        var addressFormUri = jsonPath(response, "$..links[?(@.rel=='createaddressaction')].uri")[0];
+//        var actionLink = ep.app.config/cortexApi.path + addressFormUri
         EventBus.trigger('address.createNewAddressRequest', addressFormUri);
       },
       customErrorFn: function (response) {
@@ -70,18 +72,18 @@ define(function (require) {
    * @param actionLink uri to make the POST request.
    */
   function createNewAddress(actionLink) {
-    var addressModel = View.getAddressModel();
+    var form = View.getAddressForm();
 
     var ajaxModel = new ep.io.defaultAjaxModel({
-      type: 'PUT',
-      url: actionLink,
-      data: JSON.stringify(addressModel),
+      type: 'POST',
+      url: ep.app.config.cortexApi.path + actionLink,
+      data: JSON.stringify(form),
       success: function (data, textStatus, XHR) {
         EventBus.trigger('address.submitAddressFormSuccess');
       },
       customErrorFn: function (response) {
         if (response.status === 400) {
-          // FIXME Currently cortex provide no way to differentiate missing and invalid fields
+          // FIXME Currently cortex provide no way to differentiate missing and invalid fields, and even bad request
           EventBus.trigger('address.submitAddressFormFailed.invalidFields', response.responseText);
         }
         else {
@@ -94,25 +96,60 @@ define(function (require) {
   }
 
   /* *************** Event Listeners: create address  *************** */
+  /**
+   * Listening to create address button clicked signal,
+   * will trigger request to get address form (to get action link to post form to)
+   */
   EventBus.on('address.createAddressBtnClicked', function () {
     EventBus.trigger('address.getAddressFormRequest');
   });
 
+  /**
+   * Listening to get address form request,
+   * will request address form from cortex,
+   * on success, will trigger submit address form request,
+   * and pass on create address action link acquired from address form
+   */
   EventBus.on('address.getAddressFormRequest', getAddressForm);
 
+  /**
+   * Listening to create new address request,
+   * will submit address form to cortex,
+   */
   EventBus.on('address.createNewAddressRequest', createNewAddress);
 
+  /**
+   * Listening to address form submission failed signal (general error),
+   * will display generic error message.
+   */
   EventBus.on('address.submitAddressFormFailed', function () {
-    var errMsgKey = 'address.generalSaveAddressFailedErrMsg';
+    var errMsgKey = 'addressForm.generalSaveAddressFailedErrMsg';
     View.displayAddressFormErrorMsg(errMsgKey);
   });
 
+  /**
+   * Listening to address form submission failed signal (invalid form),
+   * will display error message sent back from cortex.
+   */
   EventBus.on('address.submitAddressFormFailed.invalidFields', function (errMsg) {
     // in the future, also highlight the invalid input box
     View.displayAddressFormErrorMsg(errMsg);
   });
 
+  /**
+   * Listening to submit address form success signal,
+   * will fire mediator event to notify other modules.
+   */
+  EventBus.on('address.submitAddressFormSuccess', function() {
+    $.modal.close();
+    Mediator.fire('mediator.addressFormSaved');
+  });
+
   /* *********** Event Listeners: load display address view  *********** */
+  /**
+   * Listening to load default display address view request,
+   * will load the default view in appMainRegion.
+   */
   EventBus.on('address.loadAddressesViewRequest', loadAddressView);
 
   return{

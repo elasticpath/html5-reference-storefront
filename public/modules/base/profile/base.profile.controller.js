@@ -8,22 +8,20 @@
  *
  */
 define(function (require) {
-    var ep = require('ep'),
-      EventBus = require('eventbus'),
-      pace = require('pace'),
-      Backbone = require('backbone'),
-      Model = require('profile.models'),
-      View = require('profile.views'),
-      template = require('text!modules/base/profile/base.profile.templates.html');
+    var ep = require('ep');
+    var EventBus = require('eventbus');
+    var Mediator = require('mediator');
+    var Backbone = require('backbone');
+    var pace = require('pace');
 
-    /**
-     * Inject the address template into TemplateContainer for the views to reference
-     */
+    var Model = require('profile.models');
+    var View = require('profile.views');
+    var template = require('text!modules/base/profile/base.profile.templates.html');
+
+    // Inject the address template into TemplateContainer for the views to reference
     $('#TemplateContainer').append(template);
 
-    /**
-     * Creates namespace to template to reference model and viewHelpers
-     */
+    // Creates namespace to template to reference model and viewHelpers
     _.templateSettings.variable = 'E';
 
     /**
@@ -84,7 +82,7 @@ define(function (require) {
 
           },
           error: function (response) {
-            ep.logger.error('Error getting profile subscription model');
+            ep.logger.error('Error getting profile model');
           }
         });
 
@@ -102,14 +100,30 @@ define(function (require) {
     };
 
     /* ********* EVENT LISTENERS ************ */
-    var addressFormModal = {
-      region: 'appModalRegion',
-      module: 'address',
-      view: 'DefaultCreateAddressView'
-    };
+    /**
+     * Listen to add new address button clicked signal
+     * will load address form
+     */
+    EventBus.on('profile.addNewAddressBtnClicked', function () {
+      Mediator.fire('mediator.loadCreateAddressFormViewRequest');
+    });
 
-    EventBus.on('profile.addNewAddressBtnClicked', function() {
-      EventBus.trigger('layout.loadRegionContentRequest', addressFormModal);
+    EventBus.on('profile.addressesUpdated', function () {
+      var addressesRegion = new Marionette.Region({
+        el: '[data-region="profileAddressesRegion"]'
+      });
+
+      var profileModel = new Model.ProfileModel();
+      profileModel.fetch({
+        success: function (response) {
+          addressesRegion.show(new View.ProfileAddressesView({
+            collection: new Backbone.Collection(profileModel.get('addresses'))
+          }));
+        },
+        error: function (response) {
+          ep.logger.error('Error getting profile model');
+        }
+      });
     });
 
     return {

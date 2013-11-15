@@ -4,21 +4,21 @@
  * Functional Storefront Unit Test - Profile Controller
  */
 define(function (require) {
-  var Backbone = require('backbone'),
-      EventBus = require('eventbus'),
-      EventTestHelpers = require('EventTestHelpers'),
-      ep = require('ep');
+  var Backbone = require('backbone');
+  var EventBus = require('eventbus');
+  var Mediator = require('mediator');
+  var EventTestHelpers = require('EventTestHelpers');
+  var ep = require('ep');
 
   describe('Profile Module: Controller', function () {
     var profileController = require('profile');
+    var profileTemplate = require('text!modules/base/profile/base.profile.templates.html');
 
     describe("DefaultView", function () {
-      var cartTemplate = require('text!modules/base/profile/base.profile.templates.html');
-
       before(function () {
         sinon.stub(Backbone, 'sync');
 
-        $("#Fixtures").append(cartTemplate);
+        $("#Fixtures").append(profileTemplate);
       });
 
       after(function () {
@@ -85,28 +85,39 @@ define(function (require) {
       });
     });
 
-    describe('Responds to event: profile.addNewAddressBtnClicked', function() {
-      before(function() {
-        sinon.spy(EventBus, 'trigger');
-        EventTestHelpers.unbind('layout.loadRegionContentRequest');
+    describe('Responds to event: profile.addNewAddressBtnClicked', function () {
+      before(function () {
+        sinon.stub(Mediator, 'fire');
         EventBus.trigger('profile.addNewAddressBtnClicked');
       });
 
-      after(function() {
-        EventBus.trigger.restore();
-        EventTestHelpers.reset();
+      after(function () {
+        Mediator.fire.restore();
       });
 
-      it('registers correct event listener', function() {
+      it('registers correct event listener', function () {
         expect(EventBus._events['profile.addNewAddressBtnClicked']).to.have.length(1);
       });
-      it('and triggers event to load address form modal', function() {
-        var addressFormModal = {
-          region: 'appModalRegion',
-          module: 'address',
-          view: 'DefaultCreateAddressView'
-        };
-        expect(EventBus.trigger).to.be.calledWithExactly('layout.loadRegionContentRequest', addressFormModal);
+      it('and triggers event to load address form modal', function () {
+        expect(Mediator.fire).to.be.calledWithExactly('mediator.loadCreateAddressFormViewRequest');
+      });
+    });
+
+    describe('Responding to event: profile.addressesUpdated', function () {
+      before(function () {
+        sinon.stub(Backbone, 'sync');
+        EventBus.trigger('profile.addressesUpdated');
+      });
+
+      after(function () {
+        Backbone.sync.restore();
+      });
+
+      it('registers correct event listener', function () {
+        expect(EventBus._events['profile.addressesUpdated']).to.exist;
+      });
+      it('model should have fetched info from server once', function () {
+        expect(Backbone.sync).to.be.calledOnce;
       });
     });
   });

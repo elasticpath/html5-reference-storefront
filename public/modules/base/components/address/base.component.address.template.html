@@ -18,35 +18,35 @@
   <script id="DefaultAddressFormTemplate" type="text/template">
     <!-- defaultView, itemView tagName: ul, class: address-form-container -->
     <li class="address-form-field">
-      <label for="FirstName" data-el-label="addressForm.firstName">First Name</label>
+      <label for="FirstName" data-el-label="addressForm.firstName"><%= E.getI18nLabel('addressForm.firstName') %></label>
       <input id="FirstName" name="FirstName" type="text" value="<%= E.givenName %>">
     </li>
     <li class="address-form-field">
-      <label for="LastName" data-el-label="addressForm.lastName">Last Name</label>
+      <label for="LastName" data-el-label="addressForm.lastName"><%= E.getI18nLabel('addressForm.lastName') %></label>
       <input id="LastName" name="LastName" type="text" value="<%= E.familyName %>">
     </li>
     <li class="address-form-field">
-      <label for="StreetAddress" data-el-label="addressForm.streetAddress">Street Address</label>
+      <label for="StreetAddress" data-el-label="addressForm.streetAddress"><%= E.getI18nLabel('addressForm.streetAddress') %></label>
       <input id="StreetAddress" name="StreetAddress" type="text" value="<%= E.streetAddress %>">
     </li>
     <li class="address-form-field">
-      <label for="ExtendedAddress" data-el-label="addressForm.extendedAddress">Extended Address</label>
+      <label for="ExtendedAddress" data-el-label="addressForm.extendedAddress"><%= E.getI18nLabel('addressForm.extendedAddress') %></label>
       <input id="ExtendedAddress" name="ExtendedAddress" type="text" value="<%= E.extendedAddress %>">
     </li>
     <li class="address-form-field">
-      <label for="City" data-el-label="addressForm.city">City</label>
+      <label for="City" data-el-label="addressForm.city"><%= E.getI18nLabel('addressForm.city') %></label>
       <input id="City" name="City" type="text" value="<%= E.city %>">
     </li>
     <li class="address-form-field">
-      <label for="Country" data-el-label="addressForm.country">Country</label>
+      <label for="Country" data-el-label="addressForm.country"><%= E.getI18nLabel('addressForm.country') %></label>
       <input id="Country" name="Country" value="<%= E.country %>">
     </li>
     <li class="address-form-field">
-      <label for="Region" data-el-label="addressForm.region">State / Province</label>
+      <label for="Region" data-el-label="addressForm.region"><%= E.getI18nLabel('addressForm.region') %></label>
       <input id="Region" name="Region" value="<%= E.region %>">
     </li>
     <li class="address-form-field">
-      <label for="PostalCode" data-el-label="addressForm.postalCode">Zip / Postal Code</label>
+      <label for="PostalCode" data-el-label="addressForm.postalCode"><%= E.getI18nLabel('addressForm.postalCode') %></label>
       <input id="PostalCode" name="PostalCode" type="text" value="<%= E.postalCode %>">
     </li>
   </script>
@@ -54,14 +54,14 @@
   <!-- Default Create Address Form Template -->
   <script id="DefaultCreateAddressTemplate" type="text/template">
     <!-- defaultView, Layout tagName: div, class: -->
-    <h3>New Address</h3>
+    <h3><%= E.getI18nLabel('addressForm.createAddressTitle') %></h3>
     <div data-region="componentAddressFeedbackRegion"></div>
 
     <form class="form column-form" data-region="componentAddressFormRegion"></form>
 
     <div class="address-form-btn-container">
-      <button class="btn btn-primary address-save-btn" data-el-label="addressForm.create">Save</button>
-      <button class="btn btn-primary address-cancel-btn" data-el-label="addressForm.cancel">Cancel</button>
+      <button class="btn btn-primary address-save-btn" data-el-label="addressForm.create"><%= E.getI18nLabel('addressForm.createBtn') %></button>
+      <button class="btn btn-primary address-cancel-btn" data-el-label="addressForm.cancel"><%= E.getI18nLabel('addressForm.cancelBtn') %></button>
     </div>
   </script>
 

@@ -5,6 +5,7 @@
  */
 define(function (require) {
   var EventBus = require('eventbus');
+  var Mediator = require('mediator');
   var Backbone = require('backbone');
   var EventTestHelpers = require('EventTestHelpers');
   var EventTestFactory = require('EventTestFactory');
@@ -93,7 +94,7 @@ define(function (require) {
     describe('responds to event: address.createAddressBtnClicked',
       EventTestFactory.simpleEventTriggersEventTest('address.getAddressFormRequest', 'address.createAddressBtnClicked'));
 
-    describe('responds to event: address.getAddressFormRequest', function() {
+    describe('responds to event: address.getAddressFormRequest', function () {
       before(function () {
         sinon.spy(EventBus, 'trigger');
         sinon.stub(ep.io, 'ajax');
@@ -157,12 +158,14 @@ define(function (require) {
         }));
     });
 
-    describe('responds to event: address.createNewAddressRequest', function() {
+    describe('responds to event: address.createNewAddressRequest', function () {
       var actionLink = 'linkToPostAddressForm';
-      var fakeAddressModel = {address: 'address properties'};
+      var fakeForm = {address: 'address properties'};
 
       before(function () {
-        sinon.stub(addressView, 'getAddressModel', function() {return fakeAddressModel;});
+        sinon.stub(addressView, 'getAddressForm', function () {
+          return fakeForm;
+        });
         sinon.stub(ep.io, 'ajax');
         sinon.stub(ep.logger, 'error');
         EventBus.trigger('address.createNewAddressRequest', actionLink);
@@ -174,7 +177,7 @@ define(function (require) {
       });
 
       after(function () {
-        addressView.getAddressModel.restore();
+        addressView.getAddressForm.restore();
         ep.io.ajax.restore();
         ep.logger.error.restore();
       });
@@ -182,8 +185,8 @@ define(function (require) {
       it('registers correct event listener', function () {
         expect(EventBus._events['address.createNewAddressRequest']).to.be.length(1);
       });
-      it('should get an address form model', function() {
-        expect(addressView.getAddressModel).to.be.calledOnce;
+      it('should get an address form model', function () {
+        expect(addressView.getAddressForm).to.be.calledOnce;
       });
 
       describe('should submit new address to Cortex', function () {
@@ -191,10 +194,10 @@ define(function (require) {
           expect(ep.io.ajax).to.be.calledOnce;
         });
         it('with a valid request', function () {
-          expect(this.ajaxArgs.type).to.be.string('PUT');
+          expect(this.ajaxArgs.type).to.be.string('POST');
           expect(this.ajaxArgs.contentType).to.be.string('application/json');
-          expect(this.ajaxArgs.data).to.be.equal(JSON.stringify(addressView.getAddressModel()));
-          expect(this.ajaxArgs.url).to.be.equal(actionLink);
+          expect(this.ajaxArgs.data).to.be.equal(JSON.stringify(addressView.getAddressForm()));
+          expect(this.ajaxArgs.url).to.be.equal(ep.app.config.cortexApi.path + actionLink);
         });
         it('with required callback functions', function () {
           expect(this.ajaxArgs.success).to.exist;
@@ -244,36 +247,57 @@ define(function (require) {
         }));
     });
 
-    describe('responds to event: address.submitAddressFormFailed', function() {
-      before(function(){
+    describe('responds to event: address.submitAddressFormFailed', function () {
+      before(function () {
         sinon.stub(addressView, 'displayAddressFormErrorMsg');
         EventBus.trigger('address.submitAddressFormFailed');
       });
 
-      after(function(){
+      after(function () {
         addressView.displayAddressFormErrorMsg.restore();
       });
 
-      it('called method from view to display error message', function(){
+      it('called method from view to display error message', function () {
         expect(addressView.displayAddressFormErrorMsg).to.be.calledOnce;
       });
     });
 
-    describe('responds to event: address.submitAddressFormFailed.invalidFields', function() {
+    describe('responds to event: address.submitAddressFormFailed.invalidFields', function () {
       var errMsg = 'some error message';
-      before(function(){
+      before(function () {
         sinon.stub(addressView, 'displayAddressFormErrorMsg');
         EventBus.trigger('address.submitAddressFormFailed.invalidFields', errMsg);
       });
 
-      after(function(){
+      after(function () {
         addressView.displayAddressFormErrorMsg.restore();
       });
 
-      it('called method from view to display error message', function(){
+      it('called method from view to display error message', function () {
         expect(addressView.displayAddressFormErrorMsg).to.be.calledWith(errMsg);
       });
     });
+
+    describe('responds to event: address.submitAddressFormSuccess', function () {
+      var expectedEvent = 'mediator.addressFormSaved';
+
+      before(function () {
+        sinon.stub(Mediator, 'fire');
+        EventBus.trigger('address.submitAddressFormSuccess');
+      });
+
+      after(function () {
+        Mediator.fire.restore();
+      });
+
+      it('registers correct event listener', function () {
+        expect(EventBus._events['address.submitAddressFormSuccess']).to.have.length(1);
+      });
+      it('should trigger event: ' + expectedEvent, function() {
+        expect(Mediator.fire).to.be.calledWith(expectedEvent);
+      });
+    });
+
   });
 
 });

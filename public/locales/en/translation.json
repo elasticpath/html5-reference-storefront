@@ -6,7 +6,11 @@
     "extendedAddress": "Extended Address",
     "city": "City",
     "region": "Province",
+    "country": "Country",
     "postalCode": "Postal Code",
+    "createAddressTitle": "New Address",
+    "createBtn": "Save",
+    "cancelBtn": "Cancel",
     "generalSaveAddressFailedErrMsg": "I'm sorry, there was an error saving this address. Please try again or contact your system administrator"
   },
   "auth": {

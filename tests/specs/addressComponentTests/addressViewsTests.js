@@ -5,8 +5,6 @@
  */
 define(function (require) {
   var Backbone = require('backbone');
-  var EventBus = require('eventbus');
-  var EventTestHelpers = require('EventTestHelpers');
   var EventTestFactory = require('EventTestFactory');
 
   describe('Address Component: Views', function () {
@@ -37,10 +35,10 @@ define(function (require) {
 
     describe('all views should exist', function () {
       it('DefaultAddressItemView exist', function () {
-        expect(addressView.DefaultAddressItemView).to.be.ok;
+        expect(addressView.DefaultAddressItemView).to.exist;
       });
       it('DefaultAddressFormView exist', function () {
-        expect(addressView.DefaultAddressFormView).to.be.ok;
+        expect(addressView.DefaultAddressFormView).to.exist;
       });
     });
 
@@ -179,13 +177,13 @@ define(function (require) {
       });
     });
 
-    describe('DefaultCreateAddressLayout', function() {
+    describe('DefaultCreateAddressLayout', function () {
       before(function () {
         this.view = new addressView.DefaultCreateAddressLayout();
         this.view.render();
       });
 
-      describe('should have valid regions', function() {
+      describe('should have valid regions', function () {
         it('addressFormRegion', function () {
           expect(this.view.addressFormRegion).to.exist;
           expect(this.view.$el.find('[data-region="componentAddressFormRegion"]')).to.be.length(1);
@@ -206,10 +204,10 @@ define(function (require) {
         it('some child DOM elements (view content rendered)', function () {
           expect(this.view.el.childElementCount).to.be.above(0);
         });
-        it('the "save" button', function(){
+        it('the "save" button', function () {
           expect(this.view.$el.find('button[data-el-label="addressForm.create"]')).to.be.length(1);
         });
-        it('the "cancel" button', function(){
+        it('the "cancel" button', function () {
           expect(this.view.$el.find('button[data-el-label="addressForm.cancel"]')).to.be.length(1);
         });
       });
@@ -217,22 +215,91 @@ define(function (require) {
       describe('create address button clicked',
         EventTestFactory.simpleBtnClickTest('address.createAddressBtnClicked', '[data-el-label="addressForm.create"]'));
 
-      describe('cancel address form button clicked', function() {
+      describe('cancel address form button clicked', function () {
         before(function () {
           sinon.stub($.modal, 'close');
           this.view.$el.find('[data-el-label="addressForm.cancel"]').trigger('click');
         });
 
-        after(function() {
+        after(function () {
           $.modal.close.restore();
         });
 
-        it('should close modal window', function() {
+        it('should close modal window', function () {
           expect($.modal.close).to.be.calledOnce;
         });
       });
 
     });
+
+    describe('helper function: displayAddressFormErrorMsg', function () {
+      var errMsg = 'Address form error message to be displayed';
+      before(function () {
+        this.view = new addressView.DefaultCreateAddressLayout();
+        renderViewIntoFixture(this.view);
+
+        this.feedbackRegion = $('#renderedView [data-region="componentAddressFeedbackRegion"]');
+        // check feedback region is empty, make sure previous results isn't interfering
+        expect(this.feedbackRegion.text()).to.be.string('');
+        addressView.displayAddressFormErrorMsg(errMsg);
+      });
+
+      after(function () {
+        removeRenderedView();
+      });
+
+      // FIXME cannot test viewHelper functions because closure
+      it('displays error message in errorFeedbackRegion', function () {
+        expect(this.feedbackRegion.text()).to.be.string(errMsg);
+      });
+    });
+
+    describe('helper function: getAddressForm', function() {
+      before(function() {
+        this.model = new StandardAddressModel();
+        this.view = new addressView.DefaultAddressFormView({model: this.model});
+        renderViewIntoFixture(this.view);
+
+        this.form = addressView.getAddressForm();
+      });
+
+      after(function() {
+        removeRenderedView();
+        this.model.destroy();
+      });
+
+      it('returns a Object', function() {
+        expect(this.form).to.be.instanceOf(Object);
+      });
+      it('has address and name properties', function() {
+        expect(this.form).to.have.property('address');
+        expect(this.form).to.have.property('name');
+      });
+      it('saves address related form values into address property', function() {
+        var addObj = this.form.address;
+        expect(addObj).to.have.property('street-address', this.model.get('streetAddress'));
+        expect(addObj).to.have.property('extended-address', this.model.get('extendedAddress'));
+        expect(addObj).to.have.property('locality', this.model.get('city'));
+        expect(addObj).to.have.property('region', this.model.get('region'));
+        expect(addObj).to.have.property('country-name', this.model.get('country'));
+        expect(addObj).to.have.property('postal-code', this.model.get('postalCode'));
+      });
+      it('saves name related form values into name property', function() {
+        var nameObj = this.form.name;
+        expect(nameObj).to.have.property('family-name', this.model.get('familyName'));
+        expect(nameObj).to.have.property('given-name', this.model.get('givenName'));
+      });
+    });
+
+    function renderViewIntoFixture(view) {
+      view.render();
+      $("#Fixtures").append('<div id="renderedView"></div>');
+      $("#renderedView").append(view.$el);
+    }
+
+    function removeRenderedView() {
+      $("#renderedView").remove();
+    }
   });
 
 });
