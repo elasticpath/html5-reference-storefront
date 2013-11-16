@@ -1,22 +1,25 @@
 Theming
 ====================
-Theming allows you to change the HTML5 Reference Storefront's look and feel without having to change the JavaScript.
+Theming allows you to change the HTML5 Reference Storefront's look and feel without having to modify the JavaScript.
 Themes take advantage of <a href="http://lesscss.org/">{less}</a>, a powerful dynamic stylesheet language, chosen for its ease of use, dynamism, and widespread adoption.
 
-Each theme is comprised of a set of individual <a href="http://lesscss.org/">{less}</a> files, which get compiled into single style.css that HTML5 Storefront uses.
-{less} files are organized according to the view/region on HTML5 Storefront. See {less} Regions
+Each theme is comprised of a set of individual <a href="http://lesscss.org/">{less}</a> files, which compile into single style.css used by HTML5 Storefront.
+The core theme's {less} files are organized according to the view. Each {less} file represents a view.
+For example, <code>cart.less</code> contains the CSS for the cart's look and feel.
 
 
 
 Theme Directory Structure
 -----------------
-The image below shows the important files for the HTML5 Storefront's core theme.
+The image below shows the important HTML5 Storefront's core theme files.
 
 ![themeStructures](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/themeStructures.png)
 
 Compiling your Theme
 -----------------
-To compile your {less} files:
+How and where your theme's {less} files compile is defined in <code>Gruntfile.js</code>.
+
+<b>To compile your {less} files:</b>
 
 * In a command line, navigate to the HTML5 Reference Storefront root, and run one of the following:
 <table>
@@ -27,15 +30,15 @@ To compile your {less} files:
 </tr>
 <tr>
 <td><code>grunt less</code></td>
-<td>Compiles the {less} files into style.css.</td>
+<td>Compiles {less} files into style.css.</td>
 </tr>
 <tr>
 <td><code>grunt watch</code></td>
-<td>Sets Grunt to watch the {less} files for changes and immediately compiles the style.css when a change is detected.</td>
+<td>Sets Grunt to watch {less} files for changes and immediately compiles the style.css when a change is detected.</td>
 </tr>
 </tbody>
 </table>
-By default, the {less} files compile to <code>ui-storefront/public/style/style.css</code>
+By default, {less} files compile to <code>ui-storefront/public/style/style.css</code>
 <br/>
 
 <b>TROUBLESHOOTING NOTE:</b> Grunt {less} compilation issues: <i>throw new TypeError('Arguments to path.resolve must be strings');</i>
@@ -55,12 +58,6 @@ npm install grunt
 <code>npm install</code>
 </li>
 </ul>
-
-{less} Regions
----------------------
-Each of the {less} files each represent a view/region on the Storefront. A view is.....
-
-
 
 <h2>Tutorial: Writing Your Own Theme</h2>
 
