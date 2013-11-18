@@ -34,8 +34,7 @@ Technology Stack
 <tr>
 <td><strong><a href="http://backbonejs.org/">backbone.js</a></strong></td>
 <td>
-<p>Foundation UI framework. Provides the core UI elements such as Models, Views, and Events.
-dependencies.</p>
+<p>Foundation UI framework. Provides the core UI elements such as Models, Views, and Events.</p>
 </td>
 <td>1.0.0</td>
 </tr>
@@ -46,7 +45,7 @@ dependencies.</p>
 <tr>
 <td><strong><a href="http://gruntjs.com/">grunt.js</a></strong></td>
 <td>
-<p>Build and configuration tool.<em>Dependencies</em>: <em><strong>nodejs 1.8.x</strong></em></p>
+<p>Build and configuration tool.</p>
 </td>
 <td>0.4.x</td>
 </tr>
