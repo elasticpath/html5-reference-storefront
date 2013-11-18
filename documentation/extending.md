@@ -10,12 +10,17 @@ We encourage you to look at how our modules, cart, category, components, and so 
 The Basics
 ---------------------
 Overview of our MVC Framework and how the views are populated.
+Controller.js
+model.js
+templates.html
+views.js
 
 
 Extension Model
 ---------------------
 -Overview of the extension model.
 This is following binary based development methodologies.
+
 
 Tutorial: Extending Items
 ---------------------

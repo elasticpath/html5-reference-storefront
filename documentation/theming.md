@@ -3,21 +3,22 @@ Theming
 Theming allows you to change the HTML5 Reference Storefront's look and feel without having to modify the JavaScript.
 Themes take advantage of <a href="http://lesscss.org/">{less}</a>, a powerful dynamic stylesheet language, chosen for its ease of use, dynamism, and widespread adoption.
 
-Each theme is a set of individual <a href="http://lesscss.org/">{less}</a> files, which are compile into single <code>style.css</code> that the HTML5 Storefront uses.
+Each theme is a set of individual <a href="http://lesscss.org/">{less}</a> files, which on demand are compiled into a single <code>style.css</code> that the HTML5 Storefront uses.
 The core theme's {less} files are organized according to the view.
 For example, <code>cart.less</code> contains the CSS for the cart's look and feel, <code>itemdetail.less</code> contains the CSS for the item's look and feel, and so on.
 
+By modifying these {less} files you can change the HTML5 Storefront’s look and feel and create your own themes.
 
 
 Theme Directory Structure
 -----------------
-The image below shows the important HTML5 Storefront's core theme files.
+The image below shows HTML5 Storefront's core theme files.
 
 ![themeStructures](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/themeStructures.png)
 
-Compiling your Theme
+Compiling Themes
 -----------------
-How and where your theme's {less} files compile is defined in <code>Gruntfile.js</code>.
+<code>ui-storefront\Gruntfile.js</code> defines how and where your theme's {less} files compile.
 
 <b>To compile your {less} files:</b>
 
@@ -59,47 +60,42 @@ npm install grunt
 </li>
 </ul>
 
-<h2>Templates</h2>
-Templates are: HTML
-Located in each module.
-Follow Marrionette. _underscore
-
-
 <h2>Tutorial: Creating a Theme</h2>
 To develop your own theme, we recommend copying the core theme and then customizing it to suit your purposes.
 
 <b>To create a theme based off the core theme:</b>
 
 <ol>
-<li>Copy the theme-core foder in <code>ui-storefront/stylesrc/theme-core</code></li>
-<li>Rename folder</li>
+<li>Copy the theme-core folder in <code>ui-storefront/stylesrc/theme-core</code></li>
+<li>Rename folder to the </li>
 <li>Change the theme's reference in <code>ui-storefront/stylesrc/style.less</code>
 <pre>
-
+@import url("./<b>PATH_TO_THEME</b>.less");
 </pre>
 </li>
 <li>Change the <code>Grunt.js</code> to point to the less files:
 <pre>
 less: {
 development: {
-//        options: {
-//          paths: ["stylesrc"]
-//        },
 files: {
 "public/style/style.css": "stylesrc/style.less"
-}
-}
-},
+}}},
 watch: {
 scripts:{
-files: ['stylesrc/theme-core/*.less'],
+files: ['stylesrc/<b>YOUR_THEME_FOLDER</b>/*.less'],
 tasks: ['less']
-}
-}
+}}
 </pre>
 </li>
-<li>Code your CSS</li>
-<li>Compile and run</li>
+<li>Code your CSS and have fun.</li>
+<li>Compile and run the HTML5 Reference Storefront.</li>
 </ol>
 
-Keep in mind: the less variable files -> some of the
+
+Keep in mind:
+
+
+* Image paths are relative to <code>ui-storefront/public/style</code>
+* <code>variables.less</code> - control the look and feel for some of the Storefront's common elements, such the colors and fonts for carts, items, links, and so on.
+* <code>mixins.less</code> - embeds other CSS properties into the Storefront's general CSS classes.
+* Templates - are covered in <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/extending.md">Customizing HTML5 Features</a>.
