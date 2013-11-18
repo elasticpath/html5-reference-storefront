@@ -3,9 +3,9 @@ Theming
 Theming allows you to change the HTML5 Reference Storefront's look and feel without having to modify the JavaScript.
 Themes take advantage of <a href="http://lesscss.org/">{less}</a>, a powerful dynamic stylesheet language, chosen for its ease of use, dynamism, and widespread adoption.
 
-Each theme is comprised of a set of individual <a href="http://lesscss.org/">{less}</a> files, which compile into single style.css used by HTML5 Storefront.
-The core theme's {less} files are organized according to the view. Each {less} file represents a view.
-For example, <code>cart.less</code> contains the CSS for the cart's look and feel.
+Each theme is a set of individual <a href="http://lesscss.org/">{less}</a> files, which are compile into single <code>style.css</code> that the HTML5 Storefront uses.
+The core theme's {less} files are organized according to the view.
+For example, <code>cart.less</code> contains the CSS for the cart's look and feel, <code>itemdetail.less</code> contains the CSS for the item's look and feel, and so on.
 
 
 
@@ -59,10 +59,47 @@ npm install grunt
 </li>
 </ul>
 
-<h2>Tutorial: Writing Your Own Theme</h2>
+<h2>Templates</h2>
+Templates are: HTML
+Located in each module.
+Follow Marrionette. _underscore
 
-* Overview of how to do this:
-Recommend copy existing theme
-Wire it in
-Modify it using the regions as a guide.
 
+<h2>Tutorial: Creating a Theme</h2>
+To develop your own theme, we recommend copying the core theme and then customizing it to suit your purposes.
+
+<b>To create a theme based off the core theme:</b>
+
+<ol>
+<li>Copy the theme-core foder in <code>ui-storefront/stylesrc/theme-core</code></li>
+<li>Rename folder</li>
+<li>Change the theme's reference in <code>ui-storefront/stylesrc/style.less</code>
+<pre>
+
+</pre>
+</li>
+<li>Change the <code>Grunt.js</code> to point to the less files:
+<pre>
+less: {
+development: {
+//        options: {
+//          paths: ["stylesrc"]
+//        },
+files: {
+"public/style/style.css": "stylesrc/style.less"
+}
+}
+},
+watch: {
+scripts:{
+files: ['stylesrc/theme-core/*.less'],
+tasks: ['less']
+}
+}
+</pre>
+</li>
+<li>Code your CSS</li>
+<li>Compile and run</li>
+</ol>
+
+Keep in mind: the less variable files -> some of the

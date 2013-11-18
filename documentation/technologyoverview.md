@@ -28,7 +28,7 @@ Technology Stack
 </tr>
 <tr>
 <td><strong><a href="http://underscorejs.org/">underscore.js</a></strong></td>
-<td>Lightweight JavaScript utility and template framework</td>
+<td>Lightweight JavaScript utility and template framework.</td>
 <td>1.4.4</td>
 </tr>
 <tr>

@@ -28,7 +28,7 @@ comprised of the `cart.controller.js`, `cart.model.js`, `cart.templates.html`, a
 ![Cart Module](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/cartModule.png)
 
 Cart functionality such as checkout, item prices, item availability, lineitems, etc. is provided by the `cart.controller` and `cart.model`.
-While the view, the output representations of these features, is handled by the `cart.templates.html`, and the `cart.view.js`.
+While the view, the output representations of these features, is handled by the `cart.templates.html` and the `cart.view.js`.
 HTML5 Storefront views only define the regions where the cart representation appears, while the cart's look and feel is defined through the Presentation Layer with a theme.
 
 
