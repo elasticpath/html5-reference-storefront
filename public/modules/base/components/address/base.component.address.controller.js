@@ -12,6 +12,7 @@ define(function (require) {
   var View = require('address.views');
   var template = require('text!modules/base/components/address/base.component.address.template.html');
 
+  // url addressFormView will return to upon save form success or cancel button click
   var returnUrl = ep.app.config.routes.profile;
 
   $('#TemplateContainer').append(template);
@@ -133,6 +134,7 @@ define(function (require) {
   /**
    * Listening to address form submission failed signal (invalid form),
    * will display error message sent back from cortex.
+   * @param errMsg an error message, or a i18n key to the error message
    */
   EventBus.on('address.submitAddressFormFailed.invalidFields', function (errMsg) {
     // in the future, also highlight the invalid input box
@@ -141,12 +143,16 @@ define(function (require) {
 
   /**
    * Listening to submit address form success signal,
-   * will fire mediator event to notify other modules.
+   * will redirect page set by returnUrl.
    */
   EventBus.on('address.submitAddressFormSuccess', function() {
     window.location.href = returnUrl;
   });
 
+  /**
+   * Listen to cancel button clicked signal,
+   * will redirect page set by returnUrl.
+   */
   EventBus.on('address.cancelBtnClicked', function() {
     window.location.href = returnUrl;
   });

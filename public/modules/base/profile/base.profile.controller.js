@@ -18,10 +18,8 @@ define(function (require) {
     var View = require('profile.views');
     var template = require('text!modules/base/profile/base.profile.templates.html');
 
-    // Inject the address template into TemplateContainer for the views to reference
     $('#TemplateContainer').append(template);
 
-    // Creates namespace to template to reference model and viewHelpers
     _.templateSettings.variable = 'E';
 
     /**
