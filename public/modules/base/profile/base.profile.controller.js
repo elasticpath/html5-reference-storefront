@@ -105,9 +105,14 @@ define(function (require) {
      * will load address form
      */
     EventBus.on('profile.addNewAddressBtnClicked', function () {
-      Mediator.fire('mediator.loadCreateAddressFormViewRequest');
+      window.location.href = ep.app.config.routes.newAddress;
+      Mediator.fire('mediator.setReturnUrlInAddressForm', ep.app.config.routes.profile);
     });
 
+    /**
+     * Listen to addresses updated signal,
+     * will reload profile addresses region
+     */
     EventBus.on('profile.addressesUpdated', function () {
       var addressesRegion = new Marionette.Region({
         el: '[data-region="profileAddressesRegion"]'

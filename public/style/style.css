@@ -5798,16 +5798,32 @@ td.visible-print {
 .flatform {
   background: red;
 }
-.address-container,
-.address-form-container {
+.address-container {
   padding: 0;
 }
-.address-form-container label {
-  width: 20rem;
+.address-form-label {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
-.address-form-field {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+@media (min-width: 768px) {
+  .address-form-label {
+    float: left;
+    width: 25%;
+  }
+}
+.address-form-input {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  .address-form-input {
+    float: left;
+    width: 50%;
+  }
 }
 /*
   auth view
@@ -8299,7 +8315,7 @@ ul {
 /*
   Begin Login Form
 */
-/* oAuth Form Feedback */
+/* Form Feedback */
 .feedback-label {
   color: red;
 }
@@ -8329,6 +8345,7 @@ ul {
 }
 .pace-inactive {
   display: none;
+  width: 65%;
 }
 .itemdetail-availability-state {
   padding: 0;

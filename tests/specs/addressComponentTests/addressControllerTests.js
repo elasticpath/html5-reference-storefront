@@ -36,9 +36,9 @@ define(function (require) {
       it('returns an instance of DefaultCreateAddressLayout', function () {
         expect(this.view).to.be.instanceOf(addressView.DefaultCreateAddressLayout);
       });
-      it('renders content (ul element) into addressFormRegion', function () {
+      it('renders content into addressFormRegion', function () {
         this.view.render().trigger('show');
-        expect(this.view.$el.find('[data-region="componentAddressFormRegion"] ul')).to.be.length(1);
+        expect(this.view.$el.find('[data-region="componentAddressFormRegion"] input')).to.be.length(8);
       });
     });
 
@@ -279,22 +279,46 @@ define(function (require) {
     });
 
     describe('responds to event: address.submitAddressFormSuccess', function () {
-      var expectedEvent = 'mediator.addressFormSaved';
+      var returnUrl = ep.app.config.routes.profile;
 
       before(function () {
-        sinon.stub(Mediator, 'fire');
         EventBus.trigger('address.submitAddressFormSuccess');
-      });
-
-      after(function () {
-        Mediator.fire.restore();
       });
 
       it('registers correct event listener', function () {
         expect(EventBus._events['address.submitAddressFormSuccess']).to.have.length(1);
       });
-      it('should trigger event: ' + expectedEvent, function() {
-        expect(Mediator.fire).to.be.calledWith(expectedEvent);
+      it('redirects page back to returnUrl: ', function() {
+        expect(window.location.href).to.have.string(returnUrl);
+      });
+    });
+
+    describe('responds to event: address.cancelBtnClicked', function () {
+      var returnUrl = ep.app.config.routes.profile;
+
+      before(function () {
+        EventBus.trigger('address.cancelBtnClicked');
+      });
+
+      after(function() {
+      });
+      it('registers correct event listener', function () {
+        expect(EventBus._events['address.cancelBtnClicked']).to.have.length(1);
+      });
+      it('redirects page back to returnUrl: ', function() {
+        expect(window.location.href).to.have.string(returnUrl);
+      });
+    });
+
+    describe('responds to event: address.setReturnUrl', function () {
+      var returnUrl = ep.app.config.routes.profile;
+
+      before(function () {
+        EventBus.trigger('address.setReturnUrl');
+      });
+
+      it('registers correct event listener', function () {
+        expect(EventBus._events['address.setReturnUrl']).to.have.length(1);
       });
     });
 

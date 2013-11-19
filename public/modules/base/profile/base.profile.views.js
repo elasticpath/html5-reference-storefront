@@ -1,5 +1,6 @@
 /**
  * Copyright Elastic Path Software 2013.
+ *
  * Default Profile Views & viewHelpers
  */
 define(['marionette','i18n', 'mediator', 'eventbus'],

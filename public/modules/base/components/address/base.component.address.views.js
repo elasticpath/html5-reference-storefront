@@ -1,6 +1,7 @@
 /**
  * Copyright Elastic Path Software 2013.
  *
+ * Storefront - Address Component Views
  */
 define(['ep','marionette', 'eventbus', 'viewHelpers'],
   function(ep, Marionette, EventBus, ViewHelpers) {
@@ -28,7 +29,7 @@ define(['ep','marionette', 'eventbus', 'viewHelpers'],
      */
     var defaultAddressFormView = Marionette.ItemView.extend({
       template: '#DefaultAddressFormTemplate',
-      tagName: 'ul',
+      tagName: 'div',
       className: 'address-form-container',
       templateHelpers: viewHelpers
     });
@@ -41,6 +42,7 @@ define(['ep','marionette', 'eventbus', 'viewHelpers'],
     var defaultCreateAddressLayout = Marionette.Layout.extend({
       template: '#DefaultCreateAddressTemplate',
       templateHelpers: viewHelpers,
+      className: 'create-address-container container',
       regions: {
         addressFormRegion: '[data-region="componentAddressFormRegion"]',
         addressFeedbackMsgRegion: '[data-region="componentAddressFeedbackRegion"]'
@@ -52,7 +54,7 @@ define(['ep','marionette', 'eventbus', 'viewHelpers'],
         },
         'click [data-el-label="addressForm.cancel"]' : function(event) {
           event.preventDefault();
-          $.modal.close();
+          EventBus.trigger('address.cancelBtnClicked');
         }
       }
     });

@@ -1,15 +1,18 @@
 /**
  * Copyright Elastic Path Software 2013.
+ *
+ * Storefront - Address Component Controller
  */
 
 define(function (require) {
   var ep = require('ep');
   var EventBus = require('eventbus');
-  var Mediator = require('mediator');
   var i18n = require('i18n');
 
   var View = require('address.views');
   var template = require('text!modules/base/components/address/base.component.address.template.html');
+
+  var returnUrl = ep.app.config.routes.profile;
 
   $('#TemplateContainer').append(template);
 
@@ -141,8 +144,21 @@ define(function (require) {
    * will fire mediator event to notify other modules.
    */
   EventBus.on('address.submitAddressFormSuccess', function() {
-    $.modal.close();
-    Mediator.fire('mediator.addressFormSaved');
+    window.location.href = returnUrl;
+  });
+
+  EventBus.on('address.cancelBtnClicked', function() {
+    window.location.href = returnUrl;
+  });
+
+  /* *********** Event Listeners: set   *********** */
+  /**
+   * Listen to setReturnUrl request,
+   * will set the returnUrl variable to passed in url value
+   * @param url url address form will return to upon cancel or success
+   */
+  EventBus.on('address.setReturnUrl', function(url) {
+    returnUrl = url;
   });
 
   /* *********** Event Listeners: load display address view  *********** */

@@ -66,6 +66,13 @@ define(['marionette','eventbus','pace'],
           module:'profile',
           view:'DefaultView'
         });
+      },
+      newaddressform: function() {
+        EventBus.trigger('layout.loadRegionContentRequest',{
+          region: 'appMainRegion',
+          module: 'address',
+          view: 'DefaultCreateAddressView'
+        });
       }
     };
 
@@ -81,7 +88,8 @@ define(['marionette','eventbus','pace'],
         'itemdetail/:uri': 'item',
         'profile': 'profile',
         'mycart': 'cart',
-        'confirmation/:id': 'confirmation'
+        'confirmation/:id': 'confirmation',
+        'newaddressform' : 'newaddressform'
       },
       controller:appRouterController
     });

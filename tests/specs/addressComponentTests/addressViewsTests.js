@@ -142,7 +142,7 @@ define(function (require) {
           expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
         });
         it('as ul (unordered list) element', function () {
-          expect(this.view.el.nodeName).to.equal('UL');
+          expect(this.view.el.nodeName).to.equal('DIV');
         });
         it('8 child DOM elements (view content rendered)', function () {
           expect(this.view.el.childElementCount).to.equal(8);
@@ -215,21 +215,8 @@ define(function (require) {
       describe('create address button clicked',
         EventTestFactory.simpleBtnClickTest('address.createAddressBtnClicked', '[data-el-label="addressForm.create"]'));
 
-      describe('cancel address form button clicked', function () {
-        before(function () {
-          sinon.stub($.modal, 'close');
-          this.view.$el.find('[data-el-label="addressForm.cancel"]').trigger('click');
-        });
-
-        after(function () {
-          $.modal.close.restore();
-        });
-
-        it('should close modal window', function () {
-          expect($.modal.close).to.be.calledOnce;
-        });
-      });
-
+      describe('cancel address form button clicked',
+        EventTestFactory.simpleBtnClickTest('address.cancelBtnClicked', '[data-el-label="addressForm.cancel"]'));
     });
 
     describe('helper function: displayAddressFormErrorMsg', function () {

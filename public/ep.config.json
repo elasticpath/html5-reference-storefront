@@ -15,6 +15,7 @@
   "requireAuthToCheckout":true,
   "viewFadeInValue":500,
   "routes": {
+    "newAddress":"#newaddressform",
     "cart":"#mycart",
     "category":"#category",
     "profile":"#profile",

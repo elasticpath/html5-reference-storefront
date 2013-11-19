@@ -98,8 +98,11 @@ define(function (require) {
       it('registers correct event listener', function () {
         expect(EventBus._events['profile.addNewAddressBtnClicked']).to.have.length(1);
       });
+      it('redirects page to /#newaddressform', function () {
+        expect(window.location.href).to.have.string(ep.app.config.routes.newAddress);
+      });
       it('and triggers event to load address form modal', function () {
-        expect(Mediator.fire).to.be.calledWithExactly('mediator.loadCreateAddressFormViewRequest');
+        expect(Mediator.fire).to.be.calledWithExactly('mediator.setReturnUrlInAddressForm', ep.app.config.routes.profile);
       });
     });
 
