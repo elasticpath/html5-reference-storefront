@@ -3032,7 +3032,6 @@ input[type="button"].btn-block {
   line-height: 1.33;
   border-radius: 6px;
   border-radius: 2px;
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
@@ -5895,7 +5894,6 @@ td.visible-print {
   line-height: 1.33;
   border-radius: 6px;
   border-radius: 2px;
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   color: #ffffff;
@@ -6202,7 +6200,6 @@ fieldset[disabled] .btn-auth-login.active {
   -o-user-select: none;
   user-select: none;
   border-radius: 2px;
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   padding: 5px 10px;
@@ -6411,7 +6408,6 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   -o-user-select: none;
   user-select: none;
   border-radius: 2px;
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   padding: 5px 10px;
@@ -6777,7 +6773,8 @@ nav.main-nav {
 .cart-lineitem-quantity-select {
   min-width: 70px;
 }
-.btn-cmd-checkout {
+.btn-cmd-checkout,
+.btn-cmd-submit-order {
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
@@ -6796,33 +6793,40 @@ nav.main-nav {
   -o-user-select: none;
   user-select: none;
   border-radius: 2px;
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   color: #ffffff;
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-.btn-cmd-checkout:focus {
+.btn-cmd-checkout:focus,
+.btn-cmd-submit-order:focus {
   outline: thin dotted #333;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
 .btn-cmd-checkout:hover,
-.btn-cmd-checkout:focus {
+.btn-cmd-submit-order:hover,
+.btn-cmd-checkout:focus,
+.btn-cmd-submit-order:focus {
   color: #333333;
   text-decoration: none;
 }
 .btn-cmd-checkout:active,
-.btn-cmd-checkout.active {
+.btn-cmd-submit-order:active,
+.btn-cmd-checkout.active,
+.btn-cmd-submit-order.active {
   outline: 0;
   background-image: none;
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 .btn-cmd-checkout.disabled,
+.btn-cmd-submit-order.disabled,
 .btn-cmd-checkout[disabled],
-fieldset[disabled] .btn-cmd-checkout {
+.btn-cmd-submit-order[disabled],
+fieldset[disabled] .btn-cmd-checkout,
+fieldset[disabled] .btn-cmd-submit-order {
   cursor: not-allowed;
   pointer-events: none;
   opacity: 0.65;
@@ -6831,34 +6835,57 @@ fieldset[disabled] .btn-cmd-checkout {
   box-shadow: none;
 }
 .btn-cmd-checkout:hover,
+.btn-cmd-submit-order:hover,
 .btn-cmd-checkout:focus,
+.btn-cmd-submit-order:focus,
 .btn-cmd-checkout:active,
+.btn-cmd-submit-order:active,
 .btn-cmd-checkout.active,
-.open .dropdown-toggle.btn-cmd-checkout {
+.btn-cmd-submit-order.active,
+.open .dropdown-toggle.btn-cmd-checkout,
+.open .dropdown-toggle.btn-cmd-submit-order {
   color: #ffffff;
   background-color: #47a447;
   border-color: #398439;
 }
 .btn-cmd-checkout:active,
+.btn-cmd-submit-order:active,
 .btn-cmd-checkout.active,
-.open .dropdown-toggle.btn-cmd-checkout {
+.btn-cmd-submit-order.active,
+.open .dropdown-toggle.btn-cmd-checkout,
+.open .dropdown-toggle.btn-cmd-submit-order {
   background-image: none;
 }
 .btn-cmd-checkout.disabled,
+.btn-cmd-submit-order.disabled,
 .btn-cmd-checkout[disabled],
+.btn-cmd-submit-order[disabled],
 fieldset[disabled] .btn-cmd-checkout,
+fieldset[disabled] .btn-cmd-submit-order,
 .btn-cmd-checkout.disabled:hover,
+.btn-cmd-submit-order.disabled:hover,
 .btn-cmd-checkout[disabled]:hover,
+.btn-cmd-submit-order[disabled]:hover,
 fieldset[disabled] .btn-cmd-checkout:hover,
+fieldset[disabled] .btn-cmd-submit-order:hover,
 .btn-cmd-checkout.disabled:focus,
+.btn-cmd-submit-order.disabled:focus,
 .btn-cmd-checkout[disabled]:focus,
+.btn-cmd-submit-order[disabled]:focus,
 fieldset[disabled] .btn-cmd-checkout:focus,
+fieldset[disabled] .btn-cmd-submit-order:focus,
 .btn-cmd-checkout.disabled:active,
+.btn-cmd-submit-order.disabled:active,
 .btn-cmd-checkout[disabled]:active,
+.btn-cmd-submit-order[disabled]:active,
 fieldset[disabled] .btn-cmd-checkout:active,
+fieldset[disabled] .btn-cmd-submit-order:active,
 .btn-cmd-checkout.disabled.active,
+.btn-cmd-submit-order.disabled.active,
 .btn-cmd-checkout[disabled].active,
-fieldset[disabled] .btn-cmd-checkout.active {
+.btn-cmd-submit-order[disabled].active,
+fieldset[disabled] .btn-cmd-checkout.active,
+fieldset[disabled] .btn-cmd-submit-order.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
@@ -6901,14 +6928,6 @@ fieldset[disabled] .btn-cmd-checkout.active {
 .cart-container-inner:after {
   clear: both;
 }
-.cart-title-container {
-  position: relative;
-  float: left;
-  width: 100%;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
 .cart-title-container h1 {
   position: relative;
   float: left;
@@ -6918,7 +6937,6 @@ fieldset[disabled] .btn-cmd-checkout.active {
   padding-right: 15px;
   margin-top: 4rem;
   margin-bottom: 4rem;
-  color: #555555;
 }
 .cart-main-container {
   position: relative;
@@ -6934,6 +6952,9 @@ fieldset[disabled] .btn-cmd-checkout.active {
     float: left;
     width: 75%;
   }
+}
+.cart-main-container h2 {
+  margin-top: 0;
 }
 .cart-summary-container {
   display: inline-block;
@@ -7097,7 +7118,6 @@ Purchase Confirmation
   -o-user-select: none;
   user-select: none;
   border-radius: 2px;
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   color: #ffffff;
@@ -7567,7 +7587,6 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   -o-user-select: none;
   user-select: none;
   border-radius: 2px;
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   color: #ffffff;
@@ -7845,7 +7864,6 @@ fieldset[disabled] .btn-pagination.pagination-link-disabled.active {
   -o-user-select: none;
   user-select: none;
   border-radius: 2px;
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   padding: 5px 10px;
@@ -7934,7 +7952,6 @@ fieldset[disabled] .search-results-item-inner .btn-view-item-detail.active {
   -o-user-select: none;
   user-select: none;
   border-radius: 2px;
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   padding: 5px 10px;
@@ -8208,7 +8225,6 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
 .btn,
 .btn-lg {
   border-radius: 2px;
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }

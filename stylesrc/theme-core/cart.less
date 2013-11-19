@@ -171,12 +171,11 @@
   min-width: 70px;
 }
 
-.btn-cmd-checkout{
+.btn-cmd-checkout,
+.btn-cmd-submit-order {
     .btn;
-    // .btn-lg;
     .btn-success;
 }
-
 
 .cart-list-price{
     text-decoration: line-through;
@@ -202,13 +201,11 @@
 }
 
 .cart-title-container{ // wraps title --- applies bootstrap column classes
-    // .make-row();
-    .make-xs-column(12);
+
     h1{
         .make-xs-column(12);
         margin-top: 4rem;
         margin-bottom: 4rem;
-        color: @gray;
     }
 }
 
@@ -216,6 +213,10 @@
     .make-md-column(9);
     .make-xs-column(12);
     margin-bottom: 2em;
+
+    h2 {
+      margin-top: 0;
+    }
 }
 
 .cart-summary-container{ //wraps cart summary

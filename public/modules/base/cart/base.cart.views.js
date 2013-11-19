@@ -172,13 +172,12 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     * */
     // Set Checkout Button to Processing State
     function setCheckoutButtonProcessing(){
-
-      $('.btn-cmd-checkout').html('<img src="/images/activity-indicator-strobe.gif" />');
+      $('.btn-cmd-submit-order').html('<img src="/images/activity-indicator-strobe.gif" />');
 
     }
     // Set Checkout Button to Ready State
     function resetCheckoutButtonText(){
-      $('.btn-cmd-checkout').html(viewHelpers.getI18nLabel('cart.checkout'));
+      $('.btn-cmd-submit-order').html(viewHelpers.getI18nLabel('cart.submitOrder'));
     }
 
     // Default Layout
@@ -189,16 +188,99 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       regions:{
         cartTitleRegion:'[data-region="cartTitleRegion"]',
         mainCartRegion:'[data-region="mainCartRegion"]',
-        cartCheckoutMasterRegion:'[data-region="cartCheckoutMasterRegion"]',
-        chosenBillingAddressRegion:'[data-region="chosenBillingAddressRegion"]',
-        choiceBillingAddressesRegion:'[data-region="choiceBillingAddressesRegion"]'
+        cartCheckoutMasterRegion:'[data-region="cartCheckoutMasterRegion"]'
       },
       onShow:function(){
         Mediator.fire('mediator.cart.DefaultViewRendered');
-
-
       }
     });
+
+
+
+
+
+
+    var cartCheckoutLayout = Backbone.Marionette.Layout.extend({
+      template:'#CartCheckoutLayoutTemplate',
+      templateHelpers:viewHelpers,
+      className:'cart-container container',
+      regions:{
+        cartCheckoutTitleRegion:'[data-region="cartCheckoutTitleRegion"]',
+        chosenBillingAddressRegion:'[data-region="chosenBillingAddressRegion"]',
+        cartCancelActionRegion:'[data-region="cartCancelActionRegion"]',
+        cartOrderSummaryRegion:'[data-region="cartOrderSummary"]'
+      }
+    });
+
+    // Cart Checkout Title View
+    var cartCheckoutTitleView = Backbone.Marionette.ItemView.extend({
+      template:'#CartCheckoutTitleTemplate',
+      templateHelpers:viewHelpers
+    });
+
+    /**
+     * Cart Billing Address View
+     * make mediator request to load an address view in region: billingAddressComponentRegion,
+     * will render a wrapper around an address view
+     * @type Marionette.Layout
+     */
+    var cartBillingAddressView = Backbone.Marionette.Layout.extend({
+      template: '#CartBillingAddressTemplate',
+      templateHelpers:viewHelpers,
+      regions: {
+        billingAddressComponentRegion: '[data-region="billingAddressComponentRegion"]'
+      },
+      onShow: function() {
+        // fire event to load the address itemView from component
+        Mediator.fire('mediator.loadAddressesViewRequest', {
+          region: this.billingAddressComponentRegion,
+          model: this.model
+        });
+      }
+    });
+
+    // Cart Checkout Cancel Action View
+    var cartCancelActionView = Backbone.Marionette.ItemView.extend({
+      template:'#CartCancelActionTemplate',
+      templateHelpers:viewHelpers,
+      events:{
+        'click .btn-cancel-order':function(event){
+          event.preventDefault();
+          EventBus.trigger('cart.cancelOrderBtnClicked');
+        }
+      }
+    });
+
+    var cartOrderSummaryView = Backbone.Marionette.Layout.extend({
+      template:'#CartOrderSummaryTemplate',
+      regions: {
+        cartSummaryRegion: '[data-region="cartSummaryRegion"]',
+        cartTaxTotalRegion: '[data-region="cartTaxTotalRegion"]',
+        cartSubmitOrderRegion: '[data-region="cartSubmitOrderRegion"]'
+      }
+    });
+
+    // Cart Tax Total View
+    var cartTaxTotalView = Backbone.Marionette.ItemView.extend({
+      template:'#CartTaxTotalTemplate',
+      templateHelpers:viewHelpers
+    });
+
+    // Cart Checkout Submit Order View
+    var cartSubmitOrderActionView = Backbone.Marionette.ItemView.extend({
+      template:'#SubmitOrderActionTemplate',
+      templateHelpers:viewHelpers,
+      events:{
+        'click .btn-cmd-submit-order':function(event){
+          event.preventDefault();
+          EventBus.trigger('cart.submitOrderBtnClicked',this.model.get('submitOrderActionUri'));
+        }
+      }
+    });
+
+
+
+
 
     // Cart Checkout Master View
     var cartCheckoutMasterView = Backbone.Marionette.Layout.extend({
@@ -422,44 +504,6 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       }
     });
 
-
-    // Activity Indicator View
-    var cartActivityIndicatorView = Backbone.Marionette.ItemView.extend({
-      template:'#CartActivityIndicatorTemplate'
-    });
-
-    /**
-     * Cart Billing Address View
-     * make mediator request to load an address view in region: billingAddressComponentRegion,
-     * will render a wrapper around an address view
-     * @type Marionette.Layout
-     */
-    var cartBillingAddressItemView = Backbone.Marionette.Layout.extend({
-      template: '#CartBillingAddressTemplate',
-      tagName: 'li',
-      regions: {
-        billingAddressComponentRegion: '[data-region="billingAddressComponentRegion"]'
-      },
-      onShow: function() {
-        // fire event to load the address itemView from component
-        Mediator.fire('mediator.loadAddressesViewRequest', {
-          region: this.billingAddressComponentRegion,
-            model: this.model
-        });
-      }
-    });
-
-    /**
-     * Billing Addresses View
-     * will render a collection of billing addresses with surrounding element such as heading.
-     * @type Marionette.CompositeView
-     */
-    var cartBillingAddressesView = Backbone.Marionette.CompositeView.extend({
-      template: '#CartBillingAddressesTemplate',
-      itemView: cartBillingAddressItemView,
-      itemViewContainer: 'ul'
-    });
-
     /* ********* Helper functions ********* */
     /**
      * Reset a lineItem's quantity to original value recorded in model.
@@ -476,10 +520,14 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       EmptyCartView:emptyCartView,
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
-      CartBillingAddressItemView:cartBillingAddressItemView,
-      CartBillingAddressesView:cartBillingAddressesView,
       CartCheckoutMasterView:cartCheckoutMasterView,
-      CartActivityIndicatorView:cartActivityIndicatorView,
+      CartCheckoutLayout:cartCheckoutLayout,
+      CartCheckoutTitleView:cartCheckoutTitleView,
+      CartBillingAddressView:cartBillingAddressView,
+      CartCancelActionView:cartCancelActionView,
+      CartOrderSummaryView:cartOrderSummaryView,
+      CartTaxTotalView:cartTaxTotalView,
+      CartSubmitOrderActionView:cartSubmitOrderActionView,
       setCheckoutButtonProcessing:setCheckoutButtonProcessing,
       resetCheckoutButtonText:resetCheckoutButtonText,
       resetQuantity: resetQuantity

@@ -54,17 +54,6 @@ define(function (require) {
           });
           cartLayout.cartCheckoutMasterRegion.show(cartCheckoutMasterView);
 
-          // Display the selected (chosen) billing addresses
-          cartLayout.chosenBillingAddressRegion.show(new View.CartBillingAddressesView({
-            collection: new Backbone.Collection(cartModel.get('billingAddresses').chosenBillingAddress)
-          }));
-          // Display alternative (choice) billing addresses
-          if (response.attributes.billingAddresses.choiceBillingAddresses.length > 0) {
-            cartLayout.choiceBillingAddressesRegion.show(new View.CartBillingAddressesView({
-              collection: new Backbone.Collection(cartModel.get('billingAddresses').choiceBillingAddresses)
-            }));
-          }
-
           if (response.attributes.lineItems.length > 0) {
             cartLayout.mainCartRegion.show(mainCartView);
 
@@ -79,6 +68,55 @@ define(function (require) {
       return cartLayout;
     };
 
+    /*
+     * Checkout View
+     */
+    var checkoutView = function() {
+      pace.start();
+      var checkoutLayout = new View.CartCheckoutLayout();
+      var cartModel = new Model.CartModel();
+
+      cartModel.fetch({
+        success: function (response) {
+          checkoutLayout.cartCheckoutTitleRegion.show(new View.CartCheckoutTitleView());
+
+          checkoutLayout.chosenBillingAddressRegion.show(new View.CartBillingAddressView({
+            model: new Backbone.Model(cartModel.get('billingAddresses').chosenBillingAddress)
+          }));
+
+          checkoutLayout.cartCancelActionRegion.show(new View.CartCancelActionView({
+            model: cartModel
+          }));
+
+          var cartOrderSummaryView = new View.CartOrderSummaryView();
+          cartOrderSummaryView.on('show', function () {
+            cartOrderSummaryView.cartSummaryRegion.show(
+              new View.CartSummaryView({
+                model: cartModel
+              })
+            );
+            cartOrderSummaryView.cartTaxTotalRegion.show(
+              new View.CartTaxTotalView({
+                model: cartModel
+              })
+            );
+            cartOrderSummaryView.cartSubmitOrderRegion.show(
+              new View.CartSubmitOrderActionView({
+                model: cartModel
+              })
+            );
+          });
+          checkoutLayout.cartOrderSummaryRegion.show(cartOrderSummaryView);
+        },
+        error: function (response) {
+          ep.logger.error('error fetching my cart model: ' + response);
+        }
+      });
+
+
+
+      return checkoutLayout;
+    };
 
     /* ************** EVENT LISTENER FUNCTIONS ***************** */
     /**
@@ -262,35 +300,42 @@ define(function (require) {
       }
     });
 
-    // Checkout Button Clicked
-    EventBus.on('cart.checkoutBtnClicked', function (submitOrderActionUri) {
-
+    // Submit Order Button Clicked
+    EventBus.on('cart.submitOrderBtnClicked', function (submitOrderActionUri) {
       View.setCheckoutButtonProcessing();
-      EventBus.trigger('cart.checkoutRequest', submitOrderActionUri);
-    });
-
-    // Checkout Request
-    EventBus.on('cart.checkoutRequest', function (submitOrderActionUri) {
       // if cortex says it's ok
       if (submitOrderActionUri) {
-
-        // submit request to uri
         EventBus.trigger('cart.submitOrderRequest', submitOrderActionUri);
       }
-      // or
-      // user not logged and config set to require login
-      else if (ep.app.config.requireAuthToCheckout && (!ep.app.isUserLoggedIn())) {
-        // trigger login
-        // Mediator.fire('mediator.showLoginModalRequest');
+    });
+
+    // Proceed to checkout button checks if the user is logged in and loads the checkout summary
+    EventBus.on('cart.checkoutBtnClicked', function() {
+      // User not logged in and config set to require login
+      if (ep.app.config.requireAuthToCheckout && (!ep.app.isUserLoggedIn())) {
         EventBus.trigger('layout.loadRegionContentRequest', {
           region: 'appModalRegion',
           module: 'auth',
           view: 'LoginFormView'
         });
-        EventBus.on('ui.modalWindowClosed', function () {
-          View.resetCheckoutButtonText();
-        });
+      } else {
+        // Route to the checkout view
+        ep.router.navigate('checkout');
+        EventBus.trigger('layout.loadRegionContentRequest',
+          {
+            region: 'appMainRegion',
+            module: 'cart',
+            view: 'CheckoutView'
+          }
+        );
       }
+    });
+
+    // Cancel button will reload the default cart view
+    EventBus.on('cart.cancelOrderBtnClicked', function() {
+      // Route to the cart view
+      ep.router.navigate('mycart');
+      EventBus.trigger('cart.reloadCartViewRequest');
     });
 
     // Submit Order Request
@@ -333,7 +378,8 @@ define(function (require) {
     });
 
     return {
-      DefaultView: defaultView
+      DefaultView: defaultView,
+      CheckoutView: checkoutView
     };
   }
 );

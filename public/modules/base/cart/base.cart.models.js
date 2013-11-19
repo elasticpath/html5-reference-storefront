@@ -15,7 +15,9 @@ define(['ep', 'eventbus', 'backbone'],
       url: ep.app.config.cortexApi.path + '/carts/' + ep.app.config.cortexApi.scope + '/default?zoom=total,' +
         'lineitems:element,lineitems:element:price,lineitems:element:rate,lineitems:element:availability,' +
         'lineitems:element:item,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price,lineitems:element:item:rate,' +
-        'order:purchaseform,order:billingaddressinfo:selector:chosen:description,order:billingaddressinfo:selector:choice:description',
+        'order:purchaseform,order:billingaddressinfo:selector:choice:description,' +
+        'order:billingaddressinfo:selector:chosen:description,order:tax,order:total',
+
       parse: function (cart) {
 
         var cartObj = {};
@@ -127,13 +129,26 @@ define(['ep', 'eventbus', 'backbone'],
          * Cart Summary: total price (excluding tax)
          */
         cartObj.cartTotal = {};
-        var cartTotal = jsonPath(cart, '$._total..cost[0]')[0];
+        var cartTotal = jsonPath(cart, '$._total..cost[0]');
         if (cartTotal) {
-          cartObj.cartTotal = {
-            currency: cartTotal.currency,
-            amount: cartTotal.amount,
-            display: cartTotal.display
-          };
+          cartObj.cartTotal = parsePrice(cartTotal);
+        }
+
+        /*
+         * Cart Tax
+         */
+        cartObj.cartTax = {};
+        var cartTax = jsonPath(cart, '$._order[0]._tax[0].total');
+        if (cartTax) {
+          cartObj.cartTax = parsePrice(cartTax);
+        }
+
+        /*
+         * Cart Order Total: total price (including tax)
+         */
+        var cartOrderTotal = jsonPath(cart, '$._order[0]._total[0].cost')[0];
+        if (cartOrderTotal) {
+          cartObj.cartOrderTotal = parsePrice(cartOrderTotal);
         }
 
         /*

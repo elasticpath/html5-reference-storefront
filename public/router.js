@@ -32,6 +32,13 @@ define(['marionette','eventbus','pace'],
           view:'DefaultView'
         });
       },
+      checkout: function() {
+        EventBus.trigger('layout.loadRegionContentRequest', {
+          region:'appMainRegion',
+          module:'cart',
+          view:'CheckoutView'
+        });
+      },
       confirmation: function(id){
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
@@ -88,6 +95,7 @@ define(['marionette','eventbus','pace'],
         'itemdetail/:uri': 'item',
         'profile': 'profile',
         'mycart': 'cart',
+        'checkout': 'checkout',
         'confirmation/:id': 'confirmation',
         'newaddressform' : 'newaddressform'
       },

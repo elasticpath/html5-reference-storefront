@@ -14,19 +14,84 @@
       </div>
 
       <div class="cart-sidebar" data-region="cartCheckoutMasterRegion">
-
-      </div>
-
-      <!-- TODO: move this area to the appropriate step of the checkout process and add CSS styling -->
-      <div style="clear:left;display:none;">  <!-- TODO: remove these inline styles when we move this section -->
-        <h2><%= E.getI18nLabel('cart.chosenBillingAddress') %></h2>
-        <div data-region="chosenBillingAddressRegion"></div>
-        <h2><%= E.getI18nLabel('cart.choiceBillingAddresses') %></h2>
-        <div data-region="choiceBillingAddressesRegion"></div>
       </div>
 
     </div>
   </script>
+
+
+
+
+
+
+
+  <!-- Cart Checkout Confirmation Template -->
+  <script id="CartCheckoutLayoutTemplate" type="text/template">
+      <div class="cart-container-inner">
+
+        <div data-region="cartCheckoutTitleRegion" class="cart-title-container">
+          <div class="activity-indicator-container">
+            <img class="activity-indicator" src="/images/activity-indicator-strobe.gif"/>
+          </div>
+        </div>
+
+        <div class="cart-main-container">
+          <div data-region="chosenBillingAddressRegion"></div>
+          <div data-region="cartCancelActionRegion"></div>
+        </div>
+
+        <div class="cart-sidebar" data-region="cartOrderSummary"></div>
+
+      </div>
+  </script>
+
+  <!-- Cart Checkout Title Template -->
+  <script id="CartCheckoutTitleTemplate" type="text/template">
+    <h1 class="view-title"><%= E.getI18nLabel('cart.checkoutTitle') %></h1>
+  </script>
+
+  <!--Cart Billing Address Layout Template-->
+  <script id="CartBillingAddressTemplate" type="text/template">
+    <h2><%= E.getI18nLabel('cart.chosenBillingAddress') %></h2>
+    <div data-region="billingAddressComponentRegion"></div>
+  </script>
+
+  <script id="CartCancelActionTemplate" type="text/template">
+    <button class="btn btn-cancel-order"><%= E.getI18nLabel('cart.cancelOrder') %></button>
+  </script>
+
+  <script id="CartOrderSummaryTemplate" type="text/template">
+    <div class="cart-sidebar-inner">
+      <div data-region="cartSummaryRegion" class="cart-summary-container"></div>
+      <div data-region="cartTaxTotalRegion" class="cart-tax-total-container"></div>
+      <div data-region="cartSubmitOrderRegion" class="cart-submit-order-container"></div>
+    </div>
+  </script>
+
+  <script id="CartTaxTotalTemplate" type="text/template">
+    <ul class="cart-tax-total">
+      <li class="cart-tax">
+        <label>Today's tax:</label>
+        <span><%= E.cartTax.display %></span>
+      </li>
+      <li class="cart-total">
+        <label>Today's total:</label>
+        <span><%= E.cartOrderTotal.display %></span>
+      </li>
+    </ul>
+  </script>
+
+  <!-- Cart Complete Purchase Action Template -->
+  <script id="SubmitOrderActionTemplate" type="text/template">
+    <button class="btn-cmd-submit-order" <%= E.getCheckoutButtonDisabledAttrib(E) %>><%= E.getI18nLabel('cart.submitOrder') %></button>
+  </script>
+
+
+
+
+
+
+
 
   <!-- Cart Checkout Master Layout Template -->
   <script id="CartCheckoutMasterLayoutTemplate" type="text/template">
@@ -162,27 +227,11 @@
 
   </script>
 
-
   <!-- Cart Checkout Action Template -->
   <script id="CartCheckoutActionTemplate" type="text/template">
     <button class="btn-cmd-checkout" <%= E.getCheckoutButtonDisabledAttrib(E) %>><%= E.getI18nLabel('cart.checkout') %></button>
   </script>
 
-  <!-- Cart Activity Indicator Template -->
-  <script id="CartActivityIndicatorTemplate" type="text/template">
-    <img src="/images/activity-indicator-strobe.gif"/>
-  </script>
-
-  <!--Cart Billing Addresses Template-->
-  <script id="CartBillingAddressesTemplate" type="text/template">
-    <ul class="cart-billing-address-list">
-    </ul>
-  </script>
-
-  <!--Cart Billing Address Layout Template-->
-  <script id="CartBillingAddressTemplate" type="text/template">
-    <div data-region="billingAddressComponentRegion"></div>
-  </script>
 
 </div>
 
