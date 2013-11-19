@@ -67,13 +67,13 @@ To develop your own theme, we recommend copying the core theme and then customiz
 
 <ol>
 <li>Copy the theme-core folder in <code>ui-storefront/stylesrc/theme-core</code></li>
-<li>Rename the copied theme folder: <code>ui-storefront/stylesrce/<b>THEME_NAME</b></code></li>
+<li>Rename the copied theme folder: <code>ui-storefront/stylesrc/<b>THEME_NAME</b></code></li>
 <li>Update <code>ui-storefront/stylesrc/style.less</code> to reference the new theme:
 <pre>
 @import url("./<b>THEME_NAME</b>/<b>theme-base</b>.less");
 </pre>
 </li>
-<li>Change <code>Grunt.js</code> to reference your {less} files in its builds:
+<li>Change <code>Gruntfile.js</code> to reference your {less} files in its builds:
 <pre>
 less: {
 development: {
