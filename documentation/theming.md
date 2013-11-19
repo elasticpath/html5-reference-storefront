@@ -4,7 +4,7 @@ Theming allows you to change the HTML5 Reference Storefront's look and feel with
 Themes take advantage of <a href="http://lesscss.org/">{less}</a>, a powerful dynamic stylesheet language, chosen for its ease of use, dynamism, and widespread adoption.
 
 Each theme is a set of individual <a href="http://lesscss.org/">{less}</a> files, which, on demand, are compiled into a single <code>style.css</code>.
-The core theme's {less} files are organized according the views, which are output representations of the HTML5 Storefront's features.
+The core theme's {less} files are organized according to the views, which are output representations of the HTML5 Storefront's features.
 For example, <code>cart.less</code> contains the CSS for the cart's view, <code>itemdetail.less</code> contains the CSS for the item's view, and so on.
 
 By modifying the {less} files you can change the HTML5 Storefront’s look and feel and create your own themes.
@@ -67,13 +67,13 @@ To develop your own theme, we recommend copying the core theme and then customiz
 
 <ol>
 <li>Copy the theme-core folder in <code>ui-storefront/stylesrc/theme-core</code></li>
-<li>Rename copied theme folder: <code>ui-storefront/stylesrce/<b>THEME_NAME</b></code></li>
+<li>Rename the copied theme folder: <code>ui-storefront/stylesrce/<b>THEME_NAME</b></code></li>
 <li>Update <code>ui-storefront/stylesrc/style.less</code> to reference the new theme:
 <pre>
-@import url("./<b>PATH_TO_THEME_BASE</b>.less");
+@import url("./<b>THEME_NAME</b>/<b>theme-base</b>.less");
 </pre>
 </li>
-<li>Change <code>Grunt.js</code> to reference your {less} files its builds:
+<li>Change <code>Grunt.js</code> to reference your {less} files in its builds:
 <pre>
 less: {
 development: {
@@ -82,7 +82,7 @@ files: {
 }}},
 watch: {
 scripts:{
-files: ['stylesrc/<b>YOUR_THEME_FOLDER</b>/*.less'],
+files: ['stylesrc/<b>THEME_NAME</b>/*.less'],
 tasks: ['less']
 }}
 </pre>
@@ -95,6 +95,6 @@ Keep in mind:
 
 
 * Image paths are relative to <code>ui-storefront/public/style</code>
-* <code>variables.less</code> - Control the look and feel for some of the Storefront's common elements, such the colors and fonts for carts, items, links, and so on.
+* <code>variables.less</code> - Controls the look and feel for some of the Storefront's common elements, such the colors and fonts for carts, items, links, and so on.
 * <code>mixins.less</code> - Embeds other CSS properties into the Storefront's general CSS classes.
 * Templates - Are described in <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/extending.md">Customizing HTML5 Features</a>.
