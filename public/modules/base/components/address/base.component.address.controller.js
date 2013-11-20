@@ -13,6 +13,8 @@ define(function (require) {
   var template = require('text!modules/base/components/address/base.component.address.template.html');
 
   // url addressFormView will return to upon save form success or cancel button click
+  // FIXME should not set this here!
+  // re-think the user interaction
   var returnUrl = ep.app.config.routes.profile;
 
   $('#TemplateContainer').append(template);
@@ -145,6 +147,7 @@ define(function (require) {
    * Listening to submit address form success signal,
    * will redirect page set by returnUrl.
    */
+  // FIXME should hand controll back to modules that called address module
   EventBus.on('address.submitAddressFormSuccess', function() {
     window.location.href = returnUrl;
   });
@@ -154,6 +157,8 @@ define(function (require) {
    * will redirect page set by returnUrl.
    */
   EventBus.on('address.cancelBtnClicked', function() {
+    // FIXME more secure way of changing page (don't allow the url to escape the application)
+    // FIXME more sophisticated way of returning to previous view
     window.location.href = returnUrl;
   });
 

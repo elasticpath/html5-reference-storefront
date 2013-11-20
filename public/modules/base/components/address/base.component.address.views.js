@@ -3,8 +3,8 @@
  *
  * Storefront - Address Component Views
  */
-define(['ep','marionette', 'eventbus', 'viewHelpers'],
-  function(ep, Marionette, EventBus, ViewHelpers) {
+define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
+  function (ep, Marionette, EventBus, i18n, ViewHelpers) {
 
     /**
      * Template helper functions
@@ -29,7 +29,6 @@ define(['ep','marionette', 'eventbus', 'viewHelpers'],
      */
     var defaultAddressFormView = Marionette.ItemView.extend({
       template: '#DefaultAddressFormTemplate',
-      tagName: 'div',
       className: 'address-form-container',
       templateHelpers: viewHelpers
     });
@@ -48,11 +47,11 @@ define(['ep','marionette', 'eventbus', 'viewHelpers'],
         addressFeedbackMsgRegion: '[data-region="componentAddressFeedbackRegion"]'
       },
       events: {
-        'click [data-el-label="addressForm.create"]' : function(event) {
+        'click [data-el-label="addressForm.create"]': function (event) {
           event.preventDefault();
           EventBus.trigger('address.createAddressBtnClicked');
         },
-        'click [data-el-label="addressForm.cancel"]' : function(event) {
+        'click [data-el-label="addressForm.cancel"]': function (event) {
           event.preventDefault();
           EventBus.trigger('address.cancelBtnClicked');
         }
@@ -90,10 +89,33 @@ define(['ep','marionette', 'eventbus', 'viewHelpers'],
         return; // skip rest of the function
       }
 
-      // expect message to came back as themselves, and key to come back as localized message
-      var errMsg = viewHelpers.getI18nLabel(errMsgKey);
-      $('[data-region="componentAddressFeedbackRegion"]').text(errMsg);
+      var errMsg = i18n.t(errMsgKey);
+      var formattedMsg = formatMsgAsList(errMsg);
+
+      $('[data-region="componentAddressFeedbackRegion"]').html(formattedMsg);
 //      $('[data-region="componentAddressFeedbackRegion"]').attr('data-i18n', key);
+    }
+
+    function formatMsgAsList(msg) {
+      var formattedMsg;
+      var msgList = [];
+
+      // parse message by ';' separator into separate lines
+      msgList = msg.split('; ');
+
+      // if there is more than 1 line, format it as list
+      if (msgList.length > 1) {
+        formattedMsg = '<UL class="address-form-error-list">';
+        msgList.forEach(function (line) {
+          formattedMsg += '<LI>' + line + '</LI>';
+        });
+        formattedMsg += '</UL>';
+      }
+      else {
+        formattedMsg = msg;
+      }
+
+      return formattedMsg;
     }
 
     return {
@@ -101,6 +123,9 @@ define(['ep','marionette', 'eventbus', 'viewHelpers'],
       DefaultAddressFormView: defaultAddressFormView,
       DefaultCreateAddressLayout: defaultCreateAddressLayout,
       getAddressForm: getAddressForm,
-      displayAddressFormErrorMsg: displayAddressFormErrorMsg
+      displayAddressFormErrorMsg: displayAddressFormErrorMsg,
+      testVariables: {
+        formatMsgAsList: formatMsgAsList
+      }
     };
   });

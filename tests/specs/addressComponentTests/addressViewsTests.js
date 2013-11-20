@@ -241,6 +241,24 @@ define(function (require) {
       });
     });
 
+    describe('function: formatMsgAsList', function() {
+      before(function() {
+        this.testFn = addressView.testVariables.formatMsgAsList;
+      });
+
+      after(function() {});
+
+      it('format list into unordered list (ul)', function() {
+        var errMsg = 'line1; line2; line3';
+        expect(this.testFn(errMsg)).to.have.string('<LI>line1</LI><LI>line2</LI><LI>line3</LI>');
+      });
+
+      it('format 1 line message as just text', function() {
+        var errMsg = 'One line message.';
+        expect(this.testFn(errMsg)).to.be.equal(errMsg);
+      });
+    });
+
     describe('helper function: getAddressForm', function() {
       before(function() {
         this.model = new StandardAddressModel();

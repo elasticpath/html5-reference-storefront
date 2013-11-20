@@ -7,7 +7,7 @@ define(function (require) {
   var Backbone = require('backbone');
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
-  var EventTestHelpers = require('EventTestHelpers');
+  var EventTestHelpers = require('testhelpers.event');
   var ep = require('ep');
 
   describe('Profile Module: Controller', function () {
@@ -44,10 +44,6 @@ define(function (require) {
         });
         it('should be an instance of Marionette Layout object', function () {
           expect(this.viewLayout).to.be.an.instanceOf(Marionette.Layout);
-        });
-
-        it('render() should return the view object', function () {
-          expect(this.viewLayout.render()).to.be.equal(this.viewLayout);
         });
         it('view\'s DOM is rendered with 5 children (view content rendered)', function () {
           expect(this.viewLayout.el.childElementCount).to.be.equal(5);

@@ -5,10 +5,9 @@
  */
 define(function (require) {
   var EventBus = require('eventbus');
-  var Mediator = require('mediator');
   var Backbone = require('backbone');
-  var EventTestHelpers = require('EventTestHelpers');
   var EventTestFactory = require('EventTestFactory');
+  var DefaultViewTestHelper = require('testhelpers.defaultview');
   var ep = require('ep');
 
   describe('Address Component: Controller', function () {
@@ -20,6 +19,7 @@ define(function (require) {
       before(function () {
         $("#Fixtures").append(addressTemplate); // append templates
 
+        addressView.DefaultAddressFormView = DefaultViewTestHelper.testDouble;
         this.view = addressController.DefaultCreateAddressView();
       });
 
@@ -27,18 +27,12 @@ define(function (require) {
         $("#Fixtures").empty();
       });
 
-      it('exists', function () {
-        expect(addressController.DefaultCreateAddressView).to.exist;
-      });
-      it('is an instance of function', function () {
-        expect(addressController.DefaultCreateAddressView).to.be.instanceOf(Function);
-      });
       it('returns an instance of DefaultCreateAddressLayout', function () {
         expect(this.view).to.be.instanceOf(addressView.DefaultCreateAddressLayout);
       });
-      it('renders content into addressFormRegion', function () {
+      it('renders childView: DefaultAddressFormView', function () {
         this.view.render().trigger('show');
-        expect(this.view.$el.find('[data-region="componentAddressFormRegion"] input')).to.be.length(8);
+        expect(DefaultViewTestHelper.wasRendered()).to.be.true;
       });
     });
 
@@ -288,7 +282,7 @@ define(function (require) {
       it('registers correct event listener', function () {
         expect(EventBus._events['address.submitAddressFormSuccess']).to.have.length(1);
       });
-      it('redirects page back to returnUrl: ', function() {
+      it('redirects page back to returnUrl: ', function () {
         expect(window.location.href).to.have.string(returnUrl);
       });
     });
@@ -300,12 +294,12 @@ define(function (require) {
         EventBus.trigger('address.cancelBtnClicked');
       });
 
-      after(function() {
+      after(function () {
       });
       it('registers correct event listener', function () {
         expect(EventBus._events['address.cancelBtnClicked']).to.have.length(1);
       });
-      it('redirects page back to returnUrl: ', function() {
+      it('redirects page back to returnUrl: ', function () {
         expect(window.location.href).to.have.string(returnUrl);
       });
     });

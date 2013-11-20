@@ -4,50 +4,44 @@
  * Functional Storefront Unit Test - Cart Controller
  */
 define(function (require) {
-  var EventBus = require('eventbus'),
-    Backbone = require('backbone'),
-    Marionette = require('marionette'),
-    ep = require('ep'),
-    EventTestFactory = require('EventTestFactory'),
-    EventTestHelpers = require('EventTestHelpers');
+  var EventBus = require('eventbus');
+  var Backbone = require('backbone');
+  var ep = require('ep');
+  var Marionette = require('marionette');
+  var EventTestFactory = require('EventTestFactory');
+  var EventTestHelpers = require('testhelpers.event');
 
   describe('Cart Module: Controller', function () {
     var cartController = require('cart');
-    var View = require('cart.views');
+    var cartView = require('cart.views');
+    var cartTemplate = require('text!modules/base/cart/base.cart.templates.html');
 
 
     // Default View
     describe("DefaultView", function () {
-      var cartTemplate = require('text!modules/base/cart/base.cart.templates.html');
 
-      before(function () {
-        sinon.stub(Backbone, 'sync');
+        before(function () {
+          $("#Fixtures").append(cartTemplate); // append templates
 
-        $("#Fixtures").append(cartTemplate);
-        this.viewLayout = new cartController.DefaultView();
-        this.viewLayout.render();
-      });
+          sinon.stub(Backbone.Model.prototype, 'fetch');
+          this.view = new cartController.DefaultView();
+          this.view.render();
+        });
 
-      after(function () {
-        $("#Fixtures").empty();
-        Backbone.sync.restore();
-      });
+        after(function () {
+          $("#Fixtures").empty();
+          Backbone.Model.prototype.fetch.restore();
+        });
 
-      it('DefaultView should exist', function () {
-        expect(this.viewLayout).to.exist;
-      });
-      it('should be an instance of Marionette Layout object', function () {
-        expect(this.viewLayout).to.be.an.instanceOf(Marionette.Layout);
-      });
-      it('render() should return the view object', function () {
-        expect(this.viewLayout.render()).to.be.equal(this.viewLayout);
-      });
-      it('view\'s DOM is rendered with 1 child (view content rendered)', function () {
-        expect(this.viewLayout.el.childElementCount).to.be.equal(1);
-      });
-      it('Model should have fetched info from server once', function () {
-        expect(Backbone.sync).to.be.calledOnce;
-      });
+        it('returns an instance of cart View.DefaultLayout', function () {
+          expect(this.view).to.be.an.instanceOf(cartView.DefaultLayout);
+        });
+        it('Model should have fetched info from server once', function () {
+          expect(Backbone.Model.prototype.fetch).to.be.calledOnce;
+        });
+        it('view\'s DOM is rendered (view content rendered)', function () {
+          expect(this.view.el.childElementCount).to.be.equal(1);
+        });
     });
 
     // Event Listener: cart.lineItemQuantityChanged
@@ -195,10 +189,9 @@ define(function (require) {
       EventTestFactory.simpleEventTriggersEventTest('cart.reloadCartViewRequest', 'cart.updateLineItemQtySuccess'));
 
 
-
     // Event Listener: cart.updateLineItemQtyFailed.ItemDeleted
     describe('Responds to event: cart.updateLineItemQtyFailed.ItemDeleted', function () {
-      before(function() {
+      before(function () {
         sinon.spy(EventBus, 'trigger');
         EventTestHelpers.unbind('layout.loadRegionContentRequest');
         EventBus.trigger('cart.updateLineItemQtyFailed.ItemDeleted');
@@ -209,51 +202,48 @@ define(function (require) {
         this.triggerArgs = EventBus.trigger.args[1][1];
       });
 
-      after(function() {
+      after(function () {
         EventBus.trigger.restore();
         EventTestHelpers.reset();
       });
 
-      it ('should trigger layout.loadRegionContentRequest', function() {
+      it('should trigger layout.loadRegionContentRequest', function () {
         expect(EventBus.trigger).to.be.calledWith('layout.loadRegionContentRequest');
       });
-      it ('with valid data', function() {
+      it('with valid data', function () {
         expect(this.triggerArgs.module).to.be.string('cart');
         expect(this.triggerArgs.view).to.be.string('DefaultView');
         expect(this.triggerArgs.region).to.be.string('appMainRegion');
       });
-      it ('and a callback function', function() {
+      it('and a callback function', function () {
         expect(this.triggerArgs.callback).to.be.instanceOf(Function);
       });
       // test content of callback function is calling sticky
     });
 
 
-
     // Event Listener: cart.updateLineItemQtyFailed
     describe('Responds to event: cart.updateLineItemQtyFailed', function () {
       var originalQty = 5;
 
-      before(function() {
-        sinon.spy(View, 'resetQuantity');
+      before(function () {
+        sinon.spy(cartView, 'resetQuantity');
         sinon.stub($.fn, 'toastmessage'); // underlying function of $().toastmessage
         EventBus.trigger('cart.updateLineItemQtyFailed', originalQty);
       });
 
-      after(function() {
-        View.resetQuantity.restore();
+      after(function () {
+        cartView.resetQuantity.restore();
         $.fn.toastmessage.restore();
       });
 
-      it ('should reset lineItem quantity', function() {
-        expect(View.resetQuantity).to.be.calledWith(originalQty);
+      it('should reset lineItem quantity', function () {
+        expect(cartView.resetQuantity).to.be.calledWith(originalQty);
       });
-      it ('and display error message', function() {
+      it('and display error message', function () {
         expect($().toastmessage).to.be.calledOnce;
       });
     });
-
-
 
 
     // Event Listener: cart.checkoutBtnClicked
@@ -322,7 +312,7 @@ define(function (require) {
 
       before(function () {
         sinon.spy(EventBus, 'trigger');
-        sinon.spy(View, 'setCheckoutButtonProcessing');
+        sinon.spy(cartView, 'setCheckoutButtonProcessing');
 
         EventTestHelpers.unbind(unboundEventKey);
         EventBus.trigger('cart.submitOrderBtnClicked', actionLink);
@@ -330,7 +320,7 @@ define(function (require) {
 
       after(function () {
         EventBus.trigger.restore();
-        View.setCheckoutButtonProcessing.restore();
+        cartView.setCheckoutButtonProcessing.restore();
 
         EventTestHelpers.reset();
       });
@@ -339,7 +329,7 @@ define(function (require) {
         expect(EventBus.trigger).to.be.calledWithExactly(unboundEventKey, actionLink);
       }));
       it('called View.setCheckoutButtonProcessing', sinon.test(function () {
-        expect(View.setCheckoutButtonProcessing).to.be.called;
+        expect(cartView.setCheckoutButtonProcessing).to.be.called;
       }));
     });
 

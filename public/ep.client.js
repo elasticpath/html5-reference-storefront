@@ -76,12 +76,18 @@ define(function (reqiure) {
       defaults: {
         contentType: 'application/json',
         error: function(response) {
-          this.customErrorFn(response);
-          ep.logger.error('response code ' + response.status + ': ' + response.responseText);
+          try {
+            this.customErrorFn(response);
+          }
+          finally {
+            ep.logger.error('response code ' + response.status + ': ' + response.responseText);
+          }
         },
-        customErrorFn: function() {}
+        // FIXME use standard error function
+        customErrorFn: function(response) {}
       }
     });
+
 
     // AJAX lives here!
     ep.io.ajax = function (ioObj) {

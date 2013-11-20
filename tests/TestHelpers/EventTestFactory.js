@@ -4,7 +4,7 @@
 
 define(function (require) {
   var EventBus = require('eventbus'),
-    EventTestHelpers = require('EventTestHelpers');
+    EventTestHelpers = require('testhelpers.event');
 
   return {
     /**

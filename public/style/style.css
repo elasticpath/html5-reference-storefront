@@ -5824,6 +5824,16 @@ td.visible-print {
     width: 50%;
   }
 }
+.address-form-feedback-container {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+.address-form-error-list {
+  list-style: circle;
+}
 /*
   auth view
 */
