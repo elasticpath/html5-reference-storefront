@@ -254,8 +254,8 @@ define(function (require) {
 
 
 
-    // Event Listener: cart.checkoutBtnClicked
-    describe("cart.checkoutBtnClicked event works", function () {
+    // Event Listener: cart.submitOrderBtnClicked
+    describe("cart.submitOrderBtnClicked event works", function () {
       var unboundEventKey = 'cart.checkoutRequest';
       var actionLink = 'ActionLinkTrue';
 
@@ -264,7 +264,7 @@ define(function (require) {
         sinon.spy(View, 'setCheckoutButtonProcessing');
 
         EventTestHelpers.unbind(unboundEventKey);
-        EventBus.trigger('cart.checkoutBtnClicked', actionLink);
+        EventBus.trigger('cart.submitOrderBtnClicked', actionLink);
       });
 
       after(function () {
@@ -274,60 +274,12 @@ define(function (require) {
         EventTestHelpers.reset();
       });
 
-      it("fires cart.checkoutRequest", sinon.test(function () {
-        expect(EventBus.trigger).to.be.calledWithExactly('cart.checkoutRequest', actionLink);
+      it("fires cart.submitOrderRequest", sinon.test(function () {
+        expect(EventBus.trigger).to.be.calledWithExactly('cart.submitOrderRequest', actionLink);
       }));
       it('called View.setCheckoutButtonProcessing', sinon.test(function () {
         expect(View.setCheckoutButtonProcessing).to.be.called;
       }));
-    });
-
-
-    // Event Listener: cart.checkoutRequest
-    describe("cart.checkoutRequest event works", function () {
-
-      before(function () {
-        sinon.spy(EventBus, 'trigger'); // find out why this.spy doesn't work
-
-        EventTestHelpers.unbind('cart.submitOrderRequest', 'layout.loadRegionContentRequest');
-      });
-
-      after(function () {
-        EventBus.trigger.restore();
-        EventTestHelpers.reset();
-      });
-
-      describe('with an actionLink', function () {
-        before(function () {
-          var actionLink = 'hasActionLinkTrue';
-          EventBus.trigger('cart.checkoutRequest', actionLink);
-        });
-
-        after(function () {
-          EventBus.trigger.reset();
-        });
-
-        it("fires cart.submitOrderRequest", sinon.test(function () {
-          expect(EventBus.trigger).to.be.calledWith('cart.submitOrderRequest');
-        }));
-      });
-
-      describe('without an actionLink', function () {
-        before(function () {
-          EventBus.trigger('cart.checkoutRequest');
-        });
-
-        after(function () {
-          EventBus.trigger.reset();
-        });
-
-        it("fires layout.loadRegionContentRequest", sinon.test(function () {
-          expect(EventBus.trigger).to.be.calledWith('layout.loadRegionContentRequest');
-        }));
-        it('called eventbus right number of times', sinon.test(function () {
-          expect(EventBus.trigger).to.be.calledTwice;
-        }));
-      });
     });
 
   });
