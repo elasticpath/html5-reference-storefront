@@ -208,7 +208,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         cartCheckoutTitleRegion:'[data-region="cartCheckoutTitleRegion"]',
         chosenBillingAddressRegion:'[data-region="chosenBillingAddressRegion"]',
         cartCancelActionRegion:'[data-region="cartCancelActionRegion"]',
-        cartOrderSummaryRegion:'[data-region="cartOrderSummary"]'
+        cartOrderSummaryRegion:'[data-region="cartOrderSummaryRegion"]'
       }
     });
 
