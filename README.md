@@ -25,7 +25,7 @@ The HTML5 Reference Storefront requires the following installed:
 * <a href="http://nodejs.org/" target="_blank">Node.js <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a>
 
 
-Once those are installed, proceed to <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#installing-html5-reference-storefront-sources">Install HTML5 Reference Storefront Sources</a> and then run it either
+Once those are installed, proceed to <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#installing-html5-reference-storefront-sources">Install HTML5 Reference Storefront Sources</a> and then run the Storefront either
 <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#running-html5-reference-storefront-locally"><b>locally</b></a> or <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#running-html5-reference-storefront-remotely"><b>remotely</b></a>.
 
 **NOTE:** Due to <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>, you must set up a proxy to handle the requests between Cortex API and HTML5 Storefront.
@@ -46,11 +46,23 @@ Any proxy works, but Apache HTTP Server is the only server we test.
 <h3 id="local">Running HTML5 Reference Storefront Locally</h3>
 Running locally means all your applications, Cortex API, Search, HTML5 Storefront, etc, are running on your local computer on these ports:
 
-
-* <a href="https://docs.elasticpath.com/display/EPCAPIDEV/Installation+and+Configuration+Guide" target="_blank">Cortex API <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port `9080`
-* <a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Search Server <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port `8080`
-* <a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Commerce Engine <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a>
-
+<table>
+<tbody>
+<tr>
+<td>
+<ul>
+<li><a href="https://docs.elasticpath.com/display/EPCAPIDEV/Installation+and+Configuration+Guide" target="_blank">Cortex API <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port `9080`</li>
+<li><a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Search Server <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port `8080`</li>
+<li><a href="http://nodejs.org/" target="_blank">node.js <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port `3008`</li>
+<li><a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Commerce Engine <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a></li>
+</ul>
+</td>
+<td>
+![localSetup](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/local_proxy_setup.png)
+</td>
+</tr>
+</tbody>
+</table>
 
 <b>To run locally:</b>
 <ul>
@@ -96,7 +108,7 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 
 
 <h3 id="remote">Running HTML5 Reference Storefront Remotely</h3>
-Running remotely means your HTML5 Reference Storefront is running locally, but Cortex API, Search, Commerce Engine, etc, run on an external server.
+Running remotely means your HTML5 Reference Storefront is running locally on port `3008`, but Cortex API, Search, Commerce Engine, etc, run on an external server.
 When running remotely, we expect your Cortex API is using the Integrator project. For more information on the Integrator, see http://docs.elasticpath.com
 
 <b>To run remotely:</b>
