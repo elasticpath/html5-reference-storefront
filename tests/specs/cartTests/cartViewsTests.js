@@ -242,7 +242,7 @@ define(function (require) {
       before(function() {
         // Mock the model with just the data we need
         var rawData = {
-          "submitOrderActionUri": "someUri"
+          "submitOrderActionLink": "someUri"
         };
         this.model = new Backbone.Model(rawData);
 
@@ -307,8 +307,8 @@ define(function (require) {
     describe('CartLineItemLayout', function() {
       var cartLineItem = {
         displayName: 'Die Hard',
-        itemUri: 'items/die_hard',
-        lineitemUri: '/lineitems/die_hard_1',
+        itemLink: 'items/die_hard',
+        lineitemLink: '/lineitems/die_hard_1',
         thumbnail: {
           absolutePath: 'http://cdn.elasticpath.net/images/dieHard.png',
           name: 'default-image',
