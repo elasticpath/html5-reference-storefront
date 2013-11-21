@@ -57,11 +57,11 @@ define(function (require) {
     it('IO AJAX namespace should exist', function () {
       expect(ep.io.ajax).to.be.ok;
     });
-    it('ep.io.getApiUrl method should exist', function () {
-      expect(ep.io.getApiUrl).to.be.ok;
+    it('ep.io.getApiContext method should exist', function () {
+      expect(ep.io.getApiContext).to.be.ok;
     });
-    it('ep.io.getApiUrl() value should be not null', function () {
-      var apiUrl = ep.io.getApiUrl();
+    it('ep.io.getApiContext() value should be not null', function () {
+      var apiUrl = ep.io.getApiContext();
       expect(apiUrl).to.be.ok;
     });
     describe("EP IO localStore",function(){

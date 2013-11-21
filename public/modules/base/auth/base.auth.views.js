@@ -38,7 +38,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
         return retVal;
       },
       generateHref: function (route) {
-        return '/' + ep.app.config.routes[route] || null;
+        return  ep.app.config.routes[route] || null;
       }
     };
 

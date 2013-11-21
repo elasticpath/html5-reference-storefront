@@ -123,7 +123,7 @@
 
     <!-- Cart Line Item Display Name -->
     <td class="cart-lineitem-title-col" data-el-value="lineItem.displayName">
-      <a href="<%= E.getItemUrl(E.itemUri) %>"><%= E.displayName %></a>
+      <a href="<%= E.getItemUrl(E.itemLink) %>"><%= E.displayName %></a>
     </td>
 
     <!-- Cart Line Item Availability Region -->
@@ -144,7 +144,7 @@
 
     <!-- Cart Line Item Remove Button -->
     <td class="cart-lineitem-remove-btn-col">
-    <button class="btn btn-cart-removelineitem" data-el-label="lineItem.removeBtn" data-actionlink="<%= E.getCortexPath() %><%= E.lineitemUri %>">
+    <button class="btn btn-cart-removelineitem" data-el-label="lineItem.removeBtn" data-actionlink="<%= E.lineitemLink %>">
       <span class="icon"></span>
       <span class="btn-text"><%= E.getI18nLabel('cart.remove') %></span>
     </button>

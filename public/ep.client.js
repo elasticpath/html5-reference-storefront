@@ -33,7 +33,6 @@ define(function (reqiure) {
     });
 
     ep.app.config = JSON.parse(config);
-    //ep.app.config.cortexApi = config.cortexApi;
 
     ep.app.deployMode = function () {
       return ep.app.config.deployMode || 'development';
@@ -131,16 +130,21 @@ define(function (reqiure) {
       }
     });
 
-    ep.io.getApiUrl = function () {
-      var config = ep.app.config.cortexApi;
-      var retVal;
-      if (config.host) {
-        retVal = config.host;
+    /**
+     * Get the context to prefix to cortex request url.
+     * @returns {string}  cortex api context
+     */
+    ep.io.getApiContext = function () {
+      var config = ep.app.config;
+      var retVal = '';
+
+      if (config && config.cortexApi && config.cortexApi.path) {
+        retVal = '/' + config.cortexApi.path;
       }
-      if (config.port) {
-        retVal += ':' + config.port;
+      else {
+        ep.logger.error('cortexApi context path is not defined.');
       }
-      retVal += '/' + ep.app.config.cortexApi.path;
+
       return retVal;
     };
 

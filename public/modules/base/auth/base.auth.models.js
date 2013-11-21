@@ -27,7 +27,7 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
      defaults: {
        userName:'Anonymous',
        authRequest: true,
-       url:'/' + ep.app.config.cortexApi.path + '/oauth2/tokens',
+       url: ep.io.getApiContext() + '/oauth2/tokens',
        type: 'POST',
        contentType: 'application/x-www-form-urlencoded',
        success: function (json, responseStatus, xhr) {
@@ -56,7 +56,7 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
       defaults: {
         authRequest: true,
         type:'DELETE',
-        url:'/' + ep.app.config.cortexApi.path + '/oauth2/tokens',
+        url: ep.io.getApiContext() + '/oauth2/tokens',
         success:function(json, responseSTatus, xhr) {
           try{
             // FIXME abstract persistence layer

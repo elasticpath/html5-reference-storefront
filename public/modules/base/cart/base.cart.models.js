@@ -29,7 +29,7 @@ define(['ep', 'eventbus', 'backbone'],
 
     // Cart Model
     var cartModel = Backbone.Model.extend({
-      url: ep.app.config.cortexApi.path +
+      url: ep.io.getApiContext() +
             '/carts/' +
             ep.app.config.cortexApi.scope +
             '/default?zoom=' +
@@ -65,7 +65,7 @@ define(['ep', 'eventbus', 'backbone'],
            * item display name
            */
           lineItemObj.displayName = jsonPath(currObj, '$._item.._definition..display-name')[0];
-          lineItemObj.itemUri = jsonPath(currObj, '$._item..self.uri')[0];
+          lineItemObj.itemLink = jsonPath(currObj, '$._item..self.href')[0];
 
           /*
            * availability
@@ -123,9 +123,9 @@ define(['ep', 'eventbus', 'backbone'],
           }
 
           /*
-           * LineItem Uri (for remove lineitem button)
+           * LineItem Link (for remove lineitem button)
            */
-          lineItemObj.lineitemUri = currObj.self.uri;
+          lineItemObj.lineitemLink = currObj.self.href;
 
           lineItemsArray.push(lineItemObj);
         }
@@ -134,7 +134,7 @@ define(['ep', 'eventbus', 'backbone'],
         /*
         * Cart Submit Order Action
         * */
-        cartObj.submitOrderActionUri = jsonPath(cart, "$..links[?(@.rel=='submitorderaction')].uri");
+        cartObj.submitOrderActionLink = jsonPath(cart, "$..links[?(@.rel=='submitorderaction')].href");
 
 
         /*

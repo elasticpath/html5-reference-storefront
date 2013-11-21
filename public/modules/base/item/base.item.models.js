@@ -4,8 +4,8 @@ define(['ep', 'app', 'backbone'],
 
 
     var itemModel = Backbone.Model.extend({
-      getUrl: function (uri) {
-        return ep.app.config.cortexApi.path + '/' + ep.ui.decodeUri(uri) + '?zoom=availability,addtocartform,price,rate,definition,definition:assets:element';
+      getUrl: function (href) {
+        return ep.ui.decodeUri(href) + '?zoom=availability,addtocartform,price,rate,definition,definition:assets:element';
       },
       parse: function (item) {
 
@@ -53,7 +53,7 @@ define(['ep', 'app', 'backbone'],
         itemObj.addtocart.actionlink = null;
         var addToCartFormAction = jsonPath(item, "$._addtocartform..links[?(@.rel='addtodefaultcartaction')].rel")[0];
         if (addToCartFormAction) {
-          itemObj.addtocart.actionlink = jsonPath(item, "$._addtocartform..links[?(@.rel='addtodefaultcartaction')].uri")[0];
+          itemObj.addtocart.actionlink = jsonPath(item, "$._addtocartform..links[?(@.rel='addtodefaultcartaction')].href")[0];
           ;
         }
 

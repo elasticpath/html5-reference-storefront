@@ -35,7 +35,7 @@
 
 
         <div class="category-item-title">
-          <a href="<%= E.generateItemHref(E.uri) %>"><%= E.name %></a>
+          <a href="<%= E.generateItemHref(E.link) %>"><%= E.name %></a>
         </div>
         <div data-region="priceRegion"></div>
         <div data-region="availabilityRegion"></div>
@@ -97,7 +97,7 @@
 
     <div class="pagination-navigation-container">
       <a class="btn-pagination btn-pagination-prev pagination-link <%= E.checkForDisabledPaginationBtn(E.links.prev) %>" data-i18n="category.prev"
-        <%= E.generatePaginationLink(E.categoryUri, E.links.prev) %> > <span class="icon"></span><%= E.getI18nLabel('category.prev') %></a>
+        <%= E.generatePaginationLink(E.categoryHref, E.links.prev) %> > <span class="icon"></span><%= E.getI18nLabel('category.prev') %></a>
       <span class="pagestate-summary">
         <label class="pagination-label"><%= E.getI18nLabel('category.page') %></label>
         <span class="pagination-value pagination-curr-page-value"><%= E.stats.currentPage %></span>
@@ -107,7 +107,7 @@
       </span>
 
       <a class="btn-pagination btn-pagination-next pagination-link <%= E.checkForDisabledPaginationBtn(E.links.next) %>" data-i18n="category.next"
-          <%= E.generatePaginationLink(E.categoryUri, E.links.next) %> ><%= E.getI18nLabel('category.next') %><span class="icon"></span></a>
+          <%= E.generatePaginationLink(E.categoryHref, E.links.next) %> ><%= E.getI18nLabel('category.next') %><span class="icon"></span></a>
     </div>
   </script>
 

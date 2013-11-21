@@ -42,7 +42,7 @@
 
   <!-- Default Item Detail Asset Template -->
      <script id="DefaultItemAssetTemplate" type="text/template">
-<img src="<%- E.getDefaultImagePath(E.attributes.assets) %>" alt="<%= E.getDefaultImageName(E.attributes.assets) %>"
+<img src="<%- E.getDefaultImagePath(E.assets) %>" alt="<%= E.getDefaultImageName(E.assets) %>"
          class="itemdetail-main-img"/>
     </script> <!-- Default Item Detail Attribute Template -->
      <script id="DefaultItemAttributeItemTemplate" type="text/template">
@@ -104,7 +104,7 @@
       </div>
       <div class="form-group form-group-submit">
         <div class="form-content form-content-submit col-sm-8 col-sm-offset-4">
-          <button class="btn-round btn btn-primary btn-itemdetail-addtocart" data-actionlink="<%= E.getCortexPath() %><%= E.addtocart.actionlink %>"
+          <button class="btn-round btn btn-primary btn-itemdetail-addtocart" data-actionlink="<%= E.addtocart.actionlink %>"
           <%= E.checkForDisabledAddToCart(E) %> ><%= E.getI18nLabel('itemDetail.addToCart') %></button>
         </div>
       </div>

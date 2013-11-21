@@ -17,12 +17,12 @@ define(['marionette','eventbus','pace'],
           view:'IndexLayout'
         });
       },
-      item: function(uri) {
+      item: function(href) {
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
           module:'item',
           view:'DefaultView',
-          data:uri
+          data:href
         });
       },
       cart: function(){
@@ -47,15 +47,15 @@ define(['marionette','eventbus','pace'],
           data:id
         });
       },
-      category: function(uri, pageuri) {
+      category: function(href, pageHref) {
         pace.start();
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'appMainRegion',
           module:'category',
           view:'DefaultView',
           data: {
-            uri: uri,
-            pageUri: pageuri
+            href: href,
+            pageHref: pageHref
           }
         });
       },
@@ -88,11 +88,11 @@ define(['marionette','eventbus','pace'],
         '': 'index',
         'home': 'index',
         'category' : 'category',
-        'category/:uri' : 'category',
-        'category/:uri/:pageuri' : 'category',
+        'category/:href' : 'category',
+        'category/:href/:pagehref' : 'category',
         'search' : 'search',
         'search/:keywords' : 'search',
-        'itemdetail/:uri': 'item',
+        'itemdetail/:href': 'item',
         'profile': 'profile',
         'mycart': 'cart',
         'checkout': 'checkout',

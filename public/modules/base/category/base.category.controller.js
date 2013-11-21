@@ -26,17 +26,17 @@ define(function (require) {
      *
      *
      */
-    var defaultView = function (uriObj) {
+    var defaultView = function (hrefObj) {
       pace.start();
       var categoryLayout = new View.DefaultView();
       var categoryModel = new Model.CategoryModel();
 
 
-      var uri = uriObj.uri;
-      var pageUri = uriObj.pageUri;
+      var href = hrefObj.href;
+      var pageHref = hrefObj.pageHref;
 
       categoryModel.fetch({
-        url: categoryModel.getUrl(uri),
+        url: categoryModel.getUrl(href),
         success: function (response) {
           categoryLayout.categoryTitleRegion.show(
             new View.CategoryTitleView({
@@ -44,13 +44,13 @@ define(function (require) {
             })
           );
 
-          if (!pageUri) {
-            pageUri = response.attributes.itemUri;
+          if (!pageHref) {
+            pageHref = response.get('itemLink');
           }
 
           var reqObj = {
-            fetchUri: pageUri,
-            categoryUri: response.attributes.uri
+            fetchHref: pageHref,
+            categoryHref: response.get('href')
           };
 
           EventBus.trigger('category.fetchCategoryItemPageModelRequest', reqObj);
@@ -77,10 +77,10 @@ define(function (require) {
       pace.start();
       var categoryItemModel = new Model.CategoryItemPageModel();
       categoryItemModel.fetch({
-        url: categoryItemModel.getUrl(reqObj.fetchUri),
+        url: categoryItemModel.getUrl(reqObj.fetchHref),
         success: function (itemResponse) {
-          var paginationModel = new Model.CategoryPaginationModel(itemResponse.attributes.pagination);
-          paginationModel.set('categoryUri', reqObj.categoryUri);
+          var paginationModel = new Model.CategoryPaginationModel(itemResponse.get('pagination'));
+          paginationModel.set('categoryHref', reqObj.categoryHref);
 
           var paginationTopView = new View.CategoryPaginationView({
             model: paginationModel
@@ -104,10 +104,10 @@ define(function (require) {
     });
 
     // pagination btn is clicked
-    EventBus.on('category.paginationBtnClicked', function (direction, uri) {
+    EventBus.on('category.paginationBtnClicked', function (direction, link) {
       ep.logger.info(direction + ' btn clicked.');
 
-      EventBus.trigger('category.reloadCategoryViewsRequest', uri);
+      EventBus.trigger('category.reloadCategoryViewsRequest', link);
 
     });
 

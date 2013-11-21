@@ -14,16 +14,16 @@ define(['ep', 'eventbus', 'backbone'],
      */
     var categoryModel = Backbone.Model.extend({
       uri:'', // will be set in parse method
-      getUrl: function (uri) {
-        this.uri = ep.ui.decodeUri(uri);
-        return ep.ui.decodeUri(uri) + '?zoom=items';
+      getUrl: function (href) {
+        this.uri = ep.ui.decodeUri(href);
+        return ep.ui.decodeUri(href) + '?zoom=items';
       },
       parse: function (response) {
         var categoryObj = {};
         // category title
         categoryObj.title = response['display-name'];
-        categoryObj.itemUri = jsonPath(response, '$._items..self.uri')[0];
-        categoryObj.uri = this.uri;
+        categoryObj.itemLink = jsonPath(response, '$._items..self.href')[0];
+        categoryObj.href = this.uri;
 
         return categoryObj;
       }
@@ -33,8 +33,8 @@ define(['ep', 'eventbus', 'backbone'],
      * Category Item Page Model (fetching category item list & pagination info from server)
      */
     var categoryItemPageModel = Backbone.Model.extend({
-      getUrl: function (uri) {
-        return ep.app.config.cortexApi.path + ep.ui.decodeUri(uri) + '?zoom=element, element:availability,element:definition,element:definition:assets:element,element:price,element:rate';
+      getUrl: function (href) {
+        return ep.ui.decodeUri(href) + '?zoom=element, element:availability,element:definition,element:definition:assets:element,element:price,element:rate';
       },
       parse: function (response) {
         var categoryObj = {};
@@ -57,8 +57,8 @@ define(['ep', 'eventbus', 'backbone'],
           totalResults: pageStats['results']
         };
 
-        categoryObj.pagination.links.next = jsonPath(pageLinks, "$.[?(@.rel=='next')].uri")[0];
-        categoryObj.pagination.links.prev = jsonPath(pageLinks, "$.[?(@.rel=='previous')].uri")[0];
+        categoryObj.pagination.links.next = jsonPath(pageLinks, "$.[?(@.rel=='next')].href")[0];
+        categoryObj.pagination.links.prev = jsonPath(pageLinks, "$.[?(@.rel=='previous')].href")[0];
 
         /*
          * category item browse
@@ -81,8 +81,8 @@ define(['ep', 'eventbus', 'backbone'],
           // item name
           itemObj.name = jsonPath(itemArray[i], '$._definition..display-name')[0];
 
-          // item uri
-          itemObj.uri = jsonPath(itemArray[i], '$.self.uri')[0];
+          // item link
+          itemObj.link = jsonPath(itemArray[i], '$.self.href')[0];
 
           // item availability
           var availabilityObj = jsonPath(itemArray[i], '$._availability')[0];

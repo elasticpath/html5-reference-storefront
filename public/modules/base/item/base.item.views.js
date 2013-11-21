@@ -86,27 +86,12 @@ define(['ep','marionette','i18n','eventbus','pace'],
         return retVar;
       },
       checkForDisabledAddToCart:function(model){
-
-        /*
-        *
-        * evaluate conditions where Add To Cart would be disabled
-        *
-        * - availability is NOT_AVAILABLE
-        * - there is no url in the addtocartaction link rel
-        *
-        * */
-
-//        if (model.availability === 'NOT_AVAILABLE'){
-//          return 'disabled="disabled"';
-//        }
         // only check for the action link on the form as the
         // determining whether the add to cart button should be active
           // check if add to cart is available
           if (!model.addtocart.actionlink){
             return 'disabled="disabled"';
           }
-
-
       },
       getDefaultImagePath:function(thumbnail){
         if (thumbnail && (thumbnail.length > 0)){
@@ -130,9 +115,6 @@ define(['ep','marionette','i18n','eventbus','pace'],
           retVar = this.getI18nLabel('itemDetail.noImgLabel');
         }
         return retVar;
-      },
-      getCortexPath:function(){
-        return ep.app.config.cortexApi.path;
       }
     };
 

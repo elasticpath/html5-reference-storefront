@@ -53,17 +53,16 @@ define(function (require) {
   }
 
   /**
-   * Request an empty address form & the uri to POST or PUT address form to.
-   * Currently, only information used is the uri to POST or PUT address form to.
+   * Request an empty address form & the link to POST or PUT address form to.
+   * Currently, only information used is the link to POST or PUT address form to.
    */
   function getAddressForm() {
     var ajaxModel = new ep.io.defaultAjaxModel({
       type: 'GET',
-      url: ep.app.config.cortexApi.path + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=addresses:addressform',
+      url: ep.io.getApiContext() + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=addresses:addressform',
       success: function (response) {
-        var addressFormUri = jsonPath(response, "$..links[?(@.rel=='createaddressaction')].uri")[0];
-//        var actionLink = ep.app.config/cortexApi.path + addressFormUri
-        EventBus.trigger('address.createNewAddressRequest', addressFormUri);
+        var submitAddressFormLink = jsonPath(response, "$..links[?(@.rel=='createaddressaction')].href")[0];
+        EventBus.trigger('address.createNewAddressRequest', submitAddressFormLink);
       },
       customErrorFn: function (response) {
         EventBus.trigger('address.submitAddressFormFailed');
@@ -75,14 +74,14 @@ define(function (require) {
 
   /**
    * POST the new address to cortex.
-   * @param actionLink uri to make the POST request.
+   * @param submitAddressFormLink to POST the request to.
    */
-  function createNewAddress(actionLink) {
+  function createNewAddress(submitAddressFormLink) {
     var form = View.getAddressForm();
 
     var ajaxModel = new ep.io.defaultAjaxModel({
       type: 'POST',
-      url: ep.app.config.cortexApi.path + actionLink,
+      url: submitAddressFormLink,
       data: JSON.stringify(form),
       success: function (data, textStatus, XHR) {
         EventBus.trigger('address.submitAddressFormSuccess');

@@ -301,11 +301,11 @@ define(function (require) {
     });
 
     // Submit Order Button Clicked
-    EventBus.on('cart.submitOrderBtnClicked', function (submitOrderActionUri) {
+    EventBus.on('cart.submitOrderBtnClicked', function (submitOrderActionLink) {
       View.setCheckoutButtonProcessing();
       // if cortex says it's ok
-      if (submitOrderActionUri) {
-        EventBus.trigger('cart.submitOrderRequest', submitOrderActionUri);
+      if (submitOrderActionLink) {
+        EventBus.trigger('cart.submitOrderRequest', submitOrderActionLink);
       }
     });
 
@@ -329,14 +329,13 @@ define(function (require) {
 
     // Submit Order Request
     // FIXME use ep.io.ajaxModel
-    EventBus.on('cart.submitOrderRequest', function (uri) {
-      if (uri) {
-        uri = ep.app.config.cortexApi.path + uri;
-        ep.logger.info('SUBMIT ORDER REQUEST: ' + uri);
+    EventBus.on('cart.submitOrderRequest', function (submitOrderLink) {
+      if (submitOrderLink) {
+        ep.logger.info('SUBMIT ORDER REQUEST: ' + submitOrderLink);
         ep.io.ajax({
           type: 'POST',
           contentType: 'application/json',
-          url: uri,
+          url: submitOrderLink,
           success: function (data, textStatus, XHR) {
             var obj = {
               data: data,
@@ -352,17 +351,17 @@ define(function (require) {
         });
       }
       else {
-        ep.logger.warn('cart.submitOrderRequest called with no uri');
+        ep.logger.warn('cart.submitOrderRequest called with no submitOrderLink');
       }
     });
     EventBus.on('cart.submitOrderSuccess', function (obj) {
 
-      var orderSummaryUri = obj.XHR.getResponseHeader('Location');
-      if (orderSummaryUri) {
-        Mediator.fire('mediator.orderProcessSuccess', orderSummaryUri);
+      var orderSummaryLink = obj.XHR.getResponseHeader('Location');
+      if (orderSummaryLink) {
+        Mediator.fire('mediator.orderProcessSuccess', orderSummaryLink);
         pace.stop();
       }
-      var t = orderSummaryUri;
+      var t = orderSummaryLink;
       ep.logger.info('ORDER SUMMARY URL - ' + t);
     });
 

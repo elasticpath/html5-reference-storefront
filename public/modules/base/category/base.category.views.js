@@ -6,17 +6,15 @@
  * Time: 1:32 PM
  *
  */
-//define(['ep', 'i18n', 'eventbus','pace','equalize'],
-//  function (ep, i18n, EventBus, pace, equalize) {
 define(function(require) {
-  var ep = require('ep'),
-      i18n = require('i18n'),
-      pace = require('pace'),
-      equalize = require('equalize'),
-      EventBus = require('eventbus'),
-      Backbone = require('backbone');
+  var ep = require('ep')
+  var i18n = require('i18n');
+  var pace = require('pace');
+  var equalize = require('equalize');
+  var EventBus = require('eventbus');
+  var Backbone = require('backbone');
 
-    var viewHelpers = {
+  var viewHelpers = {
       getI18nLabel: function (key) {
         // segmented localization e.g. page n of n not well handled
         // in future, needs to look into more elegant solution that
@@ -108,10 +106,10 @@ define(function(require) {
 
         return retVar;
       },
-      generateItemHref: function (uri) {
+      generateItemHref: function (href) {
         var retVar;
-        if (uri) {
-          retVar = ep.app.config.routes.itemDetail + '/' + ep.ui.encodeUri(uri);
+        if (href) {
+          retVar = ep.app.config.routes.itemDetail + '/' + ep.ui.encodeUri(href);
         } else {
           retVar = '';
           ep.logger.warn('[category browse]: unable to generate href to item-detail');
@@ -119,15 +117,15 @@ define(function(require) {
 
         return retVar;
       },
-      generatePaginationLink: function(uri, pageUri) {
-        var href = '';
+      generatePaginationLink: function(href, pageHref) {
+        var html = '';
 
-        if (uri && pageUri) {
-          var link = ep.app.config.routes.category + '/' + ep.ui.encodeUri(uri) + '/' + ep.ui.encodeUri(pageUri);
-          href = 'href="' + link + '"';
+        if (href && pageHref) {
+          var link = ep.app.config.routes.category + '/' + ep.ui.encodeUri(href) + '/' + ep.ui.encodeUri(pageHref);
+          html = 'href="' + link + '"';
         }
 
-        return href;
+        return html;
       },
       checkForDisabledPaginationBtn: function (link) {
         if (!link) {

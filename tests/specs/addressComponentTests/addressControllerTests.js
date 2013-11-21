@@ -191,7 +191,7 @@ define(function (require) {
           expect(this.ajaxArgs.type).to.be.string('POST');
           expect(this.ajaxArgs.contentType).to.be.string('application/json');
           expect(this.ajaxArgs.data).to.be.equal(JSON.stringify(addressView.getAddressForm()));
-          expect(this.ajaxArgs.url).to.be.equal(ep.app.config.cortexApi.path + actionLink);
+          expect(this.ajaxArgs.url).to.be.equal(actionLink);
         });
         it('with required callback functions', function () {
           expect(this.ajaxArgs.success).to.exist;

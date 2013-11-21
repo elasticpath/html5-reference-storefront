@@ -11,7 +11,7 @@ define(['ep', 'eventbus', 'backbone'],
      * Backbone.Model
      */
     var profileModel = Backbone.Model.extend({
-      url: ep.app.config.cortexApi.path + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=purchases:element,paymentmethods:element,subscriptions:element,emails,addresses:element',
+      url: ep.io.getApiContext() + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=purchases:element,paymentmethods:element,subscriptions:element,emails,addresses:element',
       parse: function (response) {
         var profileObj = {};
 

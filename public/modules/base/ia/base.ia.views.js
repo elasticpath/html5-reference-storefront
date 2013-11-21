@@ -10,15 +10,14 @@ define(['ep','eventbus'],
   function(ep, EventBus){
 
     var viewHelpers = {
-      generateCategoryHref:function(uri) {
-        var retVal;
+      generateCategoryHref:function(href) {
+        var retVal = '';
 
-        if (uri) {
-          retVal = ep.app.config.routes.category + '/' + ep.ui.encodeUri(ep.app.config.cortexApi.path + uri);
+        if (href) {
+          retVal = ep.app.config.routes.category + '/' + ep.ui.encodeUri(href);
         }
         else {
-          retVal = '';
-          ep.logger.warn('main nav category loaded without uri');
+          ep.logger.warn('main nav category loaded without category href');
         }
 
         return retVal;

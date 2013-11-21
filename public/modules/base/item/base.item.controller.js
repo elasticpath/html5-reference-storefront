@@ -15,7 +15,7 @@ define(['jquery','ep','app', 'eventbus', 'item.models', 'item.views', 'text!modu
     _.templateSettings.variable = 'E';
 
 
-    var defaultView = function(uri){
+    var defaultView = function(href){
       pace.start();
       var itemDetailLayout = new View.DefaultView({
         className: ''
@@ -24,11 +24,11 @@ define(['jquery','ep','app', 'eventbus', 'item.models', 'item.views', 'text!modu
       var itemModel = new Model.ItemModel();
 
       itemModel.fetch({
-        url: itemModel.getUrl(uri),
+        url: itemModel.getUrl(href),
         success: function (response) {
 
           // Attribute List Collection
-          var attribsList = new Model.ItemAttributeCollection(response.attributes.details);
+          var attribsList = new Model.ItemAttributeCollection(response.get('details'));
 
           // Title View
           var titleView = new View.DefaultItemTitleView({
@@ -36,10 +36,8 @@ define(['jquery','ep','app', 'eventbus', 'item.models', 'item.views', 'text!modu
           });
 
           // Asset Imge Url Processing
-          var urlVal = itemModel.attributes.asset.url;
-          var modelObject = {src: urlVal};
           var assetView = new View.DefaultItemAssetView({
-            model: new Backbone.Model(itemModel)
+            model: itemModel
           });
           // Attribute View
           var attributeView = new View.DefaultItemAttributeView({
@@ -49,8 +47,8 @@ define(['jquery','ep','app', 'eventbus', 'item.models', 'item.views', 'text!modu
           // Price View
           var priceView = new View.DefaultItemPriceView({
             model: new Backbone.Model({
-              price: response.attributes.price,
-              rateCollection: response.attributes.rateCollection
+              price: response.get('price'),
+              rateCollection: response.get('rateCollection')
             })
           });
           // Add To Cart View
@@ -93,7 +91,7 @@ define(['jquery','ep','app', 'eventbus', 'item.models', 'item.views', 'text!modu
     EventBus.on('item.loadDefaultCartRequest', function () {
       var test = 'test';
       // request cart data from Coretext
-      document.location.href = '/#mycart';
+      document.location.href = '#mycart';
       // render cart view in main nav
     });
     EventBus.on('item.addToCartBtnClicked', function (event) {

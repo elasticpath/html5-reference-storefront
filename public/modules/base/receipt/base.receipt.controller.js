@@ -15,7 +15,7 @@ define(['app', 'ep', 'i18n', 'eventbus', 'receipt.models', 'receipt.views', 'tex
     _.templateSettings.variable = 'E';
 
     // Purchase Confirmation View
-    var defaultView = function(uri){
+    var defaultView = function(link){
 
 
       if (ep.app.isUserLoggedIn()) {
@@ -34,12 +34,11 @@ define(['app', 'ep', 'i18n', 'eventbus', 'receipt.models', 'receipt.views', 'tex
           model:purchaseConfirmationModel
         });
 
-        var rawUri = ep.ui.decodeUri(uri);
+        var rawLink = ep.ui.decodeUri(link);
 
-//        var zoomedUri = rawUri + '?zoom=billingaddress,paymentmeans:element,lineitems:element,lineitems:element:rates';
-       var zoomedUri = rawUri + '?zoom=billingaddress, paymentmeans:element, lineitems:element, lineitems:element:rate';
+       var zoomedLink = rawLink + '?zoom=billingaddress, paymentmeans:element, lineitems:element, lineitems:element:rate';
         purchaseConfirmationModel.fetch({
-          url:zoomedUri,
+          url:zoomedLink,
           success:function(response){
 
             purchaseConfirmationLayout.purchaseConfirmationRegion.show(purchaseConfirmationView);

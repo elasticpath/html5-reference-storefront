@@ -22,7 +22,7 @@ define(['ep','eventbus', 'backbone'],
     // Build Main Nav collection
     var mainNavTopCategoryModel = Backbone.Collection.extend({
       model: MainNavItemModel,
-      url: '/' + ep.app.config.cortexApi.path + '/navigations/' + ep.app.config.cortexApi.scope + '?zoom=element',
+      url: ep.io.getApiContext() + '/navigations/' + ep.app.config.cortexApi.scope + '?zoom=element',
       parse:function(response){
         var mainNavCollection = [];
         var mainNavItem = {};
@@ -36,10 +36,10 @@ define(['ep','eventbus', 'backbone'],
         for (var x = 0; x < arrayLen; x++) {
           var arrayObj = topLevelCatArray[x];
           mainNavItem = {
-            displayName:arrayObj['display-name'],
-            name:arrayObj['name'],
-            uri:arrayObj['self']['uri'],
-            details:arrayObj['details']
+            displayName:jsonPath(arrayObj, '$.display-name')[0],
+            name:jsonPath(arrayObj, '$.name')[0],
+            href:jsonPath(arrayObj, '$.self..href')[0],
+            details:jsonPath(arrayObj, '$.details')[0]
           }
 
           mainNavCollection.push(mainNavItem);

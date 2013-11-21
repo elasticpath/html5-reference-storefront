@@ -99,10 +99,10 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         }
         return retVar;
       },
-      getItemUrl:function(uri){
+      getItemUrl:function(link){
         var retVar;
-        if (uri) {
-          retVar = ep.app.config.routes.itemDetail + '/' + ep.ui.encodeUri(uri);
+        if (link) {
+          retVar = ep.app.config.routes.itemDetail + '/' + ep.ui.encodeUri(link);
         } else {
           retVar = '';
           ep.logger.warn('[cart]: unable to generate href to item-detail');
@@ -121,7 +121,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
             retVar = '';
         }
         // user is logged in but may not have a submitorderaction link
-        else if(model.submitOrderActionUri){
+        else if(model.submitOrderActionLink){
           retVar = '';
         }
         return  retVar;
@@ -271,7 +271,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       templateHelpers:viewHelpers,
       events:{
         'click .btn-cmd-submit-order':function(event){
-          EventBus.trigger('cart.submitOrderBtnClicked',this.model.get('submitOrderActionUri'));
+          EventBus.trigger('cart.submitOrderBtnClicked',this.model.get('submitOrderActionLink'));
         }
       }
     });
@@ -312,7 +312,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         },
 
         'change .cart-lineitem-quantity-select': function(event) {
-          var actionLink = viewHelpers.makeActionLink(this.model.get('lineitemUri'));
+          var actionLink = viewHelpers.makeActionLink(this.model.get('lineitemLink'));
           var quantities = {
             original: this.model.get('quantity'),
             changeTo: $(event.target).val()
@@ -492,7 +492,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       templateHelpers:viewHelpers,
       events:{
         'click .btn-cmd-checkout':function(event){
-          EventBus.trigger('cart.checkoutBtnClicked',this.model.get('submitOrderActionUri'));
+          EventBus.trigger('cart.checkoutBtnClicked',this.model.get('submitOrderActionLink'));
         }
       }
     });

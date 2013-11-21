@@ -10,7 +10,7 @@ define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
   function(ep, app, EventBus, Backbone,Cortex,Item){
 
     var initCachedSearch = Backbone.Model.extend({
-      url:ep.app.config.cortexApi.path +'/searches/' + ep.app.config.cortexApi.scope + '/keywords/items'
+      url: ep.io.getApiContext() +'/searches/' + ep.app.config.cortexApi.scope + '/keywords/items'
     });
 
     var searchResult = Backbone.Cortex.Model.extend({
