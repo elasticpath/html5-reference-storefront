@@ -61,7 +61,7 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 <ol>
 <li>Download Apache 2.4 zip from (http://www.apachelounge.com/download/)</li>
 <li>Extract the Apache24 folder locally to `C:\Apache24`</li>
-<li>Copy over the reference configuration files (<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>) to <code>C:\Apache24\conf</code><br/>
+<li>Copy over the reference configuration files [<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>] to <code>C:\Apache24\conf</code><br/>
 <b>NOTE:</b> The configurations files are set to run on your local, so no extra setup is required here.</li>
 <li>Run the proxy: open a command line, navigate to <code>C:\Apache24\bin</code>, and run<br/>
 <code>httpd.exe</code>
@@ -69,9 +69,8 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 </ol>
 </li>
 <li><b>Configure HTML5 Reference Storefront for the Cortex mobee Store</b>
-<ol>
-<li>With a text editor, open <code>ui-storefront/public/ep.config.json</code>
-<li>Change the cortexAPI JSON element to the following:<br/>
+<ul>
+<li>Open <code>ui-storefront/public/ep.config.json</code> and change the cortexAPI JSON element to the following:<br/>
 <pre>
 "cortexApi":{
 "path":"cortex",
@@ -79,9 +78,9 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 },
 </pre>
 </li>
-</ol>
+</ul>
 </li>
-<li><b>Start up the Node.js</b>
+<li><b>Start up Node.js</b>
 <ul>
 <li>Open a command line, navigate to your HTML5 Storefront directory, and run<br/>
 <code>node app</code>
@@ -99,25 +98,41 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 
 
 <h3 id="remote">Running HTML5 Reference Storefront Remotely</h3>
-Running remotely means your HTML5 Reference Storefront is running locally on port `3008`, but Cortex API, Search, Commerce Engine, etc, run on an external server.
-When running remotely, we expect your Cortex API is using the Integrator project. For more information on the Integrator, see http://docs.elasticpath.com
+Running remotely means your HTML5 Reference Storefront runs locally on port `3008`, but Cortex API, Search, Commerce Engine, etc, run on an external server.
+When running remotely, we expect your Cortex API is using Elastic Path Integrator, see http://docs.elasticpath.com for more information on Integrator.
 
 <b>To run remotely:</b>
 <ul>
 <li><b>Install and configure Apache 2.4 HTTP Server</b>
 <ol>
 <li>Download Apache 2.4 zip from (http://www.apachelounge.com/download/)</li>
-<li>Extract the Apache24 folder locally to `C:\Apache24`</li>
-<li>Copy over the reference configuration files (<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>) to <code>C:\Apache24\conf</code><br/>
+<li>Extract the Apache24 folder locally to <code>C:\Apache24</code></li>
+<li>Copy over the reference configuration files [<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>] to <code>C:\Apache24\conf</code><br/>
 </li>
 <li>In <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a>,
-comment out </li>
+comment out the LOCAL SETUP and uncomment the REMOTE SETUP.</li>
+<li>In the REMOTE SETUP, set the web address and port for Integrator.<br/>
+<b>NOTE:</b> Ignore the studio setting if not using studio.</li>
 <li>Run the proxy: open a command line, navigate to <code>C:\Apache24\bin</code>, and run<br/>
 <code>httpd.exe</code>
 </li>
 </ol>
 </li>
-<li><b>Start up the Node.js</b>
+<li>
+<b>Configure HTML5 Reference Storefront for the Cortex telcooperative Store</b>
+<ul>
+<li>With a text editor, open <code>ui-storefront/public/ep.config.json</code> Change the cortexAPI JSON element to the following:<br/>
+<pre>
+  "cortexApi":{
+    "path":"integrator",
+    "scope":"telcooperative"
+  },
+</pre>
+</li>
+</ul>
+</li>
+</li>
+<li><b>Start up Node.js</b>
 <ul>
 <li>Open a command line, navigate to your HTML5 Storefront directory, and run<br/>
 <code>node app</code>
