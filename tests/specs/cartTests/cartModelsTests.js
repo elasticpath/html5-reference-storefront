@@ -9,16 +9,176 @@
 define(function (require) {
 
   describe("Cart Module: Models", function () {
-    var cartModel = require('cart.models');
+    var cartModels = require('cart.models');
+    var myCartModel = new cartModels.CartModel();
 
-    it("CartModel should exist", function () {
-      expect(cartModel.CartModel).to.exist;
+    var rawData = {
+      "_order": [
+        {
+          "_billingaddressinfo": [
+            {
+              "_selector": [
+                {
+                  "_choice": [
+                    {
+                      "_description": [
+                        {
+                          "address": {
+                            "country-name": "CA",
+                            "extended-address": "Siffon Ville",
+                            "locality": "St. Helens",
+                            "postal-code": "v8v8v8",
+                            "region": "MB",
+                            "street-address": "1234 HappyVille Road"
+                          },
+                          "name": {
+                            "family-name": "boxer",
+                            "given-name": "ben"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "_chosen": [
+                    {
+                      "_description": [
+                        {
+                          "address": {
+                            "country-name": "US",
+                            "extended-address": "110 Liberty Street",
+                            "locality": "New York",
+                            "postal-code": "NY 10006",
+                            "region": "NY",
+                            "street-address": "Hoyip Chinese Restaurant"
+                          },
+                          "name": {
+                            "family-name": "boxer",
+                            "given-name": "ben"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "_tax": [
+            {
+              "total": {
+                "amount": 0,
+                "currency": "CAD",
+                "display": "$0.00"
+              }
+            }
+          ],
+          "_total": [
+            {
+              "cost": [
+                {
+                  "amount": 0,
+                  "currency": "CAD",
+                  "display": "$0.00"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    before(function() {
+      this.model = myCartModel.parse(rawData);
     });
-    it("CartItemCollection should exist", function () {
-      expect(cartModel.CartItemCollection).to.exist;
+
+    after(function() {
+      this.model = null;
     });
-    it("CartItemModel should exist", function () {
-      expect(cartModel.CartItemModel).to.exist;
+
+    describe("Cart model renders selected (chosen) billing address correctly", function() {
+      it("must have a family name", function() {
+        expect(this.model.billingAddresses.chosenBillingAddress.familyName).to.be.equal('boxer');
+      });
+      it("must have a given name", function() {
+        expect(this.model.billingAddresses.chosenBillingAddress.givenName).to.be.equal('ben');
+      });
+      it("must have a street address", function() {
+        expect(this.model.billingAddresses.chosenBillingAddress.streetAddress).to.be.equal('Hoyip Chinese Restaurant');
+      });
+      it("must have an extended address", function() {
+        expect(this.model.billingAddresses.chosenBillingAddress.extendedAddress).to.be.equal('110 Liberty Street');
+      });
+      it("must have a city", function() {
+        expect(this.model.billingAddresses.chosenBillingAddress.city).to.be.equal('New York');
+      });
+      it("must have a region", function() {
+        expect(this.model.billingAddresses.chosenBillingAddress.region).to.be.equal('NY');
+      });
+      it("must have a country", function() {
+        expect(this.model.billingAddresses.chosenBillingAddress.country).to.be.equal('US');
+      });
+      it("must have a postal code", function() {
+        expect(this.model.billingAddresses.chosenBillingAddress.postalCode).to.be.equal('NY 10006');
+      });
+    });
+
+    describe("Cart model renders alternative (choice) billing addresses correctly", function() {
+      it("should be an array", function() {
+        expect(this.model.billingAddresses.choiceBillingAddresses).to.be.an.instanceOf(Array);
+      });
+      it("should have 1 address", function () {
+        expect(this.model.billingAddresses.choiceBillingAddresses).to.have.length(1);
+      });
+
+      it("must have a family name", function() {
+        expect(this.model.billingAddresses.choiceBillingAddresses[0].familyName).to.be.equal('boxer');
+      });
+      it("must have a given name", function() {
+        expect(this.model.billingAddresses.choiceBillingAddresses[0].givenName).to.be.equal('ben');
+      });
+      it("must have a street address", function() {
+        expect(this.model.billingAddresses.choiceBillingAddresses[0].streetAddress).to.be.equal('1234 HappyVille Road');
+      });
+      it("must have an extended address", function() {
+        expect(this.model.billingAddresses.choiceBillingAddresses[0].extendedAddress).to.be.equal('Siffon Ville');
+      });
+      it("must have a city", function() {
+        expect(this.model.billingAddresses.choiceBillingAddresses[0].city).to.be.equal('St. Helens');
+      });
+      it("must have a region", function() {
+        expect(this.model.billingAddresses.choiceBillingAddresses[0].region).to.be.equal('MB');
+      });
+      it("must have a country", function() {
+        expect(this.model.billingAddresses.choiceBillingAddresses[0].country).to.be.equal('CA');
+      });
+      it("must have a postal code", function() {
+        expect(this.model.billingAddresses.choiceBillingAddresses[0].postalCode).to.be.equal('v8v8v8');
+      });
+
+    });
+
+    describe("Cart model renders tax correctly", function() {
+      it("must have a currency", function() {
+        expect(this.model.cartTax.currency).to.be.equal('CAD');
+      });
+      it("must have an amount", function() {
+        expect(this.model.cartTax.amount).to.be.equal(0);
+      });
+      it("must have a display value", function() {
+        expect(this.model.cartTax.display).to.be.equal('$0.00');
+      });
+    });
+
+    describe("Cart model renders order total correctly", function() {
+      it("must have a currency", function() {
+        expect(this.model.cartOrderTotal.currency).to.be.equal('CAD');
+      });
+      it("must have an amount", function() {
+        expect(this.model.cartOrderTotal.amount).to.be.equal(0);
+      });
+      it("must have a display value", function() {
+        expect(this.model.cartOrderTotal.display).to.be.equal('$0.00');
+      });
     });
   });
 
