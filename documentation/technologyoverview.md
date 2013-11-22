@@ -16,7 +16,13 @@ Technology Stack
 <th align="center" valign="middle">Version</th>
 </tr>
 <tr>
-<td><strong><a href="http://requirejs.org/">require.js</a></strong></td>
+<td><strong><a href="http://marionettejs.com/">Marionette.js</a></strong></td>
+<td>JavaScript library extending Backbone.js, which manages the HTML5 Reference Storefront views.
+Provides common design and implementation patterns for the Storefront.</td>
+<td>v1.0.0-rc6</td>
+</tr>
+<tr>
+<td><strong><a href="http://requirejs.org/">Require.js</a></strong></td>
 <td>JavaScript library facilitating asynchronous module definition <a href="http://en.wikipedia.org/wiki/Asynchronous_module_definition">(AMD)</a> .
 </td>
 <td>2.0</td>
@@ -32,7 +38,7 @@ Technology Stack
 <td>1.4.4</td>
 </tr>
 <tr>
-<td><strong><a href="http://backbonejs.org/">backbone.js</a></strong></td>
+<td><strong><a href="http://backbonejs.org/">Backbone.js</a></strong></td>
 <td>
 <p>Foundation UI framework. Provides the core UI elements such as Models, Views, and Events.</p>
 </td>
