@@ -156,6 +156,12 @@ define(['ep', 'eventbus', 'backbone'],
          */
         // There will only ever be one currently selected (chosen) address
         var chosenAddress = jsonPath(cart, '$.._billingaddressinfo[0].._chosen.._description[0]')[0];
+
+        // This will not be present in some scenarios (e.g. not logged in)
+        if (chosenAddress) {
+          chosenAddress = parseAddress(chosenAddress);
+        }
+
         // Array of alternative (choice) billing addresses
         var choiceAddressesArray = [];
 
@@ -173,7 +179,7 @@ define(['ep', 'eventbus', 'backbone'],
         }
 
         cartObj.billingAddresses = {
-          chosenBillingAddress: parseAddress(chosenAddress),
+          chosenBillingAddress: chosenAddress,
           choiceBillingAddresses: choiceAddressesArray
         };
 
