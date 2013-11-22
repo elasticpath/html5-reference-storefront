@@ -1,7 +1,7 @@
 HTML5 Reference Storefront
 =============
 Welcome to the Elastic Path's HTML5 Reference Storefront!
-The documentation is available in these locations:
+We have the following docs:
 
 * <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/introduction.md">Introduction</a> <br/>
 HTML5 Storefront introduction, overview of the Storefront's customization layers, Cortex API introduction, HTML5 Reference Storefront feature list, and documentation notes.
