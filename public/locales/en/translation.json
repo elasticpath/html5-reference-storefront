@@ -50,7 +50,9 @@
     "chosenBillingAddress": "Selected Billing Address",
     "checkoutTitle": "Checkout Summary",
     "cancelOrder": "Cancel",
-    "submitOrder": "Complete Purchase"
+    "submitOrder": "Complete Purchase",
+    "todaysTax": "Today's Tax",
+    "todaysTotal": "Today's Total"
   },
   "category": {
     "next": "Next",
