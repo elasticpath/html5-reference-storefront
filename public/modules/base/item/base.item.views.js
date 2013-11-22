@@ -103,7 +103,7 @@ define(['ep','marionette','i18n','eventbus','pace'],
           }
         }
         else{
-          return '/images/img-placeholder.png';
+          return 'images/img-placeholder.png';
         }
       },
       getDefaultImageName:function(thumbnail){

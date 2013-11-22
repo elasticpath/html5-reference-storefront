@@ -85,7 +85,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
           retVar = thumbnail.absolutePath;
         }
         else{
-         retVar = '/images/img-placeholder.png';
+         retVar = 'images/img-placeholder.png';
         }
         return retVar;
       },
@@ -172,7 +172,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     * */
     // Set Checkout Button to Processing State
     function setCheckoutButtonProcessing(){
-      $('.btn-cmd-submit-order').html('<img src="/images/activity-indicator-strobe.gif" />');
+      $('.btn-cmd-submit-order').html('<img src="images/activity-indicator-strobe.gif" />');
 
     }
     // Set Checkout Button to Ready State

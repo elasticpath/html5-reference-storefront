@@ -35,7 +35,7 @@ define(function(require) {
           retVar = thumbnail.absolutePath;
         }
         else {
-          retVar = '/images/img-placeholder-noborder.png';
+          retVar = 'images/img-placeholder-noborder.png';
         }
         return retVar;
       },

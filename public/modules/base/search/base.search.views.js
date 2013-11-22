@@ -40,7 +40,7 @@ define(['ep','backbone','eventbus'],
           EventBus.trigger('log.info','Search request: ' + keywords);
           // trigger navigation to search route
           // may need to make this more robust
-          document.location.href = '/#search/' + encodeURIComponent(keywords);
+          document.location.href = '#search/' + encodeURIComponent(keywords);
         }
       }
     });
