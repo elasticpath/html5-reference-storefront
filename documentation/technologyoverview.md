@@ -74,12 +74,12 @@ Testing Frameworks
 <td>1.10.0</td>
 </tr>
 <tr>
-<td><strong>Chai</strong></td>
+<td><strong><a href="http://chaijs.com/">Chai</a></strong></td>
 <td>Assertion library for node.js.</td>
 <td>1.6.1</td>
 </tr>
 <tr>
-<td><strong>Selenium</strong></td>
+<td><strong><a href="http://www.seleniumhq.org/projects/webdriver/">Selenium</a></strong></td>
 <td>Automated testing of the browser components.</td>
 <td>2.35.0</td>
 </tr>

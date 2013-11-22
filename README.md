@@ -29,7 +29,7 @@ Once those are installed, proceed to <a href="https://github.elasticpath.net/cor
 <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#running-html5-reference-storefront-locally"><b>locally</b></a> or <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#running-html5-reference-storefront-remotely"><b>remotely</b></a>.
 
 **NOTE:** Due to <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>, you must set up a proxy to handle the requests between Cortex API and HTML5 Storefront.
-We use Apache HTTP Server 2.4 in the instructions below. For convenience/reference, we provide pre-configured Apache config files you can copy over to your local Apache deployment.
+We use Apache HTTP Server 2.4 in the instructions below. For reference, we provide pre-configured Apache config files you can copy over to your local Apache deployment.
 Any proxy works, but Apache HTTP Server is the only server we test.
 
 <h3>Installing HTML5 Reference Storefront Sources</h3>
@@ -62,7 +62,7 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 <li>Download Apache 2.4 zip from (http://www.apachelounge.com/download/)</li>
 <li>Extract the Apache24 folder locally to `C:\Apache24`</li>
 <li>Copy over the reference configuration files [<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>] to <code>C:\Apache24\conf</code><br/>
-<b>NOTE:</b> The configurations files are set to run on your local, so no extra setup is required here.</li>
+<b>NOTE:</b> The configurations files are set to run on your local, so no extra setup should be required.</li>
 <li>Run the proxy: open a command line, navigate to <code>C:\Apache24\bin</code>, and run<br/>
 <code>httpd.exe</code>
 </li>
@@ -101,6 +101,8 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 Running remotely means your HTML5 Reference Storefront runs locally on port `3008`, but Cortex API, Search, Commerce Engine, etc, run on an external server.
 When running remotely, we expect your Cortex API is using Elastic Path Integrator, see http://docs.elasticpath.com for more information on Integrator.
 
+![localSetup](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/remote_proxy_setup.png)
+
 <b>To run remotely:</b>
 <ul>
 <li><b>Install and configure Apache 2.4 HTTP Server</b>
@@ -121,7 +123,7 @@ comment out the LOCAL SETUP and uncomment the REMOTE SETUP.</li>
 <li>
 <b>Configure HTML5 Reference Storefront for the Cortex telcooperative Store</b>
 <ul>
-<li>With a text editor, open <code>ui-storefront/public/ep.config.json</code> Change the cortexAPI JSON element to the following:<br/>
+<li>Open <code>ui-storefront/public/ep.config.json</code> and change the cortexAPI JSON element to the following:<br/>
 <pre>
   "cortexApi":{
     "path":"integrator",
@@ -129,6 +131,11 @@ comment out the LOCAL SETUP and uncomment the REMOTE SETUP.</li>
   },
 </pre>
 </li>
+</ul>
+</li>
+<li><b>Configure your Remote Server's Firewall and Proxy</b>
+<ul>
+<li>Configured your Remote Server's firewall and proxy to allow requests to/from your local Apache proxy.</li>
 </ul>
 </li>
 </li>
