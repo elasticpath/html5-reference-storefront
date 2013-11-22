@@ -4,10 +4,11 @@
  * Functional Storefront Unit Test - Cart Views
  */
 define(function (require) {
-  var EventBus = require('eventbus'),
-      Backbone = require('backbone'),
-      ep = require('ep'),
-      EventTestHelpers = require('EventTestHelpers');
+  var EventBus = require('eventbus');
+  var Mediator = require('mediator');
+  var Backbone = require('backbone');
+  var ep = require('ep');
+  var EventTestHelpers = require('EventTestHelpers');
   var EventTestFactory = require('EventTestFactory');
 
   describe('Cart Module: Views', function () {
@@ -20,36 +21,6 @@ define(function (require) {
 
     after(function() {
       $("#Fixtures").empty();
-    });
-
-    describe('All views & view functions should exist', function() {
-      it('DefaultLayout should exist', function () {
-        expect(cartViews.DefaultLayout).to.exist;
-      });
-      it('CartTitleView should exist', function () {
-        expect(cartViews.CartTitleView).to.exist;
-      });
-      it('MainCartView should exist', function () {
-        expect(cartViews.MainCartView).to.exist;
-      });
-      it('CartLineItemView should exist', function () {
-        expect(cartViews.CartLineItemView).to.exist;
-      });
-      it('CartSummaryView should exist', function () {
-        expect(cartViews.CartSummaryView).to.exist;
-      });
-      it('CartCheckoutMasterView should exist', function () {
-        expect(cartViews.CartCheckoutMasterView).to.exist;
-      });
-      it('CartCheckoutActionView should exist', function () {
-        expect(cartViews.CartCheckoutActionView).to.exist;
-      });
-      it('EmptyCartView should exist', function () {
-        expect(cartViews.EmptyCartView).to.exist;
-      });
-      it ('resetQuantity function should exist', function() {
-        expect(cartViews.resetQuantity).to.be.exist;
-      });
     });
 
     describe('DefaultLayout ', function () {
@@ -83,6 +54,303 @@ define(function (require) {
         });
       });
 
+    });
+
+    describe('CartCheckoutLayout', function() {
+      before(function() {
+        this.view = new cartViews.CartCheckoutLayout();
+        this.view.render();
+      });
+
+      it('should be an instance of Marionette Layout object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.Layout);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
+      });
+      it('view contents are rendered', function() {
+        expect(this.view.el.childElementCount).to.be.equal(1);
+      });
+
+      describe('regions', function() {
+        it('should have a cartCheckoutTitleRegion region', function () {
+          expect(this.view.cartCheckoutTitleRegion).to.exist;
+          expect(this.view.$el.find('[data-region="cartCheckoutTitleRegion"]')).to.be.length(1);
+        });
+        it('should have a chosenBillingAddressRegion region', function () {
+          expect(this.view.chosenBillingAddressRegion).to.exist;
+          expect(this.view.$el.find('[data-region="chosenBillingAddressRegion"]')).to.be.length(1);
+        });
+        it('should have a cartCancelActionRegion region', function () {
+          expect(this.view.cartCancelActionRegion).to.exist;
+          expect(this.view.$el.find('[data-region="cartCancelActionRegion"]')).to.be.length(1);
+        });
+        it('should have a cartOrderSummaryRegion region', function () {
+          expect(this.view.cartOrderSummaryRegion).to.exist;
+          expect(this.view.$el.find('[data-region="cartOrderSummaryRegion"]')).to.be.length(1);
+        });
+      });
+    });
+
+    describe('CartBillingAddressView', function() {
+
+      describe('renders', function() {
+        before(function () {
+          // Mock the chosenBillingAddress model
+          this.model = new Backbone.Model({
+            "givenName":"ben",
+            "familyName":"boxer",
+            "streetAddress":"Hoyip Chinese Restaurant",
+            "extendedAddress":"110 Liberty Street",
+            "city":"New York",
+            "region":"NY",
+            "country":"US",
+            "postalCode":"NY 10006"
+          });
+          sinon.stub(Mediator, 'fire');
+          this.view = new cartViews.CartBillingAddressView({
+            model: this.model
+          });
+          this.view.render();
+        });
+
+        after(function() {
+          this.model.destroy();
+          Mediator.fire.restore();
+        });
+
+        it('should be an instance of Marionette Layout object', function () {
+          expect(this.view).to.be.an.instanceOf(Marionette.Layout);
+        });
+        it('render() should return the view object', function () {
+          expect(this.view.render()).to.be.equal(this.view);
+        });
+
+        describe('onShow', function() {
+          it('fire Mediator event: mediator.loadAddressesViewRequest',function(){
+            // FIXME Reinstate this test when Mediator.fire event onShow of CartBillingAddressView is fired
+            //          expect(Mediator.fire).to.be.calledWith('mediator.loadAddressesViewRequest');
+          });
+        });
+
+        describe('regions', function () {
+          it('should have a billingAddressComponentRegion region', function () {
+            expect(this.view.billingAddressComponentRegion).to.exist;
+            expect(this.view.$el.find('[data-region="billingAddressComponentRegion"]')).to.be.length(1);
+          });
+        });
+
+        describe('renders the model data correctly', function() {
+          // FIXME Reinstate these tests when Mediator.fire event onShow of CartBillingAddressView is fired
+//        it('should render givenName and familyName', function () {
+//          expect($('[data-el-value="address.name"]', this.view.$el).text()).to.have.string(this.model.givenName)
+//            .and.to.have.string(this.model.familyName);
+//        });
+//        it('should render street address', function () {
+//          expect($('[data-el-value="address.streetAddress"]', this.view.$el).text()).to.have.string(this.model.streetAddress);
+//        });
+//        it('should render extended address', function () {
+//          expect($('[data-el-value="address.extendedAddress"]', this.view.$el).text()).to.have.string(this.model.extendedAddress);
+//        });
+//        it('should render city', function () {
+//          expect($('[data-el-value="address.city"]', this.view.$el).text()).to.have.string(this.model.city);
+//        });
+//        it('should render region', function () {
+//          expect($('[data-el-value="address.region"]', this.view.$el).text()).to.have.string(this.model.region);
+//        });
+//        it('should render country', function () {
+//          expect($('[data-el-value="address.country"]', this.view.$el).text()).to.have.string(this.model.country);
+//        });
+//        it('should render country', function () {
+//          expect($('[data-el-value="address.postalCode"]', this.view.$el).text()).to.have.string(this.model.postalCode);
+//        });
+
+        });
+
+      });
+    });
+
+    describe('CartOrderSummaryView', function() {
+      before(function() {
+        this.view = new cartViews.CartOrderSummaryView();
+        this.view.render();
+      });
+
+      it('should be an instance of Marionette Layout object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.Layout);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
+      });
+
+      describe('regions', function() {
+        it('should have a cartSummaryRegion region', function () {
+          expect(this.view.cartSummaryRegion).to.exist;
+          expect(this.view.$el.find('[data-region="cartSummaryRegion"]')).to.be.length(1);
+        });
+        it('should have a cartTaxTotalRegion region', function () {
+          expect(this.view.cartTaxTotalRegion).to.exist;
+          expect(this.view.$el.find('[data-region="cartTaxTotalRegion"]')).to.be.length(1);
+        });
+        it('should have a cartSubmitOrderRegion region', function () {
+          expect(this.view.cartSubmitOrderRegion).to.exist;
+          expect(this.view.$el.find('[data-region="cartSubmitOrderRegion"]')).to.be.length(1);
+        });
+      });
+    });
+
+    describe('CartSummaryView', function() {
+      before(function() {
+        // Mock the model with just the data we need
+        var rawData = {
+          "cartTotalQuantity": 1,
+          "cartTotal": {
+            "currency": "CAD",
+            "amount": 4.99,
+            "display": "$4.99"
+          }
+        };
+        this.model = new Backbone.Model(rawData);
+
+        this.view = new cartViews.CartSummaryView({
+          model: this.model
+        });
+        this.view.render();
+      });
+
+      after(function() {
+        this.model.destroy();
+      });
+
+      it('should be an instance of Marionette ItemView object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
+      });
+
+      describe('view contents are rendered', function() {
+        it('should render the total cart quantity', function() {
+          expect($('[data-el-value="cart.totalQuantity"]', this.view.$el).text())
+            .to.be.equal(this.model.get('cartTotalQuantity').toString());
+        });
+        it('should render the cart sub-total', function() {
+          expect($('[data-el-value="cart.subTotal"]', this.view.$el).text())
+            .to.be.equal(this.model.get('cartTotal').display);
+        });
+      });
+    });
+
+    describe('CartTaxTotalView', function() {
+      before(function () {
+        // Mock the model with just the data we need
+        var rawData = {
+          "cartTax": {
+            "currency": "CAD",
+            "amount": 0.2,
+            "display": "$0.20"
+          },
+          "cartOrderTotal": {
+            "currency": "CAD",
+            "amount": 5.19,
+            "display": "$5.19"
+          }
+        };
+        this.model = new Backbone.Model(rawData);
+
+        this.view = new cartViews.CartTaxTotalView({
+          model: this.model
+        });
+        this.view.render();
+      });
+
+      after(function() {
+        this.model.destroy();
+      });
+
+      it('should be an instance of Marionette ItemView object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
+      });
+
+      describe('view contents are rendered', function() {
+        it('should render today\'s tax total', function() {
+          expect($('[data-el-value="cartTax.display"]', this.view.$el).text())
+            .to.be.equal(this.model.get('cartTax').display);
+        });
+        it('should render today\'s total', function() {
+          expect($('[data-el-value="cartOrderTotal.display"]', this.view.$el).text())
+            .to.be.equal(this.model.get('cartOrderTotal').display);
+        });
+      });
+    });
+
+    describe('CartSubmitOrderActionView', function() {
+      before(function() {
+        // Mock the model with just the data we need
+        var rawData = {
+          "submitOrderActionUri": "someUri"
+        };
+        this.model = new Backbone.Model(rawData);
+
+        this.view = new cartViews.CartSubmitOrderActionView({
+          model: this.model
+        });
+        this.view.render();
+      });
+
+      it('should be an instance of Marionette ItemView object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
+      });
+
+      describe('complete purchase button clicked', function() {
+        before(function() {
+          sinon.spy(EventBus, 'trigger');
+
+          // Unbind subsequently triggered events
+          EventTestHelpers.unbind('cart.submitOrderBtnClicked');
+
+          this.view.$el.find('.btn-cmd-submit-order').click();
+        });
+
+        after(function() {
+          EventBus.trigger.restore();
+          EventTestHelpers.reset();
+        });
+
+        it('should trigger submitOrderBtnClicked event', function() {
+          expect(EventBus.trigger).to.be.calledWith('cart.submitOrderBtnClicked');
+        });
+      });
+    });
+
+    describe('CartCheckoutMasterView', function() {
+      before(function() {
+        this.view = new cartViews.CartOrderSummaryView();
+        this.view.render();
+      });
+
+      it('should be an instance of Marionette Layout object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.Layout);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
+      });
+      it('view contents are rendered', function() {
+        expect(this.view.el.childElementCount).to.be.equal(1);
+      });
+
+      describe('regions', function() {
+        it('should have a cartSummaryRegion region', function () {
+          expect(this.view.cartSummaryRegion).to.exist;
+          expect(this.view.$el.find('[data-region="cartSummaryRegion"]')).to.be.length(1);
+        });
+      });
     });
 
     describe('CartLineItemView', function() {
@@ -223,6 +491,35 @@ define(function (require) {
       });
     });
 
+    describe('CartCheckoutTitleView', function() {
+      before(function () {
+        this.view = new cartViews.CartCheckoutTitleView();
+        this.view.render();
+      });
+
+      it('should be an instance of Marionette ItemView object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
+      });
+    });
+
+    describe('CartCancelActionView', function() {
+      before(function () {
+        this.view = new cartViews.CartCancelActionView();
+        this.view.render();
+      });
+
+      it('should be an instance of Marionette ItemView object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
+      });
+      describe('checkout cancel button clicked',
+        EventTestFactory.simpleBtnClickTest('cart.cancelOrderBtnClicked', '.btn-cancel-order'));
+    });
   });
 
 });

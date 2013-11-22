@@ -217,11 +217,11 @@
     <ul class="cart-summary-list">
       <li class="cart-total-quantity">
         <label class="cart-summary-label-col"><%= E.getI18nLabel('cart.totalQuantity') %>: </label>
-        <span class="cart-summary-value-col"><%= E.cartTotalQuantity %></span>
+        <span class="cart-summary-value-col" data-el-value="cart.totalQuantity"><%= E.cartTotalQuantity %></span>
       </li>
       <li class="cart-subtotal">
         <label class="cart-summary-label-col"><%= E.getI18nLabel('cart.subTotal') %>: </label>
-        <span class="cart-summary-value-col"><%= E.cartTotal.display %></span>
+        <span class="cart-summary-value-col" data-el-value="cart.subTotal"><%= E.cartTotal.display %></span>
       </li>
     </ul>
 
