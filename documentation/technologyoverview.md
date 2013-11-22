@@ -69,7 +69,7 @@ Testing Frameworks
 <th align="center" valign="middle">Version</th>
 </tr>
 <tr>
-<td><strong>Mocha</strong></td>
+<td><strong><a href="http://visionmedia.github.io/mocha/">Mocha</a></strong></td>
 <td>JavaScript test framework running on node.js.</td>
 <td>1.10.0</td>
 </tr>
