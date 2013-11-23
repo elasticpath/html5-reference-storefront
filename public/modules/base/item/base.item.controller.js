@@ -64,7 +64,7 @@ define(['jquery','ep','app', 'eventbus', 'item.models', 'item.views', 'text!modu
           itemDetailLayout.itemDetailPriceRegion.show(priceView);
           itemDetailLayout.itemDetailAddToCartRegion.show(addToCartView);
 
-          if (response.get('availability').state) {
+          if (response.get('availability') && response.get('availability').state) {
             // Availability View
             var availabilityView = new View.DefaultItemAvailabilityView({
               model: new Backbone.Model(response.get('availability'))
