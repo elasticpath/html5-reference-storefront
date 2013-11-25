@@ -15,8 +15,7 @@ define(['ep', 'eventbus', 'backbone'],
       url: ep.app.config.cortexApi.path + '/carts/' + ep.app.config.cortexApi.scope + '/default?zoom=total,' +
         'lineitems:element,lineitems:element:price,lineitems:element:rate,lineitems:element:availability,' +
         'lineitems:element:item,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price,lineitems:element:item:rate,' +
-        'order:purchaseform,order:billingaddressinfo:selector:choice:description,' +
-        'order:billingaddressinfo:selector:chosen:description,order:tax,order:total',
+        'order:purchaseform,order:billingaddressinfo:selector:chosen:description,order:tax,order:total',
 
       parse: function (cart) {
 
@@ -162,25 +161,8 @@ define(['ep', 'eventbus', 'backbone'],
           chosenAddress = parseAddress(chosenAddress);
         }
 
-        // Array of alternative (choice) billing addresses
-        var choiceAddressesArray = [];
-
-        // Build array of choice billing addresses
-        var choiceAddressesRootLen = 0;
-        var choiceAddressesRoot = jsonPath(cart, '$.._billingaddressinfo[0].._choice.._description');
-
-        if (choiceAddressesRoot) {
-          choiceAddressesRootLen = choiceAddressesRoot.length;
-        }
-
-        for (var x = 0; x < choiceAddressesRootLen; x++) {
-          var currObj = choiceAddressesRoot[x];
-          choiceAddressesArray.push(parseAddress(currObj[0]));
-        }
-
         cartObj.billingAddresses = {
-          chosenBillingAddress: chosenAddress,
-          choiceBillingAddresses: choiceAddressesArray
+          chosenBillingAddress: chosenAddress
         };
 
         return cartObj;

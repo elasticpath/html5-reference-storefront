@@ -122,41 +122,6 @@ define(function (require) {
       });
     });
 
-    describe("Cart model renders alternative (choice) billing addresses correctly", function() {
-      it("should be an array", function() {
-        expect(this.model.billingAddresses.choiceBillingAddresses).to.be.an.instanceOf(Array);
-      });
-      it("should have 1 address", function () {
-        expect(this.model.billingAddresses.choiceBillingAddresses).to.have.length(1);
-      });
-
-      it("must have a family name", function() {
-        expect(this.model.billingAddresses.choiceBillingAddresses[0].familyName).to.be.equal('boxer');
-      });
-      it("must have a given name", function() {
-        expect(this.model.billingAddresses.choiceBillingAddresses[0].givenName).to.be.equal('ben');
-      });
-      it("must have a street address", function() {
-        expect(this.model.billingAddresses.choiceBillingAddresses[0].streetAddress).to.be.equal('1234 HappyVille Road');
-      });
-      it("must have an extended address", function() {
-        expect(this.model.billingAddresses.choiceBillingAddresses[0].extendedAddress).to.be.equal('Siffon Ville');
-      });
-      it("must have a city", function() {
-        expect(this.model.billingAddresses.choiceBillingAddresses[0].city).to.be.equal('St. Helens');
-      });
-      it("must have a region", function() {
-        expect(this.model.billingAddresses.choiceBillingAddresses[0].region).to.be.equal('MB');
-      });
-      it("must have a country", function() {
-        expect(this.model.billingAddresses.choiceBillingAddresses[0].country).to.be.equal('CA');
-      });
-      it("must have a postal code", function() {
-        expect(this.model.billingAddresses.choiceBillingAddresses[0].postalCode).to.be.equal('v8v8v8');
-      });
-
-    });
-
     describe("Cart model renders tax correctly", function() {
       it("must have a currency", function() {
         expect(this.model.cartTax.currency).to.be.equal('CAD');
