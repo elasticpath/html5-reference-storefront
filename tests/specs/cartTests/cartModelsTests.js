@@ -19,26 +19,6 @@ define(function (require) {
             {
               "_selector": [
                 {
-                  "_choice": [
-                    {
-                      "_description": [
-                        {
-                          "address": {
-                            "country-name": "CA",
-                            "extended-address": "Siffon Ville",
-                            "locality": "St. Helens",
-                            "postal-code": "v8v8v8",
-                            "region": "MB",
-                            "street-address": "1234 HappyVille Road"
-                          },
-                          "name": {
-                            "family-name": "boxer",
-                            "given-name": "ben"
-                          }
-                        }
-                      ]
-                    }
-                  ],
                   "_chosen": [
                     {
                       "_description": [
