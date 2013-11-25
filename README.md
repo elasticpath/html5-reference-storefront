@@ -47,9 +47,9 @@ Any proxy works, but Apache HTTP Server is the only server we test.
 Running locally means all your applications, Cortex API, Search, HTML5 Storefront, etc, are running on your local computer on these ports:
 
 <ul>
-<li><a href="https://docs.elasticpath.com/display/EPCAPIDEV/Installation+and+Configuration+Guide" target="_blank">Cortex API <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port `9080`</li>
-<li><a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Search Server <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port `8080`</li>
-<li><a href="http://nodejs.org/" target="_blank">node.js <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port `3008`</li>
+<li><a href="https://docs.elasticpath.com/display/EPCAPIDEV/Installation+and+Configuration+Guide" target="_blank">Cortex API <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port <code>9080</code></li>
+<li><a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Search Server <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port <code>8080</code></li>
+<li><a href="http://nodejs.org/" target="_blank">node.js <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port <code>3008</code></li>
 <li><a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Commerce Engine <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a></li>
 </ul>
 
@@ -60,7 +60,7 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 <li><b>Install and configure Apache 2.4 HTTP Server</b>
 <ol>
 <li>Download Apache 2.4 zip from (http://www.apachelounge.com/download/)</li>
-<li>Extract the Apache24 folder locally to `C:\Apache24`</li>
+<li>Extract the Apache24 folder locally to <code>C:\Apache24</code></li>
 <li>Copy over the reference configuration files [<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>] to <code>C:\Apache24\conf</code><br/>
 <b>NOTE:</b> The configurations files are set to run on your local, so no extra setup should be required.</li>
 <li>Run the proxy: open a command line, navigate to <code>C:\Apache24\bin</code>, and run<br/>
@@ -98,7 +98,7 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 
 
 <h3 id="remote">Running HTML5 Reference Storefront Remotely</h3>
-Running remotely means your HTML5 Reference Storefront runs locally on port `3008`, but Cortex API, Search, Commerce Engine, etc, run on an external server.
+Running remotely means your HTML5 Reference Storefront runs locally on port <code>3008</code>, but Cortex API, Search, Commerce Engine, etc, run on an external server.
 When running remotely, we expect your Cortex API is using Elastic Path Integrator, see http://docs.elasticpath.com for more information on Integrator.
 
 ![localSetup](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/remote_proxy_setup.png)
