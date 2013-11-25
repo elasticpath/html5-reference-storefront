@@ -250,31 +250,25 @@ define(function (require) {
     describe('cart.checkoutBtnClicked event works', function () {
 
       describe('routed to checkout if user is logged in', function() {
-        var unboundEventKey = 'layout.loadRegionContentRequest';
         var actionLink = 'ActionLinkTrue';
 
         before(function () {
-          sinon.spy(EventBus, 'trigger');
           sinon.stub(ep.app, 'isUserLoggedIn', function() {
             return true;
           });
           ep.router = new Marionette.AppRouter();
-          sinon.stub(ep.router, 'navigate');
+          sinon.spy(ep.router, 'navigate');
 
-          EventTestHelpers.unbind(unboundEventKey);
           EventBus.trigger('cart.checkoutBtnClicked', actionLink);
         });
 
         after(function () {
           EventTestHelpers.reset();
           ep.app.isUserLoggedIn.restore();
-          EventBus.trigger.restore();
-          ep.router.navigate.restore();
         });
 
-        it('fires a request for the checkout view', sinon.test(function () {
-          var regionObj = { region: 'appMainRegion', module: 'cart', view: 'CheckoutView' };
-          expect(EventBus.trigger).to.be.calledWithExactly('layout.loadRegionContentRequest', regionObj);
+        it('routes the user to the checkout view', sinon.test(function () {
+          expect(ep.router.navigate).to.be.calledWithExactly('checkout', true);
         }));
       });
 
@@ -334,8 +328,20 @@ define(function (require) {
     });
 
     // Event Listener: cart.cancelOrderBtnClicked
-    describe('Responds to event: cart.cancelOrderBtnClicked',
-      EventTestFactory.simpleEventTriggersEventTest('cart.reloadCartViewRequest', 'cart.cancelOrderBtnClicked'));
+    describe('cart.cancelOrderBtnClicked event works', function() {
+      var actionLink = 'ActionLinkTrue';
+
+      before(function () {
+        ep.router = new Marionette.AppRouter();
+        sinon.spy(ep.router, 'navigate');
+
+        EventBus.trigger('cart.cancelOrderBtnClicked', actionLink);
+      });
+
+      it('routes the user to the checkout view', sinon.test(function () {
+        expect(ep.router.navigate).to.be.calledWithExactly('mycart', true);
+      }));
+    });
 
     // Checkout View
     describe("CheckoutView", function () {

@@ -320,22 +320,14 @@ define(function (require) {
         });
       } else {
         // Route to the checkout view
-        ep.router.navigate('checkout');
-        EventBus.trigger('layout.loadRegionContentRequest',
-          {
-            region: 'appMainRegion',
-            module: 'cart',
-            view: 'CheckoutView'
-          }
-        );
+        ep.router.navigate('checkout', true);
       }
     });
 
     // Cancel button will reload the default cart view
     EventBus.on('cart.cancelOrderBtnClicked', function() {
-      // Route to the cart view
-      ep.router.navigate('mycart');
-      EventBus.trigger('cart.reloadCartViewRequest');
+      // Route to the default cart view
+      ep.router.navigate('mycart', true);
     });
 
     // Submit Order Request
