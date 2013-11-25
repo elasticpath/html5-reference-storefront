@@ -92,7 +92,7 @@ define(function (require) {
       });
     });
 
-    describe('CartBillingAddressView', function() {
+    describe('CartBillingAddressLayout', function() {
 
       describe('renders', function() {
         before(function () {
@@ -108,7 +108,7 @@ define(function (require) {
             "postalCode":"NY 10006"
           });
           sinon.stub(Mediator, 'fire');
-          this.view = new cartViews.CartBillingAddressView({
+          this.view = new cartViews.CartBillingAddressLayout({
             model: this.model
           });
           this.view.render();
@@ -128,7 +128,7 @@ define(function (require) {
 
         describe('onShow', function() {
           it('fire Mediator event: mediator.loadAddressesViewRequest',function(){
-            // FIXME Reinstate this test when Mediator.fire event onShow of CartBillingAddressView is fired
+            // FIXME Reinstate this test when Mediator.fire event onShow of CartBillingAddressLayout is fired
             //          expect(Mediator.fire).to.be.calledWith('mediator.loadAddressesViewRequest');
           });
         });
@@ -141,7 +141,7 @@ define(function (require) {
         });
 
         describe('renders the model data correctly', function() {
-          // FIXME Reinstate these tests when Mediator.fire event onShow of CartBillingAddressView is fired
+          // FIXME Reinstate these tests when Mediator.fire event onShow of CartBillingAddressLayout is fired
 //        it('should render givenName and familyName', function () {
 //          expect($('[data-el-value="address.name"]', this.view.$el).text()).to.have.string(this.model.givenName)
 //            .and.to.have.string(this.model.familyName);
@@ -170,9 +170,9 @@ define(function (require) {
       });
     });
 
-    describe('CartOrderSummaryView', function() {
+    describe('CartOrderSummaryLayout', function() {
       before(function() {
-        this.view = new cartViews.CartOrderSummaryView();
+        this.view = new cartViews.CartOrderSummaryLayout();
         this.view.render();
       });
 
@@ -329,9 +329,9 @@ define(function (require) {
       });
     });
 
-    describe('CartCheckoutMasterView', function() {
+    describe('CartOrderSummaryLayout', function() {
       before(function() {
-        this.view = new cartViews.CartOrderSummaryView();
+        this.view = new cartViews.CartOrderSummaryLayout();
         this.view.render();
       });
 
@@ -353,7 +353,7 @@ define(function (require) {
       });
     });
 
-    describe('CartLineItemView', function() {
+    describe('CartLineItemLayout', function() {
       var cartLineItem = {
         displayName: 'Die Hard',
         itemUri: 'items/die_hard',
@@ -375,7 +375,7 @@ define(function (require) {
         this.model = new Backbone.Model(cartLineItem);
 
         // setup view & render
-        this.view = new cartViews.CartLineItemView({model: this.model});
+        this.view = new cartViews.CartLineItemLayout({model: this.model});
         this.view.render();
       });
 

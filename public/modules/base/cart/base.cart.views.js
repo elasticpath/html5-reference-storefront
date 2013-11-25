@@ -224,7 +224,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
      * will render a wrapper around an address view
      * @type Marionette.Layout
      */
-    var cartBillingAddressView = Backbone.Marionette.Layout.extend({
+    var cartBillingAddressLayout = Backbone.Marionette.Layout.extend({
       template: '#CartBillingAddressTemplate',
       templateHelpers:viewHelpers,
       regions: {
@@ -251,7 +251,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       }
     });
 
-    var cartOrderSummaryView = Backbone.Marionette.Layout.extend({
+    var cartOrderSummaryLayout = Backbone.Marionette.Layout.extend({
       template:'#CartOrderSummaryTemplate',
       regions: {
         cartSummaryRegion: '[data-region="cartSummaryRegion"]',
@@ -283,7 +283,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
 
 
     // Cart Checkout Master View
-    var cartCheckoutMasterView = Backbone.Marionette.Layout.extend({
+    var cartCheckoutMasterLayout = Backbone.Marionette.Layout.extend({
       template:'#CartCheckoutMasterLayoutTemplate',
       regions:{
         cartSummaryRegion:'[data-region="cartSummaryRegion"]',
@@ -297,8 +297,8 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       templateHelpers:viewHelpers
     });
 
-    // Cart Line Item View
-    var cartLineItemView = Backbone.Marionette.Layout.extend({
+    // Cart Line Item Layout
+    var cartLineItemLayout = Backbone.Marionette.Layout.extend({
       template:'#CartLineItemTemplate',
       tagName:'tr',
       templateHelpers:viewHelpers,
@@ -477,7 +477,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     // Main Cart View
     var mainCartView = Backbone.Marionette.CompositeView.extend({
       template:'#MainCartTemplate',
-      itemView:cartLineItemView,
+      itemView:cartLineItemLayout,
       itemViewContainer:'tbody',
       className:'cart-main-inner table-responsive',
       templateHelpers:viewHelpers,
@@ -516,16 +516,16 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       DefaultLayout:defaultLayout,
       CartTitleView:cartTitleView,
       MainCartView:mainCartView,
-      CartLineItemView:cartLineItemView,
+      CartLineItemLayout:cartLineItemLayout,
       EmptyCartView:emptyCartView,
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
-      CartCheckoutMasterView:cartCheckoutMasterView,
+      CartCheckoutMasterLayout:cartCheckoutMasterLayout,
       CartCheckoutLayout:cartCheckoutLayout,
       CartCheckoutTitleView:cartCheckoutTitleView,
-      CartBillingAddressView:cartBillingAddressView,
+      CartBillingAddressLayout:cartBillingAddressLayout,
       CartCancelActionView:cartCancelActionView,
-      CartOrderSummaryView:cartOrderSummaryView,
+      CartOrderSummaryLayout:cartOrderSummaryLayout,
       CartTaxTotalView:cartTaxTotalView,
       CartSubmitOrderActionView:cartSubmitOrderActionView,
       setCheckoutButtonProcessing:setCheckoutButtonProcessing,

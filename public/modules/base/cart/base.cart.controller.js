@@ -45,14 +45,14 @@ define(function (require) {
           });
 
           cartLayout.cartTitleRegion.show(new View.CartTitleView());
-          var cartCheckoutMasterView = new View.CartCheckoutMasterView();
-          cartCheckoutMasterView.on('show', function () {
-            cartCheckoutMasterView.cartSummaryRegion.show(summaryView);
-            cartCheckoutMasterView.cartCheckoutActionRegion.show(new View.CartCheckoutActionView({
+          var cartCheckoutMasterLayout = new View.CartCheckoutMasterLayout();
+          cartCheckoutMasterLayout.on('show', function () {
+            cartCheckoutMasterLayout.cartSummaryRegion.show(summaryView);
+            cartCheckoutMasterLayout.cartCheckoutActionRegion.show(new View.CartCheckoutActionView({
               model: cartModel
             }));
           });
-          cartLayout.cartCheckoutMasterRegion.show(cartCheckoutMasterView);
+          cartLayout.cartCheckoutMasterRegion.show(cartCheckoutMasterLayout);
 
           if (response.attributes.lineItems.length > 0) {
             cartLayout.mainCartRegion.show(mainCartView);
@@ -80,7 +80,7 @@ define(function (require) {
         success: function (response) {
           checkoutLayout.cartCheckoutTitleRegion.show(new View.CartCheckoutTitleView());
 
-          checkoutLayout.chosenBillingAddressRegion.show(new View.CartBillingAddressView({
+          checkoutLayout.chosenBillingAddressRegion.show(new View.CartBillingAddressLayout({
             model: new Backbone.Model(cartModel.get('billingAddresses').chosenBillingAddress)
           }));
 
@@ -88,25 +88,25 @@ define(function (require) {
             model: cartModel
           }));
 
-          var cartOrderSummaryView = new View.CartOrderSummaryView();
-          cartOrderSummaryView.on('show', function () {
-            cartOrderSummaryView.cartSummaryRegion.show(
+          var cartOrderSummaryLayout = new View.CartOrderSummaryLayout();
+          cartOrderSummaryLayout.on('show', function () {
+            cartOrderSummaryLayout.cartSummaryRegion.show(
               new View.CartSummaryView({
                 model: cartModel
               })
             );
-            cartOrderSummaryView.cartTaxTotalRegion.show(
+            cartOrderSummaryLayout.cartTaxTotalRegion.show(
               new View.CartTaxTotalView({
                 model: cartModel
               })
             );
-            cartOrderSummaryView.cartSubmitOrderRegion.show(
+            cartOrderSummaryLayout.cartSubmitOrderRegion.show(
               new View.CartSubmitOrderActionView({
                 model: cartModel
               })
             );
           });
-          checkoutLayout.cartOrderSummaryRegion.show(cartOrderSummaryView);
+          checkoutLayout.cartOrderSummaryRegion.show(cartOrderSummaryLayout);
         },
         error: function (response) {
           ep.logger.error('error fetching my cart model: ' + response);
