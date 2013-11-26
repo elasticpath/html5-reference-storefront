@@ -96,26 +96,12 @@ define(function (require) {
 
       describe('renders', function() {
         before(function () {
-          // Mock the chosenBillingAddress model
-          this.model = new Backbone.Model({
-            "givenName":"ben",
-            "familyName":"boxer",
-            "streetAddress":"Hoyip Chinese Restaurant",
-            "extendedAddress":"110 Liberty Street",
-            "city":"New York",
-            "region":"NY",
-            "country":"US",
-            "postalCode":"NY 10006"
-          });
           sinon.stub(Mediator, 'fire');
-          this.view = new cartViews.CartBillingAddressLayout({
-            model: this.model
-          });
+          this.view = new cartViews.CartBillingAddressLayout();
           this.view.render();
         });
 
         after(function() {
-          this.model.destroy();
           Mediator.fire.restore();
         });
 
@@ -126,47 +112,12 @@ define(function (require) {
           expect(this.view.render()).to.be.equal(this.view);
         });
 
-        describe('onShow', function() {
-          it('fire Mediator event: mediator.loadAddressesViewRequest',function(){
-            // FIXME Reinstate this test when Mediator.fire event onShow of CartBillingAddressLayout is fired
-            //          expect(Mediator.fire).to.be.calledWith('mediator.loadAddressesViewRequest');
-          });
-        });
-
         describe('regions', function () {
           it('should have a billingAddressComponentRegion region', function () {
             expect(this.view.billingAddressComponentRegion).to.exist;
             expect(this.view.$el.find('[data-region="billingAddressComponentRegion"]')).to.be.length(1);
           });
         });
-
-        describe('renders the model data correctly', function() {
-          // FIXME Reinstate these tests when Mediator.fire event onShow of CartBillingAddressLayout is fired
-//        it('should render givenName and familyName', function () {
-//          expect($('[data-el-value="address.name"]', this.view.$el).text()).to.have.string(this.model.givenName)
-//            .and.to.have.string(this.model.familyName);
-//        });
-//        it('should render street address', function () {
-//          expect($('[data-el-value="address.streetAddress"]', this.view.$el).text()).to.have.string(this.model.streetAddress);
-//        });
-//        it('should render extended address', function () {
-//          expect($('[data-el-value="address.extendedAddress"]', this.view.$el).text()).to.have.string(this.model.extendedAddress);
-//        });
-//        it('should render city', function () {
-//          expect($('[data-el-value="address.city"]', this.view.$el).text()).to.have.string(this.model.city);
-//        });
-//        it('should render region', function () {
-//          expect($('[data-el-value="address.region"]', this.view.$el).text()).to.have.string(this.model.region);
-//        });
-//        it('should render country', function () {
-//          expect($('[data-el-value="address.country"]', this.view.$el).text()).to.have.string(this.model.country);
-//        });
-//        it('should render country', function () {
-//          expect($('[data-el-value="address.postalCode"]', this.view.$el).text()).to.have.string(this.model.postalCode);
-//        });
-
-        });
-
       });
     });
 

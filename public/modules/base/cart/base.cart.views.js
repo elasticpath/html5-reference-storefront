@@ -245,7 +245,6 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       templateHelpers:viewHelpers,
       events:{
         'click .btn-cancel-order':function(event){
-          event.preventDefault();
           EventBus.trigger('cart.cancelOrderBtnClicked');
         }
       }
@@ -272,7 +271,6 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       templateHelpers:viewHelpers,
       events:{
         'click .btn-cmd-submit-order':function(event){
-          event.preventDefault();
           EventBus.trigger('cart.submitOrderBtnClicked',this.model.get('submitOrderActionUri'));
         }
       }
@@ -309,15 +307,11 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       },
       events:{
         'click .btn-cart-removelineitem':function(event){
-          event.preventDefault();
-
           var actionLink = $(event.currentTarget).data("actionlink");
           EventBus.trigger('cart.removeLineItemBtnClicked', actionLink);
         },
 
         'change .cart-lineitem-quantity-select': function(event) {
-          event.preventDefault();
-
           var actionLink = viewHelpers.makeActionLink(this.model.get('lineitemUri'));
           var quantities = {
             original: this.model.get('quantity'),
@@ -498,7 +492,6 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       templateHelpers:viewHelpers,
       events:{
         'click .btn-cmd-checkout':function(event){
-          event.preventDefault();
           EventBus.trigger('cart.checkoutBtnClicked',this.model.get('submitOrderActionUri'));
         }
       }

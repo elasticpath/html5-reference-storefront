@@ -5,6 +5,7 @@
  */
 define(function (require) {
   var EventBus = require('eventbus');
+  var Mediator = require('mediator');
   var Backbone = require('backbone');
   var ep = require('ep');
   var Marionette = require('marionette');
@@ -273,28 +274,24 @@ define(function (require) {
       });
 
       describe('log in modal loaded if user is not logged in', function() {
-        var unboundEventKey = 'layout.loadRegionContentRequest';
         var actionLink = 'ActionLinkTrue';
 
         before(function () {
-          sinon.spy(EventBus, 'trigger');
+          sinon.stub(Mediator, 'fire');
           sinon.stub(ep.app, 'isUserLoggedIn', function() {
             return false;
           });
 
-          EventTestHelpers.unbind(unboundEventKey);
           EventBus.trigger('cart.checkoutBtnClicked', actionLink);
         });
 
         after(function () {
-          EventTestHelpers.reset();
           ep.app.isUserLoggedIn.restore();
-          EventBus.trigger.restore();
+          Mediator.fire.restore();
         });
 
-        it('fires a request for the login form', sinon.test(function () {
-          var regionObj = { region: 'appModalRegion', module: 'auth', view: 'LoginFormView' };
-          expect(EventBus.trigger).to.be.calledWithExactly('layout.loadRegionContentRequest', regionObj);
+        it('fires an authentication request to the mediator', sinon.test(function () {
+          expect(Mediator.fire).to.be.calledWithExactly('mediator.getAuthentication');
         }));
       });
     });

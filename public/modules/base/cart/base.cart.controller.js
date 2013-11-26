@@ -313,11 +313,8 @@ define(function (require) {
     EventBus.on('cart.checkoutBtnClicked', function() {
       // User not logged in and config set to require login
       if (ep.app.config.requireAuthToCheckout && (!ep.app.isUserLoggedIn())) {
-        EventBus.trigger('layout.loadRegionContentRequest', {
-          region: 'appModalRegion',
-          module: 'auth',
-          view: 'LoginFormView'
-        });
+        // Fire event to get authenticated (e.g. load the login form in a modal)
+        Mediator.fire('mediator.getAuthentication');
       } else {
         // Route to the checkout view
         ep.router.navigate('checkout', true);

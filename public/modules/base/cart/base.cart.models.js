@@ -9,13 +9,31 @@
 define(['ep', 'eventbus', 'backbone'],
   function (ep, EventBus, Backbone) {
 
+    // Array of zoom parameters to pass to Cortex
+    var zoomArray = [
+      'total',
+      'lineitems:element',
+      'lineitems:element:price',
+      'lineitems:element:rate',
+      'lineitems:element:availability',
+      'lineitems:element:item',
+      'lineitems:element:item:definition',
+      'lineitems:element:item:definition:assets:element',
+      'lineitems:element:item:price',
+      'lineitems:element:item:rate',
+      'order:purchaseform',
+      'order:billingaddressinfo:selector:chosen:description',
+      'order:tax',
+      'order:total'
+    ];
 
     // Cart Model
     var cartModel = Backbone.Model.extend({
-      url: ep.app.config.cortexApi.path + '/carts/' + ep.app.config.cortexApi.scope + '/default?zoom=total,' +
-        'lineitems:element,lineitems:element:price,lineitems:element:rate,lineitems:element:availability,' +
-        'lineitems:element:item,lineitems:element:item:definition,lineitems:element:item:definition:assets:element,lineitems:element:item:price,lineitems:element:item:rate,' +
-        'order:purchaseform,order:billingaddressinfo:selector:chosen:description,order:tax,order:total',
+      url: ep.app.config.cortexApi.path +
+            '/carts/' +
+            ep.app.config.cortexApi.scope +
+            '/default?zoom=' +
+            zoomArray.join(),
 
       parse: function (cart) {
 

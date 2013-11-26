@@ -29,6 +29,11 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         EventBus.trigger('cart.loadGlobalNavAuthMenuRequest');
       });*/
     },
+    'mediator.getAuthentication':function() {
+      require(['auth'],function(){
+        EventBus.trigger('auth.btnAuthGlobalMenuItemClicked');
+      });
+    },
     'mediator.getPublicAuthTokenRequest':function(){
       require(['auth'],function(mod){
         EventBus.trigger('auth.generatePublicAuthTokenRequest');
