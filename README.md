@@ -179,4 +179,4 @@ Files generate to: ui-storefront/docs
 
 - Use cygwin for the windows command line. Windows command line can't handle the * character
 - DOCCO does not copy the image files to the output folder. Copy over manually.
-- Image links are hardcoded to GitHub. To generate locally, change the image references so they are local.
+- Links (images + hrefs)are hardcoded to GitHub. To generate locally, change the image references so they are local.
