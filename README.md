@@ -32,7 +32,9 @@ Once those are installed, proceed to <a href="https://github.elasticpath.net/cor
 We use Apache HTTP Server 2.4 in the instructions below. For reference, we provide pre-configured Apache config files you can copy over to your local Apache deployment.
 Any proxy works, but Apache HTTP Server is the only server we test.
 
-**NOTE: Port 80 Conflicts** On Windows 7, often port 80 is in use by a system service. Change your apache httpd.conf to Listen on another port like 81 instead.
+**NOTE: Port 80 Conflicts** Often on Windows 7 port 80 is in use by a system service. Change your apache <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a> to listen on another port, like 81:<br/>
+<code>Listen 81</code><br/>
+Now access  Storefront through: <code>localhost:81/html5storefront</code>
 
 <h3>Installing HTML5 Reference Storefront Sources</h3>
 <ol>
