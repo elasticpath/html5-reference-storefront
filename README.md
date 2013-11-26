@@ -28,9 +28,11 @@ The HTML5 Reference Storefront requires the following installed:
 Once those are installed, proceed to <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#installing-html5-reference-storefront-sources">Install HTML5 Reference Storefront Sources</a> and then run the Storefront either
 <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#running-html5-reference-storefront-locally"><b>locally</b></a> or <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#running-html5-reference-storefront-remotely"><b>remotely</b></a>.
 
-**NOTE:** Due to <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>, you must set up a proxy to handle the requests between Cortex API and HTML5 Storefront.
+**NOTE: <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>** Due to CORS, you must set up a proxy to handle the requests between Cortex API and HTML5 Storefront.
 We use Apache HTTP Server 2.4 in the instructions below. For reference, we provide pre-configured Apache config files you can copy over to your local Apache deployment.
 Any proxy works, but Apache HTTP Server is the only server we test.
+
+**NOTE: Port 80 Conflicts** On Windows 7, often port 80 is in use by a system service. Change your apache httpd.conf to Listen on another port like 81 instead.
 
 <h3>Installing HTML5 Reference Storefront Sources</h3>
 <ol>
