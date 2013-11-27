@@ -275,21 +275,20 @@ define(function (require) {
     });
 
     // Remove Line Item Request
-    // FIXME use ep.io.ajaxModel
     // FIXME move logic to a method
     EventBus.on('cart.removeLineItemRequest', function (deleteActionLink) {
-      ep.io.ajax({
+      var ajaxModel = new ep.io.defaultAjaxModel({
         type: 'DELETE',
-        contentType: 'application/json',
         url: deleteActionLink,
-        success: function (data, textStatus, XHR) {
+        success: function () {
           EventBus.trigger('cart.removeLineItemSuccess');
         },
-        error: function (response) {
+        customErrorFn: function (response) {
           EventBus.trigger('cart.removeLineItemFailed', response);
         }
       });
 
+      ep.io.ajax(ajaxModel.toJSON());
     });
 
     // Remove Line Item Button Clicked
