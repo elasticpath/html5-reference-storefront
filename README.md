@@ -41,11 +41,11 @@ Any proxy works, but Apache HTTP Server is the only server we test.
 <code>RequestHeader append X-Forwarded-Base "http://localhost:81/cortex"</code></li>
 <li>For HTML5 Storefront Selenium Tests, update <code>server.port</code> in <code><a href="https://github.elasticpath.net/cortex/selenium/blob/master/testng-ui/pom.xml">repository/selenium/testng-ui/pom.xml</a></code>:<br/>
 <pre>
-			&lt;properties&gt;
-				&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-				&lt;server.port&gt;81&lt;/server.port&gt;
-				&lt;selenium.session.baseurl.ui&gt;http://localhost:${server.port}/html5storefront/&lt;/selenium.session.baseurl.ui&gt;
-			&lt;/properties&gt;
+&lt;properties&gt;
+	&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+	&lt;server.port&gt;81&lt;/server.port&gt;
+	&lt;selenium.session.baseurl.ui&gt;http://localhost:${server.port}/html5storefront/&lt;/selenium.session.baseurl.ui&gt;
+&lt;/properties&gt;
 </pre>
 </li>
 </ul>
