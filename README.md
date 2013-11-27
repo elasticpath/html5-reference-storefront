@@ -32,9 +32,25 @@ Once those are installed, proceed to <a href="https://github.elasticpath.net/cor
 We use Apache HTTP Server 2.4 in the instructions below. For reference, we provide pre-configured Apache config files you can copy over to your local Apache deployment.
 Any proxy works, but Apache HTTP Server is the only server we test.
 
-**NOTE: Port 80 Conflicts** Often on Windows 7 port 80 is in use by a system service. Change your apache <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a> to listen on another port, like 81:<br/>
-<code>Listen 81</code><br/>
-Now access  Storefront through: <code>localhost:81/html5storefront</code>
+**NOTE: Port 80 Conflicts** Often on Windows 7, <code>port 80</code> is in use by a system service. To have Apache listen on another port, like <code>port 81</code>, change the following:
+<ul>
+<li>Apache <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a><br/>
+<code>Listen 81</code>
+</li>
+<li>Apache <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>ep-cortex-proxy.conf</code></a><br/>
+<code>RequestHeader append X-Forwarded-Base "http://localhost:81/cortex"</code></li>
+<li>For HTML5 Storefront Selenium Tests, update <code>server.port</code> in <code><a href="https://github.elasticpath.net/cortex/selenium/blob/master/testng-ui/pom.xml">repository/selenium/testng-ui/pom.xml</a></code>:<br/>
+<pre>
+			&lt;properties&gt;
+				&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+				&lt;server.port&gt;81&lt;/server.port&gt;
+				&lt;selenium.session.baseurl.ui&gt;http://localhost:${server.port}/html5storefront/&lt;/selenium.session.baseurl.ui&gt;
+			&lt;/properties&gt;
+</pre>
+</li>
+</ul>
+Now access Storefront through: <code>localhost:81/html5storefront</code>
+
 
 <h3>Installing HTML5 Reference Storefront Sources</h3>
 <ol>
