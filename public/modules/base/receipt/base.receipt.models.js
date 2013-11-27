@@ -46,10 +46,9 @@ define(['underscore', 'ep', 'eventbus', 'backbone'],
           arrayLength = rawArray.length;
         }
 
-          // FIXME use apply function or forEach
         for (var i = 0; i < arrayLength; i++) {
           // invoke parse function specified by 'parseFunctionName'
-          var parsedObject = this[parseFunctionName](rawArray[i]);
+          var parsedObject = this[parseFunctionName].call(this, rawArray[i]);
           parsedArray.push(parsedObject);
         }
 
