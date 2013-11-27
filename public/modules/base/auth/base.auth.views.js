@@ -26,7 +26,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
         if (ep.io.localStore.getItem('oAuthRole') === 'PUBLIC') {
           retVal = this.getI18nLabel('auth.loginMenu');
         } else {
-          retVal = window.localStorage.oAuthUserName;  // FIXME not user's name
+          retVal = ep.io.localStore.getItem('oAuthUserName');
         }
         return retVal;
       },
