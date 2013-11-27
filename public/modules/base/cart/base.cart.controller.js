@@ -327,13 +327,12 @@ define(function (require) {
     });
 
     // Submit Order Request
-    // FIXME use ep.io.ajaxModel
     EventBus.on('cart.submitOrderRequest', function (submitOrderLink) {
       if (submitOrderLink) {
         ep.logger.info('SUBMIT ORDER REQUEST: ' + submitOrderLink);
-        ep.io.ajax({
+
+        var ajaxModel = new ep.io.defaultAjaxModel({
           type: 'POST',
-          contentType: 'application/json',
           url: submitOrderLink,
           success: function (data, textStatus, XHR) {
             var obj = {
@@ -343,11 +342,12 @@ define(function (require) {
             };
             EventBus.trigger('cart.submitOrderSuccess', obj);
           },
-          error: function (response) {
+          customErrorFn: function (response) {
             ep.logger.error('Error submitting order: ' + response);
             View.resetCheckoutButtonText();
           }
         });
+        ep.io.ajax(ajaxModel.toJSON());
       }
       else {
         ep.logger.warn('cart.submitOrderRequest called with no submitOrderLink');
