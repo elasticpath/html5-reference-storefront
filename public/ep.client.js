@@ -197,7 +197,7 @@ define(function (reqiure) {
         // scrub out any absolute path (prior to /cortex) in the URL to avoid confusing the proxy
         // ie all requests are relative path
         var replaceUrl = options.url;
-        var testPath = '/' + ep.app.config.cortexApi.path;
+        var testPath = ep.io.getApiContext();
         var pathIndex = replaceUrl.indexOf(testPath);
         if (pathIndex > 0) {
 
