@@ -13,16 +13,18 @@ requirejs.config({
     'equalize'        : 'scripts/lib/plugins/jquery-equalheights',
     'tabs'            : 'scripts/lib/plugins/kube.tabs',
     'contextmenu'     : 'scripts/lib/plugins/jquery.contextmenu',
-    'router'          : 'router',
-    'ep'              : 'ep.client',
-    'mediator'        : 'ep.mediator',
-    'viewHelpers'     : 'ep.viewHelpers',
     'jsonpath'        : 'scripts/lib/jsonpath-0.8.0',
     'i18n'            : 'scripts/lib/i18next.amd-1.6.0',
-    'eventbus'        : 'eventbus',
     'toast'           : 'scripts/lib/plugins/jquery.toastmessage',
-    'colorpicker'     : 'scripts/lib/plugins/colorpicker',
     'modalwin'        : 'scripts/lib/plugins/jquery.simplemodal-1.4.4',
+
+    'router'          : 'router',
+    'ep'              : 'ep.client',
+    'eventbus'        : 'eventbus',
+    'mediator'        : 'ep.mediator',
+    'viewHelpers'     : 'helpers/view.helpers',
+    "modelHelpers"   :  'helpers/model.helpers',
+
     'app'             : 'modules/base/app/base.app.controller',
     'app.models'      : 'modules/base/app/base.app.models',
     'app.views'       : 'modules/base/app/base.app.views',
@@ -58,13 +60,18 @@ requirejs.config({
     'auth.views'      : 'modules/base/auth/base.auth.views',
     'address'         : 'modules/base/components/address/base.component.address.controller',
     'address.views'   : 'modules/base/components/address/base.component.address.views',
+    'checkout'        : 'modules/base/checkout/base.checkout.controller',
+    'checkout.models' : 'modules/base/checkout/base.checkout.models',
+    'checkout.views'  : 'modules/base/checkout/base.checkout.views',
+
     'chai'            : '/tests/libs/chai',
     'sinon-chai'      : '/tests/libs/sinon-chai',
     'mocha.common'    : '/tests/libs/mocha.common',
+    'sinon'           :  'scripts/lib/sinon-1.7.3',
+
     'EventTestFactory': '/tests/TestHelpers/EventTestFactory',
     "testhelpers.event": '/tests/TestHelpers/EventTestHelpers',
-    'testhelpers.defaultview': '/tests/TestHelpers/DefaultViewTestHelper',
-    'sinon'           :  'scripts/lib/sinon-1.7.3'
+    'testhelpers.defaultview': '/tests/TestHelpers/DefaultViewTestHelper'
 
   },
   shim: {

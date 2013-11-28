@@ -21,10 +21,8 @@ define(['ep', 'eventbus', 'backbone'],
       'lineitems:element:item:definition:assets:element',
       'lineitems:element:item:price',
       'lineitems:element:item:rate',
-      'order:purchaseform',
-      'order:billingaddressinfo:selector:chosen:description',
-      'order:tax',
-      'order:total'
+      'order',
+      'order:purchaseform'
     ];
 
     // Cart Model
@@ -35,7 +33,7 @@ define(['ep', 'eventbus', 'backbone'],
             '/default?zoom=' +
             zoomArray.join(),
 
-      parse: function (cart) {
+      parse: function (response) {
 
         var cartObj = {};
 
@@ -44,7 +42,7 @@ define(['ep', 'eventbus', 'backbone'],
          */
         var lineItemsArray = [];
         var lineItemArrayLen = 0;
-        var lineItemsRoot = jsonPath(cart, '$._lineitems.._element')[0];
+        var lineItemsRoot = jsonPath(response, '$._lineitems.._element')[0];
 
         if (lineItemsRoot) {
           lineItemArrayLen = lineItemsRoot.length;
@@ -131,62 +129,28 @@ define(['ep', 'eventbus', 'backbone'],
         }
         cartObj.lineItems = lineItemsArray;
 
-        /*
-        * Cart Submit Order Action
-        * */
-        cartObj.submitOrderActionLink = jsonPath(cart, "$..links[?(@.rel=='submitorderaction')].href");
-
 
         /*
          * Cart Summary: total quantity
          */
-        cartObj.cartTotalQuantity = jsonPath(cart, '$.total-quantity')[0];
+        cartObj.cartTotalQuantity = jsonPath(response, '$.total-quantity')[0];
 
         /*
          * Cart Summary: total price (excluding tax)
          */
         cartObj.cartTotal = {};
-        var cartTotal = jsonPath(cart, '$._total..cost[0]');
+        var cartTotal = jsonPath(response, '$._total..cost[0]');
         if (cartTotal) {
           cartObj.cartTotal = parsePrice(cartTotal);
         }
 
-        /*
-         * Cart Tax
-         */
-        cartObj.cartTaxes = [];
-        var cartTaxes = jsonPath(cart, '$._order[0]._tax[0].cost')[0];
-
-        if (cartTaxes) {
-          var cartTaxesLen = cartTaxes.length;
-
-          for (var x = 0; x < cartTaxes.length; x++) {
-            cartObj.cartTaxes.push(parseTax(cartTaxes[x]));
-          }
-        }
 
         /*
-         * Cart Order Total: total price (including tax)
-         */
-        var cartOrderTotal = jsonPath(cart, '$._order[0]._total[0].cost')[0];
-        if (cartOrderTotal) {
-          cartObj.cartOrderTotal = parsePrice(cartOrderTotal);
-        }
+         * Cart Submit Order Action
+         * */
+        cartObj.submitOrderActionLink = jsonPath(response, "$..links[?(@.rel=='submitorderaction')].href")[0];
+        cartObj.checkoutLink = jsonPath(response, '$.._order[0].self.href')[0];
 
-        /*
-         * Billing Addresses
-         */
-        // There will only ever be one currently selected (chosen) address
-        var chosenAddress = jsonPath(cart, '$.._billingaddressinfo[0].._chosen.._description[0]')[0];
-
-        // This will not be present in some scenarios (e.g. not logged in)
-        if (chosenAddress) {
-          chosenAddress = parseAddress(chosenAddress);
-        }
-
-        cartObj.billingAddresses = {
-          chosenBillingAddress: chosenAddress
-        };
 
         return cartObj;
       }
@@ -251,22 +215,6 @@ define(['ep', 'eventbus', 'backbone'],
       return price;
     };
 
-    // function to parse taxes
-    var parseTax = function(taxObj) {
-      var tax = {};
-
-      if (taxObj) {
-        tax = {
-         currency: taxObj.currency,
-         amount: taxObj.amount,
-         display: taxObj.display,
-         title: taxObj.title
-        }
-      }
-
-      return tax;
-    };
-
     // function to parse rates collection
     var parseRates = function(rates) {
       var ratesArrayLen = 0;
@@ -295,34 +243,6 @@ define(['ep', 'eventbus', 'backbone'],
       }
 
       return rateCollection;
-    };
-
-    /**
-     * Parse an address object.
-     * @param rawObject raw address JSON response
-     * @returns Object - parsed address object
-     */
-    var parseAddress = function (rawObject) {
-
-      var address = {};
-
-      try {
-        address = {
-          givenName: jsonPath(rawObject, '$.name..given-name')[0],
-          familyName: jsonPath(rawObject, '$.name..family-name')[0],
-          streetAddress: jsonPath(rawObject, '$.address..street-address')[0],
-          extendedAddress: jsonPath(rawObject, '$.address..extended-address')[0],
-          city: jsonPath(rawObject, '$.address..locality')[0],
-          region: jsonPath(rawObject, '$.address..region')[0],
-          country: jsonPath(rawObject, '$.address..country-name')[0],
-          postalCode: jsonPath(rawObject, '$.address..postal-code')[0]
-        };
-      }
-      catch (error) {
-        ep.logger.error('Error building address object: ' + error.message);
-      }
-
-      return address;
     };
 
     return {

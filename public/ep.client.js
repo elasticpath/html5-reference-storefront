@@ -7,14 +7,14 @@
  *
  */
 define(function (reqiure) {
-    var $ = require('jquery'),
-        _ = require('underscore'),
-        Backbone = require('backbone'),
-        Marionette = require('marionette'),
-        Mediator = require('mediator'),
-        EventBus = require('eventbus'),
-        Router = require('router'),
-        config = require('text!ep.config.json');
+    var $ = require('jquery');
+    var _ = require('underscore');
+    var Backbone = require('backbone');
+    var Marionette = require('marionette');
+    var Mediator = require('mediator');
+    var EventBus = require('eventbus');
+    var Router = require('router');
+    var config = require('text!ep.config.json');
 
     // require the follow is necessary to use their functions, but no need to variablize it.
     require('toast');
@@ -160,7 +160,6 @@ define(function (reqiure) {
 
       // check and see if there is a local auth token
       // if yes, is it still valid
-      // if not generate a public one
       if (ep.io.localStore) {
         // check for auth token
         oAuthToken = ep.io.localStore.getItem('oAuthToken');
@@ -188,7 +187,13 @@ define(function (reqiure) {
           if (!isTokenDirty) {
             Mediator.fire('mediator.getPublicAuthTokenRequest');
           }
+        }
 
+        if (response.status === 403) {
+          ep.logger.error('Please login to access the following content. ');
+          ep.logger.error('Error ' + response.status + ': ' + response.responseText);
+
+          Mediator.fire('mediator.getAuthentication');
         }
       };
 

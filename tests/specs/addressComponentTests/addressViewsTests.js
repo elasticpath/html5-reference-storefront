@@ -33,15 +33,6 @@ define(function (require) {
       $("#Fixtures").empty();
     });
 
-    describe('all views should exist', function () {
-      it('DefaultAddressItemView exist', function () {
-        expect(addressView.DefaultAddressItemView).to.exist;
-      });
-      it('DefaultAddressFormView exist', function () {
-        expect(addressView.DefaultAddressFormView).to.exist;
-      });
-    });
-
     describe('DefaultAddressItemView', function () {
 
       describe('can render', function () {

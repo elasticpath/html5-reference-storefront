@@ -9,6 +9,10 @@
 define(['marionette', 'i18n', 'mediator', 'viewHelpers'],
   function(Marionette, i18n, Mediator, ViewHelpers){
 
+    /**
+     *
+     * @type {*}
+     */
     var viewHelpers = ViewHelpers.extend({
       isContainerVisisble:function(value){
         if (value){

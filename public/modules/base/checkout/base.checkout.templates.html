@@ -1,0 +1,72 @@
+<div id="CheckoutTemplateContainer">
+
+  <!-- Default Checkout Layout Template [default Layout, class: checkout-container container] -->
+  <script id="DefaultCheckoutLayoutTemplate" type="text/template">
+      <div class="checkout-container-inner">
+
+        <div data-region="checkoutTitleRegion" class="checkout-title-container">
+          <div class="activity-indicator-container">
+            <img class="activity-indicator" src="images/activity-indicator-strobe.gif"/>
+          </div>
+        </div>
+
+        <div class="checkout-main-container">
+          <div data-region="chosenBillingAddressRegion"></div>
+          <div data-region="cancelCheckoutActionRegion"></div>
+        </div>
+
+        <div class="checkout-sidebar" data-region="checkoutOrderRegion"></div>
+
+      </div>
+  </script>
+
+  <!-- Default Checkout Title Template [default Layout] -->
+  <script id="DefaultCheckoutTitleTemplate" type="text/template">
+    <h1 class="view-title"><%= E.getI18nLabel('checkout.checkoutTitle') %></h1>
+  </script>
+
+  <!-- Default Billing Address Template [default Layout] -->
+  <script id="DefaultBillingAddressTemplate" type="text/template">
+    <h2><%= E.getI18nLabel('checkout.chosenBillingAddress') %></h2>
+    <div data-region="billingAddressComponentRegion"></div>
+  </script>
+
+  <!-- Cancel Checkout Action Template [default ItemView] -->
+  <script id="CancelCheckoutActionTemplate" type="text/template">
+    <button class="btn-cancel-order" data-el-label="checkout.cancelCheckout"><%= E.getI18nLabel('checkout.cancelOrder') %></button>
+  </script>
+
+  <!-- Checkout Summary Layout Template [default Layout, class: checkout-sidebar-inner]-->
+  <script id="CheckoutSummaryLayoutTemplate" type="text/template">
+    <div data-region="checkoutSummaryRegion" class="checkout-summary-container"></div>
+    <div data-region="submitOrderRegion" class="submit-order-container"></div>
+  </script>
+
+  <!-- Checkout Summary Template [default ItemView, tagName: ul, class: checkout-summary-list]-->
+  <script id="CheckoutSummaryTemplate" type="text/template">
+    <li class="checkout-total-quantity">
+      <label data-el-label="checkout.totalQuantity"><%= E.getI18nLabel('checkout.totalQuantity') %>: </label>
+      <span data-el-value="checkout.totalQuantity"><%= E.totalQuantity %></span>
+    </li>
+    <li class="checkout-subtotal">
+      <label data-el-label="checkout.subTotal"><%= E.getI18nLabel('checkout.subTotal') %>: </label>
+      <span data-el-value="checkout.subTotal"><%= E.subTotal.display %></span>
+    </li>
+    <li class="checkout-tax">
+      <label data-el-label="checkout.tax"><%= E.getI18nLabel('checkout.tax') %>:</label>
+      <span data-el-value="checkout.tax"><%= E.tax.display %></span>
+    </li>
+    <li class="checkout-total">
+      <label data-el-label="checkout.total"><%= E.getI18nLabel('checkout.total') %>:</label>
+      <span data-el-value="checkout.total"><%= E.total.display %></span>
+    </li>
+  </script>
+
+  <!-- checkout Complete Purchase Action Template -->
+  <script id="SubmitOrderActionTemplate" type="text/template">
+    <button class="btn-cmd-submit-order" data-el-label="checkout.submitOrder"
+      <%= E.getSubmitOrderButtonDisabledAttrib(E.submitOrderActionLink) %>><%= E.getI18nLabel('checkout.submitOrder') %></button>
+  </script>
+
+</div>
+

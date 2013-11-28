@@ -1,23 +1,19 @@
 /**
  * Copyright Elastic Path Software 2013.
-
- * User: sbrookes
- * Date: 04/04/13
- * Time: 9:16 AM
  *
- *
+ * Storefront - Cart Controller
  */
 
 define(function (require) {
-    var ep = require('ep'),
-      EventBus = require('eventbus'),
-      Mediator = require('mediator'),
-      pace = require('pace'),
-      i18n = require('i18n'),
+    var ep = require('ep');
+    var EventBus = require('eventbus');
+    var Mediator = require('mediator');
+    var pace = require('pace');
+    var i18n = require('i18n');
 
-      Model = require('cart.models'),
-      View = require('cart.views'),
-      template = require('text!modules/base/cart/base.cart.templates.html');
+    var Model = require('cart.models');
+    var View = require('cart.views');
+    var template = require('text!modules/base/cart/base.cart.templates.html');
 
 
     pace.start();
@@ -68,68 +64,9 @@ define(function (require) {
       return cartLayout;
     };
 
-    /*
-     * Checkout View
-     */
-    var checkoutView = function() {
-      pace.start();
-      var checkoutLayout = new View.CartCheckoutLayout();
-      var cartModel = new Model.CartModel();
-
-      cartModel.fetch({
-        success: function (response) {
-          checkoutLayout.cartCheckoutTitleRegion.show(new View.CartCheckoutTitleView());
-
-          checkoutLayout.chosenBillingAddressRegion.show(new View.CartBillingAddressLayout({
-            model: new Backbone.Model(cartModel.get('billingAddresses').chosenBillingAddress)
-          }));
-
-          checkoutLayout.cartCancelActionRegion.show(new View.CartCancelActionView({
-            model: cartModel
-          }));
-
-          var cartOrderSummaryLayout = new View.CartOrderSummaryLayout();
-          cartOrderSummaryLayout.on('show', function () {
-            cartOrderSummaryLayout.cartSummaryRegion.show(
-              new View.CartSummaryView({
-                model: cartModel
-              })
-            );
-
-            // Show any taxes in the cart tax array
-            if (cartModel.get('cartTaxes').length) {
-              cartOrderSummaryLayout.cartTaxesRegion.show(
-                new View.CartTaxesView({
-                  collection: new Backbone.Collection(cartModel.get('cartTaxes'))
-                })
-              );
-            }
-
-            cartOrderSummaryLayout.cartTotalRegion.show(
-              new View.CartTotalView({
-                model: cartModel
-              })
-            );
-
-            cartOrderSummaryLayout.cartSubmitOrderRegion.show(
-              new View.CartSubmitOrderActionView({
-                model: cartModel
-              })
-            );
-          });
-          checkoutLayout.cartOrderSummaryRegion.show(cartOrderSummaryLayout);
-        },
-        error: function (response) {
-          ep.logger.error('error fetching my cart model: ' + response);
-        }
-      });
-
-
-
-      return checkoutLayout;
-    };
 
     /* ************** EVENT LISTENER FUNCTIONS ***************** */
+    // FIXME global notification center
     /**
      * A sticky (will not disappear on itself) toast error message
      * @param errMsg Error message to display on toast message
@@ -263,16 +200,7 @@ define(function (require) {
       stickyErrMsg(i18n.t('cart.genericUpdateErrMsg'));
     });
 
-    /* ********** EVENT LISTENERS ************ */
-    /**
-     * Listening to requests to reload cartView,
-     * will reload the entire cartView.
-     */
-    EventBus.on('cart.reloadCartViewRequest', function () {
-      // FIXME: finer refresh to reload just the necessary parts
-      EventBus.trigger('layout.loadRegionContentRequest', cartView);
-    });
-
+    /* ********** REMOVE LINE-ITEM EVENT LISTENERS ************ */
     // Remove Line Item Success
     EventBus.on('cart.removeLineItemSuccess', function () {
       // EventBus.trigger('cart.DisplayCartLineItemRemovedSuccessMsg');
@@ -310,74 +238,29 @@ define(function (require) {
       }
     });
 
-    // Submit Order Button Clicked
-    EventBus.on('cart.submitOrderBtnClicked', function (submitOrderActionLink) {
-      View.setCheckoutButtonProcessing();
-      // if cortex says it's ok
-      if (submitOrderActionLink) {
-        EventBus.trigger('cart.submitOrderRequest', submitOrderActionLink);
-      }
+    /* ********** EVENT LISTENERS ************ */
+    /**
+     * Listening to requests to reload cartView,
+     * will reload the entire cartView.
+     */
+    EventBus.on('cart.reloadCartViewRequest', function () {
+      // FIXME: finer refresh to reload just the necessary parts
+      ep.router.controller.cart();
     });
 
     // Proceed to checkout button checks if the user is logged in and loads the checkout summary
-    EventBus.on('cart.checkoutBtnClicked', function() {
+    EventBus.on('cart.checkoutBtnClicked', function(checkoutLink) {
       // User not logged in and config set to require login
       if (ep.app.config.requireAuthToCheckout && (!ep.app.isUserLoggedIn())) {
         // Fire event to get authenticated (e.g. load the login form in a modal)
         Mediator.fire('mediator.getAuthentication');
       } else {
-        // Route to the checkout view
-        ep.router.navigate('checkout', true);
+        Mediator.fire('mediator.navigateToCheckoutRequest', checkoutLink);
       }
-    });
-
-    // Cancel button will reload the default cart view
-    EventBus.on('cart.cancelOrderBtnClicked', function() {
-      // Route to the default cart view
-      ep.router.navigate('mycart', true);
-    });
-
-    // Submit Order Request
-    EventBus.on('cart.submitOrderRequest', function (submitOrderLink) {
-      if (submitOrderLink) {
-        ep.logger.info('SUBMIT ORDER REQUEST: ' + submitOrderLink);
-
-        var ajaxModel = new ep.io.defaultAjaxModel({
-          type: 'POST',
-          url: submitOrderLink,
-          success: function (data, textStatus, XHR) {
-            var obj = {
-              data: data,
-              textStatus: textStatus,
-              XHR: XHR
-            };
-            EventBus.trigger('cart.submitOrderSuccess', obj);
-          },
-          customErrorFn: function (response) {
-            ep.logger.error('Error submitting order: ' + response);
-            View.resetCheckoutButtonText();
-          }
-        });
-        ep.io.ajax(ajaxModel.toJSON());
-      }
-      else {
-        ep.logger.warn('cart.submitOrderRequest called with no submitOrderLink');
-      }
-    });
-    EventBus.on('cart.submitOrderSuccess', function (obj) {
-
-      var orderSummaryLink = obj.XHR.getResponseHeader('Location');
-      if (orderSummaryLink) {
-        Mediator.fire('mediator.orderProcessSuccess', orderSummaryLink);
-        pace.stop();
-      }
-      var t = orderSummaryLink;
-      ep.logger.info('ORDER SUMMARY URL - ' + t);
     });
 
     return {
-      DefaultView: defaultView,
-      CheckoutView: checkoutView
+      DefaultView: defaultView
     };
   }
 );

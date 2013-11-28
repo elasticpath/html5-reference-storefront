@@ -19,6 +19,8 @@
     "cart":"#mycart",
     "category":"#category",
     "profile":"#profile",
-    "itemDetail":"#itemdetail"
+    "itemDetail":"#itemdetail",
+    "receipt": "#confirmation",
+    "checkout" : "#checkout"
   }
 }

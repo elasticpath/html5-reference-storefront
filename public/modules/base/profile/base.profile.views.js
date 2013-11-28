@@ -3,32 +3,13 @@
  *
  * Default Profile Views & viewHelpers
  */
-define(['marionette','i18n', 'mediator', 'eventbus'],
-  function(Marionette, i18n, Mediator, EventBus){
+define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
+  function(Marionette, i18n, Mediator, EventBus, ViewHelpers){
 
     /**
      * Template helper functions
-     * @type {{getI18nLabel: Function}}
      */
-    var viewHelpers = {
-      /**
-       * Get the localized version of text corresponding the key given.
-       * @param key the key of JSON 'key/value' pair to corresponding localized text
-       * @returns   the localized text or the i18n key in error
-       */
-      getI18nLabel:function(key){
-        var retVal = key;
-        try{
-          retVal = i18n.t(key);
-        }
-        catch(e){
-          // slient failure on label rendering
-        }
-
-        return retVal;
-
-      }
-    };
+    var viewHelpers = ViewHelpers.extend({});
 
     // Default Profile Layout
     var defaultLayout = Backbone.Marionette.Layout.extend({

@@ -7,8 +7,8 @@ define(['ep', 'eventbus', 'backbone'],
   function (ep, EventBus, Backbone) {
 
     /**
-     * Defines url to fetch model from, and parse the response.
-     * Backbone.Model
+     * Model containing profile information of a registered user.
+     * @type Backbone.Model
      */
     var profileModel = Backbone.Model.extend({
       url: ep.io.getApiContext() + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=purchases:element,paymentmethods:element,subscriptions:element,emails,addresses:element',

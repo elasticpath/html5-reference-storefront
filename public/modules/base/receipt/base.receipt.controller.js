@@ -36,6 +36,7 @@ define(['app', 'ep', 'i18n', 'eventbus', 'receipt.models', 'receipt.views', 'tex
 
         var rawLink = ep.ui.decodeUri(link);
 
+        // FIXME zoom should be inside model
        var zoomedLink = rawLink + '?zoom=billingaddress, paymentmeans:element, lineitems:element, lineitems:element:rate';
         purchaseConfirmationModel.fetch({
           url:zoomedLink,

@@ -46,13 +46,17 @@
     "checkout": "Proceed to Checkout",
     "emptyCartMsg": "Your shopping cart is empty.",
     "deletedLineItemUpdateErrMsg": "The lineItem you were trying to update doesn't exist anymore.",
-    "genericUpdateErrMsg": "I'm sorry, there was an error updating the lineItem quantity. Please contact your system administrator.",
+    "genericUpdateErrMsg": "I'm sorry, there was an error updating the lineItem quantity. Please contact your system administrator."
+  },
+  "checkout": {
     "chosenBillingAddress": "Selected Billing Address",
     "checkoutTitle": "Checkout Summary",
     "cancelOrder": "Cancel",
     "submitOrder": "Complete Purchase",
-    "todaysTax": "Today's Tax",
-    "todaysTotal": "Today's Total"
+    "totalQuantity": "Total Quantity",
+    "subTotal": "Today's Subtotal",
+    "tax": "Today's Tax",
+    "total": "Today's Total"
   },
   "category": {
     "next": "Next",

@@ -23,7 +23,7 @@ define(function (require) {
 
   /**
    * Instantiate an DefaultCreateAddressLayout and load views into corresponding regions on DefaultCreateAddressLayout.
-   * @returns {View.DefaultCreateAddressLayout}
+   * @returns {View.DefaultCreateAddressLayout} fully rendered DefaultCreateAddressLayout
    */
   var defaultCreateAddressView = function () {
     var addressLayout = new View.DefaultCreateAddressLayout();

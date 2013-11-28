@@ -11,23 +11,25 @@ var config = {
   baseDependencyConfig: {
     paths: {
       'jquery': 'scripts/lib/jquery-1.8.3',
+      'bootstrap': 'scripts/lib/bootstrap.min',
       'underscore': 'scripts/lib/underscore',
       'backbone': 'scripts/lib/backbone',
       'marionette': 'scripts/lib/backbone.marionette',
-      'modernizr': 'scripts/lib/modernizr-latest',
-      'pace': 'scripts/lib/pace.min',
-      'bootstrap': 'scripts/lib/bootstrap.min',
-      'URI': 'scripts/lib/URI',   // used by Cortex module only, remove after redo search
-      'equalize': 'scripts/lib/plugins/jquery-equalheights',
-      'router': 'router',
-      'ep': 'ep.client',
-      'mediator': 'ep.mediator',
-      'viewHelpers': 'ep.viewHelpers',
       'jsonpath': 'scripts/lib/jsonpath-0.8.0',
-      'i18n': 'scripts/lib/i18next.amd-1.6.0',
-      'eventbus': 'eventbus',
+      'i18n': 'scripts/lib/i18next.amd-1.6.0',      'modernizr': 'scripts/lib/modernizr-latest',
       'toast': 'scripts/lib/plugins/jquery.toastmessage',
       'modalwin': 'scripts/lib/plugins/jquery.simplemodal-1.4.4',
+      'pace': 'scripts/lib/pace.min',
+      'URI': 'scripts/lib/URI',   // used by Cortex module only, remove after redo search
+      'equalize': 'scripts/lib/plugins/jquery-equalheights',
+
+      'router': 'router',
+      'ep': 'ep.client',
+      'eventbus': 'eventbus',
+      'mediator': 'ep.mediator',
+      'viewHelpers': 'helpers/view.helpers',
+      'modelHelpers': 'helpers/model.helpers',
+
       'app': 'modules/base/app/base.app.controller',
       'app.models': 'modules/base/app/base.app.models',
       'app.views': 'modules/base/app/base.app.views',
@@ -63,7 +65,10 @@ var config = {
       'auth.models': 'modules/base/auth/base.auth.models',
       'auth.views': 'modules/base/auth/base.auth.views',
       'address' : 'modules/base/components/address/base.component.address.controller',
-      'address.views' : 'modules/base/components/address/base.component.address.views'
+      'address.views' : 'modules/base/components/address/base.component.address.views',
+      'checkout': 'modules/base/checkout/base.checkout.controller',
+      'checkout.models': 'modules/base/checkout/base.checkout.models',
+      'checkout.views': 'modules/base/checkout/base.checkout.views'
     },
     shim: {
       'backbone': {

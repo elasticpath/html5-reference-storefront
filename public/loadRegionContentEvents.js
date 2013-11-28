@@ -39,8 +39,8 @@ define(function(require) {
     checkout: function() {
       EventBus.trigger('layout.loadRegionContentRequest', {
         region:'appMainRegion',
-        module:'cart',
-        view:'CheckoutView'
+        module:'checkout',
+        view:'DefaultView'
       });
     },
     confirmation: function(id){

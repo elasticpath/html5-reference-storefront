@@ -60,21 +60,13 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         EventBus.trigger('ia.clearSelectedNavRequest');
       });
     },
+    // Checkin Test this
     'mediator.orderProcessSuccess':function(uri){
-
-
       if (uri){
         require(['ep'], function(ep){
-
-          document.location.href = '#confirmation/' + ep.ui.encodeUri(uri);
+          var link = ep.app.config.routes.receipt + '/' + ep.ui.encodeUri(uri);
+          ep.router.navigate(link, true);
         });
-
-//        EventBus.trigger('layout.loadRegionContentRequest',{
-//          region:'appMainRegion',
-//          module:'cart',
-//          view:'PurchaseConfirmationView',
-//          data:uri
-//        });
       }
     },
     'mediator.logoutSuccess':function(){
@@ -92,8 +84,15 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
       require(['address'],function(mod){
         EventBus.trigger('address.setReturnUrl', url);
       });
+    },
+    'mediator.navigateToCheckoutRequest' : function(link) {
+      if (link){
+        require(['ep'], function(ep){
+          var url = ep.app.config.routes.checkout + '/' + ep.ui.encodeUri(link);
+          ep.router.navigate(url, true);
+        });
+      }
     }
-
   };
 
 

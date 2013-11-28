@@ -1,0 +1,64 @@
+//
+// ELastic Path UI Storefront Checkout View
+//
+.checkout-main-container {
+  .make-md-column(9);
+  .make-xs-column(12);
+  margin-bottom: 2em;
+}
+
+.checkout-container-inner {
+  .make-row();
+}
+
+.checkout-sidebar { // wraps cart summary + cart checkout --- applies bootstrap column classes
+  .make-md-column(3);
+  .make-xs-column(12);
+
+  .checkout-sidebar-inner {
+    display: inline-block;
+    padding: 2rem;
+    border: 3px solid @brand-primary;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.6);
+
+    h3 {
+      margin: 0 0 2rem 0;
+    }
+  }
+}
+
+.checkout-title-container { // wraps title --- applies bootstrap column classes
+
+  h1 {
+    .make-xs-column(12);
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+}
+
+.cart-summary-container { //wraps summary
+  // .make-md-column(3);
+  // .make-xs-column(12);
+  display: inline-block;
+}
+
+.submit-order-container { //wraps submit order action region
+  // .make-sm-column(3);
+  margin-top: 2rem;
+  // display: inline-block;
+  // .clearfix;
+}
+
+.checkout-summary-list {
+  padding: 0px;
+}
+
+.btn-cmd-submit-order {
+  .btn;
+  .btn-success;
+}
+
+.btn-cancel-order {
+  .btn;
+}
