@@ -411,8 +411,7 @@ define(function (require) {
             original: this.model.get('quantity'),
             changeTo: this.view.$el.find('[data-el-value="lineItem.quantity"] select').val()
           };
-          var actionLink = ep.app.config.cortexApi.path + this.model.get('lineitemLink');
-          expect(EventBus.trigger).to.be.calledWithExactly('cart.lineItemQuantityChanged', actionLink, quantities);
+          expect(EventBus.trigger).to.be.calledWithExactly('cart.lineItemQuantityChanged', this.model.get('lineitemLink'), quantities);
         });
       });
 

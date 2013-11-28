@@ -110,9 +110,6 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
 
         return retVar;
       },
-      getCortexPath:function(){
-        return ep.app.config.cortexApi.path;
-      },
       getCheckoutButtonDisabledAttrib:function(model){
         // complete purchase disabled by default
         var retVar = 'disabled="disabled"';
@@ -132,14 +129,6 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
          return null;
         }
         return 'is-hidden';
-      },
-      /**
-       * append cortex context path to url
-       * @param link  action link to make request to
-       * @returns {String} full relative path with context path
-       */
-      makeActionLink: function(link){
-        return ep.app.config.cortexApi.path + link;
       },
       /**
        * generate HTML markup for options inside a select of a given range
@@ -312,7 +301,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         },
 
         'change .cart-lineitem-quantity-select': function(event) {
-          var actionLink = viewHelpers.makeActionLink(this.model.get('lineitemLink'));
+          var actionLink = this.model.get('lineitemLink');
           var quantities = {
             original: this.model.get('quantity'),
             changeTo: $(event.target).val()
