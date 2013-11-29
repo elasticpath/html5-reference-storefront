@@ -82,7 +82,7 @@ define(function (require) {
           EventBus.trigger('checkout.submitOrderSuccess', obj);
         },
         customErrorFn: function (response) {
-          View.resetCheckoutButtonText();
+          EventBus.trigger('checkout.submitOrderFailed');
         }
       });
 
@@ -100,11 +100,18 @@ define(function (require) {
         Mediator.fire('mediator.orderProcessSuccess', orderSummaryLink);
         pace.stop();
       }
-      var t = orderSummaryLink;
-      ep.logger.info('ORDER SUMMARY URL - ' + t);
     }
 
-    /* ********** EVENT LISTENERS ************ */
+    /* ********** SUBMIT ORDER EVENT LISTENERS ************ */
+    /**
+     * Listening to cancel checkout button clicked signal,
+     * will navigate back to cart
+     */
+    EventBus.on('checkout.cancelOrderBtnClicked', function () {
+      // Route to the default cart view
+      ep.router.navigate(ep.app.config.routes.cart, true);
+    });
+
     /**
      * Listening to submit order button clicked signal,
      * will trigger event to submit order to cortex
@@ -118,16 +125,6 @@ define(function (require) {
     });
 
     /**
-     * Listening to cancel checkout button clicked signal,
-     * will navigate back to cart
-     */
-    EventBus.on('checkout.cancelOrderBtnClicked', function () {
-      // Route to the default cart view
-      ep.router.navigate(ep.app.config.routes.cart, true);
-    });
-
-    // Submit Order Request
-    /**
      * Listening to submit order request,
      * will submit purchase order to cortex.
      */
@@ -138,6 +135,15 @@ define(function (require) {
      * will fire mediator event to handle subsequent actions.
      */
     EventBus.on('checkout.submitOrderSuccess', submitOrderSuccess);
+
+    /**
+     * Listening to submit order failed signal,
+     * will reset checkout button back from activity indicator to
+     */
+    EventBus.on('checkout.submitOrderFailed', function() {
+      // FIXME should also notify user if submit fails
+      View.resetCheckoutButtonText();
+    });
 
     return {
       DefaultView: defaultView

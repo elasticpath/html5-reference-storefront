@@ -3,6 +3,7 @@
  *
  */
 define(function (require) {
+  var ep = require('ep');
 
   describe("Model Helpers", function () {
     var helpers = require('modelHelpers');
@@ -106,7 +107,6 @@ define(function (require) {
     describe('Item Parsers', function () {
       var testDataPrice = {};
       var expectedPrice = {};
-
       describe('helper: parsePrice',
         parserTestFactory(testDataPrice, helpers.parsePrice, expectedPrice));
 
@@ -125,18 +125,29 @@ define(function (require) {
 
   function parserTestFactory (testData, fnToTest, expected) {
     return function() {
-      before(function () {
-        this.model = fnToTest(testData);
+      beforeEach(function () {
+        sinon.stub(ep.logger, 'error');
       });
 
-      after(function () {
-        this.model = undefined;
+      afterEach(function () {
+        ep.logger.error.restore();
       });
 
       it("parses JSON object correctly", function () {
         for(var attr in expected) {
-          expect(this.model[attr]).to.be.equal(expected[attr]);
+          var model = fnToTest(testData);
+          expect(model[attr]).to.be.equal(expected[attr]);
         }
+      });
+
+      it("logs error given undefined argument", function() {
+        fnToTest(undefined);
+        expect(ep.logger.error).to.be.calledOnce;
+      });
+
+      it("return empty object{} given invalid data to parse", function() {
+        var model = fnToTest({});
+        expect(model).to.be.ok;
       });
     };
   }

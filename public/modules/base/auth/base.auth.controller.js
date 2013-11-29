@@ -41,6 +41,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
      * Load login menu - load login form or profile menu depend on authentication state
      */
     // auth menu item dropdown clicked
+    // FIXME abstract logic 1 level down from btnClicked event
     EventBus.on('auth.btnAuthGlobalMenuItemClicked',function(){
       var triggerLogIn = true;
       // if user is logged in then show the menu dropdown

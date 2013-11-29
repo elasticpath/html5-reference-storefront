@@ -31,18 +31,27 @@ define(function (require) {
     },
 
     parse: function (response) {
-      var checkoutObj = {};
+      var checkoutObj = {
+        submitOrderActionLink: null,
+        summary: {},
+        billingAddresses: {}
+      };
 
-      checkoutObj.submitOrderActionLink = jsonPath(response, "$..links[?(@.rel=='submitorderaction')].href")[0];
-      checkoutObj.summary = modelHelper.parseCheckoutSummary(response);
-      checkoutObj.billingAddresses = modelHelper.parseBillingAddresses(response);
+      try{
+        checkoutObj.submitOrderActionLink = jsonPath(response, "$..links[?(@.rel=='submitorderaction')].href")[0];
+        checkoutObj.summary = modelHelpers.parseCheckoutSummary(response);
+        checkoutObj.billingAddresses = modelHelpers.parseBillingAddresses(response);
+      }
+      catch(error){
+        ep.logger.error("chekcout model wasn't able to fetch valid data for parsing. " + error.message);
+      }
 
       return checkoutObj;
     }
   });
 
 
-  var modelHelper = ModelHelper.extend({
+  var modelHelpers = ModelHelper.extend({
     /**
      * Parse checkout summary information.
      * @param response to be parsed
@@ -61,17 +70,17 @@ define(function (require) {
 
         var subTotal = jsonPath(response, '$._cart.._total..cost[0]')[0];
         if (subTotal) {
-          summary.subTotal = modelHelper.parsePrice(subTotal);
+          summary.subTotal = modelHelpers.parsePrice(subTotal);
         }
 
         var tax = jsonPath(response, '$._tax..total')[0];
         if (tax) {
-          summary.tax = modelHelper.parsePrice(tax);
+          summary.tax = modelHelpers.parsePrice(tax);
         }
 
         var total = jsonPath(response, '$._total[0].cost[0]')[0];
         if (total) {
-          summary.total = modelHelper.parsePrice(total);
+          summary.total = modelHelpers.parsePrice(total);
         }
       }
       catch (error) {
@@ -96,7 +105,7 @@ define(function (require) {
       try {
         var chosenAddress = jsonPath(response, '$.._billingaddressinfo[0].._chosen.._description[0]')[0];
         if (chosenAddress) {
-          billingAddresses.chosenBillingAddress = modelHelper.parseAddress(chosenAddress);
+          billingAddresses.chosenBillingAddress = modelHelpers.parseAddress(chosenAddress);
           // flag this address as selected
 //          billingAddresses.chosenBillingAddress.chosen = true;
         }
@@ -111,6 +120,9 @@ define(function (require) {
   });
 
   return {
-    CheckoutModel: checkoutModel
+    CheckoutModel: checkoutModel,
+    testVariable: {
+      modelHelpers: modelHelpers
+    }
   };
 });

@@ -4,127 +4,128 @@
  * Functional Storefront Unit Test - Checkout Models
  */
 define(function (require) {
+  var ep = require('ep');
+  var models = require('checkout.models');
+  var dataJSON = require('text!/tests/data/checkout.json');
 
   describe('Checkout Module: Models', function () {
-    var models = require('checkout.models');
+    var data = JSON.parse(dataJSON).response;
     var checkoutModel = new models.CheckoutModel();
 
-    var rawData = {
-      "_order": [
-        {
-          "_billingaddressinfo": [
-            {
-              "_selector": [
-                {
-                  "_chosen": [
-                    {
-                      "_description": [
-                        {
-                          "address": {
-                            "country-name": "US",
-                            "extended-address": "110 Liberty Street",
-                            "locality": "New York",
-                            "postal-code": "NY 10006",
-                            "region": "NY",
-                            "street-address": "Hoyip Chinese Restaurant"
-                          },
-                          "name": {
-                            "family-name": "boxer",
-                            "given-name": "ben"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "_tax": [
-            {
-              "total": {
-                "amount": 0,
-                "currency": "CAD",
-                "display": "$0.00"
-              }
-            }
-          ],
-          "_total": [
-            {
-              "cost": [
-                {
-                  "amount": 0,
-                  "currency": "CAD",
-                  "display": "$0.00"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    };
+    describe('given all necessary information', function () {
+      before(function () {
+        var rawData = _.extend({}, data);
+        this.model = checkoutModel.parse(rawData);
+      });
 
-    before(function () {
-      this.model = checkoutModel.parse(rawData);
-    });
+      after(function () {
+        this.model = null;
+      });
 
-    after(function () {
-      this.model = null;
-    });
+      it('has non-empty submitOrderLink', function () {
+        expect(this.model.submitOrderActionLink).to.be.ok;
+      });
 
-    describe("parse (chosen) billing address correctly", function () {
+      it('has tax object and object not empty ', function () {
+        expect(this.model.summary.tax).to.not.eql({});
+      });
+      it('has subTotal object and object not empty', function () {
+        expect(this.model.summary.subTotal).to.not.eql({});
+      });
+      it('has order total object and object not empty', function () {
+        expect(this.model.summary.total).to.not.eql({});
+      });
+      it('has a total quantity greater than 0', function () {
+        expect(this.model.summary.totalQuantity).to.be.above(0);
+      });
 
-      it("must have a family name", function () {
-        expect(this.model.billingAddresses.chosenBillingAddress.familyName).to.be.equal('boxer');
-      });
-      it("must have a given name", function () {
-        expect(this.model.billingAddresses.chosenBillingAddress.givenName).to.be.equal('ben');
-      });
-      it("must have a street address", function () {
-        expect(this.model.billingAddresses.chosenBillingAddress.streetAddress).to.be.equal('Hoyip Chinese Restaurant');
-      });
-      it("must have an extended address", function () {
-        expect(this.model.billingAddresses.chosenBillingAddress.extendedAddress).to.be.equal('110 Liberty Street');
-      });
-      it("must have a city", function () {
-        expect(this.model.billingAddresses.chosenBillingAddress.city).to.be.equal('New York');
-      });
-      it("must have a region", function () {
-        expect(this.model.billingAddresses.chosenBillingAddress.region).to.be.equal('NY');
-      });
-      it("must have a country", function () {
-        expect(this.model.billingAddresses.chosenBillingAddress.country).to.be.equal('US');
-      });
-      it("must have a postal code", function () {
-        expect(this.model.billingAddresses.chosenBillingAddress.postalCode).to.be.equal('NY 10006');
+      it('parsed a billingAddresses.chosenBillingAddress object', function () {
+        expect(this.model.billingAddresses).to.be.ok;
+        expect(this.model.billingAddresses.chosenBillingAddress).to.not.eql({});
       });
     });
 
-    describe("parse tax correctly", function () {
-      it("must have a currency", function () {
-        expect(this.model.cartTax.currency).to.be.equal('CAD');
+    describe('given undefined response argument to parse', function () {
+      before(function () {
+        sinon.stub(ep.logger, 'error');
+        checkoutModel.parse(undefined);
       });
-      it("must have an amount", function () {
-        expect(this.model.cartTax.amount).to.be.equal(0);
+
+      after(function () {
+        ep.logger.error.restore();
       });
-      it("must have a display value", function () {
-        expect(this.model.cartTax.display).to.be.equal('$0.00');
+
+      it('catches & logs the error', function () {
+        expect(ep.logger.error).to.be.called;
       });
     });
 
-    describe("parse order total correctly", function () {
-      it("must have a currency", function () {
-        expect(this.model.cartOrderTotal.currency).to.be.equal('CAD');
+    describe('does not cause error', function () {
+      beforeEach(function () {
+        sinon.stub(ep.logger, 'error');
       });
-      it("must have an amount", function () {
-        expect(this.model.cartOrderTotal.amount).to.be.equal(0);
+
+      afterEach(function () {
+        ep.logger.error.restore();
       });
-      it("must have a display value", function () {
-        expect(this.model.cartOrderTotal.display).to.be.equal('$0.00');
+
+      it('when missing submitOrderActionLink', function () {
+        var rawData = _.extend({}, data);
+        rawData._purchaseform = [];
+        var model = checkoutModel.parse(rawData);
+
+        expect(ep.logger.error).to.be.not.called;
+        expect(model.submitOrderActionLink).to.be.undefined;
       });
+
+      it('when missing total quantity', function () {
+        var rawData = _.extend({}, data);
+        rawData._cart[0]['total-quantity'] = undefined;
+        var model = checkoutModel.parse(rawData);
+
+        expect(ep.logger.error).to.be.not.called;
+        expect(model.summary.totalQuantity).to.be.undefined;
+      });
+
+      it('when missing subTotal', function () {
+        var rawData = _.extend({}, data);
+        rawData._cart[0]._total = [];
+        var model = checkoutModel.parse(rawData);
+
+        expect(ep.logger.error).to.be.not.called;
+        expect(model.summary.subTotal).to.be.ok;
+      });
+
+      it('when missing tax', function () {
+        var rawData = _.extend({}, data);
+        rawData._tax = [];
+        var model = checkoutModel.parse(rawData);
+
+        expect(ep.logger.error).to.be.not.called;
+        expect(model.summary.tax).to.be.ok;
+      });
+
+      it('when missing order total', function () {
+        var rawData = _.extend({}, data);
+        rawData._total = [];
+        var model = checkoutModel.parse(rawData);
+
+        expect(ep.logger.error).to.be.not.called;
+        expect(model.summary.total).to.be.ok;
+      });
+
+      it('when missing billing Address', function () {
+        var rawData = _.extend({}, data);
+        rawData._billingaddressinfo = [];
+        var model = checkoutModel.parse(rawData);
+
+        expect(ep.logger.error).to.be.not.called;
+        expect(model.billingAddresses).to.be.ok;
+      });
+
     });
-
-
   });
 
-});
+
+})
+;

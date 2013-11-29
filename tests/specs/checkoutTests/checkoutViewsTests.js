@@ -5,8 +5,10 @@
  */
 define(function (require) {
   var Backbone = require('backbone');
+  var EventBus = require('eventbus');
   var Mediator = require('mediator');
   var EventTestFactory = require('EventTestFactory');
+  var EventTestHelpers = require('testhelpers.event');
 
   describe('Checkout Module: Views', function () {
     var views = require('checkout.views');
@@ -20,8 +22,8 @@ define(function (require) {
       $("#Fixtures").empty();
     });
 
-    describe('DefaultLayout', function() {
-      before(function() {
+    describe('DefaultLayout', function () {
+      before(function () {
         this.view = new views.DefaultLayout();
         this.view.render();
       });
@@ -32,11 +34,11 @@ define(function (require) {
       it('render() should return the view object', function () {
         expect(this.view.render()).to.be.equal(this.view);
       });
-      it('view contents are rendered', function() {
+      it('view contents are rendered', function () {
         expect(this.view.el.childElementCount).to.be.equal(1);
       });
 
-      describe('regions', function() {
+      describe('regions', function () {
         it('should have a checkoutTitleRegion region', function () {
           expect(this.view.checkoutTitleRegion).to.exist;
           expect(this.view.$el.find('[data-region="checkoutTitleRegion"]')).to.be.length(1);
@@ -56,7 +58,7 @@ define(function (require) {
       });
     });
 
-    describe('CheckoutTitleView', function() {
+    describe('CheckoutTitleView', function () {
       before(function () {
         this.view = new views.CheckoutTitleView();
         this.view.render();
@@ -70,8 +72,8 @@ define(function (require) {
       });
     });
 
-    describe('CheckoutSummaryLayout', function() {
-      before(function() {
+    describe('CheckoutSummaryLayout', function () {
+      before(function () {
         this.view = new views.CheckoutSummaryLayout();
         this.view.render();
       });
@@ -83,7 +85,7 @@ define(function (require) {
         expect(this.view.render()).to.be.equal(this.view);
       });
 
-      describe('regions', function() {
+      describe('regions', function () {
         it('should have a checkoutSummaryRegion region', function () {
           expect(this.view.checkoutSummaryRegion).to.exist;
           expect(this.view.$el.find('[data-region="checkoutSummaryRegion"]')).to.be.length(1);
@@ -95,7 +97,7 @@ define(function (require) {
       });
     });
 
-    describe('CheckoutSummaryView', function() {
+    describe('CheckoutSummaryView', function () {
       before(function () {
         // Mock the model with just the data we need
         var rawData = {
@@ -124,7 +126,7 @@ define(function (require) {
         this.view.render();
       });
 
-      after(function() {
+      after(function () {
         this.model.destroy();
       });
 
@@ -135,7 +137,7 @@ define(function (require) {
         expect(this.view.render()).to.be.equal(this.view);
       });
 
-      it('renders view content correctly', function() {
+      it('renders view content correctly', function () {
         expect($('[data-el-value="checkout.totalQuantity"]', this.view.$el).text())
           .to.be.equal(this.model.get('totalQuantity'));
 
@@ -151,17 +153,14 @@ define(function (require) {
       });
     });
 
-    describe('submitOrderActionView', function() {
-      before(function() {
+    describe('submitOrderActionView', function () {
+      before(function () {
         // Mock the model with just the data we need
         var rawData = {
           "submitOrderActionLink": "someUri"
         };
         this.model = new Backbone.Model(rawData);
-
-        this.view = new cartViews.submitOrderActionView({
-          model: this.model
-        });
+        this.view = new views.submitOrderActionView({ model: this.model });
         this.view.render();
       });
 
@@ -171,15 +170,18 @@ define(function (require) {
       it('render() should return the view object', function () {
         expect(this.view.render()).to.be.equal(this.view);
       });
+      it('renders submitOrder button', function() {
+        expect(this.view.$el.find('button[data-el-label="checkout.submitOrder"]')).to.be.length(1);
+      });
 
       describe('complete purchase button clicked', function() {
         before(function() {
           sinon.spy(EventBus, 'trigger');
 
           // Unbind subsequently triggered events
-          EventTestHelpers.unbind('cart.submitOrderBtnClicked');
+          EventTestHelpers.unbind('checkout.submitOrderBtnClicked');
 
-          this.view.$el.find('.btn-cmd-submit-order').click();
+          this.view.$el.find('[data-el-label="checkout.submitOrder"]').click();
         });
 
         after(function() {
@@ -188,12 +190,12 @@ define(function (require) {
         });
 
         it('should trigger submitOrderBtnClicked event', function() {
-          expect(EventBus.trigger).to.be.calledWith('cart.submitOrderBtnClicked');
+          expect(EventBus.trigger).to.be.calledWithExactly('checkout.submitOrderBtnClicked', this.model.get('submitOrderActionLink'));
         });
       });
     });
 
-    describe('CancelCheckoutActionView', function() {
+    describe('CancelCheckoutActionView', function () {
       before(function () {
         this.view = new views.CancelCheckoutActionView();
         this.view.render();
@@ -205,20 +207,24 @@ define(function (require) {
       it('render() should return the view object', function () {
         expect(this.view.render()).to.be.equal(this.view);
       });
+      it('renders submitOrder button', function() {
+        expect(this.view.$el.find('button[data-el-label="checkout.cancelCheckout"]')).to.be.length(1);
+      });
+
       describe('checkout cancel button clicked',
-        EventTestFactory.simpleBtnClickTest('cart.cancelOrderBtnClicked', '.btn-cancel-order'));
+        EventTestFactory.simpleBtnClickTest('checkout.cancelOrderBtnClicked', '[data-el-label="checkout.cancelCheckout"]'));
     });
 
-    describe('BillingAddressLayout', function() {
+    describe('BillingAddressLayout', function () {
 
-      describe('renders', function() {
+      describe('renders', function () {
         before(function () {
           sinon.stub(Mediator, 'fire');
           this.view = new views.BillingAddressLayout();
           this.view.render();
         });
 
-        after(function() {
+        after(function () {
           Mediator.fire.restore();
         });
 

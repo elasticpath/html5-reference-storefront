@@ -1,0 +1,243 @@
+{
+  "zoom" : "?zoom=billingaddressinfo:selector:chosen:description,cart,cart:total,purchaseform,tax,total",
+  "retrievedOn" : "Nov 29, 2013",
+  "retrievedCriteria": "purchase digital item only, must have 1 one-item item; registered user, must have at least 1 address, and chosen a default billing address",
+  "response" : {
+    "links": [
+      {
+        "type": "application/vnd.elasticpath.cart",
+        "rel": "cart",
+        "rev": "order",
+        "href": "<BASEURL>/integrator/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ongxi2dwjbde2tc2jzqxcsttnfmtowctgq4xk3dck44wswsxlbqucq2snfhdetjvj5cfkm2oimyditrsjjueyvcro5heiy3uj5cecmkoimywwtlkkuyfs6swnvhg2wjvjzcekpi",
+        "uri": "/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ongxi2dwjbde2tc2jzqxcsttnfmtowctgq4xk3dck44wswsxlbqucq2snfhdetjvj5cfkm2oimyditrsjjueyvcro5heiy3uj5cecmkoimywwtlkkuyfs6swnvhg2wjvjzcekpi"
+      },
+      {
+        "type": "application/vnd.elasticpath.info",
+        "rel": "emailinfo",
+        "rev": "order",
+        "href": "<BASEURL>/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq/emailinfo",
+        "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq/emailinfo"
+      },
+      {
+        "type": "application/vnd.elasticpath.purchase",
+        "rel": "purchaseform",
+        "href": "<BASEURL>/integrator/purchases/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi/form",
+        "uri": "/purchases/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi/form"
+      },
+      {
+        "type": "application/vnd.elasticpath.total",
+        "rel": "total",
+        "rev": "order",
+        "href": "<BASEURL>/integrator/totals/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
+        "uri": "/totals/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq"
+      },
+      {
+        "type": "application/vnd.elasticpath.info",
+        "rel": "billingaddressinfo",
+        "rev": "order",
+        "href": "<BASEURL>/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq/billingaddressinfo",
+        "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq/billingaddressinfo"
+      },
+      {
+        "type": "application/vnd.elasticpath.tax",
+        "rel": "tax",
+        "rev": "order",
+        "href": "<BASEURL>/integrator/taxes/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
+        "uri": "/taxes/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq"
+      },
+      {
+        "type": "application/vnd.elasticpath.info",
+        "rel": "paymentmethodinfo",
+        "rev": "order",
+        "href": "<BASEURL>/integrator/paymentmethods/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
+        "uri": "/paymentmethods/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq"
+      },
+      {
+        "type": "application/vnd.elasticpath.links",
+        "rel": "deliveries",
+        "rev": "order",
+        "href": "<BASEURL>/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq/deliveries",
+        "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq/deliveries"
+      }
+    ],
+    "self": {
+      "type": "application/vnd.elasticpath.order",
+      "uri": "/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi?zoom=billingaddressinfo:selector:chosen:description,cart,cart:total,purchaseform,tax,total",
+      "href": "<BASEURL>/integrator/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi?zoom=billingaddressinfo:selector:chosen:description,cart,cart:total,purchaseform,tax,total",
+      "max-age": 0
+    },
+    "_billingaddressinfo": [
+      {
+        "_selector": [
+          {
+            "_chosen": [
+              {
+                "_description": [
+                  {
+                    "links": [
+                      {
+                        "type": "application/vnd.elasticpath.profile",
+                        "rel": "profile",
+                        "href": "<BASEURL>/integrator/profiles/telcooperative/default",
+                        "uri": "/profiles/telcooperative/default"
+                      },
+                      {
+                        "type": "application/vnd.elasticpath.links",
+                        "rel": "list",
+                        "href": "<BASEURL>/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses",
+                        "uri": "/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses"
+                      }
+                    ],
+                    "self": {
+                      "type": "application/vnd.elasticpath.address",
+                      "uri": "/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweqsumnyvercki5gw2qruivsesmsknfus63ckobltc5sznvlgymthifvvevcngbhguwsgkfvvc5cnnnktktstgfdfe22wingfkwlzjvvgo5cnirseeusukv4e222rgvgukusf",
+                      "href": "<BASEURL>/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweqsumnyvercki5gw2qruivsesmsknfus63ckobltc5sznvlgymthifvvevcngbhguwsgkfvvc5cnnnktktstgfdfe22wingfkwlzjvvgo5cnirseeusukv4e222rgvgukusf",
+                      "max-age": 0
+                    },
+                    "address": {
+                      "country-name": "CA",
+                      "extended-address": "100 City Centre Drive",
+                      "locality": "Mississauga",
+                      "postal-code": "L5C 2B9",
+                      "region": "ON",
+                      "street-address": "#1999 12 floor"
+                    },
+                    "name": {
+                      "family-name": "Harris",
+                      "given-name": "Karen"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "_cart": [
+      {
+        "links": [
+          {
+            "type": "application/vnd.elasticpath.links",
+            "rel": "lineitems",
+            "rev": "cart",
+            "href": "<BASEURL>/integrator/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ongxi2dwjbde2tc2jzqxcsttnfmtowctgq4xk3dck44wswsxlbqucq2snfhdetjvj5cfkm2oimyditrsjjueyvcro5heiy3uj5cecmkoimywwtlkkuyfs6swnvhg2wjvjzcekpi/lineitems",
+            "uri": "/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ongxi2dwjbde2tc2jzqxcsttnfmtowctgq4xk3dck44wswsxlbqucq2snfhdetjvj5cfkm2oimyditrsjjueyvcro5heiy3uj5cecmkoimywwtlkkuyfs6swnvhg2wjvjzcekpi/lineitems"
+          },
+          {
+            "type": "application/vnd.elasticpath.total",
+            "rel": "total",
+            "rev": "cart",
+            "href": "<BASEURL>/integrator/totals/carts/telcooperative/m5yxissunrjgovjqnrefsrluizlweq2tgrfto2lejrtvuk3nirifgssehbhxuurtobltc5sznvlgymthifvvs2tenjhvizzrjz5fc5cpirsgswktgaye2rcrgngfiz3xjzkfc5c2iretctshjuyvu2s2nvhviuly",
+            "uri": "/totals/carts/telcooperative/m5yxissunrjgovjqnrefsrluizlweq2tgrfto2lejrtvuk3nirifgssehbhxuurtobltc5sznvlgymthifvvs2tenjhvizzrjz5fc5cpirsgswktgaye2rcrgngfiz3xjzkfc5c2iretctshjuyvu2s2nvhviuly"
+          },
+          {
+            "type": "application/vnd.elasticpath.order",
+            "rel": "order",
+            "rev": "cart",
+            "href": "<BASEURL>/integrator/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi",
+            "uri": "/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi"
+          }
+        ],
+        "self": {
+          "type": "application/vnd.elasticpath.cart",
+          "uri": "/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ongxi2dwjbde2tc2jzqxcsttnfmtowctgq4xk3dck44wswsxlbqucq2snfhdetjvj5cfkm2oimyditrsjjueyvcro5heiy3uj5cecmkoimywwtlkkuyfs6swnvhg2wjvjzcekpi",
+          "href": "<BASEURL>/integrator/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ongxi2dwjbde2tc2jzqxcsttnfmtowctgq4xk3dck44wswsxlbqucq2snfhdetjvj5cfkm2oimyditrsjjueyvcro5heiy3uj5cecmkoimywwtlkkuyfs6swnvhg2wjvjzcekpi",
+          "max-age": 0
+        },
+        "_total": [
+          {
+            "links": [
+              {
+                "type": "application/vnd.elasticpath.cart",
+                "rel": "cart",
+                "rev": "total",
+                "href": "<BASEURL>/integrator/carts/telcooperative/default",
+                "uri": "/carts/telcooperative/default"
+              }
+            ],
+            "self": {
+              "type": "application/vnd.elasticpath.total",
+              "uri": "/totals/carts/telcooperative/m5yxissunrjgovjqnrefsrluizlweq2tgrfto2lejrtvuk3nirifgssehbhxuurtobltc5sznvlgymthifvvs2tenjhvizzrjz5fc5cpirsgswktgaye2rcrgngfiz3xjzkfc5c2iretctshjuyvu2s2nvhviuly",
+              "href": "<BASEURL>/integrator/totals/carts/telcooperative/m5yxissunrjgovjqnrefsrluizlweq2tgrfto2lejrtvuk3nirifgssehbhxuurtobltc5sznvlgymthifvvs2tenjhvizzrjz5fc5cpirsgswktgaye2rcrgngfiz3xjzkfc5c2iretctshjuyvu2s2nvhviuly",
+              "max-age": 0
+            },
+            "cost": [
+              {
+                "amount": 14.97,
+                "currency": "CAD",
+                "display": "$14.97"
+              }
+            ]
+          }
+        ],
+        "total-quantity": 4
+      }
+    ],
+    "_purchaseform": [
+      {
+        "links": [
+          {
+            "rel": "submitorderaction",
+            "href": "<BASEURL>/integrator/purchases/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
+            "uri": "/purchases/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq"
+          }
+        ],
+        "self": {
+          "type": "application/vnd.elasticpath.purchase",
+          "uri": "/purchases/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi/form",
+          "href": "<BASEURL>/integrator/purchases/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi/form",
+          "max-age": 0
+        }
+      }
+    ],
+    "_tax": [
+      {
+        "links": [],
+        "self": {
+          "type": "application/vnd.elasticpath.tax",
+          "uri": "/taxes/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
+          "href": "<BASEURL>/integrator/taxes/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
+          "max-age": 0
+        },
+        "cost": [
+          {
+            "amount": 1.2,
+            "currency": "CAD",
+            "display": "$1.20",
+            "title": "PST"
+          },
+          {
+            "amount": 0.75,
+            "currency": "CAD",
+            "display": "$0.75",
+            "title": "GST"
+          }
+        ],
+        "total": {
+          "amount": 1.95,
+          "currency": "CAD",
+          "display": "$1.95"
+        }
+      }
+    ],
+    "_total": [
+      {
+        "links": [],
+        "self": {
+          "type": "application/vnd.elasticpath.total",
+          "uri": "/totals/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
+          "href": "<BASEURL>/integrator/totals/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
+          "max-age": 0
+        },
+        "cost": [
+          {
+            "amount": 16.92,
+            "currency": "CAD",
+            "display": "$16.92"
+          }
+        ]
+      }
+    ]
+  }
+}

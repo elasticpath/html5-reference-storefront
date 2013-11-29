@@ -221,7 +221,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
             original: this.model.get('quantity'),
             changeTo: $(event.target).val()
           };
-          EventBus.trigger('cart.lineItemQuantityChanged', actionLink, quantities);  // checkin ERROR?!
+          EventBus.trigger('cart.lineItemQuantityChanged', actionLink, quantities);
         }
       },
       onShow:function(){
@@ -396,7 +396,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       templateHelpers:viewHelpers,
       events:{
         'click .btn-cmd-checkout':function(event){
-          EventBus.trigger('cart.checkoutBtnClicked',this.model.get('checkoutLink')); // checkIn order href
+          EventBus.trigger('cart.checkoutBtnClicked',this.model.get('checkoutLink'));
         }
       }
     });

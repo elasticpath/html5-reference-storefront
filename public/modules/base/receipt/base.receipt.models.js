@@ -37,7 +37,6 @@ define(['underscore', 'ep', 'eventbus', 'backbone', 'modelHelpers'],
       }
     });
 
-    // checkin test, test test!
     var parseHelpers = modelHelper.extend({
       parseConfirmationSummary: function (rawObject) {
         var confirmationSummary = {};

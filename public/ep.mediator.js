@@ -60,7 +60,6 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         EventBus.trigger('ia.clearSelectedNavRequest');
       });
     },
-    // Checkin Test this
     'mediator.orderProcessSuccess':function(uri){
       if (uri){
         require(['ep'], function(ep){
@@ -85,6 +84,7 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         EventBus.trigger('address.setReturnUrl', url);
       });
     },
+    // FIXME is this too many level of abstraction?
     'mediator.navigateToCheckoutRequest' : function(link) {
       if (link){
         require(['ep'], function(ep){
@@ -114,6 +114,9 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
 
 
   return {
-    fire:fire
+    fire:fire,
+    testVariable: {
+      MediatorStrategies: mediatorObj
+    }
   };
 });

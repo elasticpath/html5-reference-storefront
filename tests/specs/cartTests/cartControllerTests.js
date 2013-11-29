@@ -8,7 +8,6 @@ define(function (require) {
   var Mediator = require('mediator');
   var Backbone = require('backbone');
   var ep = require('ep');
-  var Marionette = require('marionette');
   var EventTestFactory = require('EventTestFactory');
   var EventTestHelpers = require('testhelpers.event');
 
@@ -246,33 +245,53 @@ define(function (require) {
       });
     });
 
-
     // Event Listener: cart.checkoutBtnClicked
-    describe('cart.checkoutBtnClicked event works', function () {
+    describe('Responds to event: cart.checkoutBtnClicked', function () {
 
-      describe('routed to checkout if user is logged in', function() {
+      describe('when user is logged in', function() {
         var actionLink = 'ActionLinkTrue';
 
         before(function () {
           sinon.stub(ep.app, 'isUserLoggedIn', function() {
             return true;
           });
-          ep.router = new Marionette.AppRouter();
-          sinon.spy(ep.router, 'navigate');
-
+          sinon.stub(Mediator, 'fire');
           EventBus.trigger('cart.checkoutBtnClicked', actionLink);
         });
 
         after(function () {
           EventTestHelpers.reset();
           ep.app.isUserLoggedIn.restore();
+          Mediator.fire.restore();
         });
 
-        it('routes the user to the checkout view', sinon.test(function () {
-          expect(ep.router.navigate).to.be.calledWithExactly('checkout', true);
+        it('fire correct mediator event', sinon.test(function () {
+          expect(Mediator.fire).to.be.calledWithExactly('mediator.navigateToCheckoutRequest', actionLink);
         }));
       });
 
+    });
+
+    describe('when user is not logged in', function() {
+      var actionLink = 'ActionLinkTrue';
+
+      before(function () {
+        sinon.stub(Mediator, 'fire');
+        sinon.stub(ep.app, 'isUserLoggedIn', function() {
+          return false;
+        });
+
+        EventBus.trigger('cart.checkoutBtnClicked', actionLink);
+      });
+
+      after(function () {
+        ep.app.isUserLoggedIn.restore();
+        Mediator.fire.restore();
+      });
+
+      it('fires correct mediator event to load authentication view', sinon.test(function () {
+        expect(Mediator.fire).to.be.calledWithExactly('mediator.getAuthentication');
+      }));
     });
 
 

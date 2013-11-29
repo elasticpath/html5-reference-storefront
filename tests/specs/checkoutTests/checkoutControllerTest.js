@@ -4,11 +4,12 @@
  * Functional Storefront Unit Test - Checkout Controller
  */
 define(function (require) {
+  var ep = require('ep');
   var Backbone = require('backbone');
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
   var EventTestHelpers = require('testhelpers.event');
-  var ep = require('ep');
+  var EventTestFactory = require('EventTestFactory');
 
   describe('Checkout Module: Controller', function () {
     var controller = require('checkout');
@@ -41,24 +42,24 @@ define(function (require) {
     });
 
     // Event Listener: cart.cancelOrderBtnClicked
-    describe('cart.cancelOrderBtnClicked event works', function() {
+    describe('Responds to event: checkout.cancelOrderBtnClicked', function() {
       var actionLink = 'ActionLinkTrue';
 
       before(function () {
         ep.router = new Marionette.AppRouter();
         sinon.spy(ep.router, 'navigate');
 
-        EventBus.trigger('cart.cancelOrderBtnClicked', actionLink);
+        EventBus.trigger('checkout.cancelOrderBtnClicked', actionLink);
       });
 
       it('routes the user to the checkout view', sinon.test(function () {
-        expect(ep.router.navigate).to.be.calledWithExactly('mycart', true);
+        expect(ep.router.navigate).to.be.calledWithExactly(ep.app.config.routes.cart, true);
       }));
     });
 
     // Event Listener: cart.submitOrderBtnClicked
-    describe("cart.submitOrderBtnClicked event works", function () {
-      var unboundEventKey = 'cart.submitOrderRequest';
+    describe("Responds to event: checkout.submitOrderBtnClicked", function () {
+      var unboundEventKey = 'checkout.submitOrderRequest';
       var actionLink = 'ActionLinkTrue';
 
       before(function () {
@@ -66,7 +67,7 @@ define(function (require) {
         sinon.spy(view, 'setCheckoutButtonProcessing');
 
         EventTestHelpers.unbind(unboundEventKey);
-        EventBus.trigger('cart.submitOrderBtnClicked', actionLink);
+        EventBus.trigger('checkout.submitOrderBtnClicked', actionLink);
       });
 
       after(function () {
@@ -76,36 +77,142 @@ define(function (require) {
         EventTestHelpers.reset();
       });
 
-      it("fires cart.submitOrderRequest", sinon.test(function () {
+      it("triggers event: checkout.submitOrderRequest", sinon.test(function () {
         expect(EventBus.trigger).to.be.calledWithExactly(unboundEventKey, actionLink);
       }));
-      it('called View.setCheckoutButtonProcessing', sinon.test(function () {
-        expect(cartView.setCheckoutButtonProcessing).to.be.called;
+      it('calls View.setCheckoutButtonProcessing function', sinon.test(function () {
+        expect(view.setCheckoutButtonProcessing).to.be.called;
       }));
     });
 
-    describe('log in modal loaded if user is not logged in', function() {
-      var actionLink = 'ActionLinkTrue';
+    describe('Responds to event: checkout.submitOrderRequest', function () {
+      it('registers correct event listener', function () {
+        expect(EventBus._events['checkout.submitOrderRequest']).to.be.length(1);
+      });
+
+      describe('with out valid arguments', function() {
+        before(function () {
+          sinon.stub(ep.logger, 'warn');
+          sinon.stub(ep.io, 'ajax');
+          EventBus.trigger('checkout.submitOrderRequest');
+        });
+
+        after(function () {
+          ep.logger.warn.restore();
+          ep.io.ajax.restore();
+        });
+
+        it('should log the error', function() {
+          expect(ep.logger.warn).to.be.calledOnce;
+        });
+        it('should return early and skip ajax call', function() {
+          expect(ep.io.ajax.callCount).to.be.equal(0);
+        });
+      });
+
+      describe('with valid arguments', function() {
+        var actionLink = 'submitOrderLink';
+
+        before(function () {
+          sinon.stub(ep.io, 'ajax');
+          sinon.stub(ep.logger, 'error');
+          EventBus.trigger('checkout.submitOrderRequest', actionLink);
+
+          // get first argument passed to ep.io.ajax,
+          // args[0] gets arguments passed in the first time ep.io.ajax is called
+          // args[0][0] gets the first argument of the first time arguments
+          this.ajaxArgs = ep.io.ajax.args[0][0];
+        });
+
+        after(function () {
+          ep.io.ajax.restore();
+          ep.logger.error.restore();
+        });
+
+        describe('should submit order to Cortex', function () {
+          it('exactly once', function () {
+            expect(ep.io.ajax).to.be.calledOnce;
+          });
+          it('with a valid request', function () {
+            expect(this.ajaxArgs.type).to.be.string('POST');
+            expect(this.ajaxArgs.contentType).to.be.string('application/json');
+            expect(this.ajaxArgs.url).to.be.equal(actionLink);
+          });
+          it('with required callback functions', function () {
+            expect(this.ajaxArgs.success).to.exist;
+            expect(this.ajaxArgs.error).to.exist;
+          });
+        });
+
+        describe('and on success',
+          EventTestFactory.simpleTriggerEventTest('checkout.submitOrderSuccess', function () {
+            var testEventName = 'checkout.submitOrderSuccess';
+
+            it('should trigger ' + testEventName + ' event', function () {
+              this.ajaxArgs.success(); // trigger callback function on ajax call success
+              expect(EventBus.trigger).to.be.calledWith(testEventName);
+            });
+          }));
+
+        describe('and on failure',
+          EventTestFactory.simpleTriggerEventTest('checkout.submitOrderFailed', function () {
+            var testEventName = 'checkout.submitOrderFailed';
+
+            it('should trigger ' + testEventName + ' event', function () {
+              ep.logger.error.reset();  // make sure other test's logger call doesn't interfere
+              this.ajaxArgs.error({
+                status: 'any error code'
+              });
+              expect(EventBus.trigger).to.be.calledWithExactly(testEventName);
+              expect(ep.logger.error).to.be.calledOnce
+                .and.to.be.calledWithMatch('any error code');
+            });
+          }));
+      });
+
+    });
+
+    describe('Responds to event: checkout.submitOrderSuccess', function() {
+      var response = {
+        XHR: {
+          getResponseHeader: function(option){
+            var responseHeader = {
+              Location: 'follow location'
+            };
+            return responseHeader[option];
+          }
+        }
+      };
 
       before(function () {
         sinon.stub(Mediator, 'fire');
-        sinon.stub(ep.app, 'isUserLoggedIn', function() {
-          return false;
-        });
-
-        EventBus.trigger('cart.checkoutBtnClicked', actionLink);
+        EventBus.trigger('checkout.submitOrderSuccess', response);
       });
 
       after(function () {
-        ep.app.isUserLoggedIn.restore();
         Mediator.fire.restore();
       });
 
-      it('fires an authentication request to the mediator', sinon.test(function () {
-        expect(Mediator.fire).to.be.calledWithExactly('mediator.getAuthentication');
+      it('fires correct mediator event to notify submit order successful', sinon.test(function () {
+        expect(Mediator.fire).to.be.calledWithExactly('mediator.orderProcessSuccess', 'follow location');
       }));
+
     });
 
+    describe('Responds to event: checkout.submitOrderFailed', function() {
+      before(function () {
+        sinon.stub(view, 'resetCheckoutButtonText');
+        EventBus.trigger('checkout.submitOrderFailed');
+      });
+
+      after(function () {
+        view.resetCheckoutButtonText.restore();
+      });
+
+      it('calls View function resetCheckoutButtonText', function() {
+        expect(view.resetCheckoutButtonText).to.be.calledOnce;
+      });
+    });
   });
 
 });
