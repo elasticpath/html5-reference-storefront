@@ -132,9 +132,21 @@ When running remotely, we expect your Cortex API is using Elastic Path Integrato
 <li>Copy over the reference configuration files [<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>] to <code>C:\Apache24\conf</code><br/>
 </li>
 <li>In <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a>,
-comment out the LOCAL SETUP and uncomment the REMOTE SETUP.</li>
-<li>In the REMOTE SETUP, set the web address and port for Integrator.<br/>
-<b>NOTE:</b> Ignore the studio setting if not using studio.</li>
+comment out LOCAL SETUP and uncomment REMOTE SETUP.</li>
+<li>In REMOTE SETUP, set the web address and port for Integrator. For example, if Integrator ran at <code>http://aws-qa3.elasticpath.net:13080/integrator</code><br/>
+<pre>
+#################REMOTE SETUP#################
+RequestHeader append X-Forwarded-Base "http://localhost/integrator"
+
+ProxyPass /integrator http://aws-qa3.elasticpath.net:13080/integrator
+ProxyPassReverse /integrator http://aws-qa3.elasticpath.net:13080/integrator
+
+ProxyPass /html5storefront http://localhost:3008
+ProxyPassReverse /html5storefront http://localhost:3008
+
+#################REMOTE SETUP#################
+</pre>
+<b>NOTE:</b> Ignore Studio setting if not using Studio.</li>
 <li>Run the proxy: open a command line, navigate to <code>C:\Apache24\bin</code>, and run<br/>
 <code>httpd.exe</code>
 </li>
