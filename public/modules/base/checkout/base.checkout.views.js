@@ -56,7 +56,7 @@ define(function (require) {
       className: 'checkout-container container',
       regions: {
         checkoutTitleRegion: '[data-region="checkoutTitleRegion"]',
-        chosenBillingAddressRegion: '[data-region="chosenBillingAddressRegion"]',
+        billingAddressesRegion: '[data-region="billingAddressesRegion"]',
         cancelCheckoutActionRegion: '[data-region="cancelCheckoutActionRegion"]',
         checkoutOrderRegion: '[data-region="checkoutOrderRegion"]'
       }
@@ -72,24 +72,35 @@ define(function (require) {
     });
 
     /**
-     * Checkout Billing Address View
-     * make mediator request to load an address view in region: billingAddressComponentRegion,
+     * Checkout Billing Address Selector Layout
+     * make mediator request to load an address view in region: billingAddressRegion,
      * will render a wrapper around an address view
      * @type Marionette.Layout
      */
-    var billingAddressLayout = Marionette.Layout.extend({
-      template: '#DefaultBillingAddressTemplate',
-      templateHelpers: viewHelpers,
+    var billingAddressSelectorLayout = Backbone.Marionette.Layout.extend({
+      template: '#BillingAddressSelectorTemplate',
       regions: {
-        billingAddressComponentRegion: '[data-region="billingAddressComponentRegion"]'
+        billingAddressRegion: '[data-region="billingAddressRegion"]'
       },
       onShow: function () {
         // fire event to load the address itemView from component
         Mediator.fire('mediator.loadAddressesViewRequest', {
-          region: this.billingAddressComponentRegion,
+          region: this.billingAddressRegion,
           model: this.model
         });
       }
+    });
+
+    /**
+     * Checkout Billing Address Composite View
+     * will render a wrapper with heading around a set of billing addresses
+     * @type Marionette.CompositeView
+     */
+    var billingAddressesCompositeView = Backbone.Marionette.CompositeView.extend({
+      template: '#BillingAddressesTemplate',
+      templateHelpers: viewHelpers,
+      itemView: billingAddressSelectorLayout,
+      itemViewContainer: '[data-region="billingAddressSelectorsRegion"]'
     });
 
     /**
@@ -148,7 +159,8 @@ define(function (require) {
     return {
       DefaultLayout: defaultLayout,
       CheckoutTitleView: checkoutTitleView,
-      BillingAddressLayout: billingAddressLayout,
+      BillingAddressSelectorLayout: billingAddressSelectorLayout,
+      BillingAddressesCompositeView: billingAddressesCompositeView,
       CancelCheckoutActionView: cancelCheckoutActionView,
       CheckoutSummaryView: checkoutSummaryView,
       CheckoutTaxesCollectionView: checkoutTaxesCollectionView,

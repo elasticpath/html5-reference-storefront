@@ -15,6 +15,7 @@ define(function (require) {
   var zoomArray = [
     'purchaseform',
     'billingaddressinfo:selector:chosen:description',
+    'billingaddressinfo:selector:choice:description',
     'tax',
     'total',
     'cart',
@@ -99,22 +100,31 @@ define(function (require) {
 
     /**
      * Parse all billing addresses the registered user can use for checkout.
-     * Currently only parses the chosen billing address
+     * The first address in the returned array will be the chosen address.
      *
      * @param response to be parsed
-     * @returns Object billing addresses of a user
+     * @returns Array billing addresses of a user
      */
     parseBillingAddresses: function (response) {
-      var billingAddresses = {
-        chosenBillingAddress: undefined
-      };
+      var billingAddresses = [];
 
       try {
         var chosenAddress = jsonPath(response, '$.._billingaddressinfo[0].._chosen.._description[0]')[0];
+        var choiceAddresses = jsonPath(response, '$.._billingaddressinfo[0].._choice.._description');
+
         if (chosenAddress) {
-          billingAddresses.chosenBillingAddress = modelHelpers.parseAddress(chosenAddress);
-          // flag this address as selected
-//          billingAddresses.chosenBillingAddress.chosen = true;
+          billingAddresses.push(modelHelpers.parseAddress(chosenAddress));
+        }
+
+        if (choiceAddresses) {
+          var numAddresses = choiceAddresses.length;
+
+          for (var i = 0; i < numAddresses; i++) {
+            var currObj = choiceAddresses[i];
+            billingAddresses.push(
+              modelHelpers.parseAddress(currObj[0])
+            );
+          }
         }
       }
       catch (error) {

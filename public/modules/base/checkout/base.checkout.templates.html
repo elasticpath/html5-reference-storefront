@@ -11,7 +11,7 @@
         </div>
 
         <div class="checkout-main-container">
-          <div data-region="chosenBillingAddressRegion"></div>
+          <div data-region="billingAddressesRegion"></div>
           <div data-region="cancelCheckoutActionRegion"></div>
         </div>
 
@@ -25,10 +25,18 @@
     <h1 class="view-title"><%= E.getI18nLabel('checkout.checkoutTitle') %></h1>
   </script>
 
-  <!-- Default Billing Address Template [default Layout] -->
-  <script id="DefaultBillingAddressTemplate" type="text/template">
-    <h2><%= E.getI18nLabel('checkout.chosenBillingAddress') %></h2>
-    <div data-region="billingAddressComponentRegion"></div>
+  <!-- Billing Addresses Layout Template -->
+  <script id="BillingAddressesTemplate" type="text/template">
+    <h2><%= E.getI18nLabel('checkout.billingAddress') %></h2>
+    <div data-region="billingAddressSelectorsRegion"></div>
+  </script>
+
+  <!-- Selector template for an individual billing address -->
+  <script id="BillingAddressSelectorTemplate" type="text/template">
+    <input type="radio" name="billingAddress" id="address123" />
+    <label for="address123">
+      <div data-region="billingAddressRegion"></div>
+    </label>
   </script>
 
   <!-- Cancel Checkout Action Template [default ItemView] -->

@@ -49,7 +49,7 @@
     "genericUpdateErrMsg": "I'm sorry, there was an error updating the lineItem quantity. Please contact your system administrator."
   },
   "checkout": {
-    "chosenBillingAddress": "Selected Billing Address",
+    "billingAddress": "Billing Address",
     "checkoutTitle": "Checkout Summary",
     "cancelOrder": "Cancel",
     "submitOrder": "Complete Purchase",

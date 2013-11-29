@@ -7215,6 +7215,9 @@ fieldset[disabled] .btn-cancel-order {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+.checkout-subtotal {
+  margin-bottom: 1.5rem;
+}
 .itemdetail-container {
   margin-top: 4rem;
 }

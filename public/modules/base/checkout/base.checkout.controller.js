@@ -32,9 +32,11 @@ define(function (require) {
         success: function (response) {
           checkoutLayout.checkoutTitleRegion.show(new View.CheckoutTitleView());
 
-          checkoutLayout.chosenBillingAddressRegion.show(new View.BillingAddressLayout({
-            model: new Backbone.Model(checkoutModel.get('billingAddresses').chosenBillingAddress)
-          }));
+          checkoutLayout.billingAddressesRegion.show(
+            new View.BillingAddressesCompositeView({
+              collection: new Backbone.Collection(checkoutModel.get('billingAddresses'))
+            })
+          );
 
           checkoutLayout.cancelCheckoutActionRegion.show(new View.CancelCheckoutActionView());
 
