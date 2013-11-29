@@ -139,9 +139,13 @@ define(function (require) {
           expect(this.view.cartSummaryRegion).to.exist;
           expect(this.view.$el.find('[data-region="cartSummaryRegion"]')).to.be.length(1);
         });
-        it('should have a cartTaxTotalRegion region', function () {
-          expect(this.view.cartTaxTotalRegion).to.exist;
-          expect(this.view.$el.find('[data-region="cartTaxTotalRegion"]')).to.be.length(1);
+        it('should have a cartTaxesRegion region', function () {
+          expect(this.view.cartTaxesRegion).to.exist;
+          expect(this.view.$el.find('[data-region="cartTaxesRegion"]')).to.be.length(1);
+        });
+        it('should have a cartTotalRegion region', function () {
+          expect(this.view.cartTotalRegion).to.exist;
+          expect(this.view.$el.find('[data-region="cartTotalRegion"]')).to.be.length(1);
         });
         it('should have a cartSubmitOrderRegion region', function () {
           expect(this.view.cartSubmitOrderRegion).to.exist;
@@ -192,29 +196,60 @@ define(function (require) {
       });
     });
 
-    describe('CartTaxTotalView', function() {
-      before(function () {
+    describe('CartTaxesView', function() {
+      before(function() {
         // Mock the model with just the data we need
         var rawData = {
-          "cartTax": {
-            "currency": "CAD",
-            "amount": 0.2,
-            "display": "$0.20"
-          },
-          "cartOrderTotal": {
-            "currency": "CAD",
-            "amount": 5.19,
-            "display": "$5.19"
-          }
+          "cartTaxes": [
+            {
+              "currency": "CAD",
+              "amount": 0.25,
+              "display": "$0.25",
+              "title": "GST"
+            }
+          ]
         };
-        this.model = new Backbone.Model(rawData);
 
-        this.view = new cartViews.CartTaxTotalView({
-          model: this.model
+        this.collection = new Backbone.Collection(rawData);
+
+        this.view = new cartViews.CartTaxesView({
+          collection: this.collection
         });
+
         this.view.render();
       });
+      after(function() {
+        // Destroy the models of the collection
+        _.invoke(this.collection.toArray(), 'destroy');
+      });
 
+      it('should be an instance of Marionette CompositeView object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.CompositeView);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
+      });
+    });
+
+    describe('CartTotalView', function() {
+      before(function() {
+        // Mock the model with just the data we need
+        var rawData = {
+          "cartOrderTotal": {
+            "currency": "CAD",
+            "amount": 5.24,
+            "display": "$5.24"
+          }
+        };
+
+        this.model = new Backbone.Model(rawData);
+
+        this.view = new cartViews.CartTotalView({
+          model: this.model
+        });
+
+        this.view.render();
+      });
       after(function() {
         this.model.destroy();
       });
@@ -227,10 +262,6 @@ define(function (require) {
       });
 
       describe('view contents are rendered', function() {
-        it('should render today\'s tax total', function() {
-          expect($('[data-el-value="cartTax.display"]', this.view.$el).text())
-            .to.be.equal(this.model.get('cartTax').display);
-        });
         it('should render today\'s total', function() {
           expect($('[data-el-value="cartOrderTotal.display"]', this.view.$el).text())
             .to.be.equal(this.model.get('cartOrderTotal').display);
@@ -300,6 +331,18 @@ define(function (require) {
         it('should have a cartSummaryRegion region', function () {
           expect(this.view.cartSummaryRegion).to.exist;
           expect(this.view.$el.find('[data-region="cartSummaryRegion"]')).to.be.length(1);
+        });
+        it('should have a cartTaxesRegion region', function () {
+          expect(this.view.cartTaxesRegion).to.exist;
+          expect(this.view.$el.find('[data-region="cartTaxesRegion"]')).to.be.length(1);
+        });
+        it('should have a cartTotalRegion region', function () {
+          expect(this.view.cartTotalRegion).to.exist;
+          expect(this.view.$el.find('[data-region="cartTotalRegion"]')).to.be.length(1);
+        });
+        it('should have a cartSubmitOrderRegion region', function () {
+          expect(this.view.cartSubmitOrderRegion).to.exist;
+          expect(this.view.$el.find('[data-region="cartSubmitOrderRegion"]')).to.be.length(1);
         });
       });
     });

@@ -45,10 +45,18 @@ define(function (require) {
           ],
           "_tax": [
             {
+              "cost": [
+                {
+                  "amount": 0,
+                  "currency": "CAD",
+                  "display": "$0.00",
+                  "title": "PST"
+                }
+              ],
               "total": {
-                "amount": 0,
+                "amount": 0.25,
                 "currency": "CAD",
-                "display": "$0.00"
+                "display": "$0.25"
               }
             }
           ],
@@ -58,7 +66,9 @@ define(function (require) {
                 {
                   "amount": 0,
                   "currency": "CAD",
-                  "display": "$0.00"
+                  "display": "$0.00",
+                  "title": "PST"
+
                 }
               ]
             }
@@ -104,13 +114,16 @@ define(function (require) {
 
     describe("Cart model renders tax correctly", function() {
       it("must have a currency", function() {
-        expect(this.model.cartTax.currency).to.be.equal('CAD');
+        expect(this.model.cartTaxes[0].currency).to.be.equal('CAD');
       });
       it("must have an amount", function() {
-        expect(this.model.cartTax.amount).to.be.equal(0);
+        expect(this.model.cartTaxes[0].amount).to.be.equal(0);
       });
       it("must have a display value", function() {
-        expect(this.model.cartTax.display).to.be.equal('$0.00');
+        expect(this.model.cartTaxes[0].display).to.be.equal('$0.00');
+      });
+      it("must have a title value", function() {
+        expect(this.model.cartTaxes[0].title).to.be.equal('PST');
       });
     });
 

@@ -7018,6 +7018,12 @@ Purchase Confirmation
 .purchaseconfirmation-items-list li:nth-child(even) {
   background: #fafafe;
 }
+.cart-tax-container li ul {
+  margin: 5px 0 0 10px;
+}
+.cart-total-container {
+  margin-bottom: 10px;
+}
 .itemdetail-container {
   margin-top: 4rem;
 }

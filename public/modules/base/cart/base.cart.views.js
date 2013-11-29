@@ -243,14 +243,29 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       template:'#CartOrderSummaryTemplate',
       regions: {
         cartSummaryRegion: '[data-region="cartSummaryRegion"]',
-        cartTaxTotalRegion: '[data-region="cartTaxTotalRegion"]',
+        cartTaxesRegion: '[data-region="cartTaxesRegion"]',
+        cartTotalRegion: '[data-region="cartTotalRegion"]',
         cartSubmitOrderRegion: '[data-region="cartSubmitOrderRegion"]'
       }
     });
 
-    // Cart Tax Total View
-    var cartTaxTotalView = Backbone.Marionette.ItemView.extend({
-      template:'#CartTaxTotalTemplate',
+    var cartTaxItemView = Backbone.Marionette.ItemView.extend({
+      template:'#CartTaxItemTemplate',
+      tagName:'li',
+      className:'cart-tax-item'
+    });
+
+    // Cart Taxes Composite View
+    var cartTaxesView = Backbone.Marionette.CompositeView.extend({
+      template:'#CartTaxesTemplate',
+      itemView:cartTaxItemView,
+      itemViewContainer:'ul > li > ul',
+      templateHelpers:viewHelpers
+    });
+
+    // Cart Total View
+    var cartTotalView = Backbone.Marionette.ItemView.extend({
+      template:'#CartTotalTemplate',
       templateHelpers:viewHelpers
     });
 
@@ -508,7 +523,9 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       CartBillingAddressLayout:cartBillingAddressLayout,
       CartCancelActionView:cartCancelActionView,
       CartOrderSummaryLayout:cartOrderSummaryLayout,
-      CartTaxTotalView:cartTaxTotalView,
+      CartTaxesView:cartTaxesView,
+      CartTaxItemView:cartTaxItemView,
+      CartTotalView:cartTotalView,
       CartSubmitOrderActionView:cartSubmitOrderActionView,
       setCheckoutButtonProcessing:setCheckoutButtonProcessing,
       resetCheckoutButtonText:resetCheckoutButtonText,

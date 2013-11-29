@@ -154,10 +154,15 @@ define(['ep', 'eventbus', 'backbone'],
         /*
          * Cart Tax
          */
-        cartObj.cartTax = {};
-        var cartTax = jsonPath(cart, '$._order[0]._tax[0].total');
-        if (cartTax) {
-          cartObj.cartTax = parsePrice(cartTax);
+        cartObj.cartTaxes = [];
+        var cartTaxes = jsonPath(cart, '$._order[0]._tax[0].cost')[0];
+
+        if (cartTaxes) {
+          var cartTaxesLen = cartTaxes.length;
+
+          for (var x = 0; x < cartTaxes.length; x++) {
+            cartObj.cartTaxes.push(parseTax(cartTaxes[x]));
+          }
         }
 
         /*
@@ -244,6 +249,22 @@ define(['ep', 'eventbus', 'backbone'],
       }
 
       return price;
+    };
+
+    // function to parse taxes
+    var parseTax = function(taxObj) {
+      var tax = {};
+
+      if (taxObj) {
+        tax = {
+         currency: taxObj.currency,
+         amount: taxObj.amount,
+         display: taxObj.display,
+         title: taxObj.title
+        }
+      }
+
+      return tax;
     };
 
     // function to parse rates collection

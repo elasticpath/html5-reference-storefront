@@ -95,11 +95,22 @@ define(function (require) {
                 model: cartModel
               })
             );
-            cartOrderSummaryLayout.cartTaxTotalRegion.show(
-              new View.CartTaxTotalView({
+
+            // Show any taxes in the cart tax array
+            if (cartModel.get('cartTaxes').length) {
+              cartOrderSummaryLayout.cartTaxesRegion.show(
+                new View.CartTaxesView({
+                  collection: new Backbone.Collection(cartModel.get('cartTaxes'))
+                })
+              );
+            }
+
+            cartOrderSummaryLayout.cartTotalRegion.show(
+              new View.CartTotalView({
                 model: cartModel
               })
             );
+
             cartOrderSummaryLayout.cartSubmitOrderRegion.show(
               new View.CartSubmitOrderActionView({
                 model: cartModel

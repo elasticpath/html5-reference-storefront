@@ -63,22 +63,29 @@
   <script id="CartOrderSummaryTemplate" type="text/template">
     <div class="cart-sidebar-inner">
       <div data-region="cartSummaryRegion" class="cart-summary-container"></div>
-      <div data-region="cartTaxTotalRegion" class="cart-tax-total-container"></div>
+      <div data-region="cartTaxesRegion" class="cart-tax-container"></div>
+      <div data-region="cartTotalRegion" class="cart-total-container"></div>
       <div data-region="cartSubmitOrderRegion" class="cart-submit-order-container"></div>
     </div>
   </script>
 
-  <script id="CartTaxTotalTemplate" type="text/template">
-    <ul class="cart-tax-total">
-      <li class="cart-tax">
-        <label><%= E.getI18nLabel('cart.todaysTax') %>:</label>
-        <span data-el-value="cartTax.display"><%= E.cartTax.display %></span>
-      </li>
-      <li class="cart-total">
-        <label><%= E.getI18nLabel('cart.todaysTotal') %>:</label>
-        <span data-el-value="cartOrderTotal.display"><%= E.cartOrderTotal.display %></span>
+  <script id="CartTaxesTemplate" type="text/template">
+    <ul class="cart-taxes">
+      <li>
+        <label class="cart-tax-title"><%= E.getI18nLabel('cart.todaysTax') %>:</label>
+        <ul></ul>
       </li>
     </ul>
+  </script>
+
+  <script id="CartTaxItemTemplate" type="text/template">
+    <label class="cart-tax-title"><%= E.title %>:</label>
+    <span class="cart-tax-display"><%= E.display %></span>
+  </script>
+
+  <script id="CartTotalTemplate" type="text/template">
+    <label><%= E.getI18nLabel('cart.todaysTotal') %>:</label>
+    <span data-el-value="cartOrderTotal.display"><%= E.cartOrderTotal.display %></span>
   </script>
 
   <!-- Cart Complete Purchase Action Template -->
