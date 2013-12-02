@@ -18,7 +18,7 @@ define(function (require) {
        * @param submitOrderActionLink action-link to post submit order request to, only present if allow submit order.
        * @returns {string} HTML disabled attribute or empty string
        */
-      getSubmitOrderButtonDisabledAttrib: function (submitOrderActionLink) {
+      getSubmitOrderButtonDisabledAttr: function (submitOrderActionLink) {
         // complete purchase disabled by default
         var retVar = 'disabled="disabled"';
 
@@ -27,6 +27,22 @@ define(function (require) {
         }
 
         return retVar;
+      },
+
+      /**
+       * Determines if this is the chosen billing address and if so, returns the HTML checked attribute
+       * to be applied to the chosen billing address radio button in BillingAddressSelectorTemplate.
+       *
+       * @returns {string} HTML checked attribute or empty string
+       */
+      getBillingAddressCheckedAttr: function() {
+        var checkedAttr = '';
+
+        if (this.chosen) {
+          checkedAttr = 'checked="checked"';
+        }
+
+        return checkedAttr;
       }
     });
 
@@ -79,8 +95,16 @@ define(function (require) {
      */
     var billingAddressSelectorLayout = Backbone.Marionette.Layout.extend({
       template: '#BillingAddressSelectorTemplate',
+      templateHelpers: viewHelpers,
       regions: {
         billingAddressRegion: '[data-region="billingAddressRegion"]'
+      },
+      events: {
+        'change input[name="billingAddress"]': function () {
+
+          // this.model.get('updateChosenAddressLink')
+          EventBus.trigger('checkout.billingAddressRadioChanged');
+        }
       },
       onShow: function () {
         // fire event to load the address itemView from component

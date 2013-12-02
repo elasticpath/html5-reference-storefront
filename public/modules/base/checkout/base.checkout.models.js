@@ -16,6 +16,7 @@ define(function (require) {
     'purchaseform',
     'billingaddressinfo:selector:chosen:description',
     'billingaddressinfo:selector:choice:description',
+//    'billingaddressinfo:selector:choice:selectAction',
     'tax',
     'total',
     'cart',
@@ -113,7 +114,12 @@ define(function (require) {
         var choiceAddresses = jsonPath(response, '$.._billingaddressinfo[0].._choice.._description');
 
         if (chosenAddress) {
-          billingAddresses.push(modelHelpers.parseAddress(chosenAddress));
+          var parsedChosenAddress = modelHelpers.parseAddress(chosenAddress);
+   
+          // Add an extra property to allow us to identify the chosen address
+          _.extend(parsedChosenAddress, {chosen: true});
+
+          billingAddresses.push(parsedChosenAddress);
         }
 
         if (choiceAddresses) {

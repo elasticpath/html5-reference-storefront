@@ -32,9 +32,10 @@
   </script>
 
   <!-- Selector template for an individual billing address -->
+  <!-- FIXME: add unique 'id' and 'for' attributes to associate label with radio -->
   <script id="BillingAddressSelectorTemplate" type="text/template">
-    <input type="radio" name="billingAddress" id="address123" />
-    <label for="address123">
+    <input type="radio" name="billingAddress" id="" class="billing-address-radio" <%= E.getBillingAddressCheckedAttr() %> />
+    <label for="">
       <div data-region="billingAddressRegion"></div>
     </label>
   </script>
@@ -70,7 +71,7 @@
     </ul>
 
     <button class="btn-cmd-submit-order" data-el-label="checkout.submitOrder"
-    <%= E.getSubmitOrderButtonDisabledAttrib(E.submitOrderActionLink) %>><%= E.getI18nLabel('checkout.submitOrder') %></button>
+      <%= E.getSubmitOrderButtonDisabledAttrib(E.submitOrderActionLink) %>><%= E.getI18nLabel('checkout.submitOrder') %></button>
   </script>
 
   <!-- Checkout Tax Template [default ItemView, tagName: li, className: checkout-tax]-->

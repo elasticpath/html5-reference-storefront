@@ -30,6 +30,7 @@ define(function (require) {
       checkoutModel.fetch({
         url: checkoutModel.getUrl(link),
         success: function (response) {
+          debugger;
           checkoutLayout.checkoutTitleRegion.show(new View.CheckoutTitleView());
 
           checkoutLayout.billingAddressesRegion.show(
@@ -145,6 +146,48 @@ define(function (require) {
     EventBus.on('checkout.submitOrderFailed', function() {
       // FIXME should also notify user if submit fails
       View.resetCheckoutButtonText();
+    });
+
+
+    /**
+     * Handler for the checkout.billingAddressRadioChanged event.
+     *
+     */
+    EventBus.on('checkout.billingAddressRadioChanged', function(actionLink) {
+      EventBus.trigger('checkout.updateChosenBillingAddressRequest', actionLink);
+    });
+
+    EventBus.on('checkout.updateChosenBillingAddressRequest', function(actionLink) {
+      if (actionLink) {
+        var ajaxModel = new ep.io.defaultAjaxModel({
+          type: 'POST',
+          url: actionLink,
+          success: function() {
+            EventBus.trigger('checkout.updateChosenBillingAddressSuccess');
+          },
+          customErrorFn: function() {
+            EventBus.trigger('checkout.updateChosenBillingAddressFailed');
+          }
+        });
+
+        ep.io.ajax(ajaxModel.toJSON());
+      }
+    });
+
+    EventBus.on('checkout.updateChosenBillingAddressFailed', function(response) {
+      ep.logger.error('error updating billing address: ' + response);
+
+      // Display sticky error message
+      $().toastmessage('showToast', {
+        text: i18n.t('checkout.updateChosenBillingAddressErrMsg'),
+        sticky: true,
+        position: 'middle-center',
+        type: 'error'
+      });
+    });
+
+    EventBus.on('checkout.updateChosenBillingAddressSuccess', function(response) {
+      Backbone.history.loadUrl();
     });
 
     return {
