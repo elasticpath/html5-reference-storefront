@@ -15,8 +15,8 @@ define(function (require) {
   var zoomArray = [
     'purchaseform',
     'billingaddressinfo:selector:chosen:description',
+    'billingaddressinfo:selector:choice',
     'billingaddressinfo:selector:choice:description',
-//    'billingaddressinfo:selector:choice:selectAction',
     'tax',
     'total',
     'cart',
@@ -111,7 +111,7 @@ define(function (require) {
 
       try {
         var chosenAddress = jsonPath(response, '$.._billingaddressinfo[0].._chosen.._description[0]')[0];
-        var choiceAddresses = jsonPath(response, '$.._billingaddressinfo[0].._choice.._description');
+
 
         if (chosenAddress) {
           var parsedChosenAddress = modelHelpers.parseAddress(chosenAddress);
@@ -122,16 +122,25 @@ define(function (require) {
           billingAddresses.push(parsedChosenAddress);
         }
 
+
+        var choiceAddresses = jsonPath(response, '$.._billingaddressinfo[0].._choice')[0];
+
         if (choiceAddresses) {
           var numAddresses = choiceAddresses.length;
 
           for (var i = 0; i < numAddresses; i++) {
-            var currObj = choiceAddresses[i];
-            billingAddresses.push(
-              modelHelpers.parseAddress(currObj[0])
-            );
+            var parsedChoiceAddress =  modelHelpers.parseAddress(choiceAddresses[i]._description[0]);
+
+            // FIXME: wrap this in a try/catch
+            var selectActionHref = jsonPath(choiceAddresses[i], '$..links[?(@.rel=="selectaction")].href')[0];
+
+            _.extend(parsedChoiceAddress, {selectAction: selectActionHref})
+
+            billingAddresses.push(parsedChoiceAddress);
           }
         }
+
+
       }
       catch (error) {
         ep.logger.error('Error when building billing addresses object: ' + error.message);

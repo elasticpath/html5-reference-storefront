@@ -102,8 +102,7 @@ define(function (require) {
       events: {
         'change input[name="billingAddress"]': function () {
 
-          // this.model.get('updateChosenAddressLink')
-          EventBus.trigger('checkout.billingAddressRadioChanged');
+          EventBus.trigger('checkout.billingAddressRadioChanged', this.model.get('selectAction'));
         }
       },
       onShow: function () {

@@ -10,6 +10,7 @@ define(function (require) {
     var Mediator = require('mediator');
     var Backbone = require('backbone');
     var pace = require('pace');
+    var i18n = require('i18n');
 
     var Model = require('checkout.models');
     var View = require('checkout.views');
@@ -30,7 +31,7 @@ define(function (require) {
       checkoutModel.fetch({
         url: checkoutModel.getUrl(link),
         success: function (response) {
-          debugger;
+
           checkoutLayout.checkoutTitleRegion.show(new View.CheckoutTitleView());
 
           checkoutLayout.billingAddressesRegion.show(
