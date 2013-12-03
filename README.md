@@ -37,7 +37,7 @@ Any proxy works, but Apache HTTP Server is the only server we test.
 <li>Apache <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a><br/>
 <code>Listen 81</code>
 </li>
-<li>Apache <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>ep-cortex-proxy.conf</code></a><br/>
+<li>Apache <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a><br/>
 <code>RequestHeader append X-Forwarded-Base "http://localhost:81/cortex"</code></li>
 <li>For HTML5 Storefront Selenium Tests, update <code>server.port</code> in <code><a href="https://github.elasticpath.net/cortex/selenium/blob/master/testng-ui/pom.xml">repository/selenium/testng-ui/pom.xml</a></code>:<br/>
 <pre>
