@@ -110,17 +110,15 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
 
         return retVar;
       },
-      getCheckoutButtonDisabledAttrib:function(model){
-        // complete purchase disabled by default
+      getCheckoutButtonDisabledAttr:function(model){
+        // Proceed to checkout button disabled by default
         var retVar = 'disabled="disabled"';
-        // is user anonymous - return true
-        if (!ep.app.isUserLoggedIn() && (model.cartTotalQuantity > 0)){
+
+        // Check that there is at least one item in the cart
+        if (model.cartTotalQuantity > 0){
             retVar = '';
         }
-        // user is logged in but may not have a submitorderaction link
-        else if(model.submitOrderActionLink){
-          retVar = '';
-        }
+
         return  retVar;
 
       },

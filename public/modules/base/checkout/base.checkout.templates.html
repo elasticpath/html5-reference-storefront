@@ -32,10 +32,11 @@
   </script>
 
   <!-- Selector template for an individual billing address -->
-  <!-- FIXME: add unique 'id' and 'for' attributes to associate label with radio -->
   <script id="BillingAddressSelectorTemplate" type="text/template">
-    <input type="radio" name="billingAddress" id="" class="billing-address-radio" <%= E.getBillingAddressCheckedAttr() %> />
-    <label for="">
+    <!-- A unique ID to associate billing address labels with radio buttons -->
+    <% var uniqueId = _.uniqueId('billingAddress_'); %>
+    <input type="radio" name="billingAddress" id="<%= uniqueId %>" class="billing-address-radio" <%= E.getBillingAddressCheckedAttr(E) %> />
+    <label for="<%= uniqueId %>">
       <div data-region="billingAddressRegion"></div>
     </label>
   </script>

@@ -102,6 +102,8 @@ define(function (require) {
     /**
      * Parse all billing addresses the registered user can use for checkout.
      * The first address in the returned array will be the chosen address.
+     * If there is no chosen address, we designate the first choice address as being chosen,
+     * so we have a default billing address to display at checkout.
      *
      * @param response to be parsed
      * @returns Array billing addresses of a user
@@ -111,7 +113,7 @@ define(function (require) {
 
       try {
         var chosenAddress = jsonPath(response, '$.._billingaddressinfo[0].._chosen.._description[0]')[0];
-
+        var choiceAddresses = jsonPath(response, '$.._billingaddressinfo[0].._choice')[0];
 
         if (chosenAddress) {
           var parsedChosenAddress = modelHelpers.parseAddress(chosenAddress);
@@ -122,19 +124,20 @@ define(function (require) {
           billingAddresses.push(parsedChosenAddress);
         }
 
-
-        var choiceAddresses = jsonPath(response, '$.._billingaddressinfo[0].._choice')[0];
-
         if (choiceAddresses) {
           var numAddresses = choiceAddresses.length;
 
           for (var i = 0; i < numAddresses; i++) {
             var parsedChoiceAddress =  modelHelpers.parseAddress(choiceAddresses[i]._description[0]);
 
-            // FIXME: wrap this in a try/catch
             var selectActionHref = jsonPath(choiceAddresses[i], '$..links[?(@.rel=="selectaction")].href')[0];
 
             _.extend(parsedChoiceAddress, {selectAction: selectActionHref})
+
+            // If there is no chosen address, designate the first choice address as a default
+            if (i === 0 && !chosenAddress) {
+              _.extend(parsedChoiceAddress, {chosen: true});
+            }
 
             billingAddresses.push(parsedChoiceAddress);
           }

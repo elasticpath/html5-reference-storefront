@@ -33,12 +33,13 @@ define(function (require) {
        * Determines if this is the chosen billing address and if so, returns the HTML checked attribute
        * to be applied to the chosen billing address radio button in BillingAddressSelectorTemplate.
        *
+       * @param model the billing address model being rendered
        * @returns {string} HTML checked attribute or empty string
        */
-      getBillingAddressCheckedAttr: function() {
+      getBillingAddressCheckedAttr: function(model) {
         var checkedAttr = '';
 
-        if (this.chosen) {
+        if (model.chosen === true) {
           checkedAttr = 'checked="checked"';
         }
 
