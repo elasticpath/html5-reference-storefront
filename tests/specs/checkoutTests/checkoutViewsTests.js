@@ -9,10 +9,12 @@ define(function (require) {
   var Mediator = require('mediator');
   var EventTestFactory = require('EventTestFactory');
   var EventTestHelpers = require('testhelpers.event');
+  var dataJSON = require('text!/tests/data/checkout.json');
 
   describe('Checkout Module: Views', function () {
     var views = require('checkout.views');
     var template = require('text!modules/base/checkout/base.checkout.templates.html');
+    var data = JSON.parse(dataJSON).response;
 
     before(function () {
       $("#Fixtures").append(template);
@@ -43,9 +45,9 @@ define(function (require) {
           expect(this.view.checkoutTitleRegion).to.exist;
           expect(this.view.$el.find('[data-region="checkoutTitleRegion"]')).to.be.length(1);
         });
-        it('should have a chosenBillingAddressRegion region', function () {
-          expect(this.view.chosenBillingAddressRegion).to.exist;
-          expect(this.view.$el.find('[data-region="chosenBillingAddressRegion"]')).to.be.length(1);
+        it('should have a billingAddressRegion region', function () {
+          expect(this.view.billingAddressesRegion).to.exist;
+          expect(this.view.$el.find('[data-region="billingAddressesRegion"]')).to.be.length(1);
         });
         it('should have a cancelCheckoutActionRegion region', function () {
           expect(this.view.cancelCheckoutActionRegion).to.exist;
@@ -55,6 +57,71 @@ define(function (require) {
           expect(this.view.checkoutOrderRegion).to.exist;
           expect(this.view.$el.find('[data-region="checkoutOrderRegion"]')).to.be.length(1);
         });
+      });
+    });
+
+    describe('BillingAddressSelectorLayout', function () {
+      before(function () {
+        this.view = new views.BillingAddressSelectorLayout();
+        this.view.render();
+      });
+
+      it('should be an instance of Marionette Layout object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.Layout);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
+      });
+      it('view contents are rendered', function () {
+        // There should be 2 child elements (billing address radio and billing address label)
+        expect(this.view.el.childElementCount).to.be.equal(2);
+      });
+
+      describe('regions', function () {
+        it('should have a checkoutTitleRegion region', function () {
+          expect(this.view.billingAddressRegion).to.exist;
+          expect(this.view.$el.find('[data-region="billingAddressRegion"]')).to.be.length(1);
+        });
+      });
+
+      // FIXME: triggering the click event of the radio button doesn't seem to trigger the change event
+//      describe('selected billing address changes', function() {
+//      before(function () {
+//        sinon.spy(EventBus, 'trigger');
+//
+//        // isolate unit by unbinding subsequent triggered events
+//        EventTestHelpers.unbind('checkout.billingAddressRadioChanged');
+//
+//        this.view.$el.find('input[name="billingAddress"]').trigger('click');
+//      });
+//
+//      after(function() {
+//        EventBus.trigger.restore();
+//        EventTestHelpers.reset();
+//      });
+//
+//      it('should trigger cart.billingAddressRadioChanged event', function() {
+//        expect(EventBus.trigger).to.be.calledWith('checkout.billingAddressRadioChanged');
+//      });
+//    });
+  });
+
+    describe('BillingAddressesCompositeView', function () {
+      before(function () {
+        this.view = new views.BillingAddressesCompositeView();
+        this.view.render();
+      });
+
+      it('should be an instance of Marionette Layout object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.CompositeView);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
+      });
+      it('view contents are rendered', function () {
+        // View should contain a heading element and a <div> region for billing addresses
+        expect(this.view.el.childElementCount).to.be.equal(2);
+        expect(this.view.$el.find('[data-region="billingAddressSelectorsRegion"]')).to.be.length(1);
       });
     });
 
@@ -254,35 +321,6 @@ define(function (require) {
 
       describe('checkout cancel button clicked',
         EventTestFactory.simpleBtnClickTest('checkout.cancelOrderBtnClicked', '[data-el-label="checkout.cancelCheckout"]'));
-    });
-
-    describe('BillingAddressLayout', function () {
-
-      describe('renders', function () {
-        before(function () {
-          sinon.stub(Mediator, 'fire');
-          this.view = new views.BillingAddressLayout();
-          this.view.render();
-        });
-
-        after(function () {
-          Mediator.fire.restore();
-        });
-
-        it('should be an instance of Marionette Layout object', function () {
-          expect(this.view).to.be.an.instanceOf(Marionette.Layout);
-        });
-        it('render() should return the view object', function () {
-          expect(this.view.render()).to.be.equal(this.view);
-        });
-
-        describe('regions', function () {
-          it('should have a billingAddressComponentRegion region', function () {
-            expect(this.view.billingAddressComponentRegion).to.exist;
-            expect(this.view.$el.find('[data-region="billingAddressComponentRegion"]')).to.be.length(1);
-          });
-        });
-      });
     });
 
   });

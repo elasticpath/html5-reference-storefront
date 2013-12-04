@@ -1,6 +1,6 @@
 {
-  "zoom" : "?zoom=billingaddressinfo:selector:chosen:description,cart,cart:total,purchaseform,tax,total",
-  "retrievedOn" : "Nov 29, 2013",
+  "zoom" : "?zoom=billingaddressinfo:selector:chosen:description,billingaddressinfo:selector:choice,billingaddressinfo:selector:choice:description,cart,cart:total,purchaseform,tax,total",
+  "retrievedOn" : "Dev 4, 2013",
   "retrievedCriteria": "purchase digital item only, must have 1 one-item item; registered user, must have at least 1 address, and chosen a default billing address",
   "response" : {
     "links": [
@@ -8,90 +8,115 @@
         "type": "application/vnd.elasticpath.cart",
         "rel": "cart",
         "rev": "order",
-        "href": "<BASEURL>/integrator/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ongxi2dwjbde2tc2jzqxcsttnfmtowctgq4xk3dck44wswsxlbqucq2snfhdetjvj5cfkm2oimyditrsjjueyvcro5heiy3uj5cecmkoimywwtlkkuyfs6swnvhg2wjvjzcekpi",
-        "uri": "/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ongxi2dwjbde2tc2jzqxcsttnfmtowctgq4xk3dck44wswsxlbqucq2snfhdetjvj5cfkm2oimyditrsjjueyvcro5heiy3uj5cecmkoimywwtlkkuyfs6swnvhg2wjvjzcekpi"
+        "href": "http://10.10.2.151:13080/integrator/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ondtmu3kjvbfsn3iorwws5kni53huvjlijzgk3dck44wswsxlbqucq2rgnhguzdnjuzem22nimyhutsukf4eyvcrpjhdewluj5cgo6kopeyhqwsemrwe43kfpfmwu2zsljce2pi",
+        "uri": "/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ondtmu3kjvbfsn3iorwws5kni53huvjlijzgk3dck44wswsxlbqucq2rgnhguzdnjuzem22nimyhutsukf4eyvcrpjhdewluj5cgo6kopeyhqwsemrwe43kfpfmwu2zsljce2pi"
       },
       {
         "type": "application/vnd.elasticpath.info",
         "rel": "emailinfo",
         "rev": "order",
-        "href": "<BASEURL>/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq/emailinfo",
-        "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq/emailinfo"
+        "href": "http://10.10.2.151:13080/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/emailinfo",
+        "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/emailinfo"
       },
       {
         "type": "application/vnd.elasticpath.purchase",
         "rel": "purchaseform",
-        "href": "<BASEURL>/integrator/purchases/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi/form",
-        "uri": "/purchases/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi/form"
+        "href": "http://10.10.2.151:13080/integrator/purchases/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxkmxtamktinyvculupjhueucqgjzc6ttsivyvm5dcgjfgywten5auur22nbhvottmjz5fs6kmk5exqtlkm52e4rcgnbmxsmbvjzkgw6smkrfgstkxljuu42tinnhguyzrjvat2pi/form",
+        "uri": "/purchases/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxkmxtamktinyvculupjhueucqgjzc6ttsivyvm5dcgjfgywten5auur22nbhvottmjz5fs6kmk5exqtlkm52e4rcgnbmxsmbvjzkgw6smkrfgstkxljuu42tinnhguyzrjvat2pi/form"
       },
       {
         "type": "application/vnd.elasticpath.total",
         "rel": "total",
         "rev": "order",
-        "href": "<BASEURL>/integrator/totals/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
-        "uri": "/totals/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq"
+        "href": "http://10.10.2.151:13080/integrator/totals/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx",
+        "uri": "/totals/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx"
       },
       {
         "type": "application/vnd.elasticpath.info",
         "rel": "billingaddressinfo",
         "rev": "order",
-        "href": "<BASEURL>/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq/billingaddressinfo",
-        "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq/billingaddressinfo"
+        "href": "http://10.10.2.151:13080/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo",
+        "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo"
       },
       {
         "type": "application/vnd.elasticpath.tax",
         "rel": "tax",
         "rev": "order",
-        "href": "<BASEURL>/integrator/taxes/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
-        "uri": "/taxes/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq"
+        "href": "http://10.10.2.151:13080/integrator/taxes/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx",
+        "uri": "/taxes/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx"
       },
       {
         "type": "application/vnd.elasticpath.info",
         "rel": "paymentmethodinfo",
         "rev": "order",
-        "href": "<BASEURL>/integrator/paymentmethods/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
-        "uri": "/paymentmethods/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq"
+        "href": "http://10.10.2.151:13080/integrator/paymentmethods/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx",
+        "uri": "/paymentmethods/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx"
       },
       {
         "type": "application/vnd.elasticpath.links",
         "rel": "deliveries",
         "rev": "order",
-        "href": "<BASEURL>/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq/deliveries",
-        "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq/deliveries"
+        "href": "http://10.10.2.151:13080/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/deliveries",
+        "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/deliveries"
       }
     ],
     "self": {
       "type": "application/vnd.elasticpath.order",
-      "uri": "/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi?zoom=billingaddressinfo:selector:chosen:description,cart,cart:total,purchaseform,tax,total",
-      "href": "<BASEURL>/integrator/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi?zoom=billingaddressinfo:selector:chosen:description,cart,cart:total,purchaseform,tax,total",
+      "uri": "/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxkmxtamktinyvculupjhueucqgjzc6ttsivyvm5dcgjfgywten5auur22nbhvottmjz5fs6kmk5exqtlkm52e4rcgnbmxsmbvjzkgw6smkrfgstkxljuu42tinnhguyzrjvat2pi?zoom=billingaddressinfo:selector:choice,billingaddressinfo:selector:choice:description,billingaddressinfo:selector:chosen:description,cart,cart:total,purchaseform,tax,total",
+      "href": "http://10.10.2.151:13080/integrator/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxkmxtamktinyvculupjhueucqgjzc6ttsivyvm5dcgjfgywten5auur22nbhvottmjz5fs6kmk5exqtlkm52e4rcgnbmxsmbvjzkgw6smkrfgstkxljuu42tinnhguyzrjvat2pi?zoom=billingaddressinfo:selector:choice,billingaddressinfo:selector:choice:description,billingaddressinfo:selector:chosen:description,cart,cart:total,purchaseform,tax,total",
       "max-age": 0
     },
     "_billingaddressinfo": [
       {
         "_selector": [
           {
-            "_chosen": [
+            "_choice": [
               {
+                "links": [
+                  {
+                    "rel": "selectaction",
+                    "href": "http://10.10.2.151:13080/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo/selector/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweqsumnyvercki5gw2qruivsesmsknfus63ckobltc5sznvlgymthifvvevcngbhguwsgkfvvc5cnnnktktstgfdfe22wingfkwlzjvvgo5cnirseeusukv4e222rgvgukusf",
+                    "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo/selector/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweqsumnyvercki5gw2qruivsesmsknfus63ckobltc5sznvlgymthifvvevcngbhguwsgkfvvc5cnnnktktstgfdfe22wingfkwlzjvvgo5cnirseeusukv4e222rgvgukusf"
+                  },
+                  {
+                    "type": "application/vnd.elasticpath.address",
+                    "rel": "description",
+                    "href": "http://10.10.2.151:13080/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweqsumnyvercki5gw2qruivsesmsknfus63ckobltc5sznvlgymthifvvevcngbhguwsgkfvvc5cnnnktktstgfdfe22wingfkwlzjvvgo5cnirseeusukv4e222rgvgukusf",
+                    "uri": "/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweqsumnyvercki5gw2qruivsesmsknfus63ckobltc5sznvlgymthifvvevcngbhguwsgkfvvc5cnnnktktstgfdfe22wingfkwlzjvvgo5cnirseeusukv4e222rgvgukusf"
+                  },
+                  {
+                    "type": "application/vnd.elasticpath.selector",
+                    "rel": "selector",
+                    "href": "http://10.10.2.151:13080/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo/selector",
+                    "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo/selector"
+                  }
+                ],
+                "self": {
+                  "type": "application/vnd.elasticpath.links",
+                  "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo/selector/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweqsumnyvercki5gw2qruivsesmsknfus63ckobltc5sznvlgymthifvvevcngbhguwsgkfvvc5cnnnktktstgfdfe22wingfkwlzjvvgo5cnirseeusukv4e222rgvgukusf",
+                  "href": "http://10.10.2.151:13080/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo/selector/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweqsumnyvercki5gw2qruivsesmsknfus63ckobltc5sznvlgymthifvvevcngbhguwsgkfvvc5cnnnktktstgfdfe22wingfkwlzjvvgo5cnirseeusukv4e222rgvgukusf",
+                  "max-age": 0
+                },
                 "_description": [
                   {
                     "links": [
                       {
                         "type": "application/vnd.elasticpath.profile",
                         "rel": "profile",
-                        "href": "<BASEURL>/integrator/profiles/telcooperative/default",
+                        "href": "http://10.10.2.151:13080/integrator/profiles/telcooperative/default",
                         "uri": "/profiles/telcooperative/default"
                       },
                       {
                         "type": "application/vnd.elasticpath.links",
                         "rel": "list",
-                        "href": "<BASEURL>/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses",
+                        "href": "http://10.10.2.151:13080/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses",
                         "uri": "/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses"
                       }
                     ],
                     "self": {
                       "type": "application/vnd.elasticpath.address",
                       "uri": "/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweqsumnyvercki5gw2qruivsesmsknfus63ckobltc5sznvlgymthifvvevcngbhguwsgkfvvc5cnnnktktstgfdfe22wingfkwlzjvvgo5cnirseeusukv4e222rgvgukusf",
-                      "href": "<BASEURL>/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweqsumnyvercki5gw2qruivsesmsknfus63ckobltc5sznvlgymthifvvevcngbhguwsgkfvvc5cnnnktktstgfdfe22wingfkwlzjvvgo5cnirseeusukv4e222rgvgukusf",
+                      "href": "http://10.10.2.151:13080/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweqsumnyvercki5gw2qruivsesmsknfus63ckobltc5sznvlgymthifvvevcngbhguwsgkfvvc5cnnnktktstgfdfe22wingfkwlzjvvgo5cnirseeusukv4e222rgvgukusf",
                       "max-age": 0
                     },
                     "address": {
@@ -108,6 +133,108 @@
                     }
                   }
                 ]
+              },
+              {
+                "links": [
+                  {
+                    "rel": "selectaction",
+                    "href": "http://10.10.2.151:13080/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo/selector/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweq2snm3e42cqhexxaqkfk5juywrxnziuemjwobltc5sznvlgymthifvu2rdlgbhfkwlyjuyes5crpjbegttjgfcfc6tmijgfkvjqjvkgg5cnpjtxsusfjuyve2tlo5jeizcc",
+                    "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo/selector/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweq2snm3e42cqhexxaqkfk5juywrxnziuemjwobltc5sznvlgymthifvu2rdlgbhfkwlyjuyes5crpjbegttjgfcfc6tmijgfkvjqjvkgg5cnpjtxsusfjuyve2tlo5jeizcc"
+                  },
+                  {
+                    "type": "application/vnd.elasticpath.address",
+                    "rel": "description",
+                    "href": "http://10.10.2.151:13080/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweq2snm3e42cqhexxaqkfk5juywrxnziuemjwobltc5sznvlgymthifvu2rdlgbhfkwlyjuyes5crpjbegttjgfcfc6tmijgfkvjqjvkgg5cnpjtxsusfjuyve2tlo5jeizcc",
+                    "uri": "/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweq2snm3e42cqhexxaqkfk5juywrxnziuemjwobltc5sznvlgymthifvu2rdlgbhfkwlyjuyes5crpjbegttjgfcfc6tmijgfkvjqjvkgg5cnpjtxsusfjuyve2tlo5jeizcc"
+                  },
+                  {
+                    "type": "application/vnd.elasticpath.selector",
+                    "rel": "selector",
+                    "href": "http://10.10.2.151:13080/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo/selector",
+                    "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo/selector"
+                  }
+                ],
+                "self": {
+                  "type": "application/vnd.elasticpath.links",
+                  "uri": "/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo/selector/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweq2snm3e42cqhexxaqkfk5juywrxnziuemjwobltc5sznvlgymthifvu2rdlgbhfkwlyjuyes5crpjbegttjgfcfc6tmijgfkvjqjvkgg5cnpjtxsusfjuyve2tlo5jeizcc",
+                  "href": "http://10.10.2.151:13080/integrator/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx/billingaddressinfo/selector/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweq2snm3e42cqhexxaqkfk5juywrxnziuemjwobltc5sznvlgymthifvu2rdlgbhfkwlyjuyes5crpjbegttjgfcfc6tmijgfkvjqjvkgg5cnpjtxsusfjuyve2tlo5jeizcc",
+                  "max-age": 0
+                },
+                "_description": [
+                  {
+                    "links": [
+                      {
+                        "type": "application/vnd.elasticpath.profile",
+                        "rel": "profile",
+                        "href": "http://10.10.2.151:13080/integrator/profiles/telcooperative/default",
+                        "uri": "/profiles/telcooperative/default"
+                      },
+                      {
+                        "type": "application/vnd.elasticpath.links",
+                        "rel": "list",
+                        "href": "http://10.10.2.151:13080/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses",
+                        "uri": "/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses"
+                      }
+                    ],
+                    "self": {
+                      "type": "application/vnd.elasticpath.address",
+                      "uri": "/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweq2snm3e42cqhexxaqkfk5juywrxnziuemjwobltc5sznvlgymthifvu2rdlgbhfkwlyjuyes5crpjbegttjgfcfc6tmijgfkvjqjvkgg5cnpjtxsusfjuyve2tlo5jeizcc",
+                      "href": "http://10.10.2.151:13080/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlweq2snm3e42cqhexxaqkfk5juywrxnziuemjwobltc5sznvlgymthifvu2rdlgbhfkwlyjuyes5crpjbegttjgfcfc6tmijgfkvjqjvkgg5cnpjtxsusfjuyve2tlo5jeizcc",
+                      "max-age": 0
+                    },
+                    "address": {
+                      "country-name": "CA",
+                      "extended-address": "3910 Villy Rd.",
+                      "locality": "Vancouver",
+                      "postal-code": "V9C H2A",
+                      "region": "BC",
+                      "street-address": "Rm 1022 Tower 3"
+                    },
+                    "name": {
+                      "family-name": "Harris",
+                      "given-name": "Oliver"
+                    }
+                  }
+                ]
+              }
+            ],
+            "_chosen": [
+              {
+                "_description": [
+                  {
+                    "links": [
+                      {
+                        "type": "application/vnd.elasticpath.profile",
+                        "rel": "profile",
+                        "href": "http://10.10.2.151:13080/integrator/profiles/telcooperative/default",
+                        "uri": "/profiles/telcooperative/default"
+                      },
+                      {
+                        "type": "application/vnd.elasticpath.links",
+                        "rel": "list",
+                        "href": "http://10.10.2.151:13080/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses",
+                        "uri": "/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses"
+                      }
+                    ],
+                    "self": {
+                      "type": "application/vnd.elasticpath.address",
+                      "uri": "/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlwerdknrgsw2cbgbrwkqs2hbjwesc2gfau2ssmobltc5sznvlgymthifvu26thgnhui2zsj5kgw5conjixst2dga2e22sci5gfkrjtkjvvs5conjetkt2fjzce2rcwi5hdasjt",
+                      "href": "http://10.10.2.151:13080/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlwerdknrgsw2cbgbrwkqs2hbjwesc2gfau2ssmobltc5sznvlgymthifvu26thgnhui2zsj5kgw5conjixst2dga2e22sci5gfkrjtkjvvs5conjetkt2fjzce2rcwi5hdasjt",
+                      "max-age": 0
+                    },
+                    "address": {
+                      "country-name": "CA",
+                      "locality": "Vancouver",
+                      "postal-code": "V8C1N1",
+                      "region": "BC",
+                      "street-address": "5833 Movaat St."
+                    },
+                    "name": {
+                      "family-name": "Harris",
+                      "given-name": "Oliver"
+                    }
+                  }
+                ]
               }
             ]
           }
@@ -121,28 +248,28 @@
             "type": "application/vnd.elasticpath.links",
             "rel": "lineitems",
             "rev": "cart",
-            "href": "<BASEURL>/integrator/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ongxi2dwjbde2tc2jzqxcsttnfmtowctgq4xk3dck44wswsxlbqucq2snfhdetjvj5cfkm2oimyditrsjjueyvcro5heiy3uj5cecmkoimywwtlkkuyfs6swnvhg2wjvjzcekpi/lineitems",
-            "uri": "/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ongxi2dwjbde2tc2jzqxcsttnfmtowctgq4xk3dck44wswsxlbqucq2snfhdetjvj5cfkm2oimyditrsjjueyvcro5heiy3uj5cecmkoimywwtlkkuyfs6swnvhg2wjvjzcekpi/lineitems"
+            "href": "http://10.10.2.151:13080/integrator/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ondtmu3kjvbfsn3iorwws5kni53huvjlijzgk3dck44wswsxlbqucq2rgnhguzdnjuzem22nimyhutsukf4eyvcrpjhdewluj5cgo6kopeyhqwsemrwe43kfpfmwu2zsljce2pi/lineitems",
+            "uri": "/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ondtmu3kjvbfsn3iorwws5kni53huvjlijzgk3dck44wswsxlbqucq2rgnhguzdnjuzem22nimyhutsukf4eyvcrpjhdewluj5cgo6kopeyhqwsemrwe43kfpfmwu2zsljce2pi/lineitems"
           },
           {
             "type": "application/vnd.elasticpath.total",
             "rel": "total",
             "rev": "cart",
-            "href": "<BASEURL>/integrator/totals/carts/telcooperative/m5yxissunrjgovjqnrefsrluizlweq2tgrfto2lejrtvuk3nirifgssehbhxuurtobltc5sznvlgymthifvvs2tenjhvizzrjz5fc5cpirsgswktgaye2rcrgngfiz3xjzkfc5c2iretctshjuyvu2s2nvhviuly",
-            "uri": "/totals/carts/telcooperative/m5yxissunrjgovjqnrefsrluizlweq2tgrfto2lejrtvuk3nirifgssehbhxuurtobltc5sznvlgymthifvvs2tenjhvizzrjz5fc5cpirsgswktgaye2rcrgngfiz3xjzkfc5c2iretctshjuyvu2s2nvhviuly"
+            "href": "http://10.10.2.151:13080/integrator/totals/carts/telcooperative/m5yxissunrjgovjqnrefsrluizlweqsdofuforjlgfxfsojxiuyvcwbqnv2tg6liobltc5sznvlgymthifvu46szgnnguttiljcec5cnpjktatktgaye26tenvgfizzujvvgg5cnk5itgwsuljue23kjgvhg2ul2",
+            "uri": "/totals/carts/telcooperative/m5yxissunrjgovjqnrefsrluizlweqsdofuforjlgfxfsojxiuyvcwbqnv2tg6liobltc5sznvlgymthifvu46szgnnguttiljcec5cnpjktatktgaye26tenvgfizzujvvgg5cnk5itgwsuljue23kjgvhg2ul2"
           },
           {
             "type": "application/vnd.elasticpath.order",
             "rel": "order",
             "rev": "cart",
-            "href": "<BASEURL>/integrator/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi",
-            "uri": "/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi"
+            "href": "http://10.10.2.151:13080/integrator/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxkmxtamktinyvculupjhueucqgjzc6ttsivyvm5dcgjfgywten5auur22nbhvottmjz5fs6kmk5exqtlkm52e4rcgnbmxsmbvjzkgw6smkrfgstkxljuu42tinnhguyzrjvat2pi",
+            "uri": "/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxkmxtamktinyvculupjhueucqgjzc6ttsivyvm5dcgjfgywten5auur22nbhvottmjz5fs6kmk5exqtlkm52e4rcgnbmxsmbvjzkgw6smkrfgstkxljuu42tinnhguyzrjvat2pi"
           }
         ],
         "self": {
           "type": "application/vnd.elasticpath.cart",
-          "uri": "/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ongxi2dwjbde2tc2jzqxcsttnfmtowctgq4xk3dck44wswsxlbqucq2snfhdetjvj5cfkm2oimyditrsjjueyvcro5heiy3uj5cecmkoimywwtlkkuyfs6swnvhg2wjvjzcekpi",
-          "href": "<BASEURL>/integrator/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ongxi2dwjbde2tc2jzqxcsttnfmtowctgq4xk3dck44wswsxlbqucq2snfhdetjvj5cfkm2oimyditrsjjueyvcro5heiy3uj5cecmkoimywwtlkkuyfs6swnvhg2wjvjzcekpi",
+          "uri": "/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ondtmu3kjvbfsn3iorwws5kni53huvjlijzgk3dck44wswsxlbqucq2rgnhguzdnjuzem22nimyhutsukf4eyvcrpjhdewluj5cgo6kopeyhqwsemrwe43kfpfmwu2zsljce2pi",
+          "href": "http://10.10.2.151:13080/integrator/carts/telcooperative/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2ondtmu3kjvbfsn3iorwws5kni53huvjlijzgk3dck44wswsxlbqucq2rgnhguzdnjuzem22nimyhutsukf4eyvcrpjhdewluj5cgo6kopeyhqwsemrwe43kfpfmwu2zsljce2pi",
           "max-age": 0
         },
         "_total": [
@@ -152,26 +279,26 @@
                 "type": "application/vnd.elasticpath.cart",
                 "rel": "cart",
                 "rev": "total",
-                "href": "<BASEURL>/integrator/carts/telcooperative/default",
+                "href": "http://10.10.2.151:13080/integrator/carts/telcooperative/default",
                 "uri": "/carts/telcooperative/default"
               }
             ],
             "self": {
               "type": "application/vnd.elasticpath.total",
-              "uri": "/totals/carts/telcooperative/m5yxissunrjgovjqnrefsrluizlweq2tgrfto2lejrtvuk3nirifgssehbhxuurtobltc5sznvlgymthifvvs2tenjhvizzrjz5fc5cpirsgswktgaye2rcrgngfiz3xjzkfc5c2iretctshjuyvu2s2nvhviuly",
-              "href": "<BASEURL>/integrator/totals/carts/telcooperative/m5yxissunrjgovjqnrefsrluizlweq2tgrfto2lejrtvuk3nirifgssehbhxuurtobltc5sznvlgymthifvvs2tenjhvizzrjz5fc5cpirsgswktgaye2rcrgngfiz3xjzkfc5c2iretctshjuyvu2s2nvhviuly",
+              "uri": "/totals/carts/telcooperative/m5yxissunrjgovjqnrefsrluizlweqsdofuforjlgfxfsojxiuyvcwbqnv2tg6liobltc5sznvlgymthifvu46szgnnguttiljcec5cnpjktatktgaye26tenvgfizzujvvgg5cnk5itgwsuljue23kjgvhg2ul2",
+              "href": "http://10.10.2.151:13080/integrator/totals/carts/telcooperative/m5yxissunrjgovjqnrefsrluizlweqsdofuforjlgfxfsojxiuyvcwbqnv2tg6liobltc5sznvlgymthifvu46szgnnguttiljcec5cnpjktatktgaye26tenvgfizzujvvgg5cnk5itgwsuljue23kjgvhg2ul2",
               "max-age": 0
             },
             "cost": [
               {
-                "amount": 14.97,
+                "amount": 4.99,
                 "currency": "CAD",
-                "display": "$14.97"
+                "display": "$4.99"
               }
             ]
           }
         ],
-        "total-quantity": 4
+        "total-quantity": 1
       }
     ],
     "_purchaseform": [
@@ -179,14 +306,14 @@
         "links": [
           {
             "rel": "submitorderaction",
-            "href": "<BASEURL>/integrator/purchases/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
-            "uri": "/purchases/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq"
+            "href": "http://10.10.2.151:13080/integrator/purchases/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx",
+            "uri": "/purchases/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx"
           }
         ],
         "self": {
           "type": "application/vnd.elasticpath.purchase",
-          "uri": "/purchases/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi/form",
-          "href": "<BASEURL>/integrator/purchases/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxgrqvqnzxmnbhu5zwfnme6u2sorexc4tpn43fm5dcgjfgywten5auur2onbguoutjjzdvm3kmkraxutl2jf2e4rcwnrmvgmbujvcgw6kmkrrxstlkljwe26sfgvhvizdkjzat2pi/form",
+          "uri": "/purchases/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxkmxtamktinyvculupjhueucqgjzc6ttsivyvm5dcgjfgywten5auur22nbhvottmjz5fs6kmk5exqtlkm52e4rcgnbmxsmbvjzkgw6smkrfgstkxljuu42tinnhguyzrjvat2pi/form",
+          "href": "http://10.10.2.151:13080/integrator/purchases/orders/telcooperative/m43ggmcpkrktitl2iezwo4kfpazgoqlljzvgirsnnjtxoukvjv2e4mcvgrhgsmd2jvvuk6smkrktkulkjf2e42sfo5jgwwlzkeyek6spivjek32uirqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvg4stku2vkwkgjzffemscjrjfm3lxkmxtamktinyvculupjhueucqgjzc6ttsivyvm5dcgjfgywten5auur22nbhvottmjz5fs6kmk5exqtlkm52e4rcgnbmxsmbvjzkgw6smkrfgstkxljuu42tinnhguyzrjvat2pi/form",
           "max-age": 0
         }
       }
@@ -196,28 +323,28 @@
         "links": [],
         "self": {
           "type": "application/vnd.elasticpath.tax",
-          "uri": "/taxes/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
-          "href": "<BASEURL>/integrator/taxes/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
+          "uri": "/taxes/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx",
+          "href": "http://10.10.2.151:13080/integrator/taxes/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx",
           "max-age": 0
         },
         "cost": [
           {
-            "amount": 1.2,
+            "amount": 0.35,
             "currency": "CAD",
-            "display": "$1.20",
+            "display": "$0.35",
             "title": "PST"
           },
           {
-            "amount": 0.75,
+            "amount": 0.25,
             "currency": "CAD",
-            "display": "$0.75",
+            "display": "$0.25",
             "title": "GST"
           }
         ],
         "total": {
-          "amount": 1.95,
+          "amount": 0.6,
           "currency": "CAD",
-          "display": "$1.95"
+          "display": "$0.60"
         }
       }
     ],
@@ -226,15 +353,15 @@
         "links": [],
         "self": {
           "type": "application/vnd.elasticpath.total",
-          "uri": "/totals/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
-          "href": "<BASEURL>/integrator/totals/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqlrjngvenkzjzatk4rym4xwitjzlfjtowciobltc5sznvlgymthifvvsmsfo5neosjqljlvs5cnirgxutljgaye4v2wnbgfiz3xj5kes5copjexsttnkv5e2vdlgvhdetjq",
+          "uri": "/totals/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx",
+          "href": "http://10.10.2.151:13080/integrator/totals/orders/telcooperative/m5yxissunrjgovjqnrefsrluizlweqjpoveuu5lsjzuvkojzov4guytrnnytgnbwobltc5sznvlgymthifvvu3kfgvmtevjtjzves5cznjcxst2dgaye2v2gnjgfi2zrj5ke25cnnvexqwtnjeze6r2rgjhhuvlx",
           "max-age": 0
         },
         "cost": [
           {
-            "amount": 16.92,
+            "amount": 5.59,
             "currency": "CAD",
-            "display": "$16.92"
+            "display": "$5.59"
           }
         ]
       }

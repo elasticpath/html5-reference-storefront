@@ -139,7 +139,7 @@ define(function (require) {
 
             var selectActionHref = jsonPath(choiceAddresses[i], '$..links[?(@.rel=="selectaction")].href')[0];
 
-            _.extend(parsedChoiceAddress, {selectAction: selectActionHref})
+            _.extend(parsedChoiceAddress, {selectAction: selectActionHref});
 
             // If there is no chosen address, designate the first choice address to be chosen
             if (i === 0 && !chosenAddress) {

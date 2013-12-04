@@ -14,12 +14,26 @@ define(function (require) {
 
     describe('given all necessary information', function () {
       before(function () {
-        var rawData = _.extend({}, data);
-        this.model = checkoutModel.parse(rawData);
+        this.rawData = _.extend({}, data);
+        this.model = checkoutModel.parse(this.rawData);
+        this.model = checkoutModel.parse(this.rawData);
+
+        // Get a count of the number of choice and chosen addresses in the rawData JSON
+        this.numChosenAddresses = 0;
+        this.numChoiceAddresses = 0;
+
+        try {
+          this.numChosenAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._chosen.._description[0]').length;
+          this.numChoiceAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._choice')[0].length;
+        } catch (error) {
+        }
       });
 
       after(function () {
         this.model = null;
+
+        delete(this.numChosenAddresses);
+        delete(this.numChoiceAddresses);
       });
 
       it('has non-empty submitOrderLink', function () {
@@ -39,9 +53,16 @@ define(function (require) {
         expect(this.model.summary.totalQuantity).to.be.above(0);
       });
 
-      it('parsed a billingAddresses.chosenBillingAddress object', function () {
+      it('parsed a billingAddresses object with the correct number of addresses', function () {
         expect(this.model.billingAddresses).to.be.ok;
-        expect(this.model.billingAddresses.chosenBillingAddress).to.not.eql({});
+        expect(this.model.billingAddresses.length).to.be.eql(this.numChosenAddresses + this.numChoiceAddresses);
+      });
+
+      it('added the chosen property to identify the chosen address object', function() {
+        if(this.numChosenAddresses === 1) {
+          // The chosen billing address will always be the first address in the billingAddresses array
+          expect(this.model.billingAddresses[0]).to.have.property('chosen', true);
+        }
       });
     });
 
@@ -121,6 +142,11 @@ define(function (require) {
 
         expect(ep.logger.error).to.be.not.called;
         expect(model.billingAddresses).to.be.ok;
+      });
+
+      // FIXME
+      it('when missing a chosen billing address', function() {
+        // and it doesn't add the 'chosen' property to any of the billing address objects generated
       });
 
     });
