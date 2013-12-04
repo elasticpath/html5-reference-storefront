@@ -20,7 +20,7 @@
       </div>
   </script>
 
-  <!-- Default Checkout Title Template [default Layout] -->
+  <!-- Default Checkout Title Template [default ItemView] -->
   <script id="DefaultCheckoutTitleTemplate" type="text/template">
     <h1 class="view-title"><%= E.getI18nLabel('checkout.checkoutTitle') %></h1>
   </script>
@@ -37,36 +37,38 @@
   </script>
 
   <!-- Checkout Summary Layout Template [default Layout, class: checkout-sidebar-inner]-->
-  <script id="CheckoutSummaryLayoutTemplate" type="text/template">
-    <div data-region="checkoutSummaryRegion" class="checkout-summary-container"></div>
-    <div data-region="submitOrderRegion" class="submit-order-container"></div>
-  </script>
-
-  <!-- Checkout Summary Template [default ItemView, tagName: ul, class: checkout-summary-list]-->
   <script id="CheckoutSummaryTemplate" type="text/template">
-    <li class="checkout-total-quantity">
-      <label data-el-label="checkout.totalQuantity"><%= E.getI18nLabel('checkout.totalQuantity') %>: </label>
-      <span data-el-value="checkout.totalQuantity"><%= E.totalQuantity %></span>
-    </li>
-    <li class="checkout-subtotal">
-      <label data-el-label="checkout.subTotal"><%= E.getI18nLabel('checkout.subTotal') %>: </label>
-      <span data-el-value="checkout.subTotal"><%= E.subTotal.display %></span>
-    </li>
-    <li class="checkout-tax">
-      <label data-el-label="checkout.tax"><%= E.getI18nLabel('checkout.tax') %>:</label>
-      <span data-el-value="checkout.tax"><%= E.tax.display %></span>
-    </li>
-    <li class="checkout-total">
-      <label data-el-label="checkout.total"><%= E.getI18nLabel('checkout.total') %>:</label>
-      <span data-el-value="checkout.total"><%= E.total.display %></span>
-    </li>
-  </script>
+    <ul class="checkout-summary-list">
+      <li class="checkout-total-quantity">
+        <label data-el-label="checkout.totalQuantity"><%= E.getI18nLabel('checkout.totalQuantity') %>: </label>
+        <span data-el-value="checkout.totalQuantity"><%= E.totalQuantity %></span>
+      </li>
+      <li class="checkout-subtotal">
+        <label data-el-label="checkout.subTotal"><%= E.getI18nLabel('checkout.subTotal') %>: </label>
+        <span data-el-value="checkout.subTotal"><%= E.subTotal.display %></span>
+      </li>
+      <li>
+      </li>
+      <li class="checkout-tax" data-el-container="checkout.taxes">
+        <label data-el-label="checkout.taxTotal"><%= E.getI18nLabel('checkout.taxTotal') %>: </label>
+        <span data-el-value="checkout.taxTotal"><%= E.taxTotal.display %></span>
 
-  <!-- checkout Complete Purchase Action Template -->
-  <script id="SubmitOrderActionTemplate" type="text/template">
+        <div data-region="checkoutTaxBreakDownRegion"></div>
+      </li>
+      <li class="checkout-total">
+        <label data-el-label="checkout.total"><%= E.getI18nLabel('checkout.total') %>:</label>
+        <span data-el-value="checkout.total"><%= E.total.display %></span>
+      </li>
+    </ul>
+
     <button class="btn-cmd-submit-order" data-el-label="checkout.submitOrder"
-      <%= E.getSubmitOrderButtonDisabledAttrib(E.submitOrderActionLink) %>><%= E.getI18nLabel('checkout.submitOrder') %></button>
+    <%= E.getSubmitOrderButtonDisabledAttrib(E.submitOrderActionLink) %>><%= E.getI18nLabel('checkout.submitOrder') %></button>
   </script>
 
+  <!-- Checkout Tax Template [default ItemView, tagName: li, className: checkout-tax]-->
+  <script id="CheckoutTaxTemplate" type="text/template">
+      <label data-el-label="checkout.tax"><%= E.title %>:</label>
+      <span data-el-value="checkout.tax"><%= E.display %></span>
+  </script>
 </div>
 

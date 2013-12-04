@@ -32,7 +32,6 @@ define(function (require) {
 
     parse: function (response) {
       var checkoutObj = {
-        submitOrderActionLink: null,
         summary: {},
         billingAddresses: {}
       };
@@ -61,21 +60,29 @@ define(function (require) {
       var summary = {
         totalQuantity: undefined,
         subTotal: {},
-        tax: {},
-        total: {}
+        taxTotal: {},
+        taxes: [],
+        total: {},
+        submitOrderActionLink: undefined
       };
 
       try {
         summary.totalQuantity = jsonPath(response, '$._cart..total-quantity')[0];
+        summary.submitOrderActionLink = jsonPath(response, "$..links[?(@.rel=='submitorderaction')].href")[0];
 
         var subTotal = jsonPath(response, '$._cart.._total..cost[0]')[0];
         if (subTotal) {
           summary.subTotal = modelHelpers.parsePrice(subTotal);
         }
 
-        var tax = jsonPath(response, '$._tax..total')[0];
-        if (tax) {
-          summary.tax = modelHelpers.parsePrice(tax);
+        var taxTotal = jsonPath(response, '$._tax..total')[0];
+        if (taxTotal) {
+          summary.taxTotal = modelHelpers.parsePrice(taxTotal);
+        }
+
+        var taxes = jsonPath(response, '$._tax..cost')[0];
+        if(taxes) {
+          summary.taxes = modelHelpers.parseArray(taxes, modelHelpers.parseTax);
         }
 
         var total = jsonPath(response, '$._total[0].cost[0]')[0];

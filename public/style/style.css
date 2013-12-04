@@ -6986,6 +6986,12 @@ Purchase Confirmation
 .purchaseconfirmation-items-list li:nth-child(even) {
   background: #fafafe;
 }
+.cart-tax-container li ul {
+  margin: 5px 0 0 10px;
+}
+.cart-total-container {
+  margin-bottom: 10px;
+}
 .checkout-main-container {
   position: relative;
   float: left;
@@ -7068,6 +7074,10 @@ Purchase Confirmation
 }
 .submit-order-container {
   margin-top: 2rem;
+}
+.checkout-tax-list {
+  padding-left: 1rem;
+  margin-bottom: 1rem;
 }
 .checkout-summary-list {
   padding: 0px;

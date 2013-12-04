@@ -38,20 +38,20 @@ define(function (require) {
 
           checkoutLayout.cancelCheckoutActionRegion.show(new View.CancelCheckoutActionView());
 
-          var checkoutSummaryLayout = new View.CheckoutSummaryLayout();
-          checkoutSummaryLayout.on('show', function () {
-            checkoutSummaryLayout.checkoutSummaryRegion.show(
-              new View.CheckoutSummaryView({
-                model: new Backbone.Model(checkoutModel.get('summary'))
-              })
-            );
-            checkoutSummaryLayout.submitOrderRegion.show(
-              new View.submitOrderActionView({
-                model: checkoutModel
-              })
-            );
+          var checkoutSummaryView = new View.CheckoutSummaryView({
+            model: new Backbone.Model(checkoutModel.get('summary'))
           });
-          checkoutLayout.checkoutOrderRegion.show(checkoutSummaryLayout);
+          checkoutSummaryView.on('show', function() {
+            if (checkoutModel.get('summary').taxes.length > 0) {
+              checkoutSummaryView.checkoutTaxBreakDownRegion.show(
+                new View.CheckoutTaxesCollectionView({
+                  collection: new Backbone.Collection(checkoutModel.get('summary').taxes)
+                })
+              );
+            }
+          });
+
+          checkoutLayout.checkoutOrderRegion.show(checkoutSummaryView);
         }
       });
 

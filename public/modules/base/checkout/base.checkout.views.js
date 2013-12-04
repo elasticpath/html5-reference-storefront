@@ -41,7 +41,7 @@ define(function (require) {
 
     // Set Checkout Button to Ready State
     function resetCheckoutButtonText() {
-      $('.btn-cmd-submit-order').html(viewHelpers.getI18nLabel('cart.submitOrder'));
+      $('.btn-cmd-submit-order').html(viewHelpers.getI18nLabel('checkout.submitOrder'));
     }
 
     /**
@@ -107,36 +107,37 @@ define(function (require) {
     });
 
     /**
-     * Default Checkout Summary Layout, including regions for checkout information summary and submit order button.
-     * @type Marionette.Layout
-     */
-    var checkoutSummaryLayout = Marionette.Layout.extend({
-      template: '#CheckoutSummaryLayoutTemplate',
-      className: 'checkout-sidebar-inner',
-      regions: {
-        checkoutSummaryRegion: '[data-region="checkoutSummaryRegion"]',
-        submitOrderRegion: '[data-region="submitOrderRegion"]'
-      }
-    });
-
-    /**
-     * Default Checkout Summary View, will render checkout summary information.
+     * Default Checkout Tax View, will render a tax.
      * @type Marionette.ItemView
      */
-    var checkoutSummaryView = Marionette.ItemView.extend({
-      template: '#CheckoutSummaryTemplate',
-      tagName: 'ul',
-      className: 'checkout-summary-list',
+    var checkoutTaxView = Marionette.ItemView.extend({
+      template: '#CheckoutTaxTemplate',
+      tagName: 'li',
+      className: 'checkout-tax',
       templateHelpers: viewHelpers
     });
 
     /**
-     * Default Submit Order Action View, will render submit order button.
-     * @type Marionette.ItemView
+     * Default Checkout Taxes Collection View, will render a collection of taxes
+     * @type Marionette.CollectionView
      */
-    var submitOrderActionView = Marionette.ItemView.extend({
-      template: '#SubmitOrderActionTemplate',
+    var checkoutTaxesCollectionView = Marionette.CollectionView.extend({
+      tagName: 'ul',
+      className: 'checkout-tax-list',
+      itemView: checkoutTaxView
+    });
+
+    /**
+     * Default Checkout Summary View, will render order summary information & submit order button.
+     * @type Marionette.Layout
+     */
+    var checkoutSummaryView = Marionette.Layout.extend({
+      template: '#CheckoutSummaryTemplate',
+      className: 'checkout-sidebar-inner',
       templateHelpers: viewHelpers,
+      regions: {
+        checkoutTaxBreakDownRegion: '[data-region="checkoutTaxBreakDownRegion"]'
+      },
       events: {
         'click .btn-cmd-submit-order': function (event) {
           EventBus.trigger('checkout.submitOrderBtnClicked', this.model.get('submitOrderActionLink'));
@@ -144,15 +145,13 @@ define(function (require) {
       }
     });
 
-
     return {
       DefaultLayout: defaultLayout,
       CheckoutTitleView: checkoutTitleView,
       BillingAddressLayout: billingAddressLayout,
       CancelCheckoutActionView: cancelCheckoutActionView,
-      CheckoutSummaryLayout: checkoutSummaryLayout,
       CheckoutSummaryView: checkoutSummaryView,
-      submitOrderActionView: submitOrderActionView,
+      CheckoutTaxesCollectionView: checkoutTaxesCollectionView,
       setCheckoutButtonProcessing: setCheckoutButtonProcessing,
       resetCheckoutButtonText: resetCheckoutButtonText
     };

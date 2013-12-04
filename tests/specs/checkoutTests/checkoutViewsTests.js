@@ -72,9 +72,46 @@ define(function (require) {
       });
     });
 
-    describe('CheckoutSummaryLayout', function () {
+    describe('CheckoutSummaryView', function () {
+      // Mock the model with just the data we need
+      var rawData = {
+        "totalQuantity": "1",
+        "submitOrderActionLink": "submitOrderActionLink",
+        "taxTotal": {
+          "currency": "CAD",
+          "amount": 0.4,
+          "display": "$0.40"
+        },
+        "taxes": [
+          {
+            "currency": "CAD",
+            "amount": 0.1,
+            "display": "$0.10",
+            "title": "GST"
+          },
+          {
+            "currency": "CAD",
+            "amount": 0.3,
+            "display": "$0.30",
+            "title": "PST"
+          }
+        ],
+        "total": {
+          "currency": "CAD",
+          "amount": 5.19,
+          "display": "$5.19"
+        },
+        "subTotal": {
+          "currency": "CAD",
+          "amount": 4.99,
+          "display": "$4.99"
+        }
+      };
+
       before(function () {
-        this.view = new views.CheckoutSummaryLayout();
+        this.view = new views.CheckoutSummaryView(
+          new Backbone.Model(rawData)
+        );
         this.view.render();
       });
 
@@ -86,14 +123,18 @@ define(function (require) {
       });
 
       describe('regions', function () {
-        it('should have a checkoutSummaryRegion region', function () {
-          expect(this.view.checkoutSummaryRegion).to.exist;
-          expect(this.view.$el.find('[data-region="checkoutSummaryRegion"]')).to.be.length(1);
+        it('should have a checkoutTaxBreakDownRegion region', function () {
+          expect(this.view.checkoutTaxBreakDownRegion).to.exist;
+          expect(this.view.$el.find('[data-region="checkoutTaxBreakDownRegion"]')).to.be.length(1);
         });
-        it('should have a submitOrderRegion region', function () {
-          expect(this.view.submitOrderRegion).to.exist;
-          expect(this.view.$el.find('[data-region="submitOrderRegion"]')).to.be.length(1);
-        });
+      });
+
+      describe('when missing taxes', function() {
+        it('does not render taxes collection');
+      });
+
+      describe('when missing taxTotal & taxes', function() {
+        it('view renders without error');
       });
     });
 

@@ -55,7 +55,7 @@
     "submitOrder": "Complete Purchase",
     "totalQuantity": "Total Quantity",
     "subTotal": "Today's Subtotal",
-    "tax": "Today's Tax",
+    "taxTotal": "Today's Taxes",
     "total": "Today's Total"
   },
   "category": {
