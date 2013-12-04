@@ -44,7 +44,7 @@ define(function (require) {
         checkoutObj.billingAddresses = modelHelpers.parseBillingAddresses(response);
       }
       catch(error){
-        ep.logger.error("chekcout model wasn't able to fetch valid data for parsing. " + error.message);
+        ep.logger.error("Checkout model wasn't able to fetch valid data for parsing. " + error.message);
       }
 
       return checkoutObj;
@@ -111,6 +111,14 @@ define(function (require) {
     parseBillingAddresses: function (response) {
       var billingAddresses = [];
 
+      /**
+       * Add a property to identify a billing address as the chosen address.
+       * @param address
+       */
+      var markAsChosenAddress = function(address) {
+        return _.extend(address, {chosen: true});
+      };
+
       try {
         var chosenAddress = jsonPath(response, '$.._billingaddressinfo[0].._chosen.._description[0]')[0];
         var choiceAddresses = jsonPath(response, '$.._billingaddressinfo[0].._choice')[0];
@@ -118,8 +126,7 @@ define(function (require) {
         if (chosenAddress) {
           var parsedChosenAddress = modelHelpers.parseAddress(chosenAddress);
    
-          // Add an extra property to allow us to identify the chosen address
-          _.extend(parsedChosenAddress, {chosen: true});
+          markAsChosenAddress(parsedChosenAddress);
 
           billingAddresses.push(parsedChosenAddress);
         }
@@ -134,15 +141,14 @@ define(function (require) {
 
             _.extend(parsedChoiceAddress, {selectAction: selectActionHref})
 
-            // If there is no chosen address, designate the first choice address as a default
+            // If there is no chosen address, designate the first choice address to be chosen
             if (i === 0 && !chosenAddress) {
-              _.extend(parsedChoiceAddress, {chosen: true});
+              markAsChosenAddress(parsedChoiceAddress);
             }
 
             billingAddresses.push(parsedChoiceAddress);
           }
         }
-
 
       }
       catch (error) {
