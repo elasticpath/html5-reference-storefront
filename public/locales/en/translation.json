@@ -55,7 +55,7 @@
     "submitOrder": "Complete Purchase",
     "totalQuantity": "Total Quantity",
     "subTotal": "Today's Subtotal",
-    "tax": "Today's Taxes",
+    "taxTotal": "Today's Taxes",
     "total": "Today's Total",
     "updateChosenBillingAddressErrMsg": "I'm sorry, there was an error changing your selected billing address. Please contact your system administrator."
   },

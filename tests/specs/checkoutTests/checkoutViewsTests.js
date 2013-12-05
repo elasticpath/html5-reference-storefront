@@ -5,6 +5,7 @@
  */
 define(function (require) {
   var Backbone = require('backbone');
+  var ep = require('ep');
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
   var EventTestFactory = require('EventTestFactory');
@@ -142,44 +143,48 @@ define(function (require) {
     describe('CheckoutSummaryView', function () {
       // Mock the model with just the data we need
       var rawData = {
-        "totalQuantity": "1",
-        "submitOrderActionLink": "submitOrderActionLink",
-        "taxTotal": {
-          "currency": "CAD",
-          "amount": 0.4,
-          "display": "$0.40"
-        },
-        "taxes": [
-          {
-            "currency": "CAD",
-            "amount": 0.1,
-            "display": "$0.10",
-            "title": "GST"
-          },
-          {
-            "currency": "CAD",
-            "amount": 0.3,
-            "display": "$0.30",
-            "title": "PST"
-          }
-        ],
-        "total": {
-          "currency": "CAD",
-          "amount": 5.19,
-          "display": "$5.19"
-        },
+        "totalQuantity": 1,
         "subTotal": {
           "currency": "CAD",
           "amount": 4.99,
           "display": "$4.99"
-        }
+        },
+        "taxTotal": {
+          "currency": "CAD",
+          "amount": 0.6,
+          "display": "$0.60"
+        },
+        "taxes": [
+          {
+            "currency": "CAD",
+            "amount": 0.35,
+            "display": "$0.35",
+            "title": "PST"
+          },
+          {
+            "currency": "CAD",
+            "amount": 0.25,
+            "display": "$0.25",
+            "title": "GST"
+          }
+        ],
+        "total": {
+          "currency": "CAD",
+          "amount": 5.59,
+          "display": "$5.59"
+        },
+        "submitOrderActionLink": "fakeSubmitLink"
       };
 
       before(function () {
-        this.view = new views.CheckoutSummaryView(
-          new Backbone.Model(rawData)
-        );
+        this.view = new views.CheckoutSummaryView({
+          model: new Backbone.Model(rawData)
+        });
         this.view.render();
+      });
+
+      after(function() {
+        delete this.view;
       });
 
       it('should be an instance of Marionette Layout object', function () {
@@ -196,109 +201,45 @@ define(function (require) {
         });
       });
 
-      describe('when missing taxes', function() {
-        it('does not render taxes collection');
+      describe('renders view content correctly', function() {
+        it('renders the total quantity', function() {
+          expect(Number($('[data-el-value="checkout.totalQuantity"]', this.view.$el).text()))
+            .to.be.equal(rawData.totalQuantity);
+        });
+        it('renders the sub total', function() {
+          expect($('[data-el-value="checkout.subTotal"]', this.view.$el).text())
+            .to.be.equal(rawData.subTotal.display);
+        });
+        it('renders the tax total', function() {
+          expect($('[data-el-value="checkout.taxTotal"]', this.view.$el).text())
+            .to.be.equal(rawData.taxTotal.display);
+        });
+        it('renders the checkout total', function() {
+          expect($('[data-el-value="checkout.total"]', this.view.$el).text())
+            .to.be.equal(rawData.total.display);
+        });
       });
 
       describe('when missing taxTotal & taxes', function() {
-        it('view renders without error');
-      });
-    });
+        before(function () {
+          // Remove taxes array and taxTotal object from our raw data
+          rawData.taxes = [];
+          rawData.taxTotal = {};
 
-    describe('CheckoutSummaryView', function () {
-      before(function () {
-        // Mock the model with just the data we need
-        var rawData = {
-          "tax": {
-            "currency": "CAD",
-            "amount": 0.2,
-            "display": "$0.20"
-          },
-          "total": {
-            "currency": "CAD",
-            "amount": 5.19,
-            "display": "$5.19"
-          },
-          "totalQuantity": "1",
-          "subTotal": {
-            "currency": "CAD",
-            "amount": 4.99,
-            "display": "$4.99"
-          }
-        };
-        this.model = new Backbone.Model(rawData);
+          sinon.stub(ep.logger, 'error');
 
-        this.view = new views.CheckoutSummaryView({
-          model: this.model
-        });
-        this.view.render();
-      });
-
-      after(function () {
-        this.model.destroy();
-      });
-
-      it('should be an instance of Marionette ItemView object', function () {
-        expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
-      });
-      it('render() should return the view object', function () {
-        expect(this.view.render()).to.be.equal(this.view);
-      });
-
-      it('renders view content correctly', function () {
-        expect($('[data-el-value="checkout.totalQuantity"]', this.view.$el).text())
-          .to.be.equal(this.model.get('totalQuantity'));
-
-        expect($('[data-el-value="checkout.subTotal"]', this.view.$el).text())
-          .to.be.equal(this.model.get('subTotal').display);
-
-        expect($('[data-el-value="checkout.tax"]', this.view.$el).text())
-          .to.be.equal(this.model.get('tax').display);
-
-        expect($('[data-el-value="checkout.total"]', this.view.$el).text())
-          .to.be.equal(this.model.get('total').display);
-
-      });
-    });
-
-    describe('submitOrderActionView', function () {
-      before(function () {
-        // Mock the model with just the data we need
-        var rawData = {
-          "submitOrderActionLink": "someUri"
-        };
-        this.model = new Backbone.Model(rawData);
-        this.view = new views.submitOrderActionView({ model: this.model });
-        this.view.render();
-      });
-
-      it('should be an instance of Marionette ItemView object', function () {
-        expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
-      });
-      it('render() should return the view object', function () {
-        expect(this.view.render()).to.be.equal(this.view);
-      });
-      it('renders submitOrder button', function() {
-        expect(this.view.$el.find('button[data-el-label="checkout.submitOrder"]')).to.be.length(1);
-      });
-
-      describe('complete purchase button clicked', function() {
-        before(function() {
-          sinon.spy(EventBus, 'trigger');
-
-          // Unbind subsequently triggered events
-          EventTestHelpers.unbind('checkout.submitOrderBtnClicked');
-
-          this.view.$el.find('[data-el-label="checkout.submitOrder"]').click();
+          this.view = new views.CheckoutSummaryView({
+            model: new Backbone.Model(rawData)
+          });
+          this.view.render();
         });
 
-        after(function() {
-          EventBus.trigger.restore();
-          EventTestHelpers.reset();
+        after(function () {
+          ep.logger.error.restore();
         });
 
-        it('should trigger submitOrderBtnClicked event', function() {
-          expect(EventBus.trigger).to.be.calledWithExactly('checkout.submitOrderBtnClicked', this.model.get('submitOrderActionLink'));
+        it('view renders without error', function() {
+          expect(ep.logger.error).to.be.not.called;
         });
       });
     });

@@ -57,12 +57,9 @@
         <label data-el-label="checkout.subTotal"><%= E.getI18nLabel('checkout.subTotal') %>: </label>
         <span data-el-value="checkout.subTotal"><%= E.subTotal.display %></span>
       </li>
-      <li>
-      </li>
       <li class="checkout-tax" data-el-container="checkout.taxes">
         <label data-el-label="checkout.taxTotal"><%= E.getI18nLabel('checkout.taxTotal') %>: </label>
         <span data-el-value="checkout.taxTotal"><%= E.taxTotal.display %></span>
-
         <div data-region="checkoutTaxBreakDownRegion"></div>
       </li>
       <li class="checkout-total">
@@ -72,7 +69,7 @@
     </ul>
 
     <button class="btn-cmd-submit-order" data-el-label="checkout.submitOrder"
-      <%= E.getSubmitOrderButtonDisabledAttrib(E.submitOrderActionLink) %>><%= E.getI18nLabel('checkout.submitOrder') %></button>
+      <%= E.getSubmitOrderButtonDisabledAttr(E.submitOrderActionLink) %>><%= E.getI18nLabel('checkout.submitOrder') %></button>
   </script>
 
   <!-- Checkout Tax Template [default ItemView, tagName: li, className: checkout-tax]-->

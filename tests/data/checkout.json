@@ -1,5 +1,5 @@
 {
-  "zoom" : "?zoom=billingaddressinfo:selector:chosen:description,billingaddressinfo:selector:choice,billingaddressinfo:selector:choice:description,cart,cart:total,purchaseform,tax,total",
+  "zoom" : "?zoom=purchaseform,billingaddressinfo:selector:chosen:description,billingaddressinfo:selector:choice,billingaddressinfo:selector:choice:description,tax,total,cart,cart:total",
   "retrievedOn" : "Dev 4, 2013",
   "retrievedCriteria": "purchase digital item only, must have 1 one-item item; registered user, must have at least 1 address, and chosen a default billing address",
   "response" : {

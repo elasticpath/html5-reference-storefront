@@ -10,6 +10,7 @@ define(function (require) {
   var Mediator = require('mediator');
   var EventTestHelpers = require('testhelpers.event');
   var EventTestFactory = require('EventTestFactory');
+  var dataJSON = require('text!/tests/data/checkout.json');
 
   describe('Checkout Module: Controller', function () {
     var controller = require('checkout');
@@ -17,27 +18,91 @@ define(function (require) {
     var template = require('text!modules/base/checkout/base.checkout.templates.html');
 
     describe("DefaultView", function () {
-      before(function () {
-        sinon.stub(Backbone.Model.prototype, 'fetch');
-
+      before(function (done) {
         $("#Fixtures").append(template); // append templates
-        this.view = new controller.DefaultView();
+
+        var fakeGetLink = "/integrator/orders/fakeUrl";
+        var fakeResponse = JSON.stringify(JSON.parse(dataJSON).response);
+
+        ep.io.localStore.setItem('oAuthToken', 'fakeToken');
+
+        var server = sinon.fakeServer.create();
+        server.autoRespond = true;
+
+        server.respondWith(
+          "GET", fakeGetLink + JSON.parse(dataJSON).zoom,
+          [200, {"Content-Type":"application/json"}, fakeResponse]
+        );
+
+        this.view = new controller.DefaultView(fakeGetLink);
+
         this.view.render();
+
+        // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
+        this.view.checkoutOrderRegion.on('show', function() {
+          done();
+        });
       });
 
       after(function () {
         $("#Fixtures").empty();
-        Backbone.Model.prototype.fetch.restore();
       });
 
       it('returns an instance of cart View.DefaultLayout', function () {
         expect(this.view).to.be.an.instanceOf(view.DefaultLayout);
       });
-      it('Model should have fetched info from server once', function () {
-        expect(Backbone.Model.prototype.fetch).to.be.calledOnce;
-      });
+
       it('view\'s DOM is rendered (view content rendered)', function () {
         expect(this.view.el.childElementCount).to.be.equal(1);
+      });
+
+      it('the TaxesCollectionView is rendered', function() {
+        // Test for the presence of the unordered list rendered by TaxesCollectionView
+        expect(this.view.$el.find('ul.checkout-tax-list')).to.have.length(1);
+      });
+
+      describe("Given there is no tax data", function() {
+        // Fake a server response without tax data
+        before(function (done) {
+          $("#Fixtures").append(template); // append templates
+
+          // FIXME: create a helper function for these fakeServer tests
+          var fakeGetLink = "/integrator/orders/fakeUrl";
+          var parsedFakeResponse = JSON.parse(dataJSON).response;
+
+          // Remove tax data in the fake response JSON
+          parsedFakeResponse._tax = [];
+
+          var fakeResponseStr = JSON.stringify(parsedFakeResponse);
+
+          ep.io.localStore.setItem('oAuthToken', 'fakeToken');
+
+          var server = sinon.fakeServer.create();
+          server.autoRespond = true;
+
+          server.respondWith(
+            "GET", fakeGetLink + JSON.parse(dataJSON).zoom,
+            [200, {"Content-Type":"application/json"}, fakeResponseStr]
+          );
+
+          this.view = new controller.DefaultView(fakeGetLink);
+
+          this.view.render();
+
+          // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
+          this.view.checkoutOrderRegion.on('show', function() {
+            done();
+          });
+        });
+
+        after(function () {
+          $("#Fixtures").empty();
+        });
+
+        it('the TaxesCollectionView is not rendered', function() {
+          expect(this.view.$el.find('ul.checkout-tax-list')).to.have.length(0);
+        });
+
       });
     });
 

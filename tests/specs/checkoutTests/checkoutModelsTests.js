@@ -120,10 +120,12 @@ define(function (require) {
       it('when missing tax', function () {
         var rawData = _.extend({}, data);
         rawData._tax = [];
+
         var model = checkoutModel.parse(rawData);
 
         expect(ep.logger.error).to.be.not.called;
-        expect(model.summary.tax).to.be.ok;
+        expect(model.summary.taxTotal).to.be.ok;
+        expect(model.summary.taxes).to.be.ok;
       });
 
       it('when missing order total', function () {
