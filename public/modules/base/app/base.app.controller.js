@@ -6,8 +6,8 @@
  * Time: 2:53 PM
  *
  */
-define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/app/base.app.templates.html','modalwin'],
-  function(ep,EventBus, AppRouter, Model,View,template){
+define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/app/base.app.templates.html', 'mediator', 'modalwin'],
+  function(ep,EventBus, AppRouter, Model,View,template, Mediator){
 
     _.templateSettings.variable = 'E';
 
@@ -118,11 +118,7 @@ define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/a
 
       ep.app.viewPortRegion.show(baseLayout);
       EventBus.on('app.baseLayoutRenderSuccess',function(){
-        EventBus.trigger('layout.loadRegionContentRequest',{
-          region:'appHeaderRegion',
-          module:'appheader',
-          view:'AppHeaderView'
-        });
+        Mediator.fire('mediator.loadRegionContent', 'appHeader');
       });
 
       EventBus.trigger('app.baseLayoutRenderSuccess');

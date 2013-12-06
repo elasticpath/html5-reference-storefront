@@ -9,6 +9,12 @@
 define(['ep','eventbus','router'],function(ep, EventBus, Router){
 
   var mediatorObj = {
+    // FIXME add loadRegionContentEvents to base.denpendency.config
+    'mediator.loadRegionContent': function(controllerName) {
+      require(['loadRegionContentEvents'], function(loadRegionContent) {
+        loadRegionContent[controllerName]();
+      });
+    },
     'mediator.loadLogoComponentRequest':function(reqEventData){
       require(['appheader'],function(mod){
         EventBus.trigger('appheader.loadLogoComponent',reqEventData);
@@ -102,6 +108,7 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         reqEventData = args[1];
       }
 
+      // FIXME allow multiple arguments!
       mediatorObj[reqEventName](reqEventData);
     }
   }
