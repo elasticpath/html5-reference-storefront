@@ -23,15 +23,31 @@ define(function (require) {
      * Instantiate an checkout DefaultLayout and load views into corresponding regions
      * @returns {View.DefaultLayout}  fully rendered checkout DefaultLayout
      */
-    var defaultView = function (link) {
+    var defaultView = function () {
+      // Attempt to retrieve an order link from session storage (set by the checkout module)
+      var orderLink = ep.io.sessionStore.getItem('orderLink');
+
+      if (!orderLink) {
+        $().toastmessage('showToast', {
+          text: i18n.t('checkout.checkoutAccessErrMsg'),
+          sticky: true,
+          position: 'middle-center',
+          type: 'error',
+          close: function () {
+            // Route to the default cart view
+            ep.router.navigate(ep.app.config.routes.cart, true);
+          }
+        });
+        ep.logger.error('unable to load checkout - missing checkout link data');
+      }
+
       pace.start();
       var checkoutLayout = new View.DefaultLayout();
       var checkoutModel = new Model.CheckoutModel();
 
       checkoutModel.fetch({
-        url: checkoutModel.getUrl(link),
+        url: checkoutModel.getUrl(orderLink),
         success: function (response) {
-
           checkoutLayout.checkoutTitleRegion.show(new View.CheckoutTitleView());
 
           checkoutLayout.billingAddressesRegion.show(
@@ -78,6 +94,9 @@ define(function (require) {
         type: 'POST',
         url: submitOrderLink,
         success: function (data, textStatus, XHR) {
+          // Remove order link data from sessionStorage
+          ep.io.sessionStore.removeItem('orderLink');
+
           var obj = {
             data: data,
             textStatus: textStatus,

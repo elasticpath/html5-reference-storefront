@@ -150,6 +150,7 @@ define(function (reqiure) {
 
     ep.io.localStore = window.localStorage;
 
+    ep.io.sessionStore = window.sessionStorage;
 
     EventBus.on('app.authInit', function () {
       document.location.reload();
@@ -190,6 +191,8 @@ define(function (reqiure) {
         }
 
         if (response.status === 403) {
+          // If 403 errors are used in future when logged in users do not have the correct permissions to
+          // access a particular resource, a more granular handler for this error will be required.
           ep.logger.error('Please login to access the following content. ');
           ep.logger.error('Error ' + response.status + ': ' + response.responseText);
 

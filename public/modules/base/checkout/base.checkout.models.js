@@ -29,7 +29,7 @@ define(function (require) {
    */
   var checkoutModel = Backbone.Model.extend({
     getUrl: function (href) {
-      return ep.ui.decodeUri(href) + '?zoom=' + zoomArray.join();
+      return href + '?zoom=' + zoomArray.join();
     },
 
     parse: function (response) {

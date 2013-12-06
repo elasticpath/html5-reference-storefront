@@ -149,8 +149,8 @@ define(['ep', 'eventbus', 'backbone'],
          * Cart Submit Order Action
          * */
         cartObj.submitOrderActionLink = jsonPath(response, "$..links[?(@.rel=='submitorderaction')].href")[0];
-        cartObj.checkoutLink = jsonPath(response, '$.._order[0].self.href')[0];
 
+        cartObj.checkoutLink = jsonPath(response, '$.._order[0].self.href')[0];
 
         return cartObj;
       }

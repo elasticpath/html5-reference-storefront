@@ -84,12 +84,14 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         EventBus.trigger('address.setReturnUrl', url);
       });
     },
-    // FIXME is this too many level of abstraction?
+
     'mediator.navigateToCheckoutRequest' : function(link) {
       if (link){
         require(['ep'], function(ep){
-          var url = ep.app.config.routes.checkout + '/' + ep.ui.encodeUri(link);
-          ep.router.navigate(url, true);
+          // The order link from the cart model is stored in session for use during checkout
+          ep.io.sessionStore.setItem('orderLink', link);
+
+          ep.router.navigate(ep.app.config.routes.checkout, true);
         });
       }
     }

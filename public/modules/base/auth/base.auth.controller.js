@@ -142,9 +142,10 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
      * Logout Button Clicked - make logout request to server
      */
     EventBus.on('auth.logoutBtnClicked', function() {
+      // Clear sessionStorage on logout
+      ep.io.sessionStore.clear();
 
       var logoutModel = new Model.LogoutModel();
-
       EventBus.trigger('auth.authenticationRequest', logoutModel.attributes);
     });
 
