@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customers>
+<customer store_code="campus" user_id="august.anders@elasticpath.com" guid="F77C46F5-D539-43F1-AC27-8226B5CBBF40">
+    <status>1</status>
+    <creationDate>2011-07-20T14:18:59-07:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>419e07d899f10120157a49a5df02a2d874c647a5773120277f35e112836bd542</password>
+    <salt>48a8738d5bbc3bb965278ed2143965a72277b94c943da72b58a830d264fbcfbe</salt>
+    <addresses>
+        <address guid="8FC87697-40F7-4DA5-87A3-51799322036E">
+            <last_name>Anders</last_name>
+            <first_name>August</first_name>
+            <phone_number>(804) 555-1234</phone_number>
+            <fax_number></fax_number>
+            <street1>1455 Hillgate Crescent</street1>
+            <street2></street2>
+            <city>Richmod</city>
+            <subCountry>VA</subCountry>
+            <zip_postal_code>23173</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+	</addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>8FC87697-40F7-4DA5-87A3-51799322036E</preferred_shipping_address>
+    <preferred_billing_address>8FC87697-40F7-4DA5-87A3-51799322036E</preferred_billing_address>
+    <payment_methods>
+        <credit_card guid="B05CF016-1555-4108-A9A3-C63AF0DEF883" expiry_month="5" expiry_year="2018" type="Visa">
+            <holder_name>August K. Anders</holder_name>
+            <card_number>4111111111111111</card_number>
+        </credit_card>
+    </payment_methods>
+	<default_payment_method>
+		<credit_card guid="B05CF016-1555-4108-A9A3-C63AF0DEF883" expiry_month="5" expiry_year="2018" type="Visa">
+			<holder_name>August K. Anders</holder_name>
+			<card_number>4111111111111111</card_number>
+		</credit_card>
+	</default_payment_method>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">(804) 555-1234</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">august.anders@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en_US</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_HTML_EMAIL">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_COMPANY"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FAX"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">-</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">August</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Anders</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+<customer store_code="campus" user_id="absent.address@elasticpath.com" guid="08946B2E-169B-4FE2-9401-6AFBBC99A456">
+    <status>1</status>
+    <creationDate>2011-07-20T14:18:59-07:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>419e07d899f10120157a49a5df02a2d874c647a5773120277f35e112836bd542</password>
+    <salt>48a8738d5bbc3bb965278ed2143965a72277b94c943da72b58a830d264fbcfbe</salt>
+    <addresses/>
+    <groups>
+        <group>400</group>
+    </groups>
+    <payment_methods/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">(804) 656-1986</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">absent.address@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en_US</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_HTML_EMAIL">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_COMPANY"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FAX"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">-</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Absent</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Address</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+<customer store_code="campus" user_id="debbie.declined@elasticpath.com" guid="8EDC7B64-B7CD-46F0-B506-586B2A107BD6">
+    <status>1</status>
+    <creationDate>2011-07-20T14:18:59-07:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>419e07d899f10120157a49a5df02a2d874c647a5773120277f35e112836bd542</password>
+    <salt>48a8738d5bbc3bb965278ed2143965a72277b94c943da72b58a830d264fbcfbe</salt>
+    <addresses>
+        <address guid="B5A53035-AF77-4DA2-B10F-8237A8B88F07">
+            <last_name>Declined</last_name>
+            <first_name>Debbie</first_name>
+            <phone_number>(805) 976-8552</phone_number>
+            <fax_number></fax_number>
+            <street1>1543 Wilford Mews</street1>
+            <street2></street2>
+            <city>Richmond</city>
+            <subCountry>VA</subCountry>
+            <zip_postal_code>23173</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+	</addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>B5A53035-AF77-4DA2-B10F-8237A8B88F07</preferred_shipping_address>
+    <preferred_billing_address>B5A53035-AF77-4DA2-B10F-8237A8B88F07</preferred_billing_address>
+    <payment_methods>
+        <credit_card guid="0520DA92-0B31-4E5B-BC46-4337E6A1B25E" expiry_month="6" expiry_year="2018" type="Visa">
+            <holder_name>DEC_AUTH</holder_name>
+            <card_number>4111111111111111</card_number>
+        </credit_card>
+    </payment_methods>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">(805) 976-8552</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">debbie.declined@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en_US</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_HTML_EMAIL">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_COMPANY"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FAX"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">-</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Debbie</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Declined</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+</customers>

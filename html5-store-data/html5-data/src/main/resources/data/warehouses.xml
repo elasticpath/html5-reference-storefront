@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<warehouses>
+<warehouse code="campusStoreWarehouse">
+    <name>Campus Store Warehouse</name>
+    <pick_delay>30</pick_delay>
+    <street1>1234 Fulfillment Road</street1>
+    <street2></street2>
+    <city>Tacoma</city>
+    <sub_country>WA</sub_country>
+    <zip_postal_code>98401</zip_postal_code>
+    <country>US</country>
+</warehouse>
+</warehouses>

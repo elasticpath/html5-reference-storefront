@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<categories>
+<category mastercatalog="CampusMasterCatalog">
+    <parentcategory></parentcategory>
+    <code>courseMaterials</code>
+    <name>
+        <value language="en">Course Materials</value>
+        <value language="en_US">Course Materials</value>
+    </name>
+    <type>GenericCategoryType</type>
+    <order>3</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2013-11-20T13:40:00-08:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value/>
+        </attribute>
+        <attribute key="catDescription">
+            <value>Main category containing courseware.  eBooks are electronic goods, always available inventory.</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="en_US"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="en_US"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="en_US"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="en_US"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="campusVirtualCatalog">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="CampusMasterCatalog">
+    <parentcategory></parentcategory>
+    <code>tablets</code>
+    <name>
+        <value language="en">Tablets</value>
+        <value language="en_US">Tablets</value>
+    </name>
+    <type>GenericCategoryType</type>
+    <order>2</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2013-11-20T13:37:00-08:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value/>
+        </attribute>
+        <attribute key="catDescription">
+            <value>Tablets of all kinds to make your semester a sucess.  Category with only 1 page of products.</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="en_US"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="en_US"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="en_US"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="en_US"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="campusVirtualCatalog">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="CampusMasterCatalog">
+    <parentcategory></parentcategory>
+    <code>calculators</code>
+    <name>
+        <value language="en">Calculators</value>
+        <value language="en_US">Calculators</value>
+    </name>
+    <type>GenericCategoryType</type>
+    <order>1</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2013-11-20T13:36:00-08:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>calculators.jpg</value>
+        </attribute>
+        <attribute key="catDescription">
+            <value>All the calculators that a student could ever want!  Physical goods, single sku.  This category has multiple pages of products.</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="en_US"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="en_US"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="en_US"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="en_US"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="campusVirtualCatalog">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+</categories>

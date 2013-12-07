@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<price_lists>
+<price_list>
+    <guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</guid>
+    <description>USD Price List for Campus Store</description>
+    <currency_code>USD</currency_code>
+    <name>MSRP USD Campus</name>
+    <hidden>false</hidden>
+</price_list>
+</price_lists>

@@ -1,0 +1,1920 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<products>
+<product>
+    <code>FX260SLRSC</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Casio Scientific Calculator (FX260SLRSC)</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Casio</brand>
+    <image>FX260SLRSC.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T14:00:33-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>279</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Currently allowed on AP, SAT, PSAT, NMSQT, and all NCEES examinations.</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="1f88a981-8f21-4a04-ad88-7fc04f7a4a01">
+            <code>FX260SLRSC</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>FX-300MS</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Casio FX-300MS Plus 229-Function Scientific Calculator</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Casio</brand>
+    <image>FX-300MS.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T14:36:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>229</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="e9113a58-2469-49f9-b7ec-3eba6fae2d7a">
+            <code>FX-300MS</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>EL-W516XBS</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Sharp Electronics Engineering/Scientific Calculator (EL-W516XBSL)</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>SharpElectronics</brand>
+    <image>EL-W516XBSL.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T14:43:43-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>556</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="53beeee0-583d-47e5-ba50-72c440c3e272">
+            <code>EL-W516XBSL</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>EL-501XBWH</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Sharp Electronics EL-501XBWH Engineering/Scientific Calculator</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>SharpElectronics</brand>
+    <image>EL-501XBWH.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T14:46:19-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>131</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="fa0e2367-e6a2-4f88-92c2-ad97a21bd69b">
+            <code>EL-501XBWH</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>fx55plus</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Casio Inc. FX-55PLUS Engineering/Scientific Calculator</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Casio</brand>
+    <image>fx55plus.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T14:59:12-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>87</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="7dcc85fa-30da-48ff-ab14-83c959191657">
+            <code>fx55plus</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>ti84plus</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Texas Instruments TI-84 Plus Silver Edition Graphing Calculator (Packaging may vary)</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>TI</brand>
+    <image>ti84plus.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T15:02:51-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>184</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="12df300b-ecd1-45ae-9e3b-fe3840d499c5">
+            <code>ti84plus</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>ba2plus</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Texas Instruments BA II Plus Financial Calculator</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>TI</brand>
+    <image>ba2plus.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T15:19:40-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>98</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="51db9f5e-7109-48c7-af0a-f19fe51b6570">
+            <code>ba2plus</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>hp10s</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">HP 10s Scientific Calculator (F2214AA#ABA)</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>hp</brand>
+    <image>hp10s.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T15:21:11-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>254</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="5f18590b-79c1-4743-9098-4057cc656bce">
+            <code>hp10s</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>9781405100151</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Archaeological Theory: An Introduction eBook</value>
+    </name>
+    <type>eBooks</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Wiley</brand>
+    <image>9781444326086.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T16:36:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="courseID">
+            <value>AHCP 471W</value>
+        </attribute>
+        <attribute key="isbn">
+            <value>9781405100151</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="57789702-7db3-45bb-b3c4-bbdc78ce358b">
+            <code>9781405100151</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>9781118300510</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Medical Statistics: A Textbook for the Health Sciences - eBook edition</value>
+    </name>
+    <type>eBooks</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Wiley</brand>
+    <image>9781118300510.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T16:38:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="courseID">
+            <value>BISC 422 D100</value>
+        </attribute>
+        <attribute key="isbn">
+            <value>9781118300510</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="4f9d4b35-d9fb-4443-b905-1fb98698f3c9">
+            <code>9781118300510</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>noPriceEBook</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">No Price eBook</value>
+    </name>
+    <type>eBooks</type>
+    <taxcode>GOODS</taxcode>
+    <brand>McGrawHill</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T16:43:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="courseID">
+            <value>1234</value>
+        </attribute>
+        <attribute key="isbn">
+            <value>1234567891234</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="4821731f-c4fa-4082-9c1c-90b51f36653d">
+            <code>noPrice</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>ti30xa</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Texas Instruments TI-30XA Scientific Calculator</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>TI</brand>
+    <image>ti30xa.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T14:40:38-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>179</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="a1531b9f-1260-4c98-8486-b2e522887e41">
+            <code>ti30xa</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>FX-300ES</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Casio FX-300ES Solar Scientific Calculator</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Casio</brand>
+    <image>FX-300ES.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T14:50:23-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>78</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="f743ee69-5a26-48db-81ab-3e2855071fe0">
+            <code>FX-300ES</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>TI30XIIS</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">TI30XIIS Grey</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>TI</brand>
+    <image>TI30XIIS.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T15:05:09-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>12</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="1b110fa0-0cd6-4e4b-8f37-369a5e5c09f9">
+            <code>TI30XIIS</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>hpsmartcalc</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">HP SmartCalc 300s Scientific Calculator (F2240AA)</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>hp</brand>
+    <image>hpsmartcalc.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T15:14:30-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>279</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="c354aacf-09c2-4c19-af53-b2c07bd7840c">
+            <code>hpsmartcalc</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>casiodualpower</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Dual Power Scientific Calculator with 401 Functions and Two Line Display</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Casio</brand>
+    <image>casiodualpower.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T15:17:33-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>82</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="72d540b6-ce77-4924-ac7f-52565beb627c">
+            <code>casiodualpower</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>sumsungtab3</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Samsung Galaxy Tab 3 (7-inch)</value>
+    </name>
+    <type>tablets</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Samsung</brand>
+    <image>samsungtab3.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T16:03:11-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="a6e83197-590c-4c3d-9740-b3251c3071c2">
+            <code>samsungtab3</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>standardProduct</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Standard Product - has image, has purchase price, no sale price, is available</value>
+    </name>
+    <type>tablets</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Samsung</brand>
+    <image>samsungStandardProduct.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-21T15:59:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="842c0050-bbec-433a-90ad-fb39548e6d47">
+            <code>samsungStandardProduct</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>outOfStockCalc</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Out of Stock Calculator - Product is Out of Stock</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>hp</brand>
+    <image>outOfStockCalc.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-21T16:03:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>0</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="b1bbe259-7bab-43f4-8ccf-96ae1d3b11a1">
+            <code>outOfStockCalc</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>noPrice</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">No Price Calculator - Product has no price</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>hp</brand>
+    <image>noPrice.png</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-21T16:09:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="d4391020-827a-41ad-93d4-0488351e3363">
+            <code>noPriceCalc</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>FX-115ES</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Casio Advanced Scientific Calculator with 2-Line Natural Textbook Display (FX-115ES)</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Casio</brand>
+    <image>FX-115ES.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T14:17:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>180</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="28dc0aef-3781-4208-a669-7bda2bb1353e">
+            <code>FX-115ES</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>ti30xpink</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Texas Instruments TI-30X IIS 2-Line Scientific Calculator, Pink</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>TI</brand>
+    <image>ti30xpink.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T14:38:56-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>229</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="7432dd13-ab76-4f4f-89ca-f1f409630c8b">
+            <code>ti30xpink</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>ti34</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">TI-34 Multi View Calculator</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>TI</brand>
+    <image>ti34.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T14:48:01-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>97</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="a387a516-7192-4d60-a66d-c4b85b3c7489">
+            <code>ti34</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>hp35s</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">HP 35s Scientific Calculator</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>hp</brand>
+    <image>hp35s.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T14:52:24-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>100</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="2d24dd2b-76fa-4f42-a328-fdf466bdee4e">
+            <code>hp35s</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>FX-9750GII</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Casio Graphing Calculator (FX-9750GII)</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Casio</brand>
+    <image>FX-9750GI.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T14:54:31-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>222</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="9a0235f1-f485-4764-a490-b2b2af7c304d">
+            <code>FX-9750GII</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>SL1500</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Texas Instruments Nspire CX CAS Graphing Calculator (N3CAS/GC/2L1)</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>TI</brand>
+    <image>SL1500.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T14:56:55-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>380</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="731bb42a-1d11-4599-a4e5-6f45166d0ab1">
+            <code>SL1500</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>300s</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Hewlett Packard 300S+ Engineering/Scientific Calculator</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>hp</brand>
+    <image>300s.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T15:12:44-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>310</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="73166025-cc71-44e8-8e00-708caf171fb1">
+            <code>hp300s</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>lenovoIdeatab</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Lenovo IdeaTab A1000L 7-Inch 8 GB Tablet</value>
+    </name>
+    <type>tablets</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Lenovo</brand>
+    <image>ideatab.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T15:29:20-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="ab724b45-b2e3-4b99-96a7-cdbd2cc8463c">
+            <code>A1000L</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>freeCalculator</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Free Calculator - Product has $0 price</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>hp</brand>
+    <image>freeCalc.png</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-21T16:07:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="6b3bd34b-78b9-4778-a434-9ff57e0995c2">
+            <code>freeCalculator</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>ti30x</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Texas Instruments TI-30X IIS 2-Line Scientific Calculator</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>TI</brand>
+    <image>ti30x.gif</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T13:58:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>143</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Not Available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="3ede209f-2310-4915-ac8d-da83f6dce465">
+            <code>ti30x</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>CIOFX115MS</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Casio CIOFX115MS Standard Function Calculator</value>
+    </name>
+    <type>Calculators</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Casio</brand>
+    <image>CIOFX115MS.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T15:00:54-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="numberOfFunctions">
+            <value>279</value>
+        </attribute>
+        <attribute key="AllowedExams">
+            <value>Data not available</value>
+        </attribute>
+        <attribute key="batteryIncluded">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="0a0f28fe-68af-481f-84e8-a8bbdfe52e81">
+            <code>CIOFX115MS</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>dragontouch</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Dragon Touch® 7'' Dual Core Y88 Google Android 4.1 Tablet PC, Dual Camera, HD 1024x600, Google Play Pre-load, HDMI, 3D Game Supported (enhanced version of A13</value>
+    </name>
+    <type>tablets</type>
+    <taxcode>GOODS</taxcode>
+    <brand>tabletExpress</brand>
+    <image>dragontouch.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T16:04:27-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="dc8789fe-fa92-4a62-922f-f8d9664433ed">
+            <code>dragontouch</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>9781259015113</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Business Communication 5th Ed. - CONNECT w/ eBook </value>
+    </name>
+    <type>eBooks</type>
+    <taxcode>GOODS</taxcode>
+    <brand>McGrawHill</brand>
+    <image>7730.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-11-20T16:32:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="courseID">
+            <value>BUS 360W</value>
+        </attribute>
+        <attribute key="isbn">
+            <value>9781259015113</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="509cc8cd-b45a-47fd-8b3b-4c330dfe49c1">
+            <code>9781259015113</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="en_US"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+</products>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<shipping_service_levels>
+<shipping_service_level guid="91439BC5-07E1-4D29-A426-36C8E0F712FD">
+    <shipping_region>USA</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FedexFirstOvernight</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>100.0</value>
+                <display_text>100.0</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>campus</storecode>
+    <carrier>Fed Ex</carrier>
+    <localized_names>
+        <value language="en_US">FedEx First Overnight</value>
+        <value language="en">FedEx First Overnight</value>
+    </localized_names>
+    <code>FedExFirstOvernight</code>
+    <active>true</active>
+</shipping_service_level>
+<shipping_service_level guid="5ACC8488-AC93-43D7-B732-3B8C42A39303">
+    <shipping_region>USA</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FedexPriorityOvernight</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>45.0</value>
+                <display_text>45.0</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>campus</storecode>
+    <carrier>Fed Ex</carrier>
+    <localized_names>
+        <value language="en_US">FedEx Priority Overnight</value>
+        <value language="en">FedEx Priority Overnight</value>
+    </localized_names>
+    <code>FedExPriorityOvernight</code>
+    <active>true</active>
+</shipping_service_level>
+<shipping_service_level guid="B7203E56-D3A1-44C3-8AA9-5626A0A12062">
+    <shipping_region>USA</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>Fedex2Day</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>15.0</value>
+                <display_text>15.0</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>campus</storecode>
+    <carrier>Fed Ex</carrier>
+    <localized_names>
+        <value language="en_US">FedEx 2 Day</value>
+        <value language="en">FedEx 2 Day</value>
+    </localized_names>
+    <code>FedEx2Day</code>
+    <active>true</active>
+</shipping_service_level>
+</shipping_service_levels>

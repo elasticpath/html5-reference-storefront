@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<productcategoryassociations>
+<product code="300s">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="ba2plus">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="lenovoIdeatab">
+    <catalog code="CampusMasterCatalog">
+        <category code="tablets">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="tablets">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="9781405100151">
+    <catalog code="CampusMasterCatalog">
+        <category code="courseMaterials">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="courseMaterials">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="9781118300510">
+    <catalog code="CampusMasterCatalog">
+        <category code="courseMaterials">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="courseMaterials">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="noPriceEBook">
+    <catalog code="CampusMasterCatalog">
+        <category code="courseMaterials">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="courseMaterials">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="freeCalculator">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="ti30x">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="ti30xa">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="FX-300ES">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="CIOFX115MS">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="TI30XIIS">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="hpsmartcalc">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="casiodualpower">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="sumsungtab3">
+    <catalog code="CampusMasterCatalog">
+        <category code="tablets">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="tablets">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="dragontouch">
+    <catalog code="CampusMasterCatalog">
+        <category code="tablets">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="tablets">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="9781259015113">
+    <catalog code="CampusMasterCatalog">
+        <category code="courseMaterials">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="courseMaterials">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="standardProduct">
+    <catalog code="CampusMasterCatalog">
+        <category code="tablets">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="tablets">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="outOfStockCalc">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="noPrice">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="FX260SLRSC">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="FX-115ES">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="FX-300MS">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="ti30xpink">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="EL-W516XBS">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="EL-501XBWH">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="ti34">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="hp35s">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="FX-9750GII">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="SL1500">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="fx55plus">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="ti84plus">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="hp10s">
+    <catalog code="CampusMasterCatalog">
+        <category code="calculators">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+</productcategoryassociations>

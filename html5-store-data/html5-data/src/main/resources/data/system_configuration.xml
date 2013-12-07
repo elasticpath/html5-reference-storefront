@@ -1,0 +1,1222 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<system_configuration>
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ASSETS/assetLocation</name_space>
+    <description>The path to the directory that contains assets required by the application, including images, theme files, and digital goods.</description>
+    <default_value type="String">../assets</default_value>
+    <max_overrides>1</max_overrides>
+    <defined_values>
+        <value>/ep-assets</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">application</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ASSETS/imageAssetsSubfolder</name_space>
+    <description>The name of the subfolder within the assets directory that contains images used by product catalogs.</description>
+    <default_value type="String">images</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">application</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ASSETS/digitalGoodsAssetsSubfolder</name_space>
+    <description>The name of the subfolder within the assets directory that contains any non-physical products sold from the site, such as software or images.</description>
+    <default_value type="String">digitalassets</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">application</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ASSETS/storeAssetsSubfolder</name_space>
+    <description>The name of the subfolder within the assets directory that contains store-specific assets. For example, PowerReviews customer research engine content is stored in this directory.</description>
+    <default_value type="String">storeassets</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">application</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ASSETS/importAssetsSubfolder</name_space>
+    <description>The name of the subfolder within the assets directory that contains imported CSV files.</description>
+    <default_value type="String">import</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/SEARCH/searchHost</name_space>
+    <description>The search server's URL. If this is not set correctly, searching and browsing in the storefront and in Commerce Manager will not work. For a search server cluster, this setting must contain two values. The default value must be set to the load balancer URL. A defined value with the context set to 'master' must be set to the master search server URL.</description>
+    <default_value type="url">http://localhost:8082/searchserver</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="default">http://localhost:8080/searchserver</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/seoEnabled</name_space>
+    <description>True if SEO is enabled for the store.</description>
+    <default_value type="boolean">true</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">true</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/theme</name_space>
+    <description>The theme associated with the store. (The name of the subfolder under the themes directory that contains the theme's templates, CSS files, and other resources.)</description>
+    <default_value type="String">electronics</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">electronics</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_2</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/CATALOG/catalogViewPagination</name_space>
+    <description>The maximum number of items to display per page when browsing the catalog in the storefront.</description>
+    <default_value type="Integer">20</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">20</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">session</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/CATALOG/catalogTopSellerCount</name_space>
+    <description>The number of top seller products to display when browsing categories in the storefront. (The top seller job must also be enabled.)</description>
+    <default_value type="Integer">2</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">session</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/IMAGES/dynamicImageSizingJpegQuality</name_space>
+    <description>The quality of JPEG images. Must be set to a value between 0 (low quality) and 1 (high quality).</description>
+    <default_value type="String">0.8</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/IMAGES/dynamicImageSizingNoImage</name_space>
+    <description>The image to display for a product or category when no matching image is available. (The image must be located within the folder specified by the COMMERCE/SYSTEM/ASSETS/importAssetsSubfolder setting.)</description>
+    <default_value type="String">image-not-available.png</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/updateSiteEnabled</name_space>
+    <description>If set to true, the Commerce Manager client will attempt to automatically update each time it starts. (See the COMMERCE/APPSPECIFIC/RCP/updateSiteHomebase setting.)</description>
+    <default_value type="Boolean">false</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/updateSiteHomebase</name_space>
+    <description>The URL of the website that hosts Commerce Manager client updates. If COMMERCE/APPSPECIFIC/RCP/updateSiteEnabled is set to true, all CM clients will attempt to retrieve updates on startup from this URL.</description>
+    <default_value type="String">http://localhost:8080/updates</default_value>
+    <max_overrides>1</max_overrides>
+    <defined_values>
+        <value>http://:8080/updates</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/ASSETS/vfsHost</name_space>
+    <description>The IP address or host name of the system where asset files are uploaded.</description>
+    <default_value type="String"></default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/ASSETS/vfsProtocol</name_space>
+    <description>The VFS protocol (ftp, sftp or file) used to transfer files between the Commerce Manager client and the Commerce Manager server.</description>
+    <default_value type="String">file</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/ASSETS/vfsUsername</name_space>
+    <description>The username to use to connect to the VFS host.</description>
+    <default_value type="String"></default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/ASSETS/vfsPort</name_space>
+    <description>The port number of the VFS host.</description>
+    <default_value type="String"></default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/ASSETS/vfsRootpath</name_space>
+    <description>The root path where assets are stored on the VFS host.</description>
+    <default_value type="String">C:/trunk/store-data/camera-stores/assets</default_value>
+    <max_overrides>1</max_overrides>
+    <defined_values>
+        <value>/ep-assets</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/ASSETS/vfsPassword</name_space>
+    <description>The password to use to connect to the VFS host.</description>
+    <default_value type="String"></default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/UNITS/weight</name_space>
+    <description>The unit of measurement applying to all product weights. For example, KG or LB.</description>
+    <default_value type="String">KG</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/SHIPPING/carriers</name_space>
+    <description>The comma-delimited list of supported shipping carriers.</description>
+    <default_value type="String">Fed Ex, UPS, Canada Post, Royal Mail</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/encryptionKey</name_space>
+    <description>The encryption key used to encrypt credit card numbers. The key must be at least 25 characters long.</description>
+    <default_value type="String">this must be changed in production</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/UNITS/length</name_space>
+    <description>The unit of measurement applying to all product lengths. For example, CM or FT.</description>
+    <default_value type="String">CM</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/EMAIL/emailAuthenticationUsername</name_space>
+    <description>The username used to authenticate with the EmailService.</description>
+    <default_value type="String">cmuser</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/EMAIL/emailTextTemplateEnabled</name_space>
+    <description>Determines whether to use the plain text template for sending store emails. Set to true to use the plain text template or false to use the HTML template.</description>
+    <default_value type="boolean">false</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/EMAIL/emailGlobalSenderAddress</name_space>
+    <description>The email address used to send out global, non store specific emails.</description>
+    <default_value type="String">customerService@SomeDomain.com</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/EMAIL/emailAuthenticationPassword</name_space>
+    <description>The password used to authenticate with the EmailService.</description>
+    <default_value type="String">111111</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/EMAIL/emailCmUrl</name_space>
+    <description>The URL of the CM server that is hosting the EmailService</description>
+    <default_value type="String">http://localhost:8080/cmserver</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/EMAIL/emailGlobalSenderName</name_space>
+    <description>The sender name used in global, non store specific emails.</description>
+    <default_value type="String">Customer Service</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/PRODUCTRECOMMENDATIONS/numberMaxRecommendations</name_space>
+    <description>The maximum number of product recommendations to display.</description>
+    <default_value type="Integer">3</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">3</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/datafileEncoding</name_space>
+    <description>The character encoding used to import CSV data files and to export data files and reports.</description>
+    <default_value type="String">UTF-8</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">session</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/SEARCH/searchCategoriesFirst</name_space>
+    <description>When set to true, searches in the storefront will search categories before searching products, and if a category match is found, the first matching category page is displayed instead of the search results page.</description>
+    <default_value type="boolean">true</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">true</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/PRODUCTRECOMMENDATIONS/numberOrderHistoryDays</name_space>
+    <description>The number of days of historical order data to use when calculating product recommendations. For example, if the value is 3, product recommendations are calculated based on all orders created during the past three days.</description>
+    <default_value type="Integer">3</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">3</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">session</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/POWERREVIEWS/powerReviewsMerchantid</name_space>
+    <description>The ID assigned by PowerReviews when the merchant account was created. The default value is a demo account, which can only be used for testing. It does not retrieve or upload any product review data.</description>
+    <default_value type="String">7609</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">7609</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">session</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/CATALOG/featuredProductCountToDisplay</name_space>
+    <description>The number of featured products to display when browsing a catalog with either no filters or only one filter applied.</description>
+    <default_value type="Integer">2</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">2</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">session</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/localeDateFormat</name_space>
+    <description>The format of date strings in import files.</description>
+    <default_value type="String">EEE MMM dd HH:mm:ss yyyy</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/POWERREVIEWS/powerreviewsEnabled</name_space>
+    <description>Sets whether PowerReviews product reviews are enabled. In addition to changing this value to true, the COMMERCE/STORE/POWERREVIEWS/powerReviewsMerchantid  setting must also be configured and the PowerReviews data must be deployed in the correct directory. For more information on configuring PowerReviews, see the Deployment Guide.</description>
+    <default_value type="String">false</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">false</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">session</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/FILTEREDNAVIGATION/filteredNavigationConfiguration</name_space>
+    <description>The configuration XML for filtered (faceted) navigation.</description>
+    <default_value type="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!-- Configuration file for filtered navigation --&gt;&lt;!-- For range values, lower bounds are inclusive, upper values are exclusive. --&gt;&lt;IntelligentBrowsing&gt;&lt;/IntelligentBrowsing&gt;</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;lt;!-- Configuration file for filtered navigation --&amp;gt;&amp;lt;!-- For range values, lower bounds are inclusive, upper values are exclusive. --&amp;gt;&amp;lt;IntelligentBrowsing&amp;gt;&amp;lt;/IntelligentBrowsing&amp;gt;</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_2</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/userIdMode</name_space>
+    <description> Specifies how customer user IDs are created. If set to 1, the customer's email address is used. If set to 2, a unique ID is generated by some other means (through a customization). This should be set to 1 unless you have a customization that requires it.</description>
+    <default_value type="Integer">1</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="coreRefreshStrategy">application</value>
+        <value key="environmentSpecific">false</value>
+        <value key="apiRefreshStrategy">application</value>
+        <value key="sfRefreshStrategy">session</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/CATALOG/catalogSitemapPagination</name_space>
+    <description>The maximum number of products listed on a page in the sitemap.</description>
+    <default_value type="Integer">90</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">90</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/EMAIL/mailHost</name_space>
+    <description>The host name of the email server.</description>
+    <default_value type="String">localhost</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/EMAIL/mailPort</name_space>
+    <description>The listener port of the email server.</description>
+    <default_value type="Integer">25</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/FILTEREDNAVIGATION/attributeFilterEnabled</name_space>
+    <description>True if attribute filtering is enabled for filtered navigation, false if not.</description>
+    <default_value type="Boolean">true</default_value>
+    <max_overrides>-1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_3</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/userMaintainMode</name_space>
+    <description>Specifies how Storefront users are maintained and authenticated. If set to 1, Storefront users are stored in and authenticated against the application's database. If set to 2, Storefront users are stored externally and authenticated through JAAS (for example, WLS Authentication). Note that if set to 2, the create/delete user and change password functions are disabled.</description>
+    <default_value type="Integer">1</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/maximumPasswordAge</name_space>
+    <description>The number of days after first logon before the user password expires. Note that the default value complies with PCI DSS security guidelines. Before changing this setting, make sure the change is compatible with your organization's PCI compliance policy.</description>
+    <default_value type="Integer">90</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/minimumPasswordLength</name_space>
+    <description> The minimum user password length. Note that the default value complies with PCI DSS security guidelines. Before changing this setting, make sure the change is compatible with your organization's PCI compliance policy.</description>
+    <default_value type="Integer">8</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/storefrontUrl</name_space>
+    <description>The secure (HTTPS) storefront URL. This URL is used by the Commerce Manager client application for CSR login on behalf of customers. Certain customer service activities, such as editing orders, require the CSR to log in as the customer. The Commerce Manager client application uses this URL to perform the login. If the specified URL does not begin with {{https://}}, the login request will fail and the CSR will not be able to perform the action.</description>
+    <default_value type="String">https://localhost:8443/storefront</default_value>
+    <max_overrides>-1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/assetHttpHost</name_space>
+    <description>The URL of the CM server. This is used by the Commerce Manager client to retrieve scaled images from the server.</description>
+    <default_value type="String">http://localhost:8080/cmserver</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ASSETS/cmAssetsSubfolder</name_space>
+    <description>The name of the subfolder within the assets directory that contains non store specific resources, such as email message templates.</description>
+    <default_value type="String">cmassets</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">application</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/idleTimeForLock</name_space>
+    <description>Number of minutes of inactivity before the Commerce Manager client is locked and the user is required to re-enter their password. Set to 0 to disable. Note that the default value complies with PCI DSS security guidelines. Before changing this setting, make sure the change is compatible with your organization's PCI compliance policy.</description>
+    <default_value type="Integer">15</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/accountLockoutThreshold</name_space>
+    <description>The minimum number of unique passwords, including current CM user password, before the user can re-use a previous password. Note that the default value complies with PCI DSS security guidelines. Before changing this setting, make sure the change is compatible with your organization's PCI compliance policy.</description>
+    <default_value type="Integer">6</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/passwordHistoryLength</name_space>
+    <description>Number of passwords without repetition including current CM user password</description>
+    <default_value type="Integer">4</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/Cache/Cache_3</name_space>
+    <description>For each setting that is mapped to this cache, specifies the period of time (in milliseconds) during which the setting value is cached. At the end of the interval, the cached value is invalidated and the next time it is requested, the value is retrieved directly from the database and the cache is updated. The name of this setting can be used when specifying the refresh strategy for another setting. To assign a setting to this cache, set the value of that setting's sfRefreshStrategy  metadata setting to interval:timeout=COMMERCE/Cache/Cache_3. For more information, see the Configuration section of the Commerce Manager User Guide.</description>
+    <default_value type="Integer">100000</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/Cache/Cache_2</name_space>
+    <description>For each setting that is mapped to this cache, specifies the period of time (in milliseconds) during which the setting value is cached. At the end of the interval, the cached value is invalidated and the next time it is requested, the value is retrieved directly from the database and the cache is updated. The name of this setting can be used when specifying the refresh strategy for another setting. To assign a setting to this cache, set the value of that setting's sfRefreshStrategy  metadata setting to interval:timeout=COMMERCE/Cache/Cache_2. For more information, see the Configuration section of the Commerce Manager User Guide.</description>
+    <default_value type="Integer">60000</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/Cache/Cache_1</name_space>
+    <description>For each setting that is mapped to this cache, specifies the period of time (in milliseconds) during which the setting value is cached. At the end of the interval, the cached value is invalidated and the next time it is requested, the value is retrieved directly from the database and the cache is updated. The name of this setting can be used when specifying the refresh strategy for another setting. To assign a setting to this cache, set the value of that setting's sfRefreshStrategy  metadata setting to interval:timeout=COMMERCE/Cache/Cache_1. For more information, see the Configuration section of the Commerce Manager User Guide.</description>
+    <default_value type="Integer">300000</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/digitalAssetEncryptionKey</name_space>
+    <description>The encryption key used to encrypt the URLs of digital assets. The key must be at least 25 characters long.</description>
+    <default_value type="String">digital asset encryption key must be changed in production</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SEARCH/minimumResultsThreshold</name_space>
+    <description>Used by the spell checker. Results that are below or equal to this number will trigger a spelling suggestion lookup.</description>
+    <default_value type="String">10</default_value>
+    <max_overrides>-1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SEARCH/prefixLength</name_space>
+    <description>Used for fuzzy searching. Specifies the number of characters at the start of the search term that must be the same in potential matches.</description>
+    <default_value type="String">0</default_value>
+    <max_overrides>-1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SEARCH/minimumSimilarity</name_space>
+    <description>Used for fuzzy searching. This specifies how similar a term must be in order to match the query term. It must be set to a value between 0 and 1, not inclusive. (1 means it must be an exact match and 0 means the terms do not need to match at all.)</description>
+    <default_value type="BigDecimal">0.75</default_value>
+    <max_overrides>-1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SEARCH/maxReturnNumber</name_space>
+    <description>The maximum number of matching items to include in search results. The default is 0, which specifies no limit.</description>
+    <default_value type="Integer">0</default_value>
+    <max_overrides>-1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SEARCH/excludeAttributes</name_space>
+    <description>Specifies a comma-separated list of attribute keys that should be not be included when searching all fields. For example: &quot;A00981,A01012&quot;</description>
+    <default_value type="Collection"></default_value>
+    <max_overrides>-1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ASSETS/themesSubfolder</name_space>
+    <description>The name of the subfolder within the assets directory that contains store themes.</description>
+    <default_value type="String">themes</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">application</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/urlRewriteConfig</name_space>
+    <description>Contains the URL rewrite filter configuration XML.</description>
+    <default_value type="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;!DOCTYPE urlrewrite PUBLIC &quot;-//tuckey.org//DTD UrlRewrite 2.5//EN&quot; &quot;http://tuckey.org/res/dtds/urlrewrite2.5.dtd&quot;&gt; &lt;!--      Configuration file for UrlRewriteFilter   http://tuckey.org/urlrewrite/         Basic SEO Configuration   ========================   UrlRewriteResolverImpl takes an init-param of 'fieldSeparator', this param overrides the    default string used to tokenize the file name part of the SEO urls, this allows product    codes with dashes '-' (tokenizing default) in them to be used without changing their    codes.   If you set this param you must also set the same string in the setting property: COMMERCE/SYSTEM/URLREWRITE/fieldSeparator, so the urls that are generated can be parsed here.    --&gt; &lt;urlrewrite&gt;   &lt;!-- This section handles displaying SEO catalog pages in the locale        specified in the url.           This matches any SEO url and passes the request to UrlRewriteLocaleResolverImpl to     determine whether the url should be redirected. This class will redirect a URL     that contains the default locale OR a non-supported locale to the default locale URL:     i.e. /storefront/gr/prod1234.html will redirect to /storefront/prod1234.html          It will also set a request attribute indicating the locale which is used by other     code in the storefront.         --&gt;   &lt;rule enabled=&quot;true&quot;&gt;     &lt;name&gt;Redirect default locale&lt;/name&gt;     &lt;note&gt;Permanently redirect to default locale (if language not defined in storefront)&lt;/note&gt;     &lt;from&gt;^/(.*)/(c|prod|sitemap)([^/]*.html[^/]*)$&lt;/from&gt;     &lt;run class=&quot;com.elasticpath.sfweb.util.impl.UrlRewriteLocaleResolverImpl&quot; method=&quot;doGet&quot;/&gt;   &lt;/rule&gt;      &lt;!-- This section interprets all requests for *.html pages and decodes        the url to determine the product, catalog or sitemap to display.        The UrlRewriteResolverImpl handles this decoding.       --&gt;   &lt;rule enabled=&quot;true&quot;&gt;     &lt;!-- Category url parsing. --&gt;     &lt;from&gt;^.*/c[^/]*.html[^/]*$&lt;/from&gt;     &lt;run       class=&quot;com.elasticpath.sfweb.util.impl.UrlRewriteResolverImpl&quot;       method=&quot;resolve&quot;&gt;       &lt;!--init-param&gt;         &lt;param-name&gt;fieldSeparator&lt;/param-name&gt;         &lt;param-value&gt;,&lt;/param-value&gt;         &lt;/init-param--&gt;     &lt;/run&gt;     &lt;to&gt;/browse.ep&lt;/to&gt;   &lt;/rule&gt;   &lt;rule enabled=&quot;true&quot;&gt;     &lt;!-- Product url parsing. --&gt;     &lt;from&gt;^.*/prod[^/]*.html[^/]*$&lt;/from&gt;     &lt;run       class=&quot;com.elasticpath.sfweb.util.impl.UrlRewriteResolverImpl&quot;       method=&quot;resolve&quot;&gt;       &lt;!--init-param&gt;         &lt;param-name&gt;fieldSeparator&lt;/param-name&gt;         &lt;param-value&gt;,&lt;/param-value&gt;         &lt;/init-param--&gt;     &lt;/run&gt;     &lt;to&gt;/product-view.ep&lt;/to&gt;   &lt;/rule&gt;   &lt;rule enabled=&quot;true&quot;&gt;     &lt;!-- Sitemap url parsing. --&gt;     &lt;from&gt;^.*/sitemap[^/]*.html[^/]*$&lt;/from&gt;     &lt;run       class=&quot;com.elasticpath.sfweb.util.impl.UrlRewriteResolverImpl&quot;       method=&quot;resolve&quot;&gt;       &lt;!--init-param&gt;         &lt;param-name&gt;fieldSeparator&lt;/param-name&gt;         &lt;param-value&gt;,&lt;/param-value&gt;         &lt;/init-param--&gt;     &lt;/run&gt;     &lt;to&gt;/sitemap.ep&lt;/to&gt;   &lt;/rule&gt;    &lt;outbound-rule&gt;     &lt;note&gt;       The outbound-rule specifies that when response.encodeURL is       called (if you are using JSTL c:url) the url /rewrite-status       will be rewritten to /test/status/. The above rule and this       outbound-rule means that end users should never see the url       /rewrite-status only /test/status/ both in thier location       bar and in hyperlinks in your pages.     &lt;/note&gt;     &lt;from&gt;/rewrite-status&lt;/from&gt;     &lt;to&gt;%{context-path}/test/status&lt;/to&gt;   &lt;/outbound-rule&gt;  &lt;/urlrewrite&gt;</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SEARCH/maximumResultsThreshold</name_space>
+    <description>Used by the spell checker. Results that are above or equal to this number will trigger a spelling suggestion lookup.</description>
+    <default_value type="String">10000</default_value>
+    <max_overrides>-1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SEARCH/maximumSuggestionsPerWord</name_space>
+    <description>Used by the spell checker. The maximum number of spelling suggestions to return.</description>
+    <default_value type="String">3</default_value>
+    <max_overrides>-1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SEARCH/accuracy</name_space>
+    <description>Sets the accuracy of spelling suggestions. This value works the same as COMMERCE/SEARCH/minimumSimilarity.</description>
+    <default_value type="String">0.75</default_value>
+    <max_overrides>-1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SEARCH/boosts</name_space>
+    <description>A comma-separated list of field name/value pairs that attribute greater importance to values matched in specific fields. For example: &quot;categoryCode=0.5,productCode=0.5,categoryName_en=2.0,description_en=0.2&quot;. By default, all fields have a boost value of 1.0.</description>
+    <default_value type="Map"></default_value>
+    <max_overrides>-1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/CONTENTWRAPPERS/reloadInterval</name_space>
+    <description>Specifies how often the content wrapper XML files and templates (*.cwt) are reloaded (in seconds).</description>
+    <default_value type="Integer">600</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ASSETS/dynamicContentAssetsSubfolder</name_space>
+    <description>The name of the subfolder within the assets directory that contains Dynamic Content assets.</description>
+    <default_value type="String">dynamiccontent</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">application</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/CHANGESETS/enable</name_space>
+    <description>Determines whether change sets are enabled. When set to true, CM users can add objects to a change set to prevent others from editing them. Setting this to false will disable the feature.</description>
+    <default_value type="Boolean">false</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/IMPORT/importJobMaxAge</name_space>
+    <description>The maximum age (in seconds) a completed import job will remain in the database before it is deleted by the import job clean-up processor.</description>
+    <default_value type="Integer">172800</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/storeCustomerCreditCards</name_space>
+    <description>Determines whether credit card numbers can be saved in customer accounts for later use. If you change this to false on a system where credit card information has already been saved, the existing information remains in the system until you remove it. This can be done either manually or using the CryptoTool.</description>
+    <default_value type="Boolean">true</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/restrictedAccessPasscode</name_space>
+    <description>The passcode that must be provided to access the storefront of a store in the Restricted state. This passcode is provided automatically when viewing the store from within the Commerce Manager client. To view the storefront from an external browser, you must append the passcode parameter to the URL. For example, http://localhost:8080/storefront/index.ep?passcode=passCode</description>
+    <default_value type="String">d*h[Rvt2z$W</default_value>
+    <max_overrides>-1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/emailEnabled</name_space>
+    <description>Specifies whether email is enabled. If set to false, the system does not send any email (order confirmations, password changes, etc.) If it is set to true, the system will attempt to send email as required. Make sure all other email related settings are set correctly when this setting is true, otherwise an error will occur when attempting to send email.</description>
+    <default_value type="Boolean">true</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ASSETS/contentWrappersLocation</name_space>
+    <description>The name of the subfolder within the assets directory that contains the Content Wrapper XML and CWT files.</description>
+    <default_value type="String">content-wrappers</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/GEOIP/QUOVA/onDemandEndpointUrl</name_space>
+    <description>The URL of the Quova geo-IP web service.</description>
+    <default_value type="String"></default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_2</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/GEOIP/QUOVA/Password</name_space>
+    <description>The password used to access the Quova geo-IP web service.</description>
+    <default_value type="String"></default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_2</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/AUTOCOMPLETESEARCH/enableThumbnail</name_space>
+    <description>Set to true to display product thumbnails in the auto-complete search results when shoppers perform searches in the storefront.</description>
+    <default_value type="Boolean">true</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">true</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/AUTOCOMPLETESEARCH/enablePrice</name_space>
+    <description>Set to true to display prices on the results in the auto-complete search results when shoppers perform searches in the storefront.</description>
+    <default_value type="Boolean">true</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">true</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/IMPORT/staleImportJobTimeout</name_space>
+    <description>The period of time (in minutes) before an import job is considered stale.</description>
+    <default_value type="Integer">5</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SEARCH/indexOptimizationInterval</name_space>
+    <description>Specifies how often (in minutes) the index specified in the context is optimized. Optimization is only required after an index is updated, so if the index is updated frequently, you may want to optimize more frequently by specifying a lower value. Note that the repeatInterval property of the optimizeSearchIndicesTrigger bean determines the smallest interval between index optimizations. If indexOptimizationInterval is less than repeatInterval, then the effective interval will be the repeatInterval. For more information, see the topic on Scheduled Jobs in the Deployment Guide.</description>
+    <default_value type="Integer">720</default_value>
+    <max_overrides>-1</max_overrides>
+    <setting_metadata/>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/GEOIP/QUOVA/Username</name_space>
+    <description>The username used to access the Quova geo-IP web service.</description>
+    <default_value type="String"></default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_2</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/GEOIP/enable</name_space>
+    <description>Set to true to enable geo-IP integration. Note that any conditions that make use of geo-location tags will not be evaluated if this setting is set to false.</description>
+    <default_value type="Boolean">false</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_2</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/APPSPECIFIC/RCP/PRICING/maximumBaseAmounts</name_space>
+    <description>The maximum number of base amount rows to display in the pricing editor.</description>
+    <default_value type="Integer">1000</default_value>
+    <max_overrides>0</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/AUTOCOMPLETESEARCH/productDescriptionMaxLength</name_space>
+    <description>The maximum number of characters to display for the product description in the auto-complete search results when shoppers perform searches in the storefront.</description>
+    <default_value type="Integer">40</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">40</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/SESSIONCLEANUP/batchSize</name_space>
+    <description>The maximum number of customer sessions to clean up in one transaction.</description>
+    <default_value type="Integer">1000</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata/>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/SESSIONCLEANUP/maxHistory</name_space>
+    <description>The number of days of customer session history to maintain. At the end of this period, all sessions with empty shopping carts are removed by the cleanupSessionsJob Quartz job.</description>
+    <default_value type="Integer">60</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata/>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/AUTOCOMPLETESEARCH/enable</name_space>
+    <description>Set to true to enable search autocomplete in the storefront.</description>
+    <default_value type="Boolean">true</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">true</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/AUTOCOMPLETESEARCH/numberOfResults</name_space>
+    <description>The number of product results to display in the auto-complete search results when shoppers perform searches in the storefront.</description>
+    <default_value type="Integer">5</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">5</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/AUTOCOMPLETESEARCH/productNameMaxLength</name_space>
+    <description>The maximum number of characters to display for the product name in the auto-complete search results when shoppers perform searches in the storefront.</description>
+    <default_value type="Integer">40</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">40</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">true</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/SEARCH/showBundlesFirst</name_space>
+    <description>Set to true to display product bundles before other products in storefront search results.</description>
+    <default_value type="Boolean">true</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">true</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_1</value>
+        <value key="availableToMarketing">true</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ASYNC/ThreadKeepAlive</name_space>
+    <description>The number of milliseconds to keep the worker thread alive after it has finished.</description>
+    <default_value type="Integer">10000</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="sfRefreshStrategy">application</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/INVENTORY/inventoryStrategy</name_space>
+    <description>Determines the strategy or approach the system uses for inventory behavior. The only valid value is ''allocatedjournaling'' (no quotes). Warning: changing this value on a production system can have serious consequences. Please refer to Elastic Path documentation for guidance.</description>
+    <default_value type="String">allocatedjournaling</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">application</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ASYNC/ThreadPoolCoreSize</name_space>
+    <description>The number of worker threads the pool is starting with.</description>
+    <default_value type="Integer">50</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="sfRefreshStrategy">application</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ASYNC/ThreadMaxPoolSize</name_space>
+    <description>The maximum number of threads existing in the pool at any given time.</description>
+    <default_value type="Integer">100</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="sfRefreshStrategy">application</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/ADVANCEDSEARCH/advancedSearchConfiguration</name_space>
+    <description>This xml file is used to control the configuration of the storefront advanced search on a per store basis. By providing the appropriate configuration search fields and values can be specified.</description>
+    <default_value type="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!-- Configuration file for advanced search --&gt;&lt;!-- For range values, lower bounds are inclusive, upper values are exclusive. --&gt;&lt;IntelligentBrowsing&gt;&lt;/IntelligentBrowsing&gt;</default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;lt;!-- Configuration file for advanced search --&amp;gt;&amp;lt;!-- For range values, lower bounds are inclusive, upper values are exclusive. --&amp;gt;&amp;lt;IntelligentBrowsing&amp;gt;&amp;lt;/IntelligentBrowsing&amp;gt;</value>
+    </defined_values>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_2</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ASYNC/ThreadQueueSize</name_space>
+    <description>The maximum number of waiting tasks when the thread pool is at capacity.</description>
+    <default_value type="Integer">100</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="sfRefreshStrategy">application</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ORDERLOCK/minsBeforeCleanUp</name_space>
+    <description>The number of minutes to maintain order locks. At the end of this period, all order locks will be deleted by the cleanupOrderLocksJob Quartz job.</description>
+    <default_value type="Integer">120</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata/>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ORDERLOCK/batchSize</name_space>
+    <description>The maximum number of order locks to clean up in one transaction.</description>
+    <default_value type="Integer">200</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata/>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/FILTEREDNAVIGATION/separatorInToken</name_space>
+    <description>This setting defines the field separator that is used in the filtered navigation.</description>
+    <default_value type="String">_</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="sfRefreshStrategy">interval:timeout=COMMERCE/Cache/Cache_2</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/ASSETS/assetServerBaseUrl</name_space>
+    <description>The base URL of the system that serves up media assets such as images and video. This will be prepended in front of an asset name to build the link to retrieve the asset.</description>
+    <default_value type="String"></default_value>
+    <max_overrides>-1</max_overrides>
+    <defined_values>
+        <value context="campus">http://cdn.elasticpath.net/images</value>
+    </defined_values>
+    <setting_metadata/>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/PAYMENTGATEWAY/certificatesDirectory</name_space>
+    <description>This setting defines the base directory where the payment gateway certificates can be found. The certificate path of the payment gateway will be appended to this prefix. It should end with a file separator, e.g a /. If it is a relative path, it will be relative to the current working directory of the application server. Therefore, using an absolute path is recommended.</description>
+    <default_value type="String">./</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata/>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/URLREWRITE/fieldSeparator</name_space>
+    <description>This setting defines the field separator that is used in the urlrewrite to tokenize the file name part of the SEO urls. If you change this value, you must set the same value into the XML defined by property: COMMERCE/SYSTEM/urlRewriteConfig</description>
+    <default_value type="String">-</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata>
+        <value key="environmentSpecific">false</value>
+    </setting_metadata>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/FAILEDORDERCLEANUP/maxHistory</name_space>
+    <description>This setting controls the number of days orders with state failed will be kept before a Quartz job removes them from the system.</description>
+    <default_value type="Integer">60</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata/>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/FAILEDORDERCLEANUP/batchSize</name_space>
+    <description>This setting controls the maximum number of failed orders to clean up in one transaction.</description>
+    <default_value type="Integer">1000</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata/>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ABANDONEDCARTCLEANUP/maxHistory</name_space>
+    <description>This setting controls the number of days of cart history to keep before a Quartz job clears it.</description>
+    <default_value type="Integer">60</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata/>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ABANDONEDCARTCLEANUP/batchSize</name_space>
+    <description>The maximum number of carts to cleanup in one transaction.</description>
+    <default_value type="Integer">1000</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata/>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ANONYMOUSCUSTOMERCLEANUP/batchSize</name_space>
+    <description>The maximum number of anonymous customers to cleanup in one transaction.</description>
+    <default_value type="Integer">1000</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata/>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/SYSTEM/ANONYMOUSCUSTOMERCLEANUP/maxHistory</name_space>
+    <description>This setting controls the number of days of anonymous customer history to keep before a Quartz job clears it.</description>
+    <default_value type="Integer">60</default_value>
+    <max_overrides>1</max_overrides>
+    <setting_metadata/>
+</configuration_setting>
+
+<configuration_setting>
+    <name_space>COMMERCE/STORE/listPagination</name_space>
+    <description>The maximum number of list elements per page that the API resource will return for paginated objects.</description>
+    <default_value type="Integer">20</default_value>
+    <max_overrides>-1</max_overrides>
+	<defined_values>
+		<value context="campus">5</value>
+	</defined_values>
+    <setting_metadata/>
+</configuration_setting>
+</system_configuration>

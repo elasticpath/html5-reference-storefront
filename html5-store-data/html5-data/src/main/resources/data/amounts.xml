@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<amounts>
+<base_amount>
+    <guid>cf48a5fe-b219-4115-adf8-6071ec52caa9</guid>
+    <object_guid>hpsmartcalc</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>175.99</list_price>
+    <sale_price>79.97</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>8c958f1e-53d6-46db-9e18-0e974483cd9e</guid>
+    <object_guid>9781405100151</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>13.49</list_price>
+    <sale_price>12.79</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>ccfb0c55-57f0-4d0f-90fe-255bc2b47e09</guid>
+    <object_guid>9781259015113</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>175.00</list_price>
+    <sale_price>138.50</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>538952e6-1613-4bac-95f0-4bea54cb305d</guid>
+    <object_guid>lenovoIdeatab</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>129.99</list_price>
+    <sale_price>74.99</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>54029915-e88f-41e6-9f1e-c594a122ede5</guid>
+    <object_guid>outOfStockCalc</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>12.97</list_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>d2cb4685-2a9e-41cd-b0ff-125c60bcd9a8</guid>
+    <object_guid>EL-501XBWH</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>8.99</list_price>
+    <sale_price>7.39</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>1fa74e4a-9f64-4f3d-8e0c-c97c0b3f239c</guid>
+    <object_guid>ti30xpink</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>19.99</list_price>
+    <sale_price>12.25</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>9bc446ce-58ab-45ce-a4e3-922848dd678e</guid>
+    <object_guid>FX260SLRSC</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>15.99</list_price>
+    <sale_price>8.97</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>293adffb-0628-492b-a8b1-34d17d296b48</guid>
+    <object_guid>FX-300MS</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>17.99</list_price>
+    <sale_price>10.65</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>e99afc4a-97f3-4270-a6bb-a800792008aa</guid>
+    <object_guid>FX-9750GII</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>12.99</list_price>
+    <sale_price>12.58</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>0c654e4b-4610-4a84-9ca8-6572410f5dfa</guid>
+    <object_guid>dragontouch</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>99.99</list_price>
+    <sale_price>79.99</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>1b2ba16f-bd09-48db-b3b0-3e16c010a997</guid>
+    <object_guid>EL-W516XBS</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>24.99</list_price>
+    <sale_price>17.17</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>fcb92c43-8c2c-49a9-8237-cf9d1e0971e3</guid>
+    <object_guid>sumsungtab3</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>199.99</list_price>
+    <sale_price>149.99</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>bf74dd99-8011-46d7-8873-519614e6497b</guid>
+    <object_guid>9781118300510</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>17.99</list_price>
+    <sale_price>16.05</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>be4fae12-72d7-4847-bff8-cf02826cd63c</guid>
+    <object_guid>hp35s</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>59.99</list_price>
+    <sale_price>42.95</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>82312294-050f-4b68-a201-b6ca42ba55a9</guid>
+    <object_guid>FX-300ES</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>23.99</list_price>
+    <sale_price>12.99</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>01c2e1e3-8317-47f2-954d-714619484fbb</guid>
+    <object_guid>standardProduct</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>15.99</list_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>eef8c292-1ba2-4810-9263-f2e9039ca9fa</guid>
+    <object_guid>ti30xa</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>17.95</list_price>
+    <sale_price>10.65</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>f6f521e7-79ee-4496-b841-61056208f4ba</guid>
+    <object_guid>fx55plus</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>13.49</list_price>
+    <sale_price>12.79</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>3ed0734b-c51c-4984-85b3-14ae56e6f7d2</guid>
+    <object_guid>ti34</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>25.00</list_price>
+    <sale_price>18.92</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>e731b818-2e98-4696-ac8d-a24b86050bfe</guid>
+    <object_guid>ba2plus</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>18.15</list_price>
+    <sale_price>13.93</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>aae6c4d5-e62d-443c-ae74-bc0579738c9d</guid>
+    <object_guid>FX-115ES</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>29.98</list_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>fbbb7a82-29e3-4bb3-9149-cbc9696a047b</guid>
+    <object_guid>CIOFX115MS</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>26.95</list_price>
+    <sale_price>15.24</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>f30ea8b2-45a4-49fd-8c74-23229c6e35cf</guid>
+    <object_guid>hp10s</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>11.99</list_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>75fd80f6-5c65-472f-a5f8-c123ae936844</guid>
+    <object_guid>300s</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>18.15</list_price>
+    <sale_price>13.93</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>348a732b-0151-4cb8-af82-d7ee9fd481e3</guid>
+    <object_guid>ti30x</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>21.95</list_price>
+    <sale_price>13.99</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>3f1c2efa-7bf1-48fe-b74e-4db176541ae8</guid>
+    <object_guid>casiodualpower</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>12.00</list_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>b565f24a-2b4a-4a25-b7c1-43cc58bd0e80</guid>
+    <object_guid>ti84plus</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>189.00</list_price>
+    <sale_price>119.99</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>04a878bb-a1f7-46ec-9752-817608201c84</guid>
+    <object_guid>SL1500</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>19.99</list_price>
+    <sale_price>12.94</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>930d2997-90bb-41be-a385-84460890e629</guid>
+    <object_guid>freeCalculator</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>0.00</list_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>3bfe90ac-9bb3-4bf7-bfa1-81a4708bd361</guid>
+    <object_guid>TI30XIIS</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>19.99</list_price>
+    <sale_price>13.95</sale_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
+</amounts>

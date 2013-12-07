@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<inventory>
+<sku code="noPriceCalc">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>0</onhand>
+        <available>0</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="dragontouch">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="9781259015113"/>
+
+<sku code="samsungStandardProduct"/>
+
+<sku code="outOfStockCalc">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>0</onhand>
+        <available>0</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="TI30XIIS">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="hpsmartcalc">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="casiodualpower">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="samsungtab3">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="ti30x">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="ti30xa">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="FX-300ES">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="CIOFX115MS">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="9781405100151"/>
+
+<sku code="9781118300510"/>
+
+<sku code="noPrice"/>
+
+<sku code="freeCalculator"/>
+
+<sku code="ba2plus">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="hp300s">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="A1000L">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="hp10s">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="SL1500">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="FX-9750GII">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="ti84plus">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="fx55plus">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="EL-501XBWH">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="EL-W516XBSL">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="hp35s">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="ti34">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="FX-115ES">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>201</onhand>
+        <available>201</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="FX260SLRSC">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="ti30xpink">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="FX-300MS">
+    <warehouse code="campusStoreWarehouse">
+        <onhand>200</onhand>
+        <available>200</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+</inventory>

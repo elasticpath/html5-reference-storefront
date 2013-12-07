@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<exportconfiguration>
+
+  <exporters>
+
+    <exporter type="PRODUCT">
+      <include type="PRODUCTASSOCIATION">
+        <option key="DIRECT_ONLY" value="true"/>
+      </include>
+      <include type="INVENTORY"/>
+      <include type="PRICING"/>	  
+      <include type="ASSETS"/>
+    </exporter>
+    <exporter type="PROMOTION">
+      <include type="CONDITIONRULE"/>
+      <include type="COUPONSET"/>
+    </exporter>
+    <exporter type="SYSTEMCONFIGURATION"/>
+    <exporter type="PRICELISTDESCRIPTOR">
+      <include type="BASEAMOUNT"/>
+    </exporter>
+    <exporter type="PRICELISTASSIGNMENT"/>
+    <exporter type="DYNAMICCONTENT"/>
+    <exporter type="DYNAMICCONTENTDELIVERY"/>
+    <exporter type="TAXJURISDICTION"/>
+    <exporter type="PAYMENTGATEWAY"/>
+    <exporter type="WAREHOUSE"/>
+    <exporter type="CUSTOMER">
+      <option key="CARD_NUMBER_FILTER" value="STATIC"/>
+    </exporter>
+    <exporter type="CUSTOMERPROFILE_ATTRIBUTE"/>
+    <exporter type="STORE"/>
+    <exporter type="STORE_ASSOCIATION"/>
+    <exporter type="CMUSER"/>
+    <exporter type="USER_ROLE"/>
+    <exporter type="GIFT_CERTIFICATE"/>
+    <exporter type="CATEGORY"/>
+    <exporter type="CONTENTSPACE"/>
+	<exporter type="SAVED_CONDITION"/>
+  </exporters>
+  <packager type="NONE"/>
+  <delivery>
+    <method>FILE</method>
+    <target>target/exported/data</target>
+  </delivery>
+</exportconfiguration>

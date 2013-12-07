@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<price_list_assignments>
+<price_list_assignment>
+    <guid>c825d2a4-e43b-4ffc-97fd-6ed309dbc69f</guid>
+    <name>Campus Store USD MSRP</name>
+    <priority>1</priority>
+    <catalog_guid>campusVirtualCatalog</catalog_guid>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+    <selling_context>
+        <guid>23bdef04-ee98-4632-b9f7-f88cb6f48899</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>c9982d69-57fc-4032-a75f-a08f6239414c</guid>
+                <name>2971473313797371</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'campus' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</price_list_assignment>
+</price_list_assignments>

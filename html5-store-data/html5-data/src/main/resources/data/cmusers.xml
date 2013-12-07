@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cmusers>
+<cmuser guid="200">
+    <user_name>cmuser</user_name>
+    <email>cmuser@epstore.com</email>
+    <first_name>CM</first_name>
+    <last_name>User</last_name>
+    <password>3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d</password>
+    <creation_date>2008-01-01T00:00:00-08:00</creation_date>
+    <last_modified>2013-11-19T16:52:24-08:00</last_modified>
+    <total_failed_login_attempts>0</total_failed_login_attempts>
+    <enabled>true</enabled>
+    <has_temporary_password>true</has_temporary_password>
+    <user_password_history_items/>
+    <has_access_to_all_warehouses>true</has_access_to_all_warehouses>
+    <has_access_to_all_catalogs>true</has_access_to_all_catalogs>
+    <has_access_to_all_stores>true</has_access_to_all_stores>
+    <has_access_to_all_price_lists>true</has_access_to_all_price_lists>
+    <user_role_guids>
+        <user_role_guids>202</user_role_guids>
+    </user_role_guids>
+    <price_list_guids/>
+    <catalog_codes/>
+    <store_codes/>
+    <warehouse_codes/>
+</cmuser>
+
+<cmuser guid="300">
+    <user_name>admin</user_name>
+    <email>admin@epstore.com</email>
+    <first_name>Admin</first_name>
+    <last_name>Store</last_name>
+    <password>3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d</password>
+    <creation_date>2007-01-01T00:00:00-08:00</creation_date>
+    <last_login>2013-11-28T16:32:34-08:00</last_login>
+    <last_password_change>2013-11-20T09:58:43-08:00</last_password_change>
+    <last_modified>2013-11-28T16:32:34-08:00</last_modified>
+    <total_failed_login_attempts>0</total_failed_login_attempts>
+    <enabled>true</enabled>
+    <has_temporary_password>false</has_temporary_password>
+    <user_password_history_items/>
+    <has_access_to_all_warehouses>true</has_access_to_all_warehouses>
+    <has_access_to_all_catalogs>true</has_access_to_all_catalogs>
+    <has_access_to_all_stores>true</has_access_to_all_stores>
+    <has_access_to_all_price_lists>true</has_access_to_all_price_lists>
+    <user_role_guids>
+        <user_role_guids>201</user_role_guids>
+    </user_role_guids>
+    <price_list_guids>
+        <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+    </price_list_guids>
+    <catalog_codes/>
+    <store_codes/>
+    <warehouse_codes/>
+</cmuser>
+</cmusers>

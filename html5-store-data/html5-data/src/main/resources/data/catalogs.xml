@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<catalogs>
+<catalog>
+    <code>campusVirtualCatalog</code>
+    <type>virtual</type>
+    <name>Campus Store Virtual Catalog</name>
+    <defaultlanguage>en</defaultlanguage>
+</catalog>
+
+<catalog>
+    <code>CampusMasterCatalog</code>
+    <type>master</type>
+    <name>Campus Master Catalog</name>
+    <languages>
+        <language>en_US</language>
+        <language>en</language>
+    </languages>
+    <defaultlanguage>en</defaultlanguage>
+    <attributes>
+        <attribute>
+            <key>catImage</key>
+            <name>Category Image</name>
+            <usage>Category</usage>
+            <type>Image</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>catDescription</key>
+            <name>Category Description</name>
+            <usage>Category</usage>
+            <type>LongText</type>
+            <multilanguage>false</multilanguage>
+            <required>true</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>catName</key>
+            <name>Name</name>
+            <usage>Category</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>true</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>batteryIncluded</key>
+            <name>Battery Included</name>
+            <usage>Product</usage>
+            <type>Boolean</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>numberOfFunctions</key>
+            <name>Number of Functions</name>
+            <usage>Product</usage>
+            <type>Integer</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>alternateImage</key>
+            <name>Alternate Image</name>
+            <usage>Product</usage>
+            <type>Image</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>AllowedExams</key>
+            <name>Allowed Exams</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>courseID</key>
+            <name>Course ID</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>isbn</key>
+            <name>ISBN</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+    </attributes>
+    <categorytypes>
+        <categorytype>
+            <guid>8e04baa8-9399-4460-8a54-e1c43221f597</guid>
+            <name>GenericCategoryType</name>
+            <template>categoryTemplate</template>
+            <assignedattributes>
+                <attributekey>catDescription</attributekey>
+                <attributekey>catImage</attributekey>
+            </assignedattributes>
+        </categorytype>
+    </categorytypes>
+    <producttypes>
+        <producttype>
+            <guid>2f55d655-8c1a-4dd0-9234-250a4ae23249</guid>
+            <name>eBooks</name>
+            <template>productTemplate</template>
+            <assignedattributes>
+                <attributekey>courseID</attributekey>
+                <attributekey>isbn</attributekey>
+            </assignedattributes>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <guid>414451c3-69d6-4419-846f-064ecf34affd</guid>
+            <name>Calculators</name>
+            <template>productTemplate</template>
+            <assignedattributes>
+                <attributekey>AllowedExams</attributekey>
+                <attributekey>numberOfFunctions</attributekey>
+                <attributekey>alternateImage</attributekey>
+                <attributekey>batteryIncluded</attributekey>
+            </assignedattributes>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <guid>7740882a-1254-4fa8-83d5-87e9533244bf</guid>
+            <name>tablets</name>
+            <template>productTemplate</template>
+            <assignedattributes/>
+            <defaulttaxcode>NONE</defaulttaxcode>
+            <nodiscount>false</nodiscount>
+        </producttype>
+    </producttypes>
+    <brands>
+        <brand>
+            <code>TI</code>
+            <name>
+                <value language="en_US">Texas Instruments</value>
+                <value language="en">Texas Instruments</value>
+            </name>
+            <image>ti_logo.jpg</image>
+        </brand>
+        <brand>
+            <code>Casio</code>
+            <name>
+                <value language="en_US">Casio</value>
+                <value language="en">Casio</value>
+            </name>
+            <image>casio-logo.jpg</image>
+        </brand>
+        <brand>
+            <code>SharpElectronics</code>
+            <name>
+                <value language="en_US">Sharp Electronics</value>
+                <value language="en">Sharp Electronics</value>
+            </name>
+            <image>sharp_logo.jpg</image>
+        </brand>
+        <brand>
+            <code>hp</code>
+            <name>
+                <value language="en_US">HP</value>
+                <value language="en">HP</value>
+            </name>
+            <image>hp-logo.jpg</image>
+        </brand>
+        <brand>
+            <code>Samsung</code>
+            <name>
+                <value language="en_US">Samsung</value>
+                <value language="en">Samsung</value>
+            </name>
+            <image>samsung-logo.jpg</image>
+        </brand>
+        <brand>
+            <code>tabletExpress</code>
+            <name>
+                <value language="en_US">Tablet Express</value>
+                <value language="en">Tablet Express</value>
+            </name>
+            <image>tabletexpress-logo.jpg</image>
+        </brand>
+        <brand>
+            <code>Lenovo</code>
+            <name>
+                <value language="en_US">Lenovo</value>
+                <value language="en">Lenovo</value>
+            </name>
+            <image>lenovo-logo.jpg</image>
+        </brand>
+        <brand>
+            <code>McGrawHill</code>
+            <name>
+                <value language="en_US">McGraw Hill Education</value>
+                <value language="en">McGraw Hill Education</value>
+            </name>
+            <image>MHE.png</image>
+        </brand>
+        <brand>
+            <code>Wiley</code>
+            <name>
+                <value language="en_US">Wiley</value>
+                <value language="en">Wiley</value>
+            </name>
+            <image>wiley-logo.png</image>
+        </brand>
+    </brands>
+</catalog>
+</catalogs>

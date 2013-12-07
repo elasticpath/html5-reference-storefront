@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<user_roles>
+<user_role guid="201">
+    <name>SUPERUSER</name>
+    <description>System super user role</description>
+    <permissions/>
+</user_role>
+
+<user_role guid="202">
+    <name>CMUSER</name>
+    <description>System CM user role</description>
+    <permissions/>
+</user_role>
+
+<user_role guid="203">
+    <name>WSUSER</name>
+    <description>System WS user role</description>
+    <permissions/>
+</user_role>
+</user_roles>

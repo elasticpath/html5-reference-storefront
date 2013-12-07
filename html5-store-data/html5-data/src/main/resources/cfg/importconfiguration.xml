@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<importconfiguration>
+  <xmlvalidation>true</xmlvalidation>
+  <importstrategy>
+    <importer type="PAYMENTGATEWAY">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+      <dependentelements>
+        <dependentelement type="PAYMENT_GATEWAY_PROPERTIES">CLEAR_COLLECTION</dependentelement>
+      </dependentelements>
+    </importer>
+    <importer type="WAREHOUSE">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+    </importer>
+    <importer type="TAXCODE">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+    </importer>
+    <importer type="TAXJURISDICTION">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+    </importer>
+    <importer type="PRODUCT">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+      <dependentelements>
+        <!-- FOR SINGLE AND MULTI-SKU PRODUCTS -->
+        <dependentelement type="PRODUCT_ASSOCIATIONS">CLEAR_COLLECTION</dependentelement>
+        <dependentelement type="PRODUCT_CATEGORY_ASSIGNMENTS">CLEAR_COLLECTION</dependentelement>
+        <dependentelement type="PRODUCT_ATTRIBUTES">CLEAR_COLLECTION</dependentelement>
+        <dependentelement type="PRODUCT_CATALOG_PRICES">RETAIN_COLLECTION</dependentelement>
+        <dependentelement type="PRODUCT_PRICE_CURRENCIES">RETAIN_COLLECTION</dependentelement>
+        <dependentelement type="PRODUCT_PRICE_TIERS">CLEAR_COLLECTION</dependentelement>
+        <!-- FOR MULTI-SKU PRODUCTS ONLY. NOT TO BE EDITED WHEN IMPORTING SINGLE SKU PRODUCTS -->
+        <dependentelement type="SKU_CATALOG_PRICES">RETAIN_COLLECTION</dependentelement>
+        <dependentelement type="SKU_PRICE_CURRENCIES">RETAIN_COLLECTION</dependentelement>
+        <dependentelement type="SKU_PRICE_TIERS">CLEAR_COLLECTION</dependentelement>
+        <dependentelement type="PRODUCT_SKUS">RETAIN_COLLECTION</dependentelement>
+        <dependentelement type="PRODUCT_SKU_PRICING">CLEAR_COLLECTION</dependentelement>
+        <dependentelement type="SKU_ATTRIBUTES">CLEAR_COLLECTION</dependentelement>
+      </dependentelements>
+    </importer>
+    <importer type="CATEGORY">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+      <dependentelements>
+        <dependentelement type="CATEGORY_ATTRIBUTES">CLEAR_COLLECTION</dependentelement>
+      </dependentelements>
+    </importer>
+
+    <importer type="STORE">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+		<dependentelements>
+      		<dependentelement type="STORE_ASSOCIATIONS">CLEAR_COLLECTION</dependentelement>
+		</dependentelements>
+    </importer>
+
+    <importer type="STORE_ASSOCIATION">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+    </importer>
+
+    <importer type="CUSTOMERPROFILE_ATTRIBUTE">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+    </importer>
+
+	<importer type="CMUSER">
+		<importstrategy>INSERT_OR_UPDATE</importstrategy>
+		<dependentelements>
+			<dependentelement type="USER_ROLES">CLEAR_COLLECTION</dependentelement>
+			<dependentelement type="PRICE_LISTS">CLEAR_COLLECTION</dependentelement>
+			<dependentelement type="CATALOGS">CLEAR_COLLECTION</dependentelement>
+			<dependentelement type="STORES">CLEAR_COLLECTION</dependentelement>
+			<dependentelement type="WAREHOUSES">CLEAR_COLLECTION</dependentelement>
+			<dependentelement type="USER_PASSWORD_HISTORY">CLEAR_COLLECTION</dependentelement>
+		</dependentelements>
+	</importer>
+
+	<importer type="USER_ROLE">
+		<importstrategy>INSERT_OR_UPDATE</importstrategy>
+		<dependentelements>
+			<dependentelement type="USER_PERMISSIONS">CLEAR_COLLECTION</dependentelement>
+		</dependentelements>
+	</importer>
+	
+    <importer type="CUSTOMER">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+    </importer>
+    <importer type="PROMOTION">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+    </importer>
+    <importer type="COUPONSET">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+      <dependentelements>
+        <dependentelement type="COUPONSET">CLEAR_COLLECTION</dependentelement>
+      </dependentelements>
+    </importer>
+    <importer type="SYSTEMCONFIGURATION">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+      <dependentelements>
+        <dependentelement type="SETTING_VALUES">RETAIN_COLLECTION</dependentelement>
+        <dependentelement type="SETTING_METADATA">RETAIN_COLLECTION</dependentelement>
+      </dependentelements>
+    </importer>
+    <importer type="PRICELISTDESCRIPTOR">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+      <dependentelements>
+        <dependentelement type="BASE_AMOUNTS">RETAIN_COLLECTION</dependentelement>
+      </dependentelements>
+    </importer>
+    <importer type="GIFT_CERTIFICATE">
+		<importstrategy>INSERT_OR_UPDATE</importstrategy>
+    </importer>
+	<importer type="CONTENTSPACE">
+		<importstrategy>INSERT_OR_UPDATE</importstrategy>
+    </importer>
+	<importer type="SAVED_CONDITION">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+    </importer>
+    <importer type="DYNAMICCONTENT">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+    </importer>
+    <importer type="DYNAMICCONTENTDELIVERY">
+      <importstrategy>INSERT_OR_UPDATE</importstrategy>
+    </importer>
+  </importstrategy>
+  <packager type="NONE"/>
+  <retrieval>
+    <method>FILE</method>
+    <source>target/classes/data/</source>
+  </retrieval>
+  <transformerschain/>
+</importconfiguration>
