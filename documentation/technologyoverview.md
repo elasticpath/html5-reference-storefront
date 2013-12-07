@@ -86,8 +86,13 @@ Testing Frameworks
 </tr>
 <tr>
 <td><strong><a href="http://www.seleniumhq.org/projects/webdriver/">Selenium</a></strong></td>
-<td>Automated testing of the browser components.</td>
+<td>Automated browser component testing.</td>
 <td>2.35.0</td>
+</tr>
+<tr>
+<td><strong><a href="http://sinonjs.org/">Sinon.JS</a></strong></td>
+<td>Standalone test framework for JavaScript unit testing.</td>
+<td>1.7.3</td>
 </tr>
 </tbody>
 </table>
