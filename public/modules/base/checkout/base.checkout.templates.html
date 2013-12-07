@@ -58,8 +58,7 @@
         <span data-el-value="checkout.subTotal"><%= E.subTotal.display %></span>
       </li>
       <li class="checkout-tax" data-el-container="checkout.taxes">
-        <label data-el-label="checkout.taxTotal"><%= E.getI18nLabel('checkout.taxTotal') %>: </label>
-        <span data-el-value="checkout.taxTotal"><%= E.taxTotal.display %></span>
+        <div data-region="checkoutTaxTotalRegion"></div>
         <div data-region="checkoutTaxBreakDownRegion"></div>
       </li>
       <li class="checkout-total">
@@ -76,6 +75,12 @@
   <script id="CheckoutTaxTemplate" type="text/template">
       <label data-el-label="checkout.tax"><%= E.title %>:</label>
       <span data-el-value="checkout.tax"><%= E.display %></span>
+  </script>
+
+  <!-- Checkout Tax Total Template [default ItemView, className: checkout-tax-total]-->
+  <script id="CheckoutTaxTotalTemplate" type="text/template">
+    <label data-el-label="checkout.taxTotal"><%= E.getI18nLabel('checkout.taxTotal') %>: </label>
+    <span data-el-value="checkout.taxTotal"><%= E.display %></span>
   </script>
 </div>
 

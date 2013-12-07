@@ -33,10 +33,8 @@ define(function (require) {
           sticky: true,
           position: 'middle-center',
           type: 'error',
-          close: function () {
-            // Route to the default cart view
-            ep.router.navigate(ep.app.config.routes.cart, true);
-          }
+          // Route to the default cart view
+          close: ep.router.navigate(ep.app.config.routes.cart, true)
         });
         ep.logger.error('unable to load checkout - missing checkout link data');
       }
@@ -47,8 +45,18 @@ define(function (require) {
 
       checkoutModel.fetch({
         url: checkoutModel.getUrl(orderLink),
-        success: function (response) {
+        success: function () {
           checkoutLayout.checkoutTitleRegion.show(new View.CheckoutTitleView());
+
+          // if there is a default choice billing address, trigger a call to Cortex to formerly set it
+          // to allow tax calculations to be made
+          if (checkoutModel.get('billingAddresses').length && checkoutModel.get('billingAddresses')[0].defaultChoice) {
+            EventBus.trigger(
+              'checkout.updateChosenBillingAddressRequest',
+              checkoutModel.get('billingAddresses')[0].selectAction,
+              function() {}
+            );
+          }
 
           checkoutLayout.billingAddressesRegion.show(
             new View.BillingAddressesCompositeView({
@@ -61,8 +69,14 @@ define(function (require) {
           var checkoutSummaryView = new View.CheckoutSummaryView({
             model: new Backbone.Model(checkoutModel.get('summary'))
           });
+
           checkoutSummaryView.on('show', function() {
             if (checkoutModel.get('summary').taxes.length > 0) {
+              checkoutSummaryView.checkoutTaxTotalRegion.show(
+                new View.CheckoutTaxTotalView({
+                  model: new Backbone.Model(checkoutModel.get('summary').taxTotal)
+                })
+              );
               checkoutSummaryView.checkoutTaxBreakDownRegion.show(
                 new View.CheckoutTaxesCollectionView({
                   collection: new Backbone.Collection(checkoutModel.get('summary').taxes)
@@ -177,13 +191,17 @@ define(function (require) {
       EventBus.trigger('checkout.updateChosenBillingAddressRequest', actionLink);
     });
 
-    EventBus.on('checkout.updateChosenBillingAddressRequest', function(actionLink) {
+    EventBus.on('checkout.updateChosenBillingAddressRequest', function(actionLink, successCallback) {
       if (actionLink) {
         var ajaxModel = new ep.io.defaultAjaxModel({
           type: 'POST',
           url: actionLink,
           success: function() {
-            EventBus.trigger('checkout.updateChosenBillingAddressSuccess');
+            if (successCallback) {
+              successCallback.call();
+            } else {
+              EventBus.trigger('checkout.updateChosenBillingAddressSuccess');
+            }
           },
           customErrorFn: function() {
             EventBus.trigger('checkout.updateChosenBillingAddressFailed');
@@ -206,7 +224,7 @@ define(function (require) {
       });
     });
 
-    EventBus.on('checkout.updateChosenBillingAddressSuccess', function(response) {
+    EventBus.on('checkout.updateChosenBillingAddressSuccess', function() {
       Backbone.history.loadUrl();
     });
 

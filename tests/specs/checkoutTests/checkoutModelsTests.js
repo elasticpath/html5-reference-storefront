@@ -22,11 +22,8 @@ define(function (require) {
         this.numChosenAddresses = 0;
         this.numChoiceAddresses = 0;
 
-        try {
-          this.numChosenAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._chosen.._description[0]').length;
-          this.numChoiceAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._choice')[0].length;
-        } catch (error) {
-        }
+        this.numChosenAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._chosen.._description[0]').length;
+        this.numChoiceAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._choice')[0].length;
       });
 
       after(function () {

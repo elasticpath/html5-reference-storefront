@@ -38,12 +38,11 @@ define(function (require) {
         billingAddresses: {}
       };
 
-      try{
+      if (response) {
         checkoutObj.submitOrderActionLink = jsonPath(response, "$..links[?(@.rel=='submitorderaction')].href")[0];
         checkoutObj.summary = modelHelpers.parseCheckoutSummary(response);
         checkoutObj.billingAddresses = modelHelpers.parseBillingAddresses(response);
-      }
-      catch(error){
+      } else {
         ep.logger.error("Checkout model wasn't able to fetch valid data for parsing. " + error.message);
       }
 
@@ -68,6 +67,7 @@ define(function (require) {
         submitOrderActionLink: undefined
       };
 
+      // FIXME: replace try/catch with test for response
       try {
         summary.totalQuantity = jsonPath(response, '$._cart..total-quantity')[0];
         summary.submitOrderActionLink = jsonPath(response, "$..links[?(@.rel=='submitorderaction')].href")[0];
@@ -119,7 +119,8 @@ define(function (require) {
         return _.extend(address, {chosen: true});
       };
 
-      try {
+      if (response) {
+
         var chosenAddress = jsonPath(response, '$.._billingaddressinfo[0].._chosen.._description[0]')[0];
         var choiceAddresses = jsonPath(response, '$.._billingaddressinfo[0].._choice')[0];
 
@@ -144,14 +145,14 @@ define(function (require) {
             // If there is no chosen address, designate the first choice address to be chosen
             if (i === 0 && !chosenAddress) {
               markAsChosenAddress(parsedChoiceAddress);
+              // Add an identifier to identity this as a default choice address
+              _.extend(parsedChoiceAddress, {defaultChoice: true});
             }
 
             billingAddresses.push(parsedChoiceAddress);
           }
         }
-
-      }
-      catch (error) {
+      } else {
         ep.logger.error('Error when building billing addresses object: ' + error.message);
       }
 

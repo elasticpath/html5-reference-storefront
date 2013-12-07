@@ -84,28 +84,7 @@ define(function (require) {
           expect(this.view.$el.find('[data-region="billingAddressRegion"]')).to.be.length(1);
         });
       });
-
-      // FIXME: triggering the click event of the radio button doesn't seem to trigger the change event
-//      describe('selected billing address changes', function() {
-//      before(function () {
-//        sinon.spy(EventBus, 'trigger');
-//
-//        // isolate unit by unbinding subsequent triggered events
-//        EventTestHelpers.unbind('checkout.billingAddressRadioChanged');
-//
-//        this.view.$el.find('input[name="billingAddress"]').trigger('click');
-//      });
-//
-//      after(function() {
-//        EventBus.trigger.restore();
-//        EventTestHelpers.reset();
-//      });
-//
-//      it('should trigger cart.billingAddressRadioChanged event', function() {
-//        expect(EventBus.trigger).to.be.calledWith('checkout.billingAddressRadioChanged');
-//      });
-//    });
-  });
+    });
 
     describe('BillingAddressesCompositeView', function () {
       before(function () {

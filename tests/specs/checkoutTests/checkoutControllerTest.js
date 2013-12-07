@@ -5,7 +5,6 @@
  */
 define(function (require) {
   var ep = require('ep');
-  var Backbone = require('backbone');
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
   var EventTestHelpers = require('testhelpers.event');
@@ -26,15 +25,17 @@ define(function (require) {
 
         ep.io.localStore.setItem('oAuthToken', 'fakeToken');
 
-        var server = sinon.fakeServer.create();
-        server.autoRespond = true;
+        this.server = sinon.fakeServer.create();
+        this.server.autoRespond = true;
 
-        server.respondWith(
+        this.server.respondWith(
           "GET", fakeGetLink + JSON.parse(dataJSON).zoom,
           [200, {"Content-Type":"application/json"}, fakeResponse]
         );
 
-        this.view = new controller.DefaultView(fakeGetLink);
+        ep.io.sessionStore.setItem('orderLink', fakeGetLink);
+
+        this.view = new controller.DefaultView();
 
         this.view.render();
 
@@ -46,6 +47,9 @@ define(function (require) {
 
       after(function () {
         $("#Fixtures").empty();
+        ep.io.localStore.removeItem('oAuthToken');
+        ep.io.sessionStore.removeItem('orderLink');
+        this.server.restore();
       });
 
       it('returns an instance of cart View.DefaultLayout', function () {
@@ -85,7 +89,9 @@ define(function (require) {
             [200, {"Content-Type":"application/json"}, fakeResponseStr]
           );
 
-          this.view = new controller.DefaultView(fakeGetLink);
+          ep.io.sessionStore.setItem('orderLink', fakeGetLink);
+
+          this.view = new controller.DefaultView();
 
           this.view.render();
 
@@ -97,6 +103,9 @@ define(function (require) {
 
         after(function () {
           $("#Fixtures").empty();
+          ep.io.localStore.removeItem('oAuthToken');
+          ep.io.sessionStore.removeItem('orderLink');
+          this.server.restore();
         });
 
         it('the TaxesCollectionView is not rendered', function() {
