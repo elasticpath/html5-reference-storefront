@@ -259,16 +259,21 @@ define(function (require) {
     describe('responds to event: address.submitAddressFormFailed.invalidFields', function () {
       var errMsg = 'some error message';
       before(function () {
+        sinon.stub(addressView, 'translateErrorMessage');
         sinon.stub(addressView, 'displayAddressFormErrorMsg');
         EventBus.trigger('address.submitAddressFormFailed.invalidFields', errMsg);
       });
 
       after(function () {
+        addressView.translateErrorMessage.restore();
         addressView.displayAddressFormErrorMsg.restore();
       });
 
-      it('called method from view to display error message', function () {
-        expect(addressView.displayAddressFormErrorMsg).to.be.calledWith(errMsg);
+      it('called methods from view to translate error message', function () {
+        expect(addressView.translateErrorMessage).to.be.calledWith(errMsg);
+      });
+      it('called methods from view to display error message', function () {
+        expect(addressView.displayAddressFormErrorMsg).to.be.calledWith(addressView.translateErrorMessage(errMsg));
       });
     });
 

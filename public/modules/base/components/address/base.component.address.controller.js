@@ -1,7 +1,8 @@
 /**
  * Copyright Elastic Path Software 2013.
  *
- * Storefront - Address Component Controller
+ * Address Component Controller
+ * The HTML5 Reference Storefront's MVC controller for displaying an address, and creating an address.
  */
 
 define(function (require) {
@@ -36,6 +37,7 @@ define(function (require) {
     return addressLayout;
   };
 
+  /* *************** Event Listeners Functions *************** */
   /**
    * Renders a Default Address ItemView with regions and models passed in
    * @param addressObj  contains region to render in and the model to render with
@@ -88,7 +90,6 @@ define(function (require) {
       },
       customErrorFn: function (response) {
         if (response.status === 400) {
-          // FIXME Currently cortex provide no way to differentiate missing and invalid fields, and even bad request
           EventBus.trigger('address.submitAddressFormFailed.invalidFields', response.responseText);
         }
         else {
@@ -128,8 +129,7 @@ define(function (require) {
    * will display generic error message.
    */
   EventBus.on('address.submitAddressFormFailed', function () {
-    var errMsgKey = 'addressForm.generalSaveAddressFailedErrMsg';
-    View.displayAddressFormErrorMsg(errMsgKey);
+    View.displayAddressFormErrorMsg(i18n.t('addressForm.errorMsg.generalSaveAddressFailedErrMsg'));
   });
 
   /**
@@ -139,7 +139,8 @@ define(function (require) {
    */
   EventBus.on('address.submitAddressFormFailed.invalidFields', function (errMsg) {
     // in the future, also highlight the invalid input box
-    View.displayAddressFormErrorMsg(errMsg);
+    var translatedMsg = View.translateErrorMessage(errMsg);
+    View.displayAddressFormErrorMsg(translatedMsg);
   });
 
   /**
@@ -161,7 +162,7 @@ define(function (require) {
     window.location.href = returnUrl;
   });
 
-  /* *********** Event Listeners: set   *********** */
+  /* *********** Event Listeners: set return url  *********** */
   /**
    * Listen to setReturnUrl request,
    * will set the returnUrl variable to passed in url value

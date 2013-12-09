@@ -4,6 +4,7 @@
  * Functional Storefront Unit Test - Address Component Views
  */
 define(function (require) {
+  var ep = require('ep');
   var Backbone = require('backbone');
   var EventTestFactory = require('EventTestFactory');
 
@@ -226,7 +227,6 @@ define(function (require) {
         removeRenderedView();
       });
 
-      // FIXME cannot test viewHelper functions because closure
       it('displays error message in errorFeedbackRegion', function () {
         expect(this.feedbackRegion.text()).to.be.string(errMsg);
       });
@@ -240,14 +240,55 @@ define(function (require) {
       after(function() {});
 
       it('format list into unordered list (ul)', function() {
-        var errMsg = 'line1; line2; line3';
+        var errMsg = ['line1', 'line2', 'line3'];
         expect(this.testFn(errMsg)).to.have.string('<LI>line1</LI><LI>line2</LI><LI>line3</LI>');
       });
 
       it('format 1 line message as just text', function() {
-        var errMsg = 'One line message.';
-        expect(this.testFn(errMsg)).to.be.equal(errMsg);
+        var errMsg = ['One line message.'];
+        expect(this.testFn(errMsg)).to.be.equal(errMsg[0]);
       });
+    });
+
+    describe('function: translateErrorMessage', function() {
+      before(function() {
+        sinon.stub(ep.logger, 'warn');
+        this.testFn = addressView.translateErrorMessage;
+      });
+
+      after(function() {
+        ep.logger.warn.restore();
+      });
+
+      it('translate recorded raw message to err message key', function() {
+        var errMsg = 'family-name: may not be null; given-name: may not be null';
+        // test doesn't load i18n locale list, thus return back the key
+        expect(this.testFn(errMsg)).to
+          .eql('<UL class="address-form-error-list"><LI>addressForm.errorMsg.missingFamilyNameErrMsg</LI><LI>addressForm.errorMsg.missingGivenNameErrMsg</LI></UL>');
+      });
+
+      it('does not produce duplicate err message keys', function() {
+        var errMsg = 'family-name: may not be null; family-name: must not be blank';
+        // test doesn't load i18n locale list, thus return back the key
+        expect(this.testFn(errMsg)).to
+          .eql('addressForm.errorMsg.missingFamilyNameErrMsg');
+      });
+
+      it('translate unrecorded raw message to generic error message key', function() {
+        var errMsg = 'not a message recorded';
+        // test doesn't load i18n locale list, thus return back the key
+        expect(this.testFn(errMsg)).to
+          .eql('addressForm.errorMsg.generalSaveAddressFailedErrMsg');
+      });
+
+      it('translate only recorded raw message, and log unrecorded error message', function() {
+        var errMsg = 'family-name: may not be null; not a message recorded';
+        // test doesn't load i18n locale list, thus return back the key
+        expect(this.testFn(errMsg)).to
+          .eql('addressForm.errorMsg.missingFamilyNameErrMsg');
+        expect(ep.logger.warn).to.be.calledWithMatch('not a message recorded');
+      });
+
     });
 
     describe('helper function: getAddressForm', function() {

@@ -1,7 +1,9 @@
 /**
  * Copyright Elastic Path Software 2013.
  *
- * Storefront - Address Component Views
+ * Address Component Views
+ * The HTML5 Reference Storefront's MVC Views for an address, address form,
+ * and helper functions that manipulate DOM elements.
  */
 define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
   function (ep, Marionette, EventBus, i18n, ViewHelpers) {
@@ -81,27 +83,106 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
 
     /**
      * Displays error message feedback for address form operations
-     * @param errMsgKey i18n key for corresponding error message, or error message itself.
+     * @param errorMsg error message to display
      */
-    function displayAddressFormErrorMsg(errMsgKey) {
-      if (!errMsgKey) {
+    function displayAddressFormErrorMsg(errorMsg) {
+      if (!errorMsg) {
         ep.logger.warn('displayAddressFormErrorMsg called without error message');
         return; // skip rest of the function
       }
 
-      var errMsg = i18n.t(errMsgKey);
-      var formattedMsg = formatMsgAsList(errMsg);
-
-      $('[data-region="componentAddressFeedbackRegion"]').html(formattedMsg);
+      $('html, body').animate({ scrollTop: 0 }, 'fast');
+      $('[data-region="componentAddressFeedbackRegion"]').html(errorMsg);
 //      $('[data-region="componentAddressFeedbackRegion"]').attr('data-i18n', key);
     }
 
-    function formatMsgAsList(msg) {
-      var formattedMsg;
-      var msgList = [];
+    /**
+     * Translate raw error response coming back from Cortex.
+     * (This is a temporary fix until cortex return specific error code / key for localization mapping.)
+     * @param rawMsg  error message from Cortex.
+     * @returns String localized error message formatted as list.
+     */
+      // this is a temporary solution, should not match & parse String.
+    function translateErrorMessage(rawMsg) {
+      var rawMsgList;
+      var errMsgKeyList = [];
+      var unHandledErrMsgList = [];
+      var translatedMsgList = [];
+
+      // make this a map, key is locale key
+      // chekin check with cortex team when getting null, change to generalSaveAddressFailedErrMsg
+      var cortexMsgToKeyMap = {
+        "No valid address fields specified" : 'missingFamilyNameErrMsg',
+        "family-name: may not be null" : 'generalSaveAddressFailedErrMsg',
+        "given-name: may not be null" : 'generalSaveAddressFailedErrMsg',
+        "postal-code: may not be null" : 'generalSaveAddressFailedErrMsg',
+        "street-address: may not be null" : 'generalSaveAddressFailedErrMsg',
+        "locality: may not be null": 'generalSaveAddressFailedErrMsg',
+        "country-name: may not be null" : 'generalSaveAddressFailedErrMsg',
+        "family-name: must not be blank" : 'missingFamilyNameErrMsg',
+        "given-name: must not be blank" : 'missingGivenNameErrMsg',
+        "postal-code: must not be blank" : 'missingPostalCodeErrMsg',
+        "street-address: must not be blank" : 'missingStreetAddErrMsg',
+        "region: must not be blank" : 'missingRegionErrMsg',
+        "locality: must not be blank": 'missingLocalityErrMsg',
+        "country-name: must not be blank" : 'missingCountryErrMsg',
+        "family-name: size must be between 1 and 100": 'invalidFamilyNameErrMsg',
+        "given-name: size must be between 1 and 100": 'invalidGivenNameErrMsg',
+        "postal-code: size must be between 1 and 50": 'invalidPostalCodeErrMsg',
+        "street-address: size must be between 1 and 200" : 'invalidStreetAddErrMsg',
+        "extended-address: size must be between 0 and 200" : 'invalidExtendedAddErrMsg',
+        "locality: size must be between 1 and 200" : 'invalidLocalityErrMsg',
+        "region: size must be between 0 and 200": 'invalidRegionErrMsg',
+        "region: does not exist in list of supported codes": 'invalidRegionErrMsg',
+        "country-name: size must be between 1 and 200": 'invalidCountryErrMsg',
+        "country-name: does not exist in list of supported codes": 'invalidCountryErrMsg'
+      };
 
       // parse message by ';' separator into separate lines
-      msgList = msg.split('; ');
+      rawMsgList = rawMsg.split('; ');
+
+      // match raw messages to localization keys
+      _.each(rawMsgList, function (cortexMsg) {
+        // match message against cortexMsgToKeyMap
+        if (cortexMsgToKeyMap.hasOwnProperty(cortexMsg)){
+          var key = 'addressForm.errorMsg.' + cortexMsgToKeyMap[cortexMsg];
+          // check there isn't duplicate error message key
+          if (errMsgKeyList.indexOf(key) < 0) {
+            errMsgKeyList.push(key);
+          }
+        }
+        // if matches nothing in cortexMsgToKeyMap, store in separate list
+        else {
+          unHandledErrMsgList.push(cortexMsg);
+        }
+      });
+
+      // if non of raw messages are unhandled display a generic error message
+      if (unHandledErrMsgList.length > 0) {
+        if (errMsgKeyList.length === 0) {
+          errMsgKeyList.push('addressForm.errorMsg.generalSaveAddressFailedErrMsg');
+        }
+        else {
+          ep.logger.warn('Unhandled address form err message: ' + unHandledErrMsgList);
+        }
+      }
+
+      _.each(errMsgKeyList, function(key) {
+        translatedMsgList.push(i18n.t(key));
+      });
+
+      translatedMsgList.sort();
+
+      return formatMsgAsList(translatedMsgList);
+    }
+
+    /**
+     * Format message list into HTML unordered list.
+     * @param msgList array of messages
+     * @returns String messages in unordered list, or just message if only 1 line.
+     */
+    function formatMsgAsList(msgList) {
+      var formattedMsg = '';
 
       // if there is more than 1 line, format it as list
       if (msgList.length > 1) {
@@ -111,8 +192,8 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
         });
         formattedMsg += '</UL>';
       }
-      else {
-        formattedMsg = msg;
+      else if (msgList.length === 1){
+        formattedMsg = msgList[0];
       }
 
       return formattedMsg;
@@ -124,6 +205,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       DefaultCreateAddressLayout: defaultCreateAddressLayout,
       getAddressForm: getAddressForm,
       displayAddressFormErrorMsg: displayAddressFormErrorMsg,
+      translateErrorMessage: translateErrorMessage,
       testVariables: {
         formatMsgAsList: formatMsgAsList
       }

@@ -18,19 +18,22 @@
   <script id="DefaultAddressFormTemplate" type="text/template">
     <!-- defaultView, itemView tagName:div, class: address-form-container -->
       <div class="form-group">
-        <label for="FirstName" data-el-label="addressForm.firstName" class="control-label address-form-label"><%= E.getI18nLabel('addressForm.firstName') %></label>
+        <label for="FirstName" data-el-label="addressForm.firstName" class="control-label address-form-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('addressForm.firstName') %></label>
         <div class="address-form-input">
           <input id="FirstName" name="FirstName" class="form-control" type="text" value="<%= E.givenName %>" autofocus="autofocus" />
         </div>
       </div>
       <div class="form-group">
-        <label for="LastName" data-el-label="addressForm.lastName" class="control-label address-form-label"><%= E.getI18nLabel('addressForm.lastName') %></label>
+        <label for="LastName" data-el-label="addressForm.lastName" class="control-label address-form-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('addressForm.lastName') %></label>
         <div class="address-form-input">
           <input id="LastName" name="LastName" class="form-control" type="text" value="<%= E.familyName %>">
         </div>
       </div>
       <div class="form-group">
-        <label for="StreetAddress" data-el-label="addressForm.streetAddress" class="control-label address-form-label"><%= E.getI18nLabel('addressForm.streetAddress') %></label>
+        <label for="StreetAddress" data-el-label="addressForm.streetAddress" class="control-label address-form-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('addressForm.streetAddress') %></label>
         <div class="address-form-input">
           <input id="StreetAddress" name="StreetAddress" class="form-control" type="text" value="<%= E.streetAddress %>">
         </div>
@@ -42,25 +45,29 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="City" data-el-label="addressForm.city" class="control-label address-form-label"><%= E.getI18nLabel('addressForm.city') %></label>
+        <label for="City" data-el-label="addressForm.city" class="control-label address-form-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('addressForm.city') %></label>
         <div class="address-form-input">
           <input id="City" name="City" class="form-control" type="text" value="<%= E.city %>">
         </div>
       </div>
       <div class="form-group">
-        <label for="Region" data-el-label="addressForm.region" class="control-label address-form-label"><%= E.getI18nLabel('addressForm.region') %></label>
+        <label for="Region" data-el-label="addressForm.region" class="control-label address-form-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('addressForm.region') %></label>
         <div class="address-form-input">
           <input id="Region" name="Region" class="form-control" value="<%= E.region %>">
         </div>
       </div>
       <div class="form-group">
-        <label for="Country" data-el-label="addressForm.country" class="control-label address-form-label"><%= E.getI18nLabel('addressForm.country') %></label>
+        <label for="Country" data-el-label="addressForm.country" class="control-label address-form-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('addressForm.country') %></label>
         <div class="address-form-input">
           <input id="Country" name="Country" class="form-control" value="<%= E.country %>">
         </div>
       </div>
       <div class="form-group">
-        <label for="PostalCode" data-el-label="addressForm.postalCode" class="control-label address-form-label"><%= E.getI18nLabel('addressForm.postalCode') %></label>
+        <label for="PostalCode" data-el-label="addressForm.postalCode" class="control-label address-form-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('addressForm.postalCode') %></label>
         <div class="address-form-input">
           <input id="PostalCode" name="PostalCode" class="form-control" type="text" value="<%= E.postalCode %>">
         </div>
