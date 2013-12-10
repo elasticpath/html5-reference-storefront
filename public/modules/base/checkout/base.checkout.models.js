@@ -1,10 +1,7 @@
 /**
  * Copyright Elastic Path Software 2013.
-
- * User: sbrookes
- * Date: 04/04/13
- * Time: 9:16 AM
  *
+ * Storefront - Checkout Models
  */
 define(function (require) {
   var ep = require('ep');
@@ -40,8 +37,8 @@ define(function (require) {
 
       if (response) {
         checkoutObj.submitOrderActionLink = jsonPath(response, "$..links[?(@.rel=='submitorderaction')].href")[0];
-        checkoutObj.summary = modelHelpers.parseCheckoutSummary(response);
         checkoutObj.billingAddresses = modelHelpers.parseBillingAddresses(response);
+        checkoutObj.summary = modelHelpers.parseCheckoutSummary(response);
       } else {
         ep.logger.error("Checkout model wasn't able to fetch valid data for parsing. " + error.message);
       }
@@ -102,8 +99,8 @@ define(function (require) {
     /**
      * Parse all billing addresses the registered user can use for checkout.
      * The first address in the returned array will be the chosen address.
-     * If there is no chosen address, we designate the first choice address as being chosen,
-     * so we have a default billing address to display at checkout.
+     * If there is no chosen address, we mark the first 'choice' address as being 'chosen',
+     * so we have a default billing address to use at checkout.
      *
      * @param response to be parsed
      * @returns Array billing addresses of a user
@@ -137,10 +134,12 @@ define(function (require) {
 
           for (var i = 0; i < numAddresses; i++) {
             var parsedChoiceAddress =  modelHelpers.parseAddress(choiceAddresses[i]._description[0]);
+            var selectActionHref = jsonPath(choiceAddresses[i], '$..links[?(@.rel=="selectaction")].href');
 
-            var selectActionHref = jsonPath(choiceAddresses[i], '$..links[?(@.rel=="selectaction")].href')[0];
-
-            _.extend(parsedChoiceAddress, {selectAction: selectActionHref});
+            // Add the Cortex select action to the choice billing address
+            if (selectActionHref && selectActionHref[0]) {
+              _.extend(parsedChoiceAddress, {selectAction: selectActionHref[0]});
+            }
 
             // If there is no chosen address, designate the first choice address to be chosen
             if (i === 0 && !chosenAddress) {

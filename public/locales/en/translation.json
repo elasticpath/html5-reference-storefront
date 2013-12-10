@@ -57,8 +57,7 @@
     "subTotal": "Today's Subtotal",
     "taxTotal": "Today's Taxes",
     "total": "Today's Total",
-    "updateChosenBillingAddressErrMsg": "I'm sorry, there was an error changing your selected billing address. Please contact your system administrator.",
-    "checkoutAccessErrMsg": "I'm sorry, there was an error retrieving your shopping cart contents. Please check your shopping cart."
+    "updateChosenBillingAddressErrMsg": "I'm sorry, there was an error changing your selected billing address. Please contact your system administrator."
   },
   "category": {
     "next": "Next",

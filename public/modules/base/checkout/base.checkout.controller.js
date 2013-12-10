@@ -27,16 +27,9 @@ define(function (require) {
       // Attempt to retrieve an order link from session storage (set by the checkout module)
       var orderLink = ep.io.sessionStore.getItem('orderLink');
 
+      // Trigger an error if we are unable to retrieve a Cortex order link
       if (!orderLink) {
-        $().toastmessage('showToast', {
-          text: i18n.t('checkout.checkoutAccessErrMsg'),
-          sticky: true,
-          position: 'middle-center',
-          type: 'error',
-          // Route to the default cart view
-          close: ep.router.navigate(ep.app.config.routes.cart, true)
-        });
-        ep.logger.error('unable to load checkout - missing checkout link data');
+        EventBus.trigger('checkout.checkoutAccessError');
       }
 
       pace.start();
@@ -53,8 +46,7 @@ define(function (require) {
           if (checkoutModel.get('billingAddresses').length && checkoutModel.get('billingAddresses')[0].defaultChoice) {
             EventBus.trigger(
               'checkout.updateChosenBillingAddressRequest',
-              checkoutModel.get('billingAddresses')[0].selectAction,
-              function() {}
+              checkoutModel.get('billingAddresses')[0].selectAction
             );
           }
 
@@ -118,7 +110,7 @@ define(function (require) {
           };
           EventBus.trigger('checkout.submitOrderSuccess', obj);
         },
-        customErrorFn: function (response) {
+        customErrorFn: function () {
           EventBus.trigger('checkout.submitOrderFailed');
         }
       });
@@ -182,26 +174,29 @@ define(function (require) {
       View.resetCheckoutButtonText();
     });
 
+    /**
+     * Listening to the event fired when we are unable to load the order data.
+     * Routes the user to the cart.
+     */
+    EventBus.on('checkout.checkoutAccessError', function() {
+      ep.logger.error('unable to load checkout - missing order link data');
+      ep.router.navigate(ep.app.config.routes.cart, true);
+    });
 
     /**
      * Handler for the checkout.billingAddressRadioChanged event.
-     *
      */
     EventBus.on('checkout.billingAddressRadioChanged', function(actionLink) {
       EventBus.trigger('checkout.updateChosenBillingAddressRequest', actionLink);
     });
 
-    EventBus.on('checkout.updateChosenBillingAddressRequest', function(actionLink, successCallback) {
+    EventBus.on('checkout.updateChosenBillingAddressRequest', function(actionLink) {
       if (actionLink) {
         var ajaxModel = new ep.io.defaultAjaxModel({
           type: 'POST',
           url: actionLink,
           success: function() {
-            if (successCallback) {
-              successCallback.call();
-            } else {
-              EventBus.trigger('checkout.updateChosenBillingAddressSuccess');
-            }
+            EventBus.trigger('checkout.updateChosenBillingAddressSuccess');
           },
           customErrorFn: function() {
             EventBus.trigger('checkout.updateChosenBillingAddressFailed');
@@ -212,6 +207,10 @@ define(function (require) {
       }
     });
 
+    /**
+     * Listening to the event fired when the update of a chosen billing address fails.
+     * Displays a toast error message.
+     */
     EventBus.on('checkout.updateChosenBillingAddressFailed', function(response) {
       ep.logger.error('error updating billing address: ' + response);
 
@@ -224,6 +223,10 @@ define(function (require) {
       });
     });
 
+    /**
+     * Listening to the event fired on successful update of the chosen billing address.
+     * Triggers a page reload to update the tax and total data in checkout summary.
+     */
     EventBus.on('checkout.updateChosenBillingAddressSuccess', function() {
       Backbone.history.loadUrl();
     });

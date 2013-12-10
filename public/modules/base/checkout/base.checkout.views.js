@@ -4,7 +4,6 @@
  * Storefront - Checkout Views
  */
 define(function (require) {
-    var ep = require('ep');
     var EventBus = require('eventbus');
     var Mediator = require('mediator');
     var Marionette = require('marionette');
@@ -90,7 +89,7 @@ define(function (require) {
 
     /**
      * Checkout Billing Address Selector Layout
-     * make mediator request to load an address view in region: billingAddressRegion,
+     * Makes a mediator request to load an address view in region: billingAddressRegion,
      * will render a wrapper around an address view
      * @type Marionette.Layout
      */
@@ -117,7 +116,7 @@ define(function (require) {
 
     /**
      * Checkout Billing Address Composite View
-     * will render a wrapper with heading around a set of billing addresses
+     * will render a wrapper with heading around a list of billing addresses
      * @type Marionette.CompositeView
      */
     var billingAddressesCompositeView = Backbone.Marionette.CompositeView.extend({
@@ -135,7 +134,7 @@ define(function (require) {
       template: '#CancelCheckoutActionTemplate',
       templateHelpers: viewHelpers,
       events: {
-        'click .btn-cancel-order': function (event) {
+        'click .btn-cancel-order': function() {
           EventBus.trigger('checkout.cancelOrderBtnClicked');
         }
       }
@@ -181,7 +180,7 @@ define(function (require) {
         checkoutTaxBreakDownRegion: '[data-region="checkoutTaxBreakDownRegion"]'
       },
       events: {
-        'click .btn-cmd-submit-order': function (event) {
+        'click .btn-cmd-submit-order': function () {
           EventBus.trigger('checkout.submitOrderBtnClicked', this.model.get('submitOrderActionLink'));
         }
       }

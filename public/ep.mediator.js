@@ -84,7 +84,6 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         EventBus.trigger('address.setReturnUrl', url);
       });
     },
-
     'mediator.navigateToCheckoutRequest' : function(link) {
       if (link){
         require(['ep'], function(ep){
