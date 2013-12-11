@@ -40,7 +40,7 @@ define(function (require) {
         checkoutObj.billingAddresses = modelHelpers.parseBillingAddresses(response);
         checkoutObj.summary = modelHelpers.parseCheckoutSummary(response);
       } else {
-        ep.logger.error("Checkout model wasn't able to fetch valid data for parsing. " + error.message);
+        ep.logger.error("Checkout model wasn't able to fetch valid data for parsing. ");
       }
 
       return checkoutObj;

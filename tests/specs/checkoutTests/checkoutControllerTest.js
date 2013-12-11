@@ -20,8 +20,10 @@ define(function (require) {
       before(function (done) {
         $("#Fixtures").append(template); // append templates
 
+        this.parsedData = JSON.parse(dataJSON).response;
+
         var fakeGetLink = "/integrator/orders/fakeUrl";
-        var fakeResponse = JSON.stringify(JSON.parse(dataJSON).response);
+        var fakeResponse = JSON.stringify(this.parsedData);
 
         ep.io.localStore.setItem('oAuthToken', 'fakeToken');
 
@@ -49,6 +51,7 @@ define(function (require) {
         $("#Fixtures").empty();
         ep.io.localStore.removeItem('oAuthToken');
         ep.io.sessionStore.removeItem('orderLink');
+        delete(this.parsedData);
         this.server.restore();
       });
 
@@ -63,6 +66,11 @@ define(function (require) {
       it('the TaxesCollectionView is rendered', function() {
         // Test for the presence of the unordered list rendered by TaxesCollectionView
         expect(this.view.$el.find('ul.checkout-tax-list')).to.have.length(1);
+      });
+
+      it('renders the tax total', function() {
+        expect($('[data-el-value="checkout.taxTotal"]', this.view.$el).text())
+          .to.be.equal(this.parsedData._tax[0].total.display);
       });
 
       describe("Given there is no tax data", function() {

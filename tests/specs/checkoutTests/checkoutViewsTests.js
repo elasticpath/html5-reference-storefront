@@ -189,10 +189,6 @@ define(function (require) {
           expect($('[data-el-value="checkout.subTotal"]', this.view.$el).text())
             .to.be.equal(rawData.subTotal.display);
         });
-        it('renders the tax total', function() {
-          expect($('[data-el-value="checkout.taxTotal"]', this.view.$el).text())
-            .to.be.equal(rawData.taxTotal.display);
-        });
         it('renders the checkout total', function() {
           expect($('[data-el-value="checkout.total"]', this.view.$el).text())
             .to.be.equal(rawData.total.display);
