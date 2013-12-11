@@ -261,17 +261,17 @@ define(function (require) {
       });
 
       it('translate recorded raw message to err message key', function() {
-        var errMsg = 'family-name: may not be null; given-name: may not be null';
+        var errMsg = 'family-name: must not be blank';
         // test doesn't load i18n locale list, thus return back the key
         expect(this.testFn(errMsg)).to
-          .eql('<UL class="address-form-error-list"><LI>addressForm.errorMsg.missingFamilyNameErrMsg</LI><LI>addressForm.errorMsg.missingGivenNameErrMsg</LI></UL>');
+          .equal('addressForm.errorMsg.missingFamilyNameErrMsg');
       });
 
       it('does not produce duplicate err message keys', function() {
-        var errMsg = 'family-name: may not be null; family-name: must not be blank';
+        var errMsg = 'family-name: may not be null; given-name: may not be null';
         // test doesn't load i18n locale list, thus return back the key
         expect(this.testFn(errMsg)).to
-          .eql('addressForm.errorMsg.missingFamilyNameErrMsg');
+          .eql('addressForm.errorMsg.generalSaveAddressFailedErrMsg');
       });
 
       it('translate unrecorded raw message to generic error message key', function() {
@@ -282,7 +282,7 @@ define(function (require) {
       });
 
       it('translate only recorded raw message, and log unrecorded error message', function() {
-        var errMsg = 'family-name: may not be null; not a message recorded';
+        var errMsg = 'family-name: must not be blank; not a message recorded';
         // test doesn't load i18n locale list, thus return back the key
         expect(this.testFn(errMsg)).to
           .eql('addressForm.errorMsg.missingFamilyNameErrMsg');
