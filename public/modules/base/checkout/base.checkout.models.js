@@ -32,12 +32,28 @@ define(function (require) {
     parse: function (response) {
       var checkoutObj = {
         summary: {},
-        billingAddresses: {}
+        billingAddresses: []
       };
 
       if (response) {
         checkoutObj.submitOrderActionLink = jsonPath(response, "$..links[?(@.rel=='submitorderaction')].href")[0];
-        checkoutObj.billingAddresses = modelHelpers.parseBillingAddresses(response);
+
+        var parsedBillingAddresses = modelHelpers.parseBillingAddresses(response);
+
+        if (parsedBillingAddresses.length) {
+          // Sort the parsed addresses alphabetically by the streetAddress property
+          checkoutObj.billingAddresses = modelHelpers.sortAddresses(parsedBillingAddresses, "streetAddress");
+
+          /**
+           * If there is no chosen billing address defined, designate the first address object in the ordered
+           * array to be the chosen address by giving it a 'defaultChoice' attribute (this will trigger
+           * an update POST to Cortex in the checkout controller code).
+           */
+          if (!modelHelpers.isChosenAddressDefined(checkoutObj.billingAddresses)) {
+            _.extend(checkoutObj.billingAddresses[0], { defaultChoice: true });
+          }
+        }
+
         checkoutObj.summary = modelHelpers.parseCheckoutSummary(response);
       } else {
         ep.logger.error("Checkout model wasn't able to fetch valid data for parsing. ");
@@ -51,8 +67,8 @@ define(function (require) {
   var modelHelpers = ModelHelper.extend({
     /**
      * Parse checkout summary information.
-     * @param response to be parsed
-     * @returns Object order quantity, subtotal, tax, and total
+     * @param response The response to be parsed
+     * @returns {Object} Order quantity, subtotal, taxes, and total
      */
     parseCheckoutSummary: function (response) {
       var summary = {
@@ -64,8 +80,7 @@ define(function (require) {
         submitOrderActionLink: undefined
       };
 
-      // FIXME: replace try/catch with test for response
-      try {
+      if (response) {
         summary.totalQuantity = jsonPath(response, '$._cart..total-quantity')[0];
         summary.submitOrderActionLink = jsonPath(response, "$..links[?(@.rel=='submitorderaction')].href")[0];
 
@@ -89,9 +104,6 @@ define(function (require) {
           summary.total = modelHelpers.parsePrice(total);
         }
       }
-      catch (error) {
-        ep.logger.error('Error when parsing checkout summary information: ' + error.message);
-      }
 
       return summary;
     },
@@ -102,15 +114,15 @@ define(function (require) {
      * If there is no chosen address, we mark the first 'choice' address as being 'chosen',
      * so we have a default billing address to use at checkout.
      *
-     * @param response to be parsed
-     * @returns Array billing addresses of a user
+     * @param response The response to be parsed
+     * @returns {Array} Billing addresses of a user
      */
     parseBillingAddresses: function (response) {
       var billingAddresses = [];
 
       /**
        * Add a property to identify a billing address as the chosen address.
-       * @param address
+       * @param {Object} address
        */
       var markAsChosenAddress = function(address) {
         return _.extend(address, {chosen: true});
@@ -141,13 +153,6 @@ define(function (require) {
               _.extend(parsedChoiceAddress, {selectAction: selectActionHref[0]});
             }
 
-            // If there is no chosen address, designate the first choice address to be chosen
-            if (i === 0 && !chosenAddress) {
-              markAsChosenAddress(parsedChoiceAddress);
-              // Add an identifier to identity this as a default choice address
-              _.extend(parsedChoiceAddress, {defaultChoice: true});
-            }
-
             billingAddresses.push(parsedChoiceAddress);
           }
         }
@@ -156,6 +161,39 @@ define(function (require) {
       }
 
       return billingAddresses;
+    },
+
+    /**
+     * Boolean function that searches an array of address objects looking for a 'chosen' property.
+     * @param {Array} addressesArray Array of address objects
+     * @returns {boolean}
+     */
+    isChosenAddressDefined: function(addressesArray) {
+      var chosenAddress = _.find(addressesArray, function(address) {
+        return address.chosen;
+      });
+      return chosenAddress ? true : false;
+    },
+
+    /**
+     * Performs a case-insensitive sort of a given address array alphabetically by a given address property.
+     * @param addressArray Array of address objects
+     * @param sortProperty The address property to sort by
+     * @returns A sorted array of address objects
+     */
+    sortAddresses: function(addressArray, sortProperty) {
+      this.sortProperty = sortProperty;
+
+      var sortedAddressArray = _.sortBy(addressArray, function(addressObj) {
+        // Only convert to lower case if the sort property is a string
+        if (typeof addressObj[this.sortProperty] === "string") {
+          return addressObj[this.sortProperty].toLowerCase();
+        } else {
+          return addressObj[this.sortProperty];
+        }
+      }, this);
+
+      return sortedAddressArray;
     }
 
   });

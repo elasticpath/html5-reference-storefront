@@ -14,7 +14,7 @@ define(function (require) {
        * Determine if checkout button should be disabled, and return a disabled attribute or empty string respectively.
        * Assuming must be authenticated to view the page if anonymous checkout is not allowed.
        *
-       * @param submitOrderActionLink action-link to post submit order request to, only present if allow submit order.
+       * @param submitOrderActionLink The action-link to which the submit order request is posted.
        * @returns {string} HTML disabled attribute or empty string
        */
       getSubmitOrderButtonDisabledAttr: function (submitOrderActionLink) {
@@ -32,7 +32,7 @@ define(function (require) {
        * Determines if this is the chosen billing address and if so, returns the HTML checked attribute
        * to be applied to the chosen billing address radio button in BillingAddressSelectorTemplate.
        *
-       * @param model the billing address model being rendered
+       * @param model The billing address model being rendered
        * @returns {string} HTML checked attribute or empty string
        */
       getBillingAddressCheckedAttr: function(model) {
