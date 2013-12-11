@@ -59,7 +59,6 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
         url: ep.io.getApiContext() + '/oauth2/tokens',
         success:function(json, responseSTatus, xhr) {
           try{
-            // FIXME abstract persistence layer
             ep.io.localStore.removeItem('oAuthRole');
             ep.io.localStore.removeItem('oAuthScope');
             ep.io.localStore.removeItem('oAuthToken');

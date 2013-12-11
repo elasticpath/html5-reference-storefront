@@ -66,7 +66,7 @@ define(function (require) {
 
 
     /* ************** EVENT LISTENER FUNCTIONS ***************** */
-    // FIXME global notification center
+    // FIXME [CU-184] global notification center
     /**
      * A sticky (will not disappear on itself) toast error message
      * @param errMsg Error message to display on toast message
@@ -180,7 +180,7 @@ define(function (require) {
      * Listening to update lineItem quantity failed signal(reason: lineItem deleted),
      * will make request to load cart view, and display error message after page refresh.
      */
-      // FIXME decouple specific callback from event (set a flag which is processed regardless how/when the page is reloaded)
+      // FIXME [CU-184] decouple specific callback from event (set a flag which is processed regardless how/when the page is reloaded)
     EventBus.on('cart.updateLineItemQtyFailed.ItemDeleted', function () {
       var cartViewWithCallBack = _.extend({callback: itemDeletedErrMsg}, cartView);
 
@@ -214,7 +214,7 @@ define(function (require) {
     });
 
     // Remove Line Item Request
-    // FIXME move logic to a method
+    // FIXME [CU-195] move logic to a method
     EventBus.on('cart.removeLineItemRequest', function (deleteActionLink) {
       var ajaxModel = new ep.io.defaultAjaxModel({
         type: 'DELETE',
@@ -244,7 +244,7 @@ define(function (require) {
      * will reload the entire cartView.
      */
     EventBus.on('cart.reloadCartViewRequest', function () {
-      // FIXME: finer refresh to reload just the necessary parts
+      // FIXME: [CU-93] finer refresh to reload just the necessary parts
       ep.router.controller.cart();
     });
 

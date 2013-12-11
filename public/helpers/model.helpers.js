@@ -47,7 +47,7 @@ define(function(require){
     parseTax: function(rawObject) {
       var tax = {};
 
-      // FIXME: replace try/catch with test for rawObject
+      // FIXME: [CU-106] replace try/catch with test for rawObject
       try {
         tax = {
           currency: jsonPath(rawObject, '$.currency')[0],

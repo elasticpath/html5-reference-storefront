@@ -105,7 +105,7 @@ define(['jquery','ep','app', 'eventbus', 'item.models', 'item.views', 'text!modu
 
           var obj = '{quantity:' + qty + '}';
           // FIXME improve robustness of oauth token when we work on that story
-          // FIXME use ajax model
+          // FIXME [CU-88] use ajax model
           ep.io.ajax({
             type: 'POST',
             contentType: 'application/json',

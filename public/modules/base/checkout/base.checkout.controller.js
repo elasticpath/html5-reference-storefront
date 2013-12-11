@@ -91,7 +91,7 @@ define(function (require) {
      */
     function submitOrder(submitOrderLink) {
       if (!submitOrderLink) {
-        // FIXME user feedback
+        // FIXME [CU-92] user feedback??
         ep.logger.warn('checkout.submitOrderRequest called with no submitOrderLink');
         return;
       }
@@ -170,7 +170,7 @@ define(function (require) {
      * will reset checkout button back from activity indicator to
      */
     EventBus.on('checkout.submitOrderFailed', function() {
-      // FIXME should also notify user if submit fails
+      // FIXME [CU-112] should also notify user if submit fails
       View.resetCheckoutButtonText();
     });
 

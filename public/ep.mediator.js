@@ -48,7 +48,7 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
     'mediator.authenticationSuccess':function(role){
       // check if this is an anonymous authentication request
       if (role === 'PUBLIC') {
-        EventBus.trigger('app.authInit'); // FIXME for reload page
+        EventBus.trigger('app.authInit'); // FIXME [CU-89] granular page reload
       }
       // else this should be a registered login authentication request
       else {
@@ -101,6 +101,7 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
 
     var args = arguments;
     if (args.length > 0){
+      // FIXME [CU-197] check the validity of args[0] as strategy name
       var reqEventName  = args[0];
       //ep.logger.info('Mediator: ' + reqEventName);
       var reqEventData;
@@ -108,7 +109,7 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         reqEventData = args[1];
       }
 
-      // FIXME allow multiple arguments!
+      // FIXME [CU-197] allow multiple arguments!
       mediatorObj[reqEventName](reqEventData);
     }
   }
