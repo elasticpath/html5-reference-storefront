@@ -179,12 +179,12 @@ define(function (require) {
      * Performs a case-insensitive sort of a given address array alphabetically by a given address property.
      * @param addressArray Array of address objects
      * @param sortProperty The address property to sort by
-     * @returns A sorted array of address objects
+     * @returns {Array} A sorted array of address objects
      */
     sortAddresses: function(addressArray, sortProperty) {
       this.sortProperty = sortProperty;
 
-      var sortedAddressArray = _.sortBy(addressArray, function(addressObj) {
+      return _.sortBy(addressArray, function(addressObj) {
         // Only convert to lower case if the sort property is a string
         if (typeof addressObj[this.sortProperty] === "string") {
           return addressObj[this.sortProperty].toLowerCase();
@@ -192,8 +192,6 @@ define(function (require) {
           return addressObj[this.sortProperty];
         }
       }, this);
-
-      return sortedAddressArray;
     }
 
   });
