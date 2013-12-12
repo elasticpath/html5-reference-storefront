@@ -43,7 +43,7 @@ define(function (require) {
 
           // if there is a default choice billing address, trigger a call to Cortex to formerly set it
           // to allow tax calculations to be made
-          if (checkoutModel.get('billingAddresses').length && checkoutModel.get('billingAddresses')[0].defaultChoice) {
+          if (checkoutModel.get('billingAddresses').length && checkoutModel.get('billingAddresses')[0].setAsDefaultChoice) {
             EventBus.trigger(
               'checkout.updateChosenBillingAddressRequest',
               checkoutModel.get('billingAddresses')[0].selectAction

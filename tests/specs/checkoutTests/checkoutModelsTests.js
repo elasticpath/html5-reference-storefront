@@ -55,14 +55,6 @@ define(function (require) {
         expect(this.model.billingAddresses).to.be.ok;
         expect(this.model.billingAddresses.length).to.be.eql(this.numChosenAddresses + this.numChoiceAddresses);
       });
-
-      // CHECKIN fix/amend this test
-//      it('added the chosen property to identify the chosen address object', function() {
-//        if(this.numChosenAddresses === 1) {
-//          // The chosen billing address will always be the first address in the billingAddresses array
-//          expect(this.model.billingAddresses[0]).to.have.property('chosen', true);
-//        }
-//      });
     });
 
     describe('given undefined response argument to parse', function () {
@@ -143,11 +135,6 @@ define(function (require) {
 
         expect(ep.logger.error).to.be.not.called;
         expect(model.billingAddresses).to.be.ok;
-      });
-
-      // FIXME
-      it('when missing a chosen billing address', function() {
-        // and it doesn't add the 'chosen' property to any of the billing address objects generated
       });
 
     });

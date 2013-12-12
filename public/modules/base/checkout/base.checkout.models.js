@@ -46,11 +46,11 @@ define(function (require) {
 
           /**
            * If there is no chosen billing address defined, designate the first address object in the ordered
-           * array to be the chosen address by giving it a 'defaultChoice' attribute (this will trigger
+           * array to be the chosen address by giving it a 'setAsDefaultChoice' attribute (this will trigger
            * an update POST to Cortex in the checkout controller code).
            */
           if (!modelHelpers.isChosenAddressDefined(checkoutObj.billingAddresses)) {
-            _.extend(checkoutObj.billingAddresses[0], { defaultChoice: true });
+            _.extend(checkoutObj.billingAddresses[0], { setAsDefaultChoice: true });
           }
         }
 
