@@ -125,7 +125,7 @@
                       "locality": "Mississauga",
                       "postal-code": "L5C 2B9",
                       "region": "ON",
-                      "street-address": "#1999 12 floor"
+                      "street-address": "suite #1999 12 floor"
                     },
                     "name": {
                       "family-name": "Harris",
@@ -188,7 +188,7 @@
                       "locality": "Vancouver",
                       "postal-code": "V9C H2A",
                       "region": "BC",
-                      "street-address": "Rm 1022 Tower 3"
+                      "street-address": "Suite R1022 Tower 3"
                     },
                     "name": {
                       "family-name": "Harris",

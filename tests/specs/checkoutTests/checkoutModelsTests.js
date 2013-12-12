@@ -11,7 +11,7 @@ define(function (require) {
   describe('Checkout Module: Models', function () {
     var data = JSON.parse(dataJSON).response;
     var checkoutModel = new models.CheckoutModel();
-    var modelHelpers = _.extend(models.testVariable.modelHelpers, {});
+    var modelHelpers = _.extend({}, models.testVariable.modelHelpers);
 
     describe('given all necessary information', function () {
       before(function () {
@@ -170,12 +170,12 @@ define(function (require) {
         });
         describe('given an addresses array without a chosen address', function() {
           before(function() {
-            // Remove the chosen address object from the checkout test data
-            this.rawData = _.extend(data, {});
+            // Remove the chosen address object from (a deep copy of) the checkout test data
+            this.rawData = JSON.parse(JSON.stringify(data));
             delete(this.rawData._billingaddressinfo[0]._selector[0]._chosen);
 
             // The default checkout JSON data contains a chosen billing address
-            this.parsedBillingAddresses = modelHelpers.parseBillingAddresses(data);
+            this.parsedBillingAddresses = modelHelpers.parseBillingAddresses(this.rawData);
           });
 
           after(function() {
@@ -194,27 +194,63 @@ define(function (require) {
       });
 
       describe('sortAddresses', function() {
-        describe('given an unsorted addresses array and property name to sort by that contains a string', function() {
-          it('returns a sorted array', function() {
+        describe('given an unsorted addresses array and a property name string to sort by', function() {
+          before(function() {
+            // The default checkout JSON data contains an unordered set of billing addresses
+            this.rawData = _.extend({}, data);
+            this.sortProperty = "streetAddress";
 
+            sinon.spy(_, 'sortBy');
+
+            this.parsedBillingAddresses = modelHelpers.parseBillingAddresses(this.rawData);
+
+            this.testCaseInsensitiveSortedAddresses = _.sortBy(this.parsedBillingAddresses, function(addressObj) {
+              return addressObj[this.sortProperty].toLowerCase();
+            }, this);
+
+            this.sortedAddresses = modelHelpers.sortAddresses(this.parsedBillingAddresses, this.sortProperty);
+          });
+
+          after(function() {
+            // Clean up the test variables created
+            delete(this.rawData);
+            delete(this.sortProperty);
+            delete(this.parsedBillingAddresses);
+
+            _.sortBy.restore();
+          });
+
+          it('calls underscore\'s sortBy function with the billing addresses array', function() {
+            expect(_.sortBy).to.be.calledWith(this.parsedBillingAddresses);
+          });
+          it('returns a case-insensitive sorted array of billing addresses', function() {
+            expect(this.sortedAddresses).to.eql(this.testCaseInsensitiveSortedAddresses);
           });
         });
-        describe('given a sorted addresses array and a valid property name to sort by', function() {
-          it('returns the array unchanged', function() {
+        describe('given an addresses array and a sort property of undefined', function() {
+          before(function() {
+            this.rawData = _.extend({}, data);
+            this.sortProperty = undefined;
 
+            sinon.spy(_, 'sortBy');
+
+            this.parsedBillingAddresses = modelHelpers.parseBillingAddresses(this.rawData);
+
+            this.testSortedAddresses = _.sortBy(this.parsedBillingAddresses, function(addressObj) {
+              return addressObj[this.sortProperty];
+            }, this);
+
+            this.sortedAddresses = modelHelpers.sortAddresses(this.parsedBillingAddresses, this.sortProperty);
           });
-        });
-        describe('when it is called with a sort property that is not a string', function() {
-          it('returns the array unchanged', function() {
-
+          it('calls underscore\'s sortBy function with the billing addresses array', function() {
+            expect(_.sortBy).to.be.calledWith(this.parsedBillingAddresses);
+          });
+          it('returns an unchanged billing addresses array', function() {
+            expect(this.sortedAddresses).to.eql(this.parsedBillingAddresses);
           });
         });
       });
-
     });
-
   });
 
-
-})
-;
+});

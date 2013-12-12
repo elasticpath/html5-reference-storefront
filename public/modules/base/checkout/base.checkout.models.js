@@ -135,7 +135,7 @@ define(function (require) {
 
         if (chosenAddress) {
           var parsedChosenAddress = modelHelpers.parseAddress(chosenAddress);
-   
+
           markAsChosenAddress(parsedChosenAddress);
 
           billingAddresses.push(parsedChosenAddress);
@@ -182,16 +182,20 @@ define(function (require) {
      * @returns {Array} A sorted array of address objects
      */
     sortAddresses: function(addressArray, sortProperty) {
-      this.sortProperty = sortProperty;
+      var sortArgs = {
+        "property": sortProperty
+      };
 
-      return _.sortBy(addressArray, function(addressObj) {
-        // Only convert to lower case if the sort property is a string
-        if (typeof addressObj[this.sortProperty] === "string") {
-          return addressObj[this.sortProperty].toLowerCase();
-        } else {
-          return addressObj[this.sortProperty];
+      // Underscore will run each address object through this iterator
+      var sortIterator = function(addressObj) {
+        // If the sort property is a string, convert it to lower case to make this a case-insensitive sort
+        if (typeof addressObj[sortArgs.property] === "string") {
+          return addressObj[sortArgs.property].toLowerCase();
         }
-      }, this);
+        return addressObj[sortArgs.property];
+      };
+
+      return _.sortBy(addressArray, sortIterator, sortArgs);
     }
 
   });

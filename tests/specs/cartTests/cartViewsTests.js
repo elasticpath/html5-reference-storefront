@@ -6,9 +6,7 @@
 define(function (require) {
   var EventBus = require('eventbus');
   var Backbone = require('backbone');
-  var ep = require('ep');
   var EventTestHelpers = require('testhelpers.event');
-  var EventTestFactory = require('EventTestFactory');
 
   describe('Cart Module: Views', function () {
     var views = require('cart.views');
