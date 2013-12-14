@@ -113,16 +113,13 @@ H/3 * * * *</spec>
   <buildWrappers/>
   <icon/>
   <dsl>baseParams = [
-    &quot;ID&quot; : &quot;${id}&quot;,
-    &quot;SCM_URL&quot; : params[&quot;SCM_URL&quot;],
-    &quot;SCM_REVISION&quot; : params[&quot;SCM_REVISION&quot;],
-    &quot;EMAIL_LIST&quot; : params[&quot;EMAIL_LIST&quot;],
-    &quot;UI_STOREFRONT_REPOSITORY_ID&quot; : &quot;${ui.storefront.repository.id}&quot;,
+	'ID' : '${projectTeam}',
+	'SCM_URL' : params['SCM_URL'],
+	'SCM_REVISION' : params['SCM_REVISION'],
+	'UI_STOREFRONT_REPOSITORY_ID' : '${ui.storefront.repository.id}',
+	'EMAIL_LIST' : params['EMAIL_LIST'],
 ]
 
-jobPrefix = &quot;${baseParams[&quot;ID&quot;]}-UI-Storefront&quot;
-
-
-deploymentPackage = build( baseParams, &quot;${jobPrefix}-Deployment-Package&quot; )
+build(baseParams, '${jenkinsJobPrefix}-Main-Build')
 </dsl>
 </com.cloudbees.plugins.flow.BuildFlow>

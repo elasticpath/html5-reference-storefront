@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elasticpath.stores</groupId>
+		<artifactId>store-data-importer-parent</artifactId>
+		<version>6.9.0-SNAPSHOT</version>
+		<relativePath />
+	</parent>
+
+	<groupId>com.elasticpath.html5</groupId>
+	<artifactId>html5-h2-database</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>HTML5 H2 Database</name>
+	<description>A H2 compatible database built from the data in the html5-data artifact.</description>
+	
+	<scm>
+		<connection>scm:git:git://github.elasticpath.net/cortex/ui-storefront.git</connection>
+		<developerConnection>scm:git:git@github.elasticpath.net:cortex/ui-storefront.git</developerConnection>
+		<url>https://github.elasticpath.net/cortex/ui-storefront</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>ui-storefront-releases</id>
+			<url>${ui.storefront.release.repository.url}</url>
+		</repository>
+		<snapshotRepository>
+			<id>ui-storefront-snapshots</id>
+			<url>${ui.storefront.snapshot.repository.url}</url>
+		</snapshotRepository>
+		<site>
+			<id>ui-storefront-site</id>
+			<url>${ui.storefront.site.url}</url>
+		</site>
+	</distributionManagement>
+
+	<properties>
+		<datapopdb.url>jdbc:h2:file://${project.build.directory}/HTML5DB;TRACE_LEVEL_FILE=3</datapopdb.url>
+		<datapopdb.schemaname>PUBLIC</datapopdb.schemaname>
+		<datapopdb.username>sa</datapopdb.username>
+		<datapopdb.password>sa</datapopdb.password>
+		<datapopdb.jdbc.driver>org.h2.Driver</datapopdb.jdbc.driver>
+		<datapopdb.maven.groupId>com.h2database</datapopdb.maven.groupId>
+		<datapopdb.maven.artifactId>h2</datapopdb.maven.artifactId>
+		<datapopdb.maven.version>${com.h2database.version}</datapopdb.maven.version>
+
+		<data.artifactId>html5-data</data.artifactId>
+
+		<epdb.maven.groupId>${datapopdb.maven.groupId}</epdb.maven.groupId>
+		<epdb.maven.artifactId>${datapopdb.maven.artifactId}</epdb.maven.artifactId>
+		<epdb.maven.version>${datapopdb.maven.version}</epdb.maven.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>${datapopdb.maven.groupId}</groupId>
+			<artifactId>${datapopdb.maven.artifactId}</artifactId>
+			<version>${datapopdb.maven.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.elasticpath.html5</groupId>
+			<artifactId>html5-data</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<!-- copy resources inherited from store-data-importer-parent -->
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<!-- unpack data.artifactId inherited from store-data-importer-parent -->
+			</plugin>
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<!-- liquibase:update inherited from store-data-importer-parent -->
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<!-- perform import inherited from store-data-importer-parent -->
+			</plugin>
+			<plugin>
+				<groupId>com.elasticpath.tools</groupId>
+				<artifactId>ep-core-tool</artifactId>
+				<!-- update-settings inherited from store-data-importer-parent -->
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>make-database-zip</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<appendAssemblyId>false</appendAssemblyId>
+					<descriptors>
+						<descriptor>src/main/assembly/html5-h2-database-zip.xml
+						</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

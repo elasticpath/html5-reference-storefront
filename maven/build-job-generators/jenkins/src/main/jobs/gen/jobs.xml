@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+	<import file="common.xml" />
+
+	<job>
+		<id>${jenkinsJobPrefix}-Main-Build</id>
+		<parent>abstract-scm</parent>
+
+		<parameters>
+			<parameter>
+				<!-- not used in the build, but used in the settings.xml file -->
+				<type>string</type>
+				<name>UI_STOREFRONT_REPOSITORY_ID</name>
+				<description>Nexus repository for the UI Storefront</description>
+				<value>${ui.storefront.repository.id}</value>
+			</parameter>
+		</parameters>
+
+		<mavenGoals>-B -U -e clean deploy</mavenGoals>
+		<pom>maven/pom.xml</pom>
+	</job>
+</jobs>

@@ -1,6 +1,9 @@
 node_modules
 logs
 *.log
+.classpath
 .idea/
+.project
+.settings/
 target/
 docs/

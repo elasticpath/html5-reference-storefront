@@ -2,21 +2,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>com.elasticpath.releng.jenkins</groupId>
+		<artifactId>generator-parent</artifactId>
+		<version>0.6.1.2</version>
+	</parent>
+
 	<groupId>com.elasticpath.cortex.ui</groupId>
-	<artifactId>jenkins-build</artifactId>
+	<artifactId>cortex-ui-jenkins-build</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
 
 	<name>EP ∷ Cortex UI Storefront : Jenkins Build</name>
 
 	<properties>
-		<identifier>CortexUI</identifier>
+		<projectTeam>CortexUI</projectTeam>
+		<projectIdentifier>UI-Storefront</projectIdentifier>
+		<jenkinsJobPrefix>${projectTeam}-${projectIdentifier}</jenkinsJobPrefix>
 		<jobs.directory>${project.build.directory}/jobs</jobs.directory>
 	</properties>
 
 	<build>
 		<filters>
-			<filter>src/main/resources/${identifier}.properties</filter>
+			<filter>src/main/resources/${projectTeam}.properties</filter>
 		</filters>
 
 		<resources>
@@ -50,13 +57,24 @@
 						<configuration>
 							<target>
 								<copy toDir="${jobs.directory}">
-									<fileset dir="${project.build.outputDirectory}" />
-									<regexpmapper from="(.*)xml$$" to="${identifier}-UI-Storefront-\1xml"/>
+									<fileset dir="${project.build.outputDirectory}">
+										<exclude name="gen/**" />
+									</fileset>
+									<regexpmapper from="(.*)xml$$" to="${projectTeam}-${projectIdentifier}-\1xml"/>
 								</copy>
 							</target>
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.elasticpath.releng.jenkins</groupId>
+				<artifactId>ep-jenkins-maven-plugin</artifactId>
+				<configuration>
+					<jobs>
+						<job>gen/**/*.xml</job>
+					</jobs>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -3,15 +3,18 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.elasticpath</groupId>
-		<artifactId>grandparent</artifactId>
-		<version>54</version>
+		<groupId>com.elasticpath.stores</groupId>
+		<artifactId>store-data-exporter-parent</artifactId>
+		<version>6.9.0-SNAPSHOT</version>
+		<relativePath/>
 	</parent>
 
-	<groupId>com.elasticpath.cortex.ui</groupId>
-	<artifactId>ui-storefront-parent</artifactId>
+	<groupId>com.elasticpath.html5</groupId>
+	<artifactId>html5-data</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
+
+	<name>HTML5 Data</name>
+	<description>ImportExport data for the HTML5 functional demo storefront.</description>
 
 	<scm>
 		<connection>scm:git:git://github.elasticpath.net/cortex/ui-storefront.git</connection>
@@ -34,9 +37,19 @@
 			<url>${ui.storefront.site.url}</url>
 		</site>
 	</distributionManagement>
-
-	<modules>
-		<module>application</module>
-		<module>html5-store-data</module>
-	</modules>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<!-- We do not package up the importexporttool.config since it is only used for exporting snapitup-data from an epdb configured database and not for importing/etc.. -->
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/importexporttool.config</exclude>
+						<exclude>**/log4j.properties</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

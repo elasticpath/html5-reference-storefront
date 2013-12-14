@@ -3,15 +3,19 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.elasticpath</groupId>
-		<artifactId>grandparent</artifactId>
-		<version>54</version>
+		<groupId>com.elasticpath.stores</groupId>
+		<artifactId>store-data-populate</artifactId>
+		<version>6.9.0-SNAPSHOT</version>
+		<relativePath />
 	</parent>
 
-	<groupId>com.elasticpath.cortex.ui</groupId>
-	<artifactId>ui-storefront-parent</artifactId>
+	<groupId>com.elasticpath.html5</groupId>
+	<artifactId>html5-data-populate</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
+
+	<name>HTML5 Functional Store Data Populate</name>
+	<description>Project for importing store data via importexport.</description>
 
 	<scm>
 		<connection>scm:git:git://github.elasticpath.net/cortex/ui-storefront.git</connection>
@@ -35,8 +39,15 @@
 		</site>
 	</distributionManagement>
 
-	<modules>
-		<module>application</module>
-		<module>html5-store-data</module>
-	</modules>
+	<properties>
+		<data.artifactId>html5-data</data.artifactId>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.elasticpath.html5</groupId>
+			<artifactId>html5-data</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
