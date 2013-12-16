@@ -29,13 +29,13 @@ define(function (require) {
       },
 
       /**
-       * Determines if this is the chosen billing address and if so, returns the HTML checked attribute
-       * to be applied to the chosen billing address radio button in BillingAddressSelectorTemplate.
+       * Determines if this is the chosen (billing or shipping) address and if so, returns the HTML checked attribute
+       * to be applied to the chosen address radio button in CheckoutAddressSelectorTemplate.
        *
        * @param model The billing address model being rendered
        * @returns {string} HTML checked attribute or empty string
        */
-      getBillingAddressCheckedAttr: function(model) {
+      getCheckoutAddressCheckedAttr: function(model) {
         var checkedAttr = '';
 
         if (model.chosen === true) {
@@ -73,6 +73,7 @@ define(function (require) {
       regions: {
         checkoutTitleRegion: '[data-region="checkoutTitleRegion"]',
         billingAddressesRegion: '[data-region="billingAddressesRegion"]',
+        shippingAddressesRegion: '[data-region="shippingAddressesRegion"]',
         cancelCheckoutActionRegion: '[data-region="cancelCheckoutActionRegion"]',
         checkoutOrderRegion: '[data-region="checkoutOrderRegion"]'
       }
@@ -88,42 +89,66 @@ define(function (require) {
     });
 
     /**
-     * Checkout Billing Address Selector Layout
-     * Makes a mediator request to load an address view in region: billingAddressRegion,
-     * will render a wrapper around an address view
+     * A layout for rendering address (billing or shipping) radio buttons and their labels.
+     * Makes a mediator request to load an address view in region: billingAddressRegion.
      * @type Marionette.Layout
      */
-    var billingAddressSelectorLayout = Backbone.Marionette.Layout.extend({
-      template: '#BillingAddressSelectorTemplate',
+    var checkoutAddressSelectorLayout = Backbone.Marionette.Layout.extend({
+      template: '#CheckoutAddressSelectorTemplate',
       templateHelpers: viewHelpers,
       regions: {
-        billingAddressRegion: '[data-region="billingAddressRegion"]'
+        checkoutAddressRegion: '[data-region="checkoutAddressRegion"]'
       },
       events: {
-        'change input[name="billingAddress"]': function () {
-
-          EventBus.trigger('checkout.billingAddressRadioChanged', this.model.get('selectAction'));
+        'change input[name="checkoutAddress"]': function () {
+          // Trigger the relevant change event according to the type of address being displayed
+          if (this.options.addressType) {
+            if (this.options.addressType === "billing") {
+              EventBus.trigger('checkout.billingAddressRadioChanged', this.model.get('selectAction'));
+            }
+            if (this.options.addressType === "shipping") {
+              EventBus.trigger('checkout.shippingAddressRadioChanged', this.model.get('selectAction'));
+            }
+          }
         }
       },
       onShow: function () {
-        // fire event to load the address itemView from component
+        // Fire event to load the address itemView from component
         Mediator.fire('mediator.loadAddressesViewRequest', {
-          region: this.billingAddressRegion,
+          region: this.checkoutAddressRegion,
           model: this.model
         });
       }
     });
 
     /**
-     * Checkout Billing Address Composite View
-     * will render a wrapper with heading around a list of billing addresses
+     * Renders a heading and a list of billing addresses.
      * @type Marionette.CompositeView
      */
     var billingAddressesCompositeView = Backbone.Marionette.CompositeView.extend({
       template: '#BillingAddressesTemplate',
       templateHelpers: viewHelpers,
-      itemView: billingAddressSelectorLayout,
+      itemView: checkoutAddressSelectorLayout,
+      // Make the type of address available to the itemView
+      itemViewOptions: {
+        addressType: 'billing'
+      },
       itemViewContainer: '[data-region="billingAddressSelectorsRegion"]'
+    });
+
+    /**
+     * Renders a heading and a list of shipping addresses.
+     * @type Marionette.CompositeView
+     */
+    var shippingAddressesCompositeView = Backbone.Marionette.CompositeView.extend({
+      template: '#ShippingAddressesTemplate',
+      templateHelpers: viewHelpers,
+      itemView: checkoutAddressSelectorLayout,
+      // Make the type of address available to the itemView
+      itemViewOptions: {
+        addressType: 'shipping'
+      },
+      itemViewContainer: '[data-region="shippingAddressSelectorsRegion"]'
     });
 
     /**
@@ -189,8 +214,9 @@ define(function (require) {
     return {
       DefaultLayout: defaultLayout,
       CheckoutTitleView: checkoutTitleView,
-      BillingAddressSelectorLayout: billingAddressSelectorLayout,
+      CheckoutAddressSelectorLayout: checkoutAddressSelectorLayout,
       BillingAddressesCompositeView: billingAddressesCompositeView,
+      ShippingAddressesCompositeView: shippingAddressesCompositeView,
       CancelCheckoutActionView: cancelCheckoutActionView,
       CheckoutSummaryView: checkoutSummaryView,
       CheckoutTaxTotalView: checkoutTaxTotalView,
