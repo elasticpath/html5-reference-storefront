@@ -14,6 +14,13 @@
 				<description>Nexus repository for the UI Storefront</description>
 				<value>${ui.storefront.repository.id}</value>
 			</parameter>
+			<parameter>
+				<!-- not used in the build, but used in the settings.xml file -->
+				<type>string</type>
+				<name>CE_REPOSITORY_ID</name>
+				<description>Nexus repository for CE</description>
+				<value>${ce.repository.id}</value>
+			</parameter>
 		</parameters>
 
 		<mavenGoals>-B -U -e clean deploy</mavenGoals>

@@ -31,6 +31,16 @@
 						<enabled>true</enabled>
 					</snapshots>
 				</repository>
+				<repository>
+					<id>ce-repo</id>
+					<url>http://maven.elasticpath.com/nexus/content/repositories/${env.CE_REPOSITORY_ID}</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
 			</repositories>
 
 			<pluginRepositories>

@@ -117,6 +117,7 @@ H/3 * * * *</spec>
 	'SCM_URL' : params['SCM_URL'],
 	'SCM_REVISION' : params['SCM_REVISION'],
 	'UI_STOREFRONT_REPOSITORY_ID' : '${ui.storefront.repository.id}',
+	'CE_REPOSITORY_ID' : '${ce.repository.id}',
 	'EMAIL_LIST' : params['EMAIL_LIST'],
 ]
 
