@@ -18,7 +18,7 @@
 		<projectTeam>CortexUI</projectTeam>
 		<projectIdentifier>UI-Storefront</projectIdentifier>
 		<jenkinsJobPrefix>${projectTeam}-${projectIdentifier}</jenkinsJobPrefix>
-		<jobs.directory>${project.build.directory}/jobs</jobs.directory>
+		<jenkinsJobDirectory>${project.build.directory}/jobs</jenkinsJobDirectory>
 	</properties>
 
 	<build>
@@ -56,7 +56,7 @@
 						<phase>package</phase>
 						<configuration>
 							<target>
-								<copy toDir="${jobs.directory}">
+								<copy toDir="${jenkinsJobDirectory}">
 									<fileset dir="${project.build.outputDirectory}">
 										<exclude name="gen/**" />
 									</fileset>
