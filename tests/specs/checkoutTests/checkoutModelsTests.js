@@ -20,18 +20,19 @@ define(function (require) {
         this.model = checkoutModel.parse(this.rawData);
 
         // Get a count of the number of choice and chosen addresses in the rawData JSON
-        this.numChosenAddresses = 0;
-        this.numChoiceAddresses = 0;
+        this.numChosenBillingAddresses = 0;
+        this.numChoiceBillingAddresses = 0;
 
-        this.numChosenAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._chosen.._description[0]').length;
-        this.numChoiceAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._choice')[0].length;
+        this.numChosenBillingAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._chosen.._description[0]').length;
+        this.numChoiceBillingAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._choice')[0].length;
+
       });
 
       after(function () {
         // Clean up created variables
         delete(this.model);
-        delete(this.numChosenAddresses);
-        delete(this.numChoiceAddresses);
+        delete(this.numChosenBillingAddresses);
+        delete(this.numChoiceBillingAddresses);
       });
 
       it('has non-empty submitOrderLink', function () {
@@ -53,8 +54,10 @@ define(function (require) {
 
       it('parsed a billingAddresses object with the correct number of addresses', function () {
         expect(this.model.billingAddresses).to.be.ok;
-        expect(this.model.billingAddresses.length).to.be.eql(this.numChosenAddresses + this.numChoiceAddresses);
+        expect(this.model.billingAddresses.length).to.be.eql(this.numChosenBillingAddresses + this.numChoiceBillingAddresses);
       });
+
+
     });
 
     describe('given undefined response argument to parse', function () {
@@ -140,19 +143,19 @@ define(function (require) {
     });
 
     describe('model helper functions', function() {
-      describe('isChosenAddressDefined', function() {
+      describe('setChosenAddress', function() {
         describe('given an addresses array with a chosen address', function() {
           before(function() {
             // The default checkout JSON data contains a chosen billing address
-            this.parsedBillingAddresses = modelHelpers.parseBillingAddresses(data);
+            this.parsedBillingAddresses = modelHelpers.parseCheckoutAddresses(data, "billingaddressinfo");
           });
 
           after(function() {
             delete(this.parsedBillingAddresses);
           });
 
-          it('returns true', function() {
-            expect(modelHelpers.isChosenAddressDefined(this.parsedBillingAddresses)).to.be.true;
+          it('returns the addresses array unchanged', function() {
+            expect(modelHelpers.setChosenAddress(this.parsedBillingAddresses)).to.be.eql(this.parsedBillingAddresses);
           });
         });
         describe('given an addresses array without a chosen address', function() {
@@ -161,21 +164,24 @@ define(function (require) {
             this.rawData = JSON.parse(JSON.stringify(data));
             delete(this.rawData._billingaddressinfo[0]._selector[0]._chosen);
 
-            // The default checkout JSON data contains a chosen billing address
-            this.parsedBillingAddresses = modelHelpers.parseBillingAddresses(this.rawData);
+            // A parsed addresses array without chosen address for comparison
+            this.parsedBillingAddresses = modelHelpers.parseCheckoutAddresses(this.rawData, "billingaddressinfo");
+
+            this.parsedBillingAddressesWithDefault =  modelHelpers.setChosenAddress(
+              modelHelpers.parseCheckoutAddresses(this.rawData, "billingaddressinfo")
+            );
           });
 
           after(function() {
             delete(this.parsedBillingAddresses);
+            delete(this.parsedBillingAddressesWithDefault);
           });
 
-          it('returns false', function() {
-            expect(modelHelpers.isChosenAddressDefined(this.parsedBillingAddresses)).to.be.false;
+          it('returns a modified addresses array', function() {
+            expect(this.parsedBillingAddressesWithDefault).to.not.be.eql(this.parsedBillingAddresses);
           });
-        });
-        describe('when passed an undefined addresses array', function() {
-          it('returns false', function() {
-            expect(modelHelpers.isChosenAddressDefined(undefined)).to.be.false;
+          it('adds a "setAsDefaultChoice" property to the first address in the array', function() {
+            expect(this.parsedBillingAddressesWithDefault[0]).to.have.property('setAsDefaultChoice');
           });
         });
       });
@@ -189,7 +195,7 @@ define(function (require) {
 
             sinon.spy(_, 'sortBy');
 
-            this.parsedBillingAddresses = modelHelpers.parseBillingAddresses(this.rawData);
+            this.parsedBillingAddresses = modelHelpers.parseCheckoutAddresses(this.rawData, "billingaddressinfo");
 
             this.testCaseInsensitiveSortedAddresses = _.sortBy(this.parsedBillingAddresses, function(addressObj) {
               return addressObj[this.sortProperty].toLowerCase();
@@ -221,7 +227,7 @@ define(function (require) {
 
             sinon.spy(_, 'sortBy');
 
-            this.parsedBillingAddresses = modelHelpers.parseBillingAddresses(this.rawData);
+            this.parsedBillingAddresses = modelHelpers.parseCheckoutAddresses(this.rawData, "billingaddressinfo");
 
             this.testSortedAddresses = _.sortBy(this.parsedBillingAddresses, function(addressObj) {
               return addressObj[this.sortProperty];

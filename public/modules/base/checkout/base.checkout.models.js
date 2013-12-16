@@ -11,13 +11,20 @@ define(function (require) {
   // Array of zoom parameters to pass to Cortex
   var zoomArray = [
     'purchaseform',
+    // chosen billing address
     'billingaddressinfo:selector:chosen:description',
+    // choice billing addresses
     'billingaddressinfo:selector:choice',
     'billingaddressinfo:selector:choice:description',
     'tax',
     'total',
     'cart',
-    'cart:total'
+    'cart:total',
+    // chosen shipping address
+    'deliveries:element:destinationinfo:selector:chosen:description',
+    // choice shipping addresses
+    'deliveries:element:destinationinfo:selector:choice',
+    'deliveries:element:destinationinfo:selector:choice:description'
   ];
 
   /**
@@ -32,26 +39,30 @@ define(function (require) {
     parse: function (response) {
       var checkoutObj = {
         summary: {},
-        billingAddresses: []
+        billingAddresses: [],
+        shippingAddresses: []
       };
 
       if (response) {
         checkoutObj.submitOrderActionLink = jsonPath(response, "$..links[?(@.rel=='submitorderaction')].href")[0];
 
-        var parsedBillingAddresses = modelHelpers.parseBillingAddresses(response);
+        var parsedBillingAddresses = modelHelpers.parseCheckoutAddresses(response, "billingaddressinfo");
+        var parsedShippingAddresses = modelHelpers.parseCheckoutAddresses(response, "deliveries");
 
         if (parsedBillingAddresses.length) {
-          // Sort the parsed addresses alphabetically by the streetAddress property
+          // Sort the parsed billing addresses alphabetically by the streetAddress property
           checkoutObj.billingAddresses = modelHelpers.sortAddresses(parsedBillingAddresses, "streetAddress");
 
-          /**
-           * If there is no chosen billing address defined, designate the first address object in the ordered
-           * array to be the chosen address by giving it a 'setAsDefaultChoice' attribute (this will trigger
-           * an update POST to Cortex in the checkout controller code).
-           */
-          if (!modelHelpers.isChosenAddressDefined(checkoutObj.billingAddresses)) {
-            _.extend(checkoutObj.billingAddresses[0], { setAsDefaultChoice: true });
-          }
+          // Set a chosen billing address if there is not one set already
+          checkoutObj.billingAddresses = modelHelpers.setChosenAddress(checkoutObj.billingAddresses);
+        }
+
+        if (parsedShippingAddresses.length) {
+          // Sort the parsed shipping addresses alphabetically by the streetAddress property
+          checkoutObj.shippingAddresses = modelHelpers.sortAddresses(parsedShippingAddresses, "streetAddress");
+
+          // Set a chosen shipping address if there is not one set already
+          checkoutObj.shippingAddresses = modelHelpers.setChosenAddress(checkoutObj.shippingAddresses);
         }
 
         checkoutObj.summary = modelHelpers.parseCheckoutSummary(response);
@@ -109,36 +120,39 @@ define(function (require) {
     },
 
     /**
-     * Parse all billing addresses the registered user can use for checkout.
+     * Parse addresses (billing or shipping) that the registered user can use for checkout.
      * The first address in the returned array will be the chosen address.
      * If there is no chosen address, we mark the first 'choice' address as being 'chosen',
-     * so we have a default billing address to use at checkout.
+     * so we have a default billing/shipping address to use at checkout.
      *
      * @param response The response to be parsed
-     * @returns {Array} Billing addresses of a user
+     * @param jsonPathPrefix The prefix to use in jsonPath selections:
+     *          "billingaddressinfo" for billing addresses
+     *          "deliveries" for shipping addresses
+     * @returns {Array} Addresses (billing or shipping) of a registered user
      */
-    parseBillingAddresses: function (response) {
-      var billingAddresses = [];
+    parseCheckoutAddresses: function (response, jsonPathPrefix) {
+      var checkoutAddresses = [];
 
       /**
-       * Add a property to identify a billing address as the chosen address.
+       * Add a property to identify an address as the chosen address.
        * @param {Object} address
        */
       var markAsChosenAddress = function(address) {
         return _.extend(address, {chosen: true});
       };
 
-      if (response) {
+      if (response && jsonPathPrefix) {
 
-        var chosenAddress = jsonPath(response, '$.._billingaddressinfo[0].._chosen.._description[0]')[0];
-        var choiceAddresses = jsonPath(response, '$.._billingaddressinfo[0].._choice')[0];
+        var chosenAddress = jsonPath(response, '$.._' + jsonPathPrefix + '[0].._chosen.._description[0]')[0];
+        var choiceAddresses = jsonPath(response, '$.._' + jsonPathPrefix + '[0].._choice')[0];
 
         if (chosenAddress) {
           var parsedChosenAddress = modelHelpers.parseAddress(chosenAddress);
 
           markAsChosenAddress(parsedChosenAddress);
 
-          billingAddresses.push(parsedChosenAddress);
+          checkoutAddresses.push(parsedChosenAddress);
         }
 
         if (choiceAddresses) {
@@ -153,26 +167,35 @@ define(function (require) {
               _.extend(parsedChoiceAddress, {selectAction: selectActionHref[0]});
             }
 
-            billingAddresses.push(parsedChoiceAddress);
+            checkoutAddresses.push(parsedChoiceAddress);
           }
         }
       } else {
-        ep.logger.error('Error when building billing addresses object: ' + error.message);
+        ep.logger.error('Error when building checkout addresses object');
       }
 
-      return billingAddresses;
+      return checkoutAddresses;
     },
 
     /**
-     * Boolean function that searches an array of address objects looking for a 'chosen' property.
-     * @param {Array} addressesArray Array of address objects
-     * @returns {boolean}
+     * Searches an array of address objects looking for a 'chosen' property.
+     * If there is no 'chosen' address defined, designates the first address object in the array
+     * to be the chosen address by giving it a 'setAsDefaultChoice' property (the presence of this
+     * property will then trigger an update POST to Cortex in the checkout controller code).
+     *
+     * @param addressesArray Array of (billing or shipping) addresses
+     * @returns {Array} Array of (billing or shipping) addresses with a chosen address
      */
-    isChosenAddressDefined: function(addressesArray) {
+    setChosenAddress: function(addressesArray) {
       var chosenAddress = _.find(addressesArray, function(address) {
         return address.chosen;
       });
-      return chosenAddress ? true : false;
+
+      if (!chosenAddress) {
+        _.extend(addressesArray[0], { setAsDefaultChoice: true });
+      }
+
+      return addressesArray;
     },
 
     /**
