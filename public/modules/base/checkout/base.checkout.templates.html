@@ -25,19 +25,25 @@
     <h1 class="view-title"><%= E.getI18nLabel('checkout.checkoutTitle') %></h1>
   </script>
 
-  <!-- Billing Addresses Layout Template -->
+  <!-- Provides a wrapper for a list of billing addresses -->
   <script id="BillingAddressesTemplate" type="text/template">
     <h2><%= E.getI18nLabel('checkout.billingAddress') %></h2>
     <div data-region="billingAddressSelectorsRegion"></div>
   </script>
 
-  <!-- Selector template for an individual billing address -->
-  <script id="BillingAddressSelectorTemplate" type="text/template">
-    <!-- A unique ID to associate billing address labels with radio buttons -->
-    <% var uniqueId = _.uniqueId('billingAddress_'); %>
-    <input type="radio" name="billingAddress" id="<%= uniqueId %>" class="billing-address-radio" <%= E.getBillingAddressCheckedAttr(E) %> />
+  <!-- Provides a wrapper for a list of shipping addresses -->
+  <script id="ShippingAddressesTemplate" type="text/template">
+    <h2><%= E.getI18nLabel('checkout.shippingAddress') %></h2>
+    <div data-region="shippingAddressSelectorsRegion"></div>
+  </script>
+
+  <!-- Renders a radio button and label for the selection of an individual address -->
+  <script id="CheckoutAddressSelectorTemplate" type="text/template">
+    <!-- A unique ID to associate address labels with radio buttons -->
+    <% var uniqueId = _.uniqueId('checkoutAddress_'); %>
+    <input type="radio" name="checkoutAddress" id="<%= uniqueId %>" class="checkout-address-radio" <%= E.getCheckoutAddressCheckedAttr(E) %> />
     <label for="<%= uniqueId %>">
-      <div data-region="billingAddressRegion"></div>
+      <div data-region="checkoutAddressRegion"></div>
     </label>
   </script>
 
