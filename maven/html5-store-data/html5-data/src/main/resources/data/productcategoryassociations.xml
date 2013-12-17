@@ -49,13 +49,13 @@
     <catalog code="CampusMasterCatalog">
         <category code="courseMaterials">
             <default>true</default>
-            <featuredorder>0</featuredorder>
+            <featuredorder>1</featuredorder>
         </category>
     </catalog>
     <catalog code="campusVirtualCatalog">
         <category code="courseMaterials">
             <default>true</default>
-            <featuredorder>0</featuredorder>
+            <featuredorder>1</featuredorder>
         </category>
     </catalog>
 </product>
@@ -79,13 +79,13 @@
     <catalog code="CampusMasterCatalog">
         <category code="courseMaterials">
             <default>true</default>
-            <featuredorder>0</featuredorder>
+            <featuredorder>1</featuredorder>
         </category>
     </catalog>
     <catalog code="campusVirtualCatalog">
         <category code="courseMaterials">
             <default>true</default>
-            <featuredorder>0</featuredorder>
+            <featuredorder>1</featuredorder>
         </category>
     </catalog>
 </product>
@@ -94,13 +94,13 @@
     <catalog code="CampusMasterCatalog">
         <category code="calculators">
             <default>true</default>
-            <featuredorder>0</featuredorder>
+            <featuredorder>1</featuredorder>
         </category>
     </catalog>
     <catalog code="campusVirtualCatalog">
         <category code="calculators">
             <default>true</default>
-            <featuredorder>0</featuredorder>
+            <featuredorder>1</featuredorder>
         </category>
     </catalog>
 </product>
@@ -253,13 +253,13 @@
     <catalog code="CampusMasterCatalog">
         <category code="tablets">
             <default>true</default>
-            <featuredorder>0</featuredorder>
+            <featuredorder>1</featuredorder>
         </category>
     </catalog>
     <catalog code="campusVirtualCatalog">
         <category code="tablets">
             <default>true</default>
-            <featuredorder>0</featuredorder>
+            <featuredorder>1</featuredorder>
         </category>
     </catalog>
 </product>
@@ -268,13 +268,13 @@
     <catalog code="CampusMasterCatalog">
         <category code="calculators">
             <default>true</default>
-            <featuredorder>0</featuredorder>
+            <featuredorder>1</featuredorder>
         </category>
     </catalog>
     <catalog code="campusVirtualCatalog">
         <category code="calculators">
             <default>true</default>
-            <featuredorder>0</featuredorder>
+            <featuredorder>1</featuredorder>
         </category>
     </catalog>
 </product>
@@ -283,13 +283,13 @@
     <catalog code="CampusMasterCatalog">
         <category code="calculators">
             <default>true</default>
-            <featuredorder>0</featuredorder>
+            <featuredorder>1</featuredorder>
         </category>
     </catalog>
     <catalog code="campusVirtualCatalog">
         <category code="calculators">
             <default>true</default>
-            <featuredorder>0</featuredorder>
+            <featuredorder>1</featuredorder>
         </category>
     </catalog>
 </product>
@@ -473,6 +473,21 @@
         <category code="calculators">
             <default>true</default>
             <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="preOrderCourseware">
+    <catalog code="CampusMasterCatalog">
+        <category code="courseMaterials">
+            <default>true</default>
+            <featuredorder>1</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="campusVirtualCatalog">
+        <category code="courseMaterials">
+            <default>true</default>
+            <featuredorder>1</featuredorder>
         </category>
     </catalog>
 </product>

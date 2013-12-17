@@ -8,7 +8,7 @@
     <type>B2B</type>
     <description>Store containing test data for the HTML5 functional storefront.</description>
     <catalog>campusVirtualCatalog</catalog>
-    <display_out_of_stock>false</display_out_of_stock>
+    <display_out_of_stock>true</display_out_of_stock>
     <email_sender_name>CustomerService@elasticpath.com</email_sender_name>
     <email_sender_address>CustomerService@elasticpath.com</email_sender_address>
     <store_admin_email>StoreAdmin@elasticpath.com</store_admin_email>
@@ -32,13 +32,8 @@
         <guid>500</guid>
     </tax_codes>
     <tax_jurisdictions/>
-    <payment_gateways>
-        <gateway>DemoPaymentProcessor</gateway>
-    </payment_gateways>
-    <credit_card_types>
-        <type>American Express</type>
-        <type>Visa</type>
-        <type>MasterCard</type>
-    </credit_card_types>
+	<payment_gateways>
+		<gateway>DemoTokenPaymentProcessor</gateway>
+	</payment_gateways>
 </store>
 </stores>

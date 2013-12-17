@@ -303,4 +303,13 @@
     <sale_price>13.95</sale_price>
     <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
 </base_amount>
+
+<base_amount>
+    <guid>80B8A009-8D86-9E51-51E5-C24B7CD8AB70</guid>
+    <object_guid>preOrderCourseware</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>109.99</list_price>
+    <price_list_guid>c1275df1-1fdc-4d23-9703-cd0d8fbbcad4</price_list_guid>
+</base_amount>
 </amounts>
