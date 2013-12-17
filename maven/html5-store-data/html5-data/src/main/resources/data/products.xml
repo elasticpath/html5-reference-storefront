@@ -1869,7 +1869,7 @@
     <code>9781259015113</code>
     <name>
         <value language="en"></value>
-        <value language="en_US">Business Communication 5th Ed. - CONNECT w/ eBook </value>
+        <value language="en_US">Business Communication. - CONNECT w/ eBook </value>
     </name>
     <type>eBooks</type>
     <taxcode>GOODS</taxcode>
@@ -1914,6 +1914,53 @@
         <description>
             <value language="en_US"></value>
             <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>preOrderCourseware</code>
+    <name>
+        <value language="en"></value>
+        <value language="en_US">Pre Order Courseware</value>
+    </name>
+    <type>eBooks</type>
+    <taxcode>NONE</taxcode>
+    <brand>McGrawHill</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2013-12-17T14:09:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_PRE_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+        <expectedreleasedate>2024-12-17T00:00:00-08:00</expectedreleasedate>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="c62ebfad-8624-4b53-8e0c-aa42bf5c227d">
+            <code>preOrderCourseware</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_US"/>
+            <value language="en"/>
+        </url>
+        <title>
+            <value language="en_US"/>
+            <value language="en"/>
+        </title>
+        <keywords>
+            <value language="en_US"/>
+            <value language="en"/>
+        </keywords>
+        <description>
+            <value language="en_US"/>
+            <value language="en"/>
         </description>
     </seo>
 </product>

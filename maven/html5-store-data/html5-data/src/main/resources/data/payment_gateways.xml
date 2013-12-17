@@ -76,4 +76,10 @@
     <type>paymentGatewayExchange</type>
     <properties/>
 </payment_gateway>
+
+<payment_gateway>
+    <name>DemoTokenPaymentProcessor</name>
+    <type>paymentGatewayPluginTestDouble</type>
+    <properties/>
+</payment_gateway>
 </payment_gateways>

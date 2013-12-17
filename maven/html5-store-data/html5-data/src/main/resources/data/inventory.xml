@@ -308,4 +308,6 @@
         <reorderqty>1</reorderqty>
     </warehouse>
 </sku>
+
+<sku code="preOrderCourseware"/>
 </inventory>
