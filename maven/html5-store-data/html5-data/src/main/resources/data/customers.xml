@@ -27,17 +27,17 @@
     <preferred_shipping_address>8FC87697-40F7-4DA5-87A3-51799322036E</preferred_shipping_address>
     <preferred_billing_address>8FC87697-40F7-4DA5-87A3-51799322036E</preferred_billing_address>
     <payment_methods>
-        <credit_card guid="B05CF016-1555-4108-A9A3-C63AF0DEF883" expiry_month="5" expiry_year="2018" type="Visa">
-            <holder_name>August K. Anders</holder_name>
-            <card_number>4111111111111111</card_number>
-        </credit_card>
+		<payment_token>
+                <payment_token_display_value>VISA-********4119</payment_token_display_value>
+                <payment_token_value>anders-august-token-x</payment_token_value>
+        </payment_token>
     </payment_methods>
 	<default_payment_method>
-		<credit_card guid="B05CF016-1555-4108-A9A3-C63AF0DEF883" expiry_month="5" expiry_year="2018" type="Visa">
-			<holder_name>August K. Anders</holder_name>
-			<card_number>4111111111111111</card_number>
-		</credit_card>
-	</default_payment_method>
+        <payment_token>
+               <payment_token_display_value>MASTER-********3697</payment_token_display_value>
+                <payment_token_value>anders-august-default-token-x</payment_token_value>
+        </payment_token>
+    </default_payment_method>
     <customer_profile>
         <profile_value type="AttributeType_ShortText" key="CP_PHONE">(804) 555-1234</profile_value>
         <profile_value type="AttributeType_ShortText" key="CP_EMAIL">august.anders@elasticpath.com</profile_value>
@@ -104,10 +104,11 @@
     <preferred_shipping_address>B5A53035-AF77-4DA2-B10F-8237A8B88F07</preferred_shipping_address>
     <preferred_billing_address>B5A53035-AF77-4DA2-B10F-8237A8B88F07</preferred_billing_address>
     <payment_methods>
-        <credit_card guid="0520DA92-0B31-4E5B-BC46-4337E6A1B25E" expiry_month="6" expiry_year="2018" type="Visa">
+		<!-- token unable to stub declined behavior -->
+        <!-- <credit_card guid="0520DA92-0B31-4E5B-BC46-4337E6A1B25E" expiry_month="6" expiry_year="2018" type="Visa">
             <holder_name>DEC_AUTH</holder_name>
             <card_number>4111111111111111</card_number>
-        </credit_card>
+        </credit_card> -->
     </payment_methods>
     <customer_profile>
         <profile_value type="AttributeType_ShortText" key="CP_PHONE">(805) 976-8552</profile_value>
