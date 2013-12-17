@@ -209,7 +209,8 @@
 }
 
 .cart-main-container{ //wraps main cart table --- applies bootstrap column classes
-    .make-md-column(9);
+    .make-lg-column(9);
+    .make-md-column(8);
     .make-xs-column(12);
     margin-bottom: 2em;
 
@@ -232,8 +233,14 @@
 }
 
 .cart-sidebar{ // wraps cart summary --- applies bootstrap column classes
-    .make-md-column(3);
+    .make-lg-column(3);
+    .make-md-column(4);
     .make-xs-column(12);
+
+    // Right align the checkout summary on desktop displays and larger
+    @media screen and (min-width: @screen-desktop) {
+      text-align: right;
+    }
 
     .cart-sidebar-inner{
         display: inline-block;
@@ -241,6 +248,7 @@
         border: 3px solid @brand-primary;
         border-radius: 6px;
         background-color: rgba(255,255,255,0.6);
+        text-align: left;
 
         h3{
             margin: 0 0 2rem 0;

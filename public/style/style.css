@@ -6925,10 +6925,16 @@ fieldset[disabled] .btn-cmd-checkout.active {
   padding-right: 15px;
   margin-bottom: 2em;
 }
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .cart-main-container {
     float: left;
     width: 75%;
+  }
+}
+@media (min-width: 992px) {
+  .cart-main-container {
+    float: left;
+    width: 66.66666666666666%;
   }
 }
 .cart-main-container h2 {
@@ -6948,10 +6954,21 @@ fieldset[disabled] .btn-cmd-checkout.active {
   padding-left: 15px;
   padding-right: 15px;
 }
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .cart-sidebar {
     float: left;
     width: 25%;
+  }
+}
+@media (min-width: 992px) {
+  .cart-sidebar {
+    float: left;
+    width: 33.33333333333333%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .cart-sidebar {
+    text-align: right;
   }
 }
 .cart-sidebar .cart-sidebar-inner {
@@ -6960,6 +6977,7 @@ fieldset[disabled] .btn-cmd-checkout.active {
   border: 3px solid rgba(0, 163, 221, 0.667);
   border-radius: 6px;
   background-color: rgba(255, 255, 255, 0.6);
+  text-align: left;
 }
 .cart-sidebar .cart-sidebar-inner h3 {
   margin: 0 0 2rem 0;
@@ -7001,10 +7019,16 @@ Purchase Confirmation
   padding-right: 15px;
   margin-bottom: 2em;
 }
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .checkout-main-container {
     float: left;
     width: 75%;
+  }
+}
+@media (min-width: 992px) {
+  .checkout-main-container {
+    float: left;
+    width: 66.66666666666666%;
   }
 }
 .checkout-container-inner {
@@ -7043,10 +7067,21 @@ Purchase Confirmation
   padding-left: 15px;
   padding-right: 15px;
 }
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .checkout-sidebar {
     float: left;
     width: 25%;
+  }
+}
+@media (min-width: 992px) {
+  .checkout-sidebar {
+    float: left;
+    width: 33.33333333333333%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .checkout-sidebar {
+    text-align: right;
   }
 }
 .checkout-sidebar .checkout-sidebar-inner {
@@ -7055,6 +7090,7 @@ Purchase Confirmation
   border: 3px solid rgba(0, 163, 221, 0.667);
   border-radius: 6px;
   background-color: rgba(255, 255, 255, 0.6);
+  text-align: left;
 }
 .checkout-sidebar .checkout-sidebar-inner h3 {
   margin: 0 0 2rem 0;
@@ -7080,7 +7116,7 @@ Purchase Confirmation
   margin-bottom: 1rem;
 }
 .checkout-summary-list {
-  padding: 0px;
+  padding: 0;
 }
 .btn-cmd-submit-order {
   display: inline-block;
@@ -7222,7 +7258,7 @@ fieldset[disabled] .btn-cancel-order {
   vertical-align: top;
   margin-right: 1rem;
 }
-[data-region="checkoutAddressRegion"] h2 {
+[data-region="billingAddressesRegion"] h2 {
   margin-top: 0;
 }
 .itemdetail-container {
