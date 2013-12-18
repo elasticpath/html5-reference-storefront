@@ -96,20 +96,18 @@ define(function (require) {
     var checkoutAddressSelectorLayout = Backbone.Marionette.Layout.extend({
       template: '#CheckoutAddressSelectorTemplate',
       templateHelpers: viewHelpers,
+      serializeData: function() {
+        // Append an extra value to the model to distinguish which type of address is to be rendered.
+        var data = this.model.toJSON();
+        data.addressType = this.options.addressType;
+        return data;
+      },
       regions: {
         checkoutAddressRegion: '[data-region="checkoutAddressRegion"]'
       },
       events: {
-        'change input[name="checkoutAddress"]': function () {
-          // Trigger the relevant change event according to the type of address being displayed
-          if (this.options.addressType) {
-            if (this.options.addressType === "billing") {
-              EventBus.trigger('checkout.billingAddressRadioChanged', this.model.get('selectAction'));
-            }
-            if (this.options.addressType === "shipping") {
-              EventBus.trigger('checkout.shippingAddressRadioChanged', this.model.get('selectAction'));
-            }
-          }
+        'change input[type="radio"]': function () {
+          EventBus.trigger('checkout.addressRadioChanged', this.model.get('selectAction'));
         }
       },
       onShow: function () {

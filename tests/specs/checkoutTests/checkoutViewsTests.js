@@ -63,7 +63,10 @@ define(function (require) {
 
     describe('CheckoutAddressSelectorLayout', function () {
       before(function () {
-        this.view = new views.CheckoutAddressSelectorLayout();
+        // Instantiate view with an empty model so it can be modified in the serializeData function
+        this.view = new views.CheckoutAddressSelectorLayout({
+          model: new Backbone.Model({})
+        });
         this.view.render();
       });
 

@@ -68,6 +68,7 @@
   },
   "checkout": {
     "billingAddress": "Billing Address",
+    "shippingAddress": "Shipping Address",
     "checkoutTitle": "Checkout Summary",
     "cancelOrder": "Cancel",
     "submitOrder": "Complete Purchase",
