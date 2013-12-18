@@ -39,22 +39,43 @@ define(function (require) {
       checkoutModel.fetch({
         url: checkoutModel.getUrl(orderLink),
         success: function () {
-          checkoutLayout.checkoutTitleRegion.show(new View.CheckoutTitleView());
 
-          // if there is a default choice billing address, trigger a call to Cortex to formerly set it
-          // to allow tax calculations to be made
+          // If the model suggests we need to set a chosen billing address, trigger a call to Cortex to formerly set it
+          // to allow the correct tax calculations to be made.
           if (checkoutModel.get('billingAddresses').length && checkoutModel.get('billingAddresses')[0].setAsDefaultChoice) {
             EventBus.trigger(
-              'checkout.updateChosenBillingAddressRequest',
+              'checkout.updateChosenAddressRequest',
               checkoutModel.get('billingAddresses')[0].selectAction
             );
           }
 
-          checkoutLayout.billingAddressesRegion.show(
-            new View.BillingAddressesCompositeView({
-              collection: new Backbone.Collection(checkoutModel.get('billingAddresses'))
-            })
-          );
+          // If the model suggests we need to set a chosen shipping address, trigger a call to Cortex to formerly set it
+          // to allow the correct tax calculations to be made.
+          if (checkoutModel.get('shippingAddresses').length && checkoutModel.get('shippingAddresses')[0].setAsDefaultChoice) {
+            EventBus.trigger(
+              'checkout.updateChosenAddressRequest',
+              checkoutModel.get('shippingAddresses')[0].selectAction
+            );
+          }
+
+          checkoutLayout.checkoutTitleRegion.show(new View.CheckoutTitleView());
+
+          if (checkoutModel.get('billingAddresses').length) {
+            checkoutLayout.billingAddressesRegion.show(
+              new View.BillingAddressesCompositeView({
+                collection: new Backbone.Collection(checkoutModel.get('billingAddresses'))
+              })
+            );
+          }
+
+          // Only show the shipping addresses region if there is an address available
+          if (checkoutModel.get('shippingAddresses').length) {
+            checkoutLayout.shippingAddressesRegion.show(
+              new View.ShippingAddressesCompositeView({
+                collection: new Backbone.Collection(checkoutModel.get('shippingAddresses'))
+              })
+            );
+          }
 
           checkoutLayout.cancelCheckoutActionRegion.show(new View.CancelCheckoutActionView());
 
@@ -184,22 +205,22 @@ define(function (require) {
     });
 
     /**
-     * Handler for the checkout.billingAddressRadioChanged event.
+     * Handler for the checkout.addressRadioChanged event.
      */
-    EventBus.on('checkout.billingAddressRadioChanged', function(actionLink) {
-      EventBus.trigger('checkout.updateChosenBillingAddressRequest', actionLink);
+    EventBus.on('checkout.addressRadioChanged', function(actionLink) {
+      EventBus.trigger('checkout.updateChosenAddressRequest', actionLink);
     });
 
-    EventBus.on('checkout.updateChosenBillingAddressRequest', function(actionLink) {
+    EventBus.on('checkout.updateChosenAddressRequest', function(actionLink) {
       if (actionLink) {
         var ajaxModel = new ep.io.defaultAjaxModel({
           type: 'POST',
           url: actionLink,
           success: function() {
-            EventBus.trigger('checkout.updateChosenBillingAddressSuccess');
+            EventBus.trigger('checkout.updateChosenAddressSuccess');
           },
           customErrorFn: function() {
-            EventBus.trigger('checkout.updateChosenBillingAddressFailed');
+            EventBus.trigger('checkout.updateChosenAddressFailed');
           }
         });
 
@@ -208,11 +229,11 @@ define(function (require) {
     });
 
     /**
-     * Listening to the event fired when the update of a chosen billing address fails.
+     * Listening to the event fired when the update of a chosen (billing or shipping) address fails.
      * Displays a toast error message.
      */
-    EventBus.on('checkout.updateChosenBillingAddressFailed', function(response) {
-      ep.logger.error('error updating billing address: ' + response);
+    EventBus.on('checkout.updateChosenAddressFailed', function(response) {
+      ep.logger.error('error updating selected address: ' + response);
 
       // Display sticky error message
       $().toastmessage('showToast', {
@@ -224,10 +245,10 @@ define(function (require) {
     });
 
     /**
-     * Listening to the event fired on successful update of the chosen billing address.
+     * Listening to the event fired on successful update of the chosen (billing or shipping) address.
      * Triggers a page reload to update the tax and total data in checkout summary.
      */
-    EventBus.on('checkout.updateChosenBillingAddressSuccess', function() {
+    EventBus.on('checkout.updateChosenAddressSuccess', function() {
       Backbone.history.loadUrl();
     });
 

@@ -73,8 +73,18 @@ define(function (require) {
           .to.be.equal(this.parsedData._tax[0].total.display);
       });
 
-      describe("Given there is no tax data", function() {
-        // Fake a server response without tax data
+      it('renders the BillingAddressesCompositeView view', function() {
+        // There are billing addresses in the fake JSON response, so this region should be rendered
+        expect(this.view.$el.find('[data-region="billingAddressSelectorsRegion"]')).to.have.length(1);
+      });
+
+      it('renders the ShippingAddressesCompositeView view', function() {
+        // There are shipping addresses in the fake JSON response, so this region should be rendered
+        expect(this.view.$el.find('[data-region="shippingAddressSelectorsRegion"]')).to.have.length(1);
+      });
+
+      describe("Given there is no tax data, billing addresses or shipping addresses", function() {
+        // Fake a server response with missing data
         before(function (done) {
           $("#Fixtures").append(template); // append templates
 
@@ -82,8 +92,10 @@ define(function (require) {
           var fakeGetLink = "/integrator/orders/fakeUrl";
           var parsedFakeResponse = JSON.parse(dataJSON).response;
 
-          // Remove tax data in the fake response JSON
+          // Remove tax, billing address and shipping address data in the fake response JSON
           parsedFakeResponse._tax = [];
+          parsedFakeResponse._billingaddressinfo = [];
+          parsedFakeResponse._deliveries = [];
 
           var fakeResponseStr = JSON.stringify(parsedFakeResponse);
 
@@ -116,8 +128,84 @@ define(function (require) {
           this.server.restore();
         });
 
-        it('the TaxesCollectionView is not rendered', function() {
+        it('does not render the TaxesCollectionView view', function() {
           expect(this.view.$el.find('ul.checkout-tax-list')).to.have.length(0);
+        });
+
+        it('does not render the BillingAddressesCompositeView view', function() {
+          expect(this.view.$el.find('[data-region="billingAddressSelectorsRegion"]')).to.have.length(0);
+        });
+
+        it('does not render the ShippingAddressesCompositeView view', function() {
+          expect(this.view.$el.find('[data-region="shippingAddressSelectorsRegion"]')).to.have.length(0);
+        });
+
+      });
+
+      describe("Given there are no chosen billing or shipping addresses", function() {
+        // Fake a server response without tax data
+        before(function (done) {
+          $("#Fixtures").append(template); // append templates
+
+          sinon.spy(EventBus, 'trigger');
+          sinon.stub(ep.io, 'ajax');
+
+          var fakeGetLink = "/integrator/orders/fakeUrl";
+          var parsedFakeResponse = JSON.parse(dataJSON).response;
+
+          // Remove any chosen attributes from the billing addresses in the test data
+          delete(parsedFakeResponse._billingaddressinfo[0]._selector[0]._chosen);
+
+          this.fakeJSONResponse = parsedFakeResponse;
+
+          var fakeResponseStr = JSON.stringify(this.fakeJSONResponse);
+
+          ep.io.localStore.setItem('oAuthToken', 'fakeToken');
+
+          var server = sinon.fakeServer.create();
+          server.autoRespond = true;
+
+          server.respondWith(
+            "GET", fakeGetLink + JSON.parse(dataJSON).zoom,
+            [200, {"Content-Type":"application/json"}, fakeResponseStr]
+          );
+
+          ep.io.sessionStore.setItem('orderLink', fakeGetLink);
+
+          this.view = new controller.DefaultView();
+
+          this.view.render();
+
+          // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
+          this.view.checkoutOrderRegion.on('show', function() {
+            done();
+          });
+
+        });
+
+        after(function () {
+          $("#Fixtures").empty();
+          EventBus.trigger.restore();
+          ep.io.ajax.restore();
+          ep.io.localStore.removeItem('oAuthToken');
+          ep.io.sessionStore.removeItem('orderLink');
+          this.server.restore();
+        });
+
+        it('triggers the checkout.updateChosenAddressRequest event to set a chosen billing address', function() {
+          var firstChoiceAddress = jsonPath(this.fakeJSONResponse, '$.._billingaddressinfo[0].._choice')[0][0];
+          var firstChoiceAddressSelectAction = jsonPath(firstChoiceAddress, '$..links[?(@.rel=="selectaction")].href')[0];
+
+          // Expect the event to be triggered with the selectAction of the first choice billing address
+          expect(EventBus.trigger).to.be.calledWith('checkout.updateChosenAddressRequest', firstChoiceAddressSelectAction);
+        });
+
+        it('triggers the checkout.updateChosenAddressRequest event to set a chosen shipping address', function() {
+          var firstChoiceAddress = jsonPath(this.fakeJSONResponse, '$.._deliveries[0].._choice')[0][0];
+          var firstChoiceAddressSelectAction = jsonPath(firstChoiceAddress, '$..links[?(@.rel=="selectaction")].href')[0];
+
+          // Expect the event to be triggered with the selectAction of the first choice shipping address
+          expect(EventBus.trigger).to.be.calledWith('checkout.updateChosenAddressRequest');
         });
 
       });
@@ -295,6 +383,22 @@ define(function (require) {
         expect(view.resetCheckoutButtonText).to.be.calledOnce;
       });
     });
-  });
 
+    describe('Responds to event: checkout.addressRadioChanged', function() {
+      before(function () {
+        sinon.spy(EventBus, 'trigger');
+        EventTestHelpers.unbind('checkout.updateChosenAddressRequest');
+        EventBus.trigger('checkout.addressRadioChanged', 'fakeSelectAction');
+      });
+
+      after(function () {
+        EventTestHelpers.reset();
+      });
+
+      it('calls View function resetCheckoutButtonText', function() {
+//      expect(EventBus.trigger).to.be.calledWithExactly('checkout.updateChosenAddressRequest');
+        expect(EventBus.trigger).to.be.calledWithExactly('checkout.updateChosenAddressRequest', 'fakeSelectAction');
+      });
+    });
+  });
 });

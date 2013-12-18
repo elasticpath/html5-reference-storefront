@@ -12,6 +12,7 @@
 
         <div class="checkout-main-container">
           <div data-region="billingAddressesRegion"></div>
+          <div data-region="shippingAddressesRegion"></div>
           <div data-region="cancelCheckoutActionRegion"></div>
         </div>
 
@@ -41,7 +42,7 @@
   <script id="CheckoutAddressSelectorTemplate" type="text/template">
     <!-- A unique ID to associate address labels with radio buttons -->
     <% var uniqueId = _.uniqueId('checkoutAddress_'); %>
-    <input type="radio" name="checkoutAddress" id="<%= uniqueId %>" class="checkout-address-radio" <%= E.getCheckoutAddressCheckedAttr(E) %> />
+    <input type="radio" name="<%= E.addressType %>" id="<%= uniqueId %>" class="checkout-address-radio" <%= E.getCheckoutAddressCheckedAttr(E) %> />
     <label for="<%= uniqueId %>">
       <div data-region="checkoutAddressRegion"></div>
     </label>
