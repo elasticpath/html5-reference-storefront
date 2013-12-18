@@ -155,6 +155,7 @@ define(function (require) {
 
           // Remove any chosen attributes from the billing addresses in the test data
           delete(parsedFakeResponse._billingaddressinfo[0]._selector[0]._chosen);
+          delete(parsedFakeResponse._deliveries[0]._element[0]._destinationinfo[0]._selector[0]._chosen);
 
           this.fakeJSONResponse = parsedFakeResponse;
 
@@ -205,7 +206,7 @@ define(function (require) {
           var firstChoiceAddressSelectAction = jsonPath(firstChoiceAddress, '$..links[?(@.rel=="selectaction")].href')[0];
 
           // Expect the event to be triggered with the selectAction of the first choice shipping address
-          expect(EventBus.trigger).to.be.calledWith('checkout.updateChosenAddressRequest');
+          expect(EventBus.trigger).to.be.calledWith('checkout.updateChosenAddressRequest', firstChoiceAddressSelectAction);
         });
 
       });
