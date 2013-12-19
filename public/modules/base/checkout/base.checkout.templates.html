@@ -26,10 +26,20 @@
     <h1 class="view-title"><%= E.getI18nLabel('checkout.checkoutTitle') %></h1>
   </script>
 
+  <!-- Rendered when there are no billing addresses to display -->
+  <script id="EmptyBillingAddressesTemplate" type="text/template">
+    <p data-el-value="checkout.noBillingAddressesMsg"><%= E.getI18nLabel('checkout.noBillingAddressesMsg') %></p>
+  </script>
+
   <!-- Provides a wrapper for a list of billing addresses -->
   <script id="BillingAddressesTemplate" type="text/template">
     <h2><%= E.getI18nLabel('checkout.billingAddress') %></h2>
     <div data-region="billingAddressSelectorsRegion"></div>
+  </script>
+
+  <!-- Rendered when there are no shipping addresses to display -->
+  <script id="EmptyShippingAddressesTemplate" type="text/template">
+    <p data-el-value="checkout.noShippingAddressesMsg"><%= E.getI18nLabel('checkout.noShippingAddressesMsg') %></p>
   </script>
 
   <!-- Provides a wrapper for a list of shipping addresses -->

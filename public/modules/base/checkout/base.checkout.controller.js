@@ -60,22 +60,17 @@ define(function (require) {
 
           checkoutLayout.checkoutTitleRegion.show(new View.CheckoutTitleView());
 
-          if (checkoutModel.get('billingAddresses').length) {
-            checkoutLayout.billingAddressesRegion.show(
-              new View.BillingAddressesCompositeView({
-                collection: new Backbone.Collection(checkoutModel.get('billingAddresses'))
-              })
-            );
-          }
+          checkoutLayout.billingAddressesRegion.show(
+            new View.BillingAddressesCompositeView({
+              collection: new Backbone.Collection(checkoutModel.get('billingAddresses'))
+            })
+          );
 
-          // Only show the shipping addresses region if there is an address available
-          if (checkoutModel.get('shippingAddresses').length) {
-            checkoutLayout.shippingAddressesRegion.show(
-              new View.ShippingAddressesCompositeView({
-                collection: new Backbone.Collection(checkoutModel.get('shippingAddresses'))
-              })
-            );
-          }
+          checkoutLayout.shippingAddressesRegion.show(
+            new View.ShippingAddressesCompositeView({
+              collection: new Backbone.Collection(checkoutModel.get('shippingAddresses'))
+            })
+          );
 
           checkoutLayout.cancelCheckoutActionRegion.show(new View.CancelCheckoutActionView());
 

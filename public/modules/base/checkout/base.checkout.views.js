@@ -120,6 +120,15 @@ define(function (require) {
     });
 
     /**
+     * Rendered by BillingAddressesCompositeView when there are no billing addresses to be displayed.
+     * @type Marionette.ItemView
+     */
+    var billingAddressesEmptyView = Marionette.ItemView.extend({
+      template: '#EmptyBillingAddressesTemplate',
+      templateHelpers: viewHelpers
+    });
+
+    /**
      * Renders a heading and a list of billing addresses.
      * @type Marionette.CompositeView
      */
@@ -127,11 +136,21 @@ define(function (require) {
       template: '#BillingAddressesTemplate',
       templateHelpers: viewHelpers,
       itemView: checkoutAddressSelectorLayout,
+      emptyView: billingAddressesEmptyView,
       // Make the type of address available to the itemView
       itemViewOptions: {
         addressType: 'billing'
       },
       itemViewContainer: '[data-region="billingAddressSelectorsRegion"]'
+    });
+
+    /**
+     * Rendered by ShippingAddressesCompositeView when there are no shipping addresses to be displayed.
+     * @type Marionette.ItemView
+     */
+    var shippingAddressesEmptyView = Marionette.ItemView.extend({
+      template: '#EmptyShippingAddressesTemplate',
+      templateHelpers: viewHelpers
     });
 
     /**
@@ -142,6 +161,7 @@ define(function (require) {
       template: '#ShippingAddressesTemplate',
       templateHelpers: viewHelpers,
       itemView: checkoutAddressSelectorLayout,
+      emptyView: shippingAddressesEmptyView,
       // Make the type of address available to the itemView
       itemViewOptions: {
         addressType: 'shipping'
