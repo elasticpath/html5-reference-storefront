@@ -4,7 +4,7 @@
 		<mirror>
 			<id>cleanroom</id>
 			<url>http://maven.elasticpath.com/nexus/content/groups/cleanroom</url>
-			<mirrorOf>external:*</mirrorOf>
+			<mirrorOf>external:*,!ce-repo</mirrorOf>
 		</mirror>
 	</mirrors>
 	
