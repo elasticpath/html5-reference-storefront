@@ -132,12 +132,12 @@ define(function (require) {
           expect(this.view.$el.find('ul.checkout-tax-list')).to.have.length(0);
         });
 
-        it('does not render the BillingAddressesCompositeView view', function() {
-          expect(this.view.$el.find('[data-region="billingAddressSelectorsRegion"]')).to.have.length(0);
+        it('renders the billingAddressesEmptyView view', function() {
+          expect(this.view.$el.find('[data-el-value="checkout.noBillingAddressesMsg"]')).to.have.length(1);
         });
 
-        it('does not render the ShippingAddressesCompositeView view', function() {
-          expect(this.view.$el.find('[data-region="shippingAddressSelectorsRegion"]')).to.have.length(0);
+        it('renders the shippingAddressesEmptyView view', function() {
+          expect(this.view.$el.find('[data-el-value="checkout.noShippingAddressesMsg"]')).to.have.length(1);
         });
 
       });

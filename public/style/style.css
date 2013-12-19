@@ -7258,8 +7258,14 @@ fieldset[disabled] .btn-cancel-order {
   vertical-align: top;
   margin-right: 1rem;
 }
+[data-region="billingAddressesRegion"] {
+  margin-bottom: 3rem;
+}
 [data-region="billingAddressesRegion"] h2 {
   margin-top: 0;
+}
+[data-region="shippingAddressesRegion"] {
+  margin-bottom: 3rem;
 }
 .itemdetail-container {
   margin-top: 4rem;

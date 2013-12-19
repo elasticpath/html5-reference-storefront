@@ -68,7 +68,9 @@
   },
   "checkout": {
     "billingAddress": "Billing Address",
+    "noBillingAddressesMsg": "You have no saved billing addresses.",
     "shippingAddress": "Shipping Address",
+    "noShippingAddressesMsg": "You have no saved shipping addresses.",
     "checkoutTitle": "Checkout Summary",
     "cancelOrder": "Cancel",
     "submitOrder": "Complete Purchase",
