@@ -25,7 +25,7 @@
             <multilanguage>false</multilanguage>
             <required>false</required>
             <multivalue>false</multivalue>
-            <global>false</global>
+            <global>true</global>
         </attribute>
         <attribute>
             <key>catDescription</key>
@@ -35,7 +35,7 @@
             <multilanguage>false</multilanguage>
             <required>true</required>
             <multivalue>false</multivalue>
-            <global>false</global>
+            <global>true</global>
         </attribute>
         <attribute>
             <key>catName</key>
@@ -45,7 +45,7 @@
             <multilanguage>true</multilanguage>
             <required>true</required>
             <multivalue>false</multivalue>
-            <global>false</global>
+            <global>true</global>
         </attribute>
         <attribute>
             <key>batteryIncluded</key>
@@ -75,7 +75,7 @@
             <multilanguage>false</multilanguage>
             <required>false</required>
             <multivalue>false</multivalue>
-            <global>false</global>
+            <global>true</global>
         </attribute>
         <attribute>
             <key>AllowedExams</key>
