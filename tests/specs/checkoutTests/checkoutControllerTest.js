@@ -95,7 +95,7 @@ define(function (require) {
           // Remove tax, billing address and shipping address data in the fake response JSON
           parsedFakeResponse._tax = [];
           parsedFakeResponse._billingaddressinfo = [];
-          parsedFakeResponse._deliveries = [];
+          parsedFakeResponse._deliveries[0]._element[0]._destinationinfo = [];
 
           var fakeResponseStr = JSON.stringify(parsedFakeResponse);
 

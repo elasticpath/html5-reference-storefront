@@ -20,6 +20,8 @@ define(function (require) {
     'total',
     'cart',
     'cart:total',
+    // delivery type
+    'deliveries:element',
     // chosen shipping address
     'deliveries:element:destinationinfo:selector:chosen:description',
     // choice shipping addresses
@@ -45,6 +47,8 @@ define(function (require) {
 
       if (response) {
         checkoutObj.submitOrderActionLink = jsonPath(response, "$..links[?(@.rel=='submitorderaction')].href")[0];
+
+        checkoutObj.deliveryType = jsonPath(response, "$.._deliveries[0].._element[0].delivery-type")[0];
 
         var parsedBillingAddresses = modelHelpers.parseCheckoutAddresses(response, "billingaddressinfo");
         var parsedShippingAddresses = modelHelpers.parseCheckoutAddresses(response, "deliveries");

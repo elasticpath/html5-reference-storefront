@@ -66,11 +66,14 @@ define(function (require) {
             })
           );
 
-          checkoutLayout.shippingAddressesRegion.show(
-            new View.ShippingAddressesCompositeView({
-              collection: new Backbone.Collection(checkoutModel.get('shippingAddresses'))
-            })
-          );
+          // Only show if the cart contains physical items requiring shipment
+          if(checkoutModel.get('deliveryType') === "SHIPMENT") {
+            checkoutLayout.shippingAddressesRegion.show(
+              new View.ShippingAddressesCompositeView({
+                collection: new Backbone.Collection(checkoutModel.get('shippingAddresses'))
+              })
+            );
+          }
 
           checkoutLayout.cancelCheckoutActionRegion.show(new View.CancelCheckoutActionView());
 
