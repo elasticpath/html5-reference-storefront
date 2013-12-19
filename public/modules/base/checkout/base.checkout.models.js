@@ -26,7 +26,12 @@ define(function (require) {
     'deliveries:element:destinationinfo:selector:chosen:description',
     // choice shipping addresses
     'deliveries:element:destinationinfo:selector:choice',
-    'deliveries:element:destinationinfo:selector:choice:description'
+    'deliveries:element:destinationinfo:selector:choice:description',
+    // chosen shipping option
+    'deliveries:element:shippingoptioninfo:selector:chosen:description',
+    // choice shipping options
+    'deliveries:element:shippingoptioninfo:selector:choice',
+    'deliveries:element:shippingoptioninfo:selector:choice:description'
   ];
 
   /**
@@ -42,7 +47,8 @@ define(function (require) {
       var checkoutObj = {
         summary: {},
         billingAddresses: [],
-        shippingAddresses: []
+        shippingAddresses: [],
+        shippingOptions: []
       };
 
       if (response) {
@@ -51,7 +57,7 @@ define(function (require) {
         checkoutObj.deliveryType = jsonPath(response, "$.._deliveries[0].._element[0].delivery-type")[0];
 
         var parsedBillingAddresses = modelHelpers.parseCheckoutAddresses(response, "billingaddressinfo");
-        var parsedShippingAddresses = modelHelpers.parseCheckoutAddresses(response, "deliveries");
+        var parsedShippingAddresses = modelHelpers.parseCheckoutAddresses(response, "destinationinfo");
 
         if (parsedBillingAddresses.length) {
           // Sort the parsed billing addresses alphabetically by the streetAddress property
@@ -70,6 +76,8 @@ define(function (require) {
         }
 
         checkoutObj.summary = modelHelpers.parseCheckoutSummary(response);
+
+        checkoutObj.shippingOptions = modelHelpers.parseShippingOptions(response);
       } else {
         ep.logger.error("Checkout model wasn't able to fetch valid data for parsing. ");
       }
@@ -78,11 +86,20 @@ define(function (require) {
     }
   });
 
-
   var modelHelpers = ModelHelper.extend({
     /**
+     * Helper function for billing/shipping address and shipping option objects.
+     * Adds a property to identify the object as being the chosen (selected) object.
+     * @param {Object} obj The object to be extended.
+     * @returns {Object} The returned object with chosen property added.
+     */
+    markAsChosenObject: function(obj) {
+      return _.extend(obj, {chosen: true});
+    },
+
+    /**
      * Parse checkout summary information.
-     * @param response The response to be parsed
+     * @param response The JSON response to be parsed
      * @returns {Object} Order quantity, subtotal, taxes, and total
      */
     parseCheckoutSummary: function (response) {
@@ -124,27 +141,86 @@ define(function (require) {
     },
 
     /**
+     * Parse an individual shipping option object.
+     * @param rawObject Raw shipping option JSON object
+     * @returns {Object} Parsed shipping option object
+     */
+    parseShippingOption: function (rawObject) {
+      var shippingOption = {};
+
+      if (rawObject) {
+        shippingOption = {
+          carrier: jsonPath(rawObject, '$..carrier')[0],
+          cost: jsonPath(rawObject, '$..cost..display')[0],
+          displayName: jsonPath(rawObject, '$..display-name')[0]
+        };
+      } else {
+        ep.logger.error('Error when building checkout shipping option object');
+      }
+
+      return shippingOption;
+    },
+
+    /**
+     * Parse an array of shipping options that the registered user can use at checkout.
+     * The first shipping option in the returned array will be the chosen option.
+     * If there is no chosen option, we mark the first 'choice' option as being 'chosen',
+     * so we have a default shipping option to use at checkout.
+     * @param rawObject The raw JSON response to be parsed
+     * @returns {Array} Parsed array of shipping options objects
+     */
+    parseShippingOptions: function (response) {
+      var shippingOptions = [];
+
+      if (response) {
+
+        var chosenShippingOption = jsonPath(response, '$.._shippingoptioninfo[0].._chosen.._description[0]')[0];
+        var choiceShippingOptions = jsonPath(response, '$.._shippingoptioninfo[0].._choice')[0];
+
+        if (chosenShippingOption) {
+          var parsedShippingOption = modelHelpers.parseShippingOption(chosenShippingOption);
+
+          modelHelpers.markAsChosenObject(parsedShippingOption);
+
+          shippingOptions.push(parsedShippingOption);
+        }
+
+        if (choiceShippingOptions) {
+          var numShippingOptions = choiceShippingOptions.length;
+
+          for (var i = 0; i < numShippingOptions; i++) {
+            var parsedChoiceOption =  modelHelpers.parseShippingOption(choiceShippingOptions[i]._description[0]);
+            var selectActionHref = jsonPath(choiceShippingOptions[i], '$..links[?(@.rel=="selectaction")].href');
+
+            // Add the Cortex select action to the choice billing address
+            if (selectActionHref && selectActionHref[0]) {
+              _.extend(parsedChoiceOption, {selectAction: selectActionHref[0]});
+            }
+
+            shippingOptions.push(parsedChoiceOption);
+          }
+        }
+      } else {
+        ep.logger.error('Error when building checkout shipping option object');
+      }
+
+      return shippingOptions;
+    },
+
+    /**
      * Parse addresses (billing or shipping) that the registered user can use for checkout.
      * The first address in the returned array will be the chosen address.
      * If there is no chosen address, we mark the first 'choice' address as being 'chosen',
      * so we have a default billing/shipping address to use at checkout.
      *
-     * @param response The response to be parsed
+     * @param response The JSON response to be parsed
      * @param jsonPathPrefix The prefix to use in jsonPath selections:
      *          "billingaddressinfo" for billing addresses
-     *          "deliveries" for shipping addresses
+     *          "destinationinfo" for shipping addresses
      * @returns {Array} Addresses (billing or shipping) of a registered user
      */
     parseCheckoutAddresses: function (response, jsonPathPrefix) {
       var checkoutAddresses = [];
-
-      /**
-       * Add a property to identify an address as the chosen address.
-       * @param {Object} address
-       */
-      var markAsChosenAddress = function(address) {
-        return _.extend(address, {chosen: true});
-      };
 
       if (response && jsonPathPrefix) {
 
@@ -154,7 +230,7 @@ define(function (require) {
         if (chosenAddress) {
           var parsedChosenAddress = modelHelpers.parseAddress(chosenAddress);
 
-          markAsChosenAddress(parsedChosenAddress);
+          modelHelpers.markAsChosenObject(parsedChosenAddress);
 
           checkoutAddresses.push(parsedChosenAddress);
         }

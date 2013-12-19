@@ -25,6 +25,12 @@ define(function (require) {
 
         this.numChosenBillingAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._chosen.._description[0]').length;
         this.numChoiceBillingAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._choice')[0].length;
+
+        this.numChosenShippingAddresses = jsonPath(this.rawData, '$.._destinationinfo[0].._chosen.._description[0]').length;
+        this.numChoiceShippingAddresses = jsonPath(this.rawData, '$.._destinationinfo[0].._choice')[0].length;
+
+        this.numChosenShippingOptions = jsonPath(this.rawData, '$.._shippingoptioninfo[0].._chosen.._description[0]').length;
+        this.numChoiceShippingOptions = jsonPath(this.rawData, '$.._shippingoptioninfo[0].._choice')[0].length;
       });
 
       after(function () {
@@ -32,6 +38,12 @@ define(function (require) {
         delete(this.model);
         delete(this.numChosenBillingAddresses);
         delete(this.numChoiceBillingAddresses);
+
+        delete(this.numChosenShippingAddresses);
+        delete(this.numChoiceShippingAddresses);
+
+        delete(this.numChosenShippingOptions);
+        delete(this.numChoiceShippingOptions);
       });
 
       it('has non-empty submitOrderLink', function () {
@@ -54,8 +66,18 @@ define(function (require) {
         expect(this.model.deliveryType).to.eql("SHIPMENT");
       });
       it('parsed a billingAddresses object with the correct number of addresses', function () {
-        expect(this.model.billingAddresses).to.be.ok;
+        expect(this.model.billingAddresses).to.be.not.eql([]);
         expect(this.model.billingAddresses.length).to.be.eql(this.numChosenBillingAddresses + this.numChoiceBillingAddresses);
+      });
+
+      it('parsed a shippingAddresses object with the correct number of addresses', function () {
+        expect(this.model.shippingAddresses).to.be.not.eql([]);
+        expect(this.model.billingAddresses.length).to.be.eql(this.numChosenShippingAddresses + this.numChoiceShippingAddresses);
+      });
+
+      it('parsed a shippingOptions object with the correct number of options', function() {
+        expect(this.model.shippingOptions).to.be.not.eql([]);
+        expect(this.model.shippingOptions.length).to.be.eql(this.numChosenShippingOptions + this.numChoiceShippingOptions);
       });
     });
 
@@ -222,23 +244,84 @@ define(function (require) {
         describe('given an addresses array and a sort property of undefined', function() {
           before(function() {
             this.rawData = _.extend({}, data);
-            this.sortProperty = undefined;
-
             sinon.spy(_, 'sortBy');
 
             this.parsedBillingAddresses = modelHelpers.parseCheckoutAddresses(this.rawData, "billingaddressinfo");
 
-            this.testSortedAddresses = _.sortBy(this.parsedBillingAddresses, function(addressObj) {
-              return addressObj[this.sortProperty];
-            }, this);
-
-            this.sortedAddresses = modelHelpers.sortAddresses(this.parsedBillingAddresses, this.sortProperty);
+            this.sortedAddresses = modelHelpers.sortAddresses(this.parsedBillingAddresses, undefined);
+          });
+          after(function() {
+            delete(this.parsedBillingAddresses);
+            delete(this.sortedAddresses);
+            _.sortBy.restore();
           });
           it('calls underscore\'s sortBy function with the billing addresses array', function() {
             expect(_.sortBy).to.be.calledWith(this.parsedBillingAddresses);
           });
           it('returns an unchanged billing addresses array', function() {
             expect(this.sortedAddresses).to.eql(this.parsedBillingAddresses);
+          });
+        });
+      });
+
+      describe('parseShippingOptions', function() {
+        describe('given a valid JSON response', function() {
+          before(function() {
+            this.rawData = _.clone(data);
+            this.numChosenShippingOptions = 0;
+
+            this.parsedShippingOptions = modelHelpers.parseShippingOptions(this.rawData);
+
+            var numShippingOptions = this.parsedShippingOptions.length;
+
+            // Search the array of parsed shipping options for an object with a chosen property
+            while(numShippingOptions--) {
+              if (_.has(this.parsedShippingOptions[numShippingOptions], 'chosen')) {
+                this.numChosenShippingOptions += 1;
+              }
+            }
+          });
+          after(function() {
+            delete(this.parsedShippingOptions);
+          });
+          it('returns an array with the correct number of shipping options objects', function() {
+            // The raw checkout JSON data contains 2 shipping options
+            expect(this.parsedShippingOptions.length).to.eql(2);
+          });
+          it('returns an array with a chosen shipping option object', function() {
+            expect(this.numChosenShippingOptions).to.eql(1);
+          });
+          it('returns an array where all choice shipping options have selectAction properties', function() {
+            var numShippingOptions = this.parsedShippingOptions.length;
+            var isMissingSelectAction = false;
+
+            // Search the array of parsed shipping option objects for choice options without selectAction properties
+            while(numShippingOptions--) {
+              var currentObj = this.parsedShippingOptions[numShippingOptions];
+
+              // if this is a choice address
+              if (!_.has(currentObj, 'chosen')) {
+                if (!_.has(currentObj, 'selectAction')) {
+                  isMissingSelectAction = true;
+                }
+              }
+            }
+            expect(isMissingSelectAction).to.be.false;
+          });
+        });
+
+        describe('given an undefined JSON response parameter', function(){
+          before(function() {
+            sinon.stub(ep.logger, 'error');
+            this.parsedShippingOptions = modelHelpers.parseShippingOptions(undefined);
+          });
+          after(function() {
+            delete(this.parsedShippingOptions);
+            ep.logger.error.restore();
+          });
+          it('returns an empty array and logs an error', function() {
+            expect(this.parsedShippingOptions).to.eql([]);
+            expect(ep.logger.error).to.be.called;
           });
         });
       });

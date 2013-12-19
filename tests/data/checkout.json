@@ -1,5 +1,5 @@
 {
-  "zoom" : "?zoom=purchaseform,billingaddressinfo:selector:chosen:description,billingaddressinfo:selector:choice,billingaddressinfo:selector:choice:description,tax,total,cart,cart:total,deliveries:element,deliveries:element:destinationinfo:selector:chosen:description,deliveries:element:destinationinfo:selector:choice,deliveries:element:destinationinfo:selector:choice:description",
+  "zoom" : "?zoom=purchaseform,billingaddressinfo:selector:chosen:description,billingaddressinfo:selector:choice,billingaddressinfo:selector:choice:description,tax,total,cart,cart:total,deliveries:element,deliveries:element:destinationinfo:selector:chosen:description,deliveries:element:destinationinfo:selector:choice,deliveries:element:destinationinfo:selector:choice:description,deliveries:element:shippingoptioninfo:selector:chosen:description,deliveries:element:shippingoptioninfo:selector:choice,deliveries:element:shippingoptioninfo:selector:choice:description",
   "retrievedOn" : "Dec 19, 2013",
   "retrievedCriteria": "purchase digital and physical item, must have 1 one-item item; registered user, must have at least 1 address, chosen a default billing address and chosen a default shipping method",
   "response" : {
@@ -500,6 +500,89 @@
                               "family-name": "Harris",
                               "given-name": "Karen"
                             }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "_shippingoptioninfo": [
+              {
+                "_selector": [
+                  {
+                    "_choice": [
+                      {
+                        "links": [
+                          {
+                            "type": "application/vnd.elasticpath.shippingoption",
+                            "rel": "description",
+                            "href": "http://54.200.77.156:13080/integrator/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptions/m5yxissunrjgovjqnrefsrluizlwercxlb2s6q3unn2xe42bnbguqsdtpjeuk3scobltc5sznvlgymthifvvc2sngfhvi3chkfvgg5cokvjeotsdgaze42teizgfiqjvjzvvc5coivkxutkem4ze2mcjpjhvktsh",
+                            "uri": "/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptions/m5yxissunrjgovjqnrefsrluizlwercxlb2s6q3unn2xe42bnbguqsdtpjeuk3scobltc5sznvlgymthifvvc2sngfhvi3chkfvgg5cokvjeotsdgaze42teizgfiqjvjzvvc5coivkxutkem4ze2mcjpjhvktsh"
+                          },
+                          {
+                            "rel": "selectaction",
+                            "href": "http://54.200.77.156:13080/integrator/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptioninfo/selector/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptions/m5yxissunrjgovjqnrefsrluizlwercxlb2s6q3unn2xe42bnbguqsdtpjeuk3scobltc5sznvlgymthifvvc2sngfhvi3chkfvgg5cokvjeotsdgaze42teizgfiqjvjzvvc5coivkxutkem4ze2mcjpjhvktsh",
+                            "uri": "/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptioninfo/selector/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptions/m5yxissunrjgovjqnrefsrluizlwercxlb2s6q3unn2xe42bnbguqsdtpjeuk3scobltc5sznvlgymthifvvc2sngfhvi3chkfvgg5cokvjeotsdgaze42teizgfiqjvjzvvc5coivkxutkem4ze2mcjpjhvktsh"
+                          },
+                          {
+                            "type": "application/vnd.elasticpath.selector",
+                            "rel": "selector",
+                            "href": "http://54.200.77.156:13080/integrator/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptioninfo/selector",
+                            "uri": "/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptioninfo/selector"
+                          }
+                        ],
+                        "self": {
+                          "type": "application/vnd.elasticpath.links",
+                          "uri": "/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptioninfo/selector/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptions/m5yxissunrjgovjqnrefsrluizlwercxlb2s6q3unn2xe42bnbguqsdtpjeuk3scobltc5sznvlgymthifvvc2sngfhvi3chkfvgg5cokvjeotsdgaze42teizgfiqjvjzvvc5coivkxutkem4ze2mcjpjhvktsh",
+                          "href": "http://54.200.77.156:13080/integrator/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptioninfo/selector/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptions/m5yxissunrjgovjqnrefsrluizlwercxlb2s6q3unn2xe42bnbguqsdtpjeuk3scobltc5sznvlgymthifvvc2sngfhvi3chkfvgg5cokvjeotsdgaze42teizgfiqjvjzvvc5coivkxutkem4ze2mcjpjhvktsh",
+                          "max-age": 0
+                        },
+                        "_description": [
+                          {
+                            "links": [],
+                            "self": {
+                              "type": "application/vnd.elasticpath.shippingoption",
+                              "uri": "/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptions/m5yxissunrjgovjqnrefsrluizlwercxlb2s6q3unn2xe42bnbguqsdtpjeuk3scobltc5sznvlgymthifvvc2sngfhvi3chkfvgg5cokvjeotsdgaze42teizgfiqjvjzvvc5coivkxutkem4ze2mcjpjhvktsh",
+                              "href": "http://54.200.77.156:13080/integrator/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptions/m5yxissunrjgovjqnrefsrluizlwercxlb2s6q3unn2xe42bnbguqsdtpjeuk3scobltc5sznvlgymthifvvc2sngfhvi3chkfvgg5cokvjeotsdgaze42teizgfiqjvjzvvc5coivkxutkem4ze2mcjpjhvktsh",
+                              "max-age": 0
+                            },
+                            "carrier": "Canada Post",
+                            "cost": [
+                              {
+                                "amount": 7.5,
+                                "currency": "CAD",
+                                "display": "$7.50"
+                              }
+                            ],
+                            "display-name": "Canada Post 2 days",
+                            "name": "CanadaPostTwoDays"
+                          }
+                        ]
+                      }
+                    ],
+                    "_chosen": [
+                      {
+                        "_description": [
+                          {
+                            "links": [],
+                            "self": {
+                              "type": "application/vnd.elasticpath.shippingoption",
+                              "uri": "/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptions/m5yxissunrjgovjqnrefsrluizlweq3fkjzfmzzqnf5do2bskbxu6mzzobmhczldobltc5sznvlgymthifvu422wi5gvktjqkfvgg5cpivjeotsdgfde4rkfgvgfkvsdkjcfs5crgblegutkjzce46srgjixussd",
+                              "href": "http://54.200.77.156:13080/integrator/shipmentdetails/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtogfuvivcmnvvtk3ssjjtgqrtiovgte4ktobltc5sznvlgyz3rmr3gg3ksnrrww3dlgjtuc22okrgxot2xleye46sborhvowtnjvutamc2njbgqtcxiuye6v2zorhhuvlxjzvfs52nnjugyt2emrwhc3ksnrreo3bsljmeunktk5jw6vjqnbffkrjrizkgyuj5/shippingoptions/m5yxissunrjgovjqnrefsrluizlweq3fkjzfmzzqnf5do2bskbxu6mzzobmhczldobltc5sznvlgymthifvu422wi5gvktjqkfvgg5cpivjeotsdgfde4rkfgvgfkvsdkjcfs5crgblegutkjzce46srgjixussd",
+                              "max-age": 0
+                            },
+                            "carrier": "Canada Post",
+                            "cost": [
+                              {
+                                "amount": 15,
+                                "currency": "CAD",
+                                "display": "$15.00"
+                              }
+                            ],
+                            "display-name": "Canada Post Express",
+                            "name": "CanadaPostExpress"
                           }
                         ]
                       }
