@@ -25,7 +25,6 @@ define(function (require) {
 
         this.numChosenBillingAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._chosen.._description[0]').length;
         this.numChoiceBillingAddresses = jsonPath(this.rawData, '$.._billingaddressinfo[0].._choice')[0].length;
-
       });
 
       after(function () {
@@ -51,13 +50,13 @@ define(function (require) {
       it('has a total quantity greater than 0', function () {
         expect(this.model.summary.totalQuantity).to.be.above(0);
       });
-
+      it('has parsed a delivery type', function() {
+        expect(this.model.deliveryType).to.eql("SHIPMENT");
+      });
       it('parsed a billingAddresses object with the correct number of addresses', function () {
         expect(this.model.billingAddresses).to.be.ok;
         expect(this.model.billingAddresses.length).to.be.eql(this.numChosenBillingAddresses + this.numChoiceBillingAddresses);
       });
-
-
     });
 
     describe('given undefined response argument to parse', function () {
