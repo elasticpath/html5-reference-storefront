@@ -29,16 +29,16 @@ define(function (require) {
       },
 
       /**
-       * Determines if this is the chosen (billing or shipping) address and if so, returns the HTML checked attribute
-       * to be applied to the chosen address radio button in CheckoutAddressSelectorTemplate.
+       * Determines if the object (billing/shipping address or shipping option) being rendered has been marked as
+       * chosen (selected). If so, returns the HTML checked attribute to be applied to the associated radio button.
        *
-       * @param model The billing address model being rendered
+       * @param obj The checkout object being rendered (billing/shipping addresses and shipping options are supported)
        * @returns {string} HTML checked attribute or empty string
        */
-      getCheckoutAddressCheckedAttr: function(model) {
+      getCheckoutRadioCheckedAttr: function(obj) {
         var checkedAttr = '';
 
-        if (model.chosen === true) {
+        if (obj.chosen === true) {
           checkedAttr = 'checked="checked"';
         }
 
@@ -170,6 +170,41 @@ define(function (require) {
     });
 
     /**
+     * A layout for rendering shipping option radio buttons and their labels.
+     * @type Marionette.ItemView
+     */
+    var shippingOptionsSelectorView = Backbone.Marionette.ItemView.extend({
+      template: '#ShippingOptionSelectorTemplate',
+      templateHelpers: viewHelpers,
+      events: {
+        'change input[type="radio"]': function () {
+          EventBus.trigger('checkout.shippingOptionRadioChanged', this.model.get('selectAction'));
+        }
+      }
+    });
+
+    /**
+     * Rendered by ShippingOptionsCompositeView when there are no shipping options to be displayed.
+     * @type Marionette.ItemView
+     */
+    var shippingOptionsEmptyView = Marionette.ItemView.extend({
+      template: '#EmptyShippingOptionsTemplate',
+      templateHelpers: viewHelpers
+    });
+
+    /**
+     * Renders a heading and a list of shipping options.
+     * @type Marionette.CompositeView
+     */
+    var shippingOptionsCompositeView = Backbone.Marionette.CompositeView.extend({
+      template: '#ShippingOptionsTemplate',
+      templateHelpers: viewHelpers,
+      itemView: shippingOptionsSelectorView,
+      emptyView: shippingOptionsEmptyView,
+      itemViewContainer: '[data-region="shippingOptionSelectorsRegion"]'
+    });
+
+    /**
      * Default Cancel Checkout Action View, will render cancel checkout button.
      * @type Marionette.ItemView
      */
@@ -235,6 +270,7 @@ define(function (require) {
       CheckoutAddressSelectorLayout: checkoutAddressSelectorLayout,
       BillingAddressesCompositeView: billingAddressesCompositeView,
       ShippingAddressesCompositeView: shippingAddressesCompositeView,
+      ShippingOptionsCompositeView: shippingOptionsCompositeView,
       CancelCheckoutActionView: cancelCheckoutActionView,
       CheckoutSummaryView: checkoutSummaryView,
       CheckoutTaxTotalView: checkoutTaxTotalView,

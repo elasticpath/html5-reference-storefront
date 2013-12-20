@@ -7264,8 +7264,50 @@ fieldset[disabled] .btn-cancel-order {
 [data-region="billingAddressesRegion"] h2 {
   margin-top: 0;
 }
-[data-region="shippingAddressesRegion"] {
+.checkout-shipping-container {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.checkout-shipping-container:before,
+.checkout-shipping-container:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.checkout-shipping-container:after {
+  clear: both;
+}
+.checkout-shipping-container:before,
+.checkout-shipping-container:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.checkout-shipping-container:after {
+  clear: both;
+}
+.checkout-shipping-container [data-region="shippingAddressesRegion"] {
   margin-bottom: 3rem;
+}
+.checkout-shipping-container [data-region="shippingAddressesRegion"],
+.checkout-shipping-container [data-region="shippingOptionsRegion"] {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .checkout-shipping-container [data-region="shippingAddressesRegion"],
+  .checkout-shipping-container [data-region="shippingOptionsRegion"] {
+    float: left;
+    width: 50%;
+  }
 }
 .itemdetail-container {
   margin-top: 4rem;
