@@ -93,6 +93,14 @@
   }
 }
 
-[data-region="shippingAddressesRegion"] {
-  margin-bottom: 3rem;
+.checkout-shipping-container {
+  .make-row();
+
+  [data-region="shippingAddressesRegion"] {
+    margin-bottom: 3rem;
+  }
+  [data-region="shippingAddressesRegion"],
+  [data-region="shippingOptionsRegion"] {
+    .make-md-column(6);
+  }
 }
