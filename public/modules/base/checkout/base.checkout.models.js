@@ -64,7 +64,7 @@ define(function (require) {
           checkoutObj.billingAddresses = modelHelpers.sortAddresses(parsedBillingAddresses, "streetAddress");
 
           // Set a chosen billing address if there is not one set already
-          checkoutObj.billingAddresses = modelHelpers.setChosenAddress(checkoutObj.billingAddresses);
+          checkoutObj.billingAddresses = modelHelpers.setChosenEntity(checkoutObj.billingAddresses);
         }
 
         if (parsedShippingAddresses.length) {
@@ -72,14 +72,22 @@ define(function (require) {
           checkoutObj.shippingAddresses = modelHelpers.sortAddresses(parsedShippingAddresses, "streetAddress");
 
           // Set a chosen shipping address if there is not one set already
-          checkoutObj.shippingAddresses = modelHelpers.setChosenAddress(checkoutObj.shippingAddresses);
+          checkoutObj.shippingAddresses = modelHelpers.setChosenEntity(checkoutObj.shippingAddresses);
         }
 
         checkoutObj.summary = modelHelpers.parseCheckoutSummary(response);
 
-        checkoutObj.shippingOptions = modelHelpers.parseShippingOptions(response);
+        var parsedShippingOptions = modelHelpers.parseShippingOptions(response);
+
+        if (parsedShippingOptions.length) {
+            // Sort shipping options in ascending order by cost and then display name
+          checkoutObj.shippingOptions = modelHelpers.sortShippingOptions(parsedShippingOptions, "costAmount", "displayName");
+
+          // Set a chosen shipping option if there is not one set already
+          checkoutObj.shippingOptions = modelHelpers.setChosenEntity(checkoutObj.shippingOptions);
+        }
       } else {
-        ep.logger.error("Checkout model wasn't able to fetch valid data for parsing. ");
+        ep.logger.error("Checkout model wasn't able to fetch valid data for parsing.");
       }
 
       return checkoutObj;
@@ -104,12 +112,10 @@ define(function (require) {
      */
     parseCheckoutSummary: function (response) {
       var summary = {
-        totalQuantity: undefined,
         subTotal: {},
         taxTotal: {},
         taxes: [],
-        total: {},
-        submitOrderActionLink: undefined
+        total: {}
       };
 
       if (response) {
@@ -119,6 +125,11 @@ define(function (require) {
         var subTotal = jsonPath(response, '$._cart.._total..cost[0]')[0];
         if (subTotal) {
           summary.subTotal = modelHelpers.parsePrice(subTotal);
+        }
+
+        var shippingTotal = modelHelpers.getChosenShippingOption(response);
+        if (shippingTotal && _.has(shippingTotal, "cost")) {
+          summary.shippingTotal = modelHelpers.parsePrice(shippingTotal.cost[0]);
         }
 
         var taxTotal = jsonPath(response, '$._tax..total')[0];
@@ -141,6 +152,16 @@ define(function (require) {
     },
 
     /**
+     * Parses the chosen shipping option information from a given JSON object.
+     * Used to build the checkout summary object and the shipping options array.
+     * @param response A JSON object
+     * @returns {Object} An object representing the chosen shipping option
+     */
+    getChosenShippingOption: function (response) {
+      return jsonPath(response, '$.._shippingoptioninfo[0].._chosen.._description[0]')[0];
+    },
+
+    /**
      * Parse an individual shipping option object.
      * @param rawObject Raw shipping option JSON object
      * @returns {Object} Parsed shipping option object
@@ -151,7 +172,8 @@ define(function (require) {
       if (rawObject) {
         shippingOption = {
           carrier: jsonPath(rawObject, '$..carrier')[0],
-          cost: jsonPath(rawObject, '$..cost..display')[0],
+          costAmount: jsonPath(rawObject, '$..cost..amount')[0],
+          costDisplay: jsonPath(rawObject, '$..cost..display')[0],
           displayName: jsonPath(rawObject, '$..display-name')[0]
         };
       } else {
@@ -174,7 +196,7 @@ define(function (require) {
 
       if (response) {
 
-        var chosenShippingOption = jsonPath(response, '$.._shippingoptioninfo[0].._chosen.._description[0]')[0];
+        var chosenShippingOption = modelHelpers.getChosenShippingOption(response);
         var choiceShippingOptions = jsonPath(response, '$.._shippingoptioninfo[0].._choice')[0];
 
         if (chosenShippingOption) {
@@ -258,24 +280,24 @@ define(function (require) {
     },
 
     /**
-     * Searches an array of address objects looking for a 'chosen' property.
-     * If there is no 'chosen' address defined, designates the first address object in the array
-     * to be the chosen address by giving it a 'setAsDefaultChoice' property (the presence of this
+     * Searches an array of objects (addresses or shipping options)looking for a 'chosen' property.
+     * If there is no 'chosen' object defined, it designates the first object in the array to be
+     * the chosen object by giving it a 'setAsDefaultChoice' property (the presence of this
      * property will then trigger an update POST to Cortex in the checkout controller code).
      *
-     * @param addressesArray Array of (billing or shipping) addresses
-     * @returns {Array} Array of (billing or shipping) addresses with a chosen address
+     * @param objArray Array of objects (these could be billing/shipping addresses or shipping options)
+     * @returns {Array} Array of objects with a chosen object defined
      */
-    setChosenAddress: function(addressesArray) {
-      var chosenAddress = _.find(addressesArray, function(address) {
+    setChosenEntity: function(objArray) {
+      var chosenAddress = _.find(objArray, function(address) {
         return address.chosen;
       });
 
       if (!chosenAddress) {
-        _.extend(addressesArray[0], { setAsDefaultChoice: true });
+        _.extend(objArray[0], { setAsDefaultChoice: true });
       }
 
-      return addressesArray;
+      return objArray;
     },
 
     /**
@@ -299,8 +321,44 @@ define(function (require) {
       };
 
       return _.sortBy(addressArray, sortIterator, sortArgs);
-    }
+    },
 
+    /**
+     * Sorts an array of shipping option objects in ascending order by one or two shipping option object properties.
+     * The function uses Underscore's sortBy function and as this is a stable sort (maintains the order of items
+     * with the same sorting key), the optional secondary sort is carried out first.
+     * @param {Array} shippingOptionsArray The array of shipping option objects to sort.
+     * @param primarySortProperty The primary property to sort on.
+     * @param [secondarySortProperty] The optional secondary property to sort on.
+     * @returns {Array} Sorted array of shipping option objects.
+     */
+    sortShippingOptions: function(shippingOptionsArray, primarySortProperty, secondarySortProperty) {
+      var sortedShippingOptionsArray = shippingOptionsArray;
+
+      if (_.isArray(shippingOptionsArray) && shippingOptionsArray.length > 1) {
+        // Begin with the sort by secondary property
+        if (_.has(shippingOptionsArray[0], secondarySortProperty)) {
+          sortedShippingOptionsArray = _.sortBy(sortedShippingOptionsArray, function(shippingOption) {
+            // Convert string values to lowercase for case-insensitive sort
+            if (_.isString(shippingOption[secondarySortProperty])) {
+              return shippingOption[secondarySortProperty].toLowerCase();
+            }
+            return shippingOption[secondarySortProperty];
+          });
+        }
+        // Then sort by the primary property (the order of items with the same key will be maintained)
+        if (_.has(shippingOptionsArray[0], primarySortProperty)) {
+          sortedShippingOptionsArray = _.sortBy(sortedShippingOptionsArray, function(shippingOption) {
+            // Convert string values to lowercase for case-insensitive sort
+            if (_.isString(shippingOption[primarySortProperty])) {
+              return shippingOption[primarySortProperty].toLowerCase();
+            }
+            return shippingOption[primarySortProperty];
+          });
+        }
+      }
+      return sortedShippingOptionsArray;
+    }
   });
 
   return {
