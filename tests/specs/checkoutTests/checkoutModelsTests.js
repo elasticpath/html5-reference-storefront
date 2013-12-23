@@ -65,16 +65,17 @@ define(function (require) {
       it('has parsed a delivery type', function() {
         expect(this.model.deliveryType).to.eql("SHIPMENT");
       });
+      it('has parsed the shipping total', function() {
+        expect(this.model.summary.shippingTotal).to.not.eql({});
+      });
       it('parsed a billingAddresses object with the correct number of addresses', function () {
         expect(this.model.billingAddresses).to.be.not.eql([]);
         expect(this.model.billingAddresses.length).to.be.eql(this.numChosenBillingAddresses + this.numChoiceBillingAddresses);
       });
-
       it('parsed a shippingAddresses object with the correct number of addresses', function () {
         expect(this.model.shippingAddresses).to.be.not.eql([]);
         expect(this.model.billingAddresses.length).to.be.eql(this.numChosenShippingAddresses + this.numChoiceShippingAddresses);
       });
-
       it('parsed a shippingOptions object with the correct number of options', function() {
         expect(this.model.shippingOptions).to.be.not.eql([]);
         expect(this.model.shippingOptions.length).to.be.eql(this.numChosenShippingOptions + this.numChoiceShippingOptions);
@@ -164,8 +165,8 @@ define(function (require) {
     });
 
     describe('model helper functions', function() {
-      describe('setChosenAddress', function() {
-        describe('given an addresses array with a chosen address', function() {
+      describe('setChosenEntity', function() {
+        describe('given an billing addresses array with a chosen address', function() {
           before(function() {
             // The default checkout JSON data contains a chosen billing address
             this.parsedBillingAddresses = modelHelpers.parseCheckoutAddresses(data, "billingaddressinfo");
@@ -176,10 +177,10 @@ define(function (require) {
           });
 
           it('returns the addresses array unchanged', function() {
-            expect(modelHelpers.setChosenAddress(this.parsedBillingAddresses)).to.be.eql(this.parsedBillingAddresses);
+            expect(modelHelpers.setChosenEntity(this.parsedBillingAddresses)).to.be.eql(this.parsedBillingAddresses);
           });
         });
-        describe('given an addresses array without a chosen address', function() {
+        describe('given an billing addresses array without a chosen address', function() {
           before(function() {
             // Remove the chosen address object from (a deep copy of) the checkout test data
             this.rawData = JSON.parse(JSON.stringify(data));
@@ -188,7 +189,7 @@ define(function (require) {
             // A parsed addresses array without chosen address for comparison
             this.parsedBillingAddresses = modelHelpers.parseCheckoutAddresses(this.rawData, "billingaddressinfo");
 
-            this.parsedBillingAddressesWithDefault =  modelHelpers.setChosenAddress(
+            this.parsedBillingAddressesWithDefault =  modelHelpers.setChosenEntity(
               modelHelpers.parseCheckoutAddresses(this.rawData, "billingaddressinfo")
             );
           });
@@ -325,7 +326,60 @@ define(function (require) {
           });
         });
       });
+
+      describe('sortShippingOptions', function() {
+        describe('given an unordered array of shipping option objects and two sort properties', function() {
+          before(function() {
+            // Create an unordered array of shipping option objects
+            this.unorderedShippingOptions = [
+              {
+                "carrier": "Canada Post",
+                "costAmount": 15.55,
+                "costDisplay": "$15.55",
+                "displayName": "Canada Post Express",
+                "selectAction": "fakeAction"
+              },
+              {
+                "carrier": "Canada Post",
+                "costAmount": 2.78,
+                "costDisplay": "$2.78",
+                "displayName": "Canada Post Two Days",
+                "selectAction": "fakeAction"
+              },
+              {
+                "carrier": "Canada Post",
+                "costAmount": 2.78,
+                "costDisplay": "$2.78",
+                "displayName": "Canada Post Regular Parcel",
+                "selectAction": "fakeAction"
+              }
+            ];
+            this.sortedShippingOptions = modelHelpers.sortShippingOptions(this.unorderedShippingOptions, "costAmount", "displayName");
+          });
+          after(function() {
+            delete(this.unorderedShippingOptions);
+          });
+
+          it('returns a sorted array of shipping option objects', function() {
+            expect(this.sortedShippingOptions[0].displayName).to.be.eql("Canada Post Regular Parcel");
+            expect(this.sortedShippingOptions[1].displayName).to.be.eql("Canada Post Two Days");
+            expect(this.sortedShippingOptions[2].displayName).to.be.eql("Canada Post Express");
+          });
+
+          describe('given sort properties that do not exist', function() {
+            before(function() {
+              this.sortedShippingOptions = modelHelpers.sortShippingOptions(
+                this.unorderedShippingOptions,
+                "noSuchProperty",
+                "fakeProperty"
+              );
+            });
+            it('returns the original array of shipping option objects unchanged', function() {
+              expect(this.sortedShippingOptions).to.be.eql(this.unorderedShippingOptions);
+            });
+          });
+        });
+      });
     });
   });
-
 });
