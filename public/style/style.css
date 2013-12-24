@@ -7251,10 +7251,12 @@ fieldset[disabled] .btn-cancel-order {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.checkout-subtotal {
+.checkout-subtotal,
+.checkout-shipping {
   margin-bottom: 1.5rem;
 }
-.checkout-address-radio {
+.checkout-address-radio,
+.shipping-option-radio {
   vertical-align: top;
   margin-right: 1rem;
 }
@@ -7308,6 +7310,9 @@ fieldset[disabled] .btn-cancel-order {
     float: left;
     width: 50%;
   }
+}
+.checkout-shipping-container [data-region="shippingOptionsRegion"] span {
+  display: block;
 }
 .itemdetail-container {
   margin-top: 4rem;

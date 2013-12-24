@@ -41,9 +41,17 @@ define(function (require) {
           expect(this.view.checkoutTitleRegion).to.exist;
           expect(this.view.$el.find('[data-region="checkoutTitleRegion"]')).to.be.length(1);
         });
-        it('should have a billingAddressRegion region', function () {
+        it('should have a billingAddressesRegion region', function () {
           expect(this.view.billingAddressesRegion).to.exist;
           expect(this.view.$el.find('[data-region="billingAddressesRegion"]')).to.be.length(1);
+        });
+        it('should have a shippingAddressesRegion region', function () {
+          expect(this.view.shippingAddressesRegion).to.exist;
+          expect(this.view.$el.find('[data-region="shippingAddressesRegion"]')).to.be.length(1);
+        });
+        it('should have a shippingOptionsRegion region', function () {
+          expect(this.view.shippingOptionsRegion).to.exist;
+          expect(this.view.$el.find('[data-region="shippingOptionsRegion"]')).to.be.length(1);
         });
         it('should have a cancelCheckoutActionRegion region', function () {
           expect(this.view.cancelCheckoutActionRegion).to.exist;
@@ -90,7 +98,7 @@ define(function (require) {
         this.view.render();
       });
 
-      it('should be an instance of Marionette Layout object', function () {
+      it('should be an instance of Marionette CompositeView object', function () {
         expect(this.view).to.be.an.instanceOf(Marionette.CompositeView);
       });
       it('render() should return the view object', function () {
@@ -109,7 +117,7 @@ define(function (require) {
         this.view.render();
       });
 
-      it('should be an instance of Marionette Layout object', function () {
+      it('should be an instance of Marionette CompositeView object', function () {
         expect(this.view).to.be.an.instanceOf(Marionette.CompositeView);
       });
       it('render() should return the view object', function () {
