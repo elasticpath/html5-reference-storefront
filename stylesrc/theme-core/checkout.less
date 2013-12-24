@@ -76,11 +76,13 @@
   .btn;
 }
 
-.checkout-subtotal {
+.checkout-subtotal,
+.checkout-shipping {
   margin-bottom: 1.5rem;
 }
 
-.checkout-address-radio {
+.checkout-address-radio,
+.shipping-option-radio {
   vertical-align: top;
   margin-right: 1rem;
 }
@@ -102,5 +104,11 @@
   [data-region="shippingAddressesRegion"],
   [data-region="shippingOptionsRegion"] {
     .make-md-column(6);
+  }
+
+  [data-region="shippingOptionsRegion"] {
+    span {
+      display: block;
+    }
   }
 }

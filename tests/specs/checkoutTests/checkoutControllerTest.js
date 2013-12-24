@@ -83,7 +83,12 @@ define(function (require) {
         expect(this.view.$el.find('[data-region="shippingAddressSelectorsRegion"]')).to.have.length(1);
       });
 
-      describe("Given there is no tax data, billing addresses or shipping addresses", function() {
+      it('renders the ShippingOptionsCompositeView view', function() {
+        // There are shipping options in the fake JSON response, so this region should be rendered
+        expect(this.view.$el.find('[data-region="shippingOptionSelectorsRegion"]')).to.have.length(1);
+      });
+
+      describe("Given there is no tax data, billing addresses or shipping addresses/options", function() {
         // Fake a server response with missing data
         before(function (done) {
           $("#Fixtures").append(template); // append templates
@@ -92,10 +97,11 @@ define(function (require) {
           var fakeGetLink = "/integrator/orders/fakeUrl";
           var parsedFakeResponse = JSON.parse(dataJSON).response;
 
-          // Remove tax, billing address and shipping address data in the fake response JSON
+          // Remove tax, billing address, shipping address and shipping option data in the fake response JSON
           parsedFakeResponse._tax = [];
           parsedFakeResponse._billingaddressinfo = [];
           parsedFakeResponse._deliveries[0]._element[0]._destinationinfo = [];
+          parsedFakeResponse._deliveries[0]._element[0]._shippingoptioninfo = [];
 
           var fakeResponseStr = JSON.stringify(parsedFakeResponse);
 
@@ -140,9 +146,14 @@ define(function (require) {
           expect(this.view.$el.find('[data-el-value="checkout.noShippingAddressesMsg"]')).to.have.length(1);
         });
 
+        // If there are no shipping addresses, then we should not display the 'no shipping addresses' message
+        it('does not render the shippingOptionsEmptyView view', function() {
+          expect(this.view.$el.find('[data-el-value="checkout.noShippingOptionsMsg"]')).to.have.length(0);
+        });
+
       });
 
-      describe("Given there are no chosen billing or shipping addresses", function() {
+      describe("Given there are no chosen billing addresses, shipping addresses or shipping options", function() {
         // Fake a server response without tax data
         before(function (done) {
           $("#Fixtures").append(template); // append templates
@@ -150,12 +161,15 @@ define(function (require) {
           sinon.spy(EventBus, 'trigger');
           sinon.stub(ep.io, 'ajax');
 
-          var fakeGetLink = "/integrator/orders/fakeUrl";
-          var parsedFakeResponse = JSON.parse(dataJSON).response;
+          var fakeJSONData = _.clone(dataJSON);
 
-          // Remove any chosen attributes from the billing addresses in the test data
+          var fakeGetLink = "/integrator/orders/fakeUrl";
+          var parsedFakeResponse = JSON.parse(fakeJSONData).response;
+
+          // Remove any chosen attributes from the test data
           delete(parsedFakeResponse._billingaddressinfo[0]._selector[0]._chosen);
           delete(parsedFakeResponse._deliveries[0]._element[0]._destinationinfo[0]._selector[0]._chosen);
+          delete(parsedFakeResponse._deliveries[0]._element[0]._shippingoptioninfo[0]._selector[0]._chosen);
 
           this.fakeJSONResponse = parsedFakeResponse;
 
@@ -191,22 +205,43 @@ define(function (require) {
           ep.io.localStore.removeItem('oAuthToken');
           ep.io.sessionStore.removeItem('orderLink');
           this.server.restore();
+          delete(this.fakeJSONResponse);
         });
 
         it('triggers the checkout.updateChosenAddressRequest event to set a chosen billing address', function() {
-          var firstChoiceAddress = jsonPath(this.fakeJSONResponse, '$.._billingaddressinfo[0].._choice')[0][0];
-          var firstChoiceAddressSelectAction = jsonPath(firstChoiceAddress, '$..links[?(@.rel=="selectaction")].href')[0];
+          var firstChoiceBillingAddress = jsonPath(this.fakeJSONResponse, '$.._billingaddressinfo[0].._choice')[0][0];
+          var firstChoiceBillingAddressSelectAction =
+            jsonPath(firstChoiceBillingAddress, '$..links[?(@.rel=="selectaction")].href')[0];
 
           // Expect the event to be triggered with the selectAction of the first choice billing address
-          expect(EventBus.trigger).to.be.calledWith('checkout.updateChosenAddressRequest', firstChoiceAddressSelectAction);
+          expect(EventBus.trigger).to.be.calledWith(
+            'checkout.updateChosenAddressRequest',
+            firstChoiceBillingAddressSelectAction
+          );
         });
 
         it('triggers the checkout.updateChosenAddressRequest event to set a chosen shipping address', function() {
-          var firstChoiceAddress = jsonPath(this.fakeJSONResponse, '$.._deliveries[0].._choice')[0][0];
-          var firstChoiceAddressSelectAction = jsonPath(firstChoiceAddress, '$..links[?(@.rel=="selectaction")].href')[0];
+          var firstChoiceShippingAddress = jsonPath(this.fakeJSONResponse, '$.._deliveries[0].._choice')[0][0];
+          var firstChoiceShippingAddressSelectAction =
+            jsonPath(firstChoiceShippingAddress, '$..links[?(@.rel=="selectaction")].href')[0];
 
           // Expect the event to be triggered with the selectAction of the first choice shipping address
-          expect(EventBus.trigger).to.be.calledWith('checkout.updateChosenAddressRequest', firstChoiceAddressSelectAction);
+          expect(EventBus.trigger).to.be.calledWith(
+            'checkout.updateChosenAddressRequest',
+            firstChoiceShippingAddressSelectAction
+          );
+        });
+
+        it('triggers the checkout.updateChosenShippingOptionRequest event to set a chosen shipping option', function() {
+          var firstChoiceShippingOption = jsonPath(this.fakeJSONResponse, '$.._shippingoptioninfo[0].._choice')[0][0];
+          var firstChoiceShippingOptionSelectAction =
+            jsonPath(firstChoiceShippingOption, '$..links[?(@.rel=="selectaction")].href')[0];
+
+          // Expect the event to be triggered with the selectAction of the first choice billing address
+          expect(EventBus.trigger).to.be.calledWith(
+            'checkout.updateChosenShippingOptionRequest',
+            firstChoiceShippingOptionSelectAction
+          );
         });
 
       });

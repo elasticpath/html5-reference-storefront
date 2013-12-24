@@ -58,6 +58,15 @@ define(function (require) {
             );
           }
 
+          // If the model suggests we need to set a chosen shipping option, trigger a call to Cortex to formerly set it
+          // to allow the correct shipping cost calculations to be made.
+          if (checkoutModel.get('shippingOptions').length && checkoutModel.get('shippingOptions')[0].setAsDefaultChoice) {
+            EventBus.trigger(
+              'checkout.updateChosenShippingOptionRequest',
+              checkoutModel.get('shippingOptions')[0].selectAction
+            );
+          }
+
           checkoutLayout.checkoutTitleRegion.show(new View.CheckoutTitleView());
 
           checkoutLayout.billingAddressesRegion.show(
@@ -67,12 +76,20 @@ define(function (require) {
           );
 
           // Only show if the cart contains physical items requiring shipment
-          if(checkoutModel.get('deliveryType') === "SHIPMENT") {
+          if (checkoutModel.get('deliveryType') === "SHIPMENT") {
             checkoutLayout.shippingAddressesRegion.show(
               new View.ShippingAddressesCompositeView({
                 collection: new Backbone.Collection(checkoutModel.get('shippingAddresses'))
               })
             );
+            // Only populate the shipping options region if there is at least one shipping address
+            if (checkoutModel.get('shippingAddresses').length > 0) {
+              checkoutLayout.shippingOptionsRegion.show(
+                new View.ShippingOptionsCompositeView({
+                  collection: new Backbone.Collection(checkoutModel.get('shippingOptions'))
+                })
+              );
+            }
           }
 
           checkoutLayout.cancelCheckoutActionRegion.show(new View.CancelCheckoutActionView());
@@ -82,7 +99,9 @@ define(function (require) {
           });
 
           checkoutSummaryView.on('show', function() {
-            if (checkoutModel.get('summary').taxes.length > 0) {
+            // Only show taxes summary if tax amount is greater than zero
+            if ( (checkoutModel.get('summary').taxes.length) &&
+                 (checkoutModel.get('summary').taxes[0].amount > 0) ) {
               checkoutSummaryView.checkoutTaxTotalRegion.show(
                 new View.CheckoutTaxTotalView({
                   model: new Backbone.Model(checkoutModel.get('summary').taxTotal)
@@ -93,6 +112,14 @@ define(function (require) {
                   collection: new Backbone.Collection(checkoutModel.get('summary').taxes)
                 })
               );
+            }
+            // If there are shipping costs, show them in the checkout summary
+            if (checkoutModel.get('summary').shippingTotal) {
+                checkoutSummaryView.checkoutShippingTotalRegion.show(
+                  new View.CheckoutShippingTotalView({
+                    model: new Backbone.Model(checkoutModel.get('summary').shippingTotal)
+                  })
+                );
             }
           });
 
@@ -248,6 +275,54 @@ define(function (require) {
      */
     EventBus.on('checkout.updateChosenAddressSuccess', function() {
       Backbone.history.loadUrl();
+    });
+
+    /**
+     * Handler for the checkout.shippingOptionRadioChanged event.
+     */
+    EventBus.on('checkout.shippingOptionRadioChanged', function(actionLink) {
+      EventBus.trigger('checkout.updateChosenShippingOptionRequest', actionLink);
+    });
+
+    EventBus.on('checkout.updateChosenShippingOptionRequest', function(actionLink) {
+      if (actionLink) {
+        var ajaxModel = new ep.io.defaultAjaxModel({
+          type: 'POST',
+          url: actionLink,
+          success: function() {
+            EventBus.trigger('checkout.updateChosenShippingOptionSuccess');
+          },
+          customErrorFn: function() {
+            EventBus.trigger('checkout.updateChosenShippingOptionFailed');
+          }
+        });
+
+        ep.io.ajax(ajaxModel.toJSON());
+      }
+    });
+
+    /**
+     * Listening to the event fired on successful update of the chosen shipping option.
+     * Triggers a page reload to update the shipping cost and total data in checkout summary.
+     */
+    EventBus.on('checkout.updateChosenShippingOptionSuccess', function() {
+      Backbone.history.loadUrl();
+    });
+
+    /**
+     * Listening to the event fired when the update of a chosen (billing or shipping) address fails.
+     * Displays a toast error message.
+     */
+    EventBus.on('checkout.updateChosenShippingOptionFailed', function(response) {
+      ep.logger.error('error updating selected shipping option: ' + response);
+
+      // Display sticky error message
+      $().toastmessage('showToast', {
+        text: i18n.t('checkout.updateChosenShippingOptionErrMsg'),
+        sticky: true,
+        position: 'middle-center',
+        type: 'error'
+      });
     });
 
     return {

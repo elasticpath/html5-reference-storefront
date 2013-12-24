@@ -74,13 +74,14 @@ define(function (require) {
         checkoutTitleRegion: '[data-region="checkoutTitleRegion"]',
         billingAddressesRegion: '[data-region="billingAddressesRegion"]',
         shippingAddressesRegion: '[data-region="shippingAddressesRegion"]',
+        shippingOptionsRegion: '[data-region="shippingOptionsRegion"]',
         cancelCheckoutActionRegion: '[data-region="cancelCheckoutActionRegion"]',
         checkoutOrderRegion: '[data-region="checkoutOrderRegion"]'
       }
     });
 
     /**
-     * Default Checkout Title View, will render checkout page title.
+     * Renders the checkout page title.
      * @type Marionette.ItemView
      */
     var checkoutTitleView = Marionette.ItemView.extend({
@@ -205,7 +206,7 @@ define(function (require) {
     });
 
     /**
-     * Default Cancel Checkout Action View, will render cancel checkout button.
+     * Renders a cancel checkout button.
      * @type Marionette.ItemView
      */
     var cancelCheckoutActionView = Marionette.ItemView.extend({
@@ -219,6 +220,16 @@ define(function (require) {
     });
 
     /**
+     * Renders the shipping total (used in the checkout summary view)
+     * @type Marionette.ItemView
+     */
+    var checkoutShippingTotalView = Marionette.ItemView.extend({
+      template: '#CheckoutShippingTotalTemplate',
+      className: 'checkout-shipping-total',
+      templateHelpers: viewHelpers
+    });
+
+    /**
      * Default Checkout Tax View, will render a tax.
      * @type Marionette.ItemView
      */
@@ -229,6 +240,10 @@ define(function (require) {
       templateHelpers: viewHelpers
     });
 
+    /**
+     * Renders the tax total (used in the checkout summary view)
+     * @type Marionette.ItemView
+     */
     var checkoutTaxTotalView = Marionette.ItemView.extend({
       template: "#CheckoutTaxTotalTemplate",
       className: 'checkout-tax-total',
@@ -236,7 +251,7 @@ define(function (require) {
     });
 
     /**
-     * Default Checkout Taxes Collection View, will render a collection of taxes
+     * Renders a collection of taxes.
      * @type Marionette.CollectionView
      */
     var checkoutTaxesCollectionView = Marionette.CollectionView.extend({
@@ -254,6 +269,7 @@ define(function (require) {
       className: 'checkout-sidebar-inner',
       templateHelpers: viewHelpers,
       regions: {
+        checkoutShippingTotalRegion: '[data-region="checkoutShippingTotalRegion"]',
         checkoutTaxTotalRegion: '[data-region="checkoutTaxTotalRegion"]',
         checkoutTaxBreakDownRegion: '[data-region="checkoutTaxBreakDownRegion"]'
       },
@@ -273,6 +289,7 @@ define(function (require) {
       ShippingOptionsCompositeView: shippingOptionsCompositeView,
       CancelCheckoutActionView: cancelCheckoutActionView,
       CheckoutSummaryView: checkoutSummaryView,
+      CheckoutShippingTotalView: checkoutShippingTotalView,
       CheckoutTaxTotalView: checkoutTaxTotalView,
       CheckoutTaxesCollectionView: checkoutTaxesCollectionView,
       setCheckoutButtonProcessing: setCheckoutButtonProcessing,
