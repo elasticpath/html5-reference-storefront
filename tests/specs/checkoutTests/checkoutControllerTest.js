@@ -154,7 +154,7 @@ define(function (require) {
       });
 
       describe("Given there are no chosen billing addresses, shipping addresses or shipping options", function() {
-        // Fake a server response without tax data
+        // Fake a server response without chosen address and shipping entities
         before(function (done) {
           $("#Fixtures").append(template); // append templates
 
@@ -237,13 +237,71 @@ define(function (require) {
           var firstChoiceShippingOptionSelectAction =
             jsonPath(firstChoiceShippingOption, '$..links[?(@.rel=="selectaction")].href')[0];
 
-          // Expect the event to be triggered with the selectAction of the first choice billing address
+          // Expect the event to be triggered with the selectAction of the first choice shipping option
           expect(EventBus.trigger).to.be.calledWith(
             'checkout.updateChosenShippingOptionRequest',
             firstChoiceShippingOptionSelectAction
           );
         });
 
+      });
+
+      describe("Given there are no physical items requiring shipment in the cart", function() {
+        // Fake a server response without a deliveryType of "SHIPMENT"
+        before(function (done) {
+          $("#Fixtures").append(template); // append templates
+
+          sinon.spy(EventBus, 'trigger');
+          sinon.stub(ep.io, 'ajax');
+
+          var fakeJSONData = _.clone(dataJSON);
+
+          var fakeGetLink = "/integrator/orders/fakeUrl";
+          var parsedFakeResponse = JSON.parse(fakeJSONData).response;
+
+          // Remove the deliveryType attribute
+          delete(parsedFakeResponse._deliveries[0]._element[0]['delivery-type']);
+
+          var fakeResponseStr = JSON.stringify(parsedFakeResponse);
+
+          ep.io.localStore.setItem('oAuthToken', 'fakeToken');
+
+          var server = sinon.fakeServer.create();
+          server.autoRespond = true;
+
+          server.respondWith(
+            "GET", fakeGetLink + JSON.parse(dataJSON).zoom,
+            [200, {"Content-Type":"application/json"}, fakeResponseStr]
+          );
+
+          ep.io.sessionStore.setItem('orderLink', fakeGetLink);
+
+          this.view = new controller.DefaultView();
+
+          this.view.render();
+
+          // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
+          this.view.checkoutOrderRegion.on('show', function() {
+            done();
+          });
+
+        });
+
+        after(function () {
+          $("#Fixtures").empty();
+          EventBus.trigger.restore();
+          ep.io.ajax.restore();
+          ep.io.localStore.removeItem('oAuthToken');
+          ep.io.sessionStore.removeItem('orderLink');
+          this.server.restore();
+        });
+
+        it("does not show shipping addresses or shipping options", function() {
+          // The shipping addresses region from the checkout summary template is not populated
+          expect(this.view.$el.find('[data-region="shippingAddressesRegion"]').children().length).to.be.eql(0);
+          // The shipping options region from the checkout summary template is not populated
+          expect(this.view.$el.find('[data-region="shippingOptionsRegion"]').children().length).to.be.eql(0);
+        });
       });
     });
 
