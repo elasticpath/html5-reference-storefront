@@ -4,188 +4,110 @@
  * Functional Storefront Unit Test - Profile Models
  */
 define(function (require) {
+  var profileModels = require('profile.models');
+  var dataJSON = require('text!/tests/data/profile.json');
 
   describe('Profile Module: Models', function () {
-    var profileModels = require('profile.models');
-    it("should exist", function () {
-      expect(profileModels.ProfileModel).to.exist;
-    });
+    var data = JSON.parse(dataJSON).response;
+    var profileModel = new profileModels.ProfileModel();
 
-    describe('Model should parse data correctly', function () {
-      var profileModel = new profileModels.ProfileModel();
+    describe('Given complete and valid profile data', function () {
+      before(function() {
+        this.rawData = _.clone(data);
+        this.model = profileModel.parse(this.rawData);
+        this.subscription = this.model.subscriptions[0];
+        this.secondAddress = this.model.addresses[1];
+      });
 
-      describe('profile should parse basic information correctly', function () {
-        before(function() {
-          var rawData = {
-            "family-name": "boxer",
-            "given-name": "ben"
-          };
+      after(function() {
+        delete(this.model);
+        delete(this.subscription);
+      });
 
-          this.model = profileModel.parse(rawData);
-        });
-
+      describe('Model should parse personal data correctly', function () {
         it("must have a family name", function () {
-          expect(this.model.familyName).to.be.string('boxer');
+          expect(this.model.familyName).to.be.string('Harris');
         });
         it("must have a given name", function () {
-          expect(this.model.givenName).to.be.string('ben');
+          expect(this.model.givenName).to.be.string('Oliver');
         });
       });
 
-      describe('profile should parse subscriptions correctly', function () {
-        var rawData = {
-          "_subscriptions": [
-            {
-              "_element": [
-                {
-                  "display-name": "Subscription Plan",
-                  "next-billing-date": {
-                    "display-value": "December 18, 2013",
-                    "value": 1387324800000
-                  },
-                  "quantity": 1,
-                  "status": "ACTIVE"
-                }
-              ]
-            }
-          ]
-        };
-        var parsedModel = profileModel.parse(rawData);
-
+      describe('Model should parse subscription data correctly', function () {
         it("should have a subscription array", function () {
-          expect(parsedModel.subscriptions).to.be.an.instanceOf(Array);
+          expect(this.model.subscriptions).to.be.an.instanceOf(Array);
         });
-        it("this model should have 1 subscription", function () {
-          expect(parsedModel.subscriptions).to.have.length(1);
-        });
-
-        var subscription = parsedModel.subscriptions[0];
-        it("the subscription should have display name", function () {
-          expect(subscription.displayName).to.be.string('Subscription Plan');
-        });
-        it("the subscription should have quantity", function () {
-          expect(subscription.quantity).to.equal(1);
-        });
-        it("the subscription should have next billing date", function () {
-          expect(subscription.nextBillingDate).to.be.string('December 18, 2013');
-        });
-        it("the subscription should have status", function () {
-          expect(subscription.status).to.be.string('ACTIVE');
+        it("should have 1 subscription", function () {
+          expect(this.model.subscriptions).to.have.length(1);
         });
 
-      });
-
-      describe('profile could have no subscription', function() {
-        var rawData = { };
-        var parsedModel = profileModel.parse(rawData);
-
-        it("model should still have an subscription array", function () {
-          expect(parsedModel.subscriptions).to.be.an.instanceOf(Array);
+        it("should have display name", function () {
+          expect(this.subscription.displayName).to.be.string('iTest Master Plan CAD');
         });
-        it("model should have 0 subscription", function () {
-          expect(parsedModel.subscriptions).to.have.length(0);
+        it("should have quantity", function () {
+          expect(this.subscription.quantity).to.equal(1);
+        });
+        it("should have next billing date", function () {
+          expect(this.subscription.nextBillingDate).to.be.string('November 9, 2013');
+        });
+        it("should have status", function () {
+          expect(this.subscription.status).to.be.string('ACTIVE');
         });
       });
 
-      describe('profile should parse addresses correctly', function () {
-        var rawData = {
-          "_addresses": [
-            {
-              "_element": [
-                {
-                  "address": {
-                    "country-name": "CA",
-                    "extended-address": "Siffon Ville",
-                    "locality": "St. Helens",
-                    "postal-code": "v8v8v8",
-                    "region": "MB",
-                    "street-address": "1234 HappyVille Road"
-                  },
-                  "name": {
-                    "family-name": "boxer",
-                    "given-name": "ben"
-                  }
-                }
-              ]
-            }
-          ]
-        };
-
-        describe('addresses', function() {
-          before(function() {
-            this.model = profileModel.parse(rawData);
-          });
-
-          after(function() {
-            // unset the model for next test
-            this.model = undefined;
-          });
-
-          it("should be an array", function () {
-            expect(this.model.addresses).to.be.an.instanceOf(Array);
-          });
-          it("this model should have 1 address", function () {
-            expect(this.model.addresses).to.have.length(1);
-          });
+      describe('Model should parse address data correctly', function() {
+        it("should be an array of 3 addresses", function () {
+          expect(this.model.addresses).to.be.an.instanceOf(Array);
+          expect(this.model.addresses).to.have.length(3);
         });
 
-        describe('no addresses returned', function() {
-          before(function() {
-            this.model = profileModel.parse({ /*no address data */ });
-          });
-
-          after(function() {
-            // unset the model for next test
-            this.model = undefined;
-          });
-
-          it("model should still have an address array", function () {
-            expect(this.model.addresses).to.be.an.instanceOf(Array);
-          });
-          it("model should have 0 subscription", function () {
-            expect(this.model.addresses).to.have.length(0);
-          });
-        });
-
-        describe('an address with all fields', function() {
-          before(function(){
-            var parsedModel = profileModel.parse(rawData);
-            this.model = parsedModel.addresses[0];
-          });
-
-          after(function() {
-            // unset the model for next test
-            this.model = undefined;
-          });
-
+        describe('The second address should be completely populated', function() {
           it("should have given name", function () {
-            expect(this.model.givenName).to.be.string('ben');
+            expect(this.secondAddress.givenName).to.be.string('Karen');
           });
           it("should have family name", function () {
-            expect(this.model.familyName).to.be.string('boxer');
+            expect(this.secondAddress.familyName).to.be.string('Harris');
           });
           it("should have street address", function () {
-            expect(this.model.streetAddress).to.be.string('1234 HappyVille Road');
+            expect(this.secondAddress.streetAddress).to.be.string('#1999 12 floor');
           });
           it("should have extended address", function () {
-            expect(this.model.extendedAddress).to.be.string('Siffon Ville');
+            expect(this.secondAddress.extendedAddress).to.be.string('100 City Centre Drive');
           });
           it("should have city", function () {
-            expect(this.model.city).to.be.string('St. Helens');
+            expect(this.secondAddress.city).to.be.string('Mississauga');
           });
           it("should have region", function () {
-            expect(this.model.region).to.be.string('MB');
+            expect(this.secondAddress.region).to.be.string('ON');
           });
           it("should have country", function () {
-            expect(this.model.country).to.be.string('CA');
+            expect(this.secondAddress.country).to.be.string('CA');
           });
           it("should have postal code", function () {
-            expect(this.model.postalCode).to.be.string('v8v8v8');
+            expect(this.secondAddress.postalCode).to.be.string('L5C 2B9');
           });
         });
       });
+    });
 
+    describe('Given profile data without a subscription or an address', function() {
+      before(function() {
+        this.model = profileModel.parse({});
+      });
+
+      after(function() {
+        delete(this.model);
+      });
+
+      it("should have an empty subscription array", function () {
+        expect(this.model.subscriptions).to.be.an.instanceOf(Array);
+        expect(this.model.subscriptions).to.have.length(0);
+      });
+
+      it("should have an empty address array", function () {
+        expect(this.model.addresses).to.be.an.instanceOf(Array);
+        expect(this.model.addresses).to.have.length(0);
+      });
     });
   });
-
 });

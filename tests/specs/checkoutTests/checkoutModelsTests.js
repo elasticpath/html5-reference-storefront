@@ -17,7 +17,6 @@ define(function (require) {
       before(function () {
         this.rawData = _.extend({}, data);
         this.model = checkoutModel.parse(this.rawData);
-        this.model = checkoutModel.parse(this.rawData);
 
         // Get a count of the number of choice and chosen addresses in the rawData JSON
         this.numChosenBillingAddresses = 0;

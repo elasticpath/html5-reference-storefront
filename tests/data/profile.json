@@ -1,87 +1,572 @@
 {
-  "_addresses": [
-    {
-      "_element": [
-        {
-          "address": {
-            "country-name": "CA",
-            "extended-address": "Siffon Ville",
-            "locality": "St. Helens",
-            "postal-code": "v8v8v8",
-            "region": "MB",
-            "street-address": "1234 HappyVille Road"
-          },
-          "name": {
-            "family-name": "boxer",
-            "given-name": "ben"
-          }
-        },
-        {
-          "address": {
-            "country-name": "US",
-            "extended-address": "110 Liberty Street",
-            "locality": "New York",
-            "postal-code": "NY 10006",
-            "region": "NY",
-            "street-address": "Hoyip Chinese Restaurant"
-          },
-          "name": {
-            "family-name": "boxer",
-            "given-name": "ben"
-          }
-        }
-      ]
-    }
-  ],
-  "_purchases": [
-    {
-      "_element": [
-        {
-          "monetary-total": [
-            {
-              "amount": 5.19,
-              "currency": "CAD",
-              "display": "$5.19"
+  "zoom" : "?zoom=purchases:element,paymentmethods:element,subscriptions:element,emails,addresses:element",
+  "retrievedOn" : "Dec 31, 2013",
+  "retrievedCriteria": "a registered user with 3 addresses, tokenized payment methods and an active subscription",
+  "response" : {
+    "links": [
+      {
+        "type": "application\/vnd.elasticpath.links",
+        "rel": "subscriptions",
+        "href": "http:\/\/localhost:3007\/integrator\/subscriptions\/telcooperative",
+        "uri": "\/subscriptions\/telcooperative"
+      },
+      {
+        "type": "application\/vnd.elasticpath.links",
+        "rel": "purchases",
+        "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative",
+        "uri": "\/purchases\/telcooperative"
+      },
+      {
+        "type": "application\/vnd.elasticpath.links",
+        "rel": "addresses",
+        "rev": "profile",
+        "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses",
+        "uri": "\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses"
+      },
+      {
+        "type": "application\/vnd.elasticpath.links",
+        "rel": "paymentmethods",
+        "rev": "profile",
+        "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative",
+        "uri": "\/paymentmethods\/telcooperative"
+      },
+      {
+        "type": "application\/vnd.elasticpath.links",
+        "rel": "emails",
+        "rev": "profile",
+        "href": "http:\/\/localhost:3007\/integrator\/emails\/telcooperative",
+        "uri": "\/emails\/telcooperative"
+      }
+    ],
+    "self": {
+      "type": "application\/vnd.elasticpath.profile",
+      "uri": "\/profiles\/telcooperative\/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2onecw3zzlfxe2tcgpbsem3rppbndgq3emfwvg3dck44wswsxlbqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvcpi?zoom=addresses:element,emails,paymentmethods:element,purchases:element,subscriptions:element",
+      "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/m43ggmcpkrktitl2ieztez2bnnhguzcgjvvgo52rkvgxitrqku2e42jqpjgwwrl2jrkfknkrnjexittkiv3ve22zpfitarl2j5cverlrgbwe6vshijkfgvlem5jtavs2onecw3zzlfxe2tcgpbsem3rppbndgq3emfwvg3dck44wswsxlbqucq2rgjhdavlzj5ceeqsrpeydgusum4zeyvcnpfivitlujzkgyq2nneydetkuijdve2skirivitjukjcvcpi?zoom=addresses:element,emails,paymentmethods:element,purchases:element,subscriptions:element",
+      "max-age": 0
+    },
+    "_addresses": [
+      {
+        "_element": [
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.profile",
+                "rel": "profile",
+                "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/default",
+                "uri": "\/profiles\/telcooperative\/default"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses",
+                "uri": "\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.address",
+              "uri": "\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses\/m5yxissunrjgovjqnrefsrluizlwerdknrgsw2cbgbrwkqs2hbjwesc2gfau2ssmobltc5sznvlgymthifvu26thgnhui2zsj5kgw5conjixst2dga2e22sci5gfkrjtkjvvs5conjetkt2fjzce2rcwi5hdasjt",
+              "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses\/m5yxissunrjgovjqnrefsrluizlwerdknrgsw2cbgbrwkqs2hbjwesc2gfau2ssmobltc5sznvlgymthifvu26thgnhui2zsj5kgw5conjixst2dga2e22sci5gfkrjtkjvvs5conjetkt2fjzce2rcwi5hdasjt",
+              "max-age": 0
+            },
+            "address": {
+              "country-name": "CA",
+              "locality": "Vancouver",
+              "postal-code": "V8C1N1",
+              "region": "BC",
+              "street-address": "5833 Movaat St."
+            },
+            "name": {
+              "family-name": "Harris",
+              "given-name": "Oliver"
             }
-          ],
-          "purchase-date": {
-            "display-value": "October 28, 2013 8:43:04 PM",
-            "value": 1382992984000
           },
-          "purchase-number": "20061",
-          "status": "COMPLETED",
-          "tax-total": {
-            "amount": 0.2,
-            "currency": "CAD",
-            "display": "$0.20"
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.profile",
+                "rel": "profile",
+                "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/default",
+                "uri": "\/profiles\/telcooperative\/default"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses",
+                "uri": "\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.address",
+              "uri": "\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses\/m5yxissunrjgovjqnrefsrluizlweqsumnyvercki5gw2qruivsesmsknfus63ckobltc5sznvlgymthifvvevcngbhguwsgkfvvc5cnnnktktstgfdfe22wingfkwlzjvvgo5cnirseeusukv4e222rgvgukusf",
+              "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses\/m5yxissunrjgovjqnrefsrluizlweqsumnyvercki5gw2qruivsesmsknfus63ckobltc5sznvlgymthifvvevcngbhguwsgkfvvc5cnnnktktstgfdfe22wingfkwlzjvvgo5cnirseeusukv4e222rgvgukusf",
+              "max-age": 0
+            },
+            "address": {
+              "country-name": "CA",
+              "extended-address": "100 City Centre Drive",
+              "locality": "Mississauga",
+              "postal-code": "L5C 2B9",
+              "region": "ON",
+              "street-address": "#1999 12 floor"
+            },
+            "name": {
+              "family-name": "Harris",
+              "given-name": "Karen"
+            }
+          },
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.profile",
+                "rel": "profile",
+                "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/default",
+                "uri": "\/profiles\/telcooperative\/default"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses",
+                "uri": "\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.address",
+              "uri": "\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses\/m5yxissunrjgovjqnrefsrluizlweq2snm3e42cqhexxaqkfk5juywrxnziuemjwobltc5sznvlgymthifvu2rdlgbhfkwlyjuyes5crpjbegttjgfcfc6tmijgfkvjqjvkgg5cnpjtxsusfjuyve2tlo5jeizcc",
+              "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf\/addresses\/m5yxissunrjgovjqnrefsrluizlweq2snm3e42cqhexxaqkfk5juywrxnziuemjwobltc5sznvlgymthifvu2rdlgbhfkwlyjuyes5crpjbegttjgfcfc6tmijgfkvjqjvkgg5cnpjtxsusfjuyve2tlo5jeizcc",
+              "max-age": 0
+            },
+            "address": {
+              "country-name": "CA",
+              "extended-address": "3910 Villy Rd.",
+              "locality": "Vancouver",
+              "postal-code": "V9C H2A",
+              "region": "BC",
+              "street-address": "Rm 1022 Tower 3"
+            },
+            "name": {
+              "family-name": "Harris",
+              "given-name": "Oliver"
+            }
           }
-        },
-        {
-          "purchase-date": {
-            "display-value": "October 10, 2013 8:58:50 PM",
-            "value": 1381438730357
+        ]
+      }
+    ],
+    "_emails": [
+      {
+        "links": [
+          {
+            "type": "application\/vnd.elasticpath.email",
+            "rel": "element",
+            "rev": "list",
+            "href": "http:\/\/localhost:3007\/integrator\/emails\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweq3qnmyeur2kgyztg4soozefu3cuorkhsmjuobltc5sznvlgy5sxhfzwcwc2nrrwsnlplfmeu6lblbhecwsxpbuggm2sobmtgqtimrdwo5kzgi4xi",
+            "uri": "\/emails\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweq3qnmyeur2kgyztg4soozefu3cuorkhsmjuobltc5sznvlgy5sxhfzwcwc2nrrwsnlplfmeu6lblbhecwsxpbuggm2sobmtgqtimrdwo5kzgi4xi"
           },
-          "purchase-number": "",
-          "status": "COMPLETED"
-        }
-      ]
-    }
-  ],
-  "_subscriptions": [
-    {
-      "_element": [
-        {
-          "display-name": "EP Master Multiple Currency Plan",
-          "next-billing-date": {
-            "display-value": "December 18, 2013",
-            "value": 1387324800000
+          {
+            "type": "application\/vnd.elasticpath.email",
+            "rel": "emailform",
+            "href": "http:\/\/localhost:3007\/integrator\/emails\/telcooperative\/form",
+            "uri": "\/emails\/telcooperative\/form"
           },
-          "quantity": 1,
-          "status": "ACTIVE"
+          {
+            "type": "application\/vnd.elasticpath.profile",
+            "rel": "profile",
+            "rev": "emails",
+            "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/default",
+            "uri": "\/profiles\/telcooperative\/default"
+          }
+        ],
+        "self": {
+          "type": "application\/vnd.elasticpath.links",
+          "uri": "\/emails\/telcooperative",
+          "href": "http:\/\/localhost:3007\/integrator\/emails\/telcooperative",
+          "max-age": 0
         }
-      ]
-    }
-  ],
-  "family-name": "boxer",
-  "given-name": "ben"
+      }
+    ],
+    "_paymentmethods": [
+      {
+        "_element": [
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.profile",
+                "rel": "profile",
+                "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf",
+                "uri": "\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative",
+                "uri": "\/paymentmethods\/telcooperative"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.paymenttoken",
+              "uri": "\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqkllbthgn3siy2wsyzwhbkvgucmkq2xs42gobltc5sznvlgy4dkjf3u2rcjo5gucpj5",
+              "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqkllbthgn3siy2wsyzwhbkvgucmkq2xs42gobltc5sznvlgy4dkjf3u2rcjo5gucpj5",
+              "max-age": 0
+            },
+            "display-value": "**** **** **** 1234"
+          },
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.profile",
+                "rel": "profile",
+                "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf",
+                "uri": "\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative",
+                "uri": "\/paymentmethods\/telcooperative"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.paymenttoken",
+              "uri": "\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqsxnzatarstpfmhc6bpjbrfuwl2iqywe2srobltc5sznvlgy4dkjf3u2rcjo5gvcpj5",
+              "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqsxnzatarstpfmhc6bpjbrfuwl2iqywe2srobltc5sznvlgy4dkjf3u2rcjo5gvcpj5",
+              "max-age": 0
+            },
+            "display-value": "**** **** **** 9876"
+          },
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.profile",
+                "rel": "profile",
+                "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf",
+                "uri": "\/profiles\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative",
+                "uri": "\/paymentmethods\/telcooperative"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.paymenttoken",
+              "uri": "\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweq2ji5ato232grce4njvk5mxmskpizguu3l2obltc5sznvlgy4dkjf3u2rcjo5gwopj5",
+              "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweq2ji5ato232grce4njvk5mxmskpizguu3l2obltc5sznvlgy4dkjf3u2rcjo5gwopj5",
+              "max-age": 0
+            },
+            "display-value": "**** **** **** 5555"
+          },
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.profile",
+                "rel": "profile",
+                "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/default",
+                "uri": "\/profiles\/telcooperative\/default"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative",
+                "uri": "\/paymentmethods\/telcooperative"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.paymentmethod.creditcard",
+              "uri": "\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtmpbtvkuljgq4hurkulfgesntig5mdi6cwobltc5sznvlgy4dkjf3u2rcbgfgucpj5",
+              "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtmpbtvkuljgq4hurkulfgesntig5mdi6cwobltc5sznvlgy4dkjf3u2rcbgfgucpj5",
+              "max-age": 0
+            },
+            "card-number": "************1111",
+            "card-type": "Visa",
+            "cardholder-name": "Oliver M Harris",
+            "expiry-month": "10",
+            "expiry-year": "2013"
+          },
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.profile",
+                "rel": "profile",
+                "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/default",
+                "uri": "\/profiles\/telcooperative\/default"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative",
+                "uri": "\/paymentmethods\/telcooperative"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.paymentmethod.creditcard",
+              "uri": "\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtdhfmtiylooyzwy5kqf4ygm4tzne4fkzk2obltc5sznvlgy4dkjf3u2rcbgfgvcpj5",
+              "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqtdhfmtiylooyzwy5kqf4ygm4tzne4fkzk2obltc5sznvlgy4dkjf3u2rcbgfgvcpj5",
+              "max-age": 0
+            },
+            "card-number": "***********0009",
+            "card-type": "American Express",
+            "cardholder-name": "Oliver M Harris",
+            "expiry-month": "5",
+            "expiry-year": "2013"
+          },
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.profile",
+                "rel": "profile",
+                "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/default",
+                "uri": "\/profiles\/telcooperative\/default"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative",
+                "uri": "\/paymentmethods\/telcooperative"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.paymentmethod.creditcard",
+              "uri": "\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwerdgne3dsr2qom3tgtbziyxtardikncxgukpobltc5sznvlgy4dkjf3u2rcbgfgwopj5",
+              "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwerdgne3dsr2qom3tgtbziyxtardikncxgukpobltc5sznvlgy4dkjf3u2rcbgfgwopj5",
+              "max-age": 0
+            },
+            "card-number": "************0004",
+            "card-type": "MasterCard",
+            "cardholder-name": "Oliver Harris",
+            "expiry-month": "4",
+            "expiry-year": "2012"
+          },
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.profile",
+                "rel": "profile",
+                "href": "http:\/\/localhost:3007\/integrator\/profiles\/telcooperative\/default",
+                "uri": "\/profiles\/telcooperative\/default"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative",
+                "uri": "\/paymentmethods\/telcooperative"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.paymentmethod.creditcard",
+              "uri": "\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqrsfmydc4ttn5rus53ogjfxcrtsijre643cobltc5sznvlgy4dkjf3u2rcbgfgxopj5",
+              "href": "http:\/\/localhost:3007\/integrator\/paymentmethods\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweqrsfmydc4ttn5rus53ogjfxcrtsijre643cobltc5sznvlgy4dkjf3u2rcbgfgxopj5",
+              "max-age": 0
+            },
+            "card-number": "************1111",
+            "card-type": "Visa",
+            "cardholder-name": "EXP_AUTH",
+            "expiry-month": "3",
+            "expiry-year": "2013"
+          }
+        ]
+      }
+    ],
+    "_purchases": [
+      {
+        "_element": [
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "lineitems",
+                "rev": "purchase",
+                "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwercvgvhwqysmmzctqm3ejbruq33cgfwdowttobltc5sznvlgy4cujf3u2rcbpe\/lineitems",
+                "uri": "\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwercvgvhwqysmmzctqm3ejbruq33cgfwdowttobltc5sznvlgy4cujf3u2rcbpe\/lineitems"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "paymentmeans",
+                "rev": "purchase",
+                "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwercvgvhwqysmmzctqm3ejbruq33cgfwdowttobltc5sznvlgy4cujf3u2rcbpe\/paymentmeans",
+                "uri": "\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwercvgvhwqysmmzctqm3ejbruq33cgfwdowttobltc5sznvlgy4cujf3u2rcbpe\/paymentmeans"
+              },
+              {
+                "type": "application\/vnd.elasticpath.address",
+                "rel": "billingaddress",
+                "rev": "purchase",
+                "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwercvgvhwqysmmzctqm3ejbruq33cgfwdowttobltc5sznvlgy4cujf3u2rcbpe\/billingaddress",
+                "uri": "\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwercvgvhwqysmmzctqm3ejbruq33cgfwdowttobltc5sznvlgy4cujf3u2rcbpe\/billingaddress"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative",
+                "uri": "\/purchases\/telcooperative"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.purchase",
+              "uri": "\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwercvgvhwqysmmzctqm3ejbruq33cgfwdowttobltc5sznvlgy4cujf3u2rcbpe",
+              "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwercvgvhwqysmmzctqm3ejbruq33cgfwdowttobltc5sznvlgy4cujf3u2rcbpe",
+              "max-age": 600
+            },
+            "monetary-total": [
+              {
+                "amount": 5.64,
+                "currency": "CAD",
+                "display": "$5.64"
+              }
+            ],
+            "purchase-date": {
+              "display-value": "December 13, 2013 5:55:36 PM",
+              "value": 1386957336000
+            },
+            "purchase-number": "20002",
+            "status": "COMPLETED",
+            "tax-total": {
+              "amount": 0.65,
+              "currency": "CAD",
+              "display": "$0.65"
+            }
+          },
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "lineitems",
+                "rev": "purchase",
+                "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwerdug5kfurtzob5esqjrm4xwcqtwi5rgw5bxobltc5sznvlgy4cujf3u2rcbpa\/lineitems",
+                "uri": "\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwerdug5kfurtzob5esqjrm4xwcqtwi5rgw5bxobltc5sznvlgy4cujf3u2rcbpa\/lineitems"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "paymentmeans",
+                "rev": "purchase",
+                "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwerdug5kfurtzob5esqjrm4xwcqtwi5rgw5bxobltc5sznvlgy4cujf3u2rcbpa\/paymentmeans",
+                "uri": "\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwerdug5kfurtzob5esqjrm4xwcqtwi5rgw5bxobltc5sznvlgy4cujf3u2rcbpa\/paymentmeans"
+              },
+              {
+                "type": "application\/vnd.elasticpath.address",
+                "rel": "billingaddress",
+                "rev": "purchase",
+                "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwerdug5kfurtzob5esqjrm4xwcqtwi5rgw5bxobltc5sznvlgy4cujf3u2rcbpa\/billingaddress",
+                "uri": "\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwerdug5kfurtzob5esqjrm4xwcqtwi5rgw5bxobltc5sznvlgy4cujf3u2rcbpa\/billingaddress"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative",
+                "uri": "\/purchases\/telcooperative"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.purchase",
+              "uri": "\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwerdug5kfurtzob5esqjrm4xwcqtwi5rgw5bxobltc5sznvlgy4cujf3u2rcbpa",
+              "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlwerdug5kfurtzob5esqjrm4xwcqtwi5rgw5bxobltc5sznvlgy4cujf3u2rcbpa",
+              "max-age": 600
+            },
+            "monetary-total": [
+              {
+                "amount": 148.29,
+                "currency": "CAD",
+                "display": "$148.29"
+              }
+            ],
+            "purchase-date": {
+              "display-value": "December 13, 2013 1:07:25 AM",
+              "value": 1386896845000
+            },
+            "purchase-number": "20001",
+            "status": "COMPLETED",
+            "tax-total": {
+              "amount": 17.07,
+              "currency": "CAD",
+              "display": "$17.07"
+            }
+          },
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "lineitems",
+                "rev": "purchase",
+                "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweq3ynjbuyk2unazs6ntbojhfevllivrdstcvobltc5sznvlgy4cujf3u2rcbo4\/lineitems",
+                "uri": "\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweq3ynjbuyk2unazs6ntbojhfevllivrdstcvobltc5sznvlgy4cujf3u2rcbo4\/lineitems"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "paymentmeans",
+                "rev": "purchase",
+                "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweq3ynjbuyk2unazs6ntbojhfevllivrdstcvobltc5sznvlgy4cujf3u2rcbo4\/paymentmeans",
+                "uri": "\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweq3ynjbuyk2unazs6ntbojhfevllivrdstcvobltc5sznvlgy4cujf3u2rcbo4\/paymentmeans"
+              },
+              {
+                "type": "application\/vnd.elasticpath.address",
+                "rel": "billingaddress",
+                "rev": "purchase",
+                "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweq3ynjbuyk2unazs6ntbojhfevllivrdstcvobltc5sznvlgy4cujf3u2rcbo4\/billingaddress",
+                "uri": "\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweq3ynjbuyk2unazs6ntbojhfevllivrdstcvobltc5sznvlgy4cujf3u2rcbo4\/billingaddress"
+              },
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative",
+                "uri": "\/purchases\/telcooperative"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.purchase",
+              "uri": "\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweq3ynjbuyk2unazs6ntbojhfevllivrdstcvobltc5sznvlgy4cujf3u2rcbo4",
+              "href": "http:\/\/localhost:3007\/integrator\/purchases\/telcooperative\/m5yxissunrjgovjqnrefsrluizlweq3ynjbuyk2unazs6ntbojhfevllivrdstcvobltc5sznvlgy4cujf3u2rcbo4",
+              "max-age": 600
+            },
+            "monetary-total": [
+              {
+                "amount": 123.2,
+                "currency": "CAD",
+                "display": "$123.20"
+              }
+            ],
+            "purchase-date": {
+              "display-value": "December 13, 2013 12:46:13 AM",
+              "value": 1386895573000
+            },
+            "purchase-number": "20000",
+            "status": "IN_PROGRESS",
+            "tax-total": {
+              "amount": 13.2,
+              "currency": "CAD",
+              "display": "$13.20"
+            }
+          }
+        ]
+      }
+    ],
+    "_subscriptions": [
+      {
+        "_element": [
+          {
+            "links": [
+              {
+                "type": "application\/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http:\/\/localhost:3007\/integrator\/subscriptions\/telcooperative",
+                "uri": "\/subscriptions\/telcooperative"
+              }
+            ],
+            "self": {
+              "type": "application\/vnd.elasticpath.subscription",
+              "uri": "\/subscriptions\/telcooperative\/m5ywgmcpkrktitl2iezxcrcfo5huislyjvves6drgbwe6vshijkfgvlem5jtavs2onau45tqmfdwgvkyonbguqtimz3dctkfkrthopi",
+              "href": "http:\/\/localhost:3007\/integrator\/subscriptions\/telcooperative\/m5ywgmcpkrktitl2iezxcrcfo5huislyjvves6drgbwe6vshijkfgvlem5jtavs2onau45tqmfdwgvkyonbguqtimz3dctkfkrthopi",
+              "max-age": 0
+            },
+            "display-name": "iTest Master Plan CAD",
+            "next-billing-date": {
+              "display-value": "November 9, 2013",
+              "value": 1383955200000
+            },
+            "quantity": 1,
+            "status": "ACTIVE"
+          }
+        ]
+      }
+    ],
+    "family-name": "Harris",
+    "given-name": "Oliver"
+  }
 }
