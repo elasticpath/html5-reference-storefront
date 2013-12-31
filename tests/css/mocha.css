@@ -239,3 +239,26 @@ code .keyword {
 code .number {
     color: #2F6FAD
 }
+
+/* Extra styling to improve rendering of mocha/blanket reports */
+body #mocha-stats {
+    background: #FFF;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+}
+
+body #mocha-stats li {
+    padding-top: 13px;
+}
+
+body #blanket-main {
+    font-size: 16px;
+}
+
+body .bl-source div {
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+    font-size: 12px;
+}

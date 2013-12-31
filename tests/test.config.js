@@ -124,4 +124,4 @@ var runMocha = function () {
 var setupSinonChai = function () {
   var sinonChai = require("sinon-chai");
   chai.use(sinonChai);
-}
+};
