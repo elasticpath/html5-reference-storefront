@@ -31,10 +31,12 @@ define(function(require){
     parseArray: function (rawArray, parseFunction) {
       var parsedArray = [];
 
-      rawArray.forEach(function(data) {
-        var parsedObject = parseFunction(data);
-        parsedArray.push(parsedObject);
-      });
+      if (rawArray) {
+        rawArray.forEach(function(data) {
+          var parsedObject = parseFunction(data);
+          parsedArray.push(parsedObject);
+        });
+      }
 
       return parsedArray;
     },
