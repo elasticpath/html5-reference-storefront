@@ -1,7 +1,7 @@
 {
   "zoom" : "?zoom=purchases:element,paymentmethods:element,subscriptions:element,emails,addresses:element",
   "retrievedOn" : "Dec 31, 2013",
-  "retrievedCriteria": "a registered user with 3 addresses, tokenized payment methods and an active subscription",
+  "retrievedCriteria": "a registered user with 3 addresses, 3 tokenized payment methods, at least 1 credit card payment method and an active subscription",
   "response" : {
     "links": [
       {
