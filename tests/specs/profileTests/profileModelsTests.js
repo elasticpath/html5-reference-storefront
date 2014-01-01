@@ -34,10 +34,8 @@ define(function (require) {
       });
 
       describe('Model should parse subscription data correctly', function () {
-        it("should have a subscription array", function () {
+        it("should have a subscription array with 1 subscription", function () {
           expect(this.model.subscriptions).to.be.an.instanceOf(Array);
-        });
-        it("should have 1 subscription", function () {
           expect(this.model.subscriptions).to.have.length(1);
         });
 
@@ -86,6 +84,14 @@ define(function (require) {
           it("should have postal code", function () {
             expect(this.secondAddress.postalCode).to.be.string('L5C 2B9');
           });
+        });
+      });
+
+      describe('Model should parse tokenized payment methods correctly', function() {
+        // The test data contains 3 tokenized payment methods and a number of credit card payment methods
+        it("should have a payment method array containing 3 tokenized payment methods", function() {
+          expect(this.model.paymentMethods).to.be.an.instanceOf(Array);
+          expect(this.model.paymentMethods).to.have.length(3);
         });
       });
     });

@@ -26,19 +26,20 @@ define(function (require) {
     parse: function (response) {
       var profileObj = {};
 
-      // Profile Summary Info
+      // Name info
       profileObj.familyName = jsonPath(response, 'family-name')[0];
       profileObj.givenName = jsonPath(response, 'given-name')[0];
 
-      // Profile Payment Info
-      var creditCardsArray = jsonPath(response, '$._paymentmethods.._element')[0];
-      profileObj.paymentMethods = modelHelpers.parseArray(creditCardsArray, modelHelpers.parseCreditCard);
+      // Payment methods (tokenized only)
+      // Only select payment methods with a display-value property (credit cards do not have this property)
+      var paymentMethodsArray = jsonPath(response, "$._paymentmethods.._element[?(@['display-value'])]");
+      profileObj.paymentMethods = modelHelpers.parseArray(paymentMethodsArray, modelHelpers.parsePaymentMethod);
 
-      // Profile Subscription Info
+      // Subscription info
       var subscriptionsArray = jsonPath(response, '$._subscriptions.._element')[0];
       profileObj.subscriptions = modelHelpers.parseArray(subscriptionsArray, modelHelpers.parseSubscription);
 
-      // Profile Addresses
+      // Profile addresses
       var addressesArray = jsonPath(response, '$._addresses.._element')[0];
       profileObj.addresses = modelHelpers.parseArray(addressesArray, modelHelpers.parseAddress);
 
@@ -48,33 +49,25 @@ define(function (require) {
 
   var modelHelpers = ModelHelper.extend({
     /**
-     * Parse an credit card object.
-     * @param rawObject raw credit card JSON response
-     * @returns Object - parsed credit card object
+     * Parse a payment method object.
+     * @param rawObject raw payment method JSON response
+     * @returns Object - parsed payment method object
      */
-    parseCreditCard: function (rawObject) {
-      var creditCard = {};
-
+    parsePaymentMethod: function (rawObject) {
+      var paymentMethod = {};
       if (rawObject) {
-        creditCard = {
-          cardNumber: jsonPath(rawObject, 'card-number')[0],
-          cardType: jsonPath(rawObject, 'card-type')[0],
-          cardHolderName: jsonPath(rawObject, 'cardholder-name')[0],
-          expiryMonth: jsonPath(rawObject, 'expiry-month')[0],
-          expiryYear: jsonPath(rawObject, 'expiry-year')[0]
+        paymentMethod = {
+          displayValue: jsonPath(rawObject,'display-value')[0]
         };
       } else {
-        ep.logger.error('Error building credit card payment method object');
+        ep.logger.error('Error building payment method object');
       }
 
-      return creditCard;
+      return paymentMethod;
     }
   });
 
   return {
-    ProfileModel: profileModel,
-    testVariable: {
-      modelHelpers: modelHelpers
-    }
+    ProfileModel: profileModel
   };
 });
