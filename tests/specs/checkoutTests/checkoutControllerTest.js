@@ -14,31 +14,21 @@ define(function (require) {
   describe('Checkout Module: Controller', function () {
     var controller = require('checkout');
     var view = require('checkout.views');
-    var template = require('text!modules/base/checkout/base.checkout.templates.html');
+    var checkoutTemplates = require('text!modules/base/checkout/base.checkout.templates.html');
+    var addressTemplate = require('text!modules/base/components/address/base.component.address.template.html');
+
+    // Append templates to the DOM
+    $("#Fixtures").append(checkoutTemplates);
+    $("#Fixtures").append(addressTemplate);
 
     describe("DefaultView", function () {
       before(function (done) {
-        $("#Fixtures").append(template); // append templates
+        var parsedJSONData = JSON.parse(_.clone(dataJSON));
+        this.parsedResponse = parsedJSONData.response;
 
-        this.parsedData = JSON.parse(dataJSON).response;
-
-        var fakeGetLink = "/integrator/orders/fakeUrl";
-        var fakeResponse = JSON.stringify(this.parsedData);
-
-        ep.io.localStore.setItem('oAuthToken', 'fakeToken');
-
-        this.server = sinon.fakeServer.create();
-        this.server.autoRespond = true;
-
-        this.server.respondWith(
-          "GET", fakeGetLink + JSON.parse(dataJSON).zoom,
-          [200, {"Content-Type":"application/json"}, fakeResponse]
-        );
-
-        ep.io.sessionStore.setItem('orderLink', fakeGetLink);
+        this.server = getFakeCheckoutServer(parsedJSONData.zoom, this.parsedResponse);
 
         this.view = new controller.DefaultView();
-
         this.view.render();
 
         // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
@@ -48,10 +38,9 @@ define(function (require) {
       });
 
       after(function () {
-        $("#Fixtures").empty();
         ep.io.localStore.removeItem('oAuthToken');
         ep.io.sessionStore.removeItem('orderLink');
-        delete(this.parsedData);
+        delete(this.parsedResponse);
         this.server.restore();
       });
 
@@ -70,7 +59,7 @@ define(function (require) {
 
       it('renders the tax total', function() {
         expect($('[data-el-value="checkout.taxTotal"]', this.view.$el).text())
-          .to.be.equal(this.parsedData._tax[0].total.display);
+          .to.be.equal(this.parsedResponse._tax[0].total.display);
       });
 
       it('renders the BillingAddressesCompositeView view', function() {
@@ -91,11 +80,8 @@ define(function (require) {
       describe("Given there is no tax data, billing addresses or shipping addresses/options", function() {
         // Fake a server response with missing data
         before(function (done) {
-          $("#Fixtures").append(template); // append templates
-
-          // FIXME: create a helper function for these fakeServer tests
-          var fakeGetLink = "/integrator/orders/fakeUrl";
-          var parsedFakeResponse = JSON.parse(dataJSON).response;
+          var parsedJSONData = JSON.parse(_.clone(dataJSON));
+          var parsedFakeResponse = parsedJSONData.response;
 
           // Remove tax, billing address, shipping address and shipping option data in the fake response JSON
           parsedFakeResponse._tax = [];
@@ -103,22 +89,9 @@ define(function (require) {
           parsedFakeResponse._deliveries[0]._element[0]._destinationinfo = [];
           parsedFakeResponse._deliveries[0]._element[0]._shippingoptioninfo = [];
 
-          var fakeResponseStr = JSON.stringify(parsedFakeResponse);
-
-          ep.io.localStore.setItem('oAuthToken', 'fakeToken');
-
-          var server = sinon.fakeServer.create();
-          server.autoRespond = true;
-
-          server.respondWith(
-            "GET", fakeGetLink + JSON.parse(dataJSON).zoom,
-            [200, {"Content-Type":"application/json"}, fakeResponseStr]
-          );
-
-          ep.io.sessionStore.setItem('orderLink', fakeGetLink);
+          this.server = getFakeCheckoutServer(parsedJSONData.zoom, parsedFakeResponse);
 
           this.view = new controller.DefaultView();
-
           this.view.render();
 
           // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
@@ -128,7 +101,6 @@ define(function (require) {
         });
 
         after(function () {
-          $("#Fixtures").empty();
           ep.io.localStore.removeItem('oAuthToken');
           ep.io.sessionStore.removeItem('orderLink');
           this.server.restore();
@@ -156,39 +128,22 @@ define(function (require) {
       describe("Given there are no chosen billing addresses, shipping addresses or shipping options", function() {
         // Fake a server response without chosen address and shipping entities
         before(function (done) {
-          $("#Fixtures").append(template); // append templates
-
           sinon.spy(EventBus, 'trigger');
           sinon.stub(ep.io, 'ajax');
 
-          var fakeJSONData = _.clone(dataJSON);
-
-          var fakeGetLink = "/integrator/orders/fakeUrl";
-          var parsedFakeResponse = JSON.parse(fakeJSONData).response;
+          var parsedJSONData = JSON.parse(_.clone(dataJSON));
+          var parsedFakeResponse = parsedJSONData.response;
 
           // Remove any chosen attributes from the test data
           delete(parsedFakeResponse._billingaddressinfo[0]._selector[0]._chosen);
           delete(parsedFakeResponse._deliveries[0]._element[0]._destinationinfo[0]._selector[0]._chosen);
           delete(parsedFakeResponse._deliveries[0]._element[0]._shippingoptioninfo[0]._selector[0]._chosen);
 
-          this.fakeJSONResponse = parsedFakeResponse;
+          this.parsedFakeResponse = parsedFakeResponse;
 
-          var fakeResponseStr = JSON.stringify(this.fakeJSONResponse);
-
-          ep.io.localStore.setItem('oAuthToken', 'fakeToken');
-
-          var server = sinon.fakeServer.create();
-          server.autoRespond = true;
-
-          server.respondWith(
-            "GET", fakeGetLink + JSON.parse(dataJSON).zoom,
-            [200, {"Content-Type":"application/json"}, fakeResponseStr]
-          );
-
-          ep.io.sessionStore.setItem('orderLink', fakeGetLink);
+          this.server = getFakeCheckoutServer(parsedJSONData.zoom, parsedFakeResponse);
 
           this.view = new controller.DefaultView();
-
           this.view.render();
 
           // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
@@ -199,7 +154,6 @@ define(function (require) {
         });
 
         after(function () {
-          $("#Fixtures").empty();
           EventBus.trigger.restore();
           ep.io.ajax.restore();
           ep.io.localStore.removeItem('oAuthToken');
@@ -209,7 +163,7 @@ define(function (require) {
         });
 
         it('triggers the checkout.updateChosenAddressRequest event to set a chosen billing address', function() {
-          var firstChoiceBillingAddress = jsonPath(this.fakeJSONResponse, '$.._billingaddressinfo[0].._choice')[0][0];
+          var firstChoiceBillingAddress = jsonPath(this.parsedFakeResponse, '$.._billingaddressinfo[0].._choice')[0][0];
           var firstChoiceBillingAddressSelectAction =
             jsonPath(firstChoiceBillingAddress, '$..links[?(@.rel=="selectaction")].href')[0];
 
@@ -221,7 +175,7 @@ define(function (require) {
         });
 
         it('triggers the checkout.updateChosenAddressRequest event to set a chosen shipping address', function() {
-          var firstChoiceShippingAddress = jsonPath(this.fakeJSONResponse, '$.._deliveries[0].._choice')[0][0];
+          var firstChoiceShippingAddress = jsonPath(this.parsedFakeResponse, '$.._deliveries[0].._choice')[0][0];
           var firstChoiceShippingAddressSelectAction =
             jsonPath(firstChoiceShippingAddress, '$..links[?(@.rel=="selectaction")].href')[0];
 
@@ -233,7 +187,7 @@ define(function (require) {
         });
 
         it('triggers the checkout.updateChosenShippingOptionRequest event to set a chosen shipping option', function() {
-          var firstChoiceShippingOption = jsonPath(this.fakeJSONResponse, '$.._shippingoptioninfo[0].._choice')[0][0];
+          var firstChoiceShippingOption = jsonPath(this.parsedFakeResponse, '$.._shippingoptioninfo[0].._choice')[0][0];
           var firstChoiceShippingOptionSelectAction =
             jsonPath(firstChoiceShippingOption, '$..links[?(@.rel=="selectaction")].href')[0];
 
@@ -249,35 +203,18 @@ define(function (require) {
       describe("Given there are no physical items requiring shipment in the cart", function() {
         // Fake a server response without a deliveryType of "SHIPMENT"
         before(function (done) {
-          $("#Fixtures").append(template); // append templates
-
           sinon.spy(EventBus, 'trigger');
           sinon.stub(ep.io, 'ajax');
 
-          var fakeJSONData = _.clone(dataJSON);
-
-          var fakeGetLink = "/integrator/orders/fakeUrl";
-          var parsedFakeResponse = JSON.parse(fakeJSONData).response;
+          var parsedJSONData = JSON.parse(_.clone(dataJSON));
+          var parsedFakeResponse = parsedJSONData.response;
 
           // Remove the deliveryType attribute
           delete(parsedFakeResponse._deliveries[0]._element[0]['delivery-type']);
 
-          var fakeResponseStr = JSON.stringify(parsedFakeResponse);
-
-          ep.io.localStore.setItem('oAuthToken', 'fakeToken');
-
-          var server = sinon.fakeServer.create();
-          server.autoRespond = true;
-
-          server.respondWith(
-            "GET", fakeGetLink + JSON.parse(dataJSON).zoom,
-            [200, {"Content-Type":"application/json"}, fakeResponseStr]
-          );
-
-          ep.io.sessionStore.setItem('orderLink', fakeGetLink);
+          this.server = getFakeCheckoutServer(parsedJSONData.zoom, parsedFakeResponse);
 
           this.view = new controller.DefaultView();
-
           this.view.render();
 
           // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
@@ -288,7 +225,6 @@ define(function (require) {
         });
 
         after(function () {
-          $("#Fixtures").empty();
           EventBus.trigger.restore();
           ep.io.ajax.restore();
           ep.io.localStore.removeItem('oAuthToken');
@@ -495,4 +431,33 @@ define(function (require) {
       });
     });
   });
+
+  /**
+   * Helper function to create a sinon fakeServer object to fake the checkout model fetch in the controller code.
+   * @param zoom A zoom string to append to the fake URL.
+   * @param parsedJSONResponse A parsed JSON response with which the fake server will respond.
+   * @returns {Object} A sinon fakeServer object.
+   */
+  function getFakeCheckoutServer (zoom, response) {
+    var fakeGetLink = "/integrator/orders/fakeUrl";
+    var fakeCheckoutServer = sinon.fakeServer.create();
+
+    ep.io.localStore.setItem('oAuthToken', 'fakeToken');
+
+    fakeCheckoutServer.autoRespond = true;
+
+    fakeCheckoutServer.respondWith(
+      "GET",
+      fakeGetLink + zoom,
+      [
+        200,
+        {"Content-Type": "application/json"},
+        JSON.stringify(response)
+      ]
+    );
+
+    ep.io.sessionStore.setItem('orderLink', fakeGetLink);
+
+    return fakeCheckoutServer;
+  }
 });

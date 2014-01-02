@@ -73,19 +73,22 @@ define(function (require) {
 
           // Set a chosen shipping address if there is not one set already
           checkoutObj.shippingAddresses = modelHelpers.setChosenEntity(checkoutObj.shippingAddresses);
+
+          // FIXME test after move inside shipping address if
+          var parsedShippingOptions = modelHelpers.parseShippingOptions(response);
+
+          if (parsedShippingOptions.length) {
+            // Sort shipping options in ascending order by cost and then display name
+            checkoutObj.shippingOptions = modelHelpers.sortShippingOptions(parsedShippingOptions, "costAmount", "displayName");
+
+            // Set a chosen shipping option if there is not one set already
+            checkoutObj.shippingOptions = modelHelpers.setChosenEntity(checkoutObj.shippingOptions);
+          }
         }
 
         checkoutObj.summary = modelHelpers.parseCheckoutSummary(response);
 
-        var parsedShippingOptions = modelHelpers.parseShippingOptions(response);
 
-        if (parsedShippingOptions.length) {
-            // Sort shipping options in ascending order by cost and then display name
-          checkoutObj.shippingOptions = modelHelpers.sortShippingOptions(parsedShippingOptions, "costAmount", "displayName");
-
-          // Set a chosen shipping option if there is not one set already
-          checkoutObj.shippingOptions = modelHelpers.setChosenEntity(checkoutObj.shippingOptions);
-        }
       } else {
         ep.logger.error("Checkout model wasn't able to fetch valid data for parsing.");
       }
@@ -223,7 +226,7 @@ define(function (require) {
           }
         }
       } else {
-        ep.logger.error('Error when building checkout shipping option object');
+        ep.logger.error('parseShippingOptions called with invalid JSON response');
       }
 
       return shippingOptions;
