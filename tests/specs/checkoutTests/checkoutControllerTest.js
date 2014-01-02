@@ -17,12 +17,11 @@ define(function (require) {
     var checkoutTemplates = require('text!modules/base/checkout/base.checkout.templates.html');
     var addressTemplate = require('text!modules/base/components/address/base.component.address.template.html');
 
-    // Append templates to the DOM
-    $("#Fixtures").append(checkoutTemplates);
-    $("#Fixtures").append(addressTemplate);
-
     describe("DefaultView", function () {
       before(function (done) {
+        // Append templates to the DOM
+        $("#Fixtures").append(checkoutTemplates, addressTemplate);
+
         var parsedJSONData = JSON.parse(_.clone(dataJSON));
         this.parsedResponse = parsedJSONData.response;
 
@@ -38,6 +37,7 @@ define(function (require) {
       });
 
       after(function () {
+        $("#Fixtures").empty();
         ep.io.localStore.removeItem('oAuthToken');
         ep.io.sessionStore.removeItem('orderLink');
         delete(this.parsedResponse);
@@ -80,6 +80,8 @@ define(function (require) {
       describe("Given there is no tax data, billing addresses or shipping addresses/options", function() {
         // Fake a server response with missing data
         before(function (done) {
+          $("#Fixtures").append(checkoutTemplates, addressTemplate);
+
           var parsedJSONData = JSON.parse(_.clone(dataJSON));
           var parsedFakeResponse = parsedJSONData.response;
 
@@ -101,6 +103,7 @@ define(function (require) {
         });
 
         after(function () {
+          $("#Fixtures").empty();
           ep.io.localStore.removeItem('oAuthToken');
           ep.io.sessionStore.removeItem('orderLink');
           this.server.restore();
@@ -128,6 +131,8 @@ define(function (require) {
       describe("Given there are no chosen billing addresses, shipping addresses or shipping options", function() {
         // Fake a server response without chosen address and shipping entities
         before(function (done) {
+          $("#Fixtures").append(checkoutTemplates, addressTemplate);
+
           sinon.spy(EventBus, 'trigger');
           sinon.stub(ep.io, 'ajax');
 
@@ -154,6 +159,7 @@ define(function (require) {
         });
 
         after(function () {
+          $("#Fixtures").empty();
           EventBus.trigger.restore();
           ep.io.ajax.restore();
           ep.io.localStore.removeItem('oAuthToken');
@@ -203,6 +209,8 @@ define(function (require) {
       describe("Given there are no physical items requiring shipment in the cart", function() {
         // Fake a server response without a deliveryType of "SHIPMENT"
         before(function (done) {
+          $("#Fixtures").append(checkoutTemplates, addressTemplate);
+
           sinon.spy(EventBus, 'trigger');
           sinon.stub(ep.io, 'ajax');
 
@@ -225,6 +233,7 @@ define(function (require) {
         });
 
         after(function () {
+          $("#Fixtures").empty();
           EventBus.trigger.restore();
           ep.io.ajax.restore();
           ep.io.localStore.removeItem('oAuthToken');
