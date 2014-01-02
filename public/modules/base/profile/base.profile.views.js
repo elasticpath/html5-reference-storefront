@@ -1,7 +1,11 @@
 /**
  * Copyright Elastic Path Software 2013.
  *
- * Default Profile Views & viewHelpers
+ * Default Profile Views
+ *
+ * The HTML5 Reference Storefront's MVC Views for displaying user's basic information, subscription items information,
+ * addresses, and payment methods. Address and payment methods views are just wrappers, and calls address.component and
+ * payment.component respectively to display address and payment information.
  */
 define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
   function(Marionette, i18n, Mediator, EventBus, ViewHelpers){
@@ -53,20 +57,56 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
 
   });
 
-    // Profile Payment Method Item View
-    var paymentMethodItemView = Backbone.Marionette.ItemView.extend({
-      template:'#ProfilePaymentMethodTemplate',
-      templateHelpers:viewHelpers,
-      tagName: 'li'
+    /**
+     * Profile Payment Method Item View
+     * make mediator request to load an paymentMethod view in region: profilePaymentMethodComponentRegion,
+     * will render a wrapper around the paymentMethod view
+     * @type Marionette.Layout
+     */
+    var profilePaymentMethodItemView = Backbone.Marionette.Layout.extend({
+      template: '#DefaultProfilePaymentMethodLayoutTemplate',
+      tagName: 'li',
+      className: 'profile-payment-method-container',
+      regions: {
+        profilePaymentMethodComponentRegion: '[data-region="profilePaymentMethodComponentRegion"]'
+      },
+      onShow: function () {
+        Mediator.fire('mediator.loadPaymentMethodViewRequest', {
+          region: this.profilePaymentMethodComponentRegion,
+          model: this.model
+        });
+      }
     });
 
-    // Profile Payment Method View
-    var paymentMethodsView = Backbone.Marionette.CompositeView.extend({
-      template:'#ProfilePaymentMethodsTemplate',
-      itemView:paymentMethodItemView,
-      itemViewContainer:'ul',
-      templateHelpers:viewHelpers
+    /**
+     * Profile Payment Methods Empty View
+     * will render a no-payment-method-message when payment methods collection is empty
+     * @type Marionette.ItemView
+     */
+    var profilePaymentMethodEmptyView = Backbone.Marionette.ItemView.extend({
+      template: '#DefaultProfilePaymentMethodEmptyViewTemplate',
+      tagName: 'li',
+      className: 'profile-no-payment-method-msg-container container',
+      templateHelpers: viewHelpers,
+      attributes: {
+        'data-el-label' : 'profile.noPaymentMethodMsg'
+      }
     });
+
+    /**
+     * Profile Payment Methods View
+     * will render a collection of payment methods with surrounding element such as heading,
+     * will render emptyView if collection empty.
+     * @type Marionette.CompositeView
+     */
+    var profilePaymentMethodsView = Backbone.Marionette.CompositeView.extend({
+      template: '#DefaultProfilePaymentsTemplate',
+      emptyView: profilePaymentMethodEmptyView,
+      itemView: profilePaymentMethodItemView,
+      itemViewContainer: 'ul',
+      templateHelpers: viewHelpers
+    });
+
 
     /**
      * Profile Address Item View
@@ -128,11 +168,16 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       DefaultLayout:defaultLayout,
       ProfileTitleView: profileTitleView,
       ProfileSubscriptionSummaryView:profileSubscriptionSummaryView,
-      ProfileSubscriptionItemView: profileSubscriptionItemView,
       ProfileSummaryView:profileSummaryView,
-      PaymentMethodsView:paymentMethodsView,
+      ProfilePaymentMethodsView:profilePaymentMethodsView,
       ProfileAddressesView: profileAddressesView,
-      ProfileAddressItemView: profileAddressItemView
+      testVariables: {
+        ProfileSubscriptionItemView: profileSubscriptionItemView,
+        ProfilePaymentMethodItemView: profilePaymentMethodItemView,
+        ProfilePaymentMethodsEmptyView: profilePaymentMethodEmptyView,
+        ProfileAddressItemView: profileAddressItemView,
+        ProfileAddressesEmptyView: profileAddressesEmptyView
+      }
     };
   }
 );

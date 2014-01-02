@@ -13,7 +13,7 @@ define(function (require) {
     parseAvailability: function (rawObject) {
       var availability = {};
 
-      try {
+      if(rawObject) {
         availability.state = jsonPath(rawObject, '$..state')[0];
         var releaseDate = jsonPath(rawObject, '$..release-date')[0];
         if (releaseDate) {
@@ -23,8 +23,8 @@ define(function (require) {
           };
         }
       }
-      catch (error) {
-        ep.logger.error('Error building availability object: ' + error.message);
+      else {
+        ep.logger.warn('Error building availability object: raw availability object was undefined.');
       }
 
       return availability;
@@ -37,7 +37,7 @@ define(function (require) {
      */
     parseRate: function (rawObject) {
       var rate = {};
-      try {
+      if(rawObject) {
         rate.display = rawObject.display;
         rate.cost = {
           amount: jsonPath(rawObject, '$.cost..amount')[0],
@@ -50,8 +50,9 @@ define(function (require) {
           display: jsonPath(rawObject, '$.recurrence..display')[0]
         };
       }
-      catch (error) {
-        ep.logger.error('Error building rate object: ' + error.message);
+      else {
+        ep.logger.warn('Error building rate object: raw rate object was undefined.');
+
       }
 
       return rate;
@@ -65,15 +66,15 @@ define(function (require) {
     parsePrice: function (rawObject) {
       var price = {};
 
-      try {
+      if(rawObject) {
         price = {
           currency: jsonPath(rawObject, '$.currency')[0],
           amount: jsonPath(rawObject, '$.amount')[0],
           display: jsonPath(rawObject, '$.display')[0]
         };
       }
-      catch (error) {
-        ep.logger.error('Error building price object: ' + error.message);
+      else {
+        ep.logger.warn('Error building price object: raw price object was undefined.');
       }
 
       return price;
@@ -87,15 +88,16 @@ define(function (require) {
     parseImage: function (rawObject) {
       var defaultImg = {};
 
-      try {
+      if(rawObject) {
         defaultImg = {
           absolutePath: jsonPath(rawObject, '$.content-location')[0],
           relativePath: jsonPath(rawObject, '$.relative-location')[0],
           name: jsonPath(rawObject, '$.name')[0]
         };
       }
-      catch (error) {
-        ep.logger.error('Error building image object: ' + error.message);
+      else {
+        ep.logger.warn('Error building image object: raw image object was undefined.');
+
       }
 
       return defaultImg;

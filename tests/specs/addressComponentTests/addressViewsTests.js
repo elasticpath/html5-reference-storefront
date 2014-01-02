@@ -88,7 +88,7 @@ define(function (require) {
         it('should render country', function () {
           expect($('[data-el-value="address.country"]', this.view.$el).text()).to.have.string('CA');
         });
-        it('should render country', function () {
+        it('should render postal code', function () {
           expect($('[data-el-value="address.postalCode"]', this.view.$el).text()).to.have.string('v8v8v8');
         });
       });

@@ -58,11 +58,13 @@ requirejs.config({
     'auth'            : 'modules/base/auth/base.auth.controller',
     'auth.models'     : 'modules/base/auth/base.auth.models',
     'auth.views'      : 'modules/base/auth/base.auth.views',
-    'address'         : 'modules/base/components/address/base.component.address.controller',
-    'address.views'   : 'modules/base/components/address/base.component.address.views',
     'checkout'        : 'modules/base/checkout/base.checkout.controller',
     'checkout.models' : 'modules/base/checkout/base.checkout.models',
     'checkout.views'  : 'modules/base/checkout/base.checkout.views',
+    'address'         : 'modules/base/components/address/base.component.address.controller',
+    'address.views'   : 'modules/base/components/address/base.component.address.views',
+    'payment'       : 'modules/base/components/payment/base.component.payment.controller',
+    'payment.views' : 'modules/base/components/payment/base.component.payment.views',
 
     'chai'            : '/tests/libs/chai',
     'sinon-chai'      : '/tests/libs/sinon-chai',
@@ -70,6 +72,7 @@ requirejs.config({
     'sinon'           :  'scripts/lib/sinon-1.7.3',
 
     'EventTestFactory': '/tests/TestHelpers/EventTestFactory',
+    'testfactory.model': '/tests/TestHelpers/ModelTestFactory',
     "testhelpers.event": '/tests/TestHelpers/EventTestHelpers',
     'testhelpers.defaultview': '/tests/TestHelpers/DefaultViewTestHelper'
 

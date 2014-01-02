@@ -9,7 +9,6 @@
 define(['ep','eventbus','router'],function(ep, EventBus, Router){
 
   var mediatorObj = {
-    // FIXME add loadRegionContentEvents to base.denpendency.config
     'mediator.loadRegionContent': function(controllerName) {
       require(['loadRegionContentEvents'], function(loadRegionContent) {
         loadRegionContent[controllerName]();
@@ -77,6 +76,11 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
     'mediator.loadAddressesViewRequest':function(addressObj){
       require(['address'],function(mod){
         EventBus.trigger('address.loadAddressesViewRequest', addressObj);
+      });
+    },
+    'mediator.loadPaymentMethodViewRequest':function(paymentObj) {
+      require(['payment'], function(mod) {
+        EventBus.trigger('payment.loadPaymentMethodViewRequest', paymentObj.region, paymentObj.model);
       });
     },
     'mediator.setReturnUrlInAddressForm' : function(url) {

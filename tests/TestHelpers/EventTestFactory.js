@@ -3,8 +3,8 @@
  */
 
 define(function (require) {
-  var EventBus = require('eventbus'),
-    EventTestHelpers = require('testhelpers.event');
+  var EventBus = require('eventbus');
+  var EventTestHelpers = require('testhelpers.event');
 
   return {
     /**

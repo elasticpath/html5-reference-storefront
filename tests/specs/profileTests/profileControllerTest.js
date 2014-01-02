@@ -7,7 +7,6 @@ define(function (require) {
   var Backbone = require('backbone');
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
-  var EventTestHelpers = require('testhelpers.event');
   var ep = require('ep');
 
   describe('Profile Module: Controller', function () {
@@ -39,9 +38,6 @@ define(function (require) {
           ep.app.isUserLoggedIn.restore();
         });
 
-        it('DefaultView should exist', function () {
-          expect(this.viewLayout).to.exist;
-        });
         it('should be an instance of Marionette Layout object', function () {
           expect(this.viewLayout).to.be.an.instanceOf(Marionette.Layout);
         });

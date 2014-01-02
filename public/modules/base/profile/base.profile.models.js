@@ -1,7 +1,9 @@
 /**
  * Copyright Elastic Path Software 2013.
  *
- * Storefront - Profile Models
+ * Default Profile Models
+ * The HTML5 Reference Storefront's MVC Model manages zoom queries the model uses to ask cortex server.
+ * It also parses the raw data returned from server, so necessary data are surfaced, and renamed into desired format.
  */
 define(function (require) {
   var ep = require('ep');
@@ -10,11 +12,9 @@ define(function (require) {
 
   // Array of zoom parameters to pass to Cortex
   var zoomArray = [
-    'purchases:element',
-    'paymentmethods:element',
     'subscriptions:element',
-    'emails',
-    'addresses:element'
+    'addresses:element',
+    'paymentmethods:element'
   ];
 
   /**
@@ -24,50 +24,56 @@ define(function (require) {
   var profileModel = Backbone.Model.extend({
     url: ep.io.getApiContext() + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=' + zoomArray.join(),
     parse: function (response) {
-      var profileObj = {};
+      var profileObj = {
+        familyName: undefined,
+        givenName: undefined,
+        subscriptions: [],
+        addresses: [],
+        paymentMethods: []
+      };
 
-      // Name info
-      profileObj.familyName = jsonPath(response, 'family-name')[0];
-      profileObj.givenName = jsonPath(response, 'given-name')[0];
+      if (response) {
+        // Profile Summary Info
+        profileObj.familyName = jsonPath(response, 'family-name')[0];
+        profileObj.givenName = jsonPath(response, 'given-name')[0];
 
-      // Payment methods (tokenized only)
-      // Only select payment methods with a display-value property (credit cards do not have this property)
-      var paymentMethodsArray = jsonPath(response, "$._paymentmethods.._element[?(@['display-value'])]");
-      profileObj.paymentMethods = modelHelpers.parseArray(paymentMethodsArray, modelHelpers.parsePaymentMethod);
+        // Payment methods (tokenized only)
+        // Only select payment methods with a display-value property (credit cards do not have this property)
+        var paymentMethodsArray = jsonPath(response, "$._paymentmethods.._element[?(@.self.type=='application/vnd.elasticpath.paymenttoken')]");
+        if(paymentMethodsArray) {
+          profileObj.paymentMethods = modelHelpers.parseArray(paymentMethodsArray, modelHelpers.parseTokenPayment);
+        }
 
-      // Subscription info
-      var subscriptionsArray = jsonPath(response, '$._subscriptions.._element')[0];
-      profileObj.subscriptions = modelHelpers.parseArray(subscriptionsArray, modelHelpers.parseSubscription);
+        // Profile Subscription Info
+        var subscriptionsArray = jsonPath(response, '$._subscriptions.._element')[0];
+        if (subscriptionsArray) {
+          profileObj.subscriptions = modelHelpers.parseArray(subscriptionsArray, modelHelpers.parseSubscription);
+        }
 
-      // Profile addresses
-      var addressesArray = jsonPath(response, '$._addresses.._element')[0];
-      profileObj.addresses = modelHelpers.parseArray(addressesArray, modelHelpers.parseAddress);
+        // Profile addresses
+        var addressesArray = jsonPath(response, '$._addresses.._element')[0];
+        if (addressesArray) {
+          profileObj.addresses = modelHelpers.parseArray(addressesArray, modelHelpers.parseAddress);
+        }
+      }
+      else {
+        ep.logger.error("Profile model wasn't able to fetch valid data for parsing. ");
+      }
 
       return profileObj;
     }
   });
 
-  var modelHelpers = ModelHelper.extend({
-    /**
-     * Parse a payment method object.
-     * @param rawObject raw payment method JSON response
-     * @returns Object - parsed payment method object
-     */
-    parsePaymentMethod: function (rawObject) {
-      var paymentMethod = {};
-      if (rawObject) {
-        paymentMethod = {
-          displayValue: jsonPath(rawObject,'display-value')[0]
-        };
-      } else {
-        ep.logger.error('Error building payment method object');
-      }
-
-      return paymentMethod;
-    }
-  });
+  /**
+   * Collection of helper functions to parse the model.
+   * @type Object collection of modelHelper functions
+   */
+  var modelHelpers = ModelHelper.extend({});
 
   return {
-    ProfileModel: profileModel
+    ProfileModel: profileModel,
+    testVariable: {
+      modelHelpers: modelHelpers
+    }
   };
 });

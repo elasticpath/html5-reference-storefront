@@ -35,6 +35,9 @@
 
   </script>
 
+  <!--
+   === Subscription Templates ===
+  -->
   <!-- Subscription Item Template -->
   <script id="SubscriptionItemTemplate" type="text/template">
     <td data-el-value="subscriptions.displayName"><%= E.displayName %></td>
@@ -60,6 +63,10 @@
 
   </script>
 
+
+  <!--
+   === Address Templates ===
+  -->
   <!-- Default Profile Addresses Template -->
   <script id="DefaultProfileAddressesTemplate" type="text/template">
     <!-- defaultView, itemView tagName: div -->
@@ -83,59 +90,28 @@
     <%= E.getI18nLabel('profile.noAddressMsg') %>
   </script>
 
-  <!-- Profile Payment Method View -->
-  <script id="ProfilePaymentMethodTemplate" type="text/template">
-    <%= E.displayValue %>
-  </script>
 
-  <!-- ProfilePaymentMethodsTemplate -->
-  <script id="ProfilePaymentMethodsTemplate" type="text/template">
-
-    <h2><%= E.getI18nLabel('profile.paymentMethodsTitle') %></h2>
-    <ul></ul>
-
-  </script>
-
-
-  <!-- Profile Payment Method Form
-  not used yet
+  <!--
+   === Payment Method Templates ===
   -->
-  <script id="PaymentMethodFormTemplate" type="text/template">
-    <form class="form columnar">
-      <ul>
-        <li>
-          <label form="">Card Type</label>
-          <select id="" name="" ></select>
-        </li>
-        <li>
-          <label form="">Card Holder Name</label>
-          <input id="" name="" >
-        </li>
-        <li>
-          <label form="">Card Number</label>
-          <input id="" name="" >
-        </li>
-        <li>
-          <label form="">Expiry Month</label>
-          <select id="" name="" ></select>
-        </li>
-        <li>
-          <label form="">Expiry Year</label>
-          <select id="" name="" ></select>
-        </li>
-        <li>
-          <label form="">Default Card</label>
-          <input type="checkbox" id="" name="" >
-        </li>
-        <li>
-          <div class="button-container">
-            <button>Add Credit Card</button>
-            <button>Regurn</button>
-          </div>
-        </li>
-      </ul>
-    </form>
+  <!-- Default Profile Payment Methods Template -->
+  <script id="DefaultProfilePaymentsTemplate" type="text/template">
+    <h2><%= E.getI18nLabel('profile.paymentMethodsTitle') %></h2>
+    <ul class="profile-payment-methods-listing">
+      <!-- collection target region -->
+    </ul>
   </script>
 
+  <!--Default Profile Payment Method Layout Template-->
+  <script id="DefaultProfilePaymentMethodLayoutTemplate" type="text/template">
+    <!-- defaultView, layout tagName: li, class: profile-payment-method-container-->
+    <div data-region="profilePaymentMethodComponentRegion"></div>
+  </script>
+
+  <!-- Default Profile Payment Method EmptyView Template -->
+  <script id="DefaultProfilePaymentMethodEmptyViewTemplate" type="text/template">
+    <!-- defaultView, itemView tagName: li, class: profile-no-payment-method-msg-container container-->
+    <%= E.getI18nLabel('profile.noPaymentMethodMsg') %>
+  </script>
 
 </div>

@@ -128,6 +128,7 @@
     "subscriptionQuantity": "Quantity",
     "subscriptionNextBillingDate": "Next Billing Date",
     "paymentMethodsTitle": "Payment Methods",
+    "noPaymentMethodMsg": "You have no saved payment methods",
     "paymentCardNumber":"Card Number",
     "paymentCardType": "Card Type",
     "paymentCardHolder": "Card Holder",

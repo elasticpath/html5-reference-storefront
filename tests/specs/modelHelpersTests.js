@@ -55,6 +55,21 @@ define(function (require) {
       });
     });
 
+    var testDataTax = {
+      "amount": 13.6,
+      "currency": "CAD",
+      "display": "$13.60",
+      "title": "PST"
+    };
+    var expectedTax = {
+      amount: 13.6,
+      currency: 'CAD',
+      display: '$13.60',
+      title:'PST'
+    };
+    describe('helper: parseTax',
+      parserTestFactory(testDataTax, helpers.parseTax, expectedTax));
+
 
     describe('Profile Parsers', function () {
       var testDataAddress = {
@@ -101,24 +116,85 @@ define(function (require) {
       };
       describe('helper: parseSubscription',
         parserTestFactory(testDataSubscription, helpers.parseSubscription, expectedSubscription));
+
+      var testDataToken = {
+        "display-value": "timmins-token-X"
+      };
+      var expectedToken = {
+        displayValue: 'timmins-token-X'
+      };
+      describe('helper: parseSubscription',
+        parserTestFactory(testDataToken, helpers.parseTokenPayment, expectedToken));
+
     });
 
 
     describe('Item Parsers', function () {
-      var testDataPrice = {};
-      var expectedPrice = {};
+      var testDataPrice = {
+        "amount": 192.09,
+        "currency": "CAD",
+        "display": "$192.09"
+      };
+      var expectedPrice = {
+        amount: 192.09,
+        currency: "CAD",
+        display: "$192.09"
+      };
       describe('helper: parsePrice',
         parserTestFactory(testDataPrice, helpers.parsePrice, expectedPrice));
 
-      var testDataRate = {};
-      var expectedRate = {};
-      describe('helper: ',
+      var testDataRate = {
+        "display": "$12.00/year",
+        "cost": {
+          "amount": 12,
+          "currency": "USD",
+          "display": "$12.00"
+        },
+        "recurrence": {
+          "display": "annually",
+          "interval": "ANNUAL"
+        }
+      };
+      var expectedRate = {
+        display: "$12.00/year",
+        cost: {
+          amount: 12,
+          currency: "USD",
+          display: "$12.00"
+        },
+        recurrence: {
+          display: "annually",
+          interval: "ANNUAL"
+        }
+      };
+      describe('helper: parseRate',
         parserTestFactory(testDataRate, helpers.parseRate, expectedRate));
 
-      var testDataAvailability = {};
-      var expectedAvailability = {};
-      describe('helper: ',
-        parserTestFactory(testDataAvailability, helpers.parseAvailability, expectedAvailability));
+      var testDataPreOrder = {
+        "state": "AVAILABLE_FOR_PRE_ORDER",
+        "release-date": {
+          "display-value": "December 25, 2013 12:00:00 AM",
+          "value": 1387958400000
+        }
+      };
+      var expectedPreOrder = {
+        state: "AVAILABLE_FOR_PRE_ORDER",
+        releaseDate: {
+          displayValue: "December 25, 2013 12:00:00 AM",
+          value: 1387958400000
+        }
+      };
+      describe('helper: parseAvailability with release date',
+        parserTestFactory(testDataPreOrder, helpers.parseAvailability, expectedPreOrder));
+
+      var testDataAvailable = {
+        "state": "AVAILABLE_FOR_PRE_ORDER"
+      };
+      var expectedAvailable = {
+        state: "AVAILABLE_FOR_PRE_ORDER"
+      };
+      describe('helper: parseAvailability without release date',
+        parserTestFactory(testDataAvailable, helpers.parseAvailability, expectedAvailable));
     });
 
   });
@@ -126,23 +202,23 @@ define(function (require) {
   function parserTestFactory (testData, fnToTest, expected) {
     return function() {
       beforeEach(function () {
-        sinon.stub(ep.logger, 'error');
+        sinon.stub(ep.logger, 'warn');
       });
 
       afterEach(function () {
-        ep.logger.error.restore();
+        ep.logger.warn.restore();
       });
 
       it("parses JSON object correctly", function () {
+        var model = fnToTest(testData);
         for(var attr in expected) {
-          var model = fnToTest(testData);
-          expect(model[attr]).to.be.equal(expected[attr]);
+          expect(model[attr]).to.be.eql(expected[attr]);
         }
       });
 
       it("logs error given undefined argument", function() {
         fnToTest(undefined);
-        expect(ep.logger.error).to.be.calledOnce;
+        expect(ep.logger.warn).to.be.calledOnce;
       });
 
       it("return empty object{} given invalid data to parse", function() {
