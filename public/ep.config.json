@@ -9,7 +9,7 @@
   },
   "cortexApi":{
     "path":"integrator",
-    "scope":"cshop"
+    "scope":"telcooperative"
   },
   "deployMode":"development",
   "requireAuthToCheckout":true,

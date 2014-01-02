@@ -37,6 +37,9 @@ define(function(require){
           parsedArray.push(parsedObject);
         });
       }
+      else {
+        ep.logger.warn('modelHelper.parseArray was called with undefined data');
+      }
 
       return parsedArray;
     },
@@ -49,8 +52,7 @@ define(function(require){
     parseTax: function(rawObject) {
       var tax = {};
 
-      // FIXME: [CU-106] replace try/catch with test for rawObject
-      try {
+      if(rawObject) {
         tax = {
           currency: jsonPath(rawObject, '$.currency')[0],
           amount: jsonPath(rawObject, '$.amount')[0],
@@ -58,8 +60,8 @@ define(function(require){
           title: jsonPath(rawObject, '$.title')[0]
         };
       }
-      catch (error) {
-        ep.logger.error('Error building tax object: ' + error.message);
+      else {
+        ep.logger.warn('Error building tax object: raw tax object was undefined.');
       }
 
       return tax;

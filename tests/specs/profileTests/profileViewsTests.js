@@ -19,27 +19,6 @@ define(function (require) {
       $("#Fixtures").empty();
     });
 
-    describe('All views should exist', function () {
-      it('DefaultLayout should exist', function () {
-        expect(profileViews.DefaultLayout).to.exist;
-      });
-      it('ProfileTitleView should exist', function () {
-        expect(profileViews.ProfileTitleView).to.exist;
-      });
-      it('ProfileSummaryView should exist', function () {
-        expect(profileViews.ProfileSummaryView).to.exist;
-      });
-      it('ProfileSubscriptionSummaryView should exist', function () {
-        expect(profileViews.ProfileSubscriptionSummaryView).to.exist;
-      });
-      it('PaymentMethodsView should exist', function () {
-        expect(profileViews.PaymentMethodsView).to.exist;
-      });
-      it('An addresses view should exist', function () {
-        expect(profileViews.ProfileAddressesView).to.exist;
-      });
-    });
-
     describe('DefaultLayout', function () {
       before(function () {
         this.view = new profileViews.DefaultLayout();
@@ -137,7 +116,7 @@ define(function (require) {
             quantity: 3,
             nextBillingDate: 'December 25, 2013'
           });
-          this.view = new profileViews.ProfileSubscriptionItemView({model: this.model});
+          this.view = new profileViews.testVariables.ProfileSubscriptionItemView({model: this.model});
           this.view.render();
         });
 
@@ -221,7 +200,7 @@ define(function (require) {
           // mock the model
           this.model = new Backbone.Model();
           // setup the view
-          this.view = new profileViews.ProfileAddressItemView({model: new Backbone.Model()});
+          this.view = new profileViews.testVariables.ProfileAddressItemView({model: new Backbone.Model()});
           this.view.render();
         });
 
@@ -294,6 +273,86 @@ define(function (require) {
 
         describe('add new address button clicked',
           EventTestFactory.simpleBtnClickTest('profile.addNewAddressBtnClicked', '[data-el-label="profile.addNewAddressBtn"]'));
+      });
+
+    });
+
+    describe('Profile Payment Methods Views', function () {
+
+      describe('ProfilePaymentMethodItemView', function () {
+        before(function () {
+          // mock the model
+          this.model = new Backbone.Model();
+          // setup the view
+          this.view = new profileViews.testVariables.ProfilePaymentMethodItemView({model: new Backbone.Model()});
+          this.view.render();
+        });
+
+        after(function () {
+          this.model.destroy();
+        });
+
+        it('should be an instance of Marionette Layout object', function () {
+          expect(this.view).to.be.an.instanceOf(Marionette.Layout);
+        });
+        it('is referencing the template with correct ID', function () {
+          var templateId = '#DefaultProfilePaymentMethodLayoutTemplate';
+          expect(this.view.getTemplate()).to.be.equal(templateId);
+          expect($(templateId)).to.exist;
+        });
+        it('render() should return the view object', function () {
+          expect(this.view.render()).to.be.equal(this.view);
+        });
+        it('view content is rendered with DOM elements', function () {
+          expect(this.view.el.childElementCount).to.be.above(0);
+        });
+        it('should have a profilePaymentMethodComponentRegion region', function () {
+          expect(this.view.profilePaymentMethodComponentRegion).to.exist;
+          expect(this.view.$el.find('[data-region="profilePaymentMethodComponentRegion"]')).to.be.length(1);
+        });
+      });
+
+      describe('ProfilePaymentMethodsView', function () {
+        before(function () {
+          // mock the collection, and adds multiple model into collection
+          this.collection = new Backbone.Collection();
+          this.collection.add(new Backbone.Model());
+          this.collection.add(new Backbone.Model());
+
+          // setup the view
+          this.view = new profileViews.ProfilePaymentMethodsView({collection: this.collection});
+          this.view.render();
+        });
+
+        after(function () {
+          this.collection.reset();
+        });
+
+        describe('renders correctly', function () {
+          // test the view itself rendered
+          it('should be an instance of Marionette CompositeView object', function () {
+            expect(this.view).to.be.an.instanceOf(Marionette.CompositeView);
+          });
+          it('is referencing the template with correct ID', function () {
+            var templateId = '#DefaultProfilePaymentsTemplate';
+            expect(this.view.getTemplate()).to.be.string(templateId);
+            expect($(templateId)).to.exist;
+          });
+          it('render() should return the view object', function () {
+            expect(this.view.render()).to.be.equal(this.view);
+          });
+
+          // test the view's content rendered
+          it('view content is rendered', function () {
+            expect(this.view.el.childElementCount).to.be.above(0);  // not very accurate
+          });
+          it('renders $itemViewContainer', function () {
+            expect(this.view.$itemViewContainer.length).to.be.equal(1);
+          });
+          it('renders 2 child itemViews', function () {
+            expect(this.view.$itemViewContainer.children().length).to.be.equal(2);
+          });
+        });
       });
 
     });

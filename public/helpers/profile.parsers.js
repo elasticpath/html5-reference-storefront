@@ -13,7 +13,7 @@ define(function (require) {
     parseAddress: function (rawObject) {
       var address = {};
 
-      try {
+      if(rawObject) {
         address = {
           givenName: jsonPath(rawObject, '$.name..given-name')[0],
           familyName: jsonPath(rawObject, '$.name..family-name')[0],
@@ -25,8 +25,8 @@ define(function (require) {
           postalCode: jsonPath(rawObject, '$.address..postal-code')[0]
         };
       }
-      catch (error) {
-        ep.logger.error('Error building address object: ' + error.message);
+      else {
+        ep.logger.warn('Error building address object: raw address object was undefined.');
       }
 
       return address;
@@ -40,7 +40,7 @@ define(function (require) {
     parseSubscription: function (rawObject) {
       var subscription = {};
 
-      try {
+      if (rawObject) {
         subscription = {
           displayName: jsonPath(rawObject, 'display-name')[0],
           quantity: jsonPath(rawObject, 'quantity')[0],
@@ -48,8 +48,8 @@ define(function (require) {
           status: jsonPath(rawObject, 'status')[0]
         };
       }
-      catch (error) {
-        ep.logger.error('Error building subscription object: ' + error.message);
+      else {
+        ep.logger.warn('Error building subscription object: raw subscription object was undefined');
       }
 
       return subscription;
@@ -63,7 +63,7 @@ define(function (require) {
     parseCreditCard: function (rawObject) {
       var creditCard = {};
 
-      try {
+      if(rawObject) {
         creditCard = {
           cardNumber: jsonPath(rawObject, 'card-number')[0],
           cardType: jsonPath(rawObject, 'card-type')[0],
@@ -72,11 +72,31 @@ define(function (require) {
           expiryYear: jsonPath(rawObject, 'expiry-year')[0]
         };
       }
-      catch (error) {
-        ep.logger.error('Error building credit card payment method object: ' + error.message);
+      else {
+        ep.logger.warn('Error building credit card payment method object: raw credit card payment method object was undefined');
       }
 
       return creditCard;
+    },
+
+    /**
+     * Parse a tokenized payment method object.
+     * @param rawObject raw token JSON response
+     * @returns Object - parsed token payment method object
+     */
+    parseTokenPayment: function(rawObject) {
+      var token = {};
+
+      if (rawObject) {
+        token = {
+          displayValue: jsonPath(rawObject, 'display-value')[0]
+        };
+      }
+      else {
+        ep.logger.warn('Error building token payment method object: raw token payment method object was undefined');
+      }
+
+      return token;
     }
   };
 

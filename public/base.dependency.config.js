@@ -29,6 +29,7 @@ var config = {
       'mediator': 'ep.mediator',
       'viewHelpers': 'helpers/view.helpers',
       'modelHelpers': 'helpers/model.helpers',
+      'loadRegionContentEvents': 'loadRegionContentEvents',
 
       'app': 'modules/base/app/base.app.controller',
       'app.models': 'modules/base/app/base.app.models',
@@ -64,11 +65,13 @@ var config = {
       'auth': 'modules/base/auth/base.auth.controller',
       'auth.models': 'modules/base/auth/base.auth.models',
       'auth.views': 'modules/base/auth/base.auth.views',
-      'address' : 'modules/base/components/address/base.component.address.controller',
-      'address.views' : 'modules/base/components/address/base.component.address.views',
       'checkout': 'modules/base/checkout/base.checkout.controller',
       'checkout.models': 'modules/base/checkout/base.checkout.models',
-      'checkout.views': 'modules/base/checkout/base.checkout.views'
+      'checkout.views': 'modules/base/checkout/base.checkout.views',
+      'address'       : 'modules/base/components/address/base.component.address.controller',
+      'address.views' : 'modules/base/components/address/base.component.address.views',
+      'payment'       : 'modules/base/components/payment/base.component.payment.controller',
+      'payment.views' : 'modules/base/components/payment/base.component.payment.views'
     },
     shim: {
       'backbone': {
