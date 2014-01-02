@@ -85,20 +85,7 @@
 
   <!-- Profile Payment Method View -->
   <script id="ProfilePaymentMethodTemplate" type="text/template">
-
-    <dl class="row">
-      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.paymentCardNumber') %>:</dt>
-      <dd class="col-xs-6"><%= E.cardNumber%></dd>
-      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.paymentCardType') %>:</dt>
-      <dd class="col-xs-6"><%= E.cardType%></dd>
-      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.paymentCardHolder') %>:</dt>
-      <dd class="col-xs-6"><%= E.cardHolderName%></dd>
-      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.paymentExpiryMonth') %>:</dt>
-      <dd class="col-xs-6"><%= E.expiryMonth%></dd>
-      <dt class="col-xs-4 col-xs-offset-2"><%= E.getI18nLabel('profile.paymentExpiryYear') %>:</dt>
-      <dd class="col-xs-6"><%= E.expiryYear%></dd>
-    </dl>
-
+    <%= E.displayValue %>
   </script>
 
   <!-- ProfilePaymentMethodsTemplate -->

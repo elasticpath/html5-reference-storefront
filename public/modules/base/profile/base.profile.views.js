@@ -56,8 +56,8 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
     // Profile Payment Method Item View
     var paymentMethodItemView = Backbone.Marionette.ItemView.extend({
       template:'#ProfilePaymentMethodTemplate',
-      templateHelpers:viewHelpers
-
+      templateHelpers:viewHelpers,
+      tagName: 'li'
     });
 
     // Profile Payment Method View
