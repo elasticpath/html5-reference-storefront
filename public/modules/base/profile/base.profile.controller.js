@@ -110,10 +110,12 @@ define(function (require) {
      * will load address form
      */
     EventBus.on('profile.addNewAddressBtnClicked', function () {
-      window.location.href = ep.app.config.routes.newAddress;
-      Mediator.fire('mediator.setReturnUrlInAddressForm', ep.app.config.routes.profile);
+      Mediator.fire('mediator.addNewAddressRequest', 'profile');
     });
 
+//    'profile.addressFormComplete'
+
+    // this listener not used
     /**
      * Listen to addresses updated signal,
      * will reload profile addresses region

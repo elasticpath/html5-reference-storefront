@@ -83,11 +83,6 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         EventBus.trigger('payment.loadPaymentMethodViewRequest', paymentObj.region, paymentObj.model);
       });
     },
-    'mediator.setReturnUrlInAddressForm' : function(url) {
-      require(['address'],function(mod){
-        EventBus.trigger('address.setReturnUrl', url);
-      });
-    },
     'mediator.navigateToCheckoutRequest' : function(link) {
       if (link){
         require(['ep'], function(ep){
@@ -97,6 +92,34 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
           ep.router.navigate(ep.app.config.routes.checkout, true);
         });
       }
+    },
+    'mediator.addNewAddressRequest': function (moduleName) {
+      require(['ep'], function (ep) {
+        if (moduleName) {
+          ep.io.sessionStore.setItem('addressFormReturnTo', moduleName);
+          ep.router.navigate(ep.app.config.routes.newAddress, true);
+        }
+        else {
+          ep.logger.error('mediator.addNewAddressRequest was called with invalided moduleName: ' + moduleName);
+        }
+      });
+    },
+    'mediator.addressFormComplete': function () {
+      require(['ep'], function (ep) {
+        var moduleName = ep.io.sessionStore.getItem('addressFormReturnTo');
+
+        if (!moduleName) {
+          ep.router.navigate('/', true);  // if no return module specified, then return to homepage
+        }
+        else {
+//          require([moduleName], function() {
+//            EventBus.trigger(moduleName + '.addressFormComplete');
+//          });
+
+          ep.router.navigate(ep.app.config.routes[moduleName], true);
+          ep.io.sessionStore.removeItem('addressFormReturnTo');   // clear sessionStorage
+        }
+      });
     }
   };
 

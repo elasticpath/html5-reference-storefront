@@ -7,16 +7,12 @@
 
 define(function (require) {
   var ep = require('ep');
-  var EventBus = require('eventbus');
   var i18n = require('i18n');
+  var EventBus = require('eventbus');
+  var Mediator = require('mediator');
 
   var View = require('address.views');
   var template = require('text!modules/base/components/address/base.component.address.template.html');
-
-  // url addressFormView will return to upon save form success or cancel button click
-  // FIXME [CU-69] should not set this here!
-  // re-think the user interaction
-  var returnUrl = ep.app.config.routes.profile;
 
   $('#TemplateContainer').append(template);
 
@@ -145,11 +141,10 @@ define(function (require) {
 
   /**
    * Listening to submit address form success signal,
-   * will redirect page set by returnUrl.
+   * will call mediator strategy to notify storefront addressForm module is done.
    */
-  // FIXME [CU-69] should hand controll back to modules that called address module
   EventBus.on('address.submitAddressFormSuccess', function() {
-    window.location.href = returnUrl;
+    Mediator.fire('mediator.addressFormComplete');
   });
 
   /**
@@ -157,20 +152,7 @@ define(function (require) {
    * will redirect page set by returnUrl.
    */
   EventBus.on('address.cancelBtnClicked', function() {
-    // more secure way of changing page (don't allow the url to escape the application)
-//    ep.router.navigate(returnUrl, true);
-    // FIXME [CU-69] more sophisticated way of returning to previous view
-    window.location.href = returnUrl;
-  });
-
-  /* *********** Event Listeners: set return url  *********** */
-  /**
-   * Listen to setReturnUrl request,
-   * will set the returnUrl variable to passed in url value
-   * @param url url address form will return to upon cancel or success
-   */
-  EventBus.on('address.setReturnUrl', function(url) {
-    returnUrl = url;
+    Mediator.fire('mediator.addressFormComplete');
   });
 
   /* *********** Event Listeners: load display address view  *********** */
