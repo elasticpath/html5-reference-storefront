@@ -109,14 +109,15 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         var moduleName = ep.io.sessionStore.getItem('addressFormReturnTo');
 
         if (!moduleName) {
-          ep.router.navigate('/', true);  // if no return module specified, then return to homepage
+          ep.router.navigate('#home', true);  // if no return module specified, then return to homepage
         }
         else {
 //          require([moduleName], function() {
 //            EventBus.trigger(moduleName + '.addressFormComplete');
 //          });
 
-          ep.router.navigate(ep.app.config.routes[moduleName], true);
+          var url = ep.app.config.routes[moduleName] || '#home';
+          ep.router.navigate(url, true);
           ep.io.sessionStore.removeItem('addressFormReturnTo');   // clear sessionStorage
         }
       });

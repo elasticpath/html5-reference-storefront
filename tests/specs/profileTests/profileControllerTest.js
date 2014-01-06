@@ -90,11 +90,6 @@ define(function (require) {
       it('registers correct event listener', function () {
         expect(EventBus._events['profile.addNewAddressBtnClicked']).to.have.length(1);
       });
-/*
-      it('redirects page to /#newaddressform', function () {
-        expect(window.location.href).to.have.string(ep.app.config.routes.newAddress);
-      });
-*/
       it('and call correct mediator strategy to add new address', function () {
         expect(Mediator.fire).to.be.calledWithExactly('mediator.addNewAddressRequest', 'profile');
       });

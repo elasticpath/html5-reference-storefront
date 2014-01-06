@@ -439,6 +439,26 @@ define(function (require) {
         expect(EventBus.trigger).to.be.calledWithExactly('checkout.updateChosenAddressRequest', 'fakeSelectAction');
       });
     });
+
+    describe('Responds to event: checkout.addNewAddressBtnClicked', function() {
+      before(function () {
+        sinon.stub(Mediator, 'fire');
+        EventBus.trigger('checkout.addNewAddressBtnClicked');
+      });
+
+      after(function () {
+        Mediator.fire.restore();
+      });
+
+      it('registers correct event listener', function () {
+        expect(EventBus._events['checkout.addNewAddressBtnClicked']).to.have.length(1);
+      });
+      it('and call correct mediator strategy to add new address', function () {
+        expect(Mediator.fire).to.be.calledWithExactly('mediator.addNewAddressRequest', 'checkout');
+      });
+
+    });
+
   });
 
   /**

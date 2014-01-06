@@ -113,8 +113,6 @@ define(function (require) {
       Mediator.fire('mediator.addNewAddressRequest', 'profile');
     });
 
-//    'profile.addressFormComplete'
-
     // this listener not used
     /**
      * Listen to addresses updated signal,

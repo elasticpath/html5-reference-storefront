@@ -1,7 +1,12 @@
 /**
  * Copyright Elastic Path Software 2013.
  *
- * Storefront - Checkout Views
+ * Default Checkout Views
+ * The MVC Views defines checkout views that displays
+ *  - checkout confirmation information,
+ *  - billing information selection,
+ *  - shipping information selection,
+ *  - and, payment information selection.
  */
 define(function (require) {
     var EventBus = require('eventbus');
@@ -142,7 +147,13 @@ define(function (require) {
       itemViewOptions: {
         addressType: 'billing'
       },
-      itemViewContainer: '[data-region="billingAddressSelectorsRegion"]'
+      itemViewContainer: '[data-region="billingAddressSelectorsRegion"]',
+      events: {
+        'click [data-el-label="checkout.newBillingAddressBtn"]': function(event) {
+          event.preventDefault();
+          EventBus.trigger('checkout.addNewAddressBtnClicked');
+        }
+      }
     });
 
     /**
@@ -158,7 +169,7 @@ define(function (require) {
      * Renders a heading and a list of shipping addresses.
      * @type Marionette.CompositeView
      */
-    var shippingAddressesCompositeView = Backbone.Marionette.CompositeView.extend({
+    var shippingAddressesCompositeView = Marionette.CompositeView.extend({
       template: '#ShippingAddressesTemplate',
       templateHelpers: viewHelpers,
       itemView: checkoutAddressSelectorLayout,
@@ -174,7 +185,7 @@ define(function (require) {
      * A layout for rendering shipping option radio buttons and their labels.
      * @type Marionette.ItemView
      */
-    var shippingOptionsSelectorView = Backbone.Marionette.ItemView.extend({
+    var shippingOptionsSelectorView = Marionette.ItemView.extend({
       template: '#ShippingOptionSelectorTemplate',
       templateHelpers: viewHelpers,
       events: {
@@ -197,7 +208,7 @@ define(function (require) {
      * Renders a heading and a list of shipping options.
      * @type Marionette.CompositeView
      */
-    var shippingOptionsCompositeView = Backbone.Marionette.CompositeView.extend({
+    var shippingOptionsCompositeView = Marionette.CompositeView.extend({
       template: '#ShippingOptionsTemplate',
       templateHelpers: viewHelpers,
       itemView: shippingOptionsSelectorView,
