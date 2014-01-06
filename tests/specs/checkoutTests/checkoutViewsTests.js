@@ -104,11 +104,14 @@ define(function (require) {
       it('render() should return the view object', function () {
         expect(this.view.render()).to.be.equal(this.view);
       });
-      it('view contents are rendered', function () {
+      it('renders view contents', function () {
         // View should contain a heading element and a <div> region for billing addresses
-        expect(this.view.el.childElementCount).to.be.equal(2);
         expect(this.view.$el.find('[data-region="billingAddressSelectorsRegion"]')).to.be.length(1);
+        expect(this.view.$el.find('[data-el-label="checkout.newBillingAddressBtn"]')).to.be.length(1);
       });
+
+      describe('add new address button clicked',
+        EventTestFactory.simpleBtnClickTest('checkout.addNewAddressBtnClicked', '[data-el-label="checkout.newBillingAddressBtn"]'));
     });
 
     describe('ShippingAddressesCompositeView', function () {

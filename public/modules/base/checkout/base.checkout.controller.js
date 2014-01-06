@@ -1,7 +1,15 @@
 /**
  * Copyright Elastic Path Software 2013.
  *
- * Storefront - Checkout Controller
+ * Default Checkout Controller
+ * The MVC controller instantiates the checkout model and views, renders checkout views in destinated regions.
+ * It also manages events and functions to
+ *    - select different
+ *        -- billing or shipping address,
+ *        -- shipping options,
+ *        -- and payment options;
+ *    - add new billing address;
+ *    - and submit purchase order.
  */
 
 define(function (require) {
@@ -229,6 +237,7 @@ define(function (require) {
       ep.router.navigate(ep.app.config.routes.cart, true);
     });
 
+    /* ********** CHOOSE (BILLING/SHIPPING) ADDRESS EVENT LISTENERS ************ */
     /**
      * Handler for the checkout.addressRadioChanged event.
      */
@@ -277,6 +286,7 @@ define(function (require) {
       Backbone.history.loadUrl();
     });
 
+    /* ********** SHIPPING OPTION EVENT LISTENERS ************ */
     /**
      * Handler for the checkout.shippingOptionRadioChanged event.
      */
@@ -323,6 +333,16 @@ define(function (require) {
         position: 'middle-center',
         type: 'error'
       });
+    });
+
+
+    /* ********** ADD NEW ADDRESS EVENT LISTENERS ************ */
+    /**
+     * Listen to add new address button clicked signal
+     * will load address form
+     */
+    EventBus.on('checkout.addNewAddressBtnClicked', function () {
+      Mediator.fire('mediator.addNewAddressRequest', 'checkout');
     });
 
     return {

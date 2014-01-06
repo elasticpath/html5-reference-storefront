@@ -69,6 +69,7 @@
   "checkout": {
     "billingAddress": "Billing Address",
     "noBillingAddressesMsg": "You have no saved billing addresses.",
+    "newAddressBtn": "Add a New Address",
     "shippingAddress": "Shipping Address",
     "noShippingAddressesMsg": "You have no saved shipping addresses.",
     "shippingOption": "Shipping Options",
