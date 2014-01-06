@@ -11,7 +11,7 @@ define(function (require) {
   describe('Checkout Module: Models', function () {
     var data = JSON.parse(dataJSON).response;
     var checkoutModel = new models.CheckoutModel();
-    var modelHelpers = _.extend({}, models.testVariable.modelHelpers);
+    var modelHelpers = models.testVariable.modelHelpers;
 
     describe('given all necessary information', function () {
       before(function () {

@@ -5,6 +5,7 @@
  */
 define(function (require) {
   var EventBus = require('eventbus');
+  var Mediator = require('mediator');
   var Backbone = require('backbone');
   var EventTestFactory = require('EventTestFactory');
   var DefaultViewTestHelper = require('testhelpers.defaultview');
@@ -278,46 +279,37 @@ define(function (require) {
     });
 
     describe('responds to event: address.submitAddressFormSuccess', function () {
-      var returnUrl = ep.app.config.routes.profile;
-
       before(function () {
+        sinon.stub(Mediator, 'fire');
         EventBus.trigger('address.submitAddressFormSuccess');
+      });
+
+      after(function () {
+        Mediator.fire.restore();
       });
 
       it('registers correct event listener', function () {
         expect(EventBus._events['address.submitAddressFormSuccess']).to.have.length(1);
       });
-      it('redirects page back to returnUrl: ', function () {
-        expect(window.location.href).to.have.string(returnUrl);
+      it('calls correct mediator strategy to notify storefront address form module is complete', function () {
+        expect(Mediator.fire).to.be.calledWithExactly('mediator.addressFormComplete');
       });
     });
 
     describe('responds to event: address.cancelBtnClicked', function () {
-      var returnUrl = ep.app.config.routes.profile;
-
       before(function () {
+        sinon.stub(Mediator, 'fire');
         EventBus.trigger('address.cancelBtnClicked');
       });
 
       after(function () {
+        Mediator.fire.restore();
       });
       it('registers correct event listener', function () {
         expect(EventBus._events['address.cancelBtnClicked']).to.have.length(1);
       });
-      it('redirects page back to returnUrl: ', function () {
-        expect(window.location.href).to.have.string(returnUrl);
-      });
-    });
-
-    describe('responds to event: address.setReturnUrl', function () {
-      var returnUrl = ep.app.config.routes.profile;
-
-      before(function () {
-        EventBus.trigger('address.setReturnUrl');
-      });
-
-      it('registers correct event listener', function () {
-        expect(EventBus._events['address.setReturnUrl']).to.have.length(1);
+      it('calls correct mediator strategy to notify storefront address form module is complete: ', function () {
+        expect(Mediator.fire).to.be.calledWithExactly('mediator.addressFormComplete');
       });
     });
 

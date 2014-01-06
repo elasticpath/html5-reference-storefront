@@ -8402,6 +8402,12 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
     width: 50%;
   }
 }
+.profile-payment-methods-listing {
+  padding: 0;
+}
+.profile-payment-method-container {
+  margin-bottom: 1rem;
+}
 .toast-container {
   width: 280px;
   z-index: 9999;
