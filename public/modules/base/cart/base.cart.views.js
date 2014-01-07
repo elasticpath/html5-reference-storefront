@@ -385,13 +385,23 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     // Cart Summary View
     var cartSummaryView = Backbone.Marionette.ItemView.extend({
       template:'#CartSummaryTemplate',
-      templateHelpers:viewHelpers
+      templateHelpers:viewHelpers,
+      modelEvents: {
+        'change': function() {
+          this.render();
+        }
+      }
     });
 
     // Cart Checkout Action View
     var cartCheckoutActionView = Backbone.Marionette.ItemView.extend({
       template:'#CartCheckoutActionTemplate',
       templateHelpers:viewHelpers,
+      modelEvents: {
+        'change': function() {
+          this.render();
+        }
+      },
       events:{
         'click .btn-cmd-checkout':function(event){
           EventBus.trigger('cart.checkoutBtnClicked',this.model.get('checkoutLink'));

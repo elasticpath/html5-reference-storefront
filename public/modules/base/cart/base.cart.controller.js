@@ -1,5 +1,5 @@
 /**
- * Copyright Elastic Path Software 2013.
+ * Copyright Elastic Path Software 2013, 2014.
  *
  * Storefront - Cart Controller
  */
@@ -26,28 +26,50 @@ define(function (require) {
     var defaultView = function () {
       pace.start();
       var cartLayout = new View.DefaultLayout();
+
       var cartModel = new Model.CartModel();
+      var cartItemCollection = new Model.CartItemCollection();
+
+      // On successful removal of line item, trigger a fetch of the cart model and update the cart item collection
+      EventBus.on('cart.removeLineItemSuccess', function () {
+        cartModel.fetch({
+          success: function(response) {
+            // Update the collection of cart item products with the new array of line items from the cart model
+            var newCartLineItems = response.get('lineItems');
+
+            cartItemCollection.update(newCartLineItems);
+
+            if (newCartLineItems.length === 0) {
+              cartLayout.mainCartRegion.show(new View.EmptyCartView());
+            }
+          }
+        });
+      });
 
       cartModel.fetch({
         success: function (response) {
-
-          var summaryView = new View.CartSummaryView({
-            model: cartModel
-          });
+          cartItemCollection = new Model.CartItemCollection(response.attributes.lineItems);
 
           // collection (attributes.lineitems) coming from parse method of cartModel
           var mainCartView = new View.MainCartView({
-            collection: new Model.CartItemCollection(response.attributes.lineItems)
+            collection: cartItemCollection
           });
 
           cartLayout.cartTitleRegion.show(new View.CartTitleView());
           var cartCheckoutMasterLayout = new View.CartCheckoutMasterLayout();
           cartCheckoutMasterLayout.on('show', function () {
-            cartCheckoutMasterLayout.cartSummaryRegion.show(summaryView);
-            cartCheckoutMasterLayout.cartCheckoutActionRegion.show(new View.CartCheckoutActionView({
-              model: cartModel
-            }));
+            cartCheckoutMasterLayout.cartSummaryRegion.show(
+              new View.CartSummaryView({
+                model: cartModel
+              })
+            );
+            cartCheckoutMasterLayout.cartCheckoutActionRegion.show(
+              new View.CartCheckoutActionView({
+                model: cartModel
+              })
+            );
           });
+
           cartLayout.cartCheckoutMasterRegion.show(cartCheckoutMasterLayout);
 
           if (response.attributes.lineItems.length > 0) {
@@ -198,13 +220,6 @@ define(function (require) {
       }
       View.resetQuantity(originalQty); // reset quantity
       stickyErrMsg(i18n.t('cart.genericUpdateErrMsg'));
-    });
-
-    /* ********** REMOVE LINE-ITEM EVENT LISTENERS ************ */
-    // Remove Line Item Success
-    EventBus.on('cart.removeLineItemSuccess', function () {
-      // EventBus.trigger('cart.DisplayCartLineItemRemovedSuccessMsg');
-      EventBus.trigger('cart.reloadCartViewRequest');
     });
 
     // Remove Line Item Failed
