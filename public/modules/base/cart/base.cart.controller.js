@@ -39,7 +39,7 @@ define(function (require) {
 
             cartItemCollection.update(newCartLineItems);
 
-            if (newCartLineItems.length === 0) {
+            if (newCartLineItems.length === 0 && cartLayout.mainCartRegion) {
               cartLayout.mainCartRegion.show(new View.EmptyCartView());
             }
           }
