@@ -28,6 +28,16 @@
     <h1 class="view-title"><%= E.getI18nLabel('checkout.checkoutTitle') %></h1>
   </script>
 
+  <!-- Renders a radio button and label for the selection of an individual address -->
+  <script id="CheckoutAddressSelectorTemplate" type="text/template">
+    <!-- A unique ID to associate address labels with radio buttons -->
+    <% var uniqueId = E.getUniqueIdForFormInput('shippingOption_'); %>
+    <input type="radio" name="<%= E.addressType %>" id="<%= uniqueId %>" class="checkout-address-radio" <%= E.getCheckoutRadioCheckedAttr(E) %> />
+    <label for="<%= uniqueId %>">
+      <div data-region="checkoutAddressRegion"></div>
+    </label>
+  </script>
+
   <!-- Rendered when there are no billing addresses to display -->
   <script id="EmptyBillingAddressesTemplate" type="text/template">
     <p data-el-value="checkout.noBillingAddressesMsg"><%= E.getI18nLabel('checkout.noBillingAddressesMsg') %></p>
@@ -60,7 +70,7 @@
   <!-- Renders a radio button and label for the selection of an individual address -->
   <script id="ShippingOptionSelectorTemplate" type="text/template">
     <!-- A unique ID to associate address labels with radio buttons -->
-    <% var uniqueId = _.uniqueId('shippingOption_'); %>
+    <% var uniqueId = E.getUniqueIdForFormInput('shippingOption_'); %>
     <input type="radio" name="shippingOption" id="<%= uniqueId %>" class="shipping-option-radio" <%= E.getCheckoutRadioCheckedAttr(E) %> />
     <label for="<%= uniqueId %>">
       <span data-el-value="shippingOptionDisplayName"><%= E.displayName %></span>
@@ -69,22 +79,16 @@
     </label>
   </script>
 
-  <!-- Provides a wrapper for a list of shipping addresses -->
+  <!-- Provides a wrapper for a list of shipping options -->
   <script id="ShippingOptionsTemplate" type="text/template">
     <h2><%= E.getI18nLabel('checkout.shippingOption') %></h2>
     <div data-region="shippingOptionSelectorsRegion"></div>
   </script>
 
-  <!-- Renders a radio button and label for the selection of an individual address -->
-  <script id="CheckoutAddressSelectorTemplate" type="text/template">
-    <!-- A unique ID to associate address labels with radio buttons -->
-    <% var uniqueId = _.uniqueId('checkoutAddress_'); %>
-    <input type="radio" name="<%= E.addressType %>" id="<%= uniqueId %>" class="checkout-address-radio" <%= E.getCheckoutRadioCheckedAttr(E) %> />
-    <label for="<%= uniqueId %>">
-      <div data-region="checkoutAddressRegion"></div>
-    </label>
-  </script>
 
+  <!--
+  ====== Checkout Summary===========
+  -->
   <!-- Checkout Summary Layout Template [default Layout, class: checkout-sidebar-inner]-->
   <script id="CheckoutSummaryTemplate" type="text/template">
     <ul class="checkout-summary-list">

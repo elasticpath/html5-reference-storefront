@@ -1,5 +1,5 @@
 /**
- * Copyright Elastic Path Software 2013.
+ * Copyright Elastic Path Software 2013-2014.
  *
  * Storefront - Checkout Models
  */
@@ -32,6 +32,11 @@ define(function (require) {
     // choice shipping options
     'deliveries:element:shippingoptioninfo:selector:choice',
     'deliveries:element:shippingoptioninfo:selector:choice:description'
+/*    // chosen payment options
+    'paymentmethodinfo:selector:chosen:description',
+    // choice payment options
+    'paymentmethodinfo:selector:choice',
+    'paymentmethodinfo:selector:choice:description'*/
   ];
 
   /**
@@ -48,7 +53,8 @@ define(function (require) {
         summary: {},
         billingAddresses: [],
         shippingAddresses: [],
-        shippingOptions: []
+        shippingOptions: [],
+        paymentOptions: []
       };
 
       if (response) {
@@ -74,7 +80,6 @@ define(function (require) {
           // Set a chosen shipping address if there is not one set already
           checkoutObj.shippingAddresses = modelHelpers.setChosenEntity(checkoutObj.shippingAddresses);
 
-          // FIXME test after move inside shipping address if
           var parsedShippingOptions = modelHelpers.parseShippingOptions(response);
 
           if (parsedShippingOptions.length) {
@@ -106,6 +111,27 @@ define(function (require) {
      */
     markAsChosenObject: function(obj) {
       return _.extend(obj, {chosen: true});
+    },
+
+    /**
+     * Searches an array of objects (addresses or shipping options)looking for a 'chosen' property.
+     * If there is no 'chosen' object defined, it designates the first object in the array to be
+     * the chosen object by giving it a 'setAsDefaultChoice' property (the presence of this
+     * property will then trigger an update POST to Cortex in the checkout controller code).
+     *
+     * @param objArray Array of objects (these could be billing/shipping addresses or shipping options)
+     * @returns {Array} Array of objects with a chosen object defined
+     */
+    setChosenEntity: function(objArray) {
+      var chosenEntity = _.find(objArray, function(obj) {
+        return obj.chosen;
+      });
+
+      if (!chosenEntity) {
+        _.extend(objArray[0], { setAsDefaultChoice: true });
+      }
+
+      return objArray;
     },
 
     /**
@@ -280,27 +306,6 @@ define(function (require) {
       }
 
       return checkoutAddresses;
-    },
-
-    /**
-     * Searches an array of objects (addresses or shipping options)looking for a 'chosen' property.
-     * If there is no 'chosen' object defined, it designates the first object in the array to be
-     * the chosen object by giving it a 'setAsDefaultChoice' property (the presence of this
-     * property will then trigger an update POST to Cortex in the checkout controller code).
-     *
-     * @param objArray Array of objects (these could be billing/shipping addresses or shipping options)
-     * @returns {Array} Array of objects with a chosen object defined
-     */
-    setChosenEntity: function(objArray) {
-      var chosenAddress = _.find(objArray, function(address) {
-        return address.chosen;
-      });
-
-      if (!chosenAddress) {
-        _.extend(objArray[0], { setAsDefaultChoice: true });
-      }
-
-      return objArray;
     },
 
     /**

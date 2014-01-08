@@ -1,5 +1,5 @@
 /**
- * Copyright Elastic Path Software 2013.
+ * Copyright Elastic Path Software 2013-2014.
  *
  * Default Checkout Views
  * The MVC Views defines checkout views that displays
@@ -22,6 +22,7 @@ define(function (require) {
        * @param submitOrderActionLink The action-link to which the submit order request is posted.
        * @returns {string} HTML disabled attribute or empty string
        */
+        // FIXME could this function be abstracted to be shared by cartSubmitBtn, itemAddToCartBtn, checkoutSubmitBtn etc etc?
       getSubmitOrderButtonDisabledAttr: function (submitOrderActionLink) {
         // complete purchase disabled by default
         var retVar = 'disabled="disabled"';
@@ -43,11 +44,29 @@ define(function (require) {
       getCheckoutRadioCheckedAttr: function(obj) {
         var checkedAttr = '';
 
-        if (obj.chosen === true) {
+        if (obj && obj.chosen === true) {
           checkedAttr = 'checked="checked"';
         }
 
         return checkedAttr;
+      },
+
+      /**
+       * Generate an unique Id value for form input. Taking 1 parameter for prefix to append to the ID.
+       * @param prefix text to prepend to the generated ID
+       * @returns String an unique ID.
+       */
+      getUniqueIdForFormInput: function(prefix) {
+        var uniqueId;
+
+        if (prefix) {
+          uniqueId = _.uniqueId(prefix);
+        }
+        else {
+          uniqueId = _.uniqueId();
+        }
+
+        return uniqueId;
       }
     });
 
@@ -98,7 +117,7 @@ define(function (require) {
      * Makes a mediator request to load an address view in region: billingAddressRegion.
      * @type Marionette.Layout
      */
-    var checkoutAddressSelectorLayout = Backbone.Marionette.Layout.extend({
+    var checkoutAddressSelectorLayout = Marionette.Layout.extend({
       template: '#CheckoutAddressSelectorTemplate',
       templateHelpers: viewHelpers,
       serializeData: function() {
@@ -137,7 +156,7 @@ define(function (require) {
      * Renders a heading and a list of billing addresses.
      * @type Marionette.CompositeView
      */
-    var billingAddressesCompositeView = Backbone.Marionette.CompositeView.extend({
+    var billingAddressesCompositeView = Marionette.CompositeView.extend({
       template: '#BillingAddressesTemplate',
       templateHelpers: viewHelpers,
       itemView: checkoutAddressSelectorLayout,
@@ -221,8 +240,6 @@ define(function (require) {
       itemViewContainer: '[data-region="shippingOptionSelectorsRegion"]'
     });
 
-
-
     /**
      * Renders the shipping total (used in the checkout summary view)
      * @type Marionette.ItemView
@@ -296,7 +313,10 @@ define(function (require) {
       CheckoutTaxTotalView: checkoutTaxTotalView,
       CheckoutTaxesCollectionView: checkoutTaxesCollectionView,
       setCheckoutButtonProcessing: setCheckoutButtonProcessing,
-      resetCheckoutButtonText: resetCheckoutButtonText
+      resetCheckoutButtonText: resetCheckoutButtonText,
+      testVariables: {
+        viewHelpers: viewHelpers
+      }
     };
   }
 );

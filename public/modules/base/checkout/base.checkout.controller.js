@@ -1,5 +1,5 @@
 /**
- * Copyright Elastic Path Software 2013.
+ * Copyright Elastic Path Software 2013-2014.
  *
  * Default Checkout Controller
  * The MVC controller instantiates the checkout model and views, renders checkout views in destinated regions.
@@ -27,6 +27,9 @@ define(function (require) {
     $('#TemplateContainer').append(template);
     _.templateSettings.variable = 'E';
 
+
+    var checkoutModel = new Model.CheckoutModel();
+
     /**
      * Instantiate an checkout DefaultLayout and load views into corresponding regions
      * @returns {View.DefaultLayout}  fully rendered checkout DefaultLayout
@@ -42,7 +45,6 @@ define(function (require) {
 
       pace.start();
       var checkoutLayout = new View.DefaultLayout();
-      var checkoutModel = new Model.CheckoutModel();
 
       checkoutModel.fetch({
         url: checkoutModel.getUrl(orderLink),
