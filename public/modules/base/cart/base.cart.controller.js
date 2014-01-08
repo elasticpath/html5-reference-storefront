@@ -15,42 +15,34 @@ define(function (require) {
     var View = require('cart.views');
     var template = require('text!modules/base/cart/base.cart.templates.html');
 
-
     pace.start();
 
     $('#TemplateContainer').append(template);
 
     _.templateSettings.variable = 'E';
 
+    // Instantiate a cart DefaultLayout view
+    var cartLayout = new View.DefaultLayout();
 
+    /**
+     * Instantiate the cart model and item collection here so they can be modified
+     * by the EventBus event handlers when the items in the cart are changed.
+     */
+    var cartModel = new Model.CartModel();
+    var cartItemCollection = new Model.CartItemCollection();
+
+    /**
+     * Loads views into corresponding regions of the DefaultLayout view.
+     * @returns {View.DefaultLayout} fully rendered cart DefaultLayout
+     */
     var defaultView = function () {
       pace.start();
-      var cartLayout = new View.DefaultLayout();
-
-      var cartModel = new Model.CartModel();
-      var cartItemCollection = new Model.CartItemCollection();
-
-      // On successful removal of line item, trigger a fetch of the cart model and update the cart item collection
-      EventBus.on('cart.removeLineItemSuccess', function () {
-        cartModel.fetch({
-          success: function(response) {
-            // Update the collection of cart item products with the new array of line items from the cart model
-            var newCartLineItems = response.get('lineItems');
-
-            cartItemCollection.update(newCartLineItems);
-
-            if (newCartLineItems.length === 0 && cartLayout.mainCartRegion) {
-              cartLayout.mainCartRegion.show(new View.EmptyCartView());
-            }
-          }
-        });
-      });
 
       cartModel.fetch({
         success: function (response) {
-          cartItemCollection = new Model.CartItemCollection(response.attributes.lineItems);
+          // Populate the cart item collection with the line items parsed in the cart model
+          cartItemCollection = new Model.CartItemCollection(response.get('lineItems'));
 
-          // collection (attributes.lineitems) coming from parse method of cartModel
           var mainCartView = new View.MainCartView({
             collection: cartItemCollection
           });
@@ -222,7 +214,26 @@ define(function (require) {
       stickyErrMsg(i18n.t('cart.genericUpdateErrMsg'));
     });
 
-    // Remove Line Item Failed
+    /* ********** Remove line item EVENT LISTENERS ********** */
+    // On successful removal of line item, trigger a fetch of the cart model and update the cart item collection.
+    // The checkout summary view will be updated separately by model change listeners on the view.
+    EventBus.on('cart.removeLineItemSuccess', function () {
+      cartModel.fetch({
+
+        success: function(response) {
+          // Update the collection of cart item products with the new array of line items from the cart model
+          var newCartLineItems = response.get('lineItems');
+
+          cartItemCollection.update(newCartLineItems);
+
+          if (newCartLineItems.length === 0 && cartLayout.mainCartRegion) {
+            cartLayout.mainCartRegion.show(new View.EmptyCartView());
+          }
+        }
+      });
+    });
+
+    // Logs an error when the request to remove a line item fails.
     EventBus.on('cart.removeLineItemFailed', function (response) {
       // should use the toastMsg to inform user
       ep.logger.error('error deleting lineItem from cart: ' + response);
@@ -253,7 +264,6 @@ define(function (require) {
       }
     });
 
-    /* ********** EVENT LISTENERS ************ */
     /**
      * Listening to requests to reload cartView,
      * will reload the entire cartView.
