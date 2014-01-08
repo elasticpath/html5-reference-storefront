@@ -208,11 +208,7 @@ define(function (reqiure) {
         var testPath = ep.io.getApiContext();
         var pathIndex = replaceUrl.indexOf(testPath);
         if (pathIndex > 0) {
-
           replaceUrl = replaceUrl.substring(pathIndex, replaceUrl.length);
-          // ep.logger.info('YAUYAUYAP0SDFASDF   path: ' + replaceUrl);
-
-
         }
         options.url = replaceUrl;
       }
@@ -223,8 +219,6 @@ define(function (reqiure) {
       var authToken = getAuthToken();
       if (authToken) {
         _.extend(options.headers, { 'Authorization': getAuthToken() });
-//
-//        ep.logger.info('SYNC REQUEST: ' + model + '   : ' + options);
         baseSync(method, model, options);
       }
       else {
