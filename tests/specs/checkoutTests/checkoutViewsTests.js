@@ -53,10 +53,6 @@ define(function (require) {
           expect(this.view.shippingOptionsRegion).to.exist;
           expect(this.view.$el.find('[data-region="shippingOptionsRegion"]')).to.be.length(1);
         });
-        it('should have a cancelCheckoutActionRegion region', function () {
-          expect(this.view.cancelCheckoutActionRegion).to.exist;
-          expect(this.view.$el.find('[data-region="cancelCheckoutActionRegion"]')).to.be.length(1);
-        });
         it('should have a checkoutOrderRegion region', function () {
           expect(this.view.checkoutOrderRegion).to.exist;
           expect(this.view.$el.find('[data-region="checkoutOrderRegion"]')).to.be.length(1);
@@ -105,7 +101,6 @@ define(function (require) {
         expect(this.view.render()).to.be.equal(this.view);
       });
       it('renders view contents', function () {
-        // View should contain a heading element and a <div> region for billing addresses
         expect(this.view.$el.find('[data-region="billingAddressSelectorsRegion"]')).to.be.length(1);
         expect(this.view.$el.find('[data-el-label="checkout.newBillingAddressBtn"]')).to.be.length(1);
       });
@@ -127,10 +122,12 @@ define(function (require) {
         expect(this.view.render()).to.be.equal(this.view);
       });
       it('view contents are rendered', function () {
-        // View should contain a heading element and a <div> region for shipping addresses
-        expect(this.view.el.childElementCount).to.be.equal(2);
         expect(this.view.$el.find('[data-region="shippingAddressSelectorsRegion"]')).to.be.length(1);
+        expect(this.view.$el.find('[data-el-label="checkout.newShippingAddressBtn"]')).to.be.length(1);
       });
+
+      describe('add new address button clicked',
+        EventTestFactory.simpleBtnClickTest('checkout.addNewAddressBtnClicked', '[data-el-label="checkout.newShippingAddressBtn"]'));
     });
 
     describe('ShippingOptionsCompositeView', function () {
@@ -265,26 +262,5 @@ define(function (require) {
         });
       });
     });
-
-    describe('CancelCheckoutActionView', function () {
-      before(function () {
-        this.view = new views.CancelCheckoutActionView();
-        this.view.render();
-      });
-
-      it('should be an instance of Marionette ItemView object', function () {
-        expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
-      });
-      it('render() should return the view object', function () {
-        expect(this.view.render()).to.be.equal(this.view);
-      });
-      it('renders submitOrder button', function() {
-        expect(this.view.$el.find('button[data-el-label="checkout.cancelCheckout"]')).to.be.length(1);
-      });
-
-      describe('checkout cancel button clicked',
-        EventTestFactory.simpleBtnClickTest('checkout.cancelOrderBtnClicked', '[data-el-label="checkout.cancelCheckout"]'));
-    });
-
   });
 });

@@ -250,22 +250,6 @@ define(function (require) {
       });
     });
 
-    // Event Listener: cart.cancelOrderBtnClicked
-    describe('Responds to event: checkout.cancelOrderBtnClicked', function() {
-      var actionLink = 'ActionLinkTrue';
-
-      before(function () {
-        ep.router = new Marionette.AppRouter();
-        sinon.spy(ep.router, 'navigate');
-
-        EventBus.trigger('checkout.cancelOrderBtnClicked', actionLink);
-      });
-
-      it('routes the user to the checkout view', sinon.test(function () {
-        expect(ep.router.navigate).to.be.calledWithExactly(ep.app.config.routes.cart, true);
-      }));
-    });
-
     // Event Listener: cart.submitOrderBtnClicked
     describe("Responds to event: checkout.submitOrderBtnClicked", function () {
       var unboundEventKey = 'checkout.submitOrderRequest';

@@ -80,7 +80,6 @@ define(function (require) {
         billingAddressesRegion: '[data-region="billingAddressesRegion"]',
         shippingAddressesRegion: '[data-region="shippingAddressesRegion"]',
         shippingOptionsRegion: '[data-region="shippingOptionsRegion"]',
-        cancelCheckoutActionRegion: '[data-region="cancelCheckoutActionRegion"]',
         checkoutOrderRegion: '[data-region="checkoutOrderRegion"]'
       }
     });
@@ -178,7 +177,13 @@ define(function (require) {
       itemViewOptions: {
         addressType: 'shipping'
       },
-      itemViewContainer: '[data-region="shippingAddressSelectorsRegion"]'
+      itemViewContainer: '[data-region="shippingAddressSelectorsRegion"]',
+      events: {
+        'click [data-el-label="checkout.newShippingAddressBtn"]': function(event) {
+          event.preventDefault();
+          EventBus.trigger('checkout.addNewAddressBtnClicked');
+        }
+      }
     });
 
     /**
@@ -216,19 +221,7 @@ define(function (require) {
       itemViewContainer: '[data-region="shippingOptionSelectorsRegion"]'
     });
 
-    /**
-     * Renders a cancel checkout button.
-     * @type Marionette.ItemView
-     */
-    var cancelCheckoutActionView = Marionette.ItemView.extend({
-      template: '#CancelCheckoutActionTemplate',
-      templateHelpers: viewHelpers,
-      events: {
-        'click .btn-cancel-order': function() {
-          EventBus.trigger('checkout.cancelOrderBtnClicked');
-        }
-      }
-    });
+
 
     /**
      * Renders the shipping total (used in the checkout summary view)
@@ -298,7 +291,6 @@ define(function (require) {
       BillingAddressesCompositeView: billingAddressesCompositeView,
       ShippingAddressesCompositeView: shippingAddressesCompositeView,
       ShippingOptionsCompositeView: shippingOptionsCompositeView,
-      CancelCheckoutActionView: cancelCheckoutActionView,
       CheckoutSummaryView: checkoutSummaryView,
       CheckoutShippingTotalView: checkoutShippingTotalView,
       CheckoutTaxTotalView: checkoutTaxTotalView,
