@@ -87,6 +87,31 @@
 
 
   <!--
+  ====== Select Payment Options ===========
+  -->
+  <!-- Provides a wrapper for a list of payment options -->
+  <script id="PaymentMethodsTemplate" type="text/template">
+    <h2><%= E.getI18nLabel('checkout.paymentMethod') %></h2>
+    <div data-region="paymentMethodSelectorsRegion"></div>
+  </script>
+
+  <!-- Rendered when there are no payment options to display -->
+  <script id="EmptyPaymentMethodsTemplate" type="text/template">
+    <p data-el-value="checkout.noPaymentMethodsMsg"><%= E.getI18nLabel('checkout.noPaymentMethodsMsg') %></p>
+  </script>
+
+  <!-- Providers a wrapper to render a radio button and region to render the individual payment options -->
+  <script id="PaymentMethodSelectorTemplate" type="text/template">
+    <!-- A unique ID to associate address labels with radio buttons -->
+    <% var uniqueId = E.getUniqueIdForFormInput('paymentMethod_'); %>
+    <input type="radio" name="paymentMethod" id="<%= uniqueId %>" class="payment-option-radio" <%= E.getCheckoutRadioCheckedAttr(E) %> />
+    <label for="<%= uniqueId %>">
+      <div data-region="checkoutPaymentMethodRegion"></div>
+    </label>
+  </script>
+
+
+  <!--
   ====== Checkout Summary===========
   -->
   <!-- Checkout Summary Layout Template [default Layout, class: checkout-sidebar-inner]-->

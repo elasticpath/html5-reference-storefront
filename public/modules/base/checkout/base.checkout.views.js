@@ -99,6 +99,7 @@ define(function (require) {
         billingAddressesRegion: '[data-region="billingAddressesRegion"]',
         shippingAddressesRegion: '[data-region="shippingAddressesRegion"]',
         shippingOptionsRegion: '[data-region="shippingOptionsRegion"]',
+        paymentMethodRegion: '[data-region="paymentMethodRegion"]',
         checkoutOrderRegion: '[data-region="checkoutOrderRegion"]'
       }
     });
@@ -240,6 +241,53 @@ define(function (require) {
       itemViewContainer: '[data-region="shippingOptionSelectorsRegion"]'
     });
 
+
+    /**
+     * A layout for rendering payment method radio buttons and their labels.
+     * @type Marionette.Layout
+     */
+    var paymentMethodSelectorView = Marionette.Layout.extend({
+      template: '#PaymentMethodSelectorTemplate',
+      templateHelpers: viewHelpers,
+      regions: {
+        checkoutPaymentRegion: '[data-region="checkoutPaymentMethodRegion"]'
+      },
+      events: {
+        'change input[type="radio"]': function () {
+          EventBus.trigger('checkout.paymentMethodRadioChanged', this.model.get('selectAction'));
+        }
+      },
+      onShow: function () {
+        // Fire event to load the address itemView from component
+        Mediator.fire('mediator.loadPaymentMethodViewRequest', {
+          region: this.checkoutPaymentRegion,
+          model: this.model
+        });
+      }
+    });
+
+    /**
+     * Rendered by PaymentMethodCompositeView when there are no payment method to be displayed.
+     * @type Marionette.ItemView
+     */
+    var paymentMethodEmptyView = Marionette.ItemView.extend({
+      template: '#EmptyPaymentMethodsTemplate',
+      templateHelpers: viewHelpers
+    });
+
+    /**
+     * Renders a heading and a list of payment methods.
+     * @type Marionette.CompositeView
+     */
+    var paymentMethodsCompositeView = Marionette.CompositeView.extend({
+      template: '#PaymentMethodsTemplate',
+      templateHelpers: viewHelpers,
+      itemView: paymentMethodSelectorView,
+      emptyView: paymentMethodEmptyView,
+      itemViewContainer: '[data-region="paymentMethodSelectorsRegion"]'
+    });
+
+
     /**
      * Renders the shipping total (used in the checkout summary view)
      * @type Marionette.ItemView
@@ -308,6 +356,7 @@ define(function (require) {
       BillingAddressesCompositeView: billingAddressesCompositeView,
       ShippingAddressesCompositeView: shippingAddressesCompositeView,
       ShippingOptionsCompositeView: shippingOptionsCompositeView,
+      PaymentMethodsCompositeView: paymentMethodsCompositeView,
       CheckoutSummaryView: checkoutSummaryView,
       CheckoutShippingTotalView: checkoutShippingTotalView,
       CheckoutTaxTotalView: checkoutTaxTotalView,
@@ -315,7 +364,8 @@ define(function (require) {
       setCheckoutButtonProcessing: setCheckoutButtonProcessing,
       resetCheckoutButtonText: resetCheckoutButtonText,
       testVariables: {
-        viewHelpers: viewHelpers
+        viewHelpers: viewHelpers,
+        PaymentMethodSelectorView: paymentMethodSelectorView
       }
     };
   }
