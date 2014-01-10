@@ -188,6 +188,9 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       regions:{
         cartSummaryRegion:'[data-region="cartSummaryRegion"]',
         cartCheckoutActionRegion:'[data-region="cartCheckoutActionRegion"]'
+      },
+      ui: {
+        activityIndicatorEl: '.cart-sidebar-inner'
       }
     });
 
