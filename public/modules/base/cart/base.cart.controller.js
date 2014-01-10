@@ -237,7 +237,7 @@ define(function (require) {
       });
     });
 
-    // Logs an error when the request to remove a line item fails and stops the
+    // Logs an error when the request to remove a line item fails and stops the relevant activity indicators.
     EventBus.on('cart.removeLineItemFailed', function (response) {
       ep.ui.stopActivityIndicator(cartLayout.mainCartRegion.currentView);
       ep.ui.stopActivityIndicator(cartLayout.cartCheckoutMasterRegion.currentView);
