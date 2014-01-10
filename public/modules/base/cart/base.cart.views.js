@@ -182,7 +182,13 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       }
     });
 
-    // Cart Checkout Master View
+    /**
+     * A layout containing the cart summary and checkout action elements.
+     * The $el object returned by this view is not a suitable target for an activity indicator
+     * so the ui.activityIndicatorEl property is used to specify a more suitable object.
+     *
+     * @type {Backbone.Marionette.Layout}
+     */
     var cartCheckoutMasterLayout = Backbone.Marionette.Layout.extend({
       template:'#CartCheckoutMasterLayoutTemplate',
       regions:{
@@ -190,6 +196,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
         cartCheckoutActionRegion:'[data-region="cartCheckoutActionRegion"]'
       },
       ui: {
+        // A jQuery selector for the DOM element to which an activity indicator should be applied.
         activityIndicatorEl: '.cart-sidebar-inner'
       }
     });

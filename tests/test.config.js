@@ -17,6 +17,8 @@ requirejs.config({
     'i18n'            : 'scripts/lib/i18next.amd-1.6.0',
     'toast'           : 'scripts/lib/plugins/jquery.toastmessage',
     'modalwin'        : 'scripts/lib/plugins/jquery.simplemodal-1.4.4',
+    'spin'            : 'scripts/lib/plugins/spin',
+    'jquerySpin'      : 'scripts/lib/plugins/jquery.spin',
 
     'router'          : 'router',
     'ep'              : 'ep.client',

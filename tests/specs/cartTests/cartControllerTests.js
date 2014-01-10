@@ -245,6 +245,64 @@ define(function (require) {
       });
     });
 
+    // Event Listener: cart.removeLineItemBtnClicked
+    describe('Responds to event: cart.removeLineItemBtnClicked', function() {
+      before(function() {
+        sinon.spy(EventBus, 'trigger');
+        sinon.stub(ep.ui, 'startActivityIndicator');
+        sinon.stub(window, 'confirm', function() {
+          return true;
+        });
+        EventTestHelpers.unbind('cart.removeLineItemRequest');
+
+        this.fakeActionLink = 'fakeActionLink';
+        EventBus.trigger('cart.removeLineItemBtnClicked', this.fakeActionLink);
+      });
+      after(function() {
+        EventTestHelpers.reset();
+        EventBus.trigger.restore();
+        ep.ui.startActivityIndicator.restore();
+        window.confirm.restore();
+        delete(this.fakeActionLink);
+      });
+      it('should start the activity indicator for the cart regions that may be updated', function() {
+        expect(ep.ui.startActivityIndicator).to.be.calledTwice;
+      });
+      it('should trigger cart.removeLineItemRequest with the actionLink parameter', function() {
+        expect(EventBus.trigger).to.be.calledWithExactly('cart.removeLineItemRequest', this.fakeActionLink);
+      });
+    });
+
+    describe('Resonds to event: cart.removeLineItemSuccess', function() {
+      before(function() {
+        sinon.stub(Backbone.Model.prototype, 'fetch');
+
+        EventBus.trigger('cart.removeLineItemSuccess');
+      });
+      after(function() {
+        Backbone.Model.prototype.fetch.restore();
+      });
+      it('fetches the cart model', function() {
+        expect(Backbone.Model.prototype.fetch).to.be.called;
+      });
+    });
+
+    describe('Responds to event: cart.removeLineItemFailed', function() {
+      before(function() {
+        sinon.stub(ep.ui, 'stopActivityIndicator');
+        sinon.stub(ep.logger, 'error');
+        EventBus.trigger('cart.removeLineItemFailed');
+      });
+      after(function() {
+        ep.ui.stopActivityIndicator.restore();
+        ep.logger.error.restore();
+      });
+      it('stops the activity indicators and writes an error to the logger', function() {
+        expect(ep.ui.stopActivityIndicator).to.be.calledTwice;
+        expect(ep.logger.error).to.be.called;
+      });
+    });
+
     // Event Listener: cart.checkoutBtnClicked
     describe('Responds to event: cart.checkoutBtnClicked', function () {
 
