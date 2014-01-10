@@ -7,27 +7,26 @@ define(function (require) {
 
   return {
     /**
-     * Create a simple test that expect empty array when tested raw data is unavailable.
+     * Create a simple test to test model provides empty object / array for a property
+     * even if that part of raw data is missing. The importance of this is to prevent view from throw error
+     * when using that property to render.
      *
-     * @param jsonData          the raw json data
-     * @param stubbingDataName  name of part of raw data to be stubbed out
-     * @param model             model under testing
-     * @param arrayName         name of array expected to be empty
-     * @returns {Function}      a simple test expecting empty array when raw data is unavailable
+     * @param model       model under testing
+     * @param rawData     name of part of raw data to be removed
+     * @param testFns     test functions to assert property has empty object / array for value
+     * @returns {Function} a simple test expecting model will not cause error for views even with missing raw data
      */
-    simpleExpectEmptyArrayTestFactory: function (jsonData, stubbingDataName, model, arrayName) {
-      return function() {
+    simpleMissingDataTestFactory: function (model, rawData, testFns) {
+      return function () {
         var isSpying = false;
 
-        before(function() {
+        before(function () {
           // make sure EventBus.trigger isn't spied already outside
           if (ep.logger.error.toString() !== 'error') {
             sinon.spy(ep.logger, 'error');
             isSpying = true;
           }
 
-          var rawData = _.extend({}, jsonData);
-          rawData[stubbingDataName] = [];
           this.model = model.parse(rawData);
         });
 
@@ -42,10 +41,26 @@ define(function (require) {
         it('does not raise an error', function () {
           expect(ep.logger.error).to.be.not.called;
         });
+
+        testFns();
+      };
+    },
+
+    /**
+     * Create a simple test that expect empty array when tested raw data is unavailable.
+     *
+     * @param jsonData          the raw json data
+     * @param dataToRemove      name of part of raw data to be removed
+     * @param model             model under testing
+     * @param arrayName         name of array expected to be empty
+     * @returns {Function}      a simple test expecting empty array when raw data is unavailable
+     */
+    simpleExpectEmptyArrayTestFactory: function (jsonData, dataToRemove, model, arrayName) {
+      return this.simpleMissingDataTestFactory(model, _.omit(jsonData, dataToRemove), function () {
         it('returns an empty ' + arrayName + ' array', function () {
           expect(this.model[arrayName]).to.have.length(0);
         });
-      };
+      });
     }
   };
 });

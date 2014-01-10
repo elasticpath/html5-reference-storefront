@@ -99,7 +99,7 @@ define(function (require) {
         billingAddressesRegion: '[data-region="billingAddressesRegion"]',
         shippingAddressesRegion: '[data-region="shippingAddressesRegion"]',
         shippingOptionsRegion: '[data-region="shippingOptionsRegion"]',
-        paymentMethodRegion: '[data-region="paymentMethodRegion"]',
+        paymentMethodsRegion: '[data-region="paymentMethodsRegion"]',
         checkoutOrderRegion: '[data-region="checkoutOrderRegion"]'
       }
     });
@@ -132,7 +132,8 @@ define(function (require) {
       },
       events: {
         'change input[type="radio"]': function () {
-          EventBus.trigger('checkout.addressRadioChanged', this.model.get('selectAction'));
+          var eventName = 'checkout.' + this.options.addressType + 'AddressRadioChanged';
+          EventBus.trigger(eventName, this.model.get('selectAction'));
         }
       },
       onShow: function () {
@@ -284,7 +285,11 @@ define(function (require) {
       templateHelpers: viewHelpers,
       itemView: paymentMethodSelectorView,
       emptyView: paymentMethodEmptyView,
-      itemViewContainer: '[data-region="paymentMethodSelectorsRegion"]'
+      itemViewContainer: '[data-region="paymentMethodSelectorsRegion"]',
+      ui: {
+        // A jQuery selector for the DOM element to which an activity indicator should be applied.
+        activityIndicatorEl: '[data-region="paymentMethodSelectorsRegion"]'
+      }
     });
 
 
@@ -335,12 +340,15 @@ define(function (require) {
      */
     var checkoutSummaryView = Marionette.Layout.extend({
       template: '#CheckoutSummaryTemplate',
-      className: 'checkout-sidebar-inner',
       templateHelpers: viewHelpers,
       regions: {
         checkoutShippingTotalRegion: '[data-region="checkoutShippingTotalRegion"]',
         checkoutTaxTotalRegion: '[data-region="checkoutTaxTotalRegion"]',
         checkoutTaxBreakDownRegion: '[data-region="checkoutTaxBreakDownRegion"]'
+      },
+      ui: {
+        // A jQuery selector for the DOM element to which an activity indicator should be applied.
+        activityIndicatorEl: '.checkout-sidebar-inner'
       },
       events: {
         'click .btn-cmd-submit-order': function () {

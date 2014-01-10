@@ -68,7 +68,7 @@ to which the spinner is being added is itself relatively or absolutely positione
   $.fn.spin = function(opts, color) {
 
     // Create an overlay element that will be positioned over the given jQuery object
-    var overlay = $('<div class="overlay" style="position: absolute; background: rgba(255,255,255,0.5); z-index: 10000;"></div>');
+    var overlay = $('<div class="overlay" style="position: absolute; background: rgba(255,255,255,0.5); z-index: 999;"></div>');
 
     return this.each(function() {
       var $this = $(this),
@@ -99,9 +99,9 @@ to which the spinner is being added is itself relatively or absolutely positione
   };
 
   $.fn.spin.presets = {
-    tiny: { lines: 8, length: 2, width: 2, radius: 3 },
-    small: { lines: 8, length: 4, width: 3, radius: 5 },
-    large: { lines: 10, length: 8, width: 4, radius: 8 }
+    tiny: { lines: 8, length: 2, width: 2, radius: 3, zIndex: 1000  },
+    small: { lines: 8, length: 4, width: 3, radius: 5, zIndex: 1000 },
+    large: { lines: 10, length: 8, width: 4, radius: 8, zIndex: 1000  }
   };
 
 }));

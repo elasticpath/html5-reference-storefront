@@ -29,6 +29,7 @@
     border-radius: 6px;
     background-color: rgba(255, 255, 255, 0.6);
     text-align: left;
+    position: relative;
 
     h3 {
       margin: 0 0 2rem 0;
@@ -107,4 +108,11 @@
       display: block;
     }
   }
+}
+
+[data-region="billingAddressesRegion"],
+[data-region="shippingAddressesRegion"],
+[data-region="shippingOptionsRegion"],
+[data-region="paymentMethodSelectorsRegion"]{
+  position: relative;
 }

@@ -5,17 +5,18 @@
  */
 define(function (require) {
   var ep = require('ep');
+  var modelTestFactory = require('testfactory.model');
+
   var models = require('checkout.models');
   var dataJSON = require('text!/tests/data/checkout.json');
 
   describe('Checkout Module: Models', function () {
-    var data = JSON.parse(dataJSON).response;
     var checkoutModel = new models.CheckoutModel();
     var modelHelpers = models.testVariable.modelHelpers;
 
     describe('given all necessary information', function () {
       before(function () {
-        this.rawData = _.extend({}, data);
+        this.rawData = JSON.parse(_.clone(dataJSON)).response;
         this.model = checkoutModel.parse(this.rawData);
 
         // Get a count of the number of choice and chosen addresses in the rawData JSON
@@ -28,8 +29,11 @@ define(function (require) {
         this.numChosenShippingAddresses = jsonPath(this.rawData, '$.._destinationinfo[0].._chosen.._description[0]').length;
         this.numChoiceShippingAddresses = jsonPath(this.rawData, '$.._destinationinfo[0].._choice')[0].length;
 
-        this.numChosenShippingOptions = jsonPath(this.rawData, '$.._shippingoptioninfo[0].._chosen.._description[0]').length;
+        this.numChosenPaymentMethods = jsonPath(this.rawData, '$.._shippingoptioninfo[0].._chosen.._description[0]').length;
         this.numChoiceShippingOptions = jsonPath(this.rawData, '$.._shippingoptioninfo[0].._choice')[0].length;
+
+        this.numChosenPaymentMethods = jsonPath(this.rawData, '$.._paymentmethodinfo[0].._chosen.._description[0]').length;
+        this.numChoicePaymentMethods = jsonPath(this.rawData, '$.._paymentmethodinfo[0].._choice')[0].length;
       });
 
       after(function () {
@@ -41,8 +45,11 @@ define(function (require) {
         delete(this.numChosenShippingAddresses);
         delete(this.numChoiceShippingAddresses);
 
-        delete(this.numChosenShippingOptions);
+        delete(this.numChosenPaymentMethods);
         delete(this.numChoiceShippingOptions);
+
+        delete(this.numChosenPaymentMethods);
+        delete(this.numChoicePaymentMethods);
       });
 
       it('has non-empty submitOrderLink', function () {
@@ -64,6 +71,9 @@ define(function (require) {
       it('has parsed a delivery type', function() {
         expect(this.model.deliveryType).to.eql("SHIPMENT");
       });
+      it('has showPaymentMethods property set to true', function() {
+        expect(this.model.showPaymentMethods).to.be.ok;
+      });
       it('has parsed the shipping total', function() {
         expect(this.model.summary.shippingTotal).to.not.eql({});
       });
@@ -77,93 +87,75 @@ define(function (require) {
       });
       it('parsed a shippingOptions object with the correct number of options', function() {
         expect(this.model.shippingOptions).to.be.not.eql([]);
-        expect(this.model.shippingOptions.length).to.be.eql(this.numChosenShippingOptions + this.numChoiceShippingOptions);
+        expect(this.model.shippingOptions.length).to.be.eql(this.numChosenPaymentMethods + this.numChoiceShippingOptions);
+      });
+      it('parsed a paymentMethods object with the correct number of options', function() {
+        expect(this.model.paymentMethods.length).to.be.eql(this.numChosenPaymentMethods + this.numChoicePaymentMethods);
       });
     });
 
-    describe('given undefined response argument to parse', function () {
+    describe('given response', function() {
+      var data = JSON.parse(_.clone(dataJSON)).response;
       before(function () {
         sinon.stub(ep.logger, 'error');
-        checkoutModel.parse(undefined);
+      });
+
+      beforeEach(function() {
+        ep.logger.error.reset();
       });
 
       after(function () {
         ep.logger.error.restore();
       });
 
-      it('catches & logs the error', function () {
-        expect(ep.logger.error).to.be.called;
-      });
-    });
-
-    describe('does not cause error', function () {
-      beforeEach(function () {
-        sinon.stub(ep.logger, 'error');
+      describe('is undefined', function() {
+        it('logs an error', function () {
+          checkoutModel.parse(undefined);
+          expect(ep.logger.error).to.be.called;
+        });
       });
 
-      afterEach(function () {
-        ep.logger.error.restore();
-      });
+      describe('is missing billing addresses',
+        modelTestFactory.simpleExpectEmptyArrayTestFactory(data, '_billingaddressinfo', checkoutModel, 'billingAddresses'));
 
-      it('when missing submitOrderActionLink', function () {
-        var rawData = _.extend({}, data);
-        rawData._purchaseform = [];
-        var model = checkoutModel.parse(rawData);
+      describe('is missing shipping addresses',
+        modelTestFactory.simpleExpectEmptyArrayTestFactory(data, '_deliveries', checkoutModel, 'shippingAddresses'));
 
-        expect(ep.logger.error).to.be.not.called;
-        expect(model.submitOrderActionLink).to.be.undefined;
-      });
+      describe('is missing shipping options',
+        modelTestFactory.simpleExpectEmptyArrayTestFactory(data, '_deliveries', checkoutModel, 'shippingOptions'));
 
-      it('when missing total quantity', function () {
-        var rawData = _.extend({}, data);
-        rawData._cart[0]['total-quantity'] = undefined;
-        var model = checkoutModel.parse(rawData);
+      describe('is missing payment methods',
+        modelTestFactory.simpleExpectEmptyArrayTestFactory(data, '_paymentmethodinfo', checkoutModel, 'paymentMethods'));
 
-        expect(ep.logger.error).to.be.not.called;
-        expect(model.summary.totalQuantity).to.be.undefined;
-      });
+      describe('is missing tax',
+        modelTestFactory.simpleMissingDataTestFactory(checkoutModel, _.omit(data, '_tax'), function() {
+          it('returns an empty tax array', function () {
+            expect(this.model.summary.taxes).to.be.ok;
+          });
+          it('returns an empty total tax object', function () {
+            expect(this.model.summary.taxTotal).to.be.ok;
+          });
+        }));
 
-      it('when missing subTotal', function () {
-        var rawData = _.extend({}, data);
-        rawData._cart[0]._total = [];
-        var model = checkoutModel.parse(rawData);
+      describe('is missing order total',
+        modelTestFactory.simpleMissingDataTestFactory(checkoutModel, _.omit(data, '_total'), function() {
+          it('returns an empty total object', function () {
+            expect(this.model.summary.total).to.be.ok;
+          });
+        }));
 
-        expect(ep.logger.error).to.be.not.called;
-        expect(model.summary.subTotal).to.be.ok;
-      });
-
-      it('when missing tax', function () {
-        var rawData = _.extend({}, data);
-        rawData._tax = [];
-
-        var model = checkoutModel.parse(rawData);
-
-        expect(ep.logger.error).to.be.not.called;
-        expect(model.summary.taxTotal).to.be.ok;
-        expect(model.summary.taxes).to.be.ok;
-      });
-
-      it('when missing order total', function () {
-        var rawData = _.extend({}, data);
-        rawData._total = [];
-        var model = checkoutModel.parse(rawData);
-
-        expect(ep.logger.error).to.be.not.called;
-        expect(model.summary.total).to.be.ok;
-      });
-
-      it('when missing billing Address', function () {
-        var rawData = _.extend({}, data);
-        rawData._billingaddressinfo = [];
-        var model = checkoutModel.parse(rawData);
-
-        expect(ep.logger.error).to.be.not.called;
-        expect(model.billingAddresses).to.be.ok;
-      });
-
+      var missSubTotal = JSON.parse(_.clone(dataJSON)).response;
+      missSubTotal._cart[0]._total = [];
+      describe('is missing subTotal',
+        modelTestFactory.simpleMissingDataTestFactory(checkoutModel, missSubTotal, function() {
+          it('returns an empty subTotal object', function () {
+            expect(this.model.summary.subTotal).to.be.ok;
+          });
+        }));
     });
 
     describe('model helper functions', function() {
+      var data = JSON.parse(_.clone(dataJSON)).response;
       describe('setChosenEntity', function() {
         describe('given an billing addresses array with a chosen address', function() {
           before(function() {
@@ -207,7 +199,7 @@ define(function (require) {
         });
       });
 
-      describe('sortAddresses', function() {
+      describe('sortByAscAlphabeticOrder', function() {
         describe('given an unsorted addresses array and a property name string to sort by', function() {
           before(function() {
             // The default checkout JSON data contains an unordered set of billing addresses
@@ -222,7 +214,7 @@ define(function (require) {
               return addressObj[this.sortProperty].toLowerCase();
             }, this);
 
-            this.sortedAddresses = modelHelpers.sortAddresses(this.parsedBillingAddresses, this.sortProperty);
+            this.sortedAddresses = modelHelpers.sortByAscAlphabeticOrder(this.parsedBillingAddresses, this.sortProperty);
           });
 
           after(function() {
@@ -248,7 +240,7 @@ define(function (require) {
 
             this.parsedBillingAddresses = modelHelpers.parseCheckoutAddresses(this.rawData, "billingaddressinfo");
 
-            this.sortedAddresses = modelHelpers.sortAddresses(this.parsedBillingAddresses, undefined);
+            this.sortByAscAlphabeticOrder = modelHelpers.sortAddresses(this.parsedBillingAddresses, undefined);
           });
           after(function() {
             delete(this.parsedBillingAddresses);
@@ -268,36 +260,36 @@ define(function (require) {
         describe('given a valid JSON response', function() {
           before(function() {
             this.rawData = _.clone(data);
-            this.numChosenShippingOptions = 0;
+            this.numChosenPaymentMethods = 0;
 
-            this.parsedShippingOptions = modelHelpers.parseShippingOptions(this.rawData);
+            this.parsedPaymentMethods = modelHelpers.parseShippingOptions(this.rawData);
 
-            var numShippingOptions = this.parsedShippingOptions.length;
+            var numShippingOptions = this.parsedPaymentMethods.length;
 
             // Search the array of parsed shipping options for an object with a chosen property
             while(numShippingOptions--) {
-              if (_.has(this.parsedShippingOptions[numShippingOptions], 'chosen')) {
-                this.numChosenShippingOptions += 1;
+              if (_.has(this.parsedPaymentMethods[numShippingOptions], 'chosen')) {
+                this.numChosenPaymentMethods += 1;
               }
             }
           });
           after(function() {
-            delete(this.parsedShippingOptions);
+            delete(this.parsedPaymentMethods);
           });
           it('returns an array with the correct number of shipping options objects', function() {
             // The raw checkout JSON data contains 2 shipping options
-            expect(this.parsedShippingOptions.length).to.eql(2);
+            expect(this.parsedPaymentMethods.length).to.eql(2);
           });
           it('returns an array with a chosen shipping option object', function() {
-            expect(this.numChosenShippingOptions).to.eql(1);
+            expect(this.numChosenPaymentMethods).to.eql(1);
           });
           it('returns an array where all choice shipping options have selectAction properties', function() {
-            var numShippingOptions = this.parsedShippingOptions.length;
+            var numShippingOptions = this.parsedPaymentMethods.length;
             var isMissingSelectAction = false;
 
             // Search the array of parsed shipping option objects for choice options without selectAction properties
             while(numShippingOptions--) {
-              var currentObj = this.parsedShippingOptions[numShippingOptions];
+              var currentObj = this.parsedPaymentMethods[numShippingOptions];
 
               // if this is a choice address
               if (!_.has(currentObj, 'chosen')) {
@@ -313,14 +305,14 @@ define(function (require) {
         describe('given an undefined JSON response parameter', function(){
           before(function() {
             sinon.stub(ep.logger, 'error');
-            this.parsedShippingOptions = modelHelpers.parseShippingOptions(undefined);
+            this.parsedPaymentMethods = modelHelpers.parseShippingOptions(undefined);
           });
           after(function() {
-            delete(this.parsedShippingOptions);
+            delete(this.parsedPaymentMethods);
             ep.logger.error.restore();
           });
           it('returns an empty array and logs an error', function() {
-            expect(this.parsedShippingOptions).to.eql([]);
+            expect(this.parsedPaymentMethods).to.eql([]);
             expect(ep.logger.error).to.be.called;
           });
         });
@@ -376,6 +368,67 @@ define(function (require) {
             it('returns the original array of shipping option objects unchanged', function() {
               expect(this.sortedShippingOptions).to.be.eql(this.unorderedShippingOptions);
             });
+          });
+        });
+      });
+
+      describe('parsePaymentMethods', function() {
+        describe('given a valid JSON response', function() {
+          before(function() {
+            this.rawData = _.clone(data);
+            this.numChosenPaymentMethods = 0;
+
+            this.parsedPaymentMethods = modelHelpers.parsePaymentMethods(this.rawData);
+            var numPaymentMethods = this.parsedPaymentMethods.length;
+
+            // Search the array of parsed shipping options for an object with a chosen property
+            while(numPaymentMethods--) {
+              if (_.has(this.parsedPaymentMethods[numPaymentMethods], 'chosen')) {
+                this.numChosenPaymentMethods += 1;
+              }
+            }
+          });
+          after(function() {
+            delete(this.parsedPaymentMethods);
+          });
+          it('returns an array with the correct number of shipping options objects', function() {
+            // The raw checkout JSON data contains 2 shipping options
+            expect(this.parsedPaymentMethods.length).to.eql(2);
+          });
+          it('returns an array with a chosen payment method object', function() {
+            expect(this.numChosenPaymentMethods).to.eql(1);
+          });
+          it('returns an array where all choice payment methods have selectAction properties', function() {
+            var numPaymentMethods = this.parsedPaymentMethods.length;
+            var isMissingSelectAction = false;
+
+            // Search the array of parsed shipping option objects for choice options without selectAction properties
+            while(numPaymentMethods--) {
+              var currentObj = this.parsedPaymentMethods[numPaymentMethods];
+
+              // if this is a choice address
+              if (!_.has(currentObj, 'chosen')) {
+                if (!_.has(currentObj, 'selectAction')) {
+                  isMissingSelectAction = true;
+                }
+              }
+            }
+            expect(isMissingSelectAction).to.be.false;
+          });
+        });
+
+        describe('given an undefined JSON response parameter', function(){
+          before(function() {
+            sinon.stub(ep.logger, 'error');
+            this.parsedPaymentMethods = modelHelpers.parseShippingOptions(undefined);
+          });
+          after(function() {
+            delete(this.parsedPaymentMethods);
+            ep.logger.error.restore();
+          });
+          it('returns an empty array and logs an error', function() {
+            expect(this.parsedPaymentMethods).to.eql([]);
+            expect(ep.logger.error).to.be.called;
           });
         });
       });

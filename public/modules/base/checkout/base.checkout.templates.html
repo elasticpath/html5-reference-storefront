@@ -16,6 +16,7 @@
             <div data-region="shippingAddressesRegion"></div>
             <div data-region="shippingOptionsRegion"></div>
           </div>
+          <div data-region="paymentMethodsRegion"></div>
         </div>
 
         <div class="checkout-sidebar" data-region="checkoutOrderRegion"></div>
@@ -114,32 +115,34 @@
   <!--
   ====== Checkout Summary===========
   -->
-  <!-- Checkout Summary Layout Template [default Layout, class: checkout-sidebar-inner]-->
+  <!-- Checkout Summary Layout Template [default Layout]-->
   <script id="CheckoutSummaryTemplate" type="text/template">
-    <ul class="checkout-summary-list">
-      <li class="checkout-total-quantity">
-        <label data-el-label="checkout.totalQuantity"><%= E.getI18nLabel('checkout.totalQuantity') %>: </label>
-        <span data-el-value="checkout.totalQuantity"><%= E.totalQuantity %></span>
-      </li>
-      <li class="checkout-subtotal">
-        <label data-el-label="checkout.subTotal"><%= E.getI18nLabel('checkout.subTotal') %>: </label>
-        <span data-el-value="checkout.subTotal"><%= E.subTotal.display %></span>
-      </li>
-      <li class="checkout-shipping">
-        <div data-region="checkoutShippingTotalRegion"></div>
-      </li>
-      <li class="checkout-tax" data-el-container="checkout.taxes">
-        <div data-region="checkoutTaxTotalRegion"></div>
-        <div data-region="checkoutTaxBreakDownRegion"></div>
-      </li>
-      <li class="checkout-total">
-        <label data-el-label="checkout.total"><%= E.getI18nLabel('checkout.total') %>:</label>
-        <span data-el-value="checkout.total"><%= E.total.display %></span>
-      </li>
-    </ul>
+    <div class="checkout-sidebar-inner">
+      <ul class="checkout-summary-list">
+        <li class="checkout-total-quantity">
+          <label data-el-label="checkout.totalQuantity"><%= E.getI18nLabel('checkout.totalQuantity') %>: </label>
+          <span data-el-value="checkout.totalQuantity"><%= E.totalQuantity %></span>
+        </li>
+        <li class="checkout-subtotal">
+          <label data-el-label="checkout.subTotal"><%= E.getI18nLabel('checkout.subTotal') %>: </label>
+          <span data-el-value="checkout.subTotal"><%= E.subTotal.display %></span>
+        </li>
+        <li class="checkout-shipping">
+          <div data-region="checkoutShippingTotalRegion"></div>
+        </li>
+        <li class="checkout-tax" data-el-container="checkout.taxes">
+          <div data-region="checkoutTaxTotalRegion"></div>
+          <div data-region="checkoutTaxBreakDownRegion"></div>
+        </li>
+        <li class="checkout-total">
+          <label data-el-label="checkout.total"><%= E.getI18nLabel('checkout.total') %>:</label>
+          <span data-el-value="checkout.total"><%= E.total.display %></span>
+        </li>
+      </ul>
 
-    <button class="btn-cmd-submit-order" data-el-label="checkout.submitOrder"
+      <button class="btn-cmd-submit-order" data-el-label="checkout.submitOrder"
       <%= E.getSubmitOrderButtonDisabledAttr(E.submitOrderActionLink) %>><%= E.getI18nLabel('checkout.submitOrder') %></button>
+    </div>
   </script>
 
   <!-- Renders the total shipping costs in the checkout summary [default ItemView, className: checkout-shipping-total] -->

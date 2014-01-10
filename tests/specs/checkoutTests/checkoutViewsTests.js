@@ -53,9 +53,9 @@ define(function (require) {
           expect(this.view.shippingOptionsRegion).to.exist;
           expect(this.view.$el.find('[data-region="shippingOptionsRegion"]')).to.be.length(1);
         });
-        it('should have a paymentMethodRegion region', function () {
-          expect(this.view.paymentMethodRegion).to.exist;
-          expect(this.view.$el.find('[data-region="paymentMethodRegion"]')).to.be.length(1);
+        it('should have a paymentMethodsRegion region', function () {
+          expect(this.view.paymentMethodsRegion).to.exist;
+          expect(this.view.$el.find('[data-region="paymentMethodsRegion"]')).to.be.length(1);
         });
         it('should have a checkoutOrderRegion region', function () {
           expect(this.view.checkoutOrderRegion).to.exist;

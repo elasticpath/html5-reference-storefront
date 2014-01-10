@@ -16,71 +16,79 @@ define(function (require) {
     var view = require('checkout.views');
     var checkoutTemplates = require('text!modules/base/checkout/base.checkout.templates.html');
     var addressTemplate = require('text!modules/base/components/address/base.component.address.template.html');
+    var paymentTemplate = require('text!modules/base/components/payment/base.component.payment.template.html');
 
     describe("DefaultView", function () {
-      before(function (done) {
-        // Append templates to the DOM
-        $("#Fixtures").append(checkoutTemplates, addressTemplate);
+      describe("Given all information available", function() {
+        before(function (done) {
+          // Append templates to the DOM
+          $("#Fixtures").append(checkoutTemplates, addressTemplate, paymentTemplate);
 
-        var parsedJSONData = JSON.parse(_.clone(dataJSON));
-        this.parsedResponse = parsedJSONData.response;
+          var parsedJSONData = JSON.parse(_.clone(dataJSON));
+          this.parsedResponse = parsedJSONData.response;
 
-        this.server = getFakeCheckoutServer(parsedJSONData.zoom, this.parsedResponse);
+          this.server = getFakeCheckoutServer(parsedJSONData.zoom, this.parsedResponse);
 
-        this.view = new controller.DefaultView();
-        this.view.render();
+          this.view = new controller.DefaultView();
+          this.view.render();
 
-        // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
-        this.view.checkoutOrderRegion.on('show', function() {
-          done();
+          // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
+          this.view.checkoutOrderRegion.on('show', function() {
+            done();
+          });
+        });
+
+        after(function () {
+          $("#Fixtures").empty();
+          ep.io.localStore.removeItem('oAuthToken');
+          ep.io.sessionStore.removeItem('orderLink');
+          delete(this.parsedResponse);
+          this.server.restore();
+        });
+
+        it('returns an instance of cart View.DefaultLayout', function () {
+          expect(this.view).to.be.an.instanceOf(view.DefaultLayout);
+        });
+
+        it('view\'s DOM is rendered (view content rendered)', function () {
+          expect(this.view.el.childElementCount).to.be.equal(1);
+        });
+
+        it('the TaxesCollectionView is rendered', function() {
+          // Test for the presence of the unordered list rendered by TaxesCollectionView
+          expect(this.view.$el.find('ul.checkout-tax-list')).to.have.length(1);
+        });
+
+        it('renders the tax total', function() {
+          expect($('[data-el-value="checkout.taxTotal"]', this.view.$el).text())
+            .to.be.equal(this.parsedResponse._tax[0].total.display);
+        });
+
+        it('renders the BillingAddressesCompositeView view', function() {
+          // There are billing addresses in the fake JSON response, so this region should be rendered
+          expect(this.view.$el.find('[data-region="billingAddressSelectorsRegion"]')).to.have.length(1);
+        });
+
+        it('renders the ShippingAddressesCompositeView view', function() {
+          // There are shipping addresses in the fake JSON response, so this region should be rendered
+          expect(this.view.$el.find('[data-region="shippingAddressSelectorsRegion"]')).to.have.length(1);
+        });
+
+        it('renders the ShippingOptionsCompositeView view', function() {
+          // There are shipping options in the fake JSON response, so this region should be rendered
+          expect(this.view.$el.find('[data-region="shippingOptionSelectorsRegion"]')).to.have.length(1);
+        });
+
+        it('renders the PaymentMethodsCompositeView view', function() {
+          // There are payment methods in the fake JSON response, so this region should be rendered
+          expect(this.view.$el.find('[data-region="paymentMethodSelectorsRegion"]')).to.have.length(1);
         });
       });
 
-      after(function () {
-        $("#Fixtures").empty();
-        ep.io.localStore.removeItem('oAuthToken');
-        ep.io.sessionStore.removeItem('orderLink');
-        delete(this.parsedResponse);
-        this.server.restore();
-      });
-
-      it('returns an instance of cart View.DefaultLayout', function () {
-        expect(this.view).to.be.an.instanceOf(view.DefaultLayout);
-      });
-
-      it('view\'s DOM is rendered (view content rendered)', function () {
-        expect(this.view.el.childElementCount).to.be.equal(1);
-      });
-
-      it('the TaxesCollectionView is rendered', function() {
-        // Test for the presence of the unordered list rendered by TaxesCollectionView
-        expect(this.view.$el.find('ul.checkout-tax-list')).to.have.length(1);
-      });
-
-      it('renders the tax total', function() {
-        expect($('[data-el-value="checkout.taxTotal"]', this.view.$el).text())
-          .to.be.equal(this.parsedResponse._tax[0].total.display);
-      });
-
-      it('renders the BillingAddressesCompositeView view', function() {
-        // There are billing addresses in the fake JSON response, so this region should be rendered
-        expect(this.view.$el.find('[data-region="billingAddressSelectorsRegion"]')).to.have.length(1);
-      });
-
-      it('renders the ShippingAddressesCompositeView view', function() {
-        // There are shipping addresses in the fake JSON response, so this region should be rendered
-        expect(this.view.$el.find('[data-region="shippingAddressSelectorsRegion"]')).to.have.length(1);
-      });
-
-      it('renders the ShippingOptionsCompositeView view', function() {
-        // There are shipping options in the fake JSON response, so this region should be rendered
-        expect(this.view.$el.find('[data-region="shippingOptionSelectorsRegion"]')).to.have.length(1);
-      });
-
-      describe("Given there is no tax data, billing addresses or shipping addresses/options", function() {
+      describe("Given there is no tax data, billing addresses or shipping addresses/options or payment method", function() {
         // Fake a server response with missing data
         before(function (done) {
-          $("#Fixtures").append(checkoutTemplates, addressTemplate);
+          $("#Fixtures").append(checkoutTemplates, addressTemplate, paymentTemplate);
 
           var parsedJSONData = JSON.parse(_.clone(dataJSON));
           var parsedFakeResponse = parsedJSONData.response;
@@ -128,13 +136,19 @@ define(function (require) {
 
       });
 
-      describe("Given there are no chosen billing addresses, shipping addresses or shipping options", function() {
+      describe("Given no default chosen (no chosen billing / shipping address, shipping option, payment option)", function() {
+
         // Fake a server response without chosen address and shipping entities
         before(function (done) {
-          $("#Fixtures").append(checkoutTemplates, addressTemplate);
+          $("#Fixtures").append(checkoutTemplates, addressTemplate, paymentTemplate);
 
           sinon.spy(EventBus, 'trigger');
           sinon.stub(ep.io, 'ajax');
+
+          EventTestHelpers.unbind('checkout.updateChosenBillingAddressRequest');
+          EventTestHelpers.unbind('checkout.updateChosenShippingAddressRequest');
+          EventTestHelpers.unbind('checkout.updateChosenShippingOptionRequest');
+          EventTestHelpers.unbind('checkout.updateChosenPaymentMethodRequest');
 
           var parsedJSONData = JSON.parse(_.clone(dataJSON));
           var parsedFakeResponse = parsedJSONData.response;
@@ -143,6 +157,7 @@ define(function (require) {
           delete(parsedFakeResponse._billingaddressinfo[0]._selector[0]._chosen);
           delete(parsedFakeResponse._deliveries[0]._element[0]._destinationinfo[0]._selector[0]._chosen);
           delete(parsedFakeResponse._deliveries[0]._element[0]._shippingoptioninfo[0]._selector[0]._chosen);
+          delete(parsedFakeResponse._paymentmethodinfo[0]._selector[0]._chosen);
 
           this.parsedFakeResponse = parsedFakeResponse;
 
@@ -162,37 +177,40 @@ define(function (require) {
           $("#Fixtures").empty();
           EventBus.trigger.restore();
           ep.io.ajax.restore();
+          this.server.restore();
+
+          EventTestHelpers.reset();
+
           ep.io.localStore.removeItem('oAuthToken');
           ep.io.sessionStore.removeItem('orderLink');
-          this.server.restore();
-          delete(this.fakeJSONResponse);
+          delete(this.parsedFakeResponse);
         });
 
-        it('triggers the checkout.updateChosenAddressRequest event to set a chosen billing address', function() {
+        it('triggers event to set a chosen billing address', function() {
           var firstChoiceBillingAddress = jsonPath(this.parsedFakeResponse, '$.._billingaddressinfo[0].._choice')[0][0];
           var firstChoiceBillingAddressSelectAction =
             jsonPath(firstChoiceBillingAddress, '$..links[?(@.rel=="selectaction")].href')[0];
 
           // Expect the event to be triggered with the selectAction of the first choice billing address
           expect(EventBus.trigger).to.be.calledWith(
-            'checkout.updateChosenAddressRequest',
+            'checkout.updateChosenBillingAddressRequest',
             firstChoiceBillingAddressSelectAction
           );
         });
 
-        it('triggers the checkout.updateChosenAddressRequest event to set a chosen shipping address', function() {
+        it('triggers event to set a chosen shipping address', function() {
           var firstChoiceShippingAddress = jsonPath(this.parsedFakeResponse, '$.._deliveries[0].._choice')[0][0];
           var firstChoiceShippingAddressSelectAction =
             jsonPath(firstChoiceShippingAddress, '$..links[?(@.rel=="selectaction")].href')[0];
 
           // Expect the event to be triggered with the selectAction of the first choice shipping address
           expect(EventBus.trigger).to.be.calledWith(
-            'checkout.updateChosenAddressRequest',
+            'checkout.updateChosenShippingAddressRequest',
             firstChoiceShippingAddressSelectAction
           );
         });
 
-        it('triggers the checkout.updateChosenShippingOptionRequest event to set a chosen shipping option', function() {
+        it('triggers event to set a chosen shipping option', function() {
           var firstChoiceShippingOption = jsonPath(this.parsedFakeResponse, '$.._shippingoptioninfo[0].._choice')[0][0];
           var firstChoiceShippingOptionSelectAction =
             jsonPath(firstChoiceShippingOption, '$..links[?(@.rel=="selectaction")].href')[0];
@@ -204,12 +222,24 @@ define(function (require) {
           );
         });
 
+        it('triggers event to set a chosen payment method', function() {
+          var firstChoicePaymentMethod = jsonPath(this.parsedFakeResponse, '$.._paymentmethodinfo[0].._choice')[0][0];
+          var firstChoicePaymentMethodSelectAction =
+            jsonPath(firstChoicePaymentMethod, '$..links[?(@.rel=="selectaction")].href')[0];
+
+          // Expect the event to be triggered with the selectAction of the first choice shipping option
+          expect(EventBus.trigger).to.be.calledWith(
+            'checkout.updateChosenPaymentMethodRequest',
+            firstChoicePaymentMethodSelectAction
+          );
+        });
+
       });
 
       describe("Given there are no physical items requiring shipment in the cart", function() {
         // Fake a server response without a deliveryType of "SHIPMENT"
         before(function (done) {
-          $("#Fixtures").append(checkoutTemplates, addressTemplate);
+          $("#Fixtures").append(checkoutTemplates, addressTemplate, paymentTemplate);
 
           sinon.spy(EventBus, 'trigger');
           sinon.stub(ep.io, 'ajax');
@@ -248,9 +278,50 @@ define(function (require) {
           expect(this.view.$el.find('[data-region="shippingOptionsRegion"]').children().length).to.be.eql(0);
         });
       });
+
+      describe("Given there are no item requiring payment in the cart", function() {
+        // Fake a server response without a 'paymentmethodinfo', which is used to determine if payment methods should
+        // show in checkout right now.
+        before(function (done) {
+          $("#Fixtures").append(checkoutTemplates, addressTemplate, paymentTemplate);
+
+          sinon.spy(EventBus, 'trigger');
+          sinon.stub(ep.io, 'ajax');
+
+          var parsedJSONData = JSON.parse(_.clone(dataJSON));
+          var parsedFakeResponse = parsedJSONData.response;
+
+          // Remove the deliveryType attribute
+          delete(parsedFakeResponse._paymentmethodinfo);
+
+          this.server = getFakeCheckoutServer(parsedJSONData.zoom, parsedFakeResponse);
+
+          this.view = new controller.DefaultView();
+          this.view.render();
+
+          // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
+          this.view.checkoutOrderRegion.on('show', function() {
+            done();
+          });
+
+        });
+
+        after(function () {
+          $("#Fixtures").empty();
+          EventBus.trigger.restore();
+          ep.io.ajax.restore();
+          ep.io.localStore.removeItem('oAuthToken');
+          ep.io.sessionStore.removeItem('orderLink');
+          this.server.restore();
+        });
+
+        it("does not show payment method", function() {
+          // The payment method region from the checkout summary template is not populated
+          expect(this.view.$el.find('[data-region="paymentMethodsRegion"]').children()).to.be.length(0);
+        });
+      });
     });
 
-    // Event Listener: cart.submitOrderBtnClicked
     describe("Responds to event: checkout.submitOrderBtnClicked", function () {
       var unboundEventKey = 'checkout.submitOrderRequest';
       var actionLink = 'ActionLinkTrue';
@@ -407,21 +478,78 @@ define(function (require) {
       });
     });
 
-    describe('Responds to event: checkout.addressRadioChanged', function() {
+    describe('Responds to event: checkout.billingAddressRadioChanged',
+      selectionChangedEventTestFactory('checkout.billingAddressRadioChanged', 'checkout.updateChosenBillingAddressRequest'));
+
+    describe('Responds to event: checkout.shippingAddressRadioChanged',
+      selectionChangedEventTestFactory('checkout.shippingAddressRadioChanged', 'checkout.updateChosenShippingAddressRequest'));
+
+    describe('Responds to event: checkout.shippingOptionRadioChanged',
+      selectionChangedEventTestFactory('checkout.shippingOptionRadioChanged', 'checkout.updateChosenShippingOptionRequest'));
+
+    describe('Responds to event: checkout.paymentMethodRadioChanged',
+      selectionChangedEventTestFactory('checkout.paymentMethodRadioChanged', 'checkout.updateChosenPaymentMethodRequest'));
+
+    describe('Responds to event: checkout.updateChosenPaymentMethodRequest', function() {
+      var fakeActionLink = 'fakeActionLink';
+
       before(function () {
         sinon.spy(EventBus, 'trigger');
-        EventTestHelpers.unbind('checkout.updateChosenAddressRequest');
-        EventBus.trigger('checkout.addressRadioChanged', 'fakeSelectAction');
+        sinon.stub(ep.logger, 'error');
+        sinon.stub(ep.ui, 'startActivityIndicator');
+        sinon.stub(ep.io, 'ajax');
+
+        EventBus.trigger('checkout.updateChosenPaymentMethodRequest', fakeActionLink);
+        // get first argument passed to ep.io.ajax,
+        // args[0] gets arguments passed in the first time ep.io.ajax is called
+        // args[0][0] gets the first argument of the first time arguments
+        this.ajaxArgs = ep.io.ajax.args[0][0];
       });
 
       after(function () {
-        EventTestHelpers.reset();
+        EventBus.trigger.restore();
+        ep.logger.error.restore();
+        ep.ui.startActivityIndicator.restore();
+        ep.io.ajax.restore();
       });
 
-      it('calls View function resetCheckoutButtonText', function() {
-//      expect(EventBus.trigger).to.be.calledWithExactly('checkout.updateChosenAddressRequest');
-        expect(EventBus.trigger).to.be.calledWithExactly('checkout.updateChosenAddressRequest', 'fakeSelectAction');
+      describe('should inform Cortex of selection made', function () {
+        it('exactly once', function () {
+          expect(ep.io.ajax).to.be.calledOnce;
+        });
+        it('with a valid request', function () {
+          expect(this.ajaxArgs.type).to.be.string('POST');
+          expect(this.ajaxArgs.contentType).to.be.string('application/json');
+          expect(this.ajaxArgs.url).to.be.equal(fakeActionLink);
+        });
+        it('with required callback functions', function () {
+          expect(this.ajaxArgs.success).to.exist;
+          expect(this.ajaxArgs.error).to.exist;
+        });
       });
+
+      describe('and on success',
+        EventTestFactory.simpleTriggerEventTest('checkout.updateChosenPaymentMethodSuccess', function () {
+          var testEventName = 'checkout.updateChosenPaymentMethodSuccess';
+
+          it('should trigger ' + testEventName + ' event', function () {
+            // trigger callback function on ajax call success
+            this.ajaxArgs.success();
+            expect(EventBus.trigger).to.be.calledWithExactly(testEventName);
+          });
+        }));
+
+      describe('and on failure',
+        EventTestFactory.simpleTriggerEventTest('checkout.updateChosenPaymentMethodFailed', function () {
+          var testEventName = 'checkout.updateChosenPaymentMethodFailed';
+
+          it('should trigger ' + testEventName + ' event', function () {
+            this.ajaxArgs.error({
+              status: 'any error code'
+            });
+            expect(EventBus.trigger).to.be.calledWithExactly(testEventName);
+          });
+        }));
     });
 
     describe('Responds to event: checkout.addNewAddressBtnClicked', function() {
@@ -472,5 +600,24 @@ define(function (require) {
     ep.io.sessionStore.setItem('orderLink', fakeGetLink);
 
     return fakeCheckoutServer;
+  }
+
+  function selectionChangedEventTestFactory (eventListener, eventToTrigger) {
+    return function () {
+      before(function () {
+        sinon.spy(EventBus, 'trigger');
+        EventTestHelpers.unbind(eventToTrigger);
+        EventBus.trigger(eventListener, 'fakeSelectAction');
+      });
+
+      after(function () {
+        EventBus.trigger.restore();
+        EventTestHelpers.reset();
+      });
+
+      it('triggers event: checkout.updateChosenSelectionRequest', function() {
+        expect(EventBus.trigger).to.be.calledWithExactly(eventToTrigger, 'fakeSelectAction');
+      });
+    };
   }
 });

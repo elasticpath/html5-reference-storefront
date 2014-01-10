@@ -1,7 +1,7 @@
 {
-  "zoom" : "?zoom=purchaseform,billingaddressinfo:selector:chosen:description,billingaddressinfo:selector:choice,billingaddressinfo:selector:choice:description,tax,total,cart,cart:total,deliveries:element,deliveries:element:destinationinfo:selector:chosen:description,deliveries:element:destinationinfo:selector:choice,deliveries:element:destinationinfo:selector:choice:description,deliveries:element:shippingoptioninfo:selector:chosen:description,deliveries:element:shippingoptioninfo:selector:choice,deliveries:element:shippingoptioninfo:selector:choice:description",
+  "zoom" : "?zoom=purchaseform,billingaddressinfo:selector:chosen:description,billingaddressinfo:selector:choice,billingaddressinfo:selector:choice:description,tax,total,cart,cart:total,deliveries:element,deliveries:element:destinationinfo:selector:chosen:description,deliveries:element:destinationinfo:selector:choice,deliveries:element:destinationinfo:selector:choice:description,deliveries:element:shippingoptioninfo:selector:chosen:description,deliveries:element:shippingoptioninfo:selector:choice,deliveries:element:shippingoptioninfo:selector:choice:description,paymentmethodinfo,paymentmethodinfo:selector:chosen:description,paymentmethodinfo:selector:choice,paymentmethodinfo:selector:choice:description",
   "retrievedOn" : "Dec 19, 2013",
-  "retrievedCriteria": "purchase digital and physical item, must have 1 one-item item; registered user, must have at least 1 address, chosen a default billing address and chosen a default shipping method",
+  "retrievedCriteria": "purchase digital and physical item, must have 1 one-item item; registered user, must have at least 1 address, 1 tokenized payment method, chosen a default billing address , chosen a default shipping method, and chosen a default payment method",
   "response" : {
     "links": [
       {
@@ -592,6 +592,97 @@
               }
             ],
             "delivery-type": "SHIPMENT"
+          }
+        ]
+      }
+    ],
+    "_paymentmethodinfo": [
+      {
+        "_selector": [
+          {
+            "_choice": [
+              {
+                "links": [
+                  {
+                    "type": "application/vnd.elasticpath.paymenttoken",
+                    "rel": "description",
+                    "href": "http://aws-qa3.elasticpath.net:13080/integrator/paymentmethods/cshop/m5yxissunrjgovjqnrefsrluizlweqzvnniucvdvjzdu6tbuleyeu4bymnjxcvcqobwu42dclbbdcyzwlf4u2rcbpbhfirj5",
+                    "uri": "/paymentmethods/cshop/m5yxissunrjgovjqnrefsrluizlweqzvnniucvdvjzdu6tbuleyeu4bymnjxcvcqobwu42dclbbdcyzwlf4u2rcbpbhfirj5"
+                  },
+                  {
+                    "rel": "selectaction",
+                    "href": "http://aws-qa3.elasticpath.net:13080/integrator/paymentmethods/cshop/m5yxissunrjgovjqnrefsrluizlweqzvnniucvdvjzdu6tbuleyeu4bymnjxcvcqobwu42dclbbdcyzwlf4u2rcbpbhfirj5/selector/orders/cshop/m5yxissunrjgovjqnrefsrluizlweqjvnfxtg2buonwfc5bqorzuuu3bjrleeuskobwu42dclbbdcyzzn5auurdlpbgui2zqj5lvcmkmkritcwsukv2e4rdinnmwsmbujzvfm3kmkrmtkwtklf4e4r2knnmxuttkj5it2pi",
+                    "uri": "/paymentmethods/cshop/m5yxissunrjgovjqnrefsrluizlweqzvnniucvdvjzdu6tbuleyeu4bymnjxcvcqobwu42dclbbdcyzwlf4u2rcbpbhfirj5/selector/orders/cshop/m5yxissunrjgovjqnrefsrluizlweqjvnfxtg2buonwfc5bqorzuuu3bjrleeuskobwu42dclbbdcyzzn5auurdlpbgui2zqj5lvcmkmkritcwsukv2e4rdinnmwsmbujzvfm3kmkrmtkwtklf4e4r2knnmxuttkj5it2pi"
+                  },
+                  {
+                    "type": "application/vnd.elasticpath.selector",
+                    "rel": "selector",
+                    "href": "http://aws-qa3.elasticpath.net:13080/integrator/paymentmethods/selector/orders/cshop/m5yxissunrjgovjqnrefsrluizlweqjvnfxtg2buonwfc5bqorzuuu3bjrleeuskobwu42dclbbdcyzzn5auurdlpbgui2zqj5lvcmkmkritcwsukv2e4rdinnmwsmbujzvfm3kmkrmtkwtklf4e4r2knnmxuttkj5it2pi",
+                    "uri": "/paymentmethods/selector/orders/cshop/m5yxissunrjgovjqnrefsrluizlweqjvnfxtg2buonwfc5bqorzuuu3bjrleeuskobwu42dclbbdcyzzn5auurdlpbgui2zqj5lvcmkmkritcwsukv2e4rdinnmwsmbujzvfm3kmkrmtkwtklf4e4r2knnmxuttkj5it2pi"
+                  }
+                ],
+                "self": {
+                  "type": "application/vnd.elasticpath.links",
+                  "uri": "/paymentmethods/cshop/m5yxissunrjgovjqnrefsrluizlweqzvnniucvdvjzdu6tbuleyeu4bymnjxcvcqobwu42dclbbdcyzwlf4u2rcbpbhfirj5/selector/orders/cshop/m5yxissunrjgovjqnrefsrluizlweqjvnfxtg2buonwfc5bqorzuuu3bjrleeuskobwu42dclbbdcyzzn5auurdlpbgui2zqj5lvcmkmkritcwsukv2e4rdinnmwsmbujzvfm3kmkrmtkwtklf4e4r2knnmxuttkj5it2pi",
+                  "href": "http://aws-qa3.elasticpath.net:13080/integrator/paymentmethods/cshop/m5yxissunrjgovjqnrefsrluizlweqzvnniucvdvjzdu6tbuleyeu4bymnjxcvcqobwu42dclbbdcyzwlf4u2rcbpbhfirj5/selector/orders/cshop/m5yxissunrjgovjqnrefsrluizlweqjvnfxtg2buonwfc5bqorzuuu3bjrleeuskobwu42dclbbdcyzzn5auurdlpbgui2zqj5lvcmkmkritcwsukv2e4rdinnmwsmbujzvfm3kmkrmtkwtklf4e4r2knnmxuttkj5it2pi",
+                  "max-age": 0
+                },
+                "_description": [
+                  {
+                    "links": [
+                      {
+                        "type": "application/vnd.elasticpath.profile",
+                        "rel": "profile",
+                        "href": "http://aws-qa3.elasticpath.net:13080/integrator/profiles/cshop/m5yxissunrjgovjqnrefsrluizlweqzxnnaweukhjm3dstligfxwm6cqme3wcmtmobwu42dclbbdcyzzn5auurkzgnhdatjqjzvvsmkmkvitctl2nn2e4rcoi5gvgmkckf5esm2mkrtxstlkljbu4vkoiniwwwjqjvat2pi",
+                        "uri": "/profiles/cshop/m5yxissunrjgovjqnrefsrluizlweqzxnnaweukhjm3dstligfxwm6cqme3wcmtmobwu42dclbbdcyzzn5auurkzgnhdatjqjzvvsmkmkvitctl2nn2e4rcoi5gvgmkckf5esm2mkrtxstlkljbu4vkoiniwwwjqjvat2pi"
+                      },
+                      {
+                        "type": "application/vnd.elasticpath.links",
+                        "rel": "list",
+                        "href": "http://aws-qa3.elasticpath.net:13080/integrator/paymentmethods/cshop",
+                        "uri": "/paymentmethods/cshop"
+                      }
+                    ],
+                    "self": {
+                      "type": "application/vnd.elasticpath.paymenttoken",
+                      "uri": "/paymentmethods/cshop/m5yxissunrjgovjqnrefsrluizlweqzvnniucvdvjzdu6tbuleyeu4bymnjxcvcqobwu42dclbbdcyzwlf4u2rcbpbhfirj5",
+                      "href": "http://aws-qa3.elasticpath.net:13080/integrator/paymentmethods/cshop/m5yxissunrjgovjqnrefsrluizlweqzvnniucvdvjzdu6tbuleyeu4bymnjxcvcqobwu42dclbbdcyzwlf4u2rcbpbhfirj5",
+                      "max-age": 0
+                    },
+                    "display-value": "VISA-********4119"
+                  }
+                ]
+              }
+            ],
+            "_chosen": [
+              {
+                "_description": [
+                  {
+                    "links": [
+                      {
+                        "type": "application/vnd.elasticpath.profile",
+                        "rel": "profile",
+                        "href": "http://aws-qa3.elasticpath.net:13080/integrator/profiles/cshop/m5yxissunrjgovjqnrefsrluizlweqzxnnaweukhjm3dstligfxwm6cqme3wcmtmobwu42dclbbdcyzzn5auurkzgnhdatjqjzvvsmkmkvitctl2nn2e4rcoi5gvgmkckf5esm2mkrtxstlkljbu4vkoiniwwwjqjvat2pi",
+                        "uri": "/profiles/cshop/m5yxissunrjgovjqnrefsrluizlweqzxnnaweukhjm3dstligfxwm6cqme3wcmtmobwu42dclbbdcyzzn5auurkzgnhdatjqjzvvsmkmkvitctl2nn2e4rcoi5gvgmkckf5esm2mkrtxstlkljbu4vkoiniwwwjqjvat2pi"
+                      },
+                      {
+                        "type": "application/vnd.elasticpath.links",
+                        "rel": "list",
+                        "href": "http://aws-qa3.elasticpath.net:13080/integrator/paymentmethods/cshop",
+                        "uri": "/paymentmethods/cshop"
+                      }
+                    ],
+                    "self": {
+                      "type": "application/vnd.elasticpath.paymenttoken",
+                      "uri": "/paymentmethods/cshop/m5yxissunrjgovjqnrefsrluizlwercggnqwo4tenrmfo43koa4hczzyjvkumvdsobwu42dclbbdcyzwlf4u2rcbpbhfiqj5",
+                      "href": "http://aws-qa3.elasticpath.net:13080/integrator/paymentmethods/cshop/m5yxissunrjgovjqnrefsrluizlwercggnqwo4tenrmfo43koa4hczzyjvkumvdsobwu42dclbbdcyzwlf4u2rcbpbhfiqj5",
+                      "max-age": 0
+                    },
+                    "display-value": "MASTER-********3697"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
