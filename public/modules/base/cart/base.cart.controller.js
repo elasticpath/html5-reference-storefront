@@ -229,12 +229,18 @@ define(function (require) {
           if (newCartLineItems.length === 0 && cartLayout.mainCartRegion) {
             cartLayout.mainCartRegion.show(new View.EmptyCartView());
           }
+
+          // Stop the activity indicators on the cart regions that are being updated
+          ep.ui.stopActivityIndicator(cartLayout.mainCartRegion.currentView);
+          ep.ui.stopActivityIndicator(cartLayout.cartCheckoutMasterRegion.currentView);
         }
       });
     });
 
-    // Logs an error when the request to remove a line item fails.
+    // Logs an error when the request to remove a line item fails and stops the
     EventBus.on('cart.removeLineItemFailed', function (response) {
+      ep.ui.stopActivityIndicator(cartLayout.mainCartRegion.currentView);
+      ep.ui.stopActivityIndicator(cartLayout.cartCheckoutMasterRegion.currentView);
       // should use the toastMsg to inform user
       ep.logger.error('error deleting lineItem from cart: ' + response);
     });
@@ -256,10 +262,16 @@ define(function (require) {
       ep.io.ajax(ajaxModel.toJSON());
     });
 
-    // Remove Line Item Button Clicked
+    /**
+     * Prompts the user to confirm deletion with a JavaScript confirmation alert and then
+     * starts activity indicators on those cart regions that contain data which could
+     * change following a successful cart item deletion.
+     */
     EventBus.on('cart.removeLineItemBtnClicked', function (actionLink) {
       var confirmation = window.confirm("Do you really want to delete this item");
       if (confirmation) {
+        ep.ui.startActivityIndicator(cartLayout.mainCartRegion.currentView);
+        ep.ui.startActivityIndicator(cartLayout.cartCheckoutMasterRegion.currentView);
         EventBus.trigger('cart.removeLineItemRequest', actionLink);
       }
     });

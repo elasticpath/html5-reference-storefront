@@ -22,6 +22,8 @@ var config = {
       'pace': 'scripts/lib/pace.min',
       'URI': 'scripts/lib/URI',   // used by Cortex module only, remove after redo search
       'equalize': 'scripts/lib/plugins/jquery-equalheights',
+      'spin': 'scripts/lib/plugins/spin',
+      'jquerySpin': 'scripts/lib/plugins/jquery.spin',
 
       'router': 'router',
       'ep': 'ep.client',

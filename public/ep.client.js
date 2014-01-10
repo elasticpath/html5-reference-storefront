@@ -262,6 +262,42 @@ define(function (reqiure) {
       }
     };
 
+    // Load the spin.js library that provides the default activity indicators.
+    require('spin');
+    // Load an extended version of jQuery.spin.js that includes a loading overlay.
+    require('jquerySpin');
+    /**
+     * Adds an activity indicator to a DOM element associated with a given Marionette view.
+     *
+     * Can apply the indicator to the view's DOM element (Marionette.View.$el) or to a given
+     * jQuery object specified using the ui hash of the view (ui.activityIndicatorEl).
+     *
+     * By default, uses the spin.js (http://fgnass.github.io/spin.js/) library.
+     * @param view A Marionette.View object
+     */
+    ep.ui.startActivityIndicator = function(view) {
+      if (view.ui && view.ui.activityIndicatorEl) {
+        view.ui.activityIndicatorEl.spin();
+      } else {
+        view.$el.spin();
+      }
+    };
+
+    /**
+     * Removes an activity indicator from a DOM element associated with a given Marionette view.
+     *
+     * Removes the indicator from the jQuery object specified in the ui hash of the view (ui.activityIndicatorEl)
+     * or from the view's DOM element (Marionette.View.$el).
+     * @param view A Marionette.View object
+     */
+    ep.ui.stopActivityIndicator = function(view) {
+      if (view.ui && view.ui.activityIndicatorEl) {
+        view.ui.activityIndicatorEl.spin(false);
+      } else {
+        view.$el.spin(false);
+      }
+    };
+
     /*
      * Is IUser
      * */
