@@ -108,7 +108,7 @@ Platform Support
 <tr align="center">
 <th align="center" valign="middle"></th>
 <th align="center" valign="middle">Certified*</th>
-<th align="center" valign="middle">Compatible*</th>
+<th align="center" valign="middle">Compatible**</th>
 <th align="center" valign="middle">Not Supported</th>
 </tr>
 <tr>
@@ -152,4 +152,4 @@ Platform Support
 </table>
 *<b>Certified</b> - Officially Supported and Tested
 
-*<b>Compatible</b> - Base functionality works - Not tested.
+**<b>Compatible</b> - Base functionality works - Not tested.

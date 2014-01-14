@@ -63,7 +63,7 @@ HTML5 Reference Storefront Features
 About the Documentation
 ---------------------
 This document is written for knowledgeable JavaScript developers who are extending/customizing HTML5 Storefront modules and
-for knowledgeable front-end developers who are extending/customizing HTML5 Storefront themes. This document is not a primer for JavaScript, CSS, etc.. Before you begin, you should have working knowledge of the following technologies:
+for knowledgeable front-end developers who are extending/customizing HTML5 Storefront themes. This document is not a primer for JavaScript, CSS, etc. Before you begin, you should have working knowledge of the following technologies:
 
 * Backbone.js
 * jQuery.js

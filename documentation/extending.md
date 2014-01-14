@@ -1,25 +1,41 @@
 Customizing HTML5 Features
 ====================
-Introduction to how to customize the HTML5 features.
-Binary based
+HTML5 Reference Storefront features are divided into modules. For example, profile, An HTML5 Storefront module is the view, plus the code backing the view.
+For example, profile functionality, such as view a customers profile details (username,
 
-We've used our own extension methodology to build the HTML5 Reference Storefront Features.
+How do we determine what features go into a module.
 
-We encourage you to look at how our modules, cart, category, components, and so on, are put together to get an und
 
-The Basics
+We've built the HTML5 Storefront with this extension methodology.
+
+The HTML5 Reference Storefront is comprised of multiple modules. Each module is an independent unit of code that is responsible for a single piece of functionality in the
+storefront. The
+
+
+
+![List of Modules](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/modulesList.png)
+
+
+How did we break up our modules?
+We have have guidelines for how we broke the modules out. We don't have hard and fast rules. If you
+
+Components
+Components are reusable pieces of code that can be used in other modules. For example, the address component is used in profiles
+
+Guidlines
+- usually around page views
+- designed for reuse capabilities
+-
+
+Module Basics
 ---------------------
-Overview of our MVC Framework and how the views are populated.
-Controller.js
-model.js
-templates.html
-views.js
+Overview of the HTML5 MVC Framework
 
+base.profile.controller.js
+base.profile.models.js
+base.profile.views.js
+base.profile.templates.html
 
-Extension Model
----------------------
--Overview of the extension model.
-This is following binary based development methodologies.
 
 
 Tutorial: Extending Items
