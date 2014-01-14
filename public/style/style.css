@@ -6708,6 +6708,7 @@ nav.main-nav {
   color: #fff;
 }
 .cart-main-inner {
+  position: relative;
   background-color: #eee;
   padding: 0;
   border-radius: 6px;
@@ -6978,6 +6979,7 @@ fieldset[disabled] .btn-cmd-checkout.active {
   border-radius: 6px;
   background-color: rgba(255, 255, 255, 0.6);
   text-align: left;
+  position: relative;
 }
 .cart-sidebar .cart-sidebar-inner h3 {
   margin: 0 0 2rem 0;

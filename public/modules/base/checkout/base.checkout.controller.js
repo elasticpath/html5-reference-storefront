@@ -100,8 +100,6 @@ define(function (require) {
             }
           }
 
-          checkoutLayout.cancelCheckoutActionRegion.show(new View.CancelCheckoutActionView());
-
           var checkoutSummaryView = new View.CheckoutSummaryView({
             model: new Backbone.Model(checkoutModel.get('summary'))
           });
@@ -186,15 +184,6 @@ define(function (require) {
     }
 
     /* ********** SUBMIT ORDER EVENT LISTENERS ************ */
-    /**
-     * Listening to cancel checkout button clicked signal,
-     * will navigate back to cart
-     */
-    EventBus.on('checkout.cancelOrderBtnClicked', function () {
-      // Route to the default cart view
-      ep.router.navigate(ep.app.config.routes.cart, true);
-    });
-
     /**
      * Listening to submit order button clicked signal,
      * will trigger event to submit order to cortex

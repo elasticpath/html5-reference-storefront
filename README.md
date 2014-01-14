@@ -181,7 +181,7 @@ ProxyPassReverse /html5storefront http://localhost:3008
 <li><b>Access HTML5 Reference Storefront</b>
 <ul>
 <li>Open your browser and navigate to<br/>
-<code>localhost/html5storefront</code>
+<code>localhost/html5storefront/</code>
 </li>
 </ul>
 </li>

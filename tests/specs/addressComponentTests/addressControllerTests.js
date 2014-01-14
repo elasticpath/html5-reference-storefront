@@ -8,6 +8,7 @@ define(function (require) {
   var Mediator = require('mediator');
   var Backbone = require('backbone');
   var EventTestFactory = require('EventTestFactory');
+  var EventTestHelpers = require('testhelpers.event');
   var DefaultViewTestHelper = require('testhelpers.defaultview');
   var ep = require('ep');
 
@@ -17,23 +18,60 @@ define(function (require) {
     var addressTemplate = require('text!modules/base/components/address/base.component.address.template.html');
 
     describe('DefaultCreateAddressView', function () {
-      before(function () {
-        $("#Fixtures").append(addressTemplate); // append templates
+      describe('when a user is logged in', function() {
+        before(function() {
+          $("#Fixtures").append(addressTemplate); // append templates
 
-        addressView.DefaultAddressFormView = DefaultViewTestHelper.testDouble;
-        this.view = addressController.DefaultCreateAddressView();
+          sinon.stub(ep.app, 'isUserLoggedIn', function() {
+            return true;
+          });
+
+          addressView.DefaultAddressFormView = DefaultViewTestHelper.testDouble;
+          this.view = addressController.DefaultCreateAddressView();
+        });
+        after(function() {
+          $("#Fixtures").empty();
+          ep.app.isUserLoggedIn.restore();
+        });
+
+        it('returns an instance of DefaultCreateAddressLayout', function () {
+          expect(this.view).to.be.instanceOf(addressView.DefaultCreateAddressLayout);
+        });
+        it('renders childView: DefaultAddressFormView', function () {
+          this.view.render().trigger('show');
+          expect(DefaultViewTestHelper.wasRendered()).to.be.true;
+        });
       });
 
-      after(function () {
-        $("#Fixtures").empty();
-      });
+      describe('when a user is not logged in', function() {
+        before(function () {
+          $("#Fixtures").append(addressTemplate); // append templates
 
-      it('returns an instance of DefaultCreateAddressLayout', function () {
-        expect(this.view).to.be.instanceOf(addressView.DefaultCreateAddressLayout);
-      });
-      it('renders childView: DefaultAddressFormView', function () {
-        this.view.render().trigger('show');
-        expect(DefaultViewTestHelper.wasRendered()).to.be.true;
+          sinon.stub(ep.app, 'isUserLoggedIn', function() {
+            return false;
+          });
+          sinon.spy(EventBus, 'trigger');
+
+          EventTestHelpers.unbind('layout.loadRegionContentRequest');
+
+          addressView.DefaultAddressFormView = DefaultViewTestHelper.testDouble;
+          this.view = addressController.DefaultCreateAddressView();
+        });
+
+        after(function () {
+          $("#Fixtures").empty();
+          ep.app.isUserLoggedIn.restore();
+          EventBus.trigger.restore();
+          EventTestHelpers.reset();
+        });
+
+        it('triggers a request to load the login form', function() {
+          expect(EventBus.trigger).to.be.calledWithExactly('layout.loadRegionContentRequest', {
+            region: 'appModalRegion',
+            module: 'auth',
+            view: 'LoginFormView'
+          });
+        });
       });
     });
 

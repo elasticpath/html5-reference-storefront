@@ -16,7 +16,6 @@
             <div data-region="shippingAddressesRegion"></div>
             <div data-region="shippingOptionsRegion"></div>
           </div>
-          <div data-region="cancelCheckoutActionRegion"></div>
         </div>
 
         <div class="checkout-sidebar" data-region="checkoutOrderRegion"></div>
@@ -50,6 +49,7 @@
   <script id="ShippingAddressesTemplate" type="text/template">
     <h2><%= E.getI18nLabel('checkout.shippingAddress') %></h2>
     <div data-region="shippingAddressSelectorsRegion"></div>
+    <button class="btn btn-primary checkout-new-address-btn" data-el-label="checkout.newShippingAddressBtn"><%= E.getI18nLabel('checkout.newAddressBtn')%></button>
   </script>
 
   <!-- Rendered when there are no shipping addresses to display -->
@@ -83,11 +83,6 @@
     <label for="<%= uniqueId %>">
       <div data-region="checkoutAddressRegion"></div>
     </label>
-  </script>
-
-  <!-- Cancel Checkout Action Template [default ItemView] -->
-  <script id="CancelCheckoutActionTemplate" type="text/template">
-    <button class="btn-cancel-order" data-el-label="checkout.cancelCheckout"><%= E.getI18nLabel('checkout.cancelOrder') %></button>
   </script>
 
   <!-- Checkout Summary Layout Template [default Layout, class: checkout-sidebar-inner]-->

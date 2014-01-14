@@ -23,14 +23,21 @@ define(function (require) {
    * @returns {View.DefaultCreateAddressLayout} fully rendered DefaultCreateAddressLayout
    */
   var defaultCreateAddressView = function () {
-    var addressLayout = new View.DefaultCreateAddressLayout();
-    var addressFormView = new View.DefaultAddressFormView();
-
-    addressLayout.on('show', function () {
-      addressLayout.addressFormRegion.show(addressFormView);
-    });
-
-    return addressLayout;
+    // Ensure the user is authenticated before rendering the address form
+    if (ep.app.isUserLoggedIn()) {
+      var addressLayout = new View.DefaultCreateAddressLayout();
+      var addressFormView = new View.DefaultAddressFormView();
+      addressLayout.on('show', function () {
+        addressLayout.addressFormRegion.show(addressFormView);
+      });
+      return addressLayout;
+    } else {
+      EventBus.trigger('layout.loadRegionContentRequest', {
+        region: 'appModalRegion',
+        module: 'auth',
+        view: 'LoginFormView'
+      });
+    }
   };
 
   /* *************** Event Listeners Functions *************** */
