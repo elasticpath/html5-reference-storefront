@@ -23,28 +23,72 @@ For example, the <code>address</code> component, provides the Controller and Vie
 
 **Module Creation Guidelines**
 
-We don't have any hard and fast rules for when to create a module, we just have guidelines. You--the programmer--need to determine whether or not to create a new module for
-the functionality you are building for your HTML5 Storefront.
+We don't have any hard and fast rules for when to create a module, we just have guidelines. You need to determine whether or not to create a new module for
+the functionality you are building based on your needs.
 
-Below are Elastic Path's guidelines for creating new modules for the HTML5 Storefront.
+Keep in mind Elastic Path's Guidelines for Creating New Modules:
 
-Module Guidelines
-- We base our modules around views. For example, the profiles
-- We design our modules to be reusable.
-- We design our modules to be standalone components, meaning
+- Base the module around a view. </br>
+We base our modules around views. For example, the <code>cart</code> module contains the complete view of the cart, including the cart's lineitems, costs of the cart's contents, total quantity in the cart, and so on.
+Designing the module around a view
+- Design the module to be reusable. </br>
+We
+- Design the module to be a standalone. </br>
+meaning they are complete units of functionality.
 
 Module Basics
 ---------------------
 
 Overview of a module's components:
 The descriptions below use the profile module as an example.
+
 ![profile](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/profileModule.png)
 
-base.profile.controller.js
-base.profile.models.js
-base.profile.views.js
-base.profile.templates.html
+**base.profile.controller.js**
 
+lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsum
+
+```js
+ define(function (require) {
+     var ep = require('ep');
+     var EventBus = require('eventbus');
+     var Mediator = require('mediator');
+     var Backbone = require('backbone');
+
+     var Model = require('profile.models');
+     var View = require('profile.views');
+     var template = require('text!modules/base/profile/base.profile.templates.html');
+
+     $('#TemplateContainer').append(template);
+
+     _.templateSettings.variable = 'E';
+
+     /**
+      * Renders the DefaultLayout of profile module, and fetch model from backend;
+      * upon model fetch success, renders profile views in destinated regions.
+      * @returns {View.DefaultLayout}
+      */
+     var defaultView = function () {
+
+       // ensure the user is authenticated befor continuing to process the request
+       if (ep.app.isUserLoggedIn()) {
+         var defaultLayout = new View.DefaultLayout();
+         var profileModel = new Model.ProfileModel();
+
+
+```
+
+**base.profile.models.js**
+
+lorem ipsum
+
+**base.profile.views.js**
+
+lorem ipsum
+
+**base.profile.templates.html**
+
+lorem ipsum
 
 
 Tutorial: Creating a New Module
