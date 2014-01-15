@@ -19,7 +19,7 @@ You'll notice the <code>modules</code> folder also contains a <code>components</
 Components are very similar to modules, but their purpose is slightly different. Modules are complete, stand-alone units of functionality, which include a Model, View, and Controller.
 Components are units of code that are designed to be reused in other modules. In most cases, components just contain the View and the Controller.
 For example, the <code>address</code> component, provides the Controller and View to create, retrieve, and view customer addresses.
-<code>address</code> is reused in the <code>profile</code> and <code>receipt</code> modules, to allow customers to create, update, and view their addresses through these views.
+<code>address</code> is reused in the <code>profile</code> and <code>receipt</code> modules, to allow customers to create, update, and view their addresses through these module's views.
 
 **Module Creation Guidelines**
 
@@ -37,8 +37,9 @@ Module Basics
 ---------------------
 
 Overview of a module's components:
-
 The descriptions below use the profile module as an example.
+![profile](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/profileModule.png)
+
 base.profile.controller.js
 base.profile.models.js
 base.profile.views.js
