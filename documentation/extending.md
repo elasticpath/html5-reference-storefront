@@ -17,7 +17,7 @@ HTML5 Storefront Modular Design Benefits:
 
 You'll notice the <code>modules</code> folder also contains a <code>components</code> folder.
 Components are very similar to modules, but their purpose is slightly different. Modules are complete, stand-alone units of functionality, which include a Model, View, and Controller.
-Components are units of code that are designed to be reused in other modules. In most cases, components just contain the View and the Controller.
+Components are units of code that are designed for reuse in other modules. In most cases, components just contain the View and the Controller.
 For example, the <code>address</code> component, provides the Controller and View to create, retrieve, and view customer addresses.
 <code>address</code> is reused in the <code>profile</code> and <code>receipt</code> modules, to allow customers to create, update, and view their addresses through these module's views.
 
@@ -30,11 +30,12 @@ Keep in mind Elastic Path's Guidelines for Creating New Modules:
 
 - Base the module around a view. </br>
 We base our modules around views. For example, the <code>cart</code> module contains the complete view of the cart, including the cart's lineitems, costs of the cart's contents, total quantity in the cart, and so on.
-Designing the module around a view
-- Design the module to be reusable. </br>
-We
-- Design the module to be a standalone. </br>
-meaning they are complete units of functionality.
+Designing the module around a view helps you encapsulate HTML5 Storefront functionality.
+- Design the module to be self-contained. </br>
+We design our modules so they are complete units of functionality. This means all the functionality for a given feature is encapsulated in the module.
+For example, all the profiles functionality, view profile, update profile, and so on is defined in the <code>profile</code> module.
+This may seem kind of obvious, but we're mentioning it as a reminder for you to try and keep your code modularized. The HTML5 Reference Storefront is on a rapid-release schedule, meaning that the code is frequently updated.
+If your customized code is all over the place, you will have issues upgrading your code base.
 
 Module Basics
 ---------------------
