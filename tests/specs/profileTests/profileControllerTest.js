@@ -41,8 +41,8 @@ define(function (require) {
         it('should be an instance of Marionette Layout object', function () {
           expect(this.viewLayout).to.be.an.instanceOf(Marionette.Layout);
         });
-        it('view\'s DOM is rendered with 5 children (view content rendered)', function () {
-          expect(this.viewLayout.el.childElementCount).to.be.equal(5);
+        it('view\'s DOM is rendered with 6 children (view content rendered)', function () {
+          expect(this.viewLayout.el.childElementCount).to.be.equal(6);
         });
         it('Model should have fetched info from server once', function () {
           expect(Backbone.sync).to.be.calledOnce;

@@ -13,6 +13,7 @@ define(function (require) {
   // Array of zoom parameters to pass to Cortex
   var zoomArray = [
     'subscriptions:element',
+    'purchases:element',
     'addresses:element',
     'paymentmethods:element'
   ];
@@ -64,6 +65,8 @@ define(function (require) {
     }
   });
 
+  var profilePurchaseCollection = Backbone.Collection.extend();
+
   /**
    * Collection of helper functions to parse the model.
    * @type Object collection of modelHelper functions
@@ -72,6 +75,7 @@ define(function (require) {
 
   return {
     ProfileModel: profileModel,
+    ProfilePurchaseCollection: profilePurchaseCollection,
     testVariable: {
       modelHelpers: modelHelpers
     }

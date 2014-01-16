@@ -19,6 +19,9 @@ define(function (require) {
 
     _.templateSettings.variable = 'E';
 
+    var profileModel = new Model.ProfileModel();
+    var purchaseHistoryCollection = new Model.ProfilePurchaseCollection();
+
     /**
      * Renders the DefaultLayout of profile module, and fetch model from backend;
      * upon model fetch success, renders profile views in destinated regions.
@@ -26,10 +29,9 @@ define(function (require) {
      */
     var defaultView = function () {
 
-      // ensure the user is authenticated befor continuing to process the request
+      // ensure the user is authenticated before continuing to process the request
       if (ep.app.isUserLoggedIn()) {
         var defaultLayout = new View.DefaultLayout();
-        var profileModel = new Model.ProfileModel();
 
         profileModel.fetch({
           success: function (response) {
@@ -51,6 +53,11 @@ define(function (require) {
               });
               defaultLayout.profileSubscriptionSummaryRegion.show(profileSubscriptionView);
             }
+
+            var profilePurchaseView = new View.ProfilePurchasesHistoryView({
+              collection: purchaseHistoryCollection
+            });
+            defaultLayout.profilePurchaseHistoryRegion.show(profilePurchaseView);
 
             // Profile Addresses
             var profileAddressesView = new View.ProfileAddressesView({

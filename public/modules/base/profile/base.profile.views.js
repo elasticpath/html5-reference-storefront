@@ -22,6 +22,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
         profileTitleRegion:'[data-region="profileTitleRegion"]',
         profileSummaryRegion:'[data-region="profileSummaryRegion"]',
         profileSubscriptionSummaryRegion:'[data-region="profileSubscriptionSummaryRegion"]',
+        profilePurchaseHistoryRegion:'[data-region="profilePurchaseHistoryRegion"]',
         profileAddressesRegion:'[data-region="profileAddressesRegion"]',
         profilePaymentMethodsRegion:'[data-region="profilePaymentMethodsRegion"]'
       },
@@ -50,12 +51,58 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
 
     });
 
+    /**
+     * Profile Purchase Detail Item View
+     * will render 1 purchase record with its purchase number, date, total, status
+     * @type Marionette.Layout
+     */
+    var profilePurchaseDetailView = Marionette.ItemView.extend({
+      template:'#DefaultProfilePurchaseDetailTemplate',
+      tagName:'tr',
+      templateHelpers:viewHelpers
+    });
+
+    /**
+     * Profile Purchases History Empty View
+     * will render a no-purchase-history-message when purchases collection is empty
+     * @type Marionette.ItemView
+     */
+    var profilePurchasesHistoryEmptyView = Backbone.Marionette.ItemView.extend({
+      template: '#DefaultProfilePurchasesEmptyViewTemplate',
+      className: 'profile-no-purchase-history-msg-container',
+      templateHelpers: viewHelpers,
+      attributes: {
+        'data-el-label' : 'profile.noPurchaseHistoryMsg'
+      }
+    });
+
+    /**
+     * Profile Purchase History View
+     * will render wrappers with region title and table header around a collection of purchase records,
+     * will render emptyView if collection empty.
+     * @type Marionette.CompositeView
+     */
+    var profilePurchasesHistoryView = Marionette.CompositeView.extend({
+      template:'#DefaultProfilePurchasesHistoryTemplate',
+      itemViewContainer:'tbody',
+      itemView: profilePurchaseDetailView,
+      emptyView: profilePurchasesHistoryEmptyView,
+      className:'table-responsive',
+      templateHelpers:viewHelpers,
+      onRender: function() {
+        if (this.collection.length === 0) {
+          $('thead', this.$el).hide();
+        }
+      }
+    });
+
+
     // Profile Summary View
     var profileSummaryView = Backbone.Marionette.ItemView.extend({
-      template:'#ProfileSummaryViewTemplate',
-      templateHelpers:viewHelpers
+      template: '#ProfileSummaryViewTemplate',
+      templateHelpers: viewHelpers
 
-  });
+    });
 
     /**
      * Profile Payment Method Item View
@@ -86,7 +133,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
     var profilePaymentMethodEmptyView = Backbone.Marionette.ItemView.extend({
       template: '#DefaultProfilePaymentMethodEmptyViewTemplate',
       tagName: 'li',
-      className: 'profile-no-payment-method-msg-container container',
+      className: 'profile-no-payment-method-msg-container',
       templateHelpers: viewHelpers,
       attributes: {
         'data-el-label' : 'profile.noPaymentMethodMsg'
@@ -168,11 +215,13 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       DefaultLayout:defaultLayout,
       ProfileTitleView: profileTitleView,
       ProfileSubscriptionSummaryView:profileSubscriptionSummaryView,
+      ProfilePurchasesHistoryView: profilePurchasesHistoryView,
       ProfileSummaryView:profileSummaryView,
       ProfilePaymentMethodsView:profilePaymentMethodsView,
       ProfileAddressesView: profileAddressesView,
       testVariables: {
         ProfileSubscriptionItemView: profileSubscriptionItemView,
+        ProfilePurchaseDetailView: profilePurchaseDetailView,
         ProfilePaymentMethodItemView: profilePaymentMethodItemView,
         ProfilePaymentMethodsEmptyView: profilePaymentMethodEmptyView,
         ProfileAddressItemView: profileAddressItemView,

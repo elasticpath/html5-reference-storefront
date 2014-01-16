@@ -48,6 +48,10 @@ define(function (require) {
           expect(this.view.profileSubscriptionSummaryRegion).to.exist;
           expect(this.view.$el.find('[data-region="profileSubscriptionSummaryRegion"]')).to.be.length(1);
         });
+        it('should have a profilePurchaseHistoryRegion region', function () {
+          expect(this.view.profilePurchaseHistoryRegion).to.exist;
+          expect(this.view.$el.find('[data-region="profilePurchaseHistoryRegion"]')).to.be.length(1);
+        });
         it('should have a address region', function () {
           expect(this.view.profileAddressesRegion).to.exist;
           expect(this.view.$el.find('[data-region="profileAddressesRegion"]')).to.be.length(1);
@@ -190,6 +194,95 @@ define(function (require) {
         it('renders 2 child itemViews', function () {
           expect(this.view.$itemViewContainer.children().length).to.be.equal(1);
         });
+      });
+    });
+
+    describe('Profile Purchases Views', function () {
+
+      describe('ProfilePurchaseDetailView', function () {
+        before(function () {
+          // mock the model
+          this.model = new Backbone.Model({
+            purchaseNumber: '20060',
+            date: 'January 15, 2014 1:40:46 PM',
+            total: '$10.99',
+            status: 'COMPLETE'
+          });
+          this.view = new profileViews.testVariables.ProfilePurchaseDetailView({model: this.model});
+          this.view.render();
+        });
+
+        after(function () {
+          this.model.destroy();
+        });
+
+        it('should be an instance of Marionette ItemView object', function () {
+          expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
+        });
+        it('is referencing the template with correct ID', function () {
+          var templateId = '#DefaultProfilePurchaseDetailTemplate';
+          expect(this.view.getTemplate()).to.be.string(templateId);
+          expect($(templateId)).to.exist;
+        });
+        it('render() should return the view object', function () {
+          expect(this.view.render()).to.be.equal(this.view);
+        });
+
+        describe('renders the correct contents', function() {
+          it('purchase number', function () {
+            expect($('[data-el-value="purchase.number"]', this.view.$el).text()).to.have.string(this.model.get('purchaseNumber'));
+          });
+          it('purchase date', function () {
+            expect($('[data-el-value="purchase.date"]', this.view.$el).text()).to.have.string(this.model.get('date'));
+          });
+          it('purchase total', function () {
+            expect($('[data-el-value="purchase.total"]', this.view.$el).text()).to.have.string(this.model.get('total'));
+          });
+          it('purchase status', function () {
+            expect($('[data-el-value="purchase.status"]', this.view.$el).text()).to.have.string(this.model.get('status'));
+          });
+        });
+      });
+
+      describe('ProfilePurchasesHistoryView', function () {
+        before(function () {
+          // mock the collection of model
+          this.collection = new Backbone.Collection();
+          this.collection.add(new Backbone.Model());
+          this.collection.add(new Backbone.Model());
+          this.view = new profileViews.ProfilePurchasesHistoryView({collection: this.collection});
+          this.view.render();
+        });
+
+        after(function () {
+          this.collection.reset();
+        });
+
+        it('should be an instance of Marionette CompositeView object', function () {
+          expect(this.view).to.be.an.instanceOf(Marionette.CompositeView);
+        });
+        it('is referencing the template with correct ID', function () {
+          var templateId = '#DefaultProfilePurchasesHistoryTemplate';
+          expect(this.view.getTemplate()).to.be.string(templateId);
+          expect($(templateId)).to.exist;
+        });
+        it('render() should return the view object', function () {
+          expect(this.view.render()).to.be.equal(this.view);
+        });
+        it('has $itemViewContainer', function () {
+          expect(this.view.$itemViewContainer.length).to.be.equal(1);
+        });
+        it('has an emptyView', function () {
+          expect(this.view.emptyView).to.be.ok;
+        });
+
+        it('renders a region title', function () {
+          expect(this.view.$el.find("h2")).to.be.length(1);
+        });
+        it('renders a table header', function () {
+          expect(this.view.$el.find("thead")).to.be.length(1);
+        });
+
       });
     });
 

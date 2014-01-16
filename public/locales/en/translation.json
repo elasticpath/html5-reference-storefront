@@ -134,6 +134,14 @@
     "subscriptionHeader": "Subscription",
     "subscriptionQuantity": "Quantity",
     "subscriptionNextBillingDate": "Next Billing Date",
+    "purchases" : {
+      "title":  "Purchase History",
+      "number": "Purchase #",
+      "date":   "Date",
+      "total":  "Total",
+      "status": "Status",
+      "noPurchaseMsg": "You haven't made any purchases"
+    },
     "paymentMethodsTitle": "Payment Methods",
     "noPaymentMethodMsg": "You have no saved payment methods",
     "paymentCardNumber":"Card Number",
