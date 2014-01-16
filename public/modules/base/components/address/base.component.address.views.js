@@ -142,7 +142,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       // make this a map, key is locale key
       // chekin check with cortex team when getting null, change to generalSaveAddressFailedErrMsg
       var cortexMsgToKeyMap = {
-        "No valid address fields specified" : 'missingFamilyNameErrMsg',
+        "No valid address fields specified" : 'generalSaveAddressFailedErrMsg',
         "family-name: may not be null" : 'missingFamilyNameErrMsg',
         "given-name: may not be null" : 'missingGivenNameErrMsg',
         "postal-code: may not be null" : 'missingPostalCodeErrMsg',

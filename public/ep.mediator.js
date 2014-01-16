@@ -86,7 +86,8 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         }
         EventBus.trigger('address.loadEditAddressViewRequest',addressObj);
 
-        var editAddressLink = ep.app.config.routes.editAddress + '/' + ep.ui.encodeUri(addressObj.model.href);
+        var addressModelHref = addressObj.model.get('href');
+        var editAddressLink = ep.app.config.routes.editAddress + '/' + ep.ui.encodeUri(addressModelHref);
         ep.router.navigate(editAddressLink);
       });
     },

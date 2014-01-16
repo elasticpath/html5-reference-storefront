@@ -75,6 +75,7 @@ requirejs.config({
 
     'EventTestFactory': '/tests/TestHelpers/EventTestFactory',
     'testfactory.model': '/tests/TestHelpers/ModelTestFactory',
+    'testfactory.controller': '/tests/TestHelpers/ControllerTestFactory',
     "testhelpers.event": '/tests/TestHelpers/EventTestHelpers',
     'testhelpers.defaultview': '/tests/TestHelpers/DefaultViewTestHelper'
 

@@ -9,6 +9,8 @@ define(function (require) {
   var Mediator = require('mediator');
   var ep = require('ep');
 
+  var controllerTestFactory = require('testfactory.controller');
+
   describe('Profile Module: Controller', function () {
     var profileController = require('profile');
     var profileTemplate = require('text!modules/base/profile/base.profile.templates.html');
@@ -94,6 +96,51 @@ define(function (require) {
         expect(Mediator.fire).to.be.calledWithExactly('mediator.addNewAddressRequest', 'profile');
       });
     });
+
+    describe('EditProfileAddressView', function() {
+      describe("Given an address model href", function() {
+        before(function (done) {
+          // Append templates to the DOM
+          $("#Fixtures").append(profileTemplate);
+
+          sinon.stub(Mediator, 'fire');
+          sinon.spy(ep.logger, 'error');
+
+          var fakeGetLink = "/integrator/orders/fakeUrl";
+          var fakeAddressResponse = {
+            "country-name": "CA",
+            "locality": "Vancouver",
+            "postal-code": "V8C1N1",
+            "region": "BC",
+            "street-address": "5833 Movaat St."
+          };
+
+          // Create a sinon fakeServer object
+          this.server = controllerTestFactory.getFakeServer('', fakeAddressResponse, fakeGetLink);
+
+          profileController.EditProfileAddressView(fakeGetLink);
+
+          // Short delay to allow the fake AJAX request to complete
+          setTimeout(done, 200);
+        });
+
+        after(function() {
+          $("#Fixtures").empty();
+          ep.io.localStore.removeItem('oAuthToken');
+
+          this.server.restore();
+
+          Mediator.fire.restore();
+          ep.logger.error.restore();
+        });
+
+        it('fires the mediator.loadEditAddressViewRequest event', function() {
+          expect(Mediator.fire).to.be.calledWith('mediator.loadEditAddressViewRequest');
+          expect(ep.logger.error).to.not.be.called;
+        });
+      });
+    });
+
   });
 
 });

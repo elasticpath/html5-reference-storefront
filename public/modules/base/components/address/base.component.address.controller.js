@@ -60,16 +60,15 @@ define(function (require) {
   function loadEditAddressView(addressObj) {
     try {
       var addressLayout = new View.DefaultEditAddressLayout();
-
       var addressFormView = new View.DefaultAddressFormView({
-          model: new Backbone.Model(addressObj.model)
+          model: addressObj.model
       });
 
       addressLayout.on('show', function () {
         addressLayout.addressFormRegion.show(addressFormView);
       });
 
-      ep.app[addressObj.region].show(addressLayout);
+      addressObj.region.show(addressLayout);
     } catch (error) {
       ep.logger.error('Failed to load edit address view: ' + error.message);
     }

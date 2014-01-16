@@ -107,8 +107,8 @@ define(function (require) {
 
           Mediator.fire('mediator.loadEditAddressViewRequest', {
             returnModule: 'profile',
-            model: addressModel,
-            region: 'appMainRegion'
+            model: new Backbone.Model(addressModel),
+            region: ep.app.appMainRegion
           });
         },
         error: function(response) {
