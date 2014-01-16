@@ -84,6 +84,7 @@ define(function(require) {
         view:'DefaultView'
       });
     },
+    // checkIn change defaultView
     purchasedetails: function(id){
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'appMainRegion',

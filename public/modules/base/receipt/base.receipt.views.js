@@ -6,12 +6,15 @@
  * Time: 9:16 AM
  *
  */
-define(['marionette', 'i18n', 'mediator', 'viewHelpers'],
-  function(Marionette, i18n, Mediator, ViewHelpers){
+define(function (require) {
+  var ep = require('ep');
+  var i18n = require('i18n');
+  var Mediator = require('mediator');
+  var Marionette = require('marionette');
+  var ViewHelpers = require('viewHelpers');
 
     /**
-     *
-     * @type {*}
+     * Template helper functions
      */
     var viewHelpers = ViewHelpers.extend({
       isContainerVisisble:function(value){
@@ -29,7 +32,7 @@ define(['marionette', 'i18n', 'mediator', 'viewHelpers'],
     });
 
     // Purchase Confirmation Layout
-    var purchaseConfirmationLayout = Backbone.Marionette.Layout.extend({
+    var purchaseConfirmationLayout = Marionette.Layout.extend({
       template:'#PurchaseConfirmationLayoutTemplate',
       className:'purchase-confirmation-container container',
       regions:{
@@ -43,13 +46,13 @@ define(['marionette', 'i18n', 'mediator', 'viewHelpers'],
     });
 
     // Purchase Confirmation View
-    var purchaseConfirmationView = Backbone.Marionette.ItemView.extend({
+    var purchaseConfirmationView = Marionette.ItemView.extend({
       template:'#PurchaseConfirmationTemplate',
       templateHelpers:viewHelpers
     });
 
     // Purchase Confirmation Billing Address View
-    var purchaseConfirmationBillingAddressView = Backbone.Marionette.Layout.extend({
+    var purchaseConfirmationBillingAddressView = Marionette.Layout.extend({
       template:'#PurchaseConfirmationBillingAddress',
       templateHelpers:viewHelpers,
       className: 'purchase-confirmation-billing-address-container',
@@ -65,13 +68,13 @@ define(['marionette', 'i18n', 'mediator', 'viewHelpers'],
       }
     });
     // Payment Means View
-    var purchaseConfirmationPaymentMeansView = Backbone.Marionette.ItemView.extend({
+    var purchaseConfirmationPaymentMeansView = Marionette.ItemView.extend({
       template:'#PurchaseConfirmationPaymentMeans',
       templateHelpers:viewHelpers
     });
 
     // Purchase Confirmation Line Item View
-    var purchaseConfirmationLineItemView = Backbone.Marionette.ItemView.extend({
+    var purchaseConfirmationLineItemView = Marionette.ItemView.extend({
       template:'#PurchaseConfirmationLineItem',
       templateHelpers:viewHelpers,
       tagName:'li',
@@ -80,7 +83,7 @@ define(['marionette', 'i18n', 'mediator', 'viewHelpers'],
       }
     });
     // Purchase Confirmation Line Item Container View
-    var purchaseConfirmationLineItemsContainerView = Backbone.Marionette.CollectionView.extend({
+    var purchaseConfirmationLineItemsContainerView = Marionette.CollectionView.extend({
       tagName:'ul',
       className:'purchaseconfirmation-items-list',
       itemView:purchaseConfirmationLineItemView,

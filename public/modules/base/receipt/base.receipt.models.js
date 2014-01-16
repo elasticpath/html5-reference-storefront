@@ -6,10 +6,23 @@
  * Time: 9:16 AM
  *
  */
-define(['underscore', 'ep', 'eventbus', 'backbone', 'modelHelpers'],
-  function (_, ep, EventBus, Backbone, modelHelper) {
+define(function (require) {
+  var ep = require('ep');
+  var Backbone = require('backbone');
+  var modelHelper = require('modelHelpers');
+
+    // Array of zoom parameters to pass to Cortex
+    var zoomArray = [
+      'billingaddress',
+      'paymentmeans:element',
+      'lineitems:element',
+      'lineitems:element:rate'
+    ];
 
     var purchaseConfirmationModel = Backbone.Model.extend({
+      getUrl: function (href) {
+        return ep.ui.decodeUri(href) + '?zoom=' + zoomArray.join();
+      },
       parse: function (response) {
         var confirmationObj = {};
 

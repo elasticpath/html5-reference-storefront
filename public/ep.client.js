@@ -184,7 +184,7 @@ define(function (reqiure) {
       options = options || {};
       options.error = function (data, response, options) {
         if (response.status === 401) {
-          ep.logger.error('reponse error: ' + response.responseText + ' : ' + response.status);
+          ep.logger.error('response error: ' + response.responseText + ' : ' + response.status);
           if (!isTokenDirty) {
             Mediator.fire('mediator.getPublicAuthTokenRequest');
           }
@@ -193,11 +193,12 @@ define(function (reqiure) {
         if (response.status === 403) {
           // If 403 errors are used in future when logged in users do not have the correct permissions to
           // access a particular resource, a more granular handler for this error will be required.
-          ep.logger.error('Please login to access the following content. ');
-          ep.logger.error('Error ' + response.status + ': ' + response.responseText);
+          ep.logger.error('Please login to access the following content. Error ' + response.status + ': ' + response.responseText);
 
           Mediator.fire('mediator.getAuthentication');
         }
+
+        ep.logger.error('response error: ' + response.responseText + ' : ' + response.status);
       };
 
       if (options.url) {

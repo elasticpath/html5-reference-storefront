@@ -5,81 +5,60 @@
  * Date: 04/04/13
  * Time: 9:16 AM
  *
- * 
+ *
  */
-define(['app', 'ep', 'i18n', 'eventbus', 'receipt.models', 'receipt.views', 'text!modules/base/receipt/base.receipt.templates.html'],
-  function(App, ep, i18n, EventBus, Model, View, template){
+define(function (require) {
+    var ep = require('ep');
+    var Backbone = require('backbone');
+    var pace = require('pace');
+    var i18n = require('i18n');
+
+    var Model = require('receipt.models');
+    var View = require('receipt.views');
+    var template = require('text!modules/base/receipt/base.receipt.templates.html');
 
     $('#TemplateContainer').append(template);
 
     _.templateSettings.variable = 'E';
 
-    // Purchase Confirmation View
-    var defaultView = function(link){
+    var purchasesModel = new Model.PurchaseConfirmationModel();
 
+    var defaultView = function (receiptLink) {
+      var purchaseConfirmationLayout = new View.PurchaseConfirmationLayout();
 
-      if (ep.app.isUserLoggedIn()) {
-        var purchaseConfirmationModel = new Model.PurchaseConfirmationModel();
-        var purchaseConfirmationLayout = new View.PurchaseConfirmationLayout();
-//        var confirmationRegion = new Marionette.Region({
-//          el:'[data-region="purchaseConfirmationRegion"]'
-//        });
-//        var billingAddressRegion = new Marionette.Region({
-//          el:'[data-region="confirmationBillingAddressRegion"]'
-//        });
-//        var purchaseConfirmationlineItemsRegion = new Marionette.Region({
-//          el:'[data-region="confirmationLineItemsRegion"]'
-//        });
-        var purchaseConfirmationView = new View.PurchaseConfirmationView({
-          model:purchaseConfirmationModel
-        });
+      purchasesModel.fetch({
+        url: purchasesModel.getUrl(receiptLink),
 
-        var rawLink = ep.ui.decodeUri(link);
+        success: function (response) {
+          var purchaseConfirmationView = new View.PurchaseConfirmationView({
+            model: purchasesModel
+          });
 
-        // FIXME [CU-196] zoom should be inside model
-       var zoomedLink = rawLink + '?zoom=billingaddress, paymentmeans:element, lineitems:element, lineitems:element:rate';
-        purchaseConfirmationModel.fetch({
-          url:zoomedLink,
-          success:function(response){
+          purchaseConfirmationLayout.purchaseConfirmationRegion.show(purchaseConfirmationView);
 
-            purchaseConfirmationLayout.purchaseConfirmationRegion.show(purchaseConfirmationView);
-            purchaseConfirmationLayout.confirmationBillingAddressRegion.show(new View.PurchaseConfirmationBillingAddressView({
-              model:new Backbone.Model(purchaseConfirmationModel.get('billingAddress'))
+          purchaseConfirmationLayout.confirmationBillingAddressRegion.show(new View.PurchaseConfirmationBillingAddressView({
+            model: new Backbone.Model(purchasesModel.get('billingAddress'))
+          }));
+
+          purchaseConfirmationLayout.confirmationLineItemsRegion.show(new View.PurchaseConfirmationLineItemsContainerView({
+            collection: new Backbone.Collection(purchasesModel.get('lineItems'))
+          }));
+
+          if (purchasesModel.get('paymentMeans').displayValue) {
+            purchaseConfirmationLayout.confirmationPaymentMethodsRegion.show(new View.PurchaseConfirmationPaymentMeansView({
+              model: new Backbone.Model(purchasesModel.get('paymentMeans'))
             }));
-            purchaseConfirmationLayout.confirmationLineItemsRegion.show(new View.PurchaseConfirmationLineItemsContainerView({
-              collection:new Backbone.Collection(purchaseConfirmationModel.get('lineItems'))
-            }));
-            if (purchaseConfirmationModel.get('paymentMeans').displayValue ){
-              purchaseConfirmationLayout.confirmationPaymentMethodsRegion.show(new View.PurchaseConfirmationPaymentMeansView({
-                model:new Backbone.Model(purchaseConfirmationModel.get('paymentMeans'))
-              }));
-            }
-
-          },
-          error:function(response){
-            ep.logger.error('Error retrieving purchase confirmation response');
           }
-        });
-        return purchaseConfirmationLayout;
-      }
-      else{
-        // trigger login
-        EventBus.trigger('layout.loadRegionContentRequest', {
-          region: 'appModalRegion',
-          module: 'auth',
-          view: 'LoginFormView'
-        });
+        }
 
-      }
+      });
 
-
-
+      return purchaseConfirmationLayout;
     };
 
 
-
     return {
-      DefaultView:defaultView
+      DefaultView: defaultView
 
     };
   }
