@@ -26,6 +26,7 @@ define(function(require) {
         'mycart': 'cart',
         'checkout': 'checkout',
         'confirmation/:id': 'confirmation',
+        'purchaseDetails/:id': 'purchasedetails',
         'newaddressform' : 'newaddressform'
       },
       controller:loadRegionContentController

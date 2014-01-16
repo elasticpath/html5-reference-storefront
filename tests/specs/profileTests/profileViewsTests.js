@@ -6,6 +6,7 @@
 define(function (require) {
   var Backbone = require('backbone');
   var EventTestFactory = require('EventTestFactory');
+  var ep = require('ep');
 
   describe('Profile Module: Views', function () {
     var profileViews = require('profile.views');
@@ -204,9 +205,17 @@ define(function (require) {
           // mock the model
           this.model = new Backbone.Model({
             purchaseNumber: '20060',
-            date: 'January 15, 2014 1:40:46 PM',
-            total: '$10.99',
-            status: 'COMPLETE'
+            date: {
+              displayValue: 'January 15, 2014 1:40:46 PM',
+              value: 1389822046000
+            },
+            total: {
+              amount: 109.99,
+              currency: "USD",
+              display: "$109.99"
+            },
+            status: 'COMPLETE',
+            link: 'fakePurchaseDetailLink'
           });
           this.view = new profileViews.testVariables.ProfilePurchaseDetailView({model: this.model});
           this.view.render();
@@ -228,24 +237,28 @@ define(function (require) {
           expect(this.view.render()).to.be.equal(this.view);
         });
 
-        describe('renders the correct contents', function() {
+        describe('correctly renders', function() {
           it('purchase number', function () {
             expect($('[data-el-value="purchase.number"]', this.view.$el).text()).to.have.string(this.model.get('purchaseNumber'));
           });
           it('purchase date', function () {
-            expect($('[data-el-value="purchase.date"]', this.view.$el).text()).to.have.string(this.model.get('date'));
+            expect($('[data-el-value="purchase.date"]', this.view.$el).text()).to.have.string(this.model.get('date').displayValue);
           });
           it('purchase total', function () {
-            expect($('[data-el-value="purchase.total"]', this.view.$el).text()).to.have.string(this.model.get('total'));
+            expect($('[data-el-value="purchase.total"]', this.view.$el).text()).to.have.string(this.model.get('total').display);
           });
           it('purchase status', function () {
             expect($('[data-el-value="purchase.status"]', this.view.$el).text()).to.have.string(this.model.get('status'));
+          });
+          it('purchase detail link', function () {
+            expect($('[data-el-value="purchase.number"] a', this.view.$el).attr('href')).to.have.string(ep.app.config.routes.purchaseHistory);
           });
         });
       });
 
       describe('ProfilePurchasesHistoryView', function () {
         before(function () {
+          sinon.stub(ep.logger, 'warn');
           // mock the collection of model
           this.collection = new Backbone.Collection();
           this.collection.add(new Backbone.Model());
@@ -255,6 +268,7 @@ define(function (require) {
         });
 
         after(function () {
+          ep.logger.warn.restore();
           this.collection.reset();
         });
 
@@ -444,6 +458,75 @@ define(function (require) {
           });
           it('renders 2 child itemViews', function () {
             expect(this.view.$itemViewContainer.children().length).to.be.equal(2);
+          });
+        });
+      });
+
+    });
+
+    describe('viewHelpers functions', function() {
+      var viewHelpers = profileViews.testVariables.viewHelpers;
+
+      describe('getDate', function() {
+        describe('given an date object', function() {
+          var dateObj = {
+            displayValue: 'fakeDateDisplayValue'
+          };
+          before(function() {
+            this.result = viewHelpers.getDate(dateObj);
+          });
+
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns the date display value', function() {
+            expect(this.result).to.be.equal(dateObj.displayValue);
+          });
+        });
+        describe('given no input', function() {
+          before(function() {
+            this.result = viewHelpers.getDate(undefined);
+          });
+
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns an empty string', function() {
+            expect(this.result).to.be.a('String');
+          });
+        });
+      });
+
+      describe('getTotal', function() {
+        describe('given an date object', function() {
+          var dateObj = {
+            display: 'fakeValue'
+          };
+          before(function() {
+            this.result = viewHelpers.getTotal(dateObj);
+          });
+
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns the display value', function() {
+            expect(this.result).to.be.equal(dateObj.display);
+          });
+        });
+        describe('given no input', function() {
+          before(function() {
+            this.result = viewHelpers.getDate(undefined);
+          });
+
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns an empty string', function() {
+            expect(this.result).to.be.a('String');
           });
         });
       });

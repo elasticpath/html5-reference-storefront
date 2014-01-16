@@ -1,7 +1,7 @@
 {
   "zoom" : "?zoom=subscriptions:element,purchases:element,addresses:element,paymentmethods:element",
   "retrievedOn" : "Jan 15, 2014",
-  "retrievedCriteria": "user with subscription item, at least 1 address, 1 token payment method, and 1 credit card payment methods",
+  "retrievedCriteria": "user with subscription item, made at least 1 purchase, at least 1 address, 1 token payment method, and 1 credit card payment methods",
   "response" : {
     "links": [
       {

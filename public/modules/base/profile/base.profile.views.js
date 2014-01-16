@@ -13,7 +13,37 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
     /**
      * Template helper functions
      */
-    var viewHelpers = ViewHelpers.extend({});
+    var viewHelpers = ViewHelpers.extend({
+      /**
+       * Get date's display value
+       * @param dateObj date object
+       * @returns string display value of date
+       */
+      getDate: function(dateObj) {
+        var value = '';
+
+        if (dateObj) {
+          value = dateObj.displayValue;
+        }
+
+        return value;
+      },
+
+      /**
+       * Get display value of total cost.
+       * @param totalObj  total cost object
+       * @returns string  display value of total cost
+       */
+      getTotal: function(totalObj) {
+        var total = '';
+
+        if(totalObj) {
+          total = totalObj.display;
+        }
+
+        return total;
+      }
+    });
 
     // Default Profile Layout
     var defaultLayout = Backbone.Marionette.Layout.extend({
@@ -220,6 +250,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       ProfilePaymentMethodsView:profilePaymentMethodsView,
       ProfileAddressesView: profileAddressesView,
       testVariables: {
+        viewHelpers: viewHelpers,
         ProfileSubscriptionItemView: profileSubscriptionItemView,
         ProfilePurchaseDetailView: profilePurchaseDetailView,
         ProfilePaymentMethodItemView: profilePaymentMethodItemView,

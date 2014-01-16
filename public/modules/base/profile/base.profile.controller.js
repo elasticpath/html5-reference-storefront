@@ -54,6 +54,7 @@ define(function (require) {
               defaultLayout.profileSubscriptionSummaryRegion.show(profileSubscriptionView);
             }
 
+            purchaseHistoryCollection = new Model.ProfilePurchaseCollection(response.get('purchaseHistories'));
             var profilePurchaseView = new View.ProfilePurchasesHistoryView({
               collection: purchaseHistoryCollection
             });

@@ -68,7 +68,7 @@ define(function (require) {
       title:'PST'
     };
     describe('helper: parseTax',
-      parserTestFactory(testDataTax, helpers.parseTax, expectedTax));
+      parserTestFactory(testDataTax, expectedTax, helpers.parseTax));
 
 
     describe('Profile Parsers', function () {
@@ -97,7 +97,7 @@ define(function (require) {
         postalCode: "v8v8v8"
       };
       describe('helper: parseAddress',
-        parserTestFactory(testDataAddress, helpers.parseAddress, expectedAddress));
+        parserTestFactory(testDataAddress, expectedAddress, helpers.parseAddress));
 
 
       var testDataSubscription = {
@@ -115,7 +115,7 @@ define(function (require) {
         nextBillingDate: 'December 18, 2013'
       };
       describe('helper: parseSubscription',
-        parserTestFactory(testDataSubscription, helpers.parseSubscription, expectedSubscription));
+        parserTestFactory(testDataSubscription, expectedSubscription, helpers.parseSubscription));
 
       var testDataToken = {
         "display-value": "timmins-token-X"
@@ -124,7 +124,7 @@ define(function (require) {
         displayValue: 'timmins-token-X'
       };
       describe('helper: parseSubscription',
-        parserTestFactory(testDataToken, helpers.parseTokenPayment, expectedToken));
+        parserTestFactory(testDataToken, expectedToken, helpers.parseTokenPayment));
 
     });
 
@@ -141,7 +141,7 @@ define(function (require) {
         display: "$192.09"
       };
       describe('helper: parsePrice',
-        parserTestFactory(testDataPrice, helpers.parsePrice, expectedPrice));
+        parserTestFactory(testDataPrice, expectedPrice, helpers.parsePrice));
 
       var testDataRate = {
         "display": "$12.00/year",
@@ -168,7 +168,7 @@ define(function (require) {
         }
       };
       describe('helper: parseRate',
-        parserTestFactory(testDataRate, helpers.parseRate, expectedRate));
+        parserTestFactory(testDataRate, expectedRate, helpers.parseRate));
 
       var testDataPreOrder = {
         "state": "AVAILABLE_FOR_PRE_ORDER",
@@ -185,7 +185,7 @@ define(function (require) {
         }
       };
       describe('helper: parseAvailability with release date',
-        parserTestFactory(testDataPreOrder, helpers.parseAvailability, expectedPreOrder));
+        parserTestFactory(testDataPreOrder, expectedPreOrder, helpers.parseAvailability));
 
       var testDataAvailable = {
         "state": "AVAILABLE_FOR_PRE_ORDER"
@@ -194,12 +194,12 @@ define(function (require) {
         state: "AVAILABLE_FOR_PRE_ORDER"
       };
       describe('helper: parseAvailability without release date',
-        parserTestFactory(testDataAvailable, helpers.parseAvailability, expectedAvailable));
+        parserTestFactory(testDataAvailable, expectedAvailable, helpers.parseAvailability));
     });
 
   });
 
-  function parserTestFactory (testData, fnToTest, expected) {
+  function parserTestFactory(testData, expected, fnToTest) {
     return function() {
       beforeEach(function () {
         sinon.stub(ep.logger, 'warn');

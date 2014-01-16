@@ -87,9 +87,11 @@
 
   <!-- Renders each purchase records with purhcase number, date, total and status  -->
   <script id="DefaultProfilePurchaseDetailTemplate" type="text/template">
-    <td data-el-value="purchase.number" class="profile-purchase-number"><%= E.purchaseNumber %></td>
-    <td data-el-value="purchase.date" class="profile-purchase-date"><%= E.date %></td>
-    <td data-el-value="purchase.total" class="profile-purchase-total"><%= E.total %></td>
+    <td data-el-value="purchase.number" class="profile-purchase-number">
+      <a href="<%= E.generateUrl('purchaseHistory', E.link) %>"><%= E.purchaseNumber %></a>
+    </td>
+    <td data-el-value="purchase.date" class="profile-purchase-date"><%= E.getDate(E.date) %></td>
+    <td data-el-value="purchase.total" class="profile-purchase-total"><%= E.getTotal(E.total) %></td>
     <td data-el-value="purchase.status" class="profile-purchase-status"><%= E.status %></td>
   </script>
 

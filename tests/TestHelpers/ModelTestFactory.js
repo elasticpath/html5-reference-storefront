@@ -61,6 +61,35 @@ define(function (require) {
           expect(this.model[arrayName]).to.have.length(0);
         });
       });
+    },
+
+    simpleParserTestFactory: function (testData, expected, fnToTest) {
+      return function () {
+        beforeEach(function () {
+          sinon.stub(ep.logger, 'warn');
+        });
+
+        afterEach(function () {
+          ep.logger.warn.restore();
+        });
+
+        it("parses JSON object correctly", function () {
+          var model = fnToTest(testData);
+          for (var attr in expected) {
+            expect(model[attr]).to.be.eql(expected[attr]);
+          }
+        });
+
+        it("logs error given undefined argument", function () {
+          fnToTest(undefined);
+          expect(ep.logger.warn).to.be.calledOnce;
+        });
+
+        it("return empty object given invalid data to parse", function () {
+          var model = fnToTest({invalidData: 'invalid'});
+          expect(model).to.be.ok;
+        });
+      };
     }
   };
 });

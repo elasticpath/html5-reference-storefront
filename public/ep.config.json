@@ -21,6 +21,7 @@
     "profile":"#profile",
     "itemDetail":"#itemdetail",
     "receipt": "#confirmation",
+    "purchaseHistory": "#purchaseDetails",
     "checkout" : "#checkout"
   }
 }

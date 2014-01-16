@@ -62,6 +62,13 @@ define(function(require) {
         }
       });
     },
+    newaddressform: function() {
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region: 'appMainRegion',
+        module: 'address',
+        view: 'DefaultCreateAddressView'
+      });
+    },
     search: function(keywords) {
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'appMainRegion',
@@ -77,11 +84,12 @@ define(function(require) {
         view:'DefaultView'
       });
     },
-    newaddressform: function() {
+    purchasedetails: function(id){
       EventBus.trigger('layout.loadRegionContentRequest',{
-        region: 'appMainRegion',
-        module: 'address',
-        view: 'DefaultCreateAddressView'
+        region:'appMainRegion',
+        module:'receipt',
+        view:'DefaultView',
+        data:id
       });
     }
   };
