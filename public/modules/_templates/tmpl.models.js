@@ -1,9 +1,5 @@
 /**
- * Copyright Elastic Path Software 2013.
-
- * User: sbrookes
- * Date: 04/04/13
- * Time: 9:16 AM
+ * Copyright Elastic Path Software 2014.
  *
  */
 define(function (require) {

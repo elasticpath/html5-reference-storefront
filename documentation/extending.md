@@ -41,45 +41,21 @@ Module Basics
 ---------------------
 
 Overview of a module's components:
-The descriptions below use the profile module as an example.
+The descriptions below use our template module to describe the basic components of a standard Storefront module.
 
 ![profile](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/profileModule.png)
 
-**base.profile.controller.js**
+**tmpl.controller.js**
 
 lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsum
 
 ```js
- define(function (require) {
-     var ep = require('ep');
-     var EventBus = require('eventbus');
-     var Mediator = require('mediator');
-     var Backbone = require('backbone');
 
-     var Model = require('profile.models');
-     var View = require('profile.views');
-     var template = require('text!modules/base/profile/base.profile.templates.html');
-
-     $('#TemplateContainer').append(template);
-
-     _.templateSettings.variable = 'E';
-
-     /**
-      * Renders the DefaultLayout of profile module, and fetch model from backend;
-      * upon model fetch success, renders profile views in destinated regions.
-      * @returns {View.DefaultLayout}
-      */
-     var defaultView = function () {
-
-       // ensure the user is authenticated befor continuing to process the request
-       if (ep.app.isUserLoggedIn()) {
-         var defaultLayout = new View.DefaultLayout();
-         var profileModel = new Model.ProfileModel();
 
 
 ```
 
-**base.profile.models.js**
+**tmpl.models.js**
 
 lorem ipsum
 
@@ -87,18 +63,62 @@ lorem ipsum
 
 lorem ipsum
 
-**base.profile.templates.html**
+**tmpl.templates.html**
 
 lorem ipsum
 
 
 Tutorial: Creating a New Module
 ---------------------
-This tutorial will walk you through the process of creating a simple HTML5 Reference storefront extension, and introduce the
+This tutorial will walk you through the process of creating a HTML5 Reference storefront extension, and introduce the
 core concepts that JavaScript extension developers need to know along the way.
 
-We'll be creating....
 
-What are we going to do?
-Why are we doing it?
-How do we do it? (step-by-step)
+<ol>
+<li>Copy the Template</li>
+<li>Define your module so RequireJS can add it as a dependency
+
+<code>public/main.js</code>
+```js
+ define(function (require) {
+     var ep = require('ep');
+     var EventBus = require('eventbus');
+
+```
+
+</li>
+<li>Add it to the router
+
+<code>public/router.js</code>
+```js
+var router = Marionette.AppRouter.extend({
+      appRoutes:{
+        '': 'index',
+        'home': 'index',
+        'category' : 'category',
+        'category/:href' : 'category',
+        'category/:href/:pagehref' : 'category',
+        'search' : 'search',
+
+```
+
+<li>You need to load your module views into this file so the application can understand where and how to load your views.
+
+<code>public/loadRegionContentEvents.js</code>
+```js
+ var loadRegionContentEvents = {
+    appHeader: function() {
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region:'appHeaderRegion',
+        module:'appheader',
+        view:'AppHeaderView'
+      });
+    },
+
+```
+</li>
+
+</li>
+</ol>
+*
+* Wire in
