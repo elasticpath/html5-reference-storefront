@@ -23,6 +23,7 @@ define(function(require) {
         'search/:keywords' : 'search',
         'itemdetail/:href': 'item',
         'profile': 'profile',
+        'editaddress/:href': 'editaddress',
         'mycart': 'cart',
         'checkout': 'checkout',
         'purchaseReceipt/:id': 'purchaseReceipt',

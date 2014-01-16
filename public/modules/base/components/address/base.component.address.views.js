@@ -61,10 +61,40 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
     });
 
     /**
+     * Default Edit Address Layout
+     * wraps a default address form with elements specific to editing an address
+     * @type Marionette.Layout
+     */
+    var defaultEditAddressLayout = Marionette.Layout.extend({
+      template: '#DefaultEditAddressTemplate',
+      templateHelpers: viewHelpers,
+      className: 'create-address-container container',
+      regions: {
+        addressFormRegion: '[data-region="componentAddressFormRegion"]',
+        addressFeedbackMsgRegion: '[data-region="componentAddressFeedbackRegion"]'
+      },
+      events: {
+        'click [data-el-label="addressForm.edit"]': function (event) {
+          event.preventDefault();
+          var addressHref = this.addressFormRegion.currentView.model.get('href');
+          if (addressHref) {
+            EventBus.trigger('address.editAddressBtnClicked', addressHref);
+          } else {
+            EventBus.trigger('address.editAddressBtnClicked');
+          }
+        },
+        'click [data-el-label="addressForm.cancel"]': function (event) {
+          event.preventDefault();
+          EventBus.trigger('address.cancelBtnClicked');
+        }
+      }
+    });
+
+    /**
      * Get form values from from markup, and save it into a object corresponding to Cortex address form
      * @returns {*} a filled cortex address form object
      */
-    function getAddressForm() {
+    function getAddressFormValues() {
       return {
         "address": {
           "street-address": $('#StreetAddress').val(),
@@ -113,12 +143,12 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       // chekin check with cortex team when getting null, change to generalSaveAddressFailedErrMsg
       var cortexMsgToKeyMap = {
         "No valid address fields specified" : 'missingFamilyNameErrMsg',
-        "family-name: may not be null" : 'generalSaveAddressFailedErrMsg',
-        "given-name: may not be null" : 'generalSaveAddressFailedErrMsg',
-        "postal-code: may not be null" : 'generalSaveAddressFailedErrMsg',
-        "street-address: may not be null" : 'generalSaveAddressFailedErrMsg',
-        "locality: may not be null": 'generalSaveAddressFailedErrMsg',
-        "country-name: may not be null" : 'generalSaveAddressFailedErrMsg',
+        "family-name: may not be null" : 'missingFamilyNameErrMsg',
+        "given-name: may not be null" : 'missingGivenNameErrMsg',
+        "postal-code: may not be null" : 'missingPostalCodeErrMsg',
+        "street-address: may not be null" : 'missingStreetAddErrMsg',
+        "locality: may not be null": 'missingLocalityErrMsg',
+        "country-name: may not be null" : 'missingCountryErrMsg',
         "family-name: must not be blank" : 'missingFamilyNameErrMsg',
         "given-name: must not be blank" : 'missingGivenNameErrMsg',
         "postal-code: must not be blank" : 'missingPostalCodeErrMsg',
@@ -203,7 +233,8 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       DefaultAddressItemView: defaultAddressItemView,
       DefaultAddressFormView: defaultAddressFormView,
       DefaultCreateAddressLayout: defaultCreateAddressLayout,
-      getAddressForm: getAddressForm,
+      DefaultEditAddressLayout: defaultEditAddressLayout,
+      getAddressFormValues: getAddressFormValues,
       displayAddressFormErrorMsg: displayAddressFormErrorMsg,
       translateErrorMessage: translateErrorMessage,
       testVariables: {

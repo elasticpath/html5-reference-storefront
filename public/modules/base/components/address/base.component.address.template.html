@@ -85,11 +85,26 @@
       <div data-region="componentAddressFormRegion"></div>
 
       <div class="form-group create-address-btn-container container">
-        <button class="btn btn-primary address-save-btn" data-el-label="addressForm.create"><%= E.getI18nLabel('addressForm.createBtn') %></button>
+        <button class="btn btn-primary address-save-btn" data-el-label="addressForm.create"><%= E.getI18nLabel('addressForm.saveBtn') %></button>
         <button class="btn btn-primary address-cancel-btn" data-el-label="addressForm.cancel"><%= E.getI18nLabel('addressForm.cancelBtn') %></button>
       </div>
     </form>
   </script>
 
+  <script id="DefaultEditAddressTemplate" type="text/template">
+    <!-- defaultView, Layout tagName: div, class: create-address-container container-->
+    <h3><%= E.getI18nLabel('addressForm.editAddressTitle') %></h3>
+
+    <div class="feedback-label address-form-feedback-container" data-region="componentAddressFeedbackRegion"></div>
+
+    <form role="form" method="POST" class="form-horizontal">
+      <div data-region="componentAddressFormRegion"></div>
+
+      <div class="form-group create-address-btn-container container">
+        <button class="btn btn-primary address-save-btn" data-el-label="addressForm.edit"><%= E.getI18nLabel('addressForm.saveBtn') %></button>
+        <button class="btn btn-primary address-cancel-btn" data-el-label="addressForm.cancel"><%= E.getI18nLabel('addressForm.cancelBtn') %></button>
+      </div>
+    </form>
+  </script>
 
 </div>

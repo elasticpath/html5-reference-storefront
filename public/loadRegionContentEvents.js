@@ -91,6 +91,14 @@ define(function(require) {
         view:'PurchaseDetailsView',
         data:id
       });
+    },
+    editaddress: function(href) {
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region: 'appMainRegion',
+        module: 'profile',
+        view: 'EditProfileAddressView',
+        data: href
+      });
     }
   };
 

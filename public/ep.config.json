@@ -16,6 +16,7 @@
   "viewFadeInValue":500,
   "routes": {
     "newAddress":"#newaddressform",
+    "editAddress": "#editaddress",
     "cart":"#mycart",
     "category":"#category",
     "profile":"#profile",

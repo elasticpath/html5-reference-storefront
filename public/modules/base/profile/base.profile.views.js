@@ -186,8 +186,8 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
 
     /**
      * Profile Address Item View
-     * make mediator request to load an address view in region: profileAddressComponentRegion,
-     * will render a wrapper around an address view
+     * Makes a mediator request to load an address view in region: profileAddressComponentRegion
+     * and will render a wrapper around an address view with edit button.
      * @type Marionette.Layout
      */
     var profileAddressItemView = Backbone.Marionette.Layout.extend({
@@ -197,11 +197,18 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       regions: {
         profileAddressComponentRegion: '[data-region="profileAddressComponentRegion"]'
       },
+      templateHelpers: viewHelpers,
       onShow: function() {
         Mediator.fire('mediator.loadAddressesViewRequest', {
           region: this.profileAddressComponentRegion,
           model: this.model
         });
+      },
+      events: {
+        'click [data-el-label="profile.editAddressBtn"]': function(event) {
+          event.preventDefault();
+          EventBus.trigger('profile.editAddressRequest', this.model.get('href'));
+        }
       }
     });
 

@@ -14,6 +14,7 @@ define(function (require) {
     var Model = require('profile.models');
     var View = require('profile.views');
     var template = require('text!modules/base/profile/base.profile.templates.html');
+    var profileParser = require('helpers/profile.parsers');
 
     $('#TemplateContainer').append(template);
 
@@ -66,7 +67,6 @@ define(function (require) {
             });
             defaultLayout.profileAddressesRegion.show(profileAddressesView);
 
-
             // Profile Payment Methods
             var profilePaymentMethodsView = new View.ProfilePaymentMethodsView({
               collection: new Backbone.Collection(response.get('paymentMethods'))
@@ -88,31 +88,36 @@ define(function (require) {
         });
       }
 
+    };
 
+    /**
+     * Attempts to fetch an address model based on a href link that identifies an individual address in Cortex.
+     * If successful, fires a mediator event to render the DefaultEditAddressLayout layout of the address component
+     * which renders the edit address form.
+     * @param href A href used to identify the address to be edited in Cortex
+     */
+    var editProfileAddressView = function(href) {
+      // Get the address model from Cortex that corresponds to the href link
+      var address = new Backbone.Model();
+      address.fetch({
+        url: ep.ui.decodeUri(href),
+        success: function(response) {
+          // Parse the address raw JSON response into a Cortex address object
+          var addressModel = profileParser.parseAddress(response.toJSON());
+
+          Mediator.fire('mediator.loadEditAddressViewRequest', {
+            returnModule: 'profile',
+            model: addressModel,
+            region: 'appMainRegion'
+          });
+        },
+        error: function(response) {
+          ep.logger.error('Error getting address model: ' + JSON.stringify(response));
+        }
+      });
     };
 
     /* ********* EVENT LISTENERS ************ */
-    /**
-     * Reload addresses region with newly feteched data from Cortex server.
-     */
-    function updateAddressRegion() {
-      var addressesRegion = new Marionette.Region({
-        el: '[data-region="profileAddressesRegion"]'
-      });
-
-      var profileModel = new Model.ProfileModel();
-      profileModel.fetch({
-        success: function () {
-          addressesRegion.show(new View.ProfileAddressesView({
-            collection: new Backbone.Collection(profileModel.get('addresses'))
-          }));
-        },
-        error: function () {
-          ep.logger.error('Error getting profile model');
-        }
-      });
-    }
-
     /**
      * Listen to add new address button clicked signal
      * will load address form
@@ -121,15 +126,16 @@ define(function (require) {
       Mediator.fire('mediator.addNewAddressRequest', 'profile');
     });
 
-    // this listener not used
     /**
-     * Listen to addresses updated signal,
-     * will reload profile addresses region
+     * Handler for the edit profile address request event that navigates to the corresponding route.
      */
-    EventBus.on('profile.addressesUpdated', updateAddressRegion);
+    EventBus.on('profile.editAddressRequest', function(href) {
+      var editAddressLink = ep.app.config.routes.editAddress + '/' + ep.ui.encodeUri(href);
+      ep.router.navigate(editAddressLink, true);
+    });
 
     return {
-      DefaultView: defaultView
+      DefaultView: defaultView,
+      EditProfileAddressView: editProfileAddressView
     };
-  }
-);
+});

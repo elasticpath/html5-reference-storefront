@@ -94,24 +94,6 @@ define(function (require) {
         expect(Mediator.fire).to.be.calledWithExactly('mediator.addNewAddressRequest', 'profile');
       });
     });
-
-    describe('Responding to event: profile.addressesUpdated', function () {
-      before(function () {
-        sinon.stub(Backbone, 'sync');
-        EventBus.trigger('profile.addressesUpdated');
-      });
-
-      after(function () {
-        Backbone.sync.restore();
-      });
-
-      it('registers correct event listener', function () {
-        expect(EventBus._events['profile.addressesUpdated']).to.exist;
-      });
-      it('model should have fetched info from server once', function () {
-        expect(Backbone.sync).to.be.calledOnce;
-      });
-    });
   });
 
 });

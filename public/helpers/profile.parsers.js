@@ -22,7 +22,8 @@ define(function (require) {
           city: jsonPath(rawObject, '$.address..locality')[0],
           region: jsonPath(rawObject, '$.address..region')[0],
           country: jsonPath(rawObject, '$.address..country-name')[0],
-          postalCode: jsonPath(rawObject, '$.address..postal-code')[0]
+          postalCode: jsonPath(rawObject, '$.address..postal-code')[0],
+          href: jsonPath(rawObject, '$.self.href')[0]
         };
       }
       else {
