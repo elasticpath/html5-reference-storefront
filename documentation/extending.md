@@ -73,52 +73,41 @@ Tutorial: Creating a New Module
 This tutorial will walk you through the process of creating a HTML5 Reference storefront extension, and introduce the
 core concepts that JavaScript extension developers need to know along the way.
 
+1. Copy the Template.
+2. Define your module so RequireJS can add it as a dependency. In <code>public/router.js</code>, add the following
 
-<ol>
-<li>Copy the Template</li>
-<li>Define your module so RequireJS can add it as a dependency
+    ```js
+     define(function (require) {
+         var ep = require('ep');
+         var EventBus = require('eventbus');
 
-<code>public/main.js</code>
-```js
- define(function (require) {
-     var ep = require('ep');
-     var EventBus = require('eventbus');
+    ```
+3. Add your module to the router in <code>public/router.js</code>:
 
-```
+    ```js
+    var router = Marionette.AppRouter.extend({
+          appRoutes:{
+            '': 'index',
+            'home': 'index',
+            'category' : 'category',
+            'category/:href' : 'category',
+            'category/:href/:pagehref' : 'category',
+            'search' : 'search',
 
-</li>
-<li>Add it to the router
+    ```
 
-<code>public/router.js</code>
-```js
-var router = Marionette.AppRouter.extend({
-      appRoutes:{
-        '': 'index',
-        'home': 'index',
-        'category' : 'category',
-        'category/:href' : 'category',
-        'category/:href/:pagehref' : 'category',
-        'search' : 'search',
+4. You need to load your module views into this file so the application can understand where and how to load your views. In <code>public/router.js</code>, add:
 
-```
+     ```js
+      var loadRegionContentEvents = {
+         appHeader: function() {
+           EventBus.trigger('layout.loadRegionContentRequest',{
+             region:'appHeaderRegion',
+             module:'appheader',
+             view:'AppHeaderView'
+           });
+         },
 
-<li>You need to load your module views into this file so the application can understand where and how to load your views.
+     ```
 
-<code>public/loadRegionContentEvents.js</code>
-```js
- var loadRegionContentEvents = {
-    appHeader: function() {
-      EventBus.trigger('layout.loadRegionContentRequest',{
-        region:'appHeaderRegion',
-        module:'appheader',
-        view:'AppHeaderView'
-      });
-    },
-
-```
-</li>
-
-</li>
-</ol>
-*
-* Wire in
+5. Update the code!!!
