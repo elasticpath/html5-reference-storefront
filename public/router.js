@@ -25,8 +25,8 @@ define(function(require) {
         'profile': 'profile',
         'mycart': 'cart',
         'checkout': 'checkout',
-        'confirmation/:id': 'confirmation',
-        'purchaseDetails/:id': 'purchasedetails',
+        'purchaseReceipt/:id': 'purchaseReceipt',
+        'purchaseDetails/:id': 'purchaseDetails',
         'newaddressform' : 'newaddressform'
       },
       controller:loadRegionContentController

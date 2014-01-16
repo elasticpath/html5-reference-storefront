@@ -13,39 +13,39 @@ define(function (require) {
     var pace = require('pace');
     var i18n = require('i18n');
 
-    var Model = require('receipt.models');
-    var View = require('receipt.views');
-    var template = require('text!modules/base/receipt/base.receipt.templates.html');
+    var Model = require('purchaseinfo.models');
+    var View = require('purchaseinfo.views');
+    var template = require('text!modules/base/purchaseinfo/base.purchaseinfo.templates.html');
 
     $('#TemplateContainer').append(template);
 
     _.templateSettings.variable = 'E';
 
-    var purchasesModel = new Model.PurchaseConfirmationModel();
+    var purchasesModel = new Model.PurchaseInfoModel();
 
     var defaultView = function (receiptLink) {
-      var purchaseConfirmationLayout = new View.PurchaseConfirmationLayout();
+      var purchaseInfoLayout = new View.PurchaseInformationLayout();
 
       purchasesModel.fetch({
         url: purchasesModel.getUrl(receiptLink),
 
         success: function (response) {
-          var purchaseConfirmationView = new View.PurchaseConfirmationView({
+          var purchaseSummaryView = new View.PurchaseSummaryView({
             model: purchasesModel
           });
 
-          purchaseConfirmationLayout.purchaseConfirmationRegion.show(purchaseConfirmationView);
+          purchaseInfoLayout.purchaseSummaryRegion.show(purchaseSummaryView);
 
-          purchaseConfirmationLayout.confirmationBillingAddressRegion.show(new View.PurchaseConfirmationBillingAddressView({
+          purchaseInfoLayout.purchaseBillingAddressRegion.show(new View.PurchaseBillingAddressView({
             model: new Backbone.Model(purchasesModel.get('billingAddress'))
           }));
 
-          purchaseConfirmationLayout.confirmationLineItemsRegion.show(new View.PurchaseConfirmationLineItemsContainerView({
+          purchaseInfoLayout.purchaseLineItemsRegion.show(new View.PurchaseLineItemsView({
             collection: new Backbone.Collection(purchasesModel.get('lineItems'))
           }));
 
           if (purchasesModel.get('paymentMeans').displayValue) {
-            purchaseConfirmationLayout.confirmationPaymentMethodsRegion.show(new View.PurchaseConfirmationPaymentMeansView({
+            purchaseInfoLayout.purchasePaymentMethodsRegion.show(new View.PurchasePaymentMeansView({
               model: new Backbone.Model(purchasesModel.get('paymentMeans'))
             }));
           }
@@ -53,7 +53,7 @@ define(function (require) {
 
       });
 
-      return purchaseConfirmationLayout;
+      return purchaseInfoLayout;
     };
 
 

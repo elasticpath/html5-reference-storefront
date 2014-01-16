@@ -19,43 +19,43 @@ define(function (require) {
       'lineitems:element:rate'
     ];
 
-    var purchaseConfirmationModel = Backbone.Model.extend({
+    var purchaseInfoModel = Backbone.Model.extend({
       getUrl: function (href) {
         return ep.ui.decodeUri(href) + '?zoom=' + zoomArray.join();
       },
       parse: function (response) {
-        var confirmationObj = {};
+        var purchaseInfoObj = {};
 
-        var summary = parseHelpers.parseConfirmationSummary(response);
-        // attach summary object's properties to confirmationObj
-        // without override existing properties of confirmationObj
-        _.extend(confirmationObj, summary);
+        var summary = parseHelpers.parseInfoSummary(response);
+        // attach summary object's properties to purchaseInfoObj
+        // without override existing properties of purchaseInfoObj
+        _.extend(purchaseInfoObj, summary);
 
         // Line Items
         var lineItems = jsonPath(response, '$._lineitems.._element')[0];
-        confirmationObj.lineItems = parseHelpers.parseArray(lineItems, parseHelpers.parseReceiptLineItem);
+        purchaseInfoObj.lineItems = parseHelpers.parseArray(lineItems, parseHelpers.parseReceiptLineItem);
 
         // Billing Address
         var addressObj = jsonPath(response, '$._billingaddress[0]')[0];
-        confirmationObj.billingAddress = parseHelpers.parseAddress(addressObj);
+        purchaseInfoObj.billingAddress = parseHelpers.parseAddress(addressObj);
 
         // Payment Means
-        confirmationObj.paymentMeans = {};
+        purchaseInfoObj.paymentMeans = {};
         var paymentDisplay = jsonPath(response, '$._paymentmeans[0].._element[0]')[0];
         if (paymentDisplay) {
-          confirmationObj.paymentMeans.displayValue = jsonPath(paymentDisplay, '$.display-value');
+          purchaseInfoObj.paymentMeans.displayValue = jsonPath(paymentDisplay, '$.display-value');
         }
 
-        return confirmationObj;
+        return purchaseInfoObj;
       }
     });
 
     var parseHelpers = modelHelper.extend({
-      parseConfirmationSummary: function (rawObject) {
-        var confirmationSummary = {};
+      parseInfoSummary: function (rawObject) {
+        var purchaseSummary = {};
 
         try {
-          confirmationSummary = {
+          purchaseSummary = {
             status: jsonPath(rawObject, '$.status')[0],
             purchaseNumber: jsonPath(rawObject, '$.purchase-number')[0],  // Oder Number
             orderTotal: jsonPath(rawObject, '$.monetary-total..display')[0],
@@ -65,10 +65,10 @@ define(function (require) {
 
         }
         catch (error) {
-          ep.logger.error('Error building purchase confirmation summary object: ' + error.message);
+          ep.logger.error('Error building purchase summary object: ' + error.message);
         }
 
-        return confirmationSummary;
+        return purchaseSummary;
       },
       parseReceiptLineItem: function (rawObject) {
         var lineItemObj = {};
@@ -101,7 +101,7 @@ define(function (require) {
           }
         }
         catch (error) {
-          ep.logger.error('Error building purchase confirmation lineItem object: ' + error.message);
+          ep.logger.error('Error building purchase lineItem object: ' + error.message);
         }
 
         return lineItemObj;
@@ -109,7 +109,7 @@ define(function (require) {
     });
 
     return {
-      PurchaseConfirmationModel: purchaseConfirmationModel
+      PurchaseInfoModel: purchaseInfoModel
 
     };
   }

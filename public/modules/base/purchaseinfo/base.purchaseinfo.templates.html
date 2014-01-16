@@ -1,30 +1,28 @@
 <div id="ReceiptTemplateContainer">
 
-  <!-- Purchase Confirmation Layout Template -->
-  <script id="PurchaseConfirmationLayoutTemplate" type="text/temmplate">
+  <!-- Purchase Information Layout Template -->
+  <script id="PurchaseInformationTemplate" type="text/temmplate">
     <h2><%= E.getI18nLabel('receipt.pageTitle') %></h2>
     <h3><%= E.getI18nLabel('receipt.summaryTitle') %></h3>
-    <div data-region="purchaseConfirmationRegion"></div>
+    <div data-region="purchaseSummaryRegion"></div>
     <h3><%= E.getI18nLabel('receipt.itemsTitle') %></h3>
-    <div data-region="confirmationLineItemsRegion" class="purchaseconfirm-items-container"></div>
-    <div data-region="confirmationBillingAddressRegion"></div>
-    <div data-region="confirmationPaymentMethodsRegion"></div>
-
+    <div data-region="purchaseLineItemsRegion" class="purchase-items-container"></div>
+    <div data-region="purchaseBillingAddressRegion"></div>
+    <div data-region="purchasePaymentMethodsRegion"></div>
   </script>
 
-  <!-- Purchase Confirmation Template -->
-  <script id="PurchaseConfirmationTemplate" type="text/template">
+  <script id="PurchaseSummaryTemplate" type="text/template">
     <table class="table table-striped">
       <tbody>
         <tr>
           <td><%= E.getI18nLabel('receipt.orderStatus') %>:</td>
           <td data-el-value="status"><%= E.status %></td>
         </tr>
-        <tr class="<%= E.isContainerVisisble(E.purchaseNumber) %>" data-el-container="purchaseNumber">
+        <tr class="<%= E.isContainerVisible(E.purchaseNumber) %>" data-el-container="purchaseNumber">
           <td ><%= E.getI18nLabel('receipt.orderNumber') %>:</td>
           <td data-el-value="purchaseNumber"><%= E.purchaseNumber %></td>
         </tr>
-        <tr class="<%= E.isContainerVisisble(E.taxTotal) %>" data-el-container="taxTotal">
+        <tr class="<%= E.isContainerVisible(E.taxTotal) %>" data-el-container="taxTotal">
           <td><%= E.getI18nLabel('receipt.orderTaxTotal') %>:</td>
           <td data-el-value="taxTotal"><%= E.taxTotal %></td>
         </tr>
@@ -32,7 +30,7 @@
           <td><%= E.getI18nLabel('receipt.orderDate') %>:</td>
           <td data-el-value="purchaseDate"><%= E.purchaseDate %></td>
         </tr>
-        <tr class="<%= E.isContainerVisisble(E.orderTotal) %>" data-el-container="orderTotal">
+        <tr class="<%= E.isContainerVisible(E.orderTotal) %>" data-el-container="orderTotal">
           <td><%= E.getI18nLabel('receipt.orderTotal') %>:</td>
           <td data-el-value="orderTotal"><%= E.orderTotal %></td>
         </tr>
@@ -43,21 +41,20 @@
 
   </script>
 
-  <!-- Purchase Confirmation Billing Address -->
-  <script id="PurchaseConfirmationBillingAddress" type="text/template">
+  <!-- Purchase Billing Address -->
+  <script id="PurchaseBillingAddress" type="text/template">
     <h3><%= E.getI18nLabel('receipt.billingTitle') %></h3>
-    <div data-region="confirmationAddressComponentRegion"></div>
+    <div data-region="purchaseAddressComponentRegion"></div>
   </script>
 
-  <!-- Purchase Confirmation Payment Means -->
-  <script id="PurchaseConfirmationPaymentMeans" type="text/template">
+  <!-- Purchase Payment Means -->
+  <script id="PurchasePaymentMeans" type="text/template">
     <h3><%= E.getI18nLabel('receipt.paymentMethodTitle') %></h3>
     <p data-el-value="paymentMeans.display"><%= E.displayValue %></p>
-
   </script>
 
-  <!-- Purchase Confirmation Line Item -->
-  <script id="PurchaseConfirmationLineItem" type="text/template">
+  <!-- Purchase Line Item -->
+  <script id="PurchaseLineItem" type="text/template">
     <table class="table">
       <tbody>
         <tr>
@@ -76,7 +73,7 @@
             <span data-el-value="lineItem.quantity"><%= E.quantity %></span>
           </td>
         </tr>
-        <tr class="<%= E.isContainerVisisble(E.amount.display) %>" data-el-container="lineItem.itemSubTotal">
+        <tr class="<%= E.isContainerVisible(E.amount.display) %>" data-el-container="lineItem.itemSubTotal">
           <td>
             <label><%= E.getI18nLabel('receipt.itemSubTotal') %>:</label>
           </td>
@@ -84,7 +81,7 @@
             <span class="<%= E.checkIfVisible(E) %>" data-el-value="lineItem.amount">&nbsp;<%= E.amount.display %></span>
           </td>
         </tr>
-        <tr class="<%= E.isContainerVisisble(E.tax.display) %>" data-el-container="lineItem.itemTax">
+        <tr class="<%= E.isContainerVisible(E.tax.display) %>" data-el-container="lineItem.itemTax">
           <td>
             <label><%= E.getI18nLabel('receipt.itemTax') %>:</label>
           </td>

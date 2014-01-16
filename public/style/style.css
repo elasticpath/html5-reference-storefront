@@ -6997,13 +6997,13 @@ fieldset[disabled] .btn-cmd-checkout.active {
 /*
 Purchase Confirmation
 */
-.purchaseconfirm-items-container .row {
+.purchase-items-container .row {
   margin-bottom: 0;
 }
-.purchaseconfirm-items-container hr {
+.purchase-items-container hr {
   margin: 1rem;
 }
-.purchaseconfirmation-items-list li:nth-child(even) {
+.purchase-items-list li:nth-child(even) {
   background: #fafafe;
 }
 .cart-tax-container li ul {
