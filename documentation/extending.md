@@ -1,14 +1,14 @@
 Customizing HTML5 Features
 ====================
 HTML5 Reference Storefront functionality is divided into modules. For example, profile, cart, authentication, checkout, and so on are all separate modules.
-An HTML5 Storefront module is the view, plus the code backing the view. This means each module is its own Model View Controller (MVC) component.
+An HTML5 Storefront module is the view, plus the code backing the view. This means that each module is its own Model View Controller (MVC) component.
 For example, the profile module contains all code to retrieve and update a customer's profile data in Cortex API (Model and Controller) and contains the HTML and JS code to show the customer's profile data in the Storefront (View).
 
 HTML5 Storefront Modular Design Benefits:
-* Customizable - Add a new feature by creating a new module and adding it to the <code>module</code> folder, as opposed to modifying multiple pieces of code throughout the Storefront to create functionality.
-* Maintainable - The Storefront's modular architecture enables you to make changes, i.e. add new functionality, enhance existing functionality, without breaking the entire system.
+* Customizable - Add a new feature by creating a new module and adding it to the <code>module</code> folder, as opposed to modifying multiple pieces of code throughout the Storefront to create the functionality.
+* Maintainable - The Storefront's modular architecture enables you to make changes, i.e. add new functionality and enhance existing functionality, without breaking the entire system.
 * Debuggable - Debug individual modules to isolate HTML5 Storefront issues, rather than debugging vast amounts of JS code.
-* Updatable - The HTML5 Reference Storefront is continually being developed. With your customized features and enhancements in distinct modules, you can more easily update the out-of-the-box code without overwriting your custom code.
+* Updatable - The HTML5 Reference Storefront is under continual development. With your customized features and enhancements in distinct modules, you can more easily update the out-of-the-box code without overwriting your custom code.
 
 **HTML5 Reference Storefront Modules**
 ![List of Modules](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/modulesList.png)
@@ -164,12 +164,14 @@ define(function (require) {
 
 **base.profile.views.js**
 
-A view defines the regions where the model's data will render. To understand what regions are, think of an e-commerce web page's layout. The login, search, titlebar, and so on are all regions on the page.
-Each region can be comprised of multiple subregions. The module's view defines these regions while the module's model defines the data that gets populated in the regions.
+A view defines the regions where the model's data will render. To better understand what regions are, think of the layout of an e-commerce web page. The login, search, title bar, and so on are all regions on the page.
+Each region can be comprised of multiple subregions.
+The data in the view's regions is populated by the module's model.
 Note that the view defines the regions, not the Storefront's look and feel, which is defined in the HTML5 Storefront's <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/theming.md">theme</a>.
 
-Views extend Marionette.Layout: <code>var defaultLayout = Marionette.Layout.extend({</code>.
-<a href="https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.layout.md">Marionette.layout</a> provides the specify regions as functions, nest layouts and views, and so on.
+
+A view's regions extend Marionette.Layout: <code>var defaultLayout = Marionette.Layout.extend({</code>.
+<a href="https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.layout.md">Marionette.layout</a> provides a set of functionality to define regions, nest layouts, render layouts, organize UI elements, and configure events for the region.
 
 ```js
 define(function (require) {
@@ -201,7 +203,7 @@ define(function (require) {
 
 **tmpl.templates.html**
 
-Templates contain the regions where the module's view will populate the data.
+Templates contain the view's regions. <code><%= E %></code> is the model's namespace, from there you can access its values and view helpers. The namespace is defined in the module's controller.
 
 ```js
 <div id="[tmpl]TemplateContainer">
@@ -245,7 +247,11 @@ Please reference this section when building out your modules.
 
     ```
 
-4. You need to load your module views into this file so the application can understand where and how to load your views. In <code>public/router.js</code>, add:
+4. You need to load your module views into this file so the application can understand where and how to load your views. In <code>public/loadRegionContentEvents</code>.
+
+There are 3 main regions.
+![regions](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/regions.png)
+
 
      ```js
       var loadRegionContentEvents = {
