@@ -1,5 +1,5 @@
 /**
- * Copyright Elastic Path Software 2013.
+ * Copyright Elastic Path Software 2013-2014.
  *
  * Storefront - Checkout Models
  */
@@ -31,7 +31,15 @@ define(function (require) {
     'deliveries:element:shippingoptioninfo:selector:chosen:description',
     // choice shipping options
     'deliveries:element:shippingoptioninfo:selector:choice',
-    'deliveries:element:shippingoptioninfo:selector:choice:description'
+    'deliveries:element:shippingoptioninfo:selector:choice:description',
+    // in case user does not have any payment method,
+    // need paymentmethodinfo to determine if payment method region need to show
+    'paymentmethodinfo',
+    // chosen payment options
+    'paymentmethodinfo:selector:chosen:description',
+    // choice payment options
+    'paymentmethodinfo:selector:choice',
+    'paymentmethodinfo:selector:choice:description'
   ];
 
   /**
@@ -48,16 +56,20 @@ define(function (require) {
         summary: {},
         billingAddresses: [],
         shippingAddresses: [],
-        shippingOptions: []
+        shippingOptions: [],
+        paymentMethods: []
       };
 
       if (response) {
         checkoutObj.submitOrderActionLink = jsonPath(response, "$..links[?(@.rel=='submitorderaction')].href")[0];
-
         checkoutObj.deliveryType = jsonPath(response, "$.._deliveries[0].._element[0].delivery-type")[0];
+
+        var paymentMethodObj = jsonPath(response, '$.._paymentmethodinfo');
+        checkoutObj.showPaymentMethods = paymentMethodObj ? true : false;
 
         var parsedBillingAddresses = modelHelpers.parseCheckoutAddresses(response, "billingaddressinfo");
         var parsedShippingAddresses = modelHelpers.parseCheckoutAddresses(response, "destinationinfo");
+        var parsedPaymentMethods = modelHelpers.parsePaymentMethods(response);
 
         if (parsedBillingAddresses.length) {
           // Sort the parsed billing addresses alphabetically by the streetAddress property
@@ -74,7 +86,6 @@ define(function (require) {
           // Set a chosen shipping address if there is not one set already
           checkoutObj.shippingAddresses = modelHelpers.setChosenEntity(checkoutObj.shippingAddresses);
 
-          // FIXME test after move inside shipping address if
           var parsedShippingOptions = modelHelpers.parseShippingOptions(response);
 
           if (parsedShippingOptions.length) {
@@ -84,6 +95,14 @@ define(function (require) {
             // Set a chosen shipping option if there is not one set already
             checkoutObj.shippingOptions = modelHelpers.setChosenEntity(checkoutObj.shippingOptions);
           }
+        }
+
+        if (parsedPaymentMethods.length) {
+          // Sort the parsed payment methods alphabetically by the displayValue
+          checkoutObj.paymentMethods = modelHelpers.sortPaymentMethods(parsedPaymentMethods, 'displayValue');
+
+          // Set a chosen payment method if there is not one set already
+          checkoutObj.paymentMethods = modelHelpers.setChosenEntity(checkoutObj.paymentMethods);
         }
 
         checkoutObj.summary = modelHelpers.parseCheckoutSummary(response);
@@ -97,6 +116,10 @@ define(function (require) {
     }
   });
 
+  var paymentMethodsCollection = Backbone.Collection.extend();
+  var shippingOptionsCollection = Backbone.Collection.extend();
+  var checkoutSummaryModel = Backbone.Model.extend();
+
   var modelHelpers = ModelHelper.extend({
     /**
      * Helper function for billing/shipping address and shipping option objects.
@@ -106,6 +129,27 @@ define(function (require) {
      */
     markAsChosenObject: function(obj) {
       return _.extend(obj, {chosen: true});
+    },
+
+    /**
+     * Searches an array of objects (addresses, shipping options, or payment methods)looking for a 'chosen' property.
+     * If there is no 'chosen' object defined, it designates the first object in the array to be
+     * the chosen object by giving it a 'setAsDefaultChoice' property (the presence of this
+     * property will then trigger an update POST to Cortex in the checkout controller code).
+     *
+     * @param objArray Array of objects (these could be billing/shipping addresses or shipping options)
+     * @returns {Array} Array of objects with a chosen object defined
+     */
+    setChosenEntity: function(objArray) {
+      var chosenEntity = _.find(objArray, function(obj) {
+        return obj.chosen;
+      });
+
+      if (!chosenEntity) {
+        _.extend(objArray[0], { setAsDefaultChoice: true });
+      }
+
+      return objArray;
     },
 
     /**
@@ -188,9 +232,7 @@ define(function (require) {
 
     /**
      * Parse an array of shipping options that the registered user can use at checkout.
-     * The first shipping option in the returned array will be the chosen option.
-     * If there is no chosen option, we mark the first 'choice' option as being 'chosen',
-     * so we have a default shipping option to use at checkout.
+     *
      * @param rawObject The raw JSON response to be parsed
      * @returns {Array} Parsed array of shipping options objects
      */
@@ -234,9 +276,6 @@ define(function (require) {
 
     /**
      * Parse addresses (billing or shipping) that the registered user can use for checkout.
-     * The first address in the returned array will be the chosen address.
-     * If there is no chosen address, we mark the first 'choice' address as being 'chosen',
-     * so we have a default billing/shipping address to use at checkout.
      *
      * @param response The JSON response to be parsed
      * @param jsonPathPrefix The prefix to use in jsonPath selections:
@@ -283,47 +322,45 @@ define(function (require) {
     },
 
     /**
-     * Searches an array of objects (addresses or shipping options)looking for a 'chosen' property.
-     * If there is no 'chosen' object defined, it designates the first object in the array to be
-     * the chosen object by giving it a 'setAsDefaultChoice' property (the presence of this
-     * property will then trigger an update POST to Cortex in the checkout controller code).
+     * Parse paymentMethods that that the registered user can use for checkout.
      *
-     * @param objArray Array of objects (these could be billing/shipping addresses or shipping options)
-     * @returns {Array} Array of objects with a chosen object defined
+     * @param response  The raw JSON response to be parsed
+     * @returns {Array} Parsed array of paymentMethods objects
      */
-    setChosenEntity: function(objArray) {
-      var chosenAddress = _.find(objArray, function(address) {
-        return address.chosen;
-      });
+    parsePaymentMethods: function(response) {
+      var paymentMethods = [];
 
-      if (!chosenAddress) {
-        _.extend(objArray[0], { setAsDefaultChoice: true });
+      if (response) {
+        var chosenPaymentMethod = jsonPath(response, '$.._paymentmethodinfo.._chosen.._description[0]')[0];
+        var choicePaymentMethods = jsonPath(response, '$.._paymentmethodinfo.._choice')[0];
+
+        if (chosenPaymentMethod) {
+          var chosen = modelHelpers.parseTokenPayment(chosenPaymentMethod);
+
+          modelHelpers.markAsChosenObject(chosen);
+
+          paymentMethods.push(chosen);
+        }
+
+        if (choicePaymentMethods) {
+          choicePaymentMethods.forEach(function(choice) {
+            var parsedChoice =  modelHelpers.parseTokenPayment(choice._description[0]);
+
+            // Add the Cortex select action to the choice payment method
+            var selectActionHref = jsonPath(choice, '$..links[?(@.rel=="selectaction")].href');
+            if (selectActionHref && selectActionHref[0]) {
+              _.extend(parsedChoice, {selectAction: selectActionHref[0]});
+            }
+
+            paymentMethods.push(parsedChoice);
+          });
+        }
+      }
+      else {
+        ep.logger.error('parsePaymentMethods is passed with undefined JSON response');
       }
 
-      return objArray;
-    },
-
-    /**
-     * Performs a case-insensitive sort of a given address array alphabetically by a given address property.
-     * @param addressArray Array of address objects
-     * @param sortProperty The address property to sort by
-     * @returns {Array} A sorted array of address objects
-     */
-    sortAddresses: function(addressArray, sortProperty) {
-      var sortArgs = {
-        "property": sortProperty
-      };
-
-      // Underscore will run each address object through this iterator
-      var sortIterator = function(addressObj) {
-        // If the sort property is a string, convert it to lower case to make this a case-insensitive sort
-        if (typeof addressObj[sortArgs.property] === "string") {
-          return addressObj[sortArgs.property].toLowerCase();
-        }
-        return addressObj[sortArgs.property];
-      };
-
-      return _.sortBy(addressArray, sortIterator, sortArgs);
+      return paymentMethods;
     },
 
     /**
@@ -361,11 +398,57 @@ define(function (require) {
         }
       }
       return sortedShippingOptionsArray;
+    },
+
+    /**
+     * Performs a case-insensitive sort of a given array alphabetically by a given property.
+     * @param addressArray Array to be sorted
+     * @param sortProperty The property to sort by
+     * @returns {Array} A sorted array
+     */
+    sortByAscAlphabeticOrder: function(arrayToSort, sortProperty) {
+      var sortArgs = {
+        "property": sortProperty
+      };
+
+      // Underscore will run each object through this iterator
+      var sortIterator = function(obj) {
+        // If the sort property is a string, convert it to lower case to make this a case-insensitive sort
+        if (typeof obj[sortArgs.property] === "string") {
+          return obj[sortArgs.property].toLowerCase();
+        }
+        return obj[sortArgs.property];
+      };
+
+      return _.sortBy(arrayToSort, sortIterator, sortArgs);
+    },
+
+    /**
+     * Sort array of addresses by a given property.
+     * @param addressArray  Array to be sorted.
+     * @param sortProperty  Property to sort by.
+     * @returns {Array}     Sorted array of addresses.
+     */
+    sortAddresses: function(addressArray, sortProperty) {
+      return modelHelpers.sortByAscAlphabeticOrder(addressArray, sortProperty);
+    },
+
+    /**
+     * Sort array of payment methods by a given property.
+     * @param paymentMethodArray  Array to be sorted.
+     * @param sortProperty        Property to sort by.
+     * @returns {Array}           Sorted array of payment methods.
+     */
+    sortPaymentMethods: function(paymentMethodArray, sortProperty) {
+      return modelHelpers.sortByAscAlphabeticOrder(paymentMethodArray, sortProperty);
     }
   });
 
   return {
     CheckoutModel: checkoutModel,
+    CheckoutPaymentMethodsCollection: paymentMethodsCollection,
+    CheckoutShippingOptionsCollection: shippingOptionsCollection,
+    CheckoutSummaryModel: checkoutSummaryModel,
     testVariable: {
       modelHelpers: modelHelpers
     }

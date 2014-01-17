@@ -4,9 +4,8 @@
  * Functional Storefront Unit Test - Cart Views
  */
 define(function (require) {
-  var EventBus = require('eventbus');
   var Backbone = require('backbone');
-  var EventTestHelpers = require('testhelpers.event');
+  var EventTestFactory = require('EventTestFactory');
 
   describe('Cart Module: Views', function () {
     var views = require('cart.views');
@@ -139,30 +138,8 @@ define(function (require) {
         });
       });
 
-      describe('cart lineItem quantity changes', function() {
-        before(function () {
-          sinon.spy(EventBus, 'trigger');
-
-          // isolate unit by unbinding subsequent triggered events
-          EventTestHelpers.unbind('cart.lineItemQuantityChanged');
-
-          // select a different value
-          this.view.$el.find('[data-el-value="lineItem.quantity"] select').trigger('change');
-        });
-
-        after(function() {
-          EventBus.trigger.restore();
-          EventTestHelpers.reset();
-        });
-
-        it('should trigger triggers cart.lineItemQuantityChanged event', function() {
-          var quantities  = {
-            original: this.model.get('quantity'),
-            changeTo: this.view.$el.find('[data-el-value="lineItem.quantity"] select').val()
-          };
-          expect(EventBus.trigger).to.be.calledWithExactly('cart.lineItemQuantityChanged', this.model.get('lineitemLink'), quantities);
-        });
-      });
+      describe('cart lineItem quantity changes',
+        EventTestFactory.simpleSelectionChangedTest('cart.lineItemQuantityChanged', '[data-el-value="lineItem.quantity"] select'));
 
       describe('resetQuantity helper function', function() {
         var qty = 3;

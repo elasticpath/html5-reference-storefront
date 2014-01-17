@@ -277,9 +277,9 @@ define(function (reqiure) {
      */
     ep.ui.startActivityIndicator = function(view) {
       if (view.ui && view.ui.activityIndicatorEl) {
-        view.ui.activityIndicatorEl.spin();
+        view.ui.activityIndicatorEl.spin('large');
       } else {
-        view.$el.spin();
+        view.$el.spin('large');
       }
     };
 

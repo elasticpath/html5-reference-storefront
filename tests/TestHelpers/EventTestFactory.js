@@ -33,7 +33,38 @@ define(function (require) {
         });
 
         it('should trigger event: ' + expectedEvent, function () {
-          expect(EventBus.trigger).to.be.calledWithExactly(expectedEvent);
+          expect(EventBus.trigger).to.be.calledWith(expectedEvent);
+        });
+      };
+    },
+
+    /**
+     * Create a simple test that test a drop-down selection changed will trigger an event.
+     *
+     * @param expectedEvent  event expected to be triggered.
+     * @param optionSelector     jquery selector pattern to find the option to trigger test.
+     * @returns {Function}    a simple test of selection change trigger event
+     */
+    simpleSelectionChangedTest: function (expectedEvent, optionSelector) {
+      return function() {
+        before(function () {
+          sinon.spy(EventBus, 'trigger');
+
+          // isolate unit by unbinding subsequent triggered events
+          // first argument should be event name
+          EventTestHelpers.unbind(expectedEvent);
+
+          // select a different value
+          this.view.$el.find(optionSelector).trigger('change');
+        });
+
+        after(function () {
+          EventBus.trigger.restore();
+          EventTestHelpers.reset();
+        });
+
+        it('should trigger event: ' + expectedEvent, function () {
+          expect(EventBus.trigger).to.be.calledWith(expectedEvent);
         });
       };
     },

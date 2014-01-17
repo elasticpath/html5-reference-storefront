@@ -74,15 +74,21 @@
     "noShippingAddressesMsg": "You have no saved shipping addresses.",
     "shippingOption": "Shipping Options",
     "noShippingOptionsMsg": "There are no shipping options available for your chosen shipping address.",
+    "paymentMethod": "Payment Method",
+    "noPaymentMethodsMsg": "You have no saved payment method.",
     "checkoutTitle": "Checkout Summary",
-    "cancelOrder": "Cancel",
     "submitOrder": "Complete Purchase",
     "totalQuantity": "Total Quantity",
     "subTotal": "Today's Subtotal",
     "shippingTotal": "Today's Shipping Cost",
     "taxTotal": "Today's Taxes",
     "total": "Today's Total",
-    "updateChosenBillingAddressErrMsg": "I'm sorry, there was an error changing your selected billing address. Please contact your system administrator."
+    "updateChosenErrMsg": {
+      "billingAddress" : "I'm sorry, there was an error changing your selected billing address. Please contact your system administrator.",
+      "shippingAddress" : "I'm sorry, there was an error changing your selected shipping address. Please contact your system administrator.",
+      "shippingOption" : "I'm sorry, there was an error changing your selected shipping option. Please contact your system administrator.",
+      "paymentMethod" : "I'm sorry, there was an error changing your selected payment method. Please contact your system administrator."
+    }
   },
   "category": {
     "next": "Next",

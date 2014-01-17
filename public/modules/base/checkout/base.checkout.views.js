@@ -1,5 +1,5 @@
 /**
- * Copyright Elastic Path Software 2013.
+ * Copyright Elastic Path Software 2013-2014.
  *
  * Default Checkout Views
  * The MVC Views defines checkout views that displays
@@ -22,6 +22,7 @@ define(function (require) {
        * @param submitOrderActionLink The action-link to which the submit order request is posted.
        * @returns {string} HTML disabled attribute or empty string
        */
+        // FIXME could this function be abstracted to be shared by cartSubmitBtn, itemAddToCartBtn, checkoutSubmitBtn etc etc?
       getSubmitOrderButtonDisabledAttr: function (submitOrderActionLink) {
         // complete purchase disabled by default
         var retVar = 'disabled="disabled"';
@@ -43,11 +44,29 @@ define(function (require) {
       getCheckoutRadioCheckedAttr: function(obj) {
         var checkedAttr = '';
 
-        if (obj.chosen === true) {
+        if (obj && obj.chosen === true) {
           checkedAttr = 'checked="checked"';
         }
 
         return checkedAttr;
+      },
+
+      /**
+       * Generate an unique Id value for form input. Taking 1 parameter for prefix to append to the ID.
+       * @param prefix text to prepend to the generated ID
+       * @returns String an unique ID.
+       */
+      getUniqueIdForFormInput: function(prefix) {
+        var uniqueId;
+
+        if (prefix) {
+          uniqueId = _.uniqueId(prefix);
+        }
+        else {
+          uniqueId = _.uniqueId();
+        }
+
+        return uniqueId;
       }
     });
 
@@ -80,6 +99,7 @@ define(function (require) {
         billingAddressesRegion: '[data-region="billingAddressesRegion"]',
         shippingAddressesRegion: '[data-region="shippingAddressesRegion"]',
         shippingOptionsRegion: '[data-region="shippingOptionsRegion"]',
+        paymentMethodsRegion: '[data-region="paymentMethodsRegion"]',
         checkoutOrderRegion: '[data-region="checkoutOrderRegion"]'
       }
     });
@@ -98,7 +118,7 @@ define(function (require) {
      * Makes a mediator request to load an address view in region: billingAddressRegion.
      * @type Marionette.Layout
      */
-    var checkoutAddressSelectorLayout = Backbone.Marionette.Layout.extend({
+    var checkoutAddressSelectorLayout = Marionette.Layout.extend({
       template: '#CheckoutAddressSelectorTemplate',
       templateHelpers: viewHelpers,
       serializeData: function() {
@@ -112,7 +132,8 @@ define(function (require) {
       },
       events: {
         'change input[type="radio"]': function () {
-          EventBus.trigger('checkout.addressRadioChanged', this.model.get('selectAction'));
+          var eventName = 'checkout.' + this.options.addressType + 'AddressRadioChanged';
+          EventBus.trigger(eventName, this.model.get('selectAction'));
         }
       },
       onShow: function () {
@@ -137,7 +158,7 @@ define(function (require) {
      * Renders a heading and a list of billing addresses.
      * @type Marionette.CompositeView
      */
-    var billingAddressesCompositeView = Backbone.Marionette.CompositeView.extend({
+    var billingAddressesCompositeView = Marionette.CompositeView.extend({
       template: '#BillingAddressesTemplate',
       templateHelpers: viewHelpers,
       itemView: checkoutAddressSelectorLayout,
@@ -222,6 +243,55 @@ define(function (require) {
     });
 
 
+    /**
+     * A layout for rendering payment method radio buttons and their labels.
+     * @type Marionette.Layout
+     */
+    var paymentMethodSelectorView = Marionette.Layout.extend({
+      template: '#PaymentMethodSelectorTemplate',
+      templateHelpers: viewHelpers,
+      regions: {
+        checkoutPaymentRegion: '[data-region="checkoutPaymentMethodRegion"]'
+      },
+      events: {
+        'change input[type="radio"]': function () {
+          EventBus.trigger('checkout.paymentMethodRadioChanged', this.model.get('selectAction'));
+        }
+      },
+      onShow: function () {
+        // Fire event to load the address itemView from component
+        Mediator.fire('mediator.loadPaymentMethodViewRequest', {
+          region: this.checkoutPaymentRegion,
+          model: this.model
+        });
+      }
+    });
+
+    /**
+     * Rendered by PaymentMethodCompositeView when there are no payment method to be displayed.
+     * @type Marionette.ItemView
+     */
+    var paymentMethodEmptyView = Marionette.ItemView.extend({
+      template: '#EmptyPaymentMethodsTemplate',
+      templateHelpers: viewHelpers
+    });
+
+    /**
+     * Renders a heading and a list of payment methods.
+     * @type Marionette.CompositeView
+     */
+    var paymentMethodsCompositeView = Marionette.CompositeView.extend({
+      template: '#PaymentMethodsTemplate',
+      templateHelpers: viewHelpers,
+      itemView: paymentMethodSelectorView,
+      emptyView: paymentMethodEmptyView,
+      itemViewContainer: '[data-region="paymentMethodSelectorsRegion"]',
+      ui: {
+        // A jQuery selector for the DOM element to which an activity indicator should be applied.
+        activityIndicatorEl: '[data-region="paymentMethodSelectorsRegion"]'
+      }
+    });
+
 
     /**
      * Renders the shipping total (used in the checkout summary view)
@@ -270,12 +340,15 @@ define(function (require) {
      */
     var checkoutSummaryView = Marionette.Layout.extend({
       template: '#CheckoutSummaryTemplate',
-      className: 'checkout-sidebar-inner',
       templateHelpers: viewHelpers,
       regions: {
         checkoutShippingTotalRegion: '[data-region="checkoutShippingTotalRegion"]',
         checkoutTaxTotalRegion: '[data-region="checkoutTaxTotalRegion"]',
         checkoutTaxBreakDownRegion: '[data-region="checkoutTaxBreakDownRegion"]'
+      },
+      ui: {
+        // A jQuery selector for the DOM element to which an activity indicator should be applied.
+        activityIndicatorEl: '.checkout-sidebar-inner'
       },
       events: {
         'click .btn-cmd-submit-order': function () {
@@ -291,12 +364,17 @@ define(function (require) {
       BillingAddressesCompositeView: billingAddressesCompositeView,
       ShippingAddressesCompositeView: shippingAddressesCompositeView,
       ShippingOptionsCompositeView: shippingOptionsCompositeView,
+      PaymentMethodsCompositeView: paymentMethodsCompositeView,
       CheckoutSummaryView: checkoutSummaryView,
       CheckoutShippingTotalView: checkoutShippingTotalView,
       CheckoutTaxTotalView: checkoutTaxTotalView,
       CheckoutTaxesCollectionView: checkoutTaxesCollectionView,
       setCheckoutButtonProcessing: setCheckoutButtonProcessing,
-      resetCheckoutButtonText: resetCheckoutButtonText
+      resetCheckoutButtonText: resetCheckoutButtonText,
+      testVariables: {
+        viewHelpers: viewHelpers,
+        PaymentMethodSelectorView: paymentMethodSelectorView
+      }
     };
   }
 );

@@ -53,6 +53,10 @@ define(function (require) {
           expect(this.view.shippingOptionsRegion).to.exist;
           expect(this.view.$el.find('[data-region="shippingOptionsRegion"]')).to.be.length(1);
         });
+        it('should have a paymentMethodsRegion region', function () {
+          expect(this.view.paymentMethodsRegion).to.exist;
+          expect(this.view.$el.find('[data-region="paymentMethodsRegion"]')).to.be.length(1);
+        });
         it('should have a checkoutOrderRegion region', function () {
           expect(this.view.checkoutOrderRegion).to.exist;
           expect(this.view.$el.find('[data-region="checkoutOrderRegion"]')).to.be.length(1);
@@ -136,7 +140,7 @@ define(function (require) {
         this.view.render();
       });
 
-      it('should be an instance of Marionette Layout object', function () {
+      it('should be an instance of Marionette CompositeView object', function () {
         expect(this.view).to.be.an.instanceOf(Marionette.CompositeView);
       });
       it('render() should return the view object', function () {
@@ -146,6 +150,54 @@ define(function (require) {
         // View should contain a heading element and a <div> region for shipping options
         expect(this.view.el.childElementCount).to.be.equal(2);
         expect(this.view.$el.find('[data-region="shippingOptionSelectorsRegion"]')).to.be.length(1);
+      });
+    });
+
+    describe('PaymentMethodSelectorView', function () {
+      before(function () {
+        this.view = new views.testVariables.PaymentMethodSelectorView();
+        this.view.render();
+      });
+
+      it('should be an instance of Marionette Layout object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.Layout);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
+      });
+      it('renders the view contents', function () {
+        // View should contain a heading element and a <div> region for shipping options
+        expect(this.view.el.childElementCount).to.be.equal(2);
+        expect(this.view.$el.find('[data-region="checkoutPaymentMethodRegion"]')).to.be.length(1);
+      });
+      it('should have a checkoutPaymentRegion region', function () {
+        expect(this.view.checkoutPaymentRegion).to.exist;
+        expect(this.view.$el.find('[data-region="checkoutPaymentMethodRegion"]')).to.be.length(1);
+      });
+
+      // FIXME unable to test selection change trigger event
+      // EventTestFactory.simpleSelectionChangedTest might help.
+    });
+
+    describe('PaymentMethodsCompositeView', function () {
+      before(function () {
+        this.view = new views.PaymentMethodsCompositeView();
+        this.view.render();
+      });
+
+      it('should be an instance of Marionette CompositeView object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.CompositeView);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
+      });
+      it('renders the view contents', function () {
+        // View should contain a heading element and a <div> region for shipping options
+        expect(this.view.el.childElementCount).to.be.equal(2);
+        expect(this.view.$el.find('[data-region="paymentMethodSelectorsRegion"]')).to.be.length(1);
+      });
+      it('has an emptyView', function() {
+        expect(this.view.emptyView).to.be.ok;
       });
     });
 
@@ -259,6 +311,126 @@ define(function (require) {
 
         it('view renders without error', function() {
           expect(ep.logger.error).to.be.not.called;
+        });
+      });
+    });
+
+    describe('viewHelpers functions', function() {
+      var viewHelpers = views.testVariables.viewHelpers;
+
+      describe('getSubmitOrderButtonDisabledAttr', function() {
+        describe('given an input', function() {
+          before(function() {
+            var input = 'checkoutToEnableBtn';
+            this.result = viewHelpers.getSubmitOrderButtonDisabledAttr(input);
+          });
+
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns empty string', function() {
+            expect(this.result).to.be.a('String');
+            expect(this.result).to.be.empty;
+          });
+        });
+        describe('given no input', function() {
+          var expectedResult = 'disabled="disabled"';
+          before(function() {
+            this.result = viewHelpers.getSubmitOrderButtonDisabledAttr(undefined);
+          });
+
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns html segment with disabled attribute', function() {
+            expect(this.result).to.be.eql(expectedResult);
+          });
+        });
+      });
+
+      describe('getCheckoutRadioCheckedAttr', function() {
+        var expectedResult = 'checked="checked"';
+        describe('given an object with chosen set true', function() {
+          before(function() {
+            var input = {
+              chosen: true
+            };
+            this.result = viewHelpers.getCheckoutRadioCheckedAttr(input);
+          });
+
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns html segment with checked attribute', function() {
+            expect(this.result).to.be.eql(expectedResult);
+          });
+        });
+        describe('given an object without chosen property', function() {
+          before(function() {
+            var input = {};
+            this.result = viewHelpers.getCheckoutRadioCheckedAttr(input);
+          });
+
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns empty string', function() {
+            expect(this.result).to.be.a('String');
+            expect(this.result).to.be.empty;
+          });
+        });
+        describe('given no input', function() {
+          before(function() {
+            this.result = viewHelpers.getCheckoutRadioCheckedAttr(undefined);
+          });
+
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns empty string', function() {
+            expect(this.result).to.be.a('String');
+            expect(this.result).to.be.empty;
+          });
+        });
+      });
+
+      describe('getUniqueIdForFormInput', function() {
+        describe('given an input', function() {
+          var input = 'INPUT_TO_getUniqueIdForFormInput_';
+          before(function() {
+            this.result = viewHelpers.getUniqueIdForFormInput(input);
+          });
+
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns an ID (non-empty string)', function() {
+            expect(this.result).to.be.a('String');
+            expect(this.result).to.not.empty;
+          });
+          it('contains input as part of output', function() {
+            expect(this.result).to.have.string(input);
+          });
+        });
+        describe('given no input', function() {
+          before(function() {
+            this.result = viewHelpers.getUniqueIdForFormInput(undefined);
+          });
+
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns an ID (non-empty string)', function() {
+            expect(this.result).to.be.a('String');
+            expect(this.result).to.not.empty;
+          });
         });
       });
     });
