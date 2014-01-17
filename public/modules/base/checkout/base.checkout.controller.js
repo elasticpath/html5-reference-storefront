@@ -181,8 +181,8 @@ define(function (require) {
           };
           EventBus.trigger('checkout.submitOrderSuccess', obj);
         },
-        customErrorFn: function () {
-          EventBus.trigger('checkout.submitOrderFailed');
+        customErrorFn: function (response) {
+          EventBus.trigger('checkout.submitOrderFailed', response);
         }
       });
 
@@ -228,11 +228,16 @@ define(function (require) {
 
     /**
      * Listening to submit order failed signal,
-     * will reset checkout button back from activity indicator to
+     * will show a toast error message and reset checkout button back from activity indicator.
      */
-    EventBus.on('checkout.submitOrderFailed', function() {
-      // FIXME [CU-112] should also notify user if submit fails
-      View.resetCheckoutButtonText();
+    EventBus.on('checkout.submitOrderFailed', function(response) {
+      $().toastmessage('showToast', {
+        text: i18n.t('checkout.submitOrderError'),
+        sticky: true,
+        position: 'middle-center',
+        type: 'error',
+        close: View.resetCheckoutButtonText
+      });
     });
 
     /**

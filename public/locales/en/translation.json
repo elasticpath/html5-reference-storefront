@@ -84,6 +84,7 @@
     "shippingTotal": "Today's Shipping Cost",
     "taxTotal": "Today's Taxes",
     "total": "Today's Total",
+    "submitOrderError": "There was an error with your purchase. Please try again or contact support.",
     "updateChosenErrMsg": {
       "billingAddress" : "I'm sorry, there was an error changing your selected billing address. Please contact your system administrator.",
       "shippingAddress" : "I'm sorry, there was an error changing your selected shipping address. Please contact your system administrator.",
