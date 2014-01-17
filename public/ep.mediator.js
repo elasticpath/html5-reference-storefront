@@ -62,7 +62,7 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
     'mediator.orderProcessSuccess':function(uri){
       if (uri){
         require(['ep'], function(ep){
-          var link = ep.app.config.routes.receipt + '/' + ep.ui.encodeUri(uri);
+          var link = ep.app.config.routes.purchaseReceipt + '/' + ep.ui.encodeUri(uri);
           ep.router.navigate(link, true);
         });
       }

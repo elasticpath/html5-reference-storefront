@@ -47,7 +47,7 @@ define(function(require) {
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'appMainRegion',
         module:'purchaseinfo',
-        view:'DefaultView',
+        view:'PurchaseReceiptView',
         data:id
       });
     },
@@ -84,12 +84,11 @@ define(function(require) {
         view:'DefaultView'
       });
     },
-    // checkIn change defaultView
     purchaseDetails: function(id){
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'appMainRegion',
         module:'purchaseinfo',
-        view:'DefaultView',
+        view:'PurchaseDetailsView',
         data:id
       });
     }

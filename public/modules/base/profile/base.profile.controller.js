@@ -3,7 +3,7 @@
  *
  * Default Profile Controller
  * The HTML5 Reference Storefront's MVC controller instantiates the profile model and views,
- * renders profile views in destinated regions. It also manages events and functions to add a new address.
+ * renders profile views in designated regions. It also manages events and functions to add a new address.
  */
 define(function (require) {
     var ep = require('ep');
@@ -23,9 +23,10 @@ define(function (require) {
     var purchaseHistoryCollection = new Model.ProfilePurchaseCollection();
 
     /**
-     * Renders the DefaultLayout of profile module, and fetch model from backend;
-     * upon model fetch success, renders profile views in destinated regions.
-     * @returns {View.DefaultLayout}
+     * If user is logged in renders the DefaultLayout of profile module, and fetch model from backend;
+     * upon model fetch success, renders profile views in designated regions.
+     * If user isn't logged in, trigger request to prompt user login.
+     * @returns {View.DefaultLayout}  with populated data and child views ready to render.
      */
     var defaultView = function () {
 
@@ -54,9 +55,8 @@ define(function (require) {
               defaultLayout.profileSubscriptionSummaryRegion.show(profileSubscriptionView);
             }
 
-            purchaseHistoryCollection = new Model.ProfilePurchaseCollection(response.get('purchaseHistories'));
             var profilePurchaseView = new View.ProfilePurchasesHistoryView({
-              collection: purchaseHistoryCollection
+              collection: purchaseHistoryCollection.update(response.get('purchaseHistories'))
             });
             defaultLayout.profilePurchaseHistoryRegion.show(profilePurchaseView);
 

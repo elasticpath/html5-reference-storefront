@@ -1,10 +1,9 @@
 /**
  * Copyright Elastic Path Software 2013.
-
- * User: sbrookes
- * Date: 04/04/13
- * Time: 9:16 AM
  *
+ * Default PurchaseInfo Views
+ * The HTML5 Reference Storefront's MVC Views for displaying a purchase record's details: purchase summary, billing
+ * address, payment methods, items purchased.
  */
 define(function (require) {
   var ep = require('ep');
@@ -17,12 +16,22 @@ define(function (require) {
      * Template helper functions
      */
     var viewHelpers = ViewHelpers.extend({
+      /**
+       * Check if container should be visible, and return correct css class accordingly.
+       * @param value value that can determine if container is visible or not by its presence
+       * @returns String css class to render container visible or hidden
+       */
       isContainerVisible:function(value){
         if (value){
           return null;
         }
         return 'is-hidden';
       },
+      /**
+       * Check if element should be visible, and return correct css class accordingly.
+       * @param model model object that contains value that can determine if element should be visible
+       * @returns String  css class to render element visible or hidden
+       */
       checkIfVisible:function(model){
         if (model.amount.display){
           return null;
@@ -31,6 +40,41 @@ define(function (require) {
       }
     });
 
+    /**
+     * Purchase Receipt Layout
+     * will render a wrapper around purchaseInformationLayout that contains receipt specific elements.
+     * @type Marionette.Layout
+     */
+    var purchaseReceiptLayout = Marionette.Layout.extend({
+      template: '#PurchaseReceiptTemplate',
+      className: 'container',
+      templateHelpers:viewHelpers,
+      regions: {
+        purchaseInfoRegion: '[data-region="purchaseInformationRegion"]'
+      }
+    });
+
+    /**
+     * Purchase Details Layout
+     * will render a wrapper around purchaseInformationLayout that contains elements specific to purchase details page.
+     * @type Marionette.Layout
+     */
+    var purchaseDetailsLayout = Marionette.Layout.extend({
+      template: '#PurchaseDetailsTemplate',
+      className: 'container',
+      templateHelpers:viewHelpers,
+      regions: {
+        purchaseInfoRegion: '[data-region="purchaseInformationRegion"]'
+      }
+    });
+
+
+    /* ==============  Purchase Information ============== */
+    /**
+     * Purchase Information Layout
+     * renders regions to for views about purchase information to load; such as summary, billing address etc.
+     * @type Marionette.Layout
+     */
     var purchaseInformationLayout = Marionette.Layout.extend({
       template:'#PurchaseInformationTemplate',
       className:'purchase-information-container container',
@@ -79,7 +123,7 @@ define(function (require) {
       templateHelpers:viewHelpers,
       tagName:'li',
       attributes: {
-        "data-el-container":"receipt.lineItem"
+        "data-el-container":"purchaseInfo.lineItem"
       }
     });
     // Purchase Line Item Container View
@@ -91,14 +135,13 @@ define(function (require) {
 
     });
 
-
-
-
     return {
+      PurchaseReceiptLayout: purchaseReceiptLayout,
+      PurchaseDetailsLayout: purchaseDetailsLayout,
+      PurchaseInformationLayout:purchaseInformationLayout,
       PurchaseBillingAddressView:PurchaseBillingAddressView,
       PurchaseLineItemsView:purchaseLineItemsCollectionView,
       PurchaseSummaryView:purchaseSummaryView,
-      PurchaseInformationLayout:purchaseInformationLayout,
       PurchasePaymentMeansView:purchasePaymentMeansView
     };
   }

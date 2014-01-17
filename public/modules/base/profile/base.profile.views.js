@@ -2,7 +2,6 @@
  * Copyright Elastic Path Software 2013.
  *
  * Default Profile Views
- *
  * The HTML5 Reference Storefront's MVC Views for displaying user's basic information, subscription items information,
  * addresses, and payment methods. Address and payment methods views are just wrappers, and calls address.component and
  * payment.component respectively to display address and payment information.

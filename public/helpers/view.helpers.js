@@ -47,7 +47,27 @@ define(function (require) {
       }
 
       return link;
+    },
+
+    /**
+     * Get link from ep.config.json file.
+     * @param routeKey  key to access routes values
+     * @returns String url link
+     */
+    getLink: function(routeKey) {
+      var link = ep.app.config.routes[routeKey];
+
+      if (!link) {
+        ep.logger.warn("Unable to get link from ep.config; check if routes key correct.");
+      }
+
+      return link;
+    },
+
+    getStatusDisplayText:function(status){
+      return  this.getI18nLabel('status.' + status);
     }
+
   };
 
   return ViewHelper;

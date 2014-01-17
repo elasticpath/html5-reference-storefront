@@ -20,7 +20,7 @@
     "category":"#category",
     "profile":"#profile",
     "itemDetail":"#itemdetail",
-    "receipt": "#purchaseReceipt",
+    "purchaseReceipt": "#purchaseReceipt",
     "purchaseHistory": "#purchaseDetails",
     "checkout" : "#checkout"
   }

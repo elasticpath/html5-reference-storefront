@@ -72,6 +72,11 @@ define(function (require) {
     }
   });
 
+  /**
+   * Placeholder to keep purchase collection for keeping track of model changes.
+   * Do not fetch or parse data itself, Will have data passed in.
+   * @type Backbone.Collection
+   */
   var profilePurchaseCollection = Backbone.Collection.extend();
 
   /**

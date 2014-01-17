@@ -99,8 +99,14 @@
     "totalResults": "results",
     "emptyViewMsg": "No item currently in this category"
   },
-  "receipt":{
-    "pageTitle":"Thank you. Your order has been processed",
+  "purchaseInfo":{
+    "purchaseDetails": {
+      "backToProfile": "Go back to profile page",
+      "pageTitle": "Purchase Details"
+    },
+    "purchaseReceipt": {
+      "pageTitle": "Thank you. Your order has been processed"
+    },
     "summaryTitle":"Summary",
     "itemsTitle": "Items",
     "billingTitle": "Billing Information",
@@ -135,12 +141,12 @@
     "subscriptionQuantity": "Quantity",
     "subscriptionNextBillingDate": "Next Billing Date",
     "purchases" : {
-      "title":  "Purchase History",
-      "number": "Purchase #",
       "date":   "Date",
-      "total":  "Total",
+      "noPurchaseMsg": "You haven't made any purchases",
+      "number": "Purchase #",
       "status": "Status",
-      "noPurchaseMsg": "You haven't made any purchases"
+      "title":  "Purchase History",
+      "total":  "Total"
     },
     "paymentMethodsTitle": "Payment Methods",
     "noPaymentMethodMsg": "You have no saved payment methods",
@@ -152,5 +158,10 @@
     "addressesTitle": "Addresses",
     "noAddressMsg": "You have no saved addresses.",
     "newAddressBtn":"Add a New Address"
+  },
+  "status": {
+    "COMPLETED": "Completed",
+    "IN_PROGRESS": "In progress",
+    "FAILED": "Failed"
   }
 }

@@ -1,10 +1,9 @@
 /**
  * Copyright Elastic Path Software 2013.
-
- * User: sbrookes
- * Date: 04/04/13
- * Time: 9:16 AM
  *
+ * Default PurchaseInfo Models
+ * The HTML5 Reference Storefront's MVC Model manages zoom queries the model uses to ask cortex server.
+ * It also parses the raw data returned from server, so necessary data are surfaced, and renamed into desired format.
  */
 define(function (require) {
   var ep = require('ep');
@@ -19,6 +18,10 @@ define(function (require) {
       'lineitems:element:rate'
     ];
 
+    /**
+     * Model containing information of a purchase.
+     * @type Backbone.Model
+     */
     var purchaseInfoModel = Backbone.Model.extend({
       getUrl: function (href) {
         return ep.ui.decodeUri(href) + '?zoom=' + zoomArray.join();
@@ -33,7 +36,7 @@ define(function (require) {
 
         // Line Items
         var lineItems = jsonPath(response, '$._lineitems.._element')[0];
-        purchaseInfoObj.lineItems = parseHelpers.parseArray(lineItems, parseHelpers.parseReceiptLineItem);
+        purchaseInfoObj.lineItems = parseHelpers.parseArray(lineItems, parseHelpers.parsePurchaseLineItem);
 
         // Billing Address
         var addressObj = jsonPath(response, '$._billingaddress[0]')[0];
@@ -51,6 +54,11 @@ define(function (require) {
     });
 
     var parseHelpers = modelHelper.extend({
+      /**
+       * Parses summary information of the purchase record: number, date, total, and status.
+       * @param rawObject raw JSON object
+       * @returns Object  parsed purchase summary information
+       */
       parseInfoSummary: function (rawObject) {
         var purchaseSummary = {};
 
@@ -70,7 +78,13 @@ define(function (require) {
 
         return purchaseSummary;
       },
-      parseReceiptLineItem: function (rawObject) {
+
+      /**
+       * Parses a lineItem information required for purchase record display.
+       * @param rawObject raw JSON object
+       * @returns Object  parsed purchase lineItem
+       */
+      parsePurchaseLineItem: function (rawObject) {
         var lineItemObj = {};
 
         try {
