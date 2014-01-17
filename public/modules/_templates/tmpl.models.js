@@ -13,13 +13,27 @@ define(function (require) {
     ];
 
     var tmplModel = Backbone.Model.extend({
-      // url to READ data from cortex, can include zoom, take example below
+      // url to READ data from cortex, includes the zoom
       // ep.app.config.cortexApi.path   prefix contex path to request to Cortex (e.g. integrator, cortex), configured in ep.config.json,
       // ep.app.config.cortexApi.scope  store scope (e.g. mobee, telcooperative), configured in ep.config.json,
       url: ep.io.getApiContext() + '/CORTEX_RESOURCE_NAME/' + ep.app.config.cortexApi.scope + '/default?zoom=' + zoomArray.join(),
 
       parse: function (response) {
-        // parsing the raw JSON data from cortex server using jsonPath
+        // parsing the raw JSON data from Cortex using JSONPath and set your model values
+       var tmplObj = {
+           data: undefined
+       };
+          if(response)
+          {
+              tmplObj.propertyName = jsonPath(response, 'CortexJSONFieldName')[0];
+          }
+          //log the error
+          else {
+              ep.logger.error("tmpl model wasn't able to fetch valid data for parsing.");
+          }
+
+          //return the object
+          return tmplObj;
       }
     });
 
@@ -29,7 +43,7 @@ define(function (require) {
      */
     var modelHelpers = ModelHelper.extend({});
 
-
+    //return the model
     return {
       TmplModel: tmplModel
     };
