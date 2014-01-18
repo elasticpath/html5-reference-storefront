@@ -2,24 +2,25 @@ Customizing HTML5 Features
 ====================
 HTML5 Reference Storefront functionality is divided into modules. For example, profile, cart, authentication, checkout, and so on are all separate modules.
 An HTML5 Storefront module is the view, plus the code backing the view. This means that each module is its own Model View Controller (MVC) component.
-For example, the profile module contains all code to retrieve and update a customer's profile data in Cortex API (Model and Controller) and contains the HTML and JS code to show the customer's profile data in the Storefront (View).
+For example, the profile module contains all code to retrieve and update a customer's profile data (Model and Controller) and contains the HTML and JS code to show the customer's profile data in the Storefront (View).
 
-HTML5 Storefront Modular Design Benefits:
+HTML5 Storefront's Modular Design Benefits:
 * Customizable - Add a new feature by creating a new module and adding it to the <code>module</code> folder, as opposed to modifying multiple pieces of code throughout the Storefront to create the functionality.
 * Maintainable - The Storefront's modular architecture enables you to make changes, i.e. add new functionality and enhance existing functionality, without breaking the entire system.
 * Debuggable - Debug individual modules to isolate HTML5 Storefront issues, rather than debugging vast amounts of JS code.
-* Updatable - The HTML5 Reference Storefront is under continual development. With your customized features and enhancements in distinct modules, you can more easily update the out-of-the-box code without overwriting your custom code.
+* Updatable - The HTML5 Reference Storefront is under continual development. With your customized features and enhancements coded in distinct modules, you can more easily update the out-of-the-box code without overwriting your custom code.
 
 **HTML5 Reference Storefront Modules**
+
 ![List of Modules](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/modulesList.png)
 
 **Components vs Modules**
 
 You'll notice the <code>modules</code> folder also contains a <code>components</code> folder.
 Components are very similar to modules, but their purpose is slightly different. Modules are complete, stand-alone units of functionality, which include a Model, View, and Controller.
-Components are units of code that are designed for reuse in other modules. In most cases, components just contain the View and the Controller, not the Model, which is passed to it by the module that is using this component.
-For example, the <code>address</code> component, provides the Controller and View to create, retrieve, and view customer addresses.
-<code>address</code> is reused in the <code>profile</code> and <code>receipt</code> modules, to allow customers to create, update, and view their addresses through these module's views.
+Components are units of code that are designed for reuse in other modules. In most cases, components just contain the View and the Controller, not the Model, which is passed to it by the module using the component.
+For example, the <code>address</code> component provides the Controller and View to create, retrieve, and view customer addresses.
+<code>address</code> is reused in the <code>profile</code> and <code>receipt</code> modules to allow customers to create, update, and view their addresses through these module's views.
 
 **Module Creation Guidelines**
 
@@ -40,21 +41,23 @@ If your customized code is all over the place, you will have issues upgrading yo
 Module Basics
 ---------------------
 
-This section provides an overview of a module's basic components.
-The descriptions below use our template module to describe the basic components of a standard Storefront module.
+This section provides an overview of the basic components for a Storefront module using our template module, found in <code>modules/_templates</code>, as an example.
 
 **NOTE:** Some of the Cortex API concepts used in the modules, Zoom, Cortex Resources, URIs, Forms, Selectors, ?followLocation, and others are described in the <a href="http://api-cortex-developers.docs.elasticpath.com/drupal/">Cortex API Client Developer Documentation</a>
+
+*Module Components*
 
 ![templateModule](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/profileModule.png)
 
 **tmpl.controller.js**
 
-The controller orchestrates the creation and population of the module's view and model. The following is a list of the standard tasks performed by a Storefront module's controller:
+The controller orchestrates the creation and population of the module's view and model. The following lists the standard tasks performed by a Storefront module's controller:
 
 * Loads the module's dependencies
 * Imports the module's Model and View
 * Executes the model's fetch to populate the model's data
 * Sets the module's views
+* Creates a namespace for the model for reference in the module's template.html
 * Sets the model's listeners (if any)
 
 ```js
@@ -108,9 +111,13 @@ define(function (require) {
 
 **tmpl.models.js**
 
-The model represents a set of Cortex API data and contains the logic to Create Read Update Delete this data.
-Models extend Backbone Model: <code> var tmplModel = Backbone.Model.extend({</code>.
-<a href="http://http://backbonejs.org/#Model">Backbone.Model</a> provides a basic set of functionality for managing changes in your models.
+The model represents a set of Cortex API data and contains the logic to Create Read Update and Delete the data.
+Models extend Backbone.model.
+<a href="http://http://backbonejs.org/#Model">Backbone.Model</a> provides a basic set of functionality for managing changes in your models, such as <code>Backbone.model.fetch</code>.
+ <code>fetch</code> uses the model's <code>url:</code>'s parameters to determine where the model's data is located.
+The module's controller calls <code>fetch</code> when the model is instantiated.
+
+<code>base.cortex.controller.js</base>
 
 ```js
 define(function (require) {
@@ -167,10 +174,10 @@ define(function (require) {
 A view defines the regions where the model's data will render. To better understand what regions are, think of the layout of an e-commerce web page. The login, search, title bar, and so on are all regions on the page.
 Each region can be comprised of multiple subregions.
 The data in the view's regions is populated by the module's model.
-Note that the view defines the regions, not the Storefront's look and feel, which is defined in the HTML5 Storefront's <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/theming.md">theme</a>.
 
+**NOTE:** A view defines the regions, not the Storefront's look and feel, which is defined in an HTML5 Storefront <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/theming.md">Theme</a>.
 
-A view's regions extend Marionette.Layout: <code>var defaultLayout = Marionette.Layout.extend({</code>.
+A view's regions extend Marionette.Layout.
 <a href="https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.layout.md">Marionette.layout</a> provides a set of functionality to define regions, nest layouts, render layouts, organize UI elements, and configure events for the region.
 
 ```js
@@ -203,7 +210,8 @@ define(function (require) {
 
 **tmpl.templates.html**
 
-Templates contain the view's regions. <code><%= E %></code> is the model's namespace, from there you can access its values and view helpers. The namespace is defined in the module's controller.
+Templates contain the view's regions whose data is populated by the module's model. <code><%= E %></code> is the model's namespace, from there you can access its values and view helpers.
+Namespaces are defined in the module's controller.
 
 ```js
 <div id="[tmpl]TemplateContainer">
@@ -214,26 +222,34 @@ Templates contain the view's regions. <code><%= E %></code> is the model's names
 
   </script>
 
-
 </div>
 ```
 
 Tutorial: Creating a New Module
 ---------------------
-This tutorial walks you through the process of creating a HTML5 Reference storefront extension.
-The basics concepts of how the module works are described in the section above.
-Please reference this section when building out your modules.
+This tutorial walks you through the process of creating a HTML5 Reference Storefront module.
+The basics concepts of how a module works are described in the section above, <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/extending.md#module-basics">Module Basics</a>
+Please reference this section when building your modules.
 
-1. Copy the Template.
-2. Define your module so RequireJS can add it as a dependency. In <code>public/router.js</code>, add the following
+To Create a New Module:
 
-    ```js
-     define(function (require) {
-         var ep = require('ep');
-         var EventBus = require('eventbus');
+1. Create a new folder for your module in <code>public/modules</code>
+2. Copy <code>tmpl.controller.js</code>, <code>tmpl.models.js</code>, <code>tmpl.templates.html</code>, and <code>tmpl.views.js</code> from <code>public/modules/_templates</code> and paste them into your new module's folder.
+3. Rename your new module's to the name of your module.
+4. Define your modules is <code>public/main.js</code>, so RequireJS can handle and load your module when required.
 
-    ```
-3. Add your module to the router in <code>public/router.js</code>:
+     ```js
+      var dependencies = config.baseDependencyConfig;
+      var basePaths = config.baseDependencyConfig.paths;
+      var extensionPaths = {
+                  'tmpl': 'modules/newModule/tmpl.controller.js',
+                  'tmpl.models': 'modules/newModule/tmpl.models.js',
+                  'tmpl.views': 'modules/newModule/tmpl.views.js',
+      };
+
+     ```
+
+5. Add your module to <code>public/router.js</code> to allow Marionette to route events to it.
 
     ```js
     var router = Marionette.AppRouter.extend({
@@ -241,31 +257,31 @@ Please reference this section when building out your modules.
             '': 'index',
             'home': 'index',
             'category' : 'category',
-            'category/:href' : 'category',
-            'category/:href/:pagehref' : 'category',
-            'search' : 'search',
+            ...
+            'newModule' : 'newModule'
 
     ```
 
-4. You need to load your module views into this file so the application can understand where and how to load your views. In <code>public/loadRegionContentEvents</code>.
-
-There are 3 main regions.
-![regions](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/regions.png)
-
+6. Define the region where your module's view displays in <code>public/loadRegionContentEvents</code>.
 
      ```js
-      var loadRegionContentEvents = {
-         appHeader: function() {
-           EventBus.trigger('layout.loadRegionContentRequest',{
-             region:'appHeaderRegion',
-             module:'appheader',
-             view:'AppHeaderView'
-           });
-         },
+     var loadRegionContentEvents = {
+     ...
+         tmpl: function() {
+               EventBus.trigger('layout.loadRegionContentRequest',{
+                 region:'appMainRegion',
+                 module:'tmpl',
+                 view:'DefaultView'
+               });
+             },
 
      ```
 
-5. Update the code!!!
+The HTML5 Reference Storefront has 3 main regions:
+
+![regions](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/regions.png)
+
+7. Code your module.
 
 Further Reading
 ---------------------
