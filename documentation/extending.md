@@ -276,9 +276,7 @@ To Create a New Module:
              },
 
      ```
-
 The HTML5 Reference Storefront has 3 main regions:
-
 ![regions](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/regions.png)
 
 7. Code your module.
