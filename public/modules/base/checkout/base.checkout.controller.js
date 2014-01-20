@@ -228,7 +228,7 @@ define(function (require) {
 
     /**
      * Listening to submit order failed signal,
-     * will show a toast error message and reset checkout button back from activity indicator.
+     * will show a toast error message and refresh the entire page.
      */
     EventBus.on('checkout.submitOrderFailed', function(response) {
       $().toastmessage('showToast', {
@@ -236,7 +236,9 @@ define(function (require) {
         sticky: true,
         position: 'middle-center',
         type: 'error',
-        close: View.resetCheckoutButtonText
+        close: function() {
+          Backbone.history.loadUrl();
+        }
       });
     });
 
