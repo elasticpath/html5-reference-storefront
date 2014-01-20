@@ -228,11 +228,18 @@ define(function (require) {
 
     /**
      * Listening to submit order failed signal,
-     * will reset checkout button back from activity indicator to
+     * will show a toast error message and refresh the entire page.
      */
-    EventBus.on('checkout.submitOrderFailed', function() {
-      // FIXME [CU-112] should also notify user if submit fails
-      View.resetCheckoutButtonText();
+    EventBus.on('checkout.submitOrderFailed', function(response) {
+      $().toastmessage('showToast', {
+        text: i18n.t('checkout.submitOrderError'),
+        sticky: true,
+        position: 'middle-center',
+        type: 'error',
+        close: function() {
+          Backbone.history.loadUrl();
+        }
+      });
     });
 
     /**
