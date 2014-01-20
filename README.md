@@ -208,3 +208,7 @@ Files generate to: ui-storefront/docs
 - Use cygwin for the windows command line. Windows command line can't handle the * character
 - DOCCO does not copy the image files to the output folder. Copy over manually.
 - Links (images + hrefs)are hardcoded to GitHub. To generate locally, change the image references so they are local.
+
+
+###### Legal Mumbo Jumbo
+This document is confidential and proprietary information of Elastic Path Software Inc. Copyright © 2013 Elastic Path Software Inc. All rights reserved. Elastic Path®, the Elastic Path logo, EP Commerce Engine™, EP Cortex™, and EP Subscriptions™ are trademarks or registered trademarks of Elastic Path Software Inc. All other trademarks are the property of their respective owners.

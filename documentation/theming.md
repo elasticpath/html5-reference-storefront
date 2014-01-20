@@ -98,3 +98,7 @@ Keep in mind:
 * <code>variables.less</code> - Controls the look and feel for some of the Storefront's common elements, such the colors and fonts for carts, items, links, and so on.
 * <code>mixins.less</code> - Embeds other CSS properties into the Storefront's general CSS classes.
 * Templates - Are described in <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/extending.md">Customizing HTML5 Features</a>.
+
+
+###### Legal Mumbo Jumbo
+This document is confidential and proprietary information of Elastic Path Software Inc. Copyright © 2013 Elastic Path Software Inc. All rights reserved. Elastic Path®, the Elastic Path logo, EP Commerce Engine™, EP Cortex™, and EP Subscriptions™ are trademarks or registered trademarks of Elastic Path Software Inc. All other trademarks are the property of their respective owners.
