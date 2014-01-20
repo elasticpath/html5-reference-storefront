@@ -1,4 +1,6 @@
 /**
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
  * View Helpers
  */
 define(function (require) {

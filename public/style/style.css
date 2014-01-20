@@ -1,3 +1,13 @@
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront Style Loader 0.1
+ */
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront theme base
+ */
 /*!
  * Bootstrap v3.0.0
  *
@@ -5772,6 +5782,11 @@ td.visible-print {
     display: none !important;
   }
 }
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront style variables
+ */
 /* start main nav*/
 /* end main nav*/
 /* Start Item Detail  */
@@ -5780,6 +5795,11 @@ td.visible-print {
 /* End Cart */
 /* Start Auth */
 /* End Auth */
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront style mixins
+ */
 .separated {
   position: relative;
 }
@@ -5797,6 +5817,11 @@ td.visible-print {
 .flatform {
   background: red;
 }
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront components  styles
+ */
 .address-container {
   padding: 0;
 }
@@ -5834,6 +5859,10 @@ td.visible-print {
 .address-form-error-list {
   list-style: circle;
 }
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ */
 /*
   auth view
 */
@@ -5969,6 +5998,11 @@ fieldset[disabled] .btn-auth-login.active {
   background-color: rgba(0, 163, 221, 0.667);
   border-color: rgba(0, 144, 196, 0.667);
 }
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront App-header (Nav) styles
+ */
 .navbar {
   min-height: 100px;
   background-color: rgba(47, 157, 204, 0.85);
@@ -6603,6 +6637,11 @@ textarea.header-search-input {
 nav.main-nav {
   position: relative;
 }
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront Cart View
+ */
 .cart-outer {
   background: transparent url(images/bg-vector-splat.jpg) no-repeat center top;
   background-size: cover;
@@ -7012,6 +7051,11 @@ Purchase Confirmation
 .cart-total-container {
   margin-bottom: 10px;
 }
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront Checkout styles
+ */
 .checkout-main-container {
   position: relative;
   float: left;
@@ -7271,10 +7315,14 @@ fieldset[disabled] .btn-cmd-submit-order.active {
 [data-region="billingAddressesRegion"],
 [data-region="shippingAddressesRegion"],
 [data-region="shippingOptionsRegion"],
-[data-region="paymentMethodRegion"],
 [data-region="paymentMethodSelectorsRegion"] {
   position: relative;
 }
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront item detail styles
+ */
 .itemdetail-container {
   margin-top: 4rem;
 }
@@ -7475,6 +7523,11 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .itemdetail-rate {
   font-weight: bold;
 }
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront Category Browse styles
+ */
 .category-item-list-price-value {
   text-decoration: line-through;
 }
@@ -7796,6 +7849,11 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .category-item-list-price-value {
   text-decoration: line-through;
 }
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront pagination styles
+ */
 .pagination-container {
   font-size: 1.3rem;
   color: #999999;
@@ -8013,6 +8071,11 @@ fieldset[disabled] .btn-pagination.pagination-link-disabled.active {
 .pagination-navigation-container {
   text-align: center;
 }
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront search styles
+ */
 .search-results-container h1 {
   margin-bottom: 3rem;
 }
@@ -8288,6 +8351,11 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront profile styles
+ */
 [data-region="profileTitleRegion"],
 [data-region="profileSummaryRegion"],
 [data-region="profileSubscriptionSummaryRegion"],
@@ -8369,6 +8437,11 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
 .profile-payment-method-container {
   margin-bottom: 1rem;
 }
+/*
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Storefront toast message styles
+ */
 .toast-container {
   width: 280px;
   z-index: 9999;

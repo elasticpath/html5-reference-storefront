@@ -1,5 +1,6 @@
 /**
- * Copyright Elastic Path Software 2013.
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
  *
  * This is a switch board of layout.loadRegionContentRequest triggers for main views in storefront.
  */

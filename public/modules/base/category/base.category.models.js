@@ -1,9 +1,6 @@
 /**
- * Copyright Elastic Path Software 2013.
-
- * User: sbrookes
- * Date: 05/04/13
- * Time: 1:32 PM
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
  *
  */
 define(['ep', 'eventbus', 'backbone'],

@@ -1,5 +1,5 @@
 /**
- * Copyright Elastic Path Software 2013, 2014.
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *
  * Storefront - Cart Controller
  */

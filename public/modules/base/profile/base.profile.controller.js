@@ -1,5 +1,6 @@
 /**
- * Copyright Elastic Path Software 2013.
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
  *
  * Default Profile Controller
  * The HTML5 Reference Storefront's MVC controller instantiates the profile model and views,

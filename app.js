@@ -1,9 +1,5 @@
 /**
- * Copyright Elastic Path Software 2013.
- *
- * User: sbrookes
- * Date: 26/04/13
- * Time: 2:53 PM
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *
  *
  *  UI Store Front

@@ -1,6 +1,5 @@
 /**
- * Copyright © 2013 Elastic Path Software Inc. All rights reserved.
- *
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  */
 define(function (require) {
   var ep = require('ep');

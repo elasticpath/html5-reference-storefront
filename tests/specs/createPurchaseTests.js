@@ -1,10 +1,5 @@
 /**
- * Copyright © 2013 Elastic Path Software Inc. All rights reserved.
-
- * User: sbrookes
- * Date: 04/09/13
- * Time: 2:48 PM
- *
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  */
 define(function (require) {
   var cartController = require('cart');

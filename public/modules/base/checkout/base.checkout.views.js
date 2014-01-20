@@ -1,5 +1,5 @@
 /**
- * Copyright Elastic Path Software 2013-2014.
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *
  * Default Checkout Views
  * The MVC Views defines checkout views that displays

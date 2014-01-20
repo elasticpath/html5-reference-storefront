@@ -1,10 +1,5 @@
 /**
- * Copyright © 2013 Elastic Path Software Inc. All rights reserved.
-
- * User: sbrookes
- * Date: 15/08/13
- * Time: 3:49 PM
- *
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  */
 define(['ep','eventbus','router'],function(ep, EventBus, Router){
 

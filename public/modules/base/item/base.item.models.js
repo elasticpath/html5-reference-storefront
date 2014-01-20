@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ */
 define(['ep', 'app', 'backbone'],
   function (ep, app, Backbone) {
     var ItemModels = {};

@@ -1,5 +1,6 @@
 /**
- * Copyright Elastic Path Software 2013.
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
  *
  * Address Component Views
  * The HTML5 Reference Storefront's MVC Views for an address, address form,

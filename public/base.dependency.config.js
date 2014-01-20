@@ -1,12 +1,7 @@
 /**
- * Copyright © 2013 Elastic Path Software Inc. All rights reserved.
-
- * User: sbrookes
- * Date: 08/10/13
- * Time: 11:32 PM
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *
  */
-
 var config = {
   baseDependencyConfig: {
     paths: {

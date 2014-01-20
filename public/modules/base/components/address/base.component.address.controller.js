@@ -1,5 +1,6 @@
 /**
- * Copyright Elastic Path Software 2013.
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
  *
  * Address Component Controller
  * The HTML5 Reference Storefront's MVC controller for displaying an address, and creating an address.

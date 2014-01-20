@@ -1,9 +1,7 @@
 /**
- * Copyright Elastic Path Software 2013.
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *
- * User: sbrookes
- * Date: 18/03/13
- * Time: 1:26 PM
+ *
  *
  */
 

@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ */
 // Set the require.js configuration for the unit tests.
 requirejs.config({
   baseUrl: '/public',

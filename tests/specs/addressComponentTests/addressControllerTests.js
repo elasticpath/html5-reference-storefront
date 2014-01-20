@@ -1,6 +1,5 @@
 /**
- * Copyright © 2013 Elastic Path Software Inc. All rights reserved.
- *
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  * Functional Storefront Unit Test - Address Component Controller
  */
 define(function (require) {

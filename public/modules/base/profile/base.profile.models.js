@@ -1,5 +1,6 @@
 /**
- * Copyright Elastic Path Software 2013.
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
  *
  * Default Profile Models
  * The HTML5 Reference Storefront's MVC Model manages zoom queries the model uses to ask cortex server.

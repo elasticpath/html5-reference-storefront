@@ -1,9 +1,6 @@
 /**
- * Copyright © 2013 Elastic Path Software Inc. All rights reserved.
-
- * User: sbrookes
- * Date: 18/09/13
- * Time: 3:49 PM
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
  *
  */
 module.exports = function(grunt){

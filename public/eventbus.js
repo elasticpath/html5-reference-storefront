@@ -1,9 +1,6 @@
 /**
- * Copyright Elastic Path Software 2013.
-
- * User: sbrookes
- * Date: 28/03/13
- * Time: 9:26 AM
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
  *
  */
 define(['marionette'],function(Marionette){

@@ -1,10 +1,5 @@
 /**
- * Copyright © 2013 Elastic Path Software Inc. All rights reserved.
-
- * User: ama
- * Date: 26/09/05
- * Time: 8:03 PM
- *
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  */
 
 define(function(require) {

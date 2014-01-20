@@ -1,9 +1,6 @@
 /**
- * Copyright Elastic Path Software 2013.
-
- * User: sbrookes
- * Date: 26/04/13
- * Time: 3:07 PM
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
  *
  */
 define(['ep','eventbus','home.views','text!modules/base/home/base.home.templates.html'],
