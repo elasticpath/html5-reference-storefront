@@ -232,7 +232,7 @@ define(function (require) {
      */
     EventBus.on('checkout.submitOrderFailed', function(response) {
       $().toastmessage('showToast', {
-        text: i18n.t('checkout.submitOrderError'),
+        text: i18n.t('checkout.addressDeleteErrMsg'),
         sticky: true,
         position: 'middle-center',
         type: 'error',

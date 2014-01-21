@@ -134,7 +134,9 @@
     "quantity": "Quantity"
   },
   "profile":{
+    "delete":"Delete",
     "edit":"Edit",
+    "addressDeleteErrMsg": "I'm sorry, there was an error deleting the address. Please contact your system administrator.",
     "title":"Profile",
     "personalInfoTitle": "Personal Information",
     "firstName": "First Name",

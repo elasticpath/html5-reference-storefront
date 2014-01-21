@@ -10,6 +10,7 @@ define(function (require) {
     var EventBus = require('eventbus');
     var Mediator = require('mediator');
     var Backbone = require('backbone');
+    var i18n = require('i18n');
 
     var Model = require('profile.models');
     var View = require('profile.views');
@@ -22,6 +23,8 @@ define(function (require) {
 
     var profileModel = new Model.ProfileModel();
     var purchaseHistoryCollection = new Model.ProfilePurchaseCollection();
+    var addressesCollection = new Backbone.Collection();
+    var defaultLayout = new View.DefaultLayout();
 
     /**
      * If user is logged in renders the DefaultLayout of profile module, and fetch model from backend;
@@ -33,8 +36,6 @@ define(function (require) {
 
       // ensure the user is authenticated before continuing to process the request
       if (ep.app.isUserLoggedIn()) {
-        var defaultLayout = new View.DefaultLayout();
-
         profileModel.fetch({
           success: function (response) {
             // Profile Title
@@ -62,8 +63,9 @@ define(function (require) {
             defaultLayout.profilePurchaseHistoryRegion.show(profilePurchaseView);
 
             // Profile Addresses
+            addressesCollection.update(response.get('addresses'));
             var profileAddressesView = new View.ProfileAddressesView({
-              collection: new Backbone.Collection(response.get('addresses'))
+              collection: addressesCollection
             });
             defaultLayout.profileAddressesRegion.show(profileAddressesView);
 
@@ -132,6 +134,74 @@ define(function (require) {
     EventBus.on('profile.editAddressRequest', function(href) {
       var editAddressLink = ep.app.config.routes.editAddress + '/' + ep.ui.encodeUri(href);
       ep.router.navigate(editAddressLink, true);
+    });
+
+    /**
+     * Uses a JavaScript confirm window to confirm the delete action for a profile address.
+     * @param href A href used to identify the address to be deleted in Cortex
+     */
+    EventBus.on('profile.deleteAddressConfirm', function (href) {
+      var confirmation = window.confirm("Do you really want to delete this address");
+      if (confirmation) {
+        ep.ui.startActivityIndicator(defaultLayout.profileAddressesRegion.currentView);
+        EventBus.trigger('profile.deleteAddressRequest', href);
+      }
+    });
+
+    /**
+     * Called when a request to delete an address from Cortex has failed. Displays a toast message
+     * and stops the activity indicator in the profile addresses region.
+     * On close of the toast message, we invoke a full page refresh.
+     * @param href A href used to identify the address to be deleted in Cortex
+     */
+    EventBus.on('profile.deleteAddressFailed', function (response) {
+      $().toastmessage('showToast', {
+        text: i18n.t('profile.addressDeleteErrMsg'),
+        sticky: true,
+        position: 'middle-center',
+        type: 'error',
+        close: function() {
+          Backbone.history.loadUrl();
+        }
+      });
+      ep.ui.stopActivityIndicator(defaultLayout.profileAddressesRegion.currentView);
+    });
+
+    /**
+     * Called when an address has been successfully deleted from Cortex. Performs a fetch of the profile
+     * model and updates the collection of addresses with the updated array from Cortex.
+     */
+    EventBus.on('profile.deleteAddressSuccess', function () {
+      profileModel.fetch({
+        success: function(response) {
+          // Update the collection of addresses with the new array of addresses from Cortex
+          var newAddresses = response.get('addresses');
+
+          // Stop the activity indicators on the cart regions that are being updated
+          ep.ui.stopActivityIndicator(defaultLayout.profileAddressesRegion.currentView);
+
+          addressesCollection.update(newAddresses);
+        }
+      });
+    });
+
+    /**
+     * Makes an AJAX request to Cortex to delete an address.
+     * @param deleteActionLink A href used to identify the address to be deleted in Cortex
+     */
+    EventBus.on('profile.deleteAddressRequest', function (deleteActionLink) {
+      var ajaxModel = new ep.io.defaultAjaxModel({
+        type: 'DELETE',
+        url: deleteActionLink,
+        success: function () {
+          EventBus.trigger('profile.deleteAddressSuccess');
+        },
+        customErrorFn: function (response) {
+          EventBus.trigger('profile.deleteAddressFailed', response);
+        }
+      });
+
+      ep.io.ajax(ajaxModel.toJSON());
     });
 
     return {
