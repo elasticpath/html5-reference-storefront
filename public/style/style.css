@@ -7034,7 +7034,7 @@ fieldset[disabled] .btn-cmd-checkout.active {
   font-weight: bold;
 }
 /*
-Purchase Confirmation
+Purchase Information
 */
 .purchase-items-container .row {
   margin-bottom: 0;
@@ -8385,6 +8385,7 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
   margin-bottom: 0px;
 }
 .profile-addresses-listing {
+  position: relative;
   padding: 0;
   margin-left: -15px;
   margin-right: -15px;
@@ -8474,6 +8475,7 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
 .toast-item p {
   text-align: left;
   margin-left: 50px;
+  padding-right: 20px;
 }
 .toast-item-close {
   background: url(images/close.gif);
