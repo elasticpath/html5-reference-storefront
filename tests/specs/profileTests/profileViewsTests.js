@@ -334,6 +334,11 @@ define(function (require) {
           expect(this.view.$el.find('[data-region="profileAddressComponentRegion"]')).to.be.length(1);
         });
 
+        describe('edit address button clicked',
+          EventTestFactory.simpleBtnClickTest('profile.editAddressRequest', '[data-el-label="profile.editAddressBtn"]'));
+
+        describe('delete address button clicked',
+          EventTestFactory.simpleBtnClickTest('profile.deleteAddressConfirm', '[data-el-label="profile.deleteAddressBtn"]'));
       });
 
       describe('ProfileAddressesView', function () {
