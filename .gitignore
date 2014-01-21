@@ -7,3 +7,4 @@ logs
 .settings/
 target/
 docs/
+missingCopyrightHeader.txt
