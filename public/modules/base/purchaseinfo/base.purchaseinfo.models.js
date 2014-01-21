@@ -1,45 +1,69 @@
 /**
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *
- *
+ * Default PurchaseInfo Models
+ * The HTML5 Reference Storefront's MVC Model manages zoom queries the model uses to ask cortex server.
+ * It also parses the raw data returned from server, so necessary data are surfaced, and renamed into desired format.
  */
-define(['underscore', 'ep', 'eventbus', 'backbone', 'modelHelpers'],
-  function (_, ep, EventBus, Backbone, modelHelper) {
+define(function (require) {
+  var ep = require('ep');
+  var Backbone = require('backbone');
+  var modelHelper = require('modelHelpers');
 
-    var purchaseConfirmationModel = Backbone.Model.extend({
+    // Array of zoom parameters to pass to Cortex
+    var zoomArray = [
+      'billingaddress',
+      'paymentmeans:element',
+      'lineitems:element',
+      'lineitems:element:rate'
+    ];
+
+    /**
+     * Model containing information of a purchase.
+     * @type Backbone.Model
+     */
+    var purchaseInfoModel = Backbone.Model.extend({
+      getUrl: function (href) {
+        return ep.ui.decodeUri(href) + '?zoom=' + zoomArray.join();
+      },
       parse: function (response) {
-        var confirmationObj = {};
+        var purchaseInfoObj = {};
 
-        var summary = parseHelpers.parseConfirmationSummary(response);
-        // attach summary object's properties to confirmationObj
-        // without override existing properties of confirmationObj
-        _.extend(confirmationObj, summary);
+        var summary = parseHelpers.parseInfoSummary(response);
+        // attach summary object's properties to purchaseInfoObj
+        // without override existing properties of purchaseInfoObj
+        _.extend(purchaseInfoObj, summary);
 
         // Line Items
         var lineItems = jsonPath(response, '$._lineitems.._element')[0];
-        confirmationObj.lineItems = parseHelpers.parseArray(lineItems, parseHelpers.parseReceiptLineItem);
+        purchaseInfoObj.lineItems = parseHelpers.parseArray(lineItems, parseHelpers.parsePurchaseLineItem);
 
         // Billing Address
         var addressObj = jsonPath(response, '$._billingaddress[0]')[0];
-        confirmationObj.billingAddress = parseHelpers.parseAddress(addressObj);
+        purchaseInfoObj.billingAddress = parseHelpers.parseAddress(addressObj);
 
         // Payment Means
-        confirmationObj.paymentMeans = {};
+        purchaseInfoObj.paymentMeans = {};
         var paymentDisplay = jsonPath(response, '$._paymentmeans[0].._element[0]')[0];
         if (paymentDisplay) {
-          confirmationObj.paymentMeans.displayValue = jsonPath(paymentDisplay, '$.display-value');
+          purchaseInfoObj.paymentMeans.displayValue = jsonPath(paymentDisplay, '$.display-value');
         }
 
-        return confirmationObj;
+        return purchaseInfoObj;
       }
     });
 
     var parseHelpers = modelHelper.extend({
-      parseConfirmationSummary: function (rawObject) {
-        var confirmationSummary = {};
+      /**
+       * Parses summary information of the purchase record: number, date, total, and status.
+       * @param rawObject raw JSON object
+       * @returns Object  parsed purchase summary information
+       */
+      parseInfoSummary: function (rawObject) {
+        var purchaseSummary = {};
 
         try {
-          confirmationSummary = {
+          purchaseSummary = {
             status: jsonPath(rawObject, '$.status')[0],
             purchaseNumber: jsonPath(rawObject, '$.purchase-number')[0],  // Oder Number
             orderTotal: jsonPath(rawObject, '$.monetary-total..display')[0],
@@ -49,12 +73,18 @@ define(['underscore', 'ep', 'eventbus', 'backbone', 'modelHelpers'],
 
         }
         catch (error) {
-          ep.logger.error('Error building purchase confirmation summary object: ' + error.message);
+          ep.logger.error('Error building purchase summary object: ' + error.message);
         }
 
-        return confirmationSummary;
+        return purchaseSummary;
       },
-      parseReceiptLineItem: function (rawObject) {
+
+      /**
+       * Parses a lineItem information required for purchase record display.
+       * @param rawObject raw JSON object
+       * @returns Object  parsed purchase lineItem
+       */
+      parsePurchaseLineItem: function (rawObject) {
         var lineItemObj = {};
 
         try {
@@ -85,7 +115,7 @@ define(['underscore', 'ep', 'eventbus', 'backbone', 'modelHelpers'],
           }
         }
         catch (error) {
-          ep.logger.error('Error building purchase confirmation lineItem object: ' + error.message);
+          ep.logger.error('Error building purchase lineItem object: ' + error.message);
         }
 
         return lineItemObj;
@@ -93,7 +123,7 @@ define(['underscore', 'ep', 'eventbus', 'backbone', 'modelHelpers'],
     });
 
     return {
-      PurchaseConfirmationModel: purchaseConfirmationModel
+      PurchaseInfoModel: purchaseInfoModel
 
     };
   }

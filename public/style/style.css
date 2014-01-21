@@ -7036,13 +7036,13 @@ fieldset[disabled] .btn-cmd-checkout.active {
 /*
 Purchase Confirmation
 */
-.purchaseconfirm-items-container .row {
+.purchase-items-container .row {
   margin-bottom: 0;
 }
-.purchaseconfirm-items-container hr {
+.purchase-items-container hr {
   margin: 1rem;
 }
-.purchaseconfirmation-items-list li:nth-child(even) {
+.purchase-items-list li:nth-child(even) {
   background: #fafafe;
 }
 .cart-tax-container li ul {
@@ -8359,6 +8359,7 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
 [data-region="profileTitleRegion"],
 [data-region="profileSummaryRegion"],
 [data-region="profileSubscriptionSummaryRegion"],
+[data-region="profilePurchaseHistoryRegion"],
 [data-region="profilePaymentMethodsRegion"],
 [data-region="profileAddressesRegion"] {
   margin-bottom: 30px;
@@ -8367,6 +8368,7 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
 [data-region="profileTitleRegion"] h2,
 [data-region="profileSummaryRegion"] h2,
 [data-region="profileSubscriptionSummaryRegion"] h2,
+[data-region="profilePurchaseHistoryRegion"] h2,
 [data-region="profilePaymentMethodsRegion"] h2,
 [data-region="profileAddressesRegion"] h2 {
   font-size: 2rem;
@@ -8374,6 +8376,7 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
 [data-region="profileTitleRegion"] .table-responsive table,
 [data-region="profileSummaryRegion"] .table-responsive table,
 [data-region="profileSubscriptionSummaryRegion"] .table-responsive table,
+[data-region="profilePurchaseHistoryRegion"] .table-responsive table,
 [data-region="profilePaymentMethodsRegion"] .table-responsive table,
 [data-region="profileAddressesRegion"] .table-responsive table {
   background-color: transparent;

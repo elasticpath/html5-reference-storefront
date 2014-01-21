@@ -58,6 +58,23 @@ define(function (require) {
     }
   }
 
+  function loadEditAddressView(addressObj) {
+    try {
+      var addressLayout = new View.DefaultEditAddressLayout();
+      var addressFormView = new View.DefaultAddressFormView({
+          model: addressObj.model
+      });
+
+      addressLayout.on('show', function () {
+        addressLayout.addressFormRegion.show(addressFormView);
+      });
+
+      addressObj.region.show(addressLayout);
+    } catch (error) {
+      ep.logger.error('Failed to load edit address view: ' + error.message);
+    }
+  }
+
   /**
    * Request an empty address form & the link to POST or PUT address form to.
    * Currently, only information used is the link to POST or PUT address form to.
@@ -70,7 +87,7 @@ define(function (require) {
         var submitAddressFormLink = jsonPath(response, "$..links[?(@.rel=='createaddressaction')].href")[0];
         EventBus.trigger('address.createNewAddressRequest', submitAddressFormLink);
       },
-      customErrorFn: function (response) {
+      customErrorFn: function () {
         EventBus.trigger('address.submitAddressFormFailed');
       }
     });
@@ -79,17 +96,18 @@ define(function (require) {
   }
 
   /**
-   * POST the new address to cortex.
+   * Send an address request to cortex.
+   * @param type The AJAX type of the request POST (create) or PUT (update)
    * @param submitAddressFormLink to POST the request to.
    */
-  function createNewAddress(submitAddressFormLink) {
-    var form = View.getAddressForm();
+  function createAddressRequest(type, submitAddressFormLink) {
+    var form = View.getAddressFormValues();
 
     var ajaxModel = new ep.io.defaultAjaxModel({
-      type: 'POST',
+      type: type,
       url: submitAddressFormLink,
       data: JSON.stringify(form),
-      success: function (data, textStatus, XHR) {
+      success: function () {
         EventBus.trigger('address.submitAddressFormSuccess');
       },
       customErrorFn: function (response) {
@@ -114,6 +132,10 @@ define(function (require) {
     EventBus.trigger('address.getAddressFormRequest');
   });
 
+  EventBus.on('address.editAddressBtnClicked', function(href) {
+    createAddressRequest('PUT', href);
+  });
+
   /**
    * Listening to get address form request,
    * will request address form from cortex,
@@ -126,7 +148,9 @@ define(function (require) {
    * Listening to create new address request,
    * will submit address form to cortex,
    */
-  EventBus.on('address.createNewAddressRequest', createNewAddress);
+  EventBus.on('address.createNewAddressRequest', function(href) {
+    createAddressRequest('POST', href);
+  });
 
   /**
    * Listening to address form submission failed signal (general error),
@@ -169,6 +193,12 @@ define(function (require) {
    * will load the default view in appMainRegion.
    */
   EventBus.on('address.loadAddressesViewRequest', loadAddressView);
+
+  /**
+   * Listening to the edit address view request,
+   * will load the edit address view in appMainRegion.
+   */
+ EventBus.on('address.loadEditAddressViewRequest', loadEditAddressView);
 
   return{
     DefaultCreateAddressView: defaultCreateAddressView

@@ -57,7 +57,7 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
     'mediator.orderProcessSuccess':function(uri){
       if (uri){
         require(['ep'], function(ep){
-          var link = ep.app.config.routes.receipt + '/' + ep.ui.encodeUri(uri);
+          var link = ep.app.config.routes.purchaseReceipt + '/' + ep.ui.encodeUri(uri);
           ep.router.navigate(link, true);
         });
       }
@@ -71,6 +71,19 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
     'mediator.loadAddressesViewRequest':function(addressObj){
       require(['address'],function(mod){
         EventBus.trigger('address.loadAddressesViewRequest', addressObj);
+      });
+    },
+    'mediator.loadEditAddressViewRequest':function(addressObj){
+      require(['address', 'ep'],function(address, ep){
+        if (addressObj.returnModule) {
+          ep.io.sessionStore.setItem('addressFormReturnTo', addressObj.returnModule);
+          delete(addressObj.returnModule);
+        }
+        EventBus.trigger('address.loadEditAddressViewRequest',addressObj);
+
+        var addressModelHref = addressObj.model.get('href');
+        var editAddressLink = ep.app.config.routes.editAddress + '/' + ep.ui.encodeUri(addressModelHref);
+        ep.router.navigate(editAddressLink);
       });
     },
     'mediator.loadPaymentMethodViewRequest':function(paymentObj) {
@@ -95,7 +108,7 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
           ep.router.navigate(ep.app.config.routes.newAddress, true);
         }
         else {
-          ep.logger.error('mediator.addNewAddressRequest was called with invalided moduleName: ' + moduleName);
+          ep.logger.error('mediator.addNewAddressRequest was called with invalid moduleName: ' + moduleName);
         }
       });
     },

@@ -20,9 +20,11 @@ define(function(require) {
         'search/:keywords' : 'search',
         'itemdetail/:href': 'item',
         'profile': 'profile',
+        'editaddress/:href': 'editaddress',
         'mycart': 'cart',
         'checkout': 'checkout',
-        'confirmation/:id': 'confirmation',
+        'purchaseReceipt/:id': 'purchaseReceipt',
+        'purchaseDetails/:id': 'purchaseDetails',
         'newaddressform' : 'newaddressform'
       },
       controller:loadRegionContentController

@@ -9,16 +9,14 @@ define(function (require) {
   var dataJSON = require('text!/tests/data/profile.json');
 
   describe('Profile Module: Models', function () {
-    var data = JSON.parse(dataJSON).response;
     var profileModel = new models.ProfileModel();
     var modelHelpers = models.testVariable.modelHelpers;
 
     describe('given all necessary information', function () {
+      var data = JSON.parse(_.clone(dataJSON)).response;
       before(function () {
-        this.rawData = _.extend({}, data);
-        var rawArray = this.rawData._paymentmethods[0]._element;
-        delete(this.rawData._paymentmethods[0]._element[2]);  // delete credit card payment
-        this.model = profileModel.parse(this.rawData);
+        delete(data._paymentmethods[0]._element[2]);  // delete credit card payment
+        this.model = profileModel.parse(data);
       });
 
       after(function () {
@@ -40,6 +38,10 @@ define(function (require) {
       it('has non-empty addresses array', function () {
         expect(this.model.addresses).to.be.instanceOf(Array);
         expect(this.model.addresses).to.have.length.above(0);
+      });
+      it('has non-empty purchases array', function () {
+        expect(this.model.purchaseHistories).to.be.instanceOf(Array);
+        expect(this.model.purchaseHistories).to.have.length.above(0);
       });
       it('has non-empty paymentMethods array', function () {
         expect(this.model.paymentMethods).to.be.instanceOf(Array);
@@ -68,18 +70,18 @@ define(function (require) {
       });
 
       describe('with no subscription data',
-        modelTestFactory.simpleExpectEmptyArrayTestFactory(data, '_subscriptions', profileModel, 'subscriptions'));
+        modelTestFactory.simpleExpectEmptyArrayTestFactory(dataJSON, '_subscriptions', profileModel, 'subscriptions'));
 
       describe('with no addresses data',
-        modelTestFactory.simpleExpectEmptyArrayTestFactory(data, '_addresses', profileModel, 'addresses'));
+        modelTestFactory.simpleExpectEmptyArrayTestFactory(dataJSON, '_addresses', profileModel, 'addresses'));
 
       describe('with no payment-methods data',
-        modelTestFactory.simpleExpectEmptyArrayTestFactory(data, '_paymentmethods', profileModel, 'paymentMethods'));
+        modelTestFactory.simpleExpectEmptyArrayTestFactory(dataJSON, '_paymentmethods', profileModel, 'paymentMethods'));
 
       describe('with token  & credit card payment-methods', function() {
         before(function() {
           sinon.spy(modelHelpers, 'parseTokenPayment');
-          var rawData = JSON.parse(JSON.stringify(data));
+          var rawData = JSON.parse(_.clone(dataJSON)).response;
           this.model = profileModel.parse(rawData);
         });
 
@@ -101,7 +103,7 @@ define(function (require) {
         before(function() {
           sinon.spy(modelHelpers, 'parseTokenPayment');
 
-          var rawData = JSON.parse(JSON.stringify(data));
+          var rawData = JSON.parse(_.clone(dataJSON)).response;
           var rawArray = rawData._paymentmethods[0]._element;
           delete(rawArray[0]);  // delete token payment
           delete(rawArray[1]);  // delete token payment
@@ -123,6 +125,28 @@ define(function (require) {
       });
     });
 
+    describe('model helper functions', function () {
+      var data = JSON.parse(_.clone(dataJSON)).response;
+
+      var testData = jsonPath(data, '_purchases.._element[0]')[0];
+      var expected = {
+        purchaseNumber: "20060",
+        date: {
+          displayValue: "January 15, 2014 1:40:46 PM",
+          value: 1389822046000
+        },
+        total: {
+          amount: 109.99,
+          currency: "USD",
+          display: "$109.99"
+        },
+        status: "COMPLETED",
+        link: 'http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanrq='
+      };
+
+      describe('helper: parsePurchaseHistory',
+        modelTestFactory.simpleParserTestFactory(testData, expected, modelHelpers.parsePurchaseHistory));
+    });
   });
 
 });

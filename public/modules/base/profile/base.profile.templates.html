@@ -11,6 +11,7 @@
       </div>
     </div>
     <div data-region="profileSubscriptionSummaryRegion"></div>
+    <div data-region="profilePurchaseHistoryRegion"></div>
     <div data-region="profileAddressesRegion"></div>
     <div data-region="profilePaymentMethodsRegion"></div>
 
@@ -65,6 +66,43 @@
 
   </script>
 
+  <!--
+  === Purchases Templates ===
+  -->
+  <!-- Renders Purchase History Region's title, and a table wrapper, and header for the purchase records collection -->
+  <script id="DefaultProfilePurchasesHistoryTemplate" type="text/template">
+    <h2><%= E.getI18nLabel('profile.purchases.title') %></h2>
+    <table class="table table-condensed striped-table">
+      <thead>
+      <tr>
+        <th><%= E.getI18nLabel('profile.purchases.number') %></th>
+        <th><%= E.getI18nLabel('profile.purchases.date') %></th>
+        <th><%= E.getI18nLabel('profile.purchases.total') %></th>
+        <th><%= E.getI18nLabel('profile.purchases.status') %></th>
+      </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </script>
+
+  <!-- Renders each purchase records with purhcase number, date, total and status  -->
+  <script id="DefaultProfilePurchaseDetailTemplate" type="text/template">
+    <td data-el-value="purchase.number" class="profile-purchase-number">
+      <a href="<%= E.generateUrl('purchaseHistory', E.link) %>"><%= E.purchaseNumber %></a>
+    </td>
+    <td data-el-value="purchase.date" class="profile-purchase-date"><%= E.getDate(E.date) %></td>
+    <td data-el-value="purchase.total" class="profile-purchase-total"><%= E.getTotal(E.total) %></td>
+    <td data-el-value="purchase.status" class="profile-purchase-status"><%= E.getStatusDisplayText(E.status) %></td>
+  </script>
+
+  <!-- Rendered when there are no purchase history to display -->
+  <script id="DefaultProfilePurchasesEmptyViewTemplate" type="text/template">
+    <!-- defaultView, itemView tagName: li, class: profile-no-payment-method-msg-container container-->
+    <%= E.getI18nLabel('profile.purchases.noPurchaseMsg') %>
+  </script>
+
 
   <!--
    === Address Templates ===
@@ -83,7 +121,8 @@
   <!--Default Profile Address Layout Template-->
   <script id="DefaultProfileAddressLayoutTemplate" type="text/template">
     <!-- defaultView, itemView tagName: li, class: profile-address-container-->
-      <div data-region="profileAddressComponentRegion"></div>
+    <div data-region="profileAddressComponentRegion"></div>
+    <button class="btn profile-edit-address-btn" data-el-label="profile.editAddressBtn"><%= E.getI18nLabel('profile.edit') %></button>
   </script>
 
   <!-- Default Profile Addresses EmptyView Template -->

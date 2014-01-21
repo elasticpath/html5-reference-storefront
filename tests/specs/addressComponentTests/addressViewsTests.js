@@ -268,10 +268,10 @@ define(function (require) {
       });
 
       it('does not produce duplicate err message keys', function() {
-        var errMsg = 'family-name: may not be null; given-name: may not be null';
+        var errMsg = 'family-name: may not be null; family-name: must not be blank';
         // test doesn't load i18n locale list, thus return back the key
         expect(this.testFn(errMsg)).to
-          .eql('addressForm.errorMsg.generalSaveAddressFailedErrMsg');
+          .eql('addressForm.errorMsg.missingFamilyNameErrMsg');
       });
 
       it('translate unrecorded raw message to generic error message key', function() {
@@ -291,13 +291,13 @@ define(function (require) {
 
     });
 
-    describe('helper function: getAddressForm', function() {
+    describe('helper function: getAddressFormValues', function() {
       before(function() {
         this.model = new StandardAddressModel();
         this.view = new addressView.DefaultAddressFormView({model: this.model});
         renderViewIntoFixture(this.view);
 
-        this.form = addressView.getAddressForm();
+        this.form = addressView.getAddressFormValues();
       });
 
       after(function() {

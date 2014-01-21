@@ -9,7 +9,8 @@
     "country": "Country",
     "postalCode": "Postal Code",
     "createAddressTitle": "New Address",
-    "createBtn": "Save",
+    "editAddressTitle": "Edit Address",
+    "saveBtn": "Save",
     "cancelBtn": "Cancel",
     "errorMsg" : {
       "generalSaveAddressFailedErrMsg": "I'm sorry, there was an error saving this address. Please try again or contact your system administrator",
@@ -83,6 +84,7 @@
     "shippingTotal": "Today's Shipping Cost",
     "taxTotal": "Today's Taxes",
     "total": "Today's Total",
+    "submitOrderError": "There was an error with your purchase. Please try again or contact support.",
     "updateChosenErrMsg": {
       "billingAddress" : "I'm sorry, there was an error changing your selected billing address. Please contact your system administrator.",
       "shippingAddress" : "I'm sorry, there was an error changing your selected shipping address. Please contact your system administrator.",
@@ -99,8 +101,14 @@
     "totalResults": "results",
     "emptyViewMsg": "No item currently in this category"
   },
-  "receipt":{
-    "pageTitle":"Thank you. Your order has been processed",
+  "purchaseInfo":{
+    "purchaseDetails": {
+      "backToProfile": "Go back to profile page",
+      "pageTitle": "Purchase Details"
+    },
+    "purchaseReceipt": {
+      "pageTitle": "Thank you. Your order has been processed"
+    },
     "summaryTitle":"Summary",
     "itemsTitle": "Items",
     "billingTitle": "Billing Information",
@@ -126,6 +134,7 @@
     "quantity": "Quantity"
   },
   "profile":{
+    "edit":"Edit",
     "title":"Profile",
     "personalInfoTitle": "Personal Information",
     "firstName": "First Name",
@@ -134,6 +143,14 @@
     "subscriptionHeader": "Subscription",
     "subscriptionQuantity": "Quantity",
     "subscriptionNextBillingDate": "Next Billing Date",
+    "purchases" : {
+      "date":   "Date",
+      "noPurchaseMsg": "You haven't made any purchases",
+      "number": "Purchase #",
+      "status": "Status",
+      "title":  "Purchase History",
+      "total":  "Total"
+    },
     "paymentMethodsTitle": "Payment Methods",
     "noPaymentMethodMsg": "You have no saved payment methods",
     "paymentCardNumber":"Card Number",
@@ -144,5 +161,10 @@
     "addressesTitle": "Addresses",
     "noAddressMsg": "You have no saved addresses.",
     "newAddressBtn":"Add a New Address"
+  },
+  "status": {
+    "COMPLETED": "Completed",
+    "IN_PROGRESS": "In progress",
+    "FAILED": "Failed"
   }
 }

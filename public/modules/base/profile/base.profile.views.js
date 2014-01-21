@@ -3,7 +3,6 @@
  *
  *
  * Default Profile Views
- *
  * The HTML5 Reference Storefront's MVC Views for displaying user's basic information, subscription items information,
  * addresses, and payment methods. Address and payment methods views are just wrappers, and calls address.component and
  * payment.component respectively to display address and payment information.
@@ -14,7 +13,37 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
     /**
      * Template helper functions
      */
-    var viewHelpers = ViewHelpers.extend({});
+    var viewHelpers = ViewHelpers.extend({
+      /**
+       * Get date's display value
+       * @param dateObj date object
+       * @returns string display value of date
+       */
+      getDate: function(dateObj) {
+        var value = '';
+
+        if (dateObj) {
+          value = dateObj.displayValue;
+        }
+
+        return value;
+      },
+
+      /**
+       * Get display value of total cost.
+       * @param totalObj  total cost object
+       * @returns string  display value of total cost
+       */
+      getTotal: function(totalObj) {
+        var total = '';
+
+        if(totalObj) {
+          total = totalObj.display;
+        }
+
+        return total;
+      }
+    });
 
     // Default Profile Layout
     var defaultLayout = Backbone.Marionette.Layout.extend({
@@ -23,6 +52,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
         profileTitleRegion:'[data-region="profileTitleRegion"]',
         profileSummaryRegion:'[data-region="profileSummaryRegion"]',
         profileSubscriptionSummaryRegion:'[data-region="profileSubscriptionSummaryRegion"]',
+        profilePurchaseHistoryRegion:'[data-region="profilePurchaseHistoryRegion"]',
         profileAddressesRegion:'[data-region="profileAddressesRegion"]',
         profilePaymentMethodsRegion:'[data-region="profilePaymentMethodsRegion"]'
       },
@@ -51,12 +81,58 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
 
     });
 
+    /**
+     * Profile Purchase Detail Item View
+     * will render 1 purchase record with its purchase number, date, total, status
+     * @type Marionette.Layout
+     */
+    var profilePurchaseDetailView = Marionette.ItemView.extend({
+      template:'#DefaultProfilePurchaseDetailTemplate',
+      tagName:'tr',
+      templateHelpers:viewHelpers
+    });
+
+    /**
+     * Profile Purchases History Empty View
+     * will render a no-purchase-history-message when purchases collection is empty
+     * @type Marionette.ItemView
+     */
+    var profilePurchasesHistoryEmptyView = Backbone.Marionette.ItemView.extend({
+      template: '#DefaultProfilePurchasesEmptyViewTemplate',
+      className: 'profile-no-purchase-history-msg-container',
+      templateHelpers: viewHelpers,
+      attributes: {
+        'data-el-label' : 'profile.noPurchaseHistoryMsg'
+      }
+    });
+
+    /**
+     * Profile Purchase History View
+     * will render wrappers with region title and table header around a collection of purchase records,
+     * will render emptyView if collection empty.
+     * @type Marionette.CompositeView
+     */
+    var profilePurchasesHistoryView = Marionette.CompositeView.extend({
+      template:'#DefaultProfilePurchasesHistoryTemplate',
+      itemViewContainer:'tbody',
+      itemView: profilePurchaseDetailView,
+      emptyView: profilePurchasesHistoryEmptyView,
+      className:'table-responsive',
+      templateHelpers:viewHelpers,
+      onRender: function() {
+        if (this.collection.length === 0) {
+          $('thead', this.$el).hide();
+        }
+      }
+    });
+
+
     // Profile Summary View
     var profileSummaryView = Backbone.Marionette.ItemView.extend({
-      template:'#ProfileSummaryViewTemplate',
-      templateHelpers:viewHelpers
+      template: '#ProfileSummaryViewTemplate',
+      templateHelpers: viewHelpers
 
-  });
+    });
 
     /**
      * Profile Payment Method Item View
@@ -87,7 +163,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
     var profilePaymentMethodEmptyView = Backbone.Marionette.ItemView.extend({
       template: '#DefaultProfilePaymentMethodEmptyViewTemplate',
       tagName: 'li',
-      className: 'profile-no-payment-method-msg-container container',
+      className: 'profile-no-payment-method-msg-container',
       templateHelpers: viewHelpers,
       attributes: {
         'data-el-label' : 'profile.noPaymentMethodMsg'
@@ -111,8 +187,8 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
 
     /**
      * Profile Address Item View
-     * make mediator request to load an address view in region: profileAddressComponentRegion,
-     * will render a wrapper around an address view
+     * Makes a mediator request to load an address view in region: profileAddressComponentRegion
+     * and will render a wrapper around an address view with edit button.
      * @type Marionette.Layout
      */
     var profileAddressItemView = Backbone.Marionette.Layout.extend({
@@ -122,11 +198,18 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       regions: {
         profileAddressComponentRegion: '[data-region="profileAddressComponentRegion"]'
       },
+      templateHelpers: viewHelpers,
       onShow: function() {
         Mediator.fire('mediator.loadAddressesViewRequest', {
           region: this.profileAddressComponentRegion,
           model: this.model
         });
+      },
+      events: {
+        'click [data-el-label="profile.editAddressBtn"]': function(event) {
+          event.preventDefault();
+          EventBus.trigger('profile.editAddressRequest', this.model.get('href'));
+        }
       }
     });
 
@@ -169,11 +252,14 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       DefaultLayout:defaultLayout,
       ProfileTitleView: profileTitleView,
       ProfileSubscriptionSummaryView:profileSubscriptionSummaryView,
+      ProfilePurchasesHistoryView: profilePurchasesHistoryView,
       ProfileSummaryView:profileSummaryView,
       ProfilePaymentMethodsView:profilePaymentMethodsView,
       ProfileAddressesView: profileAddressesView,
       testVariables: {
+        viewHelpers: viewHelpers,
         ProfileSubscriptionItemView: profileSubscriptionItemView,
+        ProfilePurchaseDetailView: profilePurchaseDetailView,
         ProfilePaymentMethodItemView: profilePaymentMethodItemView,
         ProfilePaymentMethodsEmptyView: profilePaymentMethodEmptyView,
         ProfileAddressItemView: profileAddressItemView,

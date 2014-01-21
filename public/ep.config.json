@@ -16,11 +16,13 @@
   "viewFadeInValue":500,
   "routes": {
     "newAddress":"#newaddressform",
+    "editAddress": "#editaddress",
     "cart":"#mycart",
     "category":"#category",
     "profile":"#profile",
     "itemDetail":"#itemdetail",
-    "receipt": "#confirmation",
+    "purchaseReceipt": "#purchaseReceipt",
+    "purchaseHistory": "#purchaseDetails",
     "checkout" : "#checkout"
   }
 }

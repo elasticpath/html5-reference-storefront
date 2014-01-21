@@ -14,6 +14,7 @@ define(function (require) {
   // Array of zoom parameters to pass to Cortex
   var zoomArray = [
     'subscriptions:element',
+    'purchases:element',
     'addresses:element',
     'paymentmethods:element'
   ];
@@ -29,6 +30,7 @@ define(function (require) {
         familyName: undefined,
         givenName: undefined,
         subscriptions: [],
+        purchaseHistories: [],
         addresses: [],
         paymentMethods: []
       };
@@ -51,6 +53,12 @@ define(function (require) {
           profileObj.subscriptions = modelHelpers.parseArray(subscriptionsArray, modelHelpers.parseSubscription);
         }
 
+        // Profile Purchase History
+        var purchaseHistoryArray = jsonPath(response, '$._purchases.._element')[0];
+        if (purchaseHistoryArray) {
+          profileObj.purchaseHistories = modelHelpers.parseArray(purchaseHistoryArray, modelHelpers.parsePurchaseHistory);
+        }
+
         // Profile addresses
         var addressesArray = jsonPath(response, '$._addresses.._element')[0];
         if (addressesArray) {
@@ -66,13 +74,48 @@ define(function (require) {
   });
 
   /**
+   * Placeholder to keep purchase collection for keeping track of model changes.
+   * Do not fetch or parse data itself, Will have data passed in.
+   * @type Backbone.Collection
+   */
+  var profilePurchaseCollection = Backbone.Collection.extend();
+
+  /**
    * Collection of helper functions to parse the model.
    * @type Object collection of modelHelper functions
    */
-  var modelHelpers = ModelHelper.extend({});
+  var modelHelpers = ModelHelper.extend({
+    /**
+     * Parses 1 purchase history record with purchase number, date, total, and status.
+     * @param rawObject raw JSON object of 1 purchase history record
+     * @returns Object  1 parsed purchase history record
+     */
+    parsePurchaseHistory: function(rawObject) {
+      var purchaseRecord = {};
+
+      if(rawObject) {
+        purchaseRecord = {
+          purchaseNumber: jsonPath(rawObject, '$.purchase-number')[0],
+          date: {
+            displayValue: jsonPath(rawObject, '$.purchase-date..display-value')[0],
+            value: jsonPath(rawObject, '$.purchase-date..value')[0]
+          },
+          total: modelHelpers.parsePrice(jsonPath(rawObject, '$.monetary-total[0]')[0]),
+          status: jsonPath(rawObject, '$.status')[0],
+          link: jsonPath(rawObject, '$.self..href')[0]
+        };
+      }
+      else {
+        ep.logger.warn('Error building purchase record object: raw purchase record object was undefined.');
+      }
+
+      return purchaseRecord;
+    }
+  });
 
   return {
     ProfileModel: profileModel,
+    ProfilePurchaseCollection: profilePurchaseCollection,
     testVariable: {
       modelHelpers: modelHelpers
     }

@@ -123,6 +123,58 @@ define(function (require) {
       });
     });
 
+    describe('responds to event: address.loadEditAddressViewRequest', function () {
+      before(function () {
+        sinon.spy(EventBus, 'trigger');
+      });
+
+      after(function () {
+        EventBus.trigger.restore();
+      });
+
+      it("registers correct event listener", function () {
+        expect(EventBus._events['address.loadEditAddressViewRequest']).to.be.length(1);
+      });
+
+      describe('handles valid data', function () {
+        before(function () {
+          $("#Fixtures").append(addressTemplate); // append templates
+          $("#Fixtures").append('<div id="testingRegion"></div>'); // append an region to render tested view into
+
+          EventBus.trigger('address.loadEditAddressViewRequest', {
+            region: new Marionette.Region({el: '#testingRegion'}),
+            model: new Backbone.Model()
+          });
+        });
+
+        after(function () {
+          $('#Fixtures').empty();
+        });
+
+        it("by rendering DefaultEditAddressLayout into provided region", function () {
+          // Renders an address container from View.DefaultAddressFormView
+          expect($('#testingRegion [data-region="componentAddressFormRegion"] > div')).to.be.length(1);
+          // Renders the edit address button from View.DefaultEditAddressLayout
+          expect($('#testingRegion button[ data-el-label="addressForm.edit"]')).to.be.length(1);
+        });
+      });
+
+      describe('handles invalid data', function () {
+        before(function () {
+          this.errorlogger = sinon.stub(ep.logger, 'error');
+          EventBus.trigger('address.loadEditAddressViewRequest', undefined);
+        });
+
+        after(function () {
+          ep.logger.error.restore();
+        });
+
+        it("by logging the error in console", function () {
+          expect(this.errorlogger).to.be.calledWithMatch('Failed to load edit address view');
+        });
+      });
+    });
+
     describe('responds to event: address.createAddressBtnClicked',
       EventTestFactory.simpleEventTriggersEventTest('address.getAddressFormRequest', 'address.createAddressBtnClicked'));
 
@@ -195,7 +247,7 @@ define(function (require) {
       var fakeForm = {address: 'address properties'};
 
       before(function () {
-        sinon.stub(addressView, 'getAddressForm', function () {
+        sinon.stub(addressView, 'getAddressFormValues', function () {
           return fakeForm;
         });
         sinon.stub(ep.io, 'ajax');
@@ -209,7 +261,7 @@ define(function (require) {
       });
 
       after(function () {
-        addressView.getAddressForm.restore();
+        addressView.getAddressFormValues.restore();
         ep.io.ajax.restore();
         ep.logger.error.restore();
       });
@@ -218,7 +270,7 @@ define(function (require) {
         expect(EventBus._events['address.createNewAddressRequest']).to.be.length(1);
       });
       it('should get an address form model', function () {
-        expect(addressView.getAddressForm).to.be.calledOnce;
+        expect(addressView.getAddressFormValues).to.be.calledOnce;
       });
 
       describe('should submit new address to Cortex', function () {
@@ -228,7 +280,7 @@ define(function (require) {
         it('with a valid request', function () {
           expect(this.ajaxArgs.type).to.be.string('POST');
           expect(this.ajaxArgs.contentType).to.be.string('application/json');
-          expect(this.ajaxArgs.data).to.be.equal(JSON.stringify(addressView.getAddressForm()));
+          expect(this.ajaxArgs.data).to.be.equal(JSON.stringify(addressView.getAddressFormValues()));
           expect(this.ajaxArgs.url).to.be.equal(actionLink);
         });
         it('with required callback functions', function () {

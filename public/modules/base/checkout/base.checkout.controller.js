@@ -181,8 +181,8 @@ define(function (require) {
           };
           EventBus.trigger('checkout.submitOrderSuccess', obj);
         },
-        customErrorFn: function () {
-          EventBus.trigger('checkout.submitOrderFailed');
+        customErrorFn: function (response) {
+          EventBus.trigger('checkout.submitOrderFailed', response);
         }
       });
 

@@ -1,7 +1,7 @@
 {
-  "zoom" : "?zoom=subscriptions:element,addresses:element,paymentmethods:element",
-  "retrievedOn" : "Dec 20, 2013",
-  "retrievedCriteria": "user with subscription item, at least 1 address, 1 token payment method, and 1 credit card payment methods",
+  "zoom" : "?zoom=subscriptions:element,purchases:element,addresses:element,paymentmethods:element",
+  "retrievedOn" : "Jan 15, 2014",
+  "retrievedCriteria": "user with subscription item, made at least 1 purchase, at least 1 address, 1 token payment method, and 1 credit card payment methods",
   "response" : {
     "links": [
       {
@@ -221,6 +221,287 @@
             },
             "quantity": 1,
             "status": "ACTIVE"
+          }
+        ]
+      }
+    ],
+    "_purchases": [
+      {
+        "_element": [
+          {
+            "links": [
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus",
+                "uri": "/purchases/campus"
+              },
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "paymentmeans",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanrq=/paymentmeans",
+                "uri": "/purchases/campus/giydanrq=/paymentmeans"
+              },
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "lineitems",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanrq=/lineitems",
+                "uri": "/purchases/campus/giydanrq=/lineitems"
+              },
+              {
+                "type": "application/vnd.elasticpath.address",
+                "rel": "billingaddress",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanrq=/billingaddress",
+                "uri": "/purchases/campus/giydanrq=/billingaddress"
+              }
+            ],
+            "self": {
+              "type": "application/vnd.elasticpath.purchase",
+              "uri": "/purchases/campus/giydanrq=",
+              "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanrq=",
+              "max-age": 600
+            },
+            "monetary-total": [
+              {
+                "amount": 109.99,
+                "currency": "USD",
+                "display": "$109.99"
+              }
+            ],
+            "purchase-date": {
+              "display-value": "January 15, 2014 1:40:46 PM",
+              "value": 1389822046000
+            },
+            "purchase-number": "20060",
+            "status": "COMPLETED",
+            "tax-total": {
+              "amount": 0,
+              "currency": "USD",
+              "display": "$0.00"
+            }
+          },
+          {
+            "links": [
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus",
+                "uri": "/purchases/campus"
+              },
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "paymentmeans",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjz=/paymentmeans",
+                "uri": "/purchases/campus/giydanjz=/paymentmeans"
+              },
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "lineitems",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjz=/lineitems",
+                "uri": "/purchases/campus/giydanjz=/lineitems"
+              },
+              {
+                "type": "application/vnd.elasticpath.address",
+                "rel": "billingaddress",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjz=/billingaddress",
+                "uri": "/purchases/campus/giydanjz=/billingaddress"
+              }
+            ],
+            "self": {
+              "type": "application/vnd.elasticpath.purchase",
+              "uri": "/purchases/campus/giydanjz=",
+              "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjz=",
+              "max-age": 600
+            },
+            "monetary-total": [
+              {
+                "amount": 287.77,
+                "currency": "USD",
+                "display": "$287.77"
+              }
+            ],
+            "purchase-date": {
+              "display-value": "January 15, 2014 11:52:29 AM",
+              "value": 1389815549000
+            },
+            "purchase-number": "20059",
+            "status": "IN_PROGRESS",
+            "tax-total": {
+              "amount": 0,
+              "currency": "USD",
+              "display": "$0.00"
+            }
+          },
+          {
+            "links": [
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus",
+                "uri": "/purchases/campus"
+              },
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "paymentmeans",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjy=/paymentmeans",
+                "uri": "/purchases/campus/giydanjy=/paymentmeans"
+              },
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "lineitems",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjy=/lineitems",
+                "uri": "/purchases/campus/giydanjy=/lineitems"
+              },
+              {
+                "type": "application/vnd.elasticpath.address",
+                "rel": "billingaddress",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjy=/billingaddress",
+                "uri": "/purchases/campus/giydanjy=/billingaddress"
+              }
+            ],
+            "self": {
+              "type": "application/vnd.elasticpath.purchase",
+              "uri": "/purchases/campus/giydanjy=",
+              "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjy=",
+              "max-age": 600
+            },
+            "monetary-total": [
+              {
+                "amount": 30.99,
+                "currency": "USD",
+                "display": "$30.99"
+              }
+            ],
+            "purchase-date": {
+              "display-value": "January 15, 2014 11:52:02 AM",
+              "value": 1389815522000
+            },
+            "purchase-number": "20058",
+            "status": "IN_PROGRESS",
+            "tax-total": {
+              "amount": 0,
+              "currency": "USD",
+              "display": "$0.00"
+            }
+          },
+          {
+            "links": [
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus",
+                "uri": "/purchases/campus"
+              },
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "paymentmeans",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjx=/paymentmeans",
+                "uri": "/purchases/campus/giydanjx=/paymentmeans"
+              },
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "lineitems",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjx=/lineitems",
+                "uri": "/purchases/campus/giydanjx=/lineitems"
+              },
+              {
+                "type": "application/vnd.elasticpath.address",
+                "rel": "billingaddress",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjx=/billingaddress",
+                "uri": "/purchases/campus/giydanjx=/billingaddress"
+              }
+            ],
+            "self": {
+              "type": "application/vnd.elasticpath.purchase",
+              "uri": "/purchases/campus/giydanjx=",
+              "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjx=",
+              "max-age": 600
+            },
+            "monetary-total": [
+              {
+                "amount": 100,
+                "currency": "USD",
+                "display": "$100.00"
+              }
+            ],
+            "purchase-date": {
+              "display-value": "January 15, 2014 11:34:41 AM",
+              "value": 1389814481000
+            },
+            "purchase-number": "20057",
+            "status": "IN_PROGRESS",
+            "tax-total": {
+              "amount": 0,
+              "currency": "USD",
+              "display": "$0.00"
+            }
+          },
+          {
+            "links": [
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "list",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus",
+                "uri": "/purchases/campus"
+              },
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "paymentmeans",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjw=/paymentmeans",
+                "uri": "/purchases/campus/giydanjw=/paymentmeans"
+              },
+              {
+                "type": "application/vnd.elasticpath.links",
+                "rel": "lineitems",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjw=/lineitems",
+                "uri": "/purchases/campus/giydanjw=/lineitems"
+              },
+              {
+                "type": "application/vnd.elasticpath.address",
+                "rel": "billingaddress",
+                "rev": "purchase",
+                "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjw=/billingaddress",
+                "uri": "/purchases/campus/giydanjw=/billingaddress"
+              }
+            ],
+            "self": {
+              "type": "application/vnd.elasticpath.purchase",
+              "uri": "/purchases/campus/giydanjw=",
+              "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/purchases/campus/giydanjw=",
+              "max-age": 600
+            },
+            "monetary-total": [
+              {
+                "amount": 164.99,
+                "currency": "USD",
+                "display": "$164.99"
+              }
+            ],
+            "purchase-date": {
+              "display-value": "January 15, 2014 10:26:33 AM",
+              "value": 1389810393000
+            },
+            "purchase-number": "20056",
+            "status": "IN_PROGRESS",
+            "tax-total": {
+              "amount": 0,
+              "currency": "USD",
+              "display": "$0.00"
+            }
           }
         ]
       }

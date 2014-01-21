@@ -426,7 +426,7 @@ define(function (require) {
               this.ajaxArgs.error({
                 status: 'any error code'
               });
-              expect(EventBus.trigger).to.be.calledWithExactly(testEventName);
+              expect(EventBus.trigger).to.be.calledWith(testEventName);
               expect(ep.logger.error).to.be.calledOnce
                 .and.to.be.calledWithMatch('any error code');
             });
@@ -464,16 +464,16 @@ define(function (require) {
 
     describe('Responds to event: checkout.submitOrderFailed', function() {
       before(function () {
-        sinon.stub(view, 'resetCheckoutButtonText');
+        sinon.stub($.fn, 'toastmessage'); // underlying function of $().toastmessage
         EventBus.trigger('checkout.submitOrderFailed');
       });
 
       after(function () {
-        view.resetCheckoutButtonText.restore();
+        $.fn.toastmessage.restore();
       });
 
-      it('calls View function resetCheckoutButtonText', function() {
-        expect(view.resetCheckoutButtonText).to.be.calledOnce;
+      it('calls the toastmessage plugin to report the error to the user', function() {
+        expect($.fn.toastmessage).to.be.calledOnce;
       });
     });
 

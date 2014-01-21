@@ -8,6 +8,8 @@ define(function (require) {
   var Mediator = require('mediator');
   var ep = require('ep');
 
+  var controllerTestFactory = require('testfactory.controller');
+
   describe('Profile Module: Controller', function () {
     var profileController = require('profile');
     var profileTemplate = require('text!modules/base/profile/base.profile.templates.html');
@@ -40,8 +42,8 @@ define(function (require) {
         it('should be an instance of Marionette Layout object', function () {
           expect(this.viewLayout).to.be.an.instanceOf(Marionette.Layout);
         });
-        it('view\'s DOM is rendered with 5 children (view content rendered)', function () {
-          expect(this.viewLayout.el.childElementCount).to.be.equal(5);
+        it('view\'s DOM is rendered with 6 children (view content rendered)', function () {
+          expect(this.viewLayout.el.childElementCount).to.be.equal(6);
         });
         it('Model should have fetched info from server once', function () {
           expect(Backbone.sync).to.be.calledOnce;
@@ -94,23 +96,50 @@ define(function (require) {
       });
     });
 
-    describe('Responding to event: profile.addressesUpdated', function () {
-      before(function () {
-        sinon.stub(Backbone, 'sync');
-        EventBus.trigger('profile.addressesUpdated');
-      });
+    describe('EditProfileAddressView', function() {
+      describe("Given an address model href", function() {
+        before(function (done) {
+          // Append templates to the DOM
+          $("#Fixtures").append(profileTemplate);
 
-      after(function () {
-        Backbone.sync.restore();
-      });
+          sinon.stub(Mediator, 'fire');
+          sinon.spy(ep.logger, 'error');
 
-      it('registers correct event listener', function () {
-        expect(EventBus._events['profile.addressesUpdated']).to.exist;
-      });
-      it('model should have fetched info from server once', function () {
-        expect(Backbone.sync).to.be.calledOnce;
+          var fakeGetLink = "/integrator/orders/fakeUrl";
+          var fakeAddressResponse = {
+            "country-name": "CA",
+            "locality": "Vancouver",
+            "postal-code": "V8C1N1",
+            "region": "BC",
+            "street-address": "5833 Movaat St."
+          };
+
+          // Create a sinon fakeServer object
+          this.server = controllerTestFactory.getFakeServer('', fakeAddressResponse, fakeGetLink);
+
+          profileController.EditProfileAddressView(fakeGetLink);
+
+          // Short delay to allow the fake AJAX request to complete
+          setTimeout(done, 200);
+        });
+
+        after(function() {
+          $("#Fixtures").empty();
+          ep.io.localStore.removeItem('oAuthToken');
+
+          this.server.restore();
+
+          Mediator.fire.restore();
+          ep.logger.error.restore();
+        });
+
+        it('fires the mediator.loadEditAddressViewRequest event', function() {
+          expect(Mediator.fire).to.be.calledWith('mediator.loadEditAddressViewRequest');
+          expect(ep.logger.error).to.not.be.called;
+        });
       });
     });
+
   });
 
 });

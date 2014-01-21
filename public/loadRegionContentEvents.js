@@ -44,11 +44,11 @@ define(function(require) {
         view:'DefaultView'
       });
     },
-    confirmation: function(id){
+    purchaseReceipt: function(id){
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'appMainRegion',
-        module:'receipt',
-        view:'DefaultView',
+        module:'purchaseinfo',
+        view:'PurchaseReceiptView',
         data:id
       });
     },
@@ -61,6 +61,13 @@ define(function(require) {
           href: href,
           pageHref: pageHref
         }
+      });
+    },
+    newaddressform: function() {
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region: 'appMainRegion',
+        module: 'address',
+        view: 'DefaultCreateAddressView'
       });
     },
     search: function(keywords) {
@@ -78,11 +85,20 @@ define(function(require) {
         view:'DefaultView'
       });
     },
-    newaddressform: function() {
+    purchaseDetails: function(id){
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region:'appMainRegion',
+        module:'purchaseinfo',
+        view:'PurchaseDetailsView',
+        data:id
+      });
+    },
+    editaddress: function(href) {
       EventBus.trigger('layout.loadRegionContentRequest',{
         region: 'appMainRegion',
-        module: 'address',
-        view: 'DefaultCreateAddressView'
+        module: 'profile',
+        view: 'EditProfileAddressView',
+        data: href
       });
     }
   };
