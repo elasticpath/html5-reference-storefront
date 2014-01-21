@@ -207,11 +207,11 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       events: {
         'click [data-el-label="profile.deleteAddressBtn"]': function(event) {
           event.preventDefault();
-          EventBus.trigger('profile.deleteAddressConfirm', this.model.get('href'));
+          EventBus.trigger('profile.deleteAddressBtnClicked', this.model.get('href'));
         },
         'click [data-el-label="profile.editAddressBtn"]': function(event) {
           event.preventDefault();
-          EventBus.trigger('profile.editAddressRequest', this.model.get('href'));
+          EventBus.trigger('profile.editAddressBtnClicked', this.model.get('href'));
         }
       }
     });

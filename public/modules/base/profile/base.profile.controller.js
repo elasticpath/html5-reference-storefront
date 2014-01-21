@@ -129,6 +129,20 @@ define(function (require) {
     });
 
     /**
+     * Handler for the edit address button clicked signal, which triggers an edit address request.
+     */
+    EventBus.on('profile.editAddressBtnClicked', function (href) {
+      EventBus.trigger('profile.editAddressRequest', href);
+    });
+
+    /**
+    * Handler for the delete address button clicked signal, which triggers a request for confirmation from the user.
+    */
+    EventBus.on('profile.deleteAddressBtnClicked', function (href) {
+      EventBus.trigger('profile.deleteAddressConfirm', href);
+    });
+
+    /**
      * Handler for the edit profile address request event that navigates to the corresponding route.
      */
     EventBus.on('profile.editAddressRequest', function(href) {

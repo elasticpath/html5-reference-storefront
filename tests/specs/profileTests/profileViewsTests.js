@@ -335,10 +335,10 @@ define(function (require) {
         });
 
         describe('edit address button clicked',
-          EventTestFactory.simpleBtnClickTest('profile.editAddressRequest', '[data-el-label="profile.editAddressBtn"]'));
+          EventTestFactory.simpleBtnClickTest('profile.editAddressBtnClicked', '[data-el-label="profile.editAddressBtn"]'));
 
         describe('delete address button clicked',
-          EventTestFactory.simpleBtnClickTest('profile.deleteAddressConfirm', '[data-el-label="profile.deleteAddressBtn"]'));
+          EventTestFactory.simpleBtnClickTest('profile.deleteAddressBtnClicked', '[data-el-label="profile.deleteAddressBtn"]'));
       });
 
       describe('ProfileAddressesView', function () {

@@ -171,15 +171,15 @@ define(function (require) {
 
       describe('and on success', function() {
         before(function() {
-          sinon.stub(Backbone, 'sync');
+          sinon.stub(Backbone.Model.prototype, 'fetch');
           EventBus.trigger('profile.deleteAddressSuccess');
         });
         after(function() {
-          Backbone.sync.restore();
+          Backbone.Model.prototype.fetch.restore();
         });
         // Backbone.Model.fetch triggers a Backbone.sync call
         it('triggers a Backbone.Model fetch', function() {
-          expect(Backbone.sync).to.be.called;
+          expect(Backbone.Model.prototype.fetch).to.be.called;
         });
       });
 
