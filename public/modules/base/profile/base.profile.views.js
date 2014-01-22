@@ -255,6 +255,10 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       }
     });
 
+    /**
+     * This view is rendered in the modal region to obtain confirmation from the user before proceeding
+     * with a request to delete an address.
+     */
     var profileDeleteAddressConfirmationView = Backbone.Marionette.ItemView.extend({
       className:'profile-delete-confirm-modal',
       template:'#ProfileDeleteConfirmationModalTemplate',

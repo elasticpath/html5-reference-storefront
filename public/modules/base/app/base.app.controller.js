@@ -22,16 +22,8 @@ define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/a
     Marionette.Region.prototype.open = function(view){
       this.$el.hide();
       this.$el.html(view.el);
-   //  this.$el.removeAttr('style');
-      //this.$el.show(ep.app.config.viewFadeInValue);
       this.$el.fadeIn(ep.app.config.viewFadeInValue);
     };
-
-    // TODO exist on branch, but not on master
-    /*
-     * User Preferences
-     * */
-//    ep.app.epUserPrefs = {};
 
     /*
     * Modal Region
@@ -56,15 +48,11 @@ define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/a
         this.$el.modal({
           autoResize: true,
           modal: true,
-          onShow: function(dialog){
-
-          },
           onOpen:function(dialog){
-            dialog.overlay.fadeIn(200 ,function(){
+            dialog.overlay.fadeIn(200);
+            dialog.data.show(0, function() {
               dialog.container.fadeIn(0, function(){
-                dialog.data.fadeIn(0, function(){
                   $(window).resize();
-                });
               });
             });
           },
@@ -83,13 +71,6 @@ define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/a
 
       },
 
-
-      onShow:function(){
-        //this.showModal(this);
-
-      },
-
-
       hideModal: function(){
         this.$el.modal('hide');
       }
@@ -99,7 +80,6 @@ define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/a
     * Start App Listener
     * */
     ep.app.on('start',function(options){
-
 
       // base application layout
       var baseLayout = new View.BaseLayout();

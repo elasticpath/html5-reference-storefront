@@ -151,7 +151,7 @@ define(function (require) {
     });
 
     /**
-     * Uses a JavaScript confirm window to confirm the delete action for a profile address.
+     * Uses a modal window to confirm the delete action for a profile address.
      * @param href A href used to identify the address to be deleted in Cortex
      */
     EventBus.on('profile.deleteAddressConfirm', function (href) {

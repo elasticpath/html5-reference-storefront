@@ -77,6 +77,13 @@
     </td>
   </script>
 
+  <!-- The confirmation modal for removal of a cart line item -->
+  <script id="CartRemoveLineItemConfirmModalTemplate" type="text/template">
+    <p><%= E.getI18nLabel('cart.removeConfirmMsg') %></p>
+    <button class="btn btn-primary btn-yes"><%= E.getI18nLabel('general.yes') %></button>
+    <button class="btn btn-primary btn-no"><%= E.getI18nLabel('general.no') %></button>
+  </script>
+
   <!-- Cart LineItem Unit Price Master Template -->
   <script id="CartLineItemUnitPriceMasterTemplate" type="text/template">
     <div data-region="itemUnitPriceRegion"></div>

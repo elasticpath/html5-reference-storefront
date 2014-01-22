@@ -65,6 +65,7 @@
     "checkout": "Proceed to Checkout",
     "emptyCartMsg": "Your shopping cart is empty.",
     "deletedLineItemUpdateErrMsg": "The lineItem you were trying to update doesn't exist anymore.",
+    "removeConfirmMsg": "Do you really want to delete this item?",
     "genericUpdateErrMsg": "I'm sorry, there was an error updating the lineItem quantity. Please contact your system administrator."
   },
   "checkout": {
