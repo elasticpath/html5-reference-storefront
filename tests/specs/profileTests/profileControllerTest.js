@@ -8,7 +8,9 @@ define(function (require) {
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
   var ep = require('ep');
+  var modal = require('modalwin');
 
+  var EventTestFactory = require('EventTestFactory');
   var controllerTestFactory = require('testfactory.controller');
 
   describe('Profile Module: Controller', function () {
@@ -100,24 +102,21 @@ define(function (require) {
     describe('Responds to event: profile.deleteAddressConfirm', function () {
       describe('When the user confirms the deletion request', function() {
         before(function () {
-          sinon.stub(window, 'confirm', function () {
-            return true;
-          });
-
           sinon.stub(ep.ui, 'startActivityIndicator');
           sinon.spy(EventBus, 'trigger');
+          sinon.spy($.modal, 'close');
 
-          EventBus.trigger('profile.deleteAddressConfirm', 'someHref');
+          EventBus.trigger('profile.deleteAddressConfirmYesBtnClicked', 'someHref');
         });
 
         after(function () {
-          window.confirm.restore();
           ep.ui.startActivityIndicator.restore();
           EventBus.trigger.restore();
+          $.modal.close.restore();
         });
 
         it('starts the activity indicator and triggers a delete address request', function () {
-          expect(window.confirm).to.be.calledWithExactly("Do you really want to delete this address");
+          expect($.modal.close).to.be.called;
           expect(ep.ui.startActivityIndicator).to.be.called;
           expect(EventBus.trigger).to.be.calledWithExactly('profile.deleteAddressRequest', 'someHref');
         });

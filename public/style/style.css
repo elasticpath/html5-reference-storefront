@@ -3034,6 +3034,7 @@ input[type="button"].btn-block {
   border-radius: 2px;
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2px;
 }
 .btn-group > .btn + .dropdown-toggle {
   padding-left: 8px;
@@ -5906,6 +5907,7 @@ td.visible-print {
   border-radius: 2px;
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2px;
   color: #ffffff;
   background-color: rgba(0, 163, 221, 0.667);
   border-color: rgba(0, 144, 196, 0.667);
@@ -6212,6 +6214,7 @@ fieldset[disabled] .btn-auth-login.active {
   border-radius: 2px;
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2px;
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
@@ -6420,6 +6423,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   border-radius: 2px;
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2px;
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
@@ -6805,6 +6809,7 @@ nav.main-nav {
   border-radius: 2px;
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2px;
   color: #ffffff;
   background-color: #5cb85c;
   border-color: #4cae4c;
@@ -7142,6 +7147,7 @@ Purchase Information
   border-radius: 2px;
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2px;
   color: #ffffff;
   background-color: #5cb85c;
   border-color: #4cae4c;
@@ -7386,6 +7392,7 @@ fieldset[disabled] .btn-cmd-submit-order.active {
   border-radius: 2px;
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2px;
   color: #ffffff;
   background-color: #5cb85c;
   border-color: #4cae4c;
@@ -7855,6 +7862,7 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   border-radius: 2px;
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2px;
   color: #ffffff;
   background-color: rgba(0, 163, 221, 0.667);
   border-color: rgba(0, 144, 196, 0.667);
@@ -8132,6 +8140,7 @@ fieldset[disabled] .btn-pagination.pagination-link-disabled.active {
   border-radius: 2px;
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2px;
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
@@ -8220,6 +8229,7 @@ fieldset[disabled] .search-results-item-inner .btn-view-item-detail.active {
   border-radius: 2px;
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2px;
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
@@ -8504,6 +8514,7 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
   border-radius: 2px;
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2px;
 }
 .row {
   margin-bottom: 1rem;

@@ -101,6 +101,10 @@
     "totalResults": "results",
     "emptyViewMsg": "No item currently in this category"
   },
+  "general": {
+    "no": "No",
+    "yes": "Yes"
+  },
   "purchaseInfo":{
     "purchaseDetails": {
       "backToProfile": "Go back to profile page",
@@ -135,6 +139,7 @@
   },
   "profile":{
     "delete":"Delete",
+    "deleteConfirmMsg":"Do you really want to delete this address?",
     "edit":"Edit",
     "addressDeleteErrMsg": "I'm sorry, there was an error deleting the address. Please contact your system administrator.",
     "title":"Profile",

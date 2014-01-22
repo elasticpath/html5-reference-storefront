@@ -60,21 +60,18 @@ define(['ep','eventbus', 'router', 'app.models','app.views','text!modules/base/a
 
           },
           onOpen:function(dialog){
-
-            dialog.overlay.fadeIn('fast',function(){
-              dialog.data.hide();
-              dialog.container.fadeIn('fast',function(){
-
-                dialog.data.slideDown('fast',function(){
+            dialog.overlay.fadeIn(200 ,function(){
+              dialog.container.fadeIn(0, function(){
+                dialog.data.fadeIn(0, function(){
                   $(window).resize();
                 });
               });
             });
           },
           onClose:function(dialog){
-            dialog.data.fadeOut('fast',function(){
-              dialog.container.hide('fast',function(){
-                dialog.overlay.slideUp('fast',function(){
+            dialog.data.fadeOut(0,function(){
+              dialog.container.fadeOut(0,function(){
+                dialog.overlay.fadeOut(200,function(){
                   $.modal.close();
                   $('[data-region="modalRegion"]').empty();
                   EventBus.trigger('ui.modalWindowClosed');
