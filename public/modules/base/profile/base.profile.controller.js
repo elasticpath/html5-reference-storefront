@@ -152,15 +152,28 @@ define(function (require) {
     });
 
     /**
-     * Uses a JavaScript confirm window to confirm the delete action for a profile address.
+     * Uses a modal window to confirm the delete action for a profile address.
      * @param href A href used to identify the address to be deleted in Cortex
      */
     EventBus.on('profile.deleteAddressConfirm', function (href) {
-      var confirmation = window.confirm("Do you really want to delete this address");
-      if (confirmation) {
-        ep.ui.startActivityIndicator(defaultLayout.profileAddressesRegion.currentView);
-        EventBus.trigger('profile.deleteAddressRequest', href);
-      }
+      EventBus.trigger('layout.loadRegionContentRequest', {
+        region: 'appModalRegion',
+        module: 'profile',
+        view: 'ProfileDeleteAddressConfirmationView',
+        data: {
+          href: href
+        }
+      });
+    });
+
+    /**
+     * Called when the yes button in the confirm deletion modal is clicked. This handler closes any open modal windows,
+     * starts the activity indicator in the profile addresses region and trigger the delete request to Cortex.
+     */
+    EventBus.on('profile.deleteAddressConfirmYesBtnClicked', function(href) {
+      $.modal.close();
+      ep.ui.startActivityIndicator(defaultLayout.profileAddressesRegion.currentView);
+      EventBus.trigger('profile.deleteAddressRequest', href);
     });
 
     /**
@@ -221,6 +234,9 @@ define(function (require) {
 
     return {
       DefaultView: defaultView,
-      EditProfileAddressView: editProfileAddressView
+      EditProfileAddressView: editProfileAddressView,
+      ProfileDeleteAddressConfirmationView: function(options) {
+        return new View.ProfileDeleteAddressConfirmationView(options);
+      }
     };
 });

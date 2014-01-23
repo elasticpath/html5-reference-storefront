@@ -263,17 +263,37 @@ define(function (require) {
     });
 
     /**
+     * Called when the yes button in the confirm modal is clicked. This handler closes any open modal windows,
+     * starts the activity indicator for the regions to be updated and triggers the remove item request to Cortex.
+     */
+    EventBus.on('cart.removeLineItemConfirmYesBtnClicked', function(actionLink) {
+      $.modal.close();
+      ep.ui.startActivityIndicator(cartLayout.mainCartRegion.currentView);
+      ep.ui.startActivityIndicator(cartLayout.cartCheckoutMasterRegion.currentView);
+      EventBus.trigger('cart.removeLineItemRequest', actionLink);
+    });
+
+    /**
      * Prompts the user to confirm deletion with a JavaScript confirmation alert and then
      * starts activity indicators on those cart regions that contain data which could
      * change following a successful cart item deletion.
      */
-    EventBus.on('cart.removeLineItemBtnClicked', function (actionLink) {
-      var confirmation = window.confirm("Do you really want to delete this item");
-      if (confirmation) {
-        ep.ui.startActivityIndicator(cartLayout.mainCartRegion.currentView);
-        ep.ui.startActivityIndicator(cartLayout.cartCheckoutMasterRegion.currentView);
-        EventBus.trigger('cart.removeLineItemRequest', actionLink);
-      }
+    EventBus.on('cart.removeLineItemConfirm', function (actionLink) {
+      EventBus.trigger('layout.loadRegionContentRequest', {
+        region: 'appModalRegion',
+        module: 'cart',
+        view: 'CartRemoveLineItemConfirmView',
+        data: {
+          href: actionLink
+        }
+      });
+    });
+
+    /**
+     * Handler for the remove line item button clicked signal, which triggers a request for confirmation from the user.
+     */
+    EventBus.on('cart.removeLineItemBtnClicked', function(actionLink) {
+      EventBus.trigger('cart.removeLineItemConfirm', actionLink);
     });
 
     /**
@@ -297,7 +317,10 @@ define(function (require) {
     });
 
     return {
-      DefaultView: defaultView
+      DefaultView: defaultView,
+      CartRemoveLineItemConfirmView: function(options) {
+        return new View.CartRemoveLineItemConfirmView(options);
+      }
     };
   }
 );

@@ -416,6 +416,26 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       }
     });
 
+    /**
+     * This view is rendered in the modal region to obtain confirmation from the user before proceeding
+     * with a request to remove a line item from the cart.
+     */
+    var cartRemoveLineItemConfirmView = Backbone.Marionette.ItemView.extend({
+      className:'cart-remove-confirm-modal',
+      template:'#CartRemoveLineItemConfirmModalTemplate',
+      templateHelpers:viewHelpers,
+      events:{
+        'click .btn-yes':function(event) {
+          event.preventDefault();
+          EventBus.trigger('cart.removeLineItemConfirmYesBtnClicked', this.options.href);
+        },
+        'click .btn-no':function(event) {
+          event.preventDefault();
+          $.modal.close();
+        }
+      }
+    });
+
     /* ********* Helper functions ********* */
     /**
      * Reset a lineItem's quantity to original value recorded in model.
@@ -433,6 +453,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       CartSummaryView:cartSummaryView,
       CartCheckoutActionView:cartCheckoutActionView,
       CartCheckoutMasterLayout:cartCheckoutMasterLayout,
+      CartRemoveLineItemConfirmView: cartRemoveLineItemConfirmView,
       setCheckoutButtonProcessing:setCheckoutButtonProcessing,
       resetCheckoutButtonText:resetCheckoutButtonText,
       resetQuantity: resetQuantity

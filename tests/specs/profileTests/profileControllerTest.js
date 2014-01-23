@@ -7,7 +7,9 @@ define(function (require) {
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
   var ep = require('ep');
+  var modal = require('modalwin');
 
+  var EventTestFactory = require('EventTestFactory');
   var controllerTestFactory = require('testfactory.controller');
 
   describe('Profile Module: Controller', function () {
@@ -96,53 +98,25 @@ define(function (require) {
       });
     });
 
-    describe('Responds to event: profile.deleteAddressConfirm', function () {
-      describe('When the user confirms the deletion request', function() {
-        before(function () {
-          sinon.stub(window, 'confirm', function () {
-            return true;
-          });
+    describe('Responds to event: profile.deleteAddressConfirmYesBtnClicked', function () {
+      before(function () {
+        sinon.stub(ep.ui, 'startActivityIndicator');
+        sinon.spy(EventBus, 'trigger');
+        sinon.spy($.modal, 'close');
 
-          sinon.stub(ep.ui, 'startActivityIndicator');
-          sinon.spy(EventBus, 'trigger');
-
-          EventBus.trigger('profile.deleteAddressConfirm', 'someHref');
-        });
-
-        after(function () {
-          window.confirm.restore();
-          ep.ui.startActivityIndicator.restore();
-          EventBus.trigger.restore();
-        });
-
-        it('starts the activity indicator and triggers a delete address request', function () {
-          expect(window.confirm).to.be.calledWithExactly("Do you really want to delete this address");
-          expect(ep.ui.startActivityIndicator).to.be.called;
-          expect(EventBus.trigger).to.be.calledWithExactly('profile.deleteAddressRequest', 'someHref');
-        });
+        EventBus.trigger('profile.deleteAddressConfirmYesBtnClicked', 'someHref');
       });
-      describe('When the user cancels the deletion request', function() {
-        before(function () {
-          sinon.stub(window, 'confirm', function () {
-            return false;
-          });
 
-          sinon.stub(ep.ui, 'startActivityIndicator');
-          sinon.spy(EventBus, 'trigger');
+      after(function () {
+        ep.ui.startActivityIndicator.restore();
+        EventBus.trigger.restore();
+        $.modal.close.restore();
+      });
 
-          EventBus.trigger('profile.deleteAddressConfirm', 'someHref');
-        });
-
-        after(function () {
-          window.confirm.restore();
-          ep.ui.startActivityIndicator.restore();
-          EventBus.trigger.restore();
-        });
-
-        it('does not start the activity indicator or trigger a delete address request', function () {
-          expect(ep.ui.startActivityIndicator).to.be.not.called;
-          expect(EventBus.trigger).to.be.not.calledWithExactly('profile.deleteAddressRequest', 'someHref');
-        });
+      it('starts the activity indicator and triggers a delete address request', function () {
+        expect($.modal.close).to.be.called;
+        expect(ep.ui.startActivityIndicator).to.be.called;
+        expect(EventBus.trigger).to.be.calledWithExactly('profile.deleteAddressRequest', 'someHref');
       });
     });
 

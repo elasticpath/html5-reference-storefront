@@ -244,31 +244,26 @@ define(function (require) {
       });
     });
 
-    // Event Listener: cart.removeLineItemBtnClicked
-    describe('Responds to event: cart.removeLineItemBtnClicked', function() {
-      before(function() {
-        sinon.spy(EventBus, 'trigger');
+    // Event Listener: cart.removeLineItemConfirm
+    describe('Responds to event: cart.removeLineItemConfirmYesBtnClicked', function() {
+      before(function () {
         sinon.stub(ep.ui, 'startActivityIndicator');
-        sinon.stub(window, 'confirm', function() {
-          return true;
-        });
-        EventTestHelpers.unbind('cart.removeLineItemRequest');
+        sinon.spy(EventBus, 'trigger');
+        sinon.spy($.modal, 'close');
 
-        this.fakeActionLink = 'fakeActionLink';
-        EventBus.trigger('cart.removeLineItemBtnClicked', this.fakeActionLink);
+        EventBus.trigger('cart.removeLineItemConfirmYesBtnClicked', 'someHref');
       });
-      after(function() {
-        EventTestHelpers.reset();
-        EventBus.trigger.restore();
+
+      after(function () {
         ep.ui.startActivityIndicator.restore();
-        window.confirm.restore();
-        delete(this.fakeActionLink);
+        EventBus.trigger.restore();
+        $.modal.close.restore();
       });
-      it('should start the activity indicator for the cart regions that may be updated', function() {
+
+      it('starts the activity indicators and triggers a remove line item request', function () {
+        expect($.modal.close).to.be.called;
         expect(ep.ui.startActivityIndicator).to.be.calledTwice;
-      });
-      it('should trigger cart.removeLineItemRequest with the actionLink parameter', function() {
-        expect(EventBus.trigger).to.be.calledWithExactly('cart.removeLineItemRequest', this.fakeActionLink);
+        expect(EventBus.trigger).to.be.calledWithExactly('cart.removeLineItemRequest', 'someHref');
       });
     });
 

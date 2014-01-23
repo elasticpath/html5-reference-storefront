@@ -256,6 +256,26 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       }
     });
 
+    /**
+     * This view is rendered in the modal region to obtain confirmation from the user before proceeding
+     * with a request to delete an address.
+     */
+    var profileDeleteAddressConfirmationView = Backbone.Marionette.ItemView.extend({
+      className:'profile-delete-confirm-modal',
+      template:'#ProfileDeleteConfirmationModalTemplate',
+      templateHelpers:viewHelpers,
+      events:{
+        'click .btn-yes':function(event) {
+          event.preventDefault();
+          EventBus.trigger('profile.deleteAddressConfirmYesBtnClicked', this.options.href);
+        },
+        'click .btn-no':function(event) {
+          event.preventDefault();
+          $.modal.close();
+        }
+      }
+    });
+
     return {
       DefaultLayout:defaultLayout,
       ProfileTitleView: profileTitleView,
@@ -264,6 +284,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       ProfileSummaryView:profileSummaryView,
       ProfilePaymentMethodsView:profilePaymentMethodsView,
       ProfileAddressesView: profileAddressesView,
+      ProfileDeleteAddressConfirmationView: profileDeleteAddressConfirmationView,
       testVariables: {
         viewHelpers: viewHelpers,
         ProfileSubscriptionItemView: profileSubscriptionItemView,
