@@ -8451,11 +8451,6 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
 .profile-payment-method-container {
   margin-bottom: 1rem;
 }
-/*
- * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
- *
- * Storefront toast message styles
- */
 .toast-container {
   width: 280px;
   z-index: 9999;

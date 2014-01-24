@@ -38,6 +38,16 @@ module.exports = function(grunt){
         }
       }
     },
+
+    shell: {
+      copyright: {
+        options: {
+          stdout: true
+        },
+        command: 'sh findNoCopyrightFiles.sh'
+      }
+    },
+
     watch: {
       scripts:{
         files: ['stylesrc/theme-core/*.less'],
@@ -49,12 +59,11 @@ module.exports = function(grunt){
 
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
-
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.loadNpmTasks('grunt-contrib-less');
-
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
-
   grunt.registerTask('default', ['watch']);
+  grunt.registerTask('checkin', ['less', 'shell:copyright']);
 };
