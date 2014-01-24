@@ -14,6 +14,7 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         EventBus.trigger('appheader.loadLogoComponent',reqEventData);
       });
     },
+    //FIXME include into loadRegionEvents
     'mediator.appHeaderRendered':function(){
         EventBus.trigger('layout.loadRegionContentRequest',{
           region:'authMenuItemRegion',

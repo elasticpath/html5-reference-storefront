@@ -75,7 +75,7 @@ requirejs.config({
     'chai'            : '/tests/libs/chai',
     'sinon-chai'      : '/tests/libs/sinon-chai',
     'mocha.common'    : '/tests/libs/mocha.common',
-    'sinon'           :  'scripts/lib/sinon-1.7.3',
+    'sinon'           : '/tests/libs/sinon-1.7.3',
 
     'EventTestFactory': '/tests/TestHelpers/EventTestFactory',
     'testfactory.model': '/tests/TestHelpers/ModelTestFactory',

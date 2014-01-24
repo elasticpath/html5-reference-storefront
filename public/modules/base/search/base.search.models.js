@@ -3,8 +3,8 @@
  *
  *
  */
-define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
-  function(ep, app, EventBus, Backbone,Cortex,Item){
+define(['ep','app', 'eventbus','backbone','cortex','jsonpath'],
+  function(ep, app, EventBus, Backbone,Cortex){
 
     var initCachedSearch = Backbone.Model.extend({
       url: ep.io.getApiContext() +'/searches/' + ep.app.config.cortexApi.scope + '/keywords/items'
@@ -26,7 +26,7 @@ define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
         var element =  _.first(jsonPath(response, "$..['_element']"));
 
         if (element) {
-          model.results = new Item.ItemsModel(element, { parse: true });
+//          model.results = new Item.ItemsModel(element, { parse: true });
         }
         return model;
       }
@@ -47,7 +47,7 @@ define(['ep','app', 'eventbus','backbone','cortex','item','jsonpath'],
         var element =  _.first(jsonPath(response, "$..['_element']"));
 
         if (element) {
-          model.results = new Item.ItemsModel(element, { parse: true });
+//          model.results = new Item.ItemsModel(element, { parse: true });
         }
         return model;
       }
