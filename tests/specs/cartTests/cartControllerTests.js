@@ -250,6 +250,7 @@ define(function (require) {
         sinon.stub(ep.ui, 'startActivityIndicator');
         sinon.spy(EventBus, 'trigger');
         sinon.spy($.modal, 'close');
+        EventTestHelpers.unbind('cart.removeLineItemRequest');
 
         EventBus.trigger('cart.removeLineItemConfirmYesBtnClicked', 'someHref');
       });
@@ -258,6 +259,7 @@ define(function (require) {
         ep.ui.startActivityIndicator.restore();
         EventBus.trigger.restore();
         $.modal.close.restore();
+        EventTestHelpers.reset();
       });
 
       it('starts the activity indicators and triggers a remove line item request', function () {

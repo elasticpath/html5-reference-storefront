@@ -10,6 +10,7 @@ define(function (require) {
   var modal = require('modalwin');
 
   var EventTestFactory = require('EventTestFactory');
+  var EventTestHelpers = require('testhelpers.event');
   var controllerTestFactory = require('testfactory.controller');
 
   describe('Profile Module: Controller', function () {
@@ -103,6 +104,7 @@ define(function (require) {
         sinon.stub(ep.ui, 'startActivityIndicator');
         sinon.spy(EventBus, 'trigger');
         sinon.spy($.modal, 'close');
+        EventTestHelpers.unbind('profile.deleteAddressRequest');
 
         EventBus.trigger('profile.deleteAddressConfirmYesBtnClicked', 'someHref');
       });
@@ -110,6 +112,7 @@ define(function (require) {
       after(function () {
         ep.ui.startActivityIndicator.restore();
         EventBus.trigger.restore();
+        EventTestHelpers.reset();
         $.modal.close.restore();
       });
 

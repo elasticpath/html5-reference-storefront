@@ -110,7 +110,7 @@ define(function (require) {
         }
         else {
           Mediator.fire('mediator.getPublicAuthTokenRequest');
-          ep.logger.warn('AJAX request attempt without tokens: ' + ioObj);
+          ep.logger.warn('AJAX request attempt without tokens: ' + JSON.stringify(ioObj));
         }
 
       }
