@@ -4,7 +4,7 @@
  */
 define(function (require) {
   var Backbone = require('backbone');
-  var EventTestFactory = require('EventTestFactory');
+  var EventTestFactory = require('testfactory.event');
   var ep = require('ep');
 
   describe('Profile Module: Views', function () {

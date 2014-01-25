@@ -5,7 +5,7 @@
 define(function (require) {
   var Backbone = require('backbone');
   var ep = require('ep');
-  var EventTestFactory = require('EventTestFactory');
+  var EventTestFactory = require('testfactory.event');
 
   describe('Checkout Module: Views', function () {
     var views = require('checkout.views');

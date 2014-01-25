@@ -7,9 +7,8 @@ define(function (require) {
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
   var ep = require('ep');
-  var modal = require('modalwin');
 
-  var EventTestFactory = require('EventTestFactory');
+  var EventTestFactory = require('testfactory.event');
   var EventTestHelpers = require('testhelpers.event');
   var controllerTestFactory = require('testfactory.controller');
 

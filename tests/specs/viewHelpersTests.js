@@ -37,7 +37,7 @@ define(function (require) {
       });
 
       it('calls i18n to translate message key', function () {
-        expect(i18n.t).to.be.calledWithExactly('status.' + key);
+        expect(i18n.t).to.be.calledWithExactly('purchaseStatus.' + key);
       });
 
     });

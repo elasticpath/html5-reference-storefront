@@ -18,7 +18,7 @@
   </script>
 
   <script id="ProfileDeleteConfirmationModalTemplate" type="text/template">
-    <p><%= E.getI18nLabel('profile.deleteConfirmMsg') %></p>
+    <p><%= E.getI18nLabel('profile.address.msg.deleteConfirm') %></p>
     <button class="btn btn-primary btn-yes"><%= E.getI18nLabel('general.yes') %></button>
     <button class="btn btn-primary btn-no"><%= E.getI18nLabel('general.no') %></button>
   </script>
@@ -30,11 +30,11 @@
 
   <!-- Profile Summary View Template -->
   <script id="ProfileSummaryViewTemplate" type="text/template">
-    <h2><%= E.getI18nLabel('profile.personalInfoTitle') %></h2>
+    <h2><%= E.getI18nLabel('profile.personalInfo.title') %></h2>
     <dl class="row">
-      <dt class="col-xs-4 col-xs-offset-2" data-el-label="profile.firstName"><%= E.getI18nLabel('profile.firstName') %>:</dt>
+      <dt class="col-xs-4 col-xs-offset-2" data-el-label="profile.firstName"><%= E.getI18nLabel('profile.personalInfo.firstName') %>:</dt>
       <dd class="col-xs-6" data-el-value="givenName"><%= E.givenName %></dd>
-      <dt class="col-xs-4 col-xs-offset-2" data-el-label="profile.lastName"><%= E.getI18nLabel('profile.lastName') %>:</dt>
+      <dt class="col-xs-4 col-xs-offset-2" data-el-label="profile.lastName"><%= E.getI18nLabel('profile.personalInfo.lastName') %>:</dt>
       <dd class="col-xs-6" data-el-value="familyName"><%= E.familyName %></dd>
     </dl>
   </script>
@@ -56,13 +56,13 @@
 
   <!-- ProfileSubscriptionSummaryTemplate  -->
   <script id="ProfileSubscriptionSummaryTemplate" type="text/template">
-    <h2><%= E.getI18nLabel('profile.subscriptionsTitle') %></h2>
+    <h2><%= E.getI18nLabel('profile.subscriptions.title') %></h2>
     <table class="table table-condensed striped-table">
       <thead>
         <tr>
-          <th><%= E.getI18nLabel('profile.subscriptionHeader') %></th>
-          <th><%= E.getI18nLabel('profile.subscriptionQuantity') %></th>
-          <th><%= E.getI18nLabel('profile.subscriptionNextBillingDate') %></th>
+          <th><%= E.getI18nLabel('profile.subscriptions.product') %></th>
+          <th><%= E.getI18nLabel('profile.subscriptions.quantity') %></th>
+          <th><%= E.getI18nLabel('profile.subscriptions.nextBillingDate') %></th>
         </tr>
       </thead>
       <tbody>
@@ -116,26 +116,26 @@
   <!-- Default Profile Addresses Template -->
   <script id="DefaultProfileAddressesTemplate" type="text/template">
     <!-- defaultView, itemView tagName: div -->
-    <h2><%= E.getI18nLabel('profile.addressesTitle') %></h2>
+    <h2><%= E.getI18nLabel('profile.address.title') %></h2>
     <ul class="profile-addresses-listing">
       <!-- collection target region -->
     </ul>
 
-    <button class="btn btn-primary profile-new-address-btn" data-el-label="profile.addNewAddressBtn"><%= E.getI18nLabel('profile.newAddressBtn')%></button>
+    <button class="btn btn-primary profile-new-address-btn" data-el-label="profile.addNewAddressBtn"><%= E.getI18nLabel('profile.address.create')%></button>
   </script>
 
   <!--Default Profile Address Layout Template-->
   <script id="DefaultProfileAddressLayoutTemplate" type="text/template">
     <!-- defaultView, itemView tagName: li, class: profile-address-container-->
     <div data-region="profileAddressComponentRegion"></div>
-    <button class="btn profile-edit-address-btn" data-el-label="profile.editAddressBtn"><%= E.getI18nLabel('profile.edit') %></button>
-    <button class="btn profile-delete-address-btn" data-el-label="profile.deleteAddressBtn" data-actionlink="<%= E.lineitemLink %>"><%= E.getI18nLabel('profile.delete') %></button>
+    <button class="btn profile-edit-address-btn" data-el-label="profile.editAddressBtn"><%= E.getI18nLabel('profile.address.edit') %></button>
+    <button class="btn profile-delete-address-btn" data-el-label="profile.deleteAddressBtn" data-actionlink="<%= E.lineitemLink %>"><%= E.getI18nLabel('profile.address.delete') %></button>
   </script>
 
   <!-- Default Profile Addresses EmptyView Template -->
   <script id="DefaultProfileAddressesEmptyViewTemplate" type="text/template">
     <!-- defaultView, itemView tagName: li, class: profile-no-address-msg-container-->
-    <%= E.getI18nLabel('profile.noAddressMsg') %>
+    <%= E.getI18nLabel('profile.address.msg.noAddress') %>
   </script>
 
 
@@ -144,7 +144,7 @@
   -->
   <!-- Default Profile Payment Methods Template -->
   <script id="DefaultProfilePaymentsTemplate" type="text/template">
-    <h2><%= E.getI18nLabel('profile.paymentMethodsTitle') %></h2>
+    <h2><%= E.getI18nLabel('profile.paymentMethods.title') %></h2>
     <ul class="profile-payment-methods-listing">
       <!-- collection target region -->
     </ul>
@@ -159,7 +159,7 @@
   <!-- Default Profile Payment Method EmptyView Template -->
   <script id="DefaultProfilePaymentMethodEmptyViewTemplate" type="text/template">
     <!-- defaultView, itemView tagName: li, class: profile-no-payment-method-msg-container container-->
-    <%= E.getI18nLabel('profile.noPaymentMethodMsg') %>
+    <%= E.getI18nLabel('profile.paymentMethods.msg.noPaymentMethod') %>
   </script>
 
 </div>

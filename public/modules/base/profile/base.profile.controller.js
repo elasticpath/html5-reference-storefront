@@ -184,7 +184,7 @@ define(function (require) {
      */
     EventBus.on('profile.deleteAddressFailed', function (response) {
       $().toastmessage('showToast', {
-        text: i18n.t('profile.addressDeleteErrMsg'),
+        text: i18n.t('profile.address.msg.deleteErr'),
         sticky: true,
         position: 'middle-center',
         type: 'error',

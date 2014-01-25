@@ -7,7 +7,7 @@ define(function (require) {
   var Mediator = require('mediator');
   var Backbone = require('backbone');
   var ep = require('ep');
-  var EventTestFactory = require('EventTestFactory');
+  var EventTestFactory = require('testfactory.event');
   var EventTestHelpers = require('testhelpers.event');
 
   describe('Cart Module: Controller', function () {

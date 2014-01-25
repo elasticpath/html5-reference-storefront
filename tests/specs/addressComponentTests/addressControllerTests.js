@@ -6,7 +6,7 @@ define(function (require) {
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
   var Backbone = require('backbone');
-  var EventTestFactory = require('EventTestFactory');
+  var EventTestFactory = require('testfactory.event');
   var EventTestHelpers = require('testhelpers.event');
   var DefaultViewTestHelper = require('testhelpers.defaultview');
   var ep = require('ep');

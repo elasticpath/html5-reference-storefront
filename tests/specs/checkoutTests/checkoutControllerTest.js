@@ -7,7 +7,7 @@ define(function (require) {
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
   var EventTestHelpers = require('testhelpers.event');
-  var EventTestFactory = require('EventTestFactory');
+  var EventTestFactory = require('testfactory.event');
   var dataJSON = require('text!/tests/data/checkout.json');
 
   describe('Checkout Module: Controller', function () {

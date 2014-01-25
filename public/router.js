@@ -16,16 +16,16 @@ define(function(require) {
         'category' : 'category',
         'category/:href' : 'category',
         'category/:href/:pagehref' : 'category',
-        'search' : 'search',
-        'search/:keywords' : 'search',
-        'itemdetail/:href': 'item',
-        'profile': 'profile',
-        'editaddress/:href': 'editaddress',
-        'mycart': 'cart',
         'checkout': 'checkout',
+        'itemdetail/:href': 'item',
+        'editaddress/:href': 'editaddress',
+        'newaddressform' : 'newaddressform',
+        'mycart': 'cart',
+        'profile': 'profile',
         'purchaseReceipt/:id': 'purchaseReceipt',
         'purchaseDetails/:id': 'purchaseDetails',
-        'newaddressform' : 'newaddressform'
+        'search' : 'search',
+        'search/:keywords' : 'search'
       },
       controller:loadRegionContentController
     });

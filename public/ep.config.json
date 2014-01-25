@@ -15,14 +15,14 @@
   "requireAuthToCheckout":true,
   "viewFadeInValue":500,
   "routes": {
-    "newAddress":"#newaddressform",
-    "editAddress": "#editaddress",
     "cart":"#mycart",
     "category":"#category",
-    "profile":"#profile",
+    "checkout" : "#checkout",
+    "editAddress": "#editaddress",
     "itemDetail":"#itemdetail",
-    "purchaseReceipt": "#purchaseReceipt",
+    "newAddress":"#newaddressform",
+    "profile":"#profile",
     "purchaseHistory": "#purchaseDetails",
-    "checkout" : "#checkout"
+    "purchaseReceipt": "#purchaseReceipt"
   }
 }

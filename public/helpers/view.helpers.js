@@ -67,7 +67,7 @@ define(function (require) {
     },
 
     getStatusDisplayText:function(status){
-      return  this.getI18nLabel('status.' + status);
+      return  this.getI18nLabel('purchaseStatus.' + status);
     }
 
   };

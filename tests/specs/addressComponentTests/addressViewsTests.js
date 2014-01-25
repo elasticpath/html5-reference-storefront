@@ -6,7 +6,7 @@
 define(function (require) {
   var ep = require('ep');
   var Backbone = require('backbone');
-  var EventTestFactory = require('EventTestFactory');
+  var EventTestFactory = require('testfactory.event');
 
   describe('Address Component: Views', function () {
     var addressView = require('address.views');
