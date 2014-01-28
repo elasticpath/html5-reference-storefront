@@ -1,9 +1,9 @@
 {
   "address": {
-    "zoom" : "",
-    "retrievedOn" : "Jan 15, 2014",
+    "zoom": "",
+    "retrievedOn": "Jan 15, 2014",
     "retrievedCriteria": "any address",
-    "response" : {
+    "response": {
       "links": [
         {
           "type": "application/vnd.elasticpath.profile",
@@ -37,6 +37,69 @@
       }
     }
   },
-  "countries": {},
+  "countries": {
+    "zoom": "element",
+    "retrievedOn": "Jan 28, 2014",
+    "retrievedCriteria": "a few selected countries are enough",
+    "response": {
+      "_element": [
+        {
+          "links": [
+            {
+              "type": "application/vnd.elasticpath.links",
+              "rel": "regions",
+              "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/geographies/campus/countries/inha=/regions",
+              "uri": "/geographies/campus/countries/inha=/regions"
+            }
+          ],
+          "self": {
+            "type": "application/vnd.elasticpath.geography.country",
+            "uri": "/geographies/campus/countries/inha=",
+            "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/geographies/campus/countries/inha=",
+            "max-age": 600
+          },
+          "display-name": "China",
+          "name": "CN"
+        },
+        {
+          "links": [
+            {
+              "type": "application/vnd.elasticpath.links",
+              "rel": "regions",
+              "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/geographies/campus/countries/kvjq=/regions",
+              "uri": "/geographies/campus/countries/kvjq=/regions"
+            }
+          ],
+          "self": {
+            "type": "application/vnd.elasticpath.geography.country",
+            "uri": "/geographies/campus/countries/kvjq=",
+            "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/geographies/campus/countries/kvjq=",
+            "max-age": 600
+          },
+          "display-name": "United States",
+          "name": "US"
+        },
+        {
+          "links": [
+            {
+              "type": "application/vnd.elasticpath.links",
+              "rel": "regions",
+              "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/geographies/campus/countries/inaq=/regions",
+              "uri": "/geographies/campus/countries/inaq=/regions"
+            }
+          ],
+          "self": {
+            "type": "application/vnd.elasticpath.geography.country",
+            "uri": "/geographies/campus/countries/inaq=",
+            "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/geographies/campus/countries/inaq=",
+            "max-age": 600
+          },
+          "display-name": "Canada",
+          "name": "CA"
+        }
+      ]
+    }
+
+  },
   "regions": {}
 }

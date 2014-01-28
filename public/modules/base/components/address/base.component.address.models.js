@@ -11,10 +11,6 @@ define(function (require) {
   var Backbone = require('backbone');
   var ModelHelper = require('modelHelpers');
 
-  // Array of zoom parameters to pass to Cortex
-  var zoomArray = [
-  ];
-
   /**
    * Model containing displaying address information (in a form).
    * @type Backbone.Model
@@ -34,18 +30,47 @@ define(function (require) {
     }
   });
 
-
+  /**
+   * Collection of countries.
+   * @type Backbone.Collection
+   */
   var countryCollection = Backbone.Collection.extend({
-    comparator: 'displayValue',
+    comparator: 'displayName',
+    url: ep.io.getApiContext() + '/geographies/' + ep.app.config.cortexApi.scope +  '/countries?zoom=element',
     parse: function (response) {
-      // checkin parse country information
+      var countryArray = [];
+      if (response) {
+        var countries = jsonPath(response, '$.._element')[0];
+        countryArray = modelHelpers.parseArray(countries, modelHelpers.parseCountry);
+      }
+      else {
+        ep.logger.error("Countries collection wasn't able to fetch valid data for parsing. ");
+      }
+
+      return countryArray;
     }
   });
 
+  /**
+   * Collection of regions of a given country.
+   * @type Backbone.Collection
+   */
   var regionCollection = Backbone.Collection.extend({
-    comparator: 'displayValue',
+    comparator: 'displayName',
+    getUrl: function (href) {
+      return href + '?zoom=element';
+    },
     parse: function (response) {
-      // checkin parse region information
+      var regionArray = [];
+      if (response) {
+        // checkin parse country information
+        regionArray = modelHelpers.parseArray(response, modelHelpers.parseRegion);
+      }
+      else {
+        ep.logger.error("Regions collection wasn't able to fetch valid data for parsing. ");
+      }
+
+      return regionArray;
     }
   });
 
@@ -54,9 +79,40 @@ define(function (require) {
    * @type Object collection of modelHelper functions
    */
   var modelHelpers = ModelHelper.extend({
-    // parse region
 
     // parse country
+    parseCountry: function(rawObject) {
+      var country = {};
+
+      if (rawObject) {
+        country = {
+          displayName: jsonPath(rawObject, 'display-name')[0],
+          name: jsonPath(rawObject, 'name')[0]
+        };
+      }
+      else {
+        ep.logger.warn('Error building country object: the rawObject argument was undefined');
+      }
+
+      return country;
+    },
+
+    // parse region
+    parseRegion: function(rawObject) {
+      var region = {};
+
+      if (rawObject) {
+        region = {
+          displayName: jsonPath(rawObject, 'display-name')[0],
+          name: jsonPath(rawObject, 'name')[0]
+        };
+      }
+      else {
+        ep.logger.warn('Error building region object: the rawObject argument was undefined');
+      }
+
+      return region;
+    }
   });
 
   return {

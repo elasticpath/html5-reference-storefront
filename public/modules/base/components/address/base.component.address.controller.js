@@ -21,6 +21,9 @@ define(function (require) {
 
   _.templateSettings.variable = 'E';
 
+  var countryCollection = new Models.CountryCollection();
+  var regionCollection = new Models.RegionCollection();
+
   /**
    * Instantiate an DefaultCreateAddressLayout and load views into corresponding regions on DefaultCreateAddressLayout.
    * @returns {Views.DefaultCreateAddressLayout} fully rendered DefaultCreateAddressLayout
@@ -62,16 +65,22 @@ define(function (require) {
     return addressLayout;
   };
 
+  /**
+   * Instantiate a DefaultAddressFormView and load country and regions views into corresponding regions.
+   * @param addressModel  data model of address to edit.
+   * @returns {Views.DefaultAddressFormView}  fully rendered DefaultAddressFormView
+   */
   var defaultAddressFormView = function(addressModel) {
    var addressFormView = new Views.DefaultAddressFormView();
     if (addressModel) {
       addressFormView.model = addressModel;
     }
 
-    // expose countryCollection, regionCollection
-    // fetch country collection
-    // onSuccess: show countryCompositeView, regionCompositeView(empty collection)
-    //
+    countryCollection.fetch({
+      success: function(response) {
+        // show countryCompositeView, regionCompositeView(empty collection)
+      }
+    });
 
     return addressFormView;
   };
