@@ -1,0 +1,527 @@
+
+Identified 33 third party libraries.
+
+WARNING: these third party libraries do not contain header comments:
+
+/public/scripts/lib/chai.js
+/public/scripts/lib/mocha.js
+/tests/libs/chai.js
+/tests/libs/mocha-blanket.js
+/tests/libs/mocha.js
+/tests/libs/sinon-chai.js
+
+
+========================================================================
+
+Library #1: /tests/libs/sinon-chai.js
+WARNING: No comments found! 
+
+========================================================================
+
+Library #2: /tests/libs/sinon-1.7.3.js
+/**
+ * Sinon.JS 1.7.3, 2013/06/20
+ *
+ * @author Christian Johansen (christian@cjohansen.no)
+ * @author Contributors: https://github.com/cjohansen/Sinon.JS/blob/master/AUTHORS
+ *
+ * (The BSD License)
+ * 
+ * Copyright (c) 2010-2013, Christian Johansen, christian@cjohansen.no
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ * 
+ *     * Redistributions of source code must retain the above copyright notice,
+ *       this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright notice,
+ *       this list of conditions and the following disclaimer in the documentation
+ *       and/or other materials provided with the distribution.
+ *     * Neither the name of Christian Johansen nor the names of his contributors
+ *       may be used to endorse or promote products derived from this software
+ *       without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+========================================================================
+
+Library #3: /tests/libs/mocha.js
+WARNING: No comments found! 
+
+========================================================================
+
+Library #4: /tests/libs/mocha.common.js
+// Include and setup all the stuff for testing
+
+========================================================================
+
+Library #5: /tests/libs/mocha-blanket.js
+WARNING: No comments found! 
+
+========================================================================
+
+Library #6: /tests/libs/chai.js
+WARNING: No comments found! 
+
+========================================================================
+
+Library #7: /tests/libs/blanket.js
+/*! blanket - v1.1.5 */ 
+
+========================================================================
+
+Library #8: /public/text.js
+/**
+ * @license RequireJS text 2.0.5+ Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.
+ * Available via the MIT or new BSD license.
+ * see: http://github.com/requirejs/text for details
+ */
+/*jslint regexp: true */
+
+========================================================================
+
+Library #9: /public/scripts/lib/underscore.js
+// Underscore.js 1.4.4
+// ===================
+// > http://underscorejs.org
+// > (c) 2009-2013 Jeremy Ashkenas, DocumentCloud Inc.
+// > Underscore may be freely distributed under the MIT license.
+// Baseline setup
+// --------------
+
+========================================================================
+
+Library #10: /public/scripts/lib/require.js
+/** vim: et:ts=4:sw=4:sts=4
+ * @license RequireJS 2.1.5 Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.
+ * Available via the MIT or new BSD license.
+ * see: http://github.com/jrburke/requirejs for details
+ */
+//Not using strict: uneven strict support in browsers, #392, and causes
+//problems with requirejs.exec()/transpiler plugins that may not be strict.
+/*jslint regexp: true, nomen: true, sloppy: true */
+
+========================================================================
+
+Library #11: /public/scripts/lib/punycode.js
+/*! http://mths.be/punycode by @mathias */
+
+========================================================================
+
+Library #12: /public/scripts/lib/plugins/spin.js
+/**
+ * Copyright (c) 2011-2013 Felix Gnass
+ * Licensed under the MIT license
+ */
+
+========================================================================
+
+Library #13: /public/scripts/lib/plugins/kube.tabs.js
+/*
+ kube.tabs.js v1.0.1
+ Copyright 2013 Imperavi, Inc.
+ */
+
+========================================================================
+
+Library #14: /public/scripts/lib/plugins/jquery.toastmessage.js
+/*
+ * Copyright 2010 akquinet
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ *  This JQuery Plugin will help you in showing some nice Toast-Message like notification messages. The behavior is
+ *  similar to the android Toast class.
+ *  You have 4 different toast types you can show. Each type comes with its own icon and colored border. The types are:
+ *  - notice
+ *  - success
+ *  - warning
+ *  - error
+ *
+ *  The following methods will display a toast message:
+ *
+ *   $().toastmessage('showNoticeToast', 'some message here');
+ *   $().toastmessage('showSuccessToast', "some message here");
+ *   $().toastmessage('showWarningToast', "some message here");
+ *   $().toastmessage('showErrorToast', "some message here");
+ *
+ *   // user configured toastmessage:
+ *   $().toastmessage('showToast', {
+ *      text     : 'Hello World',
+ *      sticky   : true,
+ *      position : 'top-right',
+ *      type     : 'success',
+ *      close    : function () {console.log("toast is closed ...");}
+ *   });
+ *
+ *   To see some more examples please have a look into the Tests in src/test/javascript/ToastmessageTest.js
+ *
+ *   For further style configuration please see corresponding css file: jquery-toastmessage.css
+ *
+ *   This plugin is based on the jquery-notice (http://sandbox.timbenniks.com/projects/jquery-notice/)
+ *   but is enhanced in several ways:
+ *
+ *   configurable positioning
+ *   convenience methods for different message types
+ *   callback functionality when closing the toast
+ *   included some nice free icons
+ *   reimplemented to follow jquery plugin good practices rules
+ *
+ *   Author: Daniel Bremer-Tonn
+**/
+
+========================================================================
+
+Library #15: /public/scripts/lib/plugins/jquery.spin.js
+/**
+ * Copyright (c) 2011-2013 Felix Gnass
+ * Licensed under the MIT license
+ *
+ */
+/*
+Basic Usage:
+============
+$('#el').spin(); // Creates a default Spinner using the text color of #el.
+$('#el').spin({ ... }); // Creates a Spinner using the provided options.
+$('#el').spin(false); // Stops and removes the spinner.
+Using Presets:
+==============
+$('#el').spin('small'); // Creates a 'small' Spinner using the text color of #el.
+$('#el').spin('large', '#fff'); // Creates a 'large' white Spinner.
+Adding a custom preset:
+=======================
+$.fn.spin.presets.flower = {
+  lines: 9
+  length: 10
+  width: 20
+  radius: 0
+}
+$('#el').spin('flower', 'red');
+Overlay
+=======
+The plugin has been extended to position an overlay element over the jQuery object on which it is invoked.
+The overlay functionality uses absolute positioning and assumes that the jQuery object
+to which the spinner is being added is itself relatively or absolutely positioned.
+*/
+
+========================================================================
+
+Library #16: /public/scripts/lib/plugins/jquery.simplemodal-1.4.4.js
+/*
+ * SimpleModal 1.4.4 - jQuery Plugin
+ * http://simplemodal.com/
+ * Copyright (c) 2013 Eric Martin
+ * Licensed under MIT and GPL
+ * Date: Sun, Jan 20 2013 15:58:56 -0800
+ */
+/**
+ * SimpleModal is a lightweight jQuery plugin that provides a simple
+ * interface to create a modal dialog.
+ *
+ * The goal of SimpleModal is to provide developers with a cross-browser
+ * overlay and container that will be populated with data provided to
+ * SimpleModal.
+ *
+ * There are two ways to call SimpleModal:
+ * 1) As a chained function on a jQuery object, like $('#myDiv').modal();.
+ * This call would place the DOM object, #myDiv, inside a modal dialog.
+ * Chaining requires a jQuery object. An optional options object can be
+ * passed as a parameter.
+ *
+ * @example $('<div>my data</div>').modal({options});
+ * @example $('#myDiv').modal({options});
+ * @example jQueryObject.modal({options});
+ *
+ * 2) As a stand-alone function, like $.modal(data). The data parameter
+ * is required and an optional options object can be passed as a second
+ * parameter. This method provides more flexibility in the types of data
+ * that are allowed. The data could be a DOM object, a jQuery object, HTML
+ * or a string.
+ *
+ * @example $.modal('<div>my data</div>', {options});
+ * @example $.modal('my data', {options});
+ * @example $.modal($('#myDiv'), {options});
+ * @example $.modal(jQueryObject, {options});
+ * @example $.modal(document.getElementById('myDiv'), {options});
+ *
+ * A SimpleModal call can contain multiple elements, but only one modal
+ * dialog can be created at a time. Which means that all of the matched
+ * elements will be displayed within the modal container.
+ *
+ * SimpleModal internally sets the CSS needed to display the modal dialog
+ * properly in all browsers, yet provides the developer with the flexibility
+ * to easily control the look and feel. The styling for SimpleModal can be
+ * done through external stylesheets, or through SimpleModal, using the
+ * overlayCss, containerCss, and dataCss options.
+ *
+ * SimpleModal has been tested in the following browsers:
+ * - IE 6+
+ * - Firefox 2+
+ * - Opera 9+
+ * - Safari 3+
+ * - Chrome 1+
+ *
+ * @name SimpleModal
+ * @type jQuery
+ * @requires jQuery v1.3
+ * @cat Plugins/Windows and Overlays
+ * @author Eric Martin (http://ericmmartin.com)
+ * @version 1.4.4
+ */
+
+========================================================================
+
+Library #17: /public/scripts/lib/plugins/jquery.contextmenu.js
+/* contextmenu - jQuery plugin
+ * http://www.smartango.com/articles/jquery-context-menu
+ * Copyright (c) 2010 Daniele Cruciani
+ * Dual licensed under MIT and GPL licenses
+ */
+
+========================================================================
+
+Library #18: /public/scripts/lib/plugins/jquery-equalheights.js
+/*--------------------------------------------------------------------
+	Resize Page Elements
+	• looks for all elements of a given classname and resizes to max found height
+--------------------------------------------------------------------*/
+
+========================================================================
+
+Library #19: /public/scripts/lib/plugins/colorpicker.js
+/**
+ *
+ * Color picker
+ * Author: Stefan Petre www.eyecon.ro
+ * 
+ * Dual licensed under the MIT and GPL licenses
+ * 
+ */
+//define(['jquery'],function(jQuery){
+
+========================================================================
+
+Library #20: /public/scripts/lib/pace.min.js
+/*! pace 0.4.1 */
+
+========================================================================
+
+Library #21: /public/scripts/lib/modernizr-latest.js
+/*!
+ * Modernizr v2.6.2
+ * www.modernizr.com
+ *
+ * Copyright (c) Faruk Ates, Paul Irish, Alex Sexton
+ * Available under the BSD and MIT licenses: www.modernizr.com/license/
+ */
+/*
+ * Modernizr tests which native CSS3 and HTML5 features are available in
+ * the current UA and makes the results available to you in two ways:
+ * as properties on a global Modernizr object, and as classes on the
+ * <html> element. This information allows you to progressively enhance
+ * your pages with a granular level of control over the experience.
+ *
+ * Modernizr has an optional (not included) conditional resource loader
+ * called Modernizr.load(), based on Yepnope.js (yepnopejs.com).
+ * To get a build that includes Modernizr.load(), as well as choosing
+ * which tests to include, go to www.modernizr.com/download/
+ *
+ * Authors        Faruk Ates, Paul Irish, Alex Sexton
+ * Contributors   Ryan Seddon, Ben Alman
+ */
+
+========================================================================
+
+Library #22: /public/scripts/lib/mocha.js
+WARNING: No comments found! 
+
+========================================================================
+
+Library #23: /public/scripts/lib/jsonpath-0.8.0.js
+/* JSONPath 0.8.0 - XPath for JSON
+ *
+ * Copyright (c) 2007 Stefan Goessner (goessner.net)
+ * Licensed under the MIT (MIT-LICENSE.txt) licence.
+ */
+
+========================================================================
+
+Library #24: /public/scripts/lib/jquery-1.8.3.js
+/*!
+ * jQuery JavaScript Library v1.8.3
+ * http://jquery.com/
+ *
+ * Includes Sizzle.js
+ * http://sizzlejs.com/
+ *
+ * Copyright 2012 jQuery Foundation and other contributors
+ * Released under the MIT license
+ * http://jquery.org/license
+ *
+ * Date: Tue Nov 13 2012 08:20:33 GMT-0500 (Eastern Standard Time)
+ */
+
+========================================================================
+
+Library #25: /public/scripts/lib/i18next.amd-1.6.0.js
+// i18next, v1.6.0
+// Copyright (c)2013 Jan Mühlemann (jamuhl).
+// Distributed under MIT license
+// http://i18next.com
+
+========================================================================
+
+Library #26: /public/scripts/lib/easyXDM.debug.js
+/**
+ * easyXDM
+ * http://easyxdm.net/
+ * Copyright(c) 2009-2011, Øyvind Sean Kinsey, oyvind@kinsey.no.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+========================================================================
+
+Library #27: /public/scripts/lib/chai.js
+WARNING: No comments found! 
+
+========================================================================
+
+Library #28: /public/scripts/lib/bootstrap.min.js
+/*!
+ * Bootstrap v3.0.0
+ *
+ * Copyright 2013 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ */
+
+========================================================================
+
+Library #29: /public/scripts/lib/backbone.marionette.js
+ // Backbone.Marionette, v1.0.0-rc6
+ // Copyright (c)2013 Derick Bailey, Muted Solutions, LLC.
+ // Distributed under MIT license
+ // http://github.com/marionettejs/backbone.marionette
+/*!
+ * Includes BabySitter
+ * https://github.com/marionettejs/backbone.babysitter/
+ *
+ * Includes Wreqr
+ * https://github.com/marionettejs/backbone.wreqr/
+ */
+// Backbone.BabySitter, v0.0.4
+// Copyright (c)2012 Derick Bailey, Muted Solutions, LLC.
+// Distributed under MIT license
+// http://github.com/marionettejs/backbone.babysitter
+// Backbone.ChildViewContainer
+// ---------------------------
+//
+// Provide a container to store, retrieve and
+// shut down child views.
+
+========================================================================
+
+Library #30: /public/scripts/lib/backbone.js
+// Backbone.js
+// ===========
+// > (c) 2010-2012 Jeremy Ashkenas, DocumentCloud Inc.
+// > Backbone may be freely distributed under the MIT license.
+// > For all details and documentation: http://backbonejs.org
+// Initial Setup
+// -------------
+
+========================================================================
+
+Library #31: /public/scripts/lib/URI.js
+/*!
+ * URI.js - Mutating URLs
+ *
+ * Version: 1.8.3
+ *
+ * Author: Rodney Rehm
+ * Web: http://medialize.github.com/URI.js/
+ *
+ * Licensed under
+ *   MIT License http://www.opensource.org/licenses/mit-license
+ *   GPL v3 http://opensource.org/licenses/GPL-3.0
+ *
+ */
+
+========================================================================
+
+Library #32: /public/scripts/lib/SecondLevelDomains.js
+/*!
+ * URI.js - Mutating URLs
+ * Second Level Domain (SLD) Support
+ *
+ * Version: 1.8.3
+ *
+ * Author: Rodney Rehm
+ * Web: http://medialize.github.com/URI.js/
+ *
+ * Licensed under
+ *   MIT License http://www.opensource.org/licenses/mit-license
+ *   GPL v3 http://opensource.org/licenses/GPL-3.0
+ *
+ */
+
+========================================================================
+
+Library #33: /public/scripts/lib/IPv6.js
+/*!
+ * URI.js - Mutating URLs
+ * IPv6 Support
+ *
+ * Version: 1.8.3
+ *
+ * Author: Rodney Rehm
+ * Web: http://medialize.github.com/URI.js/
+ *
+ * Licensed under
+ *   MIT License http://www.opensource.org/licenses/mit-license
+ *   GPL v3 http://opensource.org/licenses/GPL-3.0
+ *
+ */
+
+========================================================================
+
