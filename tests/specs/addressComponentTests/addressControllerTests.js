@@ -3,18 +3,23 @@
  * Functional Storefront Unit Test - Address Component Controller
  */
 define(function (require) {
+  'use strict';
+
+  var ep = require('ep');
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
   var Backbone = require('backbone');
+
   var EventTestFactory = require('testfactory.event');
   var EventTestHelpers = require('testhelpers.event');
   var DefaultViewTestHelper = require('testhelpers.defaultview');
-  var ep = require('ep');
+  var controllerTestFactory = require('testfactory.controller');
 
   describe('Address Component: Controller', function () {
     var addressController = require('address');
     var addressView = require('address.views');
     var addressTemplate = require('text!modules/base/components/address/base.component.address.template.html');
+    var dataJSON = require('text!/tests/data/address.json');
 
     describe('DefaultCreateAddressView', function () {
       describe('when a user is logged in', function() {
@@ -28,6 +33,7 @@ define(function (require) {
           addressView.DefaultAddressFormView = DefaultViewTestHelper.testDouble;
           this.view = addressController.DefaultCreateAddressView();
         });
+
         after(function() {
           $("#Fixtures").empty();
           ep.app.isUserLoggedIn.restore();
@@ -70,6 +76,72 @@ define(function (require) {
             module: 'auth',
             view: 'LoginFormView'
           });
+        });
+      });
+    });
+
+    describe('DefaultEditAddressView', function () {
+      before(function (done) {
+        // Append templates to the DOM
+        $("#Fixtures").append(addressTemplate);
+        $("#Fixtures").append('<div id="testingRegion"></div>'); // append an region to render tested view into
+
+        sinon.spy(Backbone.Model.prototype, 'fetch');
+
+        // Create a sinon fakeServer object
+        var fakeGetLink = "/integrator/address/fakeUrl";
+        var fakeAddressResponse = JSON.parse(_.clone(dataJSON)).address.response;
+        this.server = controllerTestFactory.getFakeServer(fakeGetLink, '', fakeAddressResponse);
+
+        addressView.DefaultAddressFormView = DefaultViewTestHelper.testDouble;
+        this.view = addressController.DefaultEditAddressView(fakeGetLink);
+
+        // Short delay to allow the fake AJAX request to complete
+        setTimeout(done, 200);
+      });
+
+      after(function() {
+        $("#Fixtures").empty();
+        Backbone.Model.prototype.fetch.restore();
+        this.server.restore();
+      });
+
+      it('returns an instance of DefaultEditAddressLayout', function () {
+        expect(this.view).to.be.instanceOf(addressView.DefaultEditAddressLayout);
+      });
+
+      it('Model should have fetched info from server once', function () {
+        expect(Backbone.Model.prototype.fetch).to.be.calledOnce;
+      });
+
+      it('renders childView: DefaultAddressFormView', function () {
+        this.view.render().trigger('show');
+        expect(DefaultViewTestHelper.wasRendered()).to.be.true;
+      });
+    });
+
+    describe('DefaultAddressFormView', function () {
+
+      it('returns an instance of DefaultAddressFormView', function () {
+        var view = addressController.testVariables.defaultAddressFormView();
+        expect(view).to.be.instanceOf(addressView.DefaultAddressFormView);
+      });
+
+      describe('given a model', function () {
+        before(function() {
+          $("#Fixtures").append(addressTemplate); // append templates
+
+          addressView.DefaultAddressFormView = DefaultViewTestHelper.testDouble;
+          this.view = addressController.testVariables.defaultAddressFormView(new Backbone.Model());
+        });
+
+        after(function() {
+          $("#Fixtures").empty();
+        });
+
+        it('passes the model to DefaultAddressFormView', function() {
+          this.view.render();
+          expect(DefaultViewTestHelper.hasAModel()).to.be.true;
         });
       });
     });
@@ -119,58 +191,6 @@ define(function (require) {
 
         it("by logging the error in console", function () {
           expect(this.errorlogger).to.be.calledWithMatch('failed to load Address View');
-        });
-      });
-    });
-
-    describe('responds to event: address.loadEditAddressViewRequest', function () {
-      before(function () {
-        sinon.spy(EventBus, 'trigger');
-      });
-
-      after(function () {
-        EventBus.trigger.restore();
-      });
-
-      it("registers correct event listener", function () {
-        expect(EventBus._events['address.loadEditAddressViewRequest']).to.be.length(1);
-      });
-
-      describe('handles valid data', function () {
-        before(function () {
-          $("#Fixtures").append(addressTemplate); // append templates
-          $("#Fixtures").append('<div id="testingRegion"></div>'); // append an region to render tested view into
-
-          EventBus.trigger('address.loadEditAddressViewRequest', {
-            region: new Marionette.Region({el: '#testingRegion'}),
-            model: new Backbone.Model()
-          });
-        });
-
-        after(function () {
-          $('#Fixtures').empty();
-        });
-
-        it("by rendering DefaultEditAddressLayout into provided region", function () {
-          // Renders an address container from View.DefaultAddressFormView
-          expect($('#testingRegion [data-region="componentAddressFormRegion"] > div')).to.be.length(1);
-          // Renders the edit address button from View.DefaultEditAddressLayout
-          expect($('#testingRegion button[ data-el-label="addressForm.edit"]')).to.be.length(1);
-        });
-      });
-
-      describe('handles invalid data', function () {
-        before(function () {
-          this.errorlogger = sinon.stub(ep.logger, 'error');
-          EventBus.trigger('address.loadEditAddressViewRequest', undefined);
-        });
-
-        after(function () {
-          ep.logger.error.restore();
-        });
-
-        it("by logging the error in console", function () {
-          expect(this.errorlogger).to.be.calledWithMatch('Failed to load edit address view');
         });
       });
     });

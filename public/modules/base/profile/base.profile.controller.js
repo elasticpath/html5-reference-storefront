@@ -84,6 +84,7 @@ define(function (require) {
         return defaultLayout;
       }
       else {
+        // checkin centralize reference
         EventBus.trigger('layout.loadRegionContentRequest', {
           region: 'appModalRegion',
           module: 'auth',
@@ -91,33 +92,6 @@ define(function (require) {
         });
       }
 
-    };
-
-    /**
-     * Attempts to fetch an address model based on a href link that identifies an individual address in Cortex.
-     * If successful, fires a mediator event to render the DefaultEditAddressLayout layout of the address component
-     * which renders the edit address form.
-     * @param href A href used to identify the address to be edited in Cortex
-     */
-    var editProfileAddressView = function(href) {
-      // Get the address model from Cortex that corresponds to the href link
-      var address = new Backbone.Model();
-      address.fetch({
-        url: ep.ui.decodeUri(href),
-        success: function(response) {
-          // Parse the address raw JSON response into a Cortex address object
-          var addressModel = profileParser.parseAddress(response.toJSON());
-
-          Mediator.fire('mediator.loadEditAddressViewRequest', {
-            returnModule: 'profile',
-            model: new Backbone.Model(addressModel),
-            region: ep.app.appMainRegion
-          });
-        },
-        error: function(response) {
-          ep.logger.error('Error getting address model: ' + JSON.stringify(response));
-        }
-      });
     };
 
     /* ********* EVENT LISTENERS ************ */
@@ -133,7 +107,10 @@ define(function (require) {
      * Handler for the edit address button clicked signal, which triggers an edit address request.
      */
     EventBus.on('profile.editAddressBtnClicked', function (href) {
-      EventBus.trigger('profile.editAddressRequest', href);
+      Mediator.fire('mediator.editAddressRequest', {
+        returnModule: 'profile',
+        href: href
+      });
     });
 
     /**
@@ -144,18 +121,11 @@ define(function (require) {
     });
 
     /**
-     * Handler for the edit profile address request event that navigates to the corresponding route.
-     */
-    EventBus.on('profile.editAddressRequest', function(href) {
-      var editAddressLink = ep.app.config.routes.editAddress + '/' + ep.ui.encodeUri(href);
-      ep.router.navigate(editAddressLink, true);
-    });
-
-    /**
      * Uses a modal window to confirm the delete action for a profile address.
      * @param href A href used to identify the address to be deleted in Cortex
      */
     EventBus.on('profile.deleteAddressConfirm', function (href) {
+      // checkIn centralize reference
       EventBus.trigger('layout.loadRegionContentRequest', {
         region: 'appModalRegion',
         module: 'profile',
@@ -234,7 +204,6 @@ define(function (require) {
 
     return {
       DefaultView: defaultView,
-      EditProfileAddressView: editProfileAddressView,
       ProfileDeleteAddressConfirmationView: function(options) {
         return new View.ProfileDeleteAddressConfirmationView(options);
       }

@@ -68,8 +68,9 @@ requirejs.config({
 
     'address'         : 'modules/base/components/address/base.component.address.controller',
     'address.views'   : 'modules/base/components/address/base.component.address.views',
-    'payment'       : 'modules/base/components/payment/base.component.payment.controller',
-    'payment.views' : 'modules/base/components/payment/base.component.payment.views',
+    'address.models'  : 'modules/base/components/address/base.component.address.models',
+    'payment'         : 'modules/base/components/payment/base.component.payment.controller',
+    'payment.views'   : 'modules/base/components/payment/base.component.payment.views',
 
     'chai'            : '/tests/libs/chai',
     'mocha.common'    : '/tests/libs/mocha.common',

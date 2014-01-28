@@ -10,12 +10,12 @@ define(function (require) {
   return {
     /**
      * Creates a sinon.fakeServer for use with controller tests where a fetch from Cortex needs to be simulated.
+     * @param link The URL to which the fake server should respond
      * @param zoom A string of zoom parameters to append to the link
      * @param response The fake data response that the server should return
-     * @param link The URL to which the fake server should respond
      * @returns {sinon.fakeServer} A fake server object
      */
-    getFakeServer: function (zoom, response, link) {
+    getFakeServer: function (link, zoom, response) {
       var fakeGetLink = link || "/integrator/module/fakeUrl";
       var fakeServer = sinon.fakeServer.create();
 

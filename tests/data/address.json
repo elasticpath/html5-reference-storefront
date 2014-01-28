@@ -1,0 +1,42 @@
+{
+  "address": {
+    "zoom" : "",
+    "retrievedOn" : "Jan 15, 2014",
+    "retrievedCriteria": "any address",
+    "response" : {
+      "links": [
+        {
+          "type": "application/vnd.elasticpath.profile",
+          "rel": "profile",
+          "href": "http://54.213.180.164:13080/integrator/profiles/telcooperative/default",
+          "uri": "/profiles/telcooperative/default"
+        },
+        {
+          "type": "application/vnd.elasticpath.links",
+          "rel": "list",
+          "href": "http://54.213.180.164:13080/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses",
+          "uri": "/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses"
+        }
+      ],
+      "self": {
+        "type": "application/vnd.elasticpath.address",
+        "uri": "/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlwerdknrgsw2cbgbrwkqs2hbjwesc2gfau2ssmobltc5sznvlgymthifvu26thgnhui2zsj5kgw5conjixst2dga2e22sci5gfkrjtkjvvs5conjetkt2fjzce2rcwi5hdasjt",
+        "href": "http://54.213.180.164:13080/integrator/profiles/telcooperative/m5yxissunrjgovjqnrefsrluizlweqtthbmwomcuo5hdcvtho54givtmpi3xoukuobltc5sznvlgymthifvu42teizgwuz3xkfku25cogbktittjgb5e222fpjgfivjvkfves5conjcxoutllf4vcmcfpjhukusf/addresses/m5yxissunrjgovjqnrefsrluizlwerdknrgsw2cbgbrwkqs2hbjwesc2gfau2ssmobltc5sznvlgymthifvu26thgnhui2zsj5kgw5conjixst2dga2e22sci5gfkrjtkjvvs5conjetkt2fjzce2rcwi5hdasjt",
+        "max-age": 0
+      },
+      "address": {
+        "country-name": "CA",
+        "locality": "Vancouver",
+        "postal-code": "V8C1N1",
+        "region": "BC",
+        "street-address": "5833 Movaat St."
+      },
+      "name": {
+        "family-name": "Harris",
+        "given-name": "Oliver"
+      }
+    }
+  },
+  "countries": {},
+  "regions": {}
+}

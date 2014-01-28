@@ -1,7 +1,8 @@
 /**
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  */
-define(['ep','eventbus','router'],function(ep, EventBus, Router){
+define(function(require){
+  var EventBus = require('eventbus');
 
   var mediatorObj = {
     'mediator.loadRegionContent': function(controllerName) {
@@ -74,19 +75,6 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         EventBus.trigger('address.loadAddressesViewRequest', addressObj);
       });
     },
-    'mediator.loadEditAddressViewRequest':function(addressObj){
-      require(['address', 'ep'],function(address, ep){
-        if (addressObj.returnModule) {
-          ep.io.sessionStore.setItem('addressFormReturnTo', addressObj.returnModule);
-          delete(addressObj.returnModule);
-        }
-        EventBus.trigger('address.loadEditAddressViewRequest',addressObj);
-
-        var addressModelHref = addressObj.model.get('href');
-        var editAddressLink = ep.app.config.routes.editAddress + '/' + ep.ui.encodeUri(addressModelHref);
-        ep.router.navigate(editAddressLink);
-      });
-    },
     'mediator.loadPaymentMethodViewRequest':function(paymentObj) {
       require(['payment'], function(mod) {
         EventBus.trigger('payment.loadPaymentMethodViewRequest', paymentObj.region, paymentObj.model);
@@ -110,6 +98,19 @@ define(['ep','eventbus','router'],function(ep, EventBus, Router){
         }
         else {
           ep.logger.error('mediator.addNewAddressRequest was called with invalid moduleName: ' + moduleName);
+        }
+      });
+    },
+    'mediator.editAddressRequest':function(arg){
+      require(['ep'],function(ep){
+        if (arg.returnModule) {
+          ep.io.sessionStore.setItem('addressFormReturnTo', arg.returnModule);
+
+          var editAddressLink = ep.app.config.routes.editAddress + '/' + ep.ui.encodeUri(arg.href);
+          ep.router.navigate(editAddressLink, true);
+        }
+        else {
+          ep.logger.error('mediator.editAddressRequest was called with invalid arguments: ' + JSON.stringify(arg));
         }
       });
     },

@@ -8,10 +8,15 @@ define(function (require) {
   var Marionette = require('marionette');
 
   var renderTestFlag = false;
+  var modelTestFlag = false;
 
   var testDouble = Marionette.ItemView.extend({
     render: function () {
       renderTestFlag = true;
+
+      if (this.model) {
+        modelTestFlag = true;
+      }
     }
   });
 
@@ -19,8 +24,13 @@ define(function (require) {
     return renderTestFlag;
   }
 
+  function hasAModel() {
+    return modelTestFlag;
+  }
+
   return {
     testDouble: testDouble,
-    wasRendered: wasRendered
+    wasRendered: wasRendered,
+    hasAModel: hasAModel
   };
 });

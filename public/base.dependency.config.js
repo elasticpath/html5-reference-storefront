@@ -69,6 +69,7 @@ var config = {
 
       'address'       : 'modules/base/components/address/base.component.address.controller',
       'address.views' : 'modules/base/components/address/base.component.address.views',
+      'address.models': 'modules/base/components/address/base.component.address.models',
       'payment'       : 'modules/base/components/payment/base.component.payment.controller',
       'payment.views' : 'modules/base/components/payment/base.component.payment.views'
     },

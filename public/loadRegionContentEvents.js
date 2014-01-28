@@ -58,8 +58,8 @@ define(function(require) {
     editaddress: function(href) {
       EventBus.trigger('layout.loadRegionContentRequest',{
         region: 'appMainRegion',
-        module: 'profile',
-        view: 'EditProfileAddressView',
+        module: 'address',
+        view: 'DefaultEditAddressView',
         data: href
       });
     },

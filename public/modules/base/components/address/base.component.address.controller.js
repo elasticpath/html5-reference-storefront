@@ -11,8 +11,10 @@ define(function (require) {
   var i18n = require('i18n');
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
+  var Backbone = require('backbone');
 
-  var View = require('address.views');
+  var Views = require('address.views');
+  var Models = require('address.models');
   var template = require('text!modules/base/components/address/base.component.address.template.html');
 
   $('#TemplateContainer').append(template);
@@ -21,24 +23,57 @@ define(function (require) {
 
   /**
    * Instantiate an DefaultCreateAddressLayout and load views into corresponding regions on DefaultCreateAddressLayout.
-   * @returns {View.DefaultCreateAddressLayout} fully rendered DefaultCreateAddressLayout
+   * @returns {Views.DefaultCreateAddressLayout} fully rendered DefaultCreateAddressLayout
    */
   var defaultCreateAddressView = function () {
     // Ensure the user is authenticated before rendering the address form
     if (ep.app.isUserLoggedIn()) {
-      var addressLayout = new View.DefaultCreateAddressLayout();
-      var addressFormView = new View.DefaultAddressFormView();
+      var addressLayout = new Views.DefaultCreateAddressLayout();
+
       addressLayout.on('show', function () {
-        addressLayout.addressFormRegion.show(addressFormView);
+        addressLayout.addressFormRegion.show(defaultAddressFormView());
       });
       return addressLayout;
     } else {
+      // CheckIn centralize this reference: loginModal
       EventBus.trigger('layout.loadRegionContentRequest', {
         region: 'appModalRegion',
         module: 'auth',
         view: 'LoginFormView'
       });
     }
+  };
+
+  /**
+   * Instantiate an DefaultEditAddressLayout and load views into corresponding regions on DefaultEditAddressLayout.
+   * @returns {Views.DefaultEditAddressLayout} fully rendered DefaultEditAddressLayout
+   */
+  var defaultEditAddressView = function(href) {
+    var addressLayout = new Views.DefaultEditAddressLayout();
+    var addressModel = new Models.AddressModel();
+
+    addressModel.fetch({
+      url: ep.ui.decodeUri(href),
+      success: function(response) {
+        addressLayout.addressFormRegion.show(defaultAddressFormView(response));
+      }
+    });
+
+    return addressLayout;
+  };
+
+  var defaultAddressFormView = function(addressModel) {
+   var addressFormView = new Views.DefaultAddressFormView();
+    if (addressModel) {
+      addressFormView.model = addressModel;
+    }
+
+    // expose countryCollection, regionCollection
+    // fetch country collection
+    // onSuccess: show countryCompositeView, regionCompositeView(empty collection)
+    //
+
+    return addressFormView;
   };
 
   /* *************** Event Listeners Functions *************** */
@@ -48,32 +83,16 @@ define(function (require) {
    */
   function loadAddressView(addressObj) {
     try {
-      var addressView = new View.DefaultAddressItemView({
+      var addressView = new Views.DefaultAddressItemView({
         model: addressObj.model
       });
 
       addressObj.region.show(addressView);
     } catch (error) {
-      ep.logger.error('failed to load Address View: ' + error.message);
+      ep.logger.error('failed to load Address Views: ' + error.message);
     }
   }
 
-  function loadEditAddressView(addressObj) {
-    try {
-      var addressLayout = new View.DefaultEditAddressLayout();
-      var addressFormView = new View.DefaultAddressFormView({
-          model: addressObj.model
-      });
-
-      addressLayout.on('show', function () {
-        addressLayout.addressFormRegion.show(addressFormView);
-      });
-
-      addressObj.region.show(addressLayout);
-    } catch (error) {
-      ep.logger.error('Failed to load edit address view: ' + error.message);
-    }
-  }
 
   /**
    * Request an empty address form & the link to POST or PUT address form to.
@@ -101,7 +120,7 @@ define(function (require) {
    * @param submitAddressFormLink to POST the request to.
    */
   function createAddressRequest(type, submitAddressFormLink) {
-    var form = View.getAddressFormValues();
+    var form = Views.getAddressFormValues();
 
     var ajaxModel = new ep.io.defaultAjaxModel({
       type: type,
@@ -157,7 +176,7 @@ define(function (require) {
    * will display generic error message.
    */
   EventBus.on('address.submitAddressFormFailed', function () {
-    View.displayAddressFormErrorMsg(i18n.t('addressForm.errorMsg.generalSaveAddressFailedErrMsg'));
+    Views.displayAddressFormErrorMsg(i18n.t('addressForm.errorMsg.generalSaveAddressFailedErrMsg'));
   });
 
   /**
@@ -167,8 +186,8 @@ define(function (require) {
    */
   EventBus.on('address.submitAddressFormFailed.invalidFields', function (errMsg) {
     // in the future, also highlight the invalid input box
-    var translatedMsg = View.translateErrorMessage(errMsg);
-    View.displayAddressFormErrorMsg(translatedMsg);
+    var translatedMsg = Views.translateErrorMessage(errMsg);
+    Views.displayAddressFormErrorMsg(translatedMsg);
   });
 
   /**
@@ -194,13 +213,11 @@ define(function (require) {
    */
   EventBus.on('address.loadAddressesViewRequest', loadAddressView);
 
-  /**
-   * Listening to the edit address view request,
-   * will load the edit address view in appMainRegion.
-   */
- EventBus.on('address.loadEditAddressViewRequest', loadEditAddressView);
-
   return{
-    DefaultCreateAddressView: defaultCreateAddressView
+    DefaultCreateAddressView: defaultCreateAddressView,
+    DefaultEditAddressView: defaultEditAddressView,
+    testVariables: {
+      defaultAddressFormView: defaultAddressFormView
+    }
   };
 });
