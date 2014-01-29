@@ -1,0 +1,17 @@
+{
+  "name": "grunt-license-reporter",
+  "description": "A plugin to extract header comments from external libraries.",
+  "version": "0.1.0",
+  "homepage": "",
+  "author": {
+    "name": "Jamie Howells",
+    "email": "jamie.howells@elasticpath.com"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "grunt": "*"
+  },
+  "private": true
+}
