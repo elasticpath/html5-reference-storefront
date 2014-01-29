@@ -26,17 +26,6 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
     });
 
     /**
-     * Default Address Form ItemView
-     * will render a default address form
-     * @type Marionette.ItemView
-     */
-    var defaultAddressFormView = Marionette.ItemView.extend({
-      template: '#DefaultAddressFormTemplate',
-      className: 'address-form-container',
-      templateHelpers: viewHelpers
-    });
-
-    /**
      * Default Create Address Layout
      * wraps a default address form with elements specific to create address
      * @type Marionette.Layout
@@ -77,11 +66,11 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       events: {
         'click [data-el-label="addressForm.edit"]': function (event) {
           event.preventDefault();
-          var addressHref = this.addressFormRegion.currentView.model.get('href');
+          var addressHref = this.model.get('href');
           if (addressHref) {
             EventBus.trigger('address.editAddressBtnClicked', addressHref);
           } else {
-            EventBus.trigger('address.editAddressBtnClicked');
+            ep.logger.warn('unable to retrieve url to post address form');
           }
         },
         'click [data-el-label="addressForm.cancel"]': function (event) {
@@ -92,9 +81,120 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
     });
 
     /**
+     * Default Address Form ItemView
+     * will render a default address form
+     * @type Marionette.ItemView
+     */
+    var defaultAddressFormView = Marionette.Layout.extend({
+      template: '#DefaultAddressFormTemplate',
+      className: 'address-form-container',
+      regions: {
+        countriesRegion: '[data-region="addressCountryRegion"]',
+        regionsRegion: '[data-region="addressRegionsRegion"]'
+      },
+      templateHelpers: viewHelpers
+    });
+
+    var defaultCountryItemView = Marionette.ItemView.extend({
+      template: '#DefaultAddressCountryOptionTemplate',
+      templateHelpers: viewHelpers,
+      tagName: 'option',
+      onRender: function() {
+        // set dynamic attribute value + selected for wrapper tag
+        $(this.el).attr('value', this.model.get('name'));
+        if (this.model.get('selected')) {
+          $(this.el).attr('selected', true);
+        }
+      }
+    });
+
+    var defaultCountriesView = Marionette.CompositeView.extend({
+      template: '#DefaultAddressCountriesTemplate',
+      itemView: defaultCountryItemView,
+      templateHelpers: viewHelpers,
+      itemViewContainer: 'select',
+      collectionEvents: {
+        'reset': 'render',
+        'change': 'render'
+      },
+      events: {
+        'change #Country': function(event) {
+          var regionsLink = '';
+          var country = $(event.target).val();
+          var selectedCountry = this.collection.where({name: country})[0];
+          if (selectedCountry) {
+            regionsLink = selectedCountry.get('regionLink');
+          }
+          else {
+            ep.logger.warn('No country with given countryCode (' + country + ') was found while retrieving regionLink');
+          }
+          EventBus.trigger('address.countrySelectionChanged', country, regionsLink);
+        }
+      }
+    });
+
+    var defaultRegionItemView = Marionette.ItemView.extend({
+      template: '#DefaultAddressRegionOptionTemplate',
+      templateHelpers: viewHelpers,
+      tagName: 'option',
+      onRender: function() {
+        // set dynamic attribute value + selected for wrapper tag
+        $(this.el).attr('value', this.model.get('name'));
+        if (this.model.get('selected')) {
+          $(this.el).attr('selected', true);
+        }
+      }
+    });
+
+    var defaultSelectionNoneOptionView = Marionette.ItemView.extend({
+      template: '#DefaultAddressSelectNoneOptionTemplate',
+      templateHelpers: viewHelpers,
+      tagName: 'option',
+      attributes: {
+        'value': ''
+      }
+    });
+
+    var defaultRegionsView = Marionette.CompositeView.extend({
+      template: '#DefaultAddressRegionsTemplate',
+      emptyView: defaultSelectionNoneOptionView,
+      itemView: defaultRegionItemView,
+      templateHelpers: viewHelpers,
+      itemViewContainer: 'select',
+      collectionEvents: {
+        'reset': 'render',
+        'change': 'render'
+      },
+      ui: {
+        // A jQuery selector for the DOM element to which an activity indicator should be applied.
+        activityIndicatorEl: '.activity-indicator-loading-region'
+      },
+      onRender: function () {
+        // hide regions area if model.fetch returned an empty region array
+        // test collection == 1 because collection.parse will insert a blank option, increase collection.length by 1
+        // when page load with no country selected, when don't want to hide the whole region but show a dropDown with
+        // ---- option to show consistency. when no country is selected, no regionLink is provide, and
+        // so regions collection didn't fetch, collection.parse wasn't called, and thus collection.length = 0
+        if(this.collection.length === 1) {
+          $('[data-region="addressRegionsRegion"]').hide();
+        }
+        else {
+          $('[data-region="addressRegionsRegion"]').show();
+        }
+      },
+      events: {
+        'change #Region': function (event) {
+          var region = $(event.target).val();
+          EventBus.trigger('address.regionSelectionChanged', region);
+        }
+      }
+    });
+
+    /**
      * Get form values from from markup, and save it into a object corresponding to Cortex address form
      * @returns {*} a filled cortex address form object
      */
+    // CheckIn convert using model
     function getAddressFormValues() {
       return {
         "address": {
@@ -230,16 +330,25 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       return formattedMsg;
     }
 
+    var __test_only__ = {};
+    /* test-code */
+    __test_only__.formatMsgAsList = formatMsgAsList;
+    __test_only__.defaultCountryItemView = defaultCountryItemView;
+    __test_only__.defaultRegionItemView = defaultRegionItemView;
+    __test_only__.defaultSelectionNoneOptionView = defaultSelectionNoneOptionView;
+    /* end-test-code */
+
     return {
       DefaultAddressItemView: defaultAddressItemView,
-      DefaultAddressFormView: defaultAddressFormView,
       DefaultCreateAddressLayout: defaultCreateAddressLayout,
       DefaultEditAddressLayout: defaultEditAddressLayout,
+      DefaultAddressFormView: defaultAddressFormView,
+      DefaultCountriesView: defaultCountriesView,
+      DefaultRegionsView: defaultRegionsView,
+
       getAddressFormValues: getAddressFormValues,
       displayAddressFormErrorMsg: displayAddressFormErrorMsg,
       translateErrorMessage: translateErrorMessage,
-      testVariables: {
-        formatMsgAsList: formatMsgAsList
-      }
+      __test_only__: __test_only__
     };
   });

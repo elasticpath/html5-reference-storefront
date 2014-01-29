@@ -53,20 +53,8 @@
           <input id="City" name="City" class="form-control" type="text" value="<%= E.city %>">
         </div>
       </div>
-      <div class="form-group">
-        <label for="Region" data-el-label="addressForm.region" class="control-label address-form-label">
-          <span class="required-label">*</span> <%= E.getI18nLabel('addressForm.region') %></label>
-        <div class="address-form-input">
-          <input id="Region" name="Region" class="form-control" value="<%= E.region %>">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="Country" data-el-label="addressForm.country" class="control-label address-form-label">
-          <span class="required-label">*</span> <%= E.getI18nLabel('addressForm.country') %></label>
-        <div class="address-form-input">
-          <input id="Country" name="Country" class="form-control" value="<%= E.country %>">
-        </div>
-      </div>
+      <div data-region="addressRegionsRegion" class="form-group"> </div>
+      <div data-region="addressCountryRegion" class="form-group">  </div>
       <div class="form-group">
         <label for="PostalCode" data-el-label="addressForm.postalCode" class="control-label address-form-label">
           <span class="required-label">*</span> <%= E.getI18nLabel('addressForm.postalCode') %></label>
@@ -75,6 +63,40 @@
         </div>
       </div>
   </script>
+
+  <!-- Renders a select dropdown menu wrapper to display select country options -->
+  <script id="DefaultAddressCountriesTemplate" type="text/template">
+    <label for="Country" data-el-label="addressForm.country" class="control-label address-form-label">
+      <span class="required-label">*</span> <%= E.getI18nLabel('addressForm.country') %></label>
+    <div class="address-form-input">
+      <select id="Country" name="Country" class="form-control" >      </select>
+    </div>
+  </script>
+
+  <!--Renders 1 single country option, e.g. <option value="CA" selected >Canada</option> -->
+  <script id="DefaultAddressCountryOptionTemplate" type="text/template">
+    <%= E.displayName %>
+  </script>
+
+  <!-- Renders a select dropdown menu wrapper to display select region options -->
+  <script id="DefaultAddressRegionsTemplate" type="text/template">
+    <label for="Region" data-el-label="addressForm.region" class="control-label address-form-label">
+      <span class="required-label">*</span> <%= E.getI18nLabel('addressForm.region') %></label>
+    <div class="address-form-input activity-indicator-loading-region">
+      <select id="Region" name="Region" class="form-control" > </select>
+    </div>
+  </script>
+
+  <!--Renders 1 single region option, e.g. <option value="QC" selected >Quebec</option> -->
+  <script id="DefaultAddressRegionOptionTemplate" type="text/template">
+    <%= E.displayName %>
+  </script>
+
+  <!--Renders 1 single option <option value="" selected >----</option> to represent select nothing -->
+  <script id="DefaultAddressSelectNoneOptionTemplate" type="text/template">
+    ----
+  </script>
+
 
   <!-- Default Create Address Form Template -->
   <script id="DefaultCreateAddressTemplate" type="text/template">

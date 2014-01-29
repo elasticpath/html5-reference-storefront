@@ -272,11 +272,16 @@ define(function (require) {
      * By default, uses the spin.js (http://fgnass.github.io/spin.js/) library.
      * @param view A Marionette.View object
      */
-    ep.ui.startActivityIndicator = function(view) {
+    ep.ui.startActivityIndicator = function(view, option) {
+      if (!view) {
+        ep.logger.error('missing view to startActivityIndicator');
+        return;
+      }
+
       if (view.ui && view.ui.activityIndicatorEl) {
-        view.ui.activityIndicatorEl.spin('large');
+        view.ui.activityIndicatorEl.spin(option);
       } else {
-        view.$el.spin('large');
+        view.$el.spin(option);
       }
     };
 
@@ -288,6 +293,11 @@ define(function (require) {
      * @param view A Marionette.View object
      */
     ep.ui.stopActivityIndicator = function(view) {
+      if (!view) {
+        ep.logger.error('missing view to startActivityIndicator');
+        return;
+      }
+
       if (view.ui && view.ui.activityIndicatorEl) {
         view.ui.activityIndicatorEl.spin(false);
       } else {

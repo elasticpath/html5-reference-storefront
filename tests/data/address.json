@@ -101,5 +101,46 @@
     }
 
   },
-  "regions": {}
+  "regions": {
+    "zoom": "element",
+    "retrievedOn": "Jan 29, 2014",
+    "retrievedCriteria": "a few selected regions are enough",
+    "response": {
+      "_element": [
+        {
+          "links": [],
+          "self": {
+            "type": "application/vnd.elasticpath.geography.region",
+            "uri": "/geographies/campus/countries/inaq=/regions/jzkq=",
+            "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/geographies/campus/countries/inaq=/regions/jzkq=",
+            "max-age": 600
+          },
+          "display-name": "Nunavut",
+          "name": "NU"
+        },
+        {
+          "links": [],
+          "self": {
+            "type": "application/vnd.elasticpath.geography.region",
+            "uri": "/geographies/campus/countries/inaq=/regions/kfbq=",
+            "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/geographies/campus/countries/inaq=/regions/kfbq=",
+            "max-age": 600
+          },
+          "display-name": "Quebec",
+          "name": "QC"
+        },
+        {
+          "links": [],
+          "self": {
+            "type": "application/vnd.elasticpath.geography.region",
+            "uri": "/geographies/campus/countries/inaq=/regions/ifba=",
+            "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/geographies/campus/countries/inaq=/regions/ifba=",
+            "max-age": 600
+          },
+          "display-name": "Alberta",
+          "name": "AB"
+        }
+      ]
+    }
+  }
 }

@@ -16,51 +16,48 @@ define(function (require) {
   var controllerTestFactory = require('testfactory.controller');
 
   describe('Address Component: Controller', function () {
-    var addressController = require('address');
+    var controller = require('address');
     var addressView = require('address.views');
+    var addressModel = require('address.models');
     var addressTemplate = require('text!modules/base/components/address/base.component.address.template.html');
     var dataJSON = require('text!/tests/data/address.json');
 
     describe('DefaultCreateAddressView', function () {
-      describe('when a user is logged in', function() {
-        before(function() {
-          $("#Fixtures").append(addressTemplate); // append templates
-
-          sinon.stub(ep.app, 'isUserLoggedIn', function() {
-            return true;
-          });
-
-          addressView.DefaultAddressFormView = DefaultViewTestHelper.testDouble;
-          this.view = addressController.DefaultCreateAddressView();
-        });
-
-        after(function() {
-          $("#Fixtures").empty();
-          ep.app.isUserLoggedIn.restore();
-        });
-
-        it('returns an instance of DefaultCreateAddressLayout', function () {
-          expect(this.view).to.be.instanceOf(addressView.DefaultCreateAddressLayout);
-        });
-        it('renders childView: DefaultAddressFormView', function () {
-          this.view.render().trigger('show');
-          expect(DefaultViewTestHelper.wasRendered()).to.be.true;
-        });
-      });
-
-      describe('when a user is not logged in', function() {
+      describe('when a user is logged in', function () {
         before(function () {
           $("#Fixtures").append(addressTemplate); // append templates
 
-          sinon.stub(ep.app, 'isUserLoggedIn', function() {
+          sinon.stub(ep.app, 'isUserLoggedIn', function () {
+            return true;
+          });
+          sinon.stub(Backbone.Collection.prototype, 'fetch');
+
+          this.controller = controller.DefaultCreateAddressView();
+        });
+
+        after(function () {
+          $("#Fixtures").empty();
+          ep.app.isUserLoggedIn.restore();
+          Backbone.Collection.prototype.fetch.restore();
+        });
+
+        it('returns an instance of DefaultCreateAddressLayout', function () {
+          expect(this.controller).to.be.instanceOf(addressView.DefaultCreateAddressLayout);
+        });
+      });
+
+      describe('when a user is not logged in', function () {
+        before(function () {
+          $("#Fixtures").append(addressTemplate); // append templates
+
+          sinon.stub(ep.app, 'isUserLoggedIn', function () {
             return false;
           });
           sinon.spy(EventBus, 'trigger');
 
           EventTestHelpers.unbind('layout.loadRegionContentRequest');
 
-          addressView.DefaultAddressFormView = DefaultViewTestHelper.testDouble;
-          this.view = addressController.DefaultCreateAddressView();
+          this.controller = controller.DefaultCreateAddressView();
         });
 
         after(function () {
@@ -70,7 +67,7 @@ define(function (require) {
           EventTestHelpers.reset();
         });
 
-        it('triggers a request to load the login form', function() {
+        it('triggers a request to load the login form', function () {
           expect(EventBus.trigger).to.be.calledWithExactly('layout.loadRegionContentRequest', {
             region: 'appModalRegion',
             module: 'auth',
@@ -86,24 +83,20 @@ define(function (require) {
         $("#Fixtures").append(addressTemplate);
         $("#Fixtures").append('<div id="testingRegion"></div>'); // append an region to render tested view into
 
-        sinon.spy(Backbone.Model.prototype, 'fetch');
+        sinon.stub(Backbone.Model.prototype, 'fetch');
+        sinon.stub(Backbone.Collection.prototype, 'fetch');
 
-        // Create a sinon fakeServer object
         var fakeGetLink = "/integrator/address/fakeUrl";
-        var fakeAddressResponse = JSON.parse(_.clone(dataJSON)).address.response;
-        this.server = controllerTestFactory.getFakeServer(fakeGetLink, '', fakeAddressResponse);
-
-        addressView.DefaultAddressFormView = DefaultViewTestHelper.testDouble;
-        this.view = addressController.DefaultEditAddressView(fakeGetLink);
+        this.view = controller.DefaultEditAddressView(fakeGetLink);
 
         // Short delay to allow the fake AJAX request to complete
         setTimeout(done, 200);
       });
 
-      after(function() {
+      after(function () {
         $("#Fixtures").empty();
         Backbone.Model.prototype.fetch.restore();
-        this.server.restore();
+        Backbone.Collection.prototype.fetch.restore();
       });
 
       it('returns an instance of DefaultEditAddressLayout', function () {
@@ -113,35 +106,100 @@ define(function (require) {
       it('Model should have fetched info from server once', function () {
         expect(Backbone.Model.prototype.fetch).to.be.calledOnce;
       });
-
-      it('renders childView: DefaultAddressFormView', function () {
-        this.view.render().trigger('show');
-        expect(DefaultViewTestHelper.wasRendered()).to.be.true;
-      });
     });
 
     describe('DefaultAddressFormView', function () {
+      before(function () {
+        $("#Fixtures").append(addressTemplate); // append templates
 
-      it('returns an instance of DefaultAddressFormView', function () {
-        var view = addressController.testVariables.defaultAddressFormView();
-        expect(view).to.be.instanceOf(addressView.DefaultAddressFormView);
+        // Create a sinon fakeServer object
+        var parsedJSONData = JSON.parse(_.clone(dataJSON)).countries;
+        var fakeUrl = addressModel.CountryCollection.prototype.url;
+        var fakeAddressResponse = parsedJSONData.response;
+        this.server = controllerTestFactory.getFakeServer(fakeUrl, '', fakeAddressResponse);
+      });
+
+      after(function () {
+        $("#Fixtures").empty();
+        this.server.restore();
+      });
+
+      describe('given no model', function () {
+        before(function (done) {
+          // mock country and region view
+          this.realCountryView = addressView.DefaultCountriesView;
+          this.countryDouble = DefaultViewTestHelper.TestDouble();
+          addressView.DefaultCountriesView = this.countryDouble.View;
+
+          this.realRegionView = addressView.DefaultRegionsView;
+          this.regionDouble = DefaultViewTestHelper.TestDouble();
+          addressView.DefaultRegionsView = this.regionDouble.View;
+
+          this.controller = controller.testVariables.defaultAddressFormView(undefined);
+          this.controller.render();
+          this.controller.regionsRegion.on('show', function () {
+            done();
+          });
+        });
+
+        after(function () {
+          delete(this.countryDouble);
+          delete(this.regionDouble);
+
+          addressView.DefaultCountriesView = this.realCountryView;
+          addressView.DefaultRegionsView = this.realRegionView;
+        });
+
+        it('returns an instance of DefaultAddressFormView', function () {
+          expect(this.controller).to.be.instanceOf(addressView.DefaultAddressFormView);
+        });
+
+        it('renders childView: DefaultCountriesView', function () {
+          expect(this.countryDouble.wasRendered()).to.be.true;
+        });
+        it('passes a collection to DefaultCountriesView', function () {
+          expect(this.countryDouble.hasACollection()).to.be.true;
+        });
+        it('renders childView: DefaultRegionsView', function () {
+          expect(this.regionDouble.wasRendered()).to.be.true;
+        });
       });
 
       describe('given a model', function () {
-        before(function() {
-          $("#Fixtures").append(addressTemplate); // append templates
+        var triggeredEvent = 'address.updateChosenCountryRequest';
+        before(function (done) {
+          // mock country and region view
+          this.countryDouble = DefaultViewTestHelper.TestDouble();
+          addressView.DefaultCountriesView = this.countryDouble.View;
+          this.regionDouble = DefaultViewTestHelper.TestDouble();
+          addressView.DefaultRegionsView = this.regionDouble.View;
 
-          addressView.DefaultAddressFormView = DefaultViewTestHelper.testDouble;
-          this.view = addressController.testVariables.defaultAddressFormView(new Backbone.Model());
+          // isolate Event chain
+          EventTestHelpers.unbind(triggeredEvent);
+          sinon.spy(EventBus, 'trigger');
+
+          this.model = new Backbone.Model({
+            country: 'CA' // this country code should match 1 of the countries in response
+          });
+          this.controller = controller.testVariables.defaultAddressFormView(this.model);
+          this.controller.render();
+          this.controller.regionsRegion.on('show', function () {
+            done();
+          });
         });
 
-        after(function() {
-          $("#Fixtures").empty();
+        after(function () {
+          delete(this.countryDouble);
+          delete(this.regionDouble);
+          EventTestHelpers.reset();
+          EventBus.trigger.restore();
         });
 
-        it('passes the model to DefaultAddressFormView', function() {
-          this.view.render();
-          expect(DefaultViewTestHelper.hasAModel()).to.be.true;
+        it('passes the model to DefaultAddressFormView', function () {
+          expect(this.controller.model).to.be.ok;
+        });
+        it('triggers ' + triggeredEvent, function () {
+          expect(EventBus.trigger).to.be.calledWith(triggeredEvent);
         });
       });
     });

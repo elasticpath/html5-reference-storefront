@@ -41,7 +41,15 @@ define(function (require) {
       var countryArray = [];
       if (response) {
         var countries = jsonPath(response, '$.._element')[0];
-        countryArray = modelHelpers.parseArray(countries, modelHelpers.parseCountry);
+        if (countries) {
+          countryArray = modelHelpers.parseArray(countries, modelHelpers.parseCountry);
+        }
+
+        // default select option; allow user to select non of the countries provided.
+        countryArray.unshift({
+          displayName: '----',
+          name: ''
+        });
       }
       else {
         ep.logger.error("Countries collection wasn't able to fetch valid data for parsing. ");
@@ -63,8 +71,16 @@ define(function (require) {
     parse: function (response) {
       var regionArray = [];
       if (response) {
-        // checkin parse country information
-        regionArray = modelHelpers.parseArray(response, modelHelpers.parseRegion);
+        var regions = jsonPath(response, '$.._element')[0];
+        if (regions) {
+          regionArray = modelHelpers.parseArray(regions, modelHelpers.parseRegion);
+        }
+
+        // default select option; allow user to select non of the regions provided.
+        regionArray.unshift({
+          displayName: '----',
+          name: ''
+        });
       }
       else {
         ep.logger.error("Regions collection wasn't able to fetch valid data for parsing. ");
@@ -80,14 +96,14 @@ define(function (require) {
    */
   var modelHelpers = ModelHelper.extend({
 
-    // parse country
     parseCountry: function(rawObject) {
       var country = {};
 
       if (rawObject) {
         country = {
           displayName: jsonPath(rawObject, 'display-name')[0],
-          name: jsonPath(rawObject, 'name')[0]
+          name: jsonPath(rawObject, 'name')[0],
+          regionLink: jsonPath(rawObject, "$.links[?(@.rel=='regions')].href")[0]
         };
       }
       else {
@@ -97,7 +113,6 @@ define(function (require) {
       return country;
     },
 
-    // parse region
     parseRegion: function(rawObject) {
       var region = {};
 

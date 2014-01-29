@@ -7,30 +7,49 @@
 define(function (require) {
   var Marionette = require('marionette');
 
-  var renderTestFlag = false;
-  var modelTestFlag = false;
+  var testDouble = function() {
+    var renderTestFlag = false;
+    var modelTestFlag = false;
+    var collectionTestFlag = false;
 
-  var testDouble = Marionette.ItemView.extend({
-    render: function () {
+    function wasRendered() {
+      return renderTestFlag;
+    }
+
+    function hasAModel() {
+      return modelTestFlag;
+    }
+
+    function hasACollection() {
+      return collectionTestFlag;
+    }
+
+    function renderMock() {
       renderTestFlag = true;
 
       if (this.model) {
         modelTestFlag = true;
       }
+
+      if (this.collection) {
+        collectionTestFlag = true;
+      }
     }
-  });
 
-  function wasRendered() {
-    return renderTestFlag;
-  }
+    var itemView = Marionette.ItemView.extend({
+      render: renderMock
+    });
 
-  function hasAModel() {
-    return modelTestFlag;
-  }
+    return {
+      View: itemView,
+
+      wasRendered: wasRendered,
+      hasAModel: hasAModel,
+      hasACollection: hasACollection
+    };
+  };
 
   return {
-    testDouble: testDouble,
-    wasRendered: wasRendered,
-    hasAModel: hasAModel
+    TestDouble: testDouble
   };
 });

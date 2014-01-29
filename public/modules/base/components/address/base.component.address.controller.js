@@ -11,7 +11,6 @@ define(function (require) {
   var i18n = require('i18n');
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
-  var Backbone = require('backbone');
 
   var Views = require('address.views');
   var Models = require('address.models');
@@ -23,6 +22,8 @@ define(function (require) {
 
   var countryCollection = new Models.CountryCollection();
   var regionCollection = new Models.RegionCollection();
+
+  var addressFormView = new Views.DefaultAddressFormView();
 
   /**
    * Instantiate an DefaultCreateAddressLayout and load views into corresponding regions on DefaultCreateAddressLayout.
@@ -52,12 +53,15 @@ define(function (require) {
    * @returns {Views.DefaultEditAddressLayout} fully rendered DefaultEditAddressLayout
    */
   var defaultEditAddressView = function(href) {
-    var addressLayout = new Views.DefaultEditAddressLayout();
     var addressModel = new Models.AddressModel();
+    var addressLayout = new Views.DefaultEditAddressLayout({
+      model: addressModel
+    });
 
     addressModel.fetch({
       url: ep.ui.decodeUri(href),
       success: function(response) {
+        addressModel = response;
         addressLayout.addressFormRegion.show(defaultAddressFormView(response));
       }
     });
@@ -70,20 +74,120 @@ define(function (require) {
    * @param addressModel  data model of address to edit.
    * @returns {Views.DefaultAddressFormView}  fully rendered DefaultAddressFormView
    */
-  var defaultAddressFormView = function(addressModel) {
-   var addressFormView = new Views.DefaultAddressFormView();
-    if (addressModel) {
-      addressFormView.model = addressModel;
-    }
+  var defaultAddressFormView = function (addressModel) {
+    var countriesView = new Views.DefaultCountriesView();
+    var regionsView = new Views.DefaultRegionsView({
+      collection: regionCollection
+    });
+
+    addressFormView.model = addressModel;
 
     countryCollection.fetch({
-      success: function(response) {
-        // show countryCompositeView, regionCompositeView(empty collection)
+      success: function (response) {
+        // if addressModel is present, means in edit mode, and a country & region is selected
+        if (addressModel) {
+          var regionCode = addressModel.get('region');
+          var countryCode = addressModel.get('country');
+          var regionsLink = getRegionLink(response, countryCode);
+
+
+          EventBus.trigger('address.updateChosenCountryRequest', countryCode, regionsLink, regionCode);
+        }
+        else {
+          regionCollection.reset();
+        }
+
+        countriesView.collection = response;
+
+        addressFormView.countriesRegion.show(countriesView);
+        addressFormView.regionsRegion.show(regionsView);
+
       }
     });
 
+    function getRegionLink(collection, code) {
+      var link;
+
+      var selectedCountry = collection.where({name: code})[0];
+      if (selectedCountry) {
+        link = selectedCountry.get('regionLink');
+      }
+      else {
+        ep.logger.warn('No country with given countryCode (' + code + ') was found while retrieving regionLink');
+      }
+      return link;
+    }
+
     return addressFormView;
   };
+
+  /* *************** Event Listeners: update chosen country / regions *************** */
+  EventBus.on('address.countrySelectionChanged', function(selectedCountry, regionsLink, selectedRegion) {
+    EventBus.trigger('address.updateChosenCountryRequest', selectedCountry, regionsLink, selectedRegion);
+  });
+
+  EventBus.on('address.regionSelectionChanged', function(selectedRegion) {
+    EventBus.trigger('address.updateChosenRegionRequest', selectedRegion);
+  });
+
+  EventBus.on('address.updateChosenCountryRequest', function(selectedCountry, regionsLink, selectedRegion) {
+    setSelectedCountry(selectedCountry);
+
+    if (addressFormView.regionsRegion.currentView) {
+      ep.ui.startActivityIndicator(addressFormView.regionsRegion.currentView, 'small');
+    }
+
+    fetchRegionCollection(regionsLink, selectedRegion);
+  });
+
+  EventBus.on('address.updateChosenRegionRequest', function(selectedRegion) {
+    setSelectedRegion(selectedRegion);
+  });
+
+  function fetchRegionCollection(regionsLink, selectedRegion) {
+    if(selectedRegion && !regionsLink) {
+      ep.logger.error('Fail to fetch regions collection, missing regions link');
+      return;
+    }
+
+    if (regionsLink) {
+      regionCollection.fetch({
+        url: regionCollection.getUrl(regionsLink),
+        success: function(response) {
+          if (selectedRegion) {
+            EventBus.trigger('address.updateChosenRegionRequest', selectedRegion);
+          }
+
+          ep.ui.stopActivityIndicator(addressFormView.regionsRegion.currentView);
+        }
+      });
+    }
+    else {
+      regionCollection.reset();
+      ep.ui.stopActivityIndicator(addressFormView.regionsRegion.currentView);
+    }
+
+  }
+
+  function setSelectedCountry(selectedCountry) {
+    var deselect = countryCollection.where({selected: true})[0];
+    if (deselect) {
+      deselect.unset('selected');
+    }
+
+    var selected = countryCollection.where({name: selectedCountry})[0];
+    selected.set('selected', true);
+  }
+
+  function setSelectedRegion(selectedRegion) {
+    var deselect = regionCollection.where({selected: true})[0];
+    if (deselect) {
+      deselect.unset('selected');
+    }
+
+    var selected = regionCollection.where({name: selectedRegion})[0];
+    selected.set('selected', true);
+  }
 
   /* *************** Event Listeners Functions *************** */
   /**
@@ -107,6 +211,7 @@ define(function (require) {
    * Request an empty address form & the link to POST or PUT address form to.
    * Currently, only information used is the link to POST or PUT address form to.
    */
+  // CheckIn convert this to event, trigger call from view, pass href from profile / checkout
   function getAddressForm() {
     var ajaxModel = new ep.io.defaultAjaxModel({
       type: 'GET',
