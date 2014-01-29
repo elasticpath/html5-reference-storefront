@@ -57,7 +57,7 @@ module.exports = function(grunt) {
       var commandLineOutput = '';
       // Any warning text that we may want to output differently to the command line
       var warningOutput = '';
-      var separatorStr = '\r\n========================================================================\r\n\r\n';
+      var separatorStr = '\n========================================================================\n\n';
 
       // A count of the library files processed
       var libraryCount = 0;
@@ -81,10 +81,10 @@ module.exports = function(grunt) {
 
             // Remove any leading '../' characters from the file path and add it to the output
             currentFile = currentFile.replace(parentDirectoryRegEx, '/');
-            fileOutput += 'Library #' + (libraryCount + 1) + ': ' + currentFile + '\r\n';
+            fileOutput += 'Library #' + (libraryCount + 1) + ': ' + currentFile + '\n';
 
             // Split the file content into an array of lines to begin extraction of banner comments
-            var lines = fileContent.split("\r\n");
+            var lines = fileContent.split("\n");
             // A boolean to record whether or not any comments have been found in the current library
             var foundComments = false;
             var lookForClosingComment = false;
@@ -114,11 +114,11 @@ module.exports = function(grunt) {
                     lookForClosingComment = true;
                   } else {
                     // Otherwise, add this line to the output
-                    fileOutput += currentLine + "\r\n";
+                    fileOutput += currentLine + "\n";
                   }
                 // If the line contains the multi-line comment end syntax
                 } else if (multiLineCommentEndRegEx.test(currentLine)) {
-                  fileOutput += currentLine + "\r\n";
+                  fileOutput += currentLine + "\n";
                   lookForClosingComment = false;
                   // Go to the next iteration of the for..in loop
                   continue;
@@ -131,18 +131,18 @@ module.exports = function(grunt) {
                  */
                 // Match any single line comments
                 if (singleLineCommentRegEx.test(currentLine)) {
-                    fileOutput += currentLine + "\r\n";
+                    fileOutput += currentLine + "\n";
                     foundComments = true;
                 } else {
                   if (!foundComments) {
                     // Append the current file to the list of files without comments
                     filesMissingCommentsArray.push(currentFile);
-                    fileOutput += "WARNING: No comments found! \r\n";
+                    fileOutput += "WARNING: No comments found! \n";
                   }
                   // If we are still looking for a matching closing comment syntax, add the current line to the output
                   // and keep looking
                   if (lookForClosingComment) {
-                    fileOutput += currentLine + "\r\n";
+                    fileOutput += currentLine + "\n";
                   } else {
                     // Break out of the for..in loop and stop processing this file
                     break;
@@ -161,11 +161,11 @@ module.exports = function(grunt) {
         if (len) {
           var fileList = '';
           while(len--) {
-            fileList += filesMissingCommentsArray[len] + '\r\n';
+            fileList += filesMissingCommentsArray[len] + '\n';
           }
-          warningOutput = fileList + '\r\n';
+          warningOutput = fileList + '\n';
 
-          warningOutput = "WARNING: these third party libraries do not contain header comments:\r\n\r\n" + warningOutput;
+          warningOutput = "WARNING: these third party libraries do not contain header comments:\n\n" + warningOutput;
         }
 
         // Read and report on any package.json files specified
@@ -186,34 +186,39 @@ module.exports = function(grunt) {
             // If there are any dependencies listed, add them to the file output
             if (fileContentJSON.dependencies) {
               var numDependencies = getPackageJSONKeyCount(fileContentJSON, 'dependencies');
-              fileOutput += numDependencies + ' ' + dependenciesStr + '\r\n\r\n';
-              fileOutput += JSON.stringify(fileContentJSON.dependencies, null, '\r\n');
-              fileOutput += '\r\n' + separatorStr;
-              commandLineOutput += '\r\n* ' + numDependencies + ' ' + dependenciesStr;
+              fileOutput += numDependencies + ' ' + dependenciesStr + '\n\n';
+              fileOutput += JSON.stringify(fileContentJSON.dependencies, null, '\n');
+              fileOutput += '\n' + separatorStr;
+              commandLineOutput += '\n* ' + numDependencies + ' ' + dependenciesStr;
             }
 
             // If there are any dependencies listed, add them to the file output
             if (fileContentJSON.devDependencies) {
               var numDevDependencies = getPackageJSONKeyCount(fileContentJSON, 'devDependencies');
-              fileOutput += numDevDependencies + ' ' + devDependenciesStr + '\r\n\r\n';
-              fileOutput += JSON.stringify(fileContentJSON.devDependencies, null, '\r\n');
-              fileOutput += '\r\n' + separatorStr;
-              commandLineOutput += '\r\n* ' + numDevDependencies + ' ' + devDependenciesStr;
+              fileOutput += numDevDependencies + ' ' + devDependenciesStr + '\n\n';
+              fileOutput += JSON.stringify(fileContentJSON.devDependencies, null, '\n');
+              fileOutput += '\n' + separatorStr;
+              commandLineOutput += '\n* ' + numDevDependencies + ' ' + devDependenciesStr;
             }
           });
         }
 
         // Output third party library count info to the command line
         commandLineOutput = '* ' + libraryCount + ' third party libraries' + commandLineOutput;
-        commandLineOutput = 'Identified:\r\n\r\n' + commandLineOutput  + '\r\n';
+        commandLineOutput = 'Identified:\n\n' + commandLineOutput  + '\n';
+
+        // Normalize line endings depending on platform (windows \r\n, else \n)
+        var outputs =  commandLineOutput + '\n' + warningOutput + separatorStr + fileOutput;
+        var normalizedOutputs = grunt.util.normalizelf(outputs);
 
         // Write all output (command line, warnings and file output) to file
-        grunt.file.write(f.dest, commandLineOutput + '\r\n' + warningOutput + separatorStr + fileOutput);
+        grunt.file.write(f.dest, normalizedOutputs);
 
         // Write the summary, warnings and file write info to the command line
-        grunt.log.writeln('\r\n' + commandLineOutput);
+        grunt.log.writeln();
+        grunt.log.writeln(commandLineOutput);
         grunt.log.writeln(warningOutput.yellow);
-        grunt.log.writeln('The full list of identified third party libraries was written to: \r\n' + f.dest);
+        grunt.log.writeln('The full list of identified third party libraries was written to: \n' + f.dest);
       });
     }
   });
