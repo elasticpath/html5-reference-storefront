@@ -3,8 +3,15 @@
  *
  */
 // Set the require.js configuration for the unit tests.
+
+// Use a relative base URL with Require JS if tests are being run from PhantomJS
+var baseRequireUrl = '/public';
+if (window.PHANTOMJS) {
+  baseRequireUrl = '../public';
+}
+
 requirejs.config({
-  baseUrl: '/public',
+  baseUrl: baseRequireUrl,
   paths: {
     'backbone'        : 'scripts/lib/backbone',
     'bootstrap'       : 'scripts/lib/bootstrap.min',
@@ -71,16 +78,18 @@ requirejs.config({
     'payment'       : 'modules/base/components/payment/base.component.payment.controller',
     'payment.views' : 'modules/base/components/payment/base.component.payment.views',
 
-    'chai'            : '/tests/libs/chai',
-    'mocha.common'    : '/tests/libs/mocha.common',
-    'sinon'           : '/tests/libs/sinon-1.7.3',
-    'sinon-chai'      : '/tests/libs/sinon-chai',
+    'chai'            : '../tests/libs/chai',
+    'mocha.common'    : '../tests/libs/mocha.common',
+    'sinon'           : '../tests/libs/sinon-1.7.3',
+    'sinon-chai'      : '../tests/libs/sinon-chai',
 
-    'testfactory.event': '/tests/TestHelpers/EventTestFactory',
-    'testfactory.controller': '/tests/TestHelpers/ControllerTestFactory',
-    'testfactory.model': '/tests/TestHelpers/ModelTestFactory',
-    "testhelpers.event": '/tests/TestHelpers/EventTestHelpers',
-    'testhelpers.defaultview': '/tests/TestHelpers/DefaultViewTestHelper'
+    'testfactory.event': '../tests/TestHelpers/EventTestFactory',
+    'testfactory.controller': '../tests/TestHelpers/ControllerTestFactory',
+    'testfactory.model': '../tests/TestHelpers/ModelTestFactory',
+    "testhelpers.event": '../tests/TestHelpers/EventTestHelpers',
+    'testhelpers.defaultview': '../tests/TestHelpers/DefaultViewTestHelper',
+
+    'phantom.bridge': '../tests/libs/phantomjs/bridge.js'
 
   },
   shim: {
@@ -124,7 +133,7 @@ var runMocha = function () {
   // Add Sinon assertions to Chai
   setupSinonChai();
   if (window.mochaPhantomJS) {
-    mochaPhantomJS.run();
+    require('phantom.bridge', mochaPhantomJS.run);
   } else {
     mocha.run();
   }

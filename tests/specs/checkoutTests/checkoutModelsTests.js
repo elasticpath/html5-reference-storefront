@@ -7,7 +7,7 @@ define(function (require) {
   var modelTestFactory = require('testfactory.model');
 
   var models = require('checkout.models');
-  var dataJSON = require('text!/tests/data/checkout.json');
+  var dataJSON = require('text!../../../tests/data/checkout.json');
 
   describe('Checkout Module: Models', function () {
     var checkoutModel = new models.CheckoutModel();

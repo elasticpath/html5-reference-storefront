@@ -25,6 +25,7 @@
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-uglify": "~0.2.4",
     "grunt-contrib-requirejs": "~0.4.1",
-    "testem": "~0.3.18"
+    "testem": "~0.3.18",
+    "grunt-mocha": "~0.4.10"
   }
 }
