@@ -54,7 +54,8 @@ module.exports = function(grunt){
         src: ['tests/testrunner.html'],
         // Prevent the plugin calling mocha.run() - we will call this once our RequireJS dependencies have been loaded
         options: {
-          run: false
+          run: false,
+          log: true
         }
       }
     }

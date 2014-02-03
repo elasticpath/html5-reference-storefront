@@ -96,9 +96,12 @@ exports.reporter = function (data) {
     }
   });
 
-  console.log((data.length + ' errors found in ' + numFiles + ' file' + (numFiles === 1 ? ':' : 's:')).red.bold);
+  setTimeout(function () {
+    console.log((data.length + ' errors found in ' + numFiles + ' file' + (numFiles === 1 ? ':' : 's:')).red.bold);
 
-  fileNames.forEach(function (fileName) {
-    console.log('  ' + fileName);
-  });
+    fileNames.forEach(function (fileName) {
+      console.log('  ' + fileName);
+    });
+  }, 0);
+
 };
