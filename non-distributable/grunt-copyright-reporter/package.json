@@ -1,5 +1,5 @@
 {
-  "name": "grunt-license-reporter",
+  "name": "grunt-copyright-reporter",
   "description": "A plugin to extract header comments from external libraries.",
   "version": "0.1.0",
   "homepage": "",

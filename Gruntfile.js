@@ -58,6 +58,32 @@ module.exports = function(grunt){
           log: true
         }
       }
+    },
+    copyright_reporter: {
+      allFiles: {
+        options: {
+          // Regular expression to match the copyright notice
+          // \d{4} matches any 4 digits
+          copyrightRegEx: /Copyright © \d{4} Elastic Path Software Inc./
+        },
+        files: [{
+          // The array of files to inspect
+          // Supports Node 'globbing patterns'
+          src: [
+            '**/*.{js,html,less,css}',
+            // Exclusions
+            '!public/scripts/**',
+            '!node_modules/**',
+            '!non-distributable/**',
+            '!tests/libs/**',
+            '!tests/css/**',
+            '!stylesrc/bootstrap/**',
+            '!stylesrc/theme-core/load-bootstrap.less',
+            '!stylesrc/theme-core/jquery.toastmessage.less',
+            '!public/text.js'
+          ]
+        }]
+      }
     }
   });
 
@@ -68,6 +94,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-copyright-reporter');
 
   // Make watch the default task
   grunt.registerTask('default', ['watch']);
@@ -80,6 +107,6 @@ module.exports = function(grunt){
   grunt.registerTask('checkin', 'A task to run all check-in tasks', function() {
     // set the force option for all tasks
     grunt.option('force', true);
-    grunt.task.run(['less', 'jshint', 'mocha']);
+    grunt.task.run(['less', 'jshint', 'mocha', 'copyright_reporter']);
   });
 };

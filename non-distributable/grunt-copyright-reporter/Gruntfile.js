@@ -11,7 +11,7 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     copyright_reporter: {
-      default_options: {
+      allFiles: {
         options: {
           // Regular expression to match the copyright notice
           // \d{4} matches any 4 digits
