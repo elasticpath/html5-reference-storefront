@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.elasticpath</groupId>
 		<artifactId>grandparent</artifactId>
-		<version>54</version>
+		<version>55</version>
 	</parent>
 
 	<groupId>com.elasticpath.cortex.ui</groupId>
