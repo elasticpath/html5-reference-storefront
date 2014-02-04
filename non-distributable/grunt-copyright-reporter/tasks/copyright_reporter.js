@@ -58,13 +58,13 @@ module.exports = function(grunt) {
         if (missingCopyrightArrayLen === 1) {
           fileStr = 'file does';
         }
-        var warningStr = '\r\rWARNING: the following ' + fileStr + ' not have copyright notices:\r\r';
-        var filesMissingCopyrightArrayStr = filesMissingCopyrightArray.join('\r') + '\r\r';
+        var warningStr = 'WARNING: the following ' + fileStr + ' not have copyright notices:';
+        var filesMissingCopyrightArrayStr = filesMissingCopyrightArray.join('\n') + '\n';
 
-        grunt.log.writeln(warningStr.yellow);
-        grunt.log.writeln(filesMissingCopyrightArrayStr.yellow);
+        grunt.log.writeln(grunt.util.normalizelf(warningStr.yellow));
+        grunt.log.writeln(grunt.util.normalizelf(filesMissingCopyrightArrayStr.yellow));
       } else {
-        grunt.log.writeln('\r\rAll target files have copyright notices.\r\r'.green);
+        grunt.log.writeln(grunt.util.normalizelf('\n\nAll target files have copyright notices.\n').green);
       }
 
     }
