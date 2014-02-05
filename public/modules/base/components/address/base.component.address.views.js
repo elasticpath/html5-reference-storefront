@@ -41,7 +41,12 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       events: {
         'click [data-el-label="addressForm.create"]': function (event) {
           event.preventDefault();
-          EventBus.trigger('address.createAddressBtnClicked');
+          var addressHref = this.model.get('href');
+          if (addressHref) {
+            EventBus.trigger('address.createAddressBtnClicked', addressHref);
+          } else {
+            ep.logger.warn('unable to retrieve url to post address form');
+          }
         },
         'click [data-el-label="addressForm.cancel"]': function (event) {
           event.preventDefault();

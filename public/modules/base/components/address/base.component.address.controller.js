@@ -32,12 +32,20 @@ define(function (require) {
   var defaultCreateAddressView = function () {
     // Ensure the user is authenticated before rendering the address form
     if (ep.app.isUserLoggedIn()) {
-      var addressLayout = new Views.DefaultCreateAddressLayout();
-
-      addressLayout.on('show', function () {
-        addressLayout.addressFormRegion.show(defaultAddressFormView());
+      var addressModel = new Models.CreateAddressModel();
+      var addressLayout = new Views.DefaultCreateAddressLayout({
+        model: addressModel
       });
+
+      addressModel.fetch({
+        success: function(response) {
+          addressModel = response;
+          addressLayout.addressFormRegion.show(defaultAddressFormView(response));
+        }
+      });
+
       return addressLayout;
+
     } else {
       Mediator.fire('mediator.loadRegionContent', 'loginModal');
     }
@@ -79,13 +87,11 @@ define(function (require) {
 
     countryCollection.fetch({
       success: function (response) {
-        // if addressModel is present, means in edit mode, and a country & region is selected
-        if (addressModel) {
-          var regionCode = addressModel.get('region');
+        if (addressModel && addressModel.get('country')) {
           var countryCode = addressModel.get('country');
+          var regionCode = addressModel.get('region');
+
           var regionsLink = getRegionLink(response, countryCode);
-
-
           EventBus.trigger('address.updateChosenCountryRequest', countryCode, regionsLink, regionCode);
         }
         else {
@@ -96,7 +102,6 @@ define(function (require) {
 
         addressFormView.countriesRegion.show(countriesView);
         addressFormView.regionsRegion.show(regionsView);
-
       }
     });
 
@@ -115,6 +120,29 @@ define(function (require) {
 
     return addressFormView;
   };
+
+  /* *********** Event Listeners: load display address view  *********** */
+  /**
+   * Listening to load default display address view request,
+   * will load the default view in appMainRegion.
+   */
+  EventBus.on('address.loadAddressesViewRequest', loadAddressView);
+
+  /**
+   * Renders a Default Address ItemView with regions and models passed in
+   * @param addressObj  contains region to render in and the model to render with
+   */
+  function loadAddressView(addressObj) {
+    try {
+      var addressView = new Views.DefaultAddressItemView({
+        model: addressObj.model
+      });
+
+      addressObj.region.show(addressView);
+    } catch (error) {
+      ep.logger.error('failed to load Address Views: ' + error.message);
+    }
+  }
 
   /* *************** Event Listeners: update chosen country / regions *************** */
   EventBus.on('address.countrySelectionChanged', function(selectedCountry, regionsLink, selectedRegion) {
@@ -184,100 +212,30 @@ define(function (require) {
     selected.set('selected', true);
   }
 
-  /* *************** Event Listeners Functions *************** */
-  /**
-   * Renders a Default Address ItemView with regions and models passed in
-   * @param addressObj  contains region to render in and the model to render with
-   */
-  function loadAddressView(addressObj) {
-    try {
-      var addressView = new Views.DefaultAddressItemView({
-        model: addressObj.model
-      });
-
-      addressObj.region.show(addressView);
-    } catch (error) {
-      ep.logger.error('failed to load Address Views: ' + error.message);
-    }
-  }
-
-
-  /**
-   * Request an empty address form & the link to POST or PUT address form to.
-   * Currently, only information used is the link to POST or PUT address form to.
-   */
-  // CheckIn convert this to event, trigger call from view, pass href from profile / checkout
-  function getAddressForm() {
-    var ajaxModel = new ep.io.defaultAjaxModel({
-      type: 'GET',
-      url: ep.io.getApiContext() + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=addresses:addressform',
-      success: function (response) {
-        var submitAddressFormLink = jsonPath(response, "$..links[?(@.rel=='createaddressaction')].href")[0];
-        EventBus.trigger('address.createNewAddressRequest', submitAddressFormLink);
-      },
-      customErrorFn: function () {
-        EventBus.trigger('address.submitAddressFormFailed');
-      }
-    });
-
-    ep.io.ajax(ajaxModel.toJSON());
-  }
-
-  /**
-   * Send an address request to cortex.
-   * @param type The AJAX type of the request POST (create) or PUT (update)
-   * @param submitAddressFormLink to POST the request to.
-   */
-  function createAddressRequest(type, submitAddressFormLink) {
-    var form = Views.getAddressFormValues();
-
-    var ajaxModel = new ep.io.defaultAjaxModel({
-      type: type,
-      url: submitAddressFormLink,
-      data: JSON.stringify(form),
-      success: function () {
-        EventBus.trigger('address.submitAddressFormSuccess');
-      },
-      customErrorFn: function (response) {
-        if (response.status === 400) {
-          EventBus.trigger('address.submitAddressFormFailed.invalidFields', response.responseText);
-        }
-        else {
-          EventBus.trigger('address.submitAddressFormFailed');
-        }
-      }
-    });
-
-    ep.io.ajax(ajaxModel.toJSON());
-  }
-
   /* *************** Event Listeners: create address  *************** */
   /**
    * Listening to create address button clicked signal,
    * will trigger request to get address form (to get action link to post form to)
    */
-  EventBus.on('address.createAddressBtnClicked', function () {
-    EventBus.trigger('address.getAddressFormRequest');
-  });
-
-  EventBus.on('address.editAddressBtnClicked', function(href) {
-    createAddressRequest('PUT', href);
+  EventBus.on('address.createAddressBtnClicked', function (href) {
+    debugger;
+    EventBus.trigger('address.submitAddressRequest', 'POST', href);
   });
 
   /**
-   * Listening to get address form request,
-   * will request address form from cortex,
-   * on success, will trigger submit address form request,
-   * and pass on create address action link acquired from address form
+   * Listening to create address button clicked signal,
+   * will trigger request to get address form (to get action link to post form to)
    */
-  EventBus.on('address.getAddressFormRequest', getAddressForm);
+  EventBus.on('address.editAddressBtnClicked', function(href) {
+    EventBus.trigger('address.submitAddressRequest', 'PUT', href);
+  });
 
   /**
    * Listening to create new address request,
    * will submit address form to cortex,
    */
-  EventBus.on('address.createNewAddressRequest', function(href) {
-    createAddressRequest('POST', href);
+  EventBus.on('address.submitAddressRequest', function(method, href) {
+    submitAddressRequest(method, href);
   });
 
   /**
@@ -315,12 +273,34 @@ define(function (require) {
     Mediator.fire('mediator.addressFormComplete');
   });
 
-  /* *********** Event Listeners: load display address view  *********** */
   /**
-   * Listening to load default display address view request,
-   * will load the default view in appMainRegion.
+   * Send an address request to cortex.
+   * @param type The AJAX type of the request POST (create) or PUT (update)
+   * @param submitAddressFormLink to POST the request to.
    */
-  EventBus.on('address.loadAddressesViewRequest', loadAddressView);
+  function submitAddressRequest(type, submitAddressFormLink) {
+    var form = Views.getAddressFormValues();
+
+    var ajaxModel = new ep.io.defaultAjaxModel({
+      type: type,
+      url: submitAddressFormLink,
+      data: JSON.stringify(form),
+      success: function () {
+        EventBus.trigger('address.submitAddressFormSuccess');
+      },
+      customErrorFn: function (response) {
+        if (response.status === 400) {
+          EventBus.trigger('address.submitAddressFormFailed.invalidFields', response.responseText);
+        }
+        else {
+          EventBus.trigger('address.submitAddressFormFailed');
+        }
+      }
+    });
+
+    ep.io.ajax(ajaxModel.toJSON());
+  }
+
 
   return{
     DefaultCreateAddressView: defaultCreateAddressView,

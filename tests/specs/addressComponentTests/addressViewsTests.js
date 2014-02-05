@@ -67,7 +67,7 @@ define(function (require) {
 
       describe('can render', function () {
         before(function () {
-          this.view = new addressView.DefaultAddressItemView({model: this.model});
+          this.view = new addressView.DefaultAddressItemView();
         });
 
         after(function () {
@@ -158,7 +158,8 @@ define(function (require) {
 
     describe('DefaultCreateAddressLayout', function () {
       before(function () {
-        this.view = new addressView.DefaultCreateAddressLayout();
+        this.model = new StandardAddressModel();  // only care about href attribute
+        this.view = new addressView.DefaultCreateAddressLayout({model: this.model});
         this.view.render();
       });
 

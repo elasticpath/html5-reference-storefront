@@ -108,21 +108,21 @@ define(function (require) {
     /**
      * Create a simple test to test if tested event listener triggers another event.
      * @param expectedEvent        event expected to be triggered in listener
-     * @param testTriggerEventName  name of event triggering test function.
+     * @param listenerName  name of event triggering test function.
      * @returns {Function}          a simple EventBus listen and trigger unit test.
      */
-    simpleEventTriggersEventTest: function (expectedEvent, testTriggerEventName) {
+    simpleEventTriggersEventTest: function (expectedEvent, listenerName) {
       return this.simpleTriggerEventTest(expectedEvent, function () {
 
         it("registers correct event listener", function () {
-          expect(EventBus._events[testTriggerEventName]).to.have.length(1);
+          expect(EventBus._events[listenerName]).to.have.length(1);
         });
 
         it('should trigger event: ' + expectedEvent, function () {
           // trigger callback function on ajax call success
-          EventBus.trigger(testTriggerEventName);
+          EventBus.trigger(listenerName);
 
-          expect(EventBus.trigger).to.be.calledWithExactly(expectedEvent);
+          expect(EventBus.trigger).to.be.calledWith(expectedEvent);
         });
       });
     },

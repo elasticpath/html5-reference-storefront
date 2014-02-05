@@ -30,6 +30,23 @@ define(function (require) {
     }
   });
 
+  var createAddressModel = Backbone.Model.extend({
+    url: ep.io.getApiContext() + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=addresses:addressform',
+    parse: function (response) {
+      var addressObj = {};
+
+      if (response) {
+        addressObj = modelHelpers.parseAddress(response);
+        addressObj.href = jsonPath(response, "$..links[?(@.rel=='createaddressaction')].href")[0];
+      }
+      else {
+        ep.logger.error("Address model wasn't able to fetch valid data for parsing. ");
+      }
+
+      return addressObj;
+    }
+  });
+
   /**
    * Collection of countries.
    * @type Backbone.Collection
@@ -132,6 +149,7 @@ define(function (require) {
 
   return {
     AddressModel: addressModel,
+    CreateAddressModel: createAddressModel,
     CountryCollection: countryCollection,
     RegionCollection: regionCollection,
     testVariable: {

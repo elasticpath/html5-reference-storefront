@@ -30,6 +30,7 @@ define(function (require) {
           sinon.stub(ep.app, 'isUserLoggedIn', function () {
             return true;
           });
+          sinon.stub(Backbone.Model.prototype, 'fetch');
           sinon.stub(Backbone.Collection.prototype, 'fetch');
 
           this.controller = controller.DefaultCreateAddressView();
@@ -39,6 +40,7 @@ define(function (require) {
           $("#Fixtures").empty();
           ep.app.isUserLoggedIn.restore();
           Backbone.Collection.prototype.fetch.restore();
+          Backbone.Model.prototype.fetch.restore();
         });
 
         it('returns an instance of DefaultCreateAddressLayout', function () {
@@ -246,75 +248,16 @@ define(function (require) {
       });
     });
 
+    /* ==================== Create / Update Address ===================== */
     describe('responds to event: address.createAddressBtnClicked',
-      EventTestFactory.simpleEventTriggersEventTest('address.getAddressFormRequest', 'address.createAddressBtnClicked'));
+      simpleAddressBtnClickedEventTest('address.submitAddressRequest', 'address.createAddressBtnClicked', 'POST'));
 
-    describe('responds to event: address.getAddressFormRequest', function () {
-      before(function () {
-        sinon.spy(EventBus, 'trigger');
-        sinon.stub(ep.io, 'ajax');
-        sinon.stub(ep.logger, 'error');
-        EventBus.trigger('address.getAddressFormRequest');
+    describe('responds to event: address.editAddressBtnClicked',
+      simpleAddressBtnClickedEventTest('address.submitAddressRequest', 'address.editAddressBtnClicked', 'PUT'));
 
-        // get first argument passed to ep.io.ajax,
-        // args[0] gets arguments passed in the first time ep.io.ajax is called
-        // args[0][0] gets the first argument of the first time arguments
-        this.ajaxArgs = ep.io.ajax.args[0][0];
-      });
-
-      after(function () {
-        EventBus.trigger.restore();
-        ep.io.ajax.restore();
-        ep.logger.error.restore();
-      });
-
-      it('registers correct event listener', function () {
-        expect(EventBus._events['address.getAddressFormRequest']).to.be.length(1);
-      });
-
-      describe('should request address form from Cortex', function () {
-        it('exactly once', function () {
-          expect(ep.io.ajax).to.be.calledOnce;
-        });
-        it('with a valid request', function () {
-          var actionLink = '/default?zoom=addresses:addressform';
-          expect(this.ajaxArgs.type).to.be.string('GET');
-          expect(this.ajaxArgs.contentType).to.be.string('application/json');
-          expect(this.ajaxArgs.url).to.have.string(actionLink);
-        });
-        it('with required callback functions', function () {
-          expect(this.ajaxArgs.success).to.be.ok;
-          expect(this.ajaxArgs.error).to.be.ok;
-        });
-      });
-
-      describe('and on success',
-        EventTestFactory.simpleTriggerEventTest('address.createNewAddressRequest', function () {
-          var testEventName = 'address.createNewAddressRequest';
-
-          it('should trigger ' + testEventName + ' event', function () {
-            this.ajaxArgs.success('response'); // trigger callback function on ajax call success
-            expect(EventBus.trigger).to.be.calledWith(testEventName);
-          });
-        }));
-
-      describe('and on failure',
-        EventTestFactory.simpleTriggerEventTest('address.submitAddressFormFailed', function () {
-          var testEventName = 'address.submitAddressFormFailed';
-
-          it('should trigger ' + testEventName + ' event', function () {
-            this.ajaxArgs.error({
-              status: 'any error code'
-            });
-            expect(EventBus.trigger).to.be.calledWithExactly(testEventName);
-            expect(ep.logger.error).to.be.calledOnce
-              .and.to.be.calledWithMatch('any error code');
-          });
-        }));
-    });
-
-    describe('responds to event: address.createNewAddressRequest', function () {
+    describe('responds to event: address.submitAddressRequest', function () {
       var actionLink = 'linkToPostAddressForm';
+      var method = 'POST';
       var fakeForm = {address: 'address properties'};
 
       before(function () {
@@ -323,7 +266,7 @@ define(function (require) {
         });
         sinon.stub(ep.io, 'ajax');
         sinon.stub(ep.logger, 'error');
-        EventBus.trigger('address.createNewAddressRequest', actionLink);
+        EventBus.trigger('address.submitAddressRequest', method, actionLink);
 
         // get first argument passed to ep.io.ajax,
         // args[0] gets arguments passed in the first time ep.io.ajax is called
@@ -338,7 +281,7 @@ define(function (require) {
       });
 
       it('registers correct event listener', function () {
-        expect(EventBus._events['address.createNewAddressRequest']).to.be.length(1);
+        expect(EventBus._events['address.submitAddressRequest']).to.be.length(1);
       });
       it('should get an address form model', function () {
         expect(addressView.getAddressFormValues).to.be.calledOnce;
@@ -473,6 +416,31 @@ define(function (require) {
       });
     });
 
+    /* ==================== Create / Update Address ===================== */
+    describe('responds to event: address.countrySelectionChanged',
+      EventTestFactory.simpleEventTriggersEventTest('address.updateChosenCountryRequest', 'address.countrySelectionChanged'));
+
+    describe('responds to event: address.regionSelectionChanged',
+      EventTestFactory.simpleEventTriggersEventTest('address.updateChosenRegionRequest', 'address.regionSelectionChanged'));
+
+    // FIXME address.updateChosenCountryRequest cannot test because cannot mock the collection
+    // FIXME address.updateChosenRegionRequest cannot test because cannot mock the collection
+
+    function simpleAddressBtnClickedEventTest(expected, listener, method) {
+      return EventTestFactory.simpleTriggerEventTest(expected, function () {
+
+        it("registers correct event listener", function () {
+          expect(EventBus._events[listener]).to.have.length(1);
+        });
+
+        it('should trigger event: ' + expected, function () {
+          var href = 'fakeAddressSubmitHref';
+          EventBus.trigger(listener, href);
+
+          expect(EventBus.trigger).to.be.calledWith(expected, method, href);
+        });
+      });
+    }
   });
 
 });
