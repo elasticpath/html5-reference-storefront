@@ -84,12 +84,7 @@ define(function (require) {
         return defaultLayout;
       }
       else {
-        // checkin centralize reference
-        EventBus.trigger('layout.loadRegionContentRequest', {
-          region: 'appModalRegion',
-          module: 'auth',
-          view: 'LoginFormView'
-        });
+        Mediator.fire('mediator.loadRegionContent', 'loginModal');
       }
 
     };
@@ -125,7 +120,6 @@ define(function (require) {
      * @param href A href used to identify the address to be deleted in Cortex
      */
     EventBus.on('profile.deleteAddressConfirm', function (href) {
-      // checkIn centralize reference
       EventBus.trigger('layout.loadRegionContentRequest', {
         region: 'appModalRegion',
         module: 'profile',

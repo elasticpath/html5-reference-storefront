@@ -53,9 +53,7 @@ define(function (require) {
           sinon.stub(ep.app, 'isUserLoggedIn', function () {
             return false;
           });
-          sinon.spy(EventBus, 'trigger');
-
-          EventTestHelpers.unbind('layout.loadRegionContentRequest');
+          sinon.stub(Mediator, 'fire');
 
           this.controller = controller.DefaultCreateAddressView();
         });
@@ -63,16 +61,11 @@ define(function (require) {
         after(function () {
           $("#Fixtures").empty();
           ep.app.isUserLoggedIn.restore();
-          EventBus.trigger.restore();
-          EventTestHelpers.reset();
+          Mediator.fire.restore();
         });
 
         it('triggers a request to load the login form', function () {
-          expect(EventBus.trigger).to.be.calledWithExactly('layout.loadRegionContentRequest', {
-            region: 'appModalRegion',
-            module: 'auth',
-            view: 'LoginFormView'
-          });
+          expect(Mediator.fire).to.be.calledWith('mediator.loadRegionContent', 'loginModal');
         });
       });
     });

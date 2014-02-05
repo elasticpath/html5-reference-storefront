@@ -194,7 +194,6 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
      * Get form values from from markup, and save it into a object corresponding to Cortex address form
      * @returns {*} a filled cortex address form object
      */
-    // CheckIn convert using model
     function getAddressFormValues() {
       return {
         "address": {

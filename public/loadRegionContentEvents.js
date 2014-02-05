@@ -15,6 +15,39 @@ define(function(require) {
         view:'AppHeaderView'
       });
     },
+    cart: function(){
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region:'appMainRegion',
+        module:'cart',
+        view:'DefaultView'
+      });
+    },
+    category: function(href, pageHref) {
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region:'appMainRegion',
+        module:'category',
+        view:'DefaultView',
+        data: {
+          href: href,
+          pageHref: pageHref
+        }
+      });
+    },
+    checkout: function() {
+      EventBus.trigger('layout.loadRegionContentRequest', {
+        region:'appMainRegion',
+        module:'checkout',
+        view:'DefaultView'
+      });
+    },
+    editaddress: function(href) {
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region: 'appMainRegion',
+        module: 'address',
+        view: 'DefaultEditAddressView',
+        data: href
+      });
+    },
     index: function() {
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'appMainRegion',
@@ -30,37 +63,11 @@ define(function(require) {
         data:href
       });
     },
-    cart: function(){
-      EventBus.trigger('layout.loadRegionContentRequest',{
-        region:'appMainRegion',
-        module:'cart',
-        view:'DefaultView'
-      });
-    },
-    checkout: function() {
+    loginModal: function() {
       EventBus.trigger('layout.loadRegionContentRequest', {
-        region:'appMainRegion',
-        module:'checkout',
-        view:'DefaultView'
-      });
-    },
-    category: function(href, pageHref) {
-      EventBus.trigger('layout.loadRegionContentRequest',{
-        region:'appMainRegion',
-        module:'category',
-        view:'DefaultView',
-        data: {
-          href: href,
-          pageHref: pageHref
-        }
-      });
-    },
-    editaddress: function(href) {
-      EventBus.trigger('layout.loadRegionContentRequest',{
-        region: 'appMainRegion',
-        module: 'address',
-        view: 'DefaultEditAddressView',
-        data: href
+        region: 'appModalRegion',
+        module: 'auth',
+        view: 'LoginFormView'
       });
     },
     newaddressform: function() {

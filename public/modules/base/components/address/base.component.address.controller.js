@@ -39,12 +39,7 @@ define(function (require) {
       });
       return addressLayout;
     } else {
-      // CheckIn centralize this reference: loginModal
-      EventBus.trigger('layout.loadRegionContentRequest', {
-        region: 'appModalRegion',
-        module: 'auth',
-        view: 'LoginFormView'
-      });
+      Mediator.fire('mediator.loadRegionContent', 'loginModal');
     }
   };
 

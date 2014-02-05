@@ -623,12 +623,24 @@ define(function (require) {
 
     });
 
-    // CheckIn not fixed since function will change too
     describe('helper function: getAddressFormValues', function () {
       before(function () {
         this.model = new StandardAddressModel();
         this.view = new addressView.DefaultAddressFormView({model: this.model});
+
+        this.countryCollection = new Backbone.Collection([
+          new CountryModel()
+        ]);
+        this.countryView = new addressView.DefaultCountriesView({collection: this.countryCollection});
+
+        this.regionCollection = new Backbone.Collection([
+          new RegionModel()
+        ]);
+        this.regionView = new addressView.DefaultRegionsView({collection: this.regionCollection});
+
         renderViewIntoFixture(this.view);
+        $(this.view.regions.countriesRegion).append(this.countryView.render().$el);
+        $(this.view.regions.regionsRegion).append(this.regionView.render().$el);
 
         this.form = addressView.getAddressFormValues();
       });
@@ -642,6 +654,7 @@ define(function (require) {
 
       it('returns a Object', function () {
         expect(this.form).to.be.instanceOf(Object);
+        expect(this.form).to.be.not.empty;
       });
       it('has address and name properties', function () {
         expect(this.form).to.have.property('address');
@@ -652,8 +665,8 @@ define(function (require) {
         expect(addObj).to.have.property('street-address', this.model.get('streetAddress'));
         expect(addObj).to.have.property('extended-address', this.model.get('extendedAddress'));
         expect(addObj).to.have.property('locality', this.model.get('city'));
-        expect(addObj).to.have.property('region', this.model.get('region'));
-        expect(addObj).to.have.property('country-name', this.model.get('country'));
+        expect(addObj).to.have.property('region', this.regionCollection.at(0).get('name'));
+        expect(addObj).to.have.property('country-name', this.countryCollection.at(0).get('name'));
         expect(addObj).to.have.property('postal-code', this.model.get('postalCode'));
       });
       it('saves name related form values into name property', function () {
