@@ -313,11 +313,11 @@ define(function (require) {
       });
     });
 
-    describe('DefaultCountriesView', function () {
+    describe('DefaultOptionItemView', function () {
 
       before(function () {
         this.model = new CountryModel();
-        this.view = new addressView.__test_only__.defaultCountryItemView({model: this.model});
+        this.view = new addressView.__test_only__.defaultOptionsItemView({model: this.model});
         this.view.render();
       });
 
@@ -345,7 +345,7 @@ define(function (require) {
       it('does no render selected attribute when model has no selected property', function () {
         var thisModel = new CountryModel();
         thisModel.unset('selected');
-        var thisView = new addressView.__test_only__.defaultCountryItemView({model: thisModel});
+        var thisView = new addressView.__test_only__.defaultOptionsItemView({model: thisModel});
         thisView.render();
 
         expect(thisView.$el.attr('selected')).to.be.undefined;
@@ -389,45 +389,6 @@ define(function (require) {
 
       describe('country selection changed',
         EventTestFactory.simpleSelectionChangedTest('address.countrySelectionChanged', '#Country'));
-    });
-
-    describe('DefaultRegionItemView', function () {
-
-      before(function () {
-        this.model = new RegionModel();
-        this.view = new addressView.__test_only__.defaultRegionItemView({model: this.model});
-        this.view.render();
-      });
-
-      after(function () {
-        delete(this.model);
-        delete(this.view);
-      });
-
-      it('renders as an instance of ItemView object', function () {
-        expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
-      });
-      it('renders as correct HTML element', function () {
-        expect(this.view.el.nodeName).to.equal('OPTION');
-      });
-      it('renders the display name', function () {
-        expect(this.view.$el.text()).to.have.string(this.model.get('displayName'));
-      });
-      it('renders value attribute with region code', function () {
-        expect(this.view.$el.attr('value')).to.be.equal(this.model.get('name'));
-      });
-
-      it('renders selected attribute when model has selected property', function () {
-        expect(this.view.$el.attr('selected')).to.be.equal('selected');
-      });
-      it('does no render selected attribute when model has no selected property', function () {
-        var thisModel = new RegionModel();
-        thisModel.unset('selected');
-        var thisView = new addressView.__test_only__.defaultRegionItemView({model: thisModel});
-        thisView.render();
-
-        expect(thisView.$el.attr('selected')).to.be.undefined;
-      });
     });
 
     describe('DefaultSelectionNoneOptionView', function () {
@@ -500,12 +461,12 @@ define(function (require) {
 
       describe('onRender', function () {
         beforeEach(function () {
-          sinon.spy($.prototype, 'hide');
+          sinon.spy($.prototype, 'slideUp');
           sinon.spy($.prototype, 'show');
         });
 
         afterEach(function () {
-          $.prototype.hide.restore();
+          $.prototype.slideUp.restore();
           $.prototype.show.restore();
         });
 
@@ -518,7 +479,7 @@ define(function (require) {
           var view = new addressView.DefaultRegionsView({collection: collection});
           view.render();
 
-          expect($.prototype.hide).to.be.calledOnce;
+          expect($.prototype.slideUp).to.be.calledOnce;
         });
 
         it('does not hide regionsRegion when no country is selected', function () {
@@ -531,7 +492,7 @@ define(function (require) {
           var view = new addressView.DefaultRegionsView({collection: collection});
           view.render();
 
-          expect($.prototype.hide).to.be.not.called;
+          expect($.prototype.slideUp).to.be.not.called;
           expect($.prototype.show).to.be.called;
         });
 

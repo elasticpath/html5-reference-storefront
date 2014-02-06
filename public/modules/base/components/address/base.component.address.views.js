@@ -100,22 +100,47 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       templateHelpers: viewHelpers
     });
 
-    var defaultCountryItemView = Marionette.ItemView.extend({
-      template: '#DefaultAddressCountryOptionTemplate',
+    /**
+     * Default Option View
+     * will render an option of a dropDown menu(select), set as selected if marked so in model
+     * @type Marionette.ItemView
+     */
+    var defaultOptionsItemView = Marionette.ItemView.extend({
+      template: '#DefaultAddressOptionTemplate',
       templateHelpers: viewHelpers,
       tagName: 'option',
       onRender: function() {
         // set dynamic attribute value + selected for wrapper tag
-        $(this.el).attr('value', this.model.get('name'));
+        var element = this.el;
+        $(element).attr('value', this.model.get('name'));
         if (this.model.get('selected')) {
-          $(this.el).attr('selected', true);
+          $(element).attr('selected', true);
         }
       }
     });
 
+    /**
+     * Select None Option ItemView
+     * will render an option representing no country / region selected. Used as emptyView for defaultRegionsView.
+     * @type Marionette.ItemView
+     */
+    var defaultSelectionNoneOptionView = Marionette.ItemView.extend({
+      template: '#DefaultAddressSelectNoneOptionTemplate',
+      templateHelpers: viewHelpers,
+      tagName: 'option',
+      attributes: {
+        'value': ''
+      }
+    });
+
+    /**
+     * Default Countries View
+     * renders a wrapper, select element, for country options collection
+     * @type Marionette.CompositeView
+     */
     var defaultCountriesView = Marionette.CompositeView.extend({
       template: '#DefaultAddressCountriesTemplate',
-      itemView: defaultCountryItemView,
+      itemView: defaultOptionsItemView,
       templateHelpers: viewHelpers,
       itemViewContainer: 'select',
       collectionEvents: {
@@ -138,32 +163,15 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       }
     });
 
-    var defaultRegionItemView = Marionette.ItemView.extend({
-      template: '#DefaultAddressRegionOptionTemplate',
-      templateHelpers: viewHelpers,
-      tagName: 'option',
-      onRender: function() {
-        // set dynamic attribute value + selected for wrapper tag
-        $(this.el).attr('value', this.model.get('name'));
-        if (this.model.get('selected')) {
-          $(this.el).attr('selected', true);
-        }
-      }
-    });
-
-    var defaultSelectionNoneOptionView = Marionette.ItemView.extend({
-      template: '#DefaultAddressSelectNoneOptionTemplate',
-      templateHelpers: viewHelpers,
-      tagName: 'option',
-      attributes: {
-        'value': ''
-      }
-    });
-
+    /**
+     * Default Regions View
+     * renders a wrapper, select element, for region options collection
+     * @type Marionette.CompositeView
+     */
     var defaultRegionsView = Marionette.CompositeView.extend({
       template: '#DefaultAddressRegionsTemplate',
       emptyView: defaultSelectionNoneOptionView,
-      itemView: defaultRegionItemView,
+      itemView: defaultOptionsItemView,
       templateHelpers: viewHelpers,
       itemViewContainer: 'select',
       collectionEvents: {
@@ -181,7 +189,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
         // ---- option to show consistency. when no country is selected, no regionLink is provide, and
         // so regions collection didn't fetch, collection.parse wasn't called, and thus collection.length = 0
         if(this.collection.length === 1) {
-          $('[data-region="addressRegionsRegion"]').hide();
+          $('[data-region="addressRegionsRegion"]').slideUp();
         }
         else {
           $('[data-region="addressRegionsRegion"]').show();
@@ -245,7 +253,6 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       var translatedMsgList = [];
 
       // make this a map, key is locale key
-      // chekin check with cortex team when getting null, change to generalSaveAddressFailedErrMsg
       var cortexMsgToKeyMap = {
         "No valid address fields specified" : 'generalSaveAddressFailedErrMsg',
         "family-name: may not be null" : 'missingFamilyNameErrMsg',
@@ -335,24 +342,23 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
     }
 
     var __test_only__ = {};
-    /* test-code */
     __test_only__.formatMsgAsList = formatMsgAsList;
-    __test_only__.defaultCountryItemView = defaultCountryItemView;
-    __test_only__.defaultRegionItemView = defaultRegionItemView;
+    __test_only__.defaultOptionsItemView = defaultOptionsItemView;
     __test_only__.defaultSelectionNoneOptionView = defaultSelectionNoneOptionView;
-    /* end-test-code */
 
     return {
+      /* test-code */
+      __test_only__: __test_only__,
+      /* end-test-code */
       DefaultAddressItemView: defaultAddressItemView,
       DefaultCreateAddressLayout: defaultCreateAddressLayout,
       DefaultEditAddressLayout: defaultEditAddressLayout,
       DefaultAddressFormView: defaultAddressFormView,
       DefaultCountriesView: defaultCountriesView,
-      DefaultRegionsView: defaultRegionsView,
 
+      DefaultRegionsView: defaultRegionsView,
       getAddressFormValues: getAddressFormValues,
       displayAddressFormErrorMsg: displayAddressFormErrorMsg,
-      translateErrorMessage: translateErrorMessage,
-      __test_only__: __test_only__
+      translateErrorMessage: translateErrorMessage
     };
   });

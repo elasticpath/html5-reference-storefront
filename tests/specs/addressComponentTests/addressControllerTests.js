@@ -103,7 +103,7 @@ define(function (require) {
       });
     });
 
-    describe('DefaultAddressFormView', function () {
+    describe('DefaultAddressFormController', function () {
       before(function () {
         $("#Fixtures").append(addressTemplate); // append templates
 
@@ -130,7 +130,7 @@ define(function (require) {
           this.regionDouble = DefaultViewTestHelper.TestDouble();
           addressView.DefaultRegionsView = this.regionDouble.View;
 
-          this.controller = controller.testVariables.defaultAddressFormView(undefined);
+          this.controller = controller.__test_only__.defaultAddressFormController(undefined);
           this.controller.render();
           this.controller.regionsRegion.on('show', function () {
             done();
@@ -176,7 +176,7 @@ define(function (require) {
           this.model = new Backbone.Model({
             country: 'CA' // this country code should match 1 of the countries in response
           });
-          this.controller = controller.testVariables.defaultAddressFormView(this.model);
+          this.controller = controller.__test_only__.defaultAddressFormController(this.model);
           this.controller.render();
           this.controller.regionsRegion.on('show', function () {
             done();
@@ -416,7 +416,7 @@ define(function (require) {
       });
     });
 
-    /* ==================== Create / Update Address ===================== */
+    /* ==================== Select Country / Region ===================== */
     describe('responds to event: address.countrySelectionChanged',
       EventTestFactory.simpleEventTriggersEventTest('address.updateChosenCountryRequest', 'address.countrySelectionChanged'));
 

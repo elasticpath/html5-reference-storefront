@@ -69,13 +69,8 @@
     <label for="Country" data-el-label="addressForm.country" class="control-label address-form-label">
       <span class="required-label">*</span> <%= E.getI18nLabel('addressForm.country') %></label>
     <div class="address-form-input">
-      <select id="Country" name="Country" class="form-control" >      </select>
+      <select id="Country" name="Country" class="form-control" >  </select>
     </div>
-  </script>
-
-  <!--Renders 1 single country option, e.g. <option value="CA" selected >Canada</option> -->
-  <script id="DefaultAddressCountryOptionTemplate" type="text/template">
-    <%= E.displayName %>
   </script>
 
   <!-- Renders a select dropdown menu wrapper to display select region options -->
@@ -87,8 +82,8 @@
     </div>
   </script>
 
-  <!--Renders 1 single region option, e.g. <option value="QC" selected >Quebec</option> -->
-  <script id="DefaultAddressRegionOptionTemplate" type="text/template">
+  <!--Renders 1 single country option, e.g. <option value="CA" selected >Canada</option> -->
+  <script id="DefaultAddressOptionTemplate" type="text/template">
     <%= E.displayName %>
   </script>
 
@@ -115,6 +110,7 @@
     </form>
   </script>
 
+  <!-- Renders a wrapper view around addressFormView to provide information such as title, edit btn -->
   <script id="DefaultEditAddressTemplate" type="text/template">
     <!-- defaultView, Layout tagName: div, class: create-address-container container-->
     <h3><%= E.getI18nLabel('addressForm.editAddressTitle') %></h3>

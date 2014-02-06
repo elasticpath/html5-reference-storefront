@@ -30,13 +30,16 @@ define(function (require) {
     }
   });
 
+  /**
+   * Model containing empty address information, and a link to post new address form to cortex server.
+   * @type Backbone.Model
+   */
   var createAddressModel = Backbone.Model.extend({
     url: ep.io.getApiContext() + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=addresses:addressform',
     parse: function (response) {
       var addressObj = {};
 
       if (response) {
-        addressObj = modelHelpers.parseAddress(response);
         addressObj.href = jsonPath(response, "$..links[?(@.rel=='createaddressaction')].href")[0];
       }
       else {

@@ -29,7 +29,7 @@ define(function (require) {
    * Instantiate an DefaultCreateAddressLayout and load views into corresponding regions on DefaultCreateAddressLayout.
    * @returns {Views.DefaultCreateAddressLayout} fully rendered DefaultCreateAddressLayout
    */
-  var defaultCreateAddressView = function () {
+  var defaultCreateAddressController = function () {
     // Ensure the user is authenticated before rendering the address form
     if (ep.app.isUserLoggedIn()) {
       var addressModel = new Models.CreateAddressModel();
@@ -40,7 +40,7 @@ define(function (require) {
       addressModel.fetch({
         success: function(response) {
           addressModel = response;
-          addressLayout.addressFormRegion.show(defaultAddressFormView(response));
+          addressLayout.addressFormRegion.show(defaultAddressFormController(response));
         }
       });
 
@@ -55,7 +55,7 @@ define(function (require) {
    * Instantiate an DefaultEditAddressLayout and load views into corresponding regions on DefaultEditAddressLayout.
    * @returns {Views.DefaultEditAddressLayout} fully rendered DefaultEditAddressLayout
    */
-  var defaultEditAddressView = function(href) {
+  var defaultEditAddressController = function(href) {
     var addressModel = new Models.AddressModel();
     var addressLayout = new Views.DefaultEditAddressLayout({
       model: addressModel
@@ -65,7 +65,7 @@ define(function (require) {
       url: ep.ui.decodeUri(href),
       success: function(response) {
         addressModel = response;
-        addressLayout.addressFormRegion.show(defaultAddressFormView(response));
+        addressLayout.addressFormRegion.show(defaultAddressFormController(response));
       }
     });
 
@@ -77,7 +77,7 @@ define(function (require) {
    * @param addressModel  data model of address to edit.
    * @returns {Views.DefaultAddressFormView}  fully rendered DefaultAddressFormView
    */
-  var defaultAddressFormView = function (addressModel) {
+  var defaultAddressFormController = function (addressModel) {
     var countriesView = new Views.DefaultCountriesView();
     var regionsView = new Views.DefaultRegionsView({
       collection: regionCollection
@@ -145,30 +145,43 @@ define(function (require) {
   }
 
   /* *************** Event Listeners: update chosen country / regions *************** */
-  EventBus.on('address.countrySelectionChanged', function(selectedCountry, regionsLink, selectedRegion) {
-    EventBus.trigger('address.updateChosenCountryRequest', selectedCountry, regionsLink, selectedRegion);
+  EventBus.on('address.countrySelectionChanged', function(countryCode, regionsLink, regionCode) {
+    EventBus.trigger('address.updateChosenCountryRequest', countryCode, regionsLink, regionCode);
   });
 
-  EventBus.on('address.regionSelectionChanged', function(selectedRegion) {
-    EventBus.trigger('address.updateChosenRegionRequest', selectedRegion);
+  EventBus.on('address.regionSelectionChanged', function(regionCode) {
+    EventBus.trigger('address.updateChosenRegionRequest', regionCode);
   });
 
-  EventBus.on('address.updateChosenCountryRequest', function(selectedCountry, regionsLink, selectedRegion) {
-    setSelectedCountry(selectedCountry);
+  /**
+   * Listening to update chosen country request. Will set the selected country in collection,
+   * and fetch region collection.
+   */
+  EventBus.on('address.updateChosenCountryRequest', function(countryCode, regionsLink, regionCode) {
+    setSelectedCountry(countryCode);
 
     if (addressFormView.regionsRegion.currentView) {
       ep.ui.startActivityIndicator(addressFormView.regionsRegion.currentView, 'small');
     }
 
-    fetchRegionCollection(regionsLink, selectedRegion);
+    fetchRegionCollection(regionsLink, regionCode);
   });
 
-  EventBus.on('address.updateChosenRegionRequest', function(selectedRegion) {
-    setSelectedRegion(selectedRegion);
+  EventBus.on('address.updateChosenRegionRequest', function(regionCode) {
+    setSelectedRegion(regionCode);
   });
 
-  function fetchRegionCollection(regionsLink, selectedRegion) {
-    if(selectedRegion && !regionsLink) {
+  /**
+   * Fetches the regions collection with given link, and set selected country.
+   * <li>If given a link, fetch the regions collection</li>
+   * <li>If no link given, will reset the region collection. This is in case a regions collection was loaded
+   * for some country, and then user select no country, no region should be loaded or selected.</li>
+   * <li>If given a regionCode value, will trigger event to set a selected region.</li>
+   * @param regionsLink link to fetch regions collection from Cortex server
+   * @param regionCode  code value of the region to select
+   */
+  function fetchRegionCollection(regionsLink, regionCode) {
+    if(regionCode && !regionsLink) {
       ep.logger.error('Fail to fetch regions collection, missing regions link');
       return;
     }
@@ -177,8 +190,8 @@ define(function (require) {
       regionCollection.fetch({
         url: regionCollection.getUrl(regionsLink),
         success: function(response) {
-          if (selectedRegion) {
-            EventBus.trigger('address.updateChosenRegionRequest', selectedRegion);
+          if (regionCode) {
+            EventBus.trigger('address.updateChosenRegionRequest', regionCode);
           }
 
           ep.ui.stopActivityIndicator(addressFormView.regionsRegion.currentView);
@@ -192,23 +205,31 @@ define(function (require) {
 
   }
 
-  function setSelectedCountry(selectedCountry) {
+  /**
+   * Set the selected country in collection with given country code.
+   * @param countryCode the code value of country to be selected.
+   */
+  function setSelectedCountry(countryCode) {
     var deselect = countryCollection.where({selected: true})[0];
     if (deselect) {
       deselect.unset('selected');
     }
 
-    var selected = countryCollection.where({name: selectedCountry})[0];
+    var selected = countryCollection.where({name: countryCode})[0];
     selected.set('selected', true);
   }
 
-  function setSelectedRegion(selectedRegion) {
+  /**
+   * Set the selected region in collection with given region code.
+   * @param regionCode the code value of region to be selected.
+   */
+  function setSelectedRegion(regionCode) {
     var deselect = regionCollection.where({selected: true})[0];
     if (deselect) {
       deselect.unset('selected');
     }
 
-    var selected = regionCollection.where({name: selectedRegion})[0];
+    var selected = regionCollection.where({name: regionCode})[0];
     selected.set('selected', true);
   }
 
@@ -218,7 +239,6 @@ define(function (require) {
    * will trigger request to get address form (to get action link to post form to)
    */
   EventBus.on('address.createAddressBtnClicked', function (href) {
-    debugger;
     EventBus.trigger('address.submitAddressRequest', 'POST', href);
   });
 
@@ -301,12 +321,14 @@ define(function (require) {
     ep.io.ajax(ajaxModel.toJSON());
   }
 
+  var __test_only__ = {};
+  __test_only__.defaultAddressFormController = defaultAddressFormController;
 
   return{
-    DefaultCreateAddressView: defaultCreateAddressView,
-    DefaultEditAddressView: defaultEditAddressView,
-    testVariables: {
-      defaultAddressFormView: defaultAddressFormView
-    }
+    /* test-code */
+    __test_only__: __test_only__,
+    /* end-test-code */
+    DefaultCreateAddressView: defaultCreateAddressController,
+    DefaultEditAddressView: defaultEditAddressController
   };
 });
