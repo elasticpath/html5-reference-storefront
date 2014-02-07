@@ -100,6 +100,13 @@ define(function(require) {
         data:id
       });
     },
+    registration: function() {
+      EventBus.trigger('layout.loadRegionContentRequest', {
+        region:'appMainRegion',
+        module:'registration',
+        view:'DefaultController'
+      });
+    },
     search: function(keywords) {
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'appMainRegion',

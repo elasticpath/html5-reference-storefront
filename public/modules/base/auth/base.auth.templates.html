@@ -34,8 +34,15 @@
       </div>
       <input id="OAuthScope" name="OAuthScope" list="oAuthScopeList" type="hidden" value="<%= E.scope%>">
       <input id="OAuthRole" name="OAuthRole" list="oAuthRoleList" type="hidden" value="REGISTERED">
-      <div class="form-group">
+      <div class="form-group row">
+        <div class="col-md-6">
           <button  class="btn-auth-login" data-cmd="login"><%= E.getI18nLabel('auth.login') %></button>
+        </div>
+        <div class="col-md-6">
+          <span class="pull-right">
+            <a href="#" data-cmd="register"><%= E.getI18nLabel('auth.register') %></a>
+          </span>
+        </div>
       </div>
     </form>
   </script>

@@ -1,0 +1,23 @@
+<!-- Copyright © 2014 Elastic Path Software Inc. All rights reserved. -->
+
+<div id="RegistrationTemplateContainer">
+  <!-- Registration Form Template -->
+  <script id="RegistrationFormTemplate" type="text/template">
+    <h3><%= E.getI18nLabel('registration.pageTitle') %></h3>
+
+    <div class="feedback-label registration-form-feedback-container" data-region="registrationFeedbackMsgRegion"></div>
+
+    <form role="form" method="POST" action="<%= E.postHref %>" class="form-horizontal">
+      <div data-region="registrationFormRegion"></div>
+
+      <div class="form-group container">
+        <button class="btn btn-primary registration-save-btn" data-el-label="registration.save"><%= E.getI18nLabel('registration.saveBtn') %></button>
+        <button class="btn registration-cancel-btn" data-el-label="registration.cancel"><%= E.getI18nLabel('registration.cancelBtn') %></button>
+      </div>
+    </form>
+  </script>
+
+  <script id="RegistrationFormErrorItemTemplate" type="text/template">
+    <%= E.error %>
+  </script>
+</div>

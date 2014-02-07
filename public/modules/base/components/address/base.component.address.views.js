@@ -337,7 +337,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
 
       // if there is more than 1 line, format it as list
       if (msgList.length > 1) {
-        formattedMsg = '<UL class="address-form-error-list">';
+        formattedMsg = '<UL class="error-list">';
         msgList.forEach(function (line) {
           formattedMsg += '<LI>' + line + '</LI>';
         });

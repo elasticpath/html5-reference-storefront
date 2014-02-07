@@ -24,6 +24,7 @@ define(function(require) {
         'profile': 'profile',
         'purchaseReceipt/:id': 'purchaseReceipt',
         'purchaseDetails/:id': 'purchaseDetails',
+        'registration' : 'registration',
         'search' : 'search',
         'search/:keywords' : 'search'
       },

@@ -33,15 +33,16 @@
     }
   },
   "auth": {
-    "loginMenu": "Login",
+    "badCredentialErrMsg": "Your username or password is invalid. ",
     "login": "Login",
+    "loginFormMissingFieldsErrMsg": "Username or password are missing. ",
+    "loginMenu": "Login",
     "loginTitle":"Login",
     "logout": "Logout",
-    "profile":"Profile",
     "password": "Password",
-    "userName": "Username",
-    "loginFormMissingFieldsErrMsg": "Username or password are missing. ",
-    "badCredentialErrMsg": "Your username or password is invalid. "
+    "profile":"Profile",
+    "register":"Register",
+    "userName": "Username"
   },
   "availability": {
     "ALWAYS": "Always",
@@ -181,5 +182,10 @@
     "COMPLETED": "Completed",
     "IN_PROGRESS": "In progress",
     "FAILED": "Failed"
+  },
+  "registration": {
+    "cancelBtn": "Cancel",
+    "pageTitle": "Register a New Account",
+    "saveBtn": "Save"
   }
 }
