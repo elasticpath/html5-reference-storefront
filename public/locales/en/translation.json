@@ -185,6 +185,21 @@
   },
   "registration": {
     "cancelBtn": "Cancel",
+    "errorMsg": {
+      "invalidEmailUsername": "Please enter a valid email address",
+      "invalidPassword": "Password must be at least 8 characters",
+      "missingEmailUsername": "Username is required",
+      "missingFirstName": "First Name is required",
+      "missingLastName": "Last Name is required",
+      "missingPassword": "Password is required"
+    },
+    "formLabel": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "emailUsername": "Email/Username",
+      "password": "Password",
+      "passwordConfirm": "Password Confirmation"
+    },
     "pageTitle": "Register a New Account",
     "saveBtn": "Save"
   }

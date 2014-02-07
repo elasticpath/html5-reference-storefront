@@ -28,6 +28,7 @@ var config = {
       'modelHelpers': 'helpers/model.helpers',
       'router': 'router',
       'viewHelpers': 'helpers/view.helpers',
+      'utils': 'utils/utils',
 
       'cortex': 'modules/base/cortex/base.cortex.controller', // used by Search module only, remove after redo search
       'app': 'modules/base/app/base.app.controller',
