@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ * Functional Storefront Unit Test - Address Component
+ */
 define(function(require) {
   var ep = require('ep');
   var EventBus = require('eventbus');
