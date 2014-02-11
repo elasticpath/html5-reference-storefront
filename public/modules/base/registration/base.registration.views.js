@@ -8,7 +8,6 @@ define(function (require) {
     var EventBus = require('eventbus');
     var Marionette = require('marionette');
     var ViewHelpers = require('viewHelpers');
-    var i18n = require('i18n');
     var ep = require('ep');
     var utils = require('utils');
 

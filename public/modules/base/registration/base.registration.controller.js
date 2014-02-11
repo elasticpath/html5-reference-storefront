@@ -12,6 +12,7 @@ define(function (require) {
     var Backbone = require('backbone');
 
     var View = require('registration.views');
+    var i18n = require('i18n');
     var template = require('text!modules/base/registration/base.registration.templates.html');
 
     $('#TemplateContainer').append(template);
@@ -34,6 +35,69 @@ define(function (require) {
 
       return registrationLayout;
     };
+
+    // ========================================
+    // CONTROLLER HELPER FUNCTIONS
+    // ========================================
+
+    /**
+     * Builds and returns a JSON object of name/values from the input fields of the registration form.
+     *
+     * @param form A DOM object representation of the registration form
+     * @returns JSON object
+     */
+    function getJSONFormData(form) {
+      var dataObj = {};
+      for (var i= 0, len = form.length; i < len; i++) {
+        var input = form[i];
+        // Add all form fields (EXCEPT the password confirmation field) to the data object
+        if (input.name && input.name !== 'passwordConfirm') {
+          dataObj[input.name] = input.value;
+        }
+      }
+      return JSON.stringify(dataObj);
+    }
+
+    /**
+     * Helper function to create a CollectionView based on the current state of the errors collection and
+     * render it in the feedback message region of the registration form layout.
+     */
+    function renderErrorMessagesToFeedbackRegion () {
+      var errorCollectionView = new View.RegistrationErrorCollectionView({
+        collection: formErrorsCollection
+      });
+
+      registrationLayout.registrationFeedbackMsgRegion.show(errorCollectionView);
+    }
+
+    /**
+     * Inspects the 'password' and 'passwordConfirm' inputs of a form DOM element (the registration form)
+     * and returns true if the values of the two fields match. If the values do not match, a localized
+     * error message is added to the collection of form errors so it can be displayed to the user.
+     *
+     * @param form The registration form DOM element whose password fields are to be validated
+     * @returns {boolean} True if the fields match, false if they do not match
+     */
+    function isPasswordConfirmed (form) {
+      if (form.password && form.passwordConfirm) {
+        var passwordValue = form.password.value;
+        var passwordConfirmValue = form.passwordConfirm.value;
+
+        if (passwordValue !== passwordConfirmValue) {
+          formErrorsCollection.add({
+            "error": i18n.t('registration.errorMsg.passwordsDoNotMatch')
+          });
+          return false;
+        }
+      } else {
+        ep.logger.warn("Registration form password fields are missing or mis-named");
+      }
+      return true;
+    }
+
+    // ========================================
+    // EVENT HANDLERS
+    // ========================================
 
     /**
      * Called when a submit URL for the registration form is successfully retrieved from Cortex.
@@ -75,8 +139,30 @@ define(function (require) {
       ep.io.ajax(ajaxModel.toJSON());
     });
 
-    EventBus.on('registration.submitFormFailed', function () {
-      // Generic fail message here
+    /**
+     * Called when an error other than an HTTP 400 is returned by Cortex when the registration form is submitted.
+     * Renders the appropriate localized error message to the feedback region of the layout.
+     */
+    EventBus.on('registration.submitFormFailed', function (response) {
+      // The return error message
+      var errorMsg = '';
+
+      switch (response.status) {
+        case 403:
+          errorMsg = i18n.t('registration.errorMsg.alreadyLoggedIn');
+          break;
+        case 409:
+          errorMsg = i18n.t('registration.errorMsg.usernameAlreadyExists');
+          break;
+        default:
+          errorMsg = i18n.t('registration.errorMsg.generic');
+      }
+
+      formErrorsCollection.add({
+        "error": errorMsg
+      });
+
+      renderErrorMessagesToFeedbackRegion();
     });
 
     /**
@@ -91,9 +177,6 @@ define(function (require) {
       // Get the array of translated error messages
       var translatedErrorsArr = View.translateRegistrationErrorMessage(errMsg);
 
-      // Empty the Collection of form errors
-      formErrorsCollection.reset();
-
       // Iterate over the array of error messages and add them to the Collection as Backbone Models
       for (var i = 0, len = translatedErrorsArr.length; i < len; i++) {
         formErrorsCollection.add({
@@ -101,11 +184,7 @@ define(function (require) {
         });
       }
 
-      var errorCollectionView = new View.RegistrationErrorCollectionView({
-        collection: formErrorsCollection
-      });
-
-      registrationLayout.registrationFeedbackMsgRegion.show(errorCollectionView);
+      renderErrorMessagesToFeedbackRegion();
     });
 
     EventBus.on('registration.submitFormSuccess', function() {
@@ -124,49 +203,40 @@ define(function (require) {
 
 
     /**
-     * Make a ajax POST request to cortex server with give registration form, and trigger corresponding events
+     * Make an AJAX POST request to cortex server with the given registration form, and trigger corresponding events
      * in case of success or error.
      *
      * @param form A registration form DOM object
      */
     EventBus.on('registration.submitForm', function(form) {
-      /**
-       * Builds and returns a JSON object of name/values from the input fields of the registration form.
-       *
-       * @param form A DOM object representation of the registration form
-       * @returns JSON object
-       */
-      function getJSONFormData(form) {
-        var dataObj = {};
-        for (var i= 0, len = form.length; i < len; i++) {
-          var input = form[i];
-          if (input.name) {
-            dataObj[input.name] = input.value;
-          }
-        }
-        return JSON.stringify(dataObj);
-      }
 
       var formData = getJSONFormData(form);
 
-      var ajaxModel = new ep.io.defaultAjaxModel({
-        type: 'POST',
-        url: form.action,
-        data: formData,
-        success: function() {
-          EventBus.trigger('registration.submitFormSuccess');
-        },
-        customErrorFn: function(response) {
-          if (response.status === 400) {
-            EventBus.trigger('registration.submitFormFailed.invalidFields', response.responseText);
-          }
-          else {
-            EventBus.trigger('registration.submitFormFailed');
-          }
-        }
-      });
+      // Remove any form errors that were previously generated before we make the AJAX request
+      formErrorsCollection.reset();
 
-      ep.io.ajax(ajaxModel.toJSON());
+      // Check that the password fields match before proceeding
+      if (isPasswordConfirmed(form)) {
+        var ajaxModel = new ep.io.defaultAjaxModel({
+          type: 'POST',
+          url: form.action,
+          data: formData,
+          success: function() {
+            EventBus.trigger('registration.submitFormSuccess');
+          },
+          customErrorFn: function(response) {
+            if (response.status === 400) {
+              EventBus.trigger('registration.submitFormFailed.invalidFields', response.responseText);
+            }
+            else {
+              EventBus.trigger('registration.submitFormFailed', response);
+            }
+          }
+        });
+        ep.io.ajax(ajaxModel.toJSON());
+      } else {
+        renderErrorMessagesToFeedbackRegion();
+      }
     });
 
     /**

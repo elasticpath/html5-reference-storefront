@@ -65,7 +65,6 @@ var config = {
       'purchaseinfo.models': 'modules/base/purchaseinfo/base.purchaseinfo.models',
       'purchaseinfo.views': 'modules/base/purchaseinfo/base.purchaseinfo.views',
       'registration': 'modules/base/registration/base.registration.controller',
-      'registration.models': 'modules/base/registration/base.registration.models',
       'registration.views': 'modules/base/registration/base.registration.views',
       'search': 'modules/base/search/base.search.controller',
       'search.models': 'modules/base/search/base.search.models',
