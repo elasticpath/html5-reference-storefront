@@ -22,14 +22,6 @@ define(function (require) {
       regions: {
         registrationFeedbackMsgRegion: '[data-region="registrationFeedbackMsgRegion"]',
         registrationFormRegion: '[data-region="registrationFormRegion"]'
-      },
-      events: {
-        'click [data-el-label="registration.save"]': function(event) {
-          event.preventDefault();
-          // Get the registration form and trigger an event to process it and send it to Cortex
-          var registrationForm = $(event.currentTarget).parents('form').get(0);
-          EventBus.trigger('registration.saveButtonClicked', registrationForm);
-        }
       }
     });
 
@@ -39,7 +31,15 @@ define(function (require) {
      */
     var registrationFormItemView = Marionette.ItemView.extend({
       template: '#RegistrationFormTemplate',
-      templateHelpers: ViewHelpers
+      templateHelpers: ViewHelpers,
+      events: {
+        'click [data-el-label="registration.save"]': function(event) {
+          event.preventDefault();
+          // Get the registration form and trigger an event to process it and send it to Cortex
+          var registrationForm = $(event.currentTarget).parents('form').get(0);
+          EventBus.trigger('registration.saveButtonClicked', registrationForm);
+        }
+      }
     });
 
     /**
@@ -87,8 +87,8 @@ define(function (require) {
 
     return {
       DefaultLayout: defaultLayout,
-      RegistrationErrorCollectionView: registrationErrorCollectionView,
       RegistrationFormItemView: registrationFormItemView,
+      RegistrationErrorCollectionView: registrationErrorCollectionView,
       translateRegistrationErrorMessage: translateRegistrationErrorMessage
     };
   }
