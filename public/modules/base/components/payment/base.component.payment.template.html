@@ -8,4 +8,74 @@
     <%= E.displayValue %>
   </script>
 
+  <!-- NOT USED -->
+  <script id="MockPaymentMethodFormTemplate" type="text/template">
+    <h1>New Payment Method (Mock)</h1>
+
+    <div class="payment-method-form-container">
+      <div class="form-group">
+        <label for="CardType" data-el-label="payment.cardType" class="control-label form-label"> <span
+          class="required-label">*</span> Card-Type</label>
+
+        <div class="form-input">
+          <select id="CardType" name="CardType" class="form-control">
+            <option value="master">Master</option>
+            <option value="visa">Visa</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="CardHolderName" data-el-label="payment.cardHolderName" class="control-label form-label"> <span
+          class="required-label">*</span> Card Holder's Name</label>
+
+        <div class="form-input">
+          <input id="CardHolderName" name="CardHolderName" class="form-control" type="text" autofocus="autofocus"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="CardNumber" data-el-label="payment.cardNum" class="control-label form-label"> <span
+          class="required-label">*</span> Credit Card Number</label>
+
+        <div class="form-input">
+          <input id="CardNumber" name="CardNumber" class="form-control" type="text"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="ExpiryMonth" data-el-label="payment.expiryDate" class="control-label form-label"> <span
+          class="required-label">*</span> Expiry Date</label>
+
+        <div class="form-input">
+          <select id="ExpiryMonth" name="ExpiryMonth" <!-- class="what boostrap class to use?" --> >
+            <!-- generate using function <%= E.generateMonthDropdown() %>-->
+            <option value="1">01</option>
+            <option value="2">02</option>
+          </select>
+          /
+          <select id="ExpiryYear" name="ExpiryYear" <!-- class="what boostra0p class to use?" --> >
+            <!-- generate using function <%= E.generateYearDropdown() %>-->
+            <option value="2014">2014</option>
+            <option value="2014">2015</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="SecurityCode" data-el-label="payment.securityCode" class="control-label form-label"> <span
+          class="required-label">*</span> Security Code</label>
+
+        <div class="form-input">
+          <input id="SecurityCode" name="SecurityCode" class="form-control" type="text"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group create-address-btn-container container">
+      <button class="btn btn-primary payment-save-btn" data-el-label="payment.create"><%= E.getI18nLabel('paymentForm.saveBtn') %></button>
+      <button class="btn payment-cancel-btn" data-el-label="addressForm.cancel"><%= E.getI18nLabel('paymentForm.cancelBtn') %></button>
+    </div>
+
+  </script>
 </div>
