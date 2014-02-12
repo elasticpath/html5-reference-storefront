@@ -3,6 +3,7 @@
  *
  *
  */
+/* jshint ignore: start */
 define(['ep','app', 'eventbus','backbone','cortex','jsonpath'],
   function(ep, app, EventBus, Backbone,Cortex){
 
@@ -124,3 +125,4 @@ define(['ep','app', 'eventbus','backbone','cortex','jsonpath'],
     }
   }
 );
+/* jshint ignore: end */

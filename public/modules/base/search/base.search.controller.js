@@ -3,6 +3,7 @@
  *
  *
  */
+/*jshint ignore: start*/
 define(['ep','eventbus','search.views','search.models','text!modules/base/search/base.search.templates.html'],
   function(ep,EventBus,View,Model,template){
 
@@ -94,3 +95,4 @@ define(['ep','eventbus','search.views','search.models','text!modules/base/search
     };
   }
 );
+/*jshint ignore: end*/

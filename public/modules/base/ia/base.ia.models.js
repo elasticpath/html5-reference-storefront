@@ -37,7 +37,7 @@ define(['ep','eventbus', 'backbone'],
             name:jsonPath(arrayObj, '$.name')[0],
             href:jsonPath(arrayObj, '$.self..href')[0],
             details:jsonPath(arrayObj, '$.details')[0]
-          }
+          };
 
           mainNavCollection.push(mainNavItem);
         }

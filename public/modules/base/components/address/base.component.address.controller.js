@@ -125,14 +125,9 @@ define(function (require) {
   /**
    * Listening to load default display address view request,
    * will load the default view in appMainRegion.
-   */
-  EventBus.on('address.loadAddressesViewRequest', loadAddressView);
-
-  /**
-   * Renders a Default Address ItemView with regions and models passed in
    * @param addressObj  contains region to render in and the model to render with
    */
-  function loadAddressView(addressObj) {
+  EventBus.on('address.loadAddressesViewRequest', function (addressObj) {
     try {
       var addressView = new Views.DefaultAddressItemView({
         model: addressObj.model
@@ -142,7 +137,7 @@ define(function (require) {
     } catch (error) {
       ep.logger.error('failed to load Address Views: ' + error.message);
     }
-  }
+  });
 
   /* *************** Event Listeners: update chosen country / regions *************** */
   EventBus.on('address.countrySelectionChanged', function(countryCode, regionsLink, regionCode) {

@@ -145,7 +145,7 @@ define(['ep', 'app', 'eventbus', 'ia.models', 'ia.views', 'text!modules/base/ia/
           subCategoryNavRegion.show(subCatView);
         },
         error:function(response){
-          EventBus.trigger('log.error','error getting sub category navigation collection: ' + response)
+          EventBus.trigger('log.error','error getting sub category navigation collection: ' + response);
         }
       });
 
@@ -170,7 +170,7 @@ define(['ep', 'app', 'eventbus', 'ia.models', 'ia.views', 'text!modules/base/ia/
 
         },
         error:function(response){
-          EventBus.trigger('log.error','error getting item browse collection: ' + response)
+          EventBus.trigger('log.error','error getting item browse collection: ' + response);
 
         }
       });

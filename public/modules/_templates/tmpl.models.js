@@ -3,6 +3,7 @@
  *
  */
 define(function (require) {
+    var ep = require('ep');
     var Backbone = require('backbone');
     var ModelHelper = require('modelHelpers');
 

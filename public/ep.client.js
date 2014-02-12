@@ -7,6 +7,8 @@ define(function (require) {
     var _ = require('underscore');
     var Backbone = require('backbone');
     var Marionette = require('marionette');
+    var Modernizr = require('modernizr');
+
     var Mediator = require('mediator');
     var EventBus = require('eventbus');
     var Router = require('router');
@@ -38,10 +40,7 @@ define(function (require) {
     // determine if touch enabled
     ep.ui.touchEnabled = function () {
       // logic to return if this is a touch interface
-      if (Modernizr.touch) {
-        return true;
-      }
-      return false;
+      return Modernizr.touch;
     };
 
 
@@ -350,7 +349,7 @@ define(function (require) {
         ep.io.localStore.setItem('epUserPrefs', JSON.stringify(ep.app.epUserPrefs));
       }
       else {
-        ep.logger.warn('attmempt to set user pref but localStorage not supported')
+        ep.logger.warn('attempt to set user pref but localStorage not supported');
       }
       return val;
     };

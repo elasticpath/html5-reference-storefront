@@ -8,7 +8,7 @@ define(['ep', 'mediator', 'eventbus','backbone','marionette','i18n','appheader.m
   function(ep, Mediator, EventBus,Backbone, Marionette,i18n,Model){
     var viewHelpers = {
       getI18nLabel:function(key){
-        retVal = key;
+        var retVal = key;
         try{
           retVal = i18n.t(key);
         }

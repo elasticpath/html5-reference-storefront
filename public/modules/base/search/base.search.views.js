@@ -3,6 +3,7 @@
  *
  *
  */
+/* jshint ignore: start */
 define(['ep','backbone','eventbus'],
   function(ep,Backbone,EventBus){
 
@@ -71,3 +72,4 @@ define(['ep','backbone','eventbus'],
     }
   }
 );
+/* jshint ignore: end */
