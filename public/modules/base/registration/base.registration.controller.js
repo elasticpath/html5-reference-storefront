@@ -63,6 +63,8 @@ define(function (require) {
      * render it in the feedback message region of the registration form layout.
      */
     function renderErrorMessagesToFeedbackRegion () {
+      View.clearPasswordFields(registrationLayout.registrationFormRegion);
+
       var errorCollectionView = new View.RegistrationErrorCollectionView({
         collection: formErrorsCollection
       });
@@ -91,6 +93,7 @@ define(function (require) {
         }
       } else {
         ep.logger.warn("Registration form password fields are missing or mis-named");
+        return false;
       }
       return true;
     }
@@ -209,7 +212,6 @@ define(function (require) {
      * @param form A registration form DOM object
      */
     EventBus.on('registration.submitForm', function(form) {
-
       var formData = getJSONFormData(form);
 
       // Remove any form errors that were previously generated before we make the AJAX request

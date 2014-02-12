@@ -86,10 +86,23 @@ define(function (require) {
       });
     }
 
+    /**
+     * A helper function to empty password fields in a given Marionette.Region.
+     * @param region A Marionette.Region
+     */
+    function clearPasswordFields(region) {
+      // If this is a populated Marionette.Region
+      if (region.$el) {
+        // Use jQuery to find password input fields and empty them
+        $(':password', region.$el).val("");
+      }
+    }
+
     return {
       DefaultLayout: defaultLayout,
       RegistrationFormItemView: registrationFormItemView,
       RegistrationErrorCollectionView: registrationErrorCollectionView,
+      clearPasswordFields: clearPasswordFields,
       translateRegistrationErrorMessage: translateRegistrationErrorMessage
     };
   }
