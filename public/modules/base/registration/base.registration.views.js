@@ -30,6 +30,7 @@ define(function (require) {
      * @type Marionette.ItemView
      */
     var registrationFormItemView = Marionette.ItemView.extend({
+      className: 'container',
       template: '#RegistrationFormTemplate',
       templateHelpers: ViewHelpers,
       events: {

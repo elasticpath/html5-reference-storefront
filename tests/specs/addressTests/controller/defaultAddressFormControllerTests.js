@@ -25,7 +25,11 @@ define(function(require) {
       var parsedJSONData = JSON.parse(_.clone(dataJSON)).countries;
       var fakeUrl = model.CountryCollection.prototype.url;
       var fakeAddressResponse = parsedJSONData.response;
-      this.server = controllerTestFactory.getFakeServer(fakeUrl, '', fakeAddressResponse);
+//      this.server = controllerTestFactory.getFakeServer(fakeUrl, '', fakeAddressResponse);
+      this.server = controllerTestFactory.getFakeServer({
+        response: fakeAddressResponse,
+        requestUrl: fakeUrl
+      });
     });
 
     after(function () {

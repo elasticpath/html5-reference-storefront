@@ -251,7 +251,17 @@ define(function (require) {
       }
     });
 
+    /* test-code */
+    var __test_only__ = {};
+    __test_only__.getJSONFormData = getJSONFormData;
+    __test_only__.renderErrorMessagesToFeedbackRegion = renderErrorMessagesToFeedbackRegion;
+    __test_only__.isPasswordConfirmed = isPasswordConfirmed;
+    /* end-test-code */
+
     return {
+      /* test-code */
+      __test_only__: __test_only__,
+      /* end-test-code */
       DefaultController: defaultController
     };
   }

@@ -6,8 +6,11 @@ define(function (require) {
     /*
      * Controller Tests
      */
-    // defaultEditAddressController Tests
-//    require('specs/addressTests/controller/defaultEditAddressControllerTests.js');
+    // Registration events tests
+    require('specs/registrationTests/controller/registrationEventsTests.js');
+
+    // Registration controller helper functions
+    require('specs/registrationTests/controller/registrationHelperTests.js');
 
     /*
      * View Tests
