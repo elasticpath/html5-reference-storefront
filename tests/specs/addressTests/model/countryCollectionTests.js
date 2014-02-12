@@ -9,7 +9,7 @@ define(function (require) {
   var _ = require('underscore');
 
   var models = require('address.models');
-  var dataJSON = require('text!/tests/data/address.json');
+  var dataJSON = require('text!../../../../tests/data/address.json');
   var modelHelpers = models.testVariable.modelHelpers;
 
   describe('Country Collection', function () {

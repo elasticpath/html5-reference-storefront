@@ -10,7 +10,7 @@ define(function (require) {
   var modelTestFactory = require('testfactory.model');
 
   var models = require('address.models');
-  var dataJSON = require('text!/tests/data/address.json');
+  var dataJSON = require('text!../../../../tests/data/address.json');
   var modelHelpers = models.testVariable.modelHelpers;
 
   describe('model helper functions', function () {

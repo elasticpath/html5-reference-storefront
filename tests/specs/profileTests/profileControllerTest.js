@@ -53,29 +53,24 @@ define(function (require) {
       });
       describe('called when user not logged in', function () {
         before(function () {
-          sinon.spy(EventBus, 'trigger');
+          sinon.stub(Mediator, 'fire');
           sinon.stub(ep.app, 'isUserLoggedIn', function () {
             return false;
           });
 
-          EventBus.unbind('layout.loadRegionContentRequest');  // isolate event
           this.viewLayout = new profileController.DefaultView();
         });
 
         after(function () {
           ep.app.isUserLoggedIn.restore();
-          EventBus.trigger.restore();
+          Mediator.fire.restore();
         });
 
         it('DefaultView should exist', function () {
           expect(this.viewLayout).to.exist;
         });
-        it('triggers layout.loadRegionContentRequest', function () {
-          expect(EventBus.trigger).to.be.calledWith('layout.loadRegionContentRequest');
-        });
         it('triggered with 2 arguments', function () {
-          var module = { module: "auth", region: "appModalRegion", view: "LoginFormView" };
-          expect(EventBus.trigger).to.be.calledWithExactly('layout.loadRegionContentRequest', module);
+          expect(Mediator.fire).to.be.calledWithExactly('mediator.loadRegionContent', 'loginModal');
         });
       });
     });

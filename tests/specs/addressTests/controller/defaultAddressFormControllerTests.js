@@ -15,7 +15,7 @@ define(function(require) {
   var view = require('address.views');
   var model = require('address.models');
   var template = require('text!modules/base/components/address/base.component.address.template.html');
-  var dataJSON = require('text!/tests/data/address.json');
+  var dataJSON = require('text!../../../../tests/data/address.json');
 
   describe('DefaultAddressFormController', function () {
     before(function () {
