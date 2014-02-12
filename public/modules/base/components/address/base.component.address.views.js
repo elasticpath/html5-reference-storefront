@@ -22,7 +22,16 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
     var defaultAddressItemView = Marionette.ItemView.extend({
       template: '#DefaultAddressTemplate',
       tagName: 'ul',
-      className: 'address-container'
+      className: 'address-container',
+      onRender: function() {
+        if (!this.model.get('region')) {
+          $('[data-el-value="address.region"]', this.$el).hide();
+        }
+
+        if (!this.model.get('city')) {
+          $('[data-el-value="address.city"]', this.$el).hide();
+        }
+      }
     });
 
     /**

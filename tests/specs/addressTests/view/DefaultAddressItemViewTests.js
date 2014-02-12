@@ -38,23 +38,6 @@ define(function (require) {
       $("#Fixtures").empty();
     });
 
-    describe('can render', function () {
-      before(function () {
-        this.view = new addressView.DefaultAddressItemView();
-      });
-
-      after(function () {
-        delete(this.view);
-      });
-
-      it('should be an instance of ItemView object', function () {
-        expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
-      });
-      it('render() should return the view object', function () {
-        expect(this.view.render()).to.be.equal(this.view);
-      });
-    });
-
     describe('renders correctly with all fields of address model', function () {
       before(function () {
         this.model = new StandardAddressModel();
@@ -67,6 +50,13 @@ define(function (require) {
       after(function () {
         delete(this.model);
         delete(this.view);
+      });
+
+      it('should be an instance of ItemView object', function () {
+        expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
+      });
+      it('render() should return the view object', function () {
+        expect(this.view.render()).to.be.equal(this.view);
       });
 
       it('should render as UL (unordered list)', function () {
@@ -126,6 +116,30 @@ define(function (require) {
         expect($('[data-el-value="address.extendedAddress"]', this.view.$el).text()).to.have.length(0);
       });
       // should I and how to other content are rendered with value?
+    });
+
+    describe('displays address smoothly when city or region absent', function () {
+      // prevent Beijing, , CN 001090394 from display
+      it("hides comma after region if region absent in model", function() {
+        var model = new StandardAddressModel();
+        model.set('region', undefined);
+
+        var view = new addressView.DefaultAddressItemView({model: model});
+        view.render();
+
+        expect($('[data-el-value="address.region"]', view.el).attr('style')).to.have.string("display: none");
+      });
+
+      it("hides comma after city if city absent in model", function () {
+        var model = new StandardAddressModel();
+        model.set('city', undefined);
+
+        var view = new addressView.DefaultAddressItemView({model: model});
+        view.render();
+
+        expect($('[data-el-value="address.city"]', view.el).attr('style')).to.have.string("display: none");
+
+      });
     });
   });
 
