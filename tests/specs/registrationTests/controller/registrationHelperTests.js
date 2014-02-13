@@ -7,7 +7,7 @@ define(function (require) {
 
   var ep = require('ep');
 
-  describe('Registration Module Controller Helper Functions', function () {
+  describe('Registration Module: Controller: Helper Functions', function () {
     var registrationController = require('registration'); // load controller file
 
     before(function() {
@@ -76,7 +76,7 @@ define(function (require) {
           var passwordInput = $('input[name="password"]',this.fakeFormEl).get(0);
           this.fakeFormEl.removeChild(passwordInput);
 
-          sinon.spy(ep.logger, 'warn');
+          sinon.stub(ep.logger, 'warn');
 
           registrationController.__test_only__.isPasswordConfirmed(this.fakeFormEl);
         });

@@ -8,7 +8,7 @@ define(function (require) {
   var ep = require('ep');
   var EventBus = require('eventbus');
 
-  describe('Registration Module General Events Tests', function () {
+  describe('Registration Module: Controller: General Events Tests', function () {
     var registrationController = require('registration'); // load controller file
     var registrationView = require('registration.views');
     var registrationTemplate = require('text!modules/base/registration/base.registration.templates.html');
@@ -91,7 +91,9 @@ define(function (require) {
         var passwordInput = $('<input name="password" value="password123" />');
         var passwordConfirmInput = $('<input name="passwordConfirm" value="password123" />');
 
+        // Some settings for our fakeServer
         this.fakeSubmitUrl = "/fakeSubmitUrl";
+        this.response = {responseText: "some response text"};
 
         this.fakeFormEl = $('<form></form>');
         this.fakeFormEl.append(passwordInput, passwordConfirmInput);
@@ -120,23 +122,14 @@ define(function (require) {
       });
       after(function() {
         delete(this.fakeFormEl);
-      });
-
-      describe('when the form has mismatched password fields', function() {
-        before(function() {
-          // pass a form with mismatched password fields
-        });
-        it('renders an error message to the feedback region', function() {
-
-        });
+        delete(this.fakeSubmitUrl);
+        delete(this.response);
       });
 
       describe('when the server returns a 400 error', function() {
 
         before(function(done) {
           sinon.spy(EventBus, 'trigger');
-
-          this.response = {responseText: "some response text"};
 
           this.fakeRegistrationServer = controllerTestFactory.getFakeServer({
             method: 'POST',
@@ -154,7 +147,6 @@ define(function (require) {
 
         after(function() {
           EventBus.trigger.restore();
-          delete(this.response);
         });
 
         it("triggers the 'registration.submitFormFailed.invalidFields' event", function() {
@@ -173,20 +165,68 @@ define(function (require) {
       });
 
       describe('when the server returns a 403 error', function() {
-        // fakeServer returns a 403 error
+        before(function(done) {
+          sinon.spy(EventBus, 'trigger');
 
-        // EventBus.trigger 'registration.submitFormFailed'
+          this.fakeRegistrationServer = controllerTestFactory.getFakeServer({
+            method: 'POST',
+            response: this.response,
+            responseCode: 403,
+            requestUrl: this.fakeSubmitUrl
+          });
+
+          EventBus.trigger('registration.submitForm', this.fakeFormEl.get(0));
+
+          EventBus.on('registration.submitFormFailed', function() {
+            done();
+          });
+        });
+
+        after(function() {
+          EventBus.trigger.restore();
+        });
+
+        it("triggers the 'registration.submitFormFailed' event", function() {
+          expect(EventBus.trigger).to.be.calledWith('registration.submitFormFailed');
+        });
+
+        it("renders an error message in the feedback area", function() {
+          // Check that the error message list has at least one list item
+          expect($('[data-region="registrationFeedbackMsgRegion"] li', this.view.$el).length).to.be.greaterThan(0);
+        });
       });
 
       describe('when the server returns a 200 error', function() {
-        // fakeServer returns a 200 error
+        before(function(done) {
+          sinon.spy(EventBus, 'trigger');
 
-        // EventBus.trigger 'registration.submitFormSuccess'
+          this.fakeRegistrationServer = controllerTestFactory.getFakeServer({
+            method: 'POST',
+            response: this.response,
+            responseCode: 200,
+            requestUrl: this.fakeSubmitUrl
+          });
+
+          EventBus.trigger('registration.submitForm', this.fakeFormEl.get(0));
+
+          EventBus.on('registration.submitFormSuccess', function() {
+            done();
+          });
+        });
+
+        after(function() {
+          EventBus.trigger.restore();
+        });
+
+        it("triggers the 'registration.submitFormSuccess' event", function() {
+          expect(EventBus.trigger).to.be.calledWith('registration.submitFormSuccess');
+        });
+
+        it("does not render an error message in the feedback area", function() {
+          // Check that the error message list has at least one list item
+          expect($('[data-region="registrationFeedbackMsgRegion"] li', this.view.$el).length).to.be.equal(0);
+        });
       });
-
-
     });
-
   });
-
 });
