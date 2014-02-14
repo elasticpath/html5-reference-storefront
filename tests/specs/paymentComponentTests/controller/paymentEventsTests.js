@@ -7,7 +7,7 @@ define(function (require) {
   var Backbone = require('backbone');
   var ep = require('ep');
 
-  describe('Payment Component: Controller', function () {
+  describe('Payment Controller: Events Tests', function () {
     var paymentController = require('payment');
     var paymentTemplate = require('text!modules/base/components/payment/base.component.payment.template.html');
 
