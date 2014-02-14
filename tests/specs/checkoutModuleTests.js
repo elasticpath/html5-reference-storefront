@@ -33,7 +33,7 @@ define(function (require) {
     require('specs/checkoutTests/view/checkoutSummaryViewTests.js');
 
     // Billing / Shipping Address Views Tests
-    require('specs/checkoutTests/view/billShipAddressViewsTests.js');
+    require('specs/checkoutTests/view/BillShipAddressViewsTests.js');
 
     // Shipping Option Views Tests
     require('specs/checkoutTests/view/shippingOptionViewsTests.js');

@@ -55,6 +55,10 @@ define(function (require) {
       });
     });
 
+<<<<<<< HEAD
+=======
+    // CHECKIN remove this
+>>>>>>> [CU-251] split checkout & Payment module unit tests
     describe('sortByAscAlphabeticOrder', function() {
       describe('given an unsorted addresses array and a property name string to sort by', function() {
         before(function() {
