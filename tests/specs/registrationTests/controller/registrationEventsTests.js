@@ -8,6 +8,8 @@ define(function (require) {
   var ep = require('ep');
   var EventBus = require('eventbus');
 
+  var EventTestFactory = require('testfactory.event');
+
   describe('Registration Module: Controller: General Events Tests', function () {
     var registrationController = require('registration'); // load controller file
     var registrationView = require('registration.views');
@@ -53,29 +55,11 @@ define(function (require) {
       });
     });
 
-    describe('responds to event: registration.submitFormSuccess', function() {
-      before(function() {
-        sinon.spy(EventBus, 'trigger');
+    describe('responds to event: registration.submitFormSuccess',
+      EventTestFactory.simpleEventTriggersEventTest('registration.navigateToReturnRoute', 'registration.submitFormSuccess'));
 
-        sinon.stub(ep.io.localStore, 'removeItem');
-
-        EventBus.trigger('registration.submitFormSuccess');
-      });
-
-      after(function() {
-        EventBus.trigger.restore();
-        ep.io.localStore.removeItem.restore();
-      });
-
-      it("Revokes the auth token and loads the login form", function() {
-        expect(ep.io.localStore.removeItem).to.be.calledWithExactly('oAuthToken');
-        expect(EventBus.trigger).to.be.calledWithExactly('layout.loadRegionContentRequest', {
-          region: 'appModalRegion',
-          module: 'auth',
-          view: 'LoginFormView'
-        });
-      });
-    });
+    describe('responds to event: registration.cancelButtonClicked',
+      EventTestFactory.simpleEventTriggersEventTest('registration.navigateToReturnRoute', 'registration.cancelButtonClicked'));
 
     /**
      * ======================
@@ -199,6 +183,7 @@ define(function (require) {
       describe('when the server returns a 200 error', function() {
         before(function(done) {
           sinon.spy(EventBus, 'trigger');
+          ep.router = new Marionette.AppRouter();
 
           this.fakeRegistrationServer = controllerTestFactory.getFakeServer({
             method: 'POST',

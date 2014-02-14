@@ -12,8 +12,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
     _.templateSettings.variable = 'E';
 
     var defaultView = function(options) {
-      var authLayout =  new View.DefaultView(options);
-      return authLayout;
+      return new View.DefaultView(options);
     };
 
 
@@ -116,6 +115,16 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
       else {
         EventBus.trigger('auth.loginFormValidationFailed', 'loginFormMissingFieldsErrMsg');
       }
+    });
+
+    /**
+     * Handler for the click event on the login form register link.
+     * Fires a mediator strategy with the return route.
+     */
+    EventBus.on('auth.loginFormRegisterLinkClicked', function (route) {
+      // Close the login form modal
+      $.modal.close();
+      Mediator.fire('mediator.registrationRequest', route);
     });
 
     /*

@@ -73,8 +73,9 @@ define(function (require) {
       describe('When called with an invalid form', function() {
         before(function() {
           // Remove one of the password inputs that the function is expecting
-          var passwordInput = $('input[name="password"]',this.fakeFormEl).get(0);
-          this.fakeFormEl.removeChild(passwordInput);
+          var passwordInput = this.fakeFormEl.children[0];
+
+          this.fakeFormEl = this.fakeFormEl.removeChild(passwordInput);
 
           sinon.stub(ep.logger, 'warn');
 

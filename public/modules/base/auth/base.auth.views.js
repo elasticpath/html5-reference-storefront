@@ -86,6 +86,8 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
       }
     });
 
+
+
     /*
      * Login Form View: login form and login button
      */
@@ -96,10 +98,17 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
       attributes: {
         "data-el-container":"global.loginMenu"
       },
-      events:{
-        'click .btn-auth-login':function(event) {
+      events: {
+        'click .btn-auth-login': function (event) {
           event.preventDefault();
           EventBus.trigger('auth.loginFormSubmitButtonClicked');
+        },
+        'click [data-cmd="register"]': function (event) {
+          event.preventDefault();
+          // Get the current route as an object
+          var currentRoute = ep.router.getCurrentRoute();
+
+          EventBus.trigger('auth.loginFormRegisterLinkClicked', currentRoute);
         }
       }
     });

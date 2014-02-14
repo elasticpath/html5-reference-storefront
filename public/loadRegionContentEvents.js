@@ -55,7 +55,7 @@ define(function(require) {
         view:'IndexLayout'
       });
     },
-    item: function(href) {
+    itemDetail: function(href) {
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'appMainRegion',
         module:'item',

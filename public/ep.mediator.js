@@ -131,6 +131,18 @@ define(function(require){
           ep.io.sessionStore.removeItem('addressFormReturnTo');   // clear sessionStorage
         }
       });
+    },
+    'mediator.registrationRequest': function(returnRoute) {
+      require(['ep'], function (ep) {
+        if (returnRoute) {
+          // Stringify the return route object so it can be stored in localStorage
+          var routeForStorage = JSON.stringify(returnRoute);
+          ep.io.sessionStore.setItem('registrationFormReturnTo', routeForStorage);
+
+          // Navigate to the registration route
+          ep.router.navigate(ep.app.config.routes.registration, true);
+        }
+      });
     }
   };
 

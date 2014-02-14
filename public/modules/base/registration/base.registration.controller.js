@@ -98,6 +98,48 @@ define(function (require) {
       return true;
     }
 
+    /**
+     * Attempts to parse a route (stored in JSON) from the 'registrationFormReturnTo' sessionStorage item.
+     *
+     * @returns {string} Undefined or the full route (including parameters) from sessionStorage
+     */
+    function getRouteObjFromStorage() {
+      // Attempt to get a stored route from sessionStorage
+      var storedRoute = ep.io.sessionStore.getItem('registrationFormReturnTo');
+
+      var finalRoute;
+
+      if (storedRoute) {
+        var storedRouteObj = {};
+
+        // Remove the return route from sessionStorage
+        ep.io.sessionStore.removeItem('registrationFormReturnTo');
+
+        // Attempt to parse the route object from the stored JSON
+        try {
+          storedRouteObj = JSON.parse(storedRoute);
+        } catch (error) {
+          ep.logger.error("Unable to parse JSON route from sessionStorage: " + error);
+        }
+
+        if (storedRouteObj.name) {
+          var urlParams = storedRouteObj.params;
+
+          // Get the corresponding route from our config file
+          if (_.has(ep.app.config.routes, storedRouteObj.name)) {
+            finalRoute = ep.app.config.routes[storedRouteObj.name];
+          }
+
+          // If there is an array of parameters, append them to the URL fragment
+          if (urlParams && urlParams.length) {
+            finalRoute = finalRoute + '/' + urlParams.join('/');
+          }
+        }
+      }
+
+      return finalRoute;
+    }
+
     // ========================================
     // EVENT HANDLERS
     // ========================================
@@ -143,6 +185,30 @@ define(function (require) {
     });
 
     /**
+     * Routes the user to a return route held in sessionStorage or back to the homepage
+     * @param showLogin {Boolean} Show the login form after navigating to the return route
+     */
+    EventBus.on('registration.navigateToReturnRoute', function (showLogin) {
+      var routeFromStorage = getRouteObjFromStorage();
+      if (routeFromStorage) {
+        // Navigate to the route and call its associated function
+        ep.router.navigate(routeFromStorage, true);
+      } else {
+        // Navigate to the homepage route
+        ep.router.navigate('', true);
+      }
+
+      if (showLogin) {
+        // Prompt the user to login
+        EventBus.trigger('layout.loadRegionContentRequest', {
+          region: 'appModalRegion',
+          module: 'auth',
+          view: 'LoginFormView'
+        });
+      }
+    });
+
+    /**
      * Called when an error other than an HTTP 400 is returned by Cortex when the registration form is submitted.
      * Renders the appropriate localized error message to the feedback region of the layout.
      */
@@ -176,7 +242,6 @@ define(function (require) {
      * NOTE: this is temporary until Cortex returns specific error codes/keys for localization mapping.
      */
     EventBus.on('registration.submitFormFailed.invalidFields', function (errMsg) {
-
       // Get the array of translated error messages
       var translatedErrorsArr = View.translateRegistrationErrorMessage(errMsg);
 
@@ -190,18 +255,14 @@ define(function (require) {
       renderErrorMessagesToFeedbackRegion();
     });
 
+    /**
+     * Handler for the event triggered in the success callback of the AJAX registration request to Cortex.
+     * Triggers an event to return the user to the page they were on prior to registration
+     */
     EventBus.on('registration.submitFormSuccess', function() {
-      // Revoke the public auth token by removing it from local storage
-      ep.io.localStore.removeItem('oAuthToken');
-
-      // TODO: load the referring route from sessionStorage
-
-      // Prompt the user to login
-      EventBus.trigger('layout.loadRegionContentRequest', {
-        region: 'appModalRegion',
-        module: 'auth',
-        view: 'LoginFormView'
-      });
+      // Load the referring route from sessionStorage
+      // The boolean parameter will cause the login form to be displayed after navigating to the route
+      EventBus.trigger('registration.navigateToReturnRoute', true);
     });
 
 
@@ -245,6 +306,14 @@ define(function (require) {
      * Event handler for the registration form save button click event.
      * Checks if the form parameter is a DOM element and then triggers the submitForm event.
      */
+    EventBus.on('registration.cancelButtonClicked', function() {
+      EventBus.trigger('registration.navigateToReturnRoute');
+    });
+
+    /**
+     * Event handler for the registration form save button click event.
+     * Checks if the form parameter is a DOM element and then triggers the submitForm event.
+     */
     EventBus.on('registration.saveButtonClicked', function(form) {
       if (_.isElement(form)) {
         EventBus.trigger('registration.submitForm', form);
@@ -256,8 +325,9 @@ define(function (require) {
     /* test-code */
     var __test_only__ = {};
     __test_only__.getJSONFormData = getJSONFormData;
-    __test_only__.renderErrorMessagesToFeedbackRegion = renderErrorMessagesToFeedbackRegion;
+    __test_only__.getRouteObjFromStorage = getRouteObjFromStorage;
     __test_only__.isPasswordConfirmed = isPasswordConfirmed;
+    __test_only__.renderErrorMessagesToFeedbackRegion = renderErrorMessagesToFeedbackRegion;
     /* end-test-code */
 
     return {

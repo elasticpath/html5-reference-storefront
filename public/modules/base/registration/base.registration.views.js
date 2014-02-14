@@ -39,6 +39,10 @@ define(function (require) {
           // Get the registration form and trigger an event to process it and send it to Cortex
           var registrationForm = $(event.currentTarget).parents('form').get(0);
           EventBus.trigger('registration.saveButtonClicked', registrationForm);
+        },
+        'click [data-el-label="registration.cancel"]': function(event) {
+          event.preventDefault();
+          EventBus.trigger('registration.cancelButtonClicked');
         }
       }
     });
