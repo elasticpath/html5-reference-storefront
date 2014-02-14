@@ -101,13 +101,13 @@ define(function (require) {
     /**
      * Attempts to parse a route (stored in JSON) from the 'registrationFormReturnTo' sessionStorage item.
      *
-     * @returns {string} Undefined or the full route (including parameters) from sessionStorage
+     * @returns {string} Undefined or the URL fragment (including parameters) from sessionStorage
      */
     function getRouteObjFromStorage() {
       // Attempt to get a stored route from sessionStorage
       var storedRoute = ep.io.sessionStore.getItem('registrationFormReturnTo');
 
-      var finalRoute;
+      var urlFragment;
 
       if (storedRoute) {
         var storedRouteObj = {};
@@ -123,21 +123,11 @@ define(function (require) {
         }
 
         if (storedRouteObj.name) {
-          var urlParams = storedRouteObj.params;
-
-          // Get the corresponding route from our config file
-          if (_.has(ep.app.config.routes, storedRouteObj.name)) {
-            finalRoute = ep.app.config.routes[storedRouteObj.name];
-          }
-
-          // If there is an array of parameters, append them to the URL fragment
-          if (urlParams && urlParams.length) {
-            finalRoute = finalRoute + '/' + urlParams.join('/');
-          }
+          urlFragment = ep.router.rebuildUrlFragment(ep.app.config.routes, storedRouteObj.name, storedRouteObj.params);
         }
       }
 
-      return finalRoute;
+      return urlFragment;
     }
 
     // ========================================
@@ -175,9 +165,6 @@ define(function (require) {
         url: ep.io.getApiContext() + '/registrations/' + ep.app.config.cortexApi.scope + '/newaccount/form',
         success: function(response) {
           EventBus.trigger('registration.requestFormSubmitUrlSuccess', response);
-        },
-        customErrorFn: function() {
-          ep.logger.error("Unable to retrieve registration form submit URL from Cortex");
         }
       });
 

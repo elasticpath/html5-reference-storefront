@@ -67,6 +67,28 @@ define(function(require) {
             params: this._extractParameters(route, fragment)
           };
         }
+      },
+      /**
+       * Rebuilds a URL fragment from a given route and optional parameters
+       * @param routeConfigObj An object containing a mapping of route names to fragments
+       * @param routeName The route name to use for the URL fragment
+       * @param urlParams {Array} Optional array of parameters to append to the URL fragment
+       * @returns {String} A complete URL fragment built from the supplied parameters and one
+       *                   that is suitable for passing directly to Backbone.Router.navigate
+       */
+      rebuildUrlFragment: function (routeConfigObj, routeName, urlParams) {
+        var fragment;
+
+        // Get the corresponding route from our config file
+        if (_.has(routeConfigObj, routeName)) {
+          fragment = routeConfigObj[routeName];
+        }
+
+        // If there is an array of parameters, append them to the URL fragment
+        if (urlParams && urlParams.length) {
+          fragment = fragment + '/' + urlParams.join('/');
+        }
+        return fragment;
       }
     });
 

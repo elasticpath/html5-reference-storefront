@@ -1,3 +1,9 @@
+/**
+ * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
+ *
+ * Functional Storefront Unit Test - Registration Module Views
+ */
+
 define(function (require) {
   'use strict';
 

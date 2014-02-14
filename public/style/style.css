@@ -6046,8 +6046,9 @@ fieldset[disabled] .btn-auth-login.active {
   padding-right: 15px;
   padding-right: 0;
 }
-.register-cell a {
+.register-cell .btn-link {
   float: right !important;
+  padding-right: 0;
 }
 /*
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
@@ -8633,6 +8634,11 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   margin-bottom: 2px;
+}
+.btn.btn-link {
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .row {
   margin-bottom: 1rem;

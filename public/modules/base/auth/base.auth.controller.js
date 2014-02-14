@@ -118,13 +118,12 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
     });
 
     /**
-     * Handler for the click event on the login form register link.
-     * Fires a mediator strategy with the return route.
+     * Handler for the click event on the login form register link. Fires a mediator strategy.
      */
-    EventBus.on('auth.loginFormRegisterLinkClicked', function (route) {
+    EventBus.on('auth.loginFormRegisterLinkClicked', function () {
       // Close the login form modal
       $.modal.close();
-      Mediator.fire('mediator.registrationRequest', route);
+      Mediator.fire('mediator.registrationRequest');
     });
 
     /*
