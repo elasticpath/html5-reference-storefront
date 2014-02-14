@@ -6000,6 +6000,55 @@ fieldset[disabled] .btn-auth-login.active {
   background-color: rgba(0, 163, 221, 0.667);
   border-color: rgba(0, 144, 196, 0.667);
 }
+.action-row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.action-row:before,
+.action-row:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.action-row:after {
+  clear: both;
+}
+.action-row:before,
+.action-row:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.action-row:after {
+  clear: both;
+}
+.login-cell {
+  position: relative;
+  float: left;
+  width: 50%;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-left: 0;
+}
+.register-cell {
+  position: relative;
+  float: left;
+  width: 50%;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-right: 0;
+}
+.register-cell a {
+  float: right !important;
+}
 /*
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *
