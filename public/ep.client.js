@@ -134,7 +134,17 @@ define(function (require) {
       var retVal = '';
 
       if (config && config.cortexApi && config.cortexApi.path) {
-        retVal = '/' + config.cortexApi.path;
+        /**
+         * In some scenarios (e.g. PhoneGap apps), the path to the Cortex API (as defined in ep.config.json) will not be
+         * a relative string like "integrator" but an absolute path like "http://54.200.118.70:13080/integrator"
+         *
+         * Only prepend the Cortex API path with a forward-slash if it is a relative path (does not start with 'http')
+         */
+        if (/^http/.test(config.cortexApi.path)) {
+          retVal = config.cortexApi.path;
+        } else {
+          retVal = '/' + config.cortexApi.path;
+        }
       }
       else {
         ep.logger.error('cortexApi context path is not defined.');
