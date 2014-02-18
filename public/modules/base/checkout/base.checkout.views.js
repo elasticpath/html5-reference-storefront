@@ -279,6 +279,7 @@ define(function (require) {
         // A jQuery selector for the DOM element to which an activity indicator should be applied.
         activityIndicatorEl: '[data-region="paymentMethodSelectorsRegion"]'
       },
+<<<<<<< HEAD
       onRender: function() {
         var oneTime = this.collection.where({oneTime: true})[0];
 
@@ -287,6 +288,8 @@ define(function (require) {
           this.collection.push(oneTime);
         }
       },
+=======
+>>>>>>> [CU-70] add "new payment form" and logics to save and cancel form.
       events: {
         'click [data-el-label="checkout.newPaymentMethodBtn"]': function (event) {
           event.preventDefault();

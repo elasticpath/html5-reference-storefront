@@ -35,16 +35,13 @@
   "auth": {
     "badCredentialErrMsg": "Your username or password is invalid. ",
     "login": "Login",
-<<<<<<< HEAD
-    "loginTitle": "Login",
-    "logout": "Logout",
-    "profile": "Profile",
-=======
     "loginFormMissingFieldsErrMsg": "Username or password are missing. ",
     "loginMenu": "Login",
     "loginTitle":"Login",
     "logout": "Logout",
->>>>>>> INT
+    "loginTitle": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
     "password": "Password",
     "profile":"Profile",
     "register":"Register",

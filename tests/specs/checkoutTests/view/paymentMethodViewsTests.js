@@ -4,7 +4,10 @@
  */
 define(function (require) {
   var ep = require('ep');
+<<<<<<< HEAD
   var Backbone = require('backbone');
+=======
+>>>>>>> [CU-70] add "new payment form" and logics to save and cancel form.
   var EventTestFactory = require('testfactory.event');
 
   describe('Checkout Payment Method Views', function () {

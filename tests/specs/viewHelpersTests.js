@@ -160,6 +160,7 @@ define(function (require) {
       });
     });
 
+<<<<<<< HEAD
     describe('getButtonDisabledAttr', function() {
       afterEach(function() {
         delete(this.retVal);
@@ -185,6 +186,8 @@ define(function (require) {
         });
       });
     });
+=======
+>>>>>>> [CU-70] add "new payment form" and logics to save and cancel form.
   });
 
 });
