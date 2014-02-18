@@ -22,7 +22,7 @@ define(function (require) {
        * @param submitOrderActionLink The action-link to which the submit order request is posted.
        * @returns {string} HTML disabled attribute or empty string
        */
-        // FIXME could this function be abstracted to be shared by cartSubmitBtn, itemAddToCartBtn, checkoutSubmitBtn etc etc?
+      // CHECKIN could this function be abstracted to be shared by cartSubmitBtn, itemAddToCartBtn, checkoutSubmitBtn etc etc?
       getSubmitOrderButtonDisabledAttr: function (submitOrderActionLink) {
         // complete purchase disabled by default
         var retVar = 'disabled="disabled"';
@@ -41,7 +41,7 @@ define(function (require) {
        * @param obj The checkout object being rendered (billing/shipping addresses and shipping options are supported)
        * @returns {string} HTML checked attribute or empty string
        */
-      getCheckoutRadioCheckedAttr: function(obj) {
+      getCheckoutRadioCheckedAttr: function (obj) {
         var checkedAttr = '';
 
         if (obj && obj.chosen === true) {
@@ -56,7 +56,7 @@ define(function (require) {
        * @param prefix text to prepend to the generated ID
        * @returns String an unique ID.
        */
-      getUniqueIdForFormInput: function(prefix) {
+      getUniqueIdForFormInput: function (prefix) {
         var uniqueId;
 
         if (prefix) {
@@ -74,6 +74,7 @@ define(function (require) {
      * Functions
      *
      * */
+    // FIXME convert to activity indicator
     // Set Checkout Button to Processing State
     function setCheckoutButtonProcessing() {
       $('.btn-cmd-submit-order').html('<img src="images/activity-indicator-strobe.gif" />');
@@ -121,7 +122,7 @@ define(function (require) {
     var checkoutAddressSelectorLayout = Marionette.Layout.extend({
       template: '#CheckoutAddressSelectorTemplate',
       templateHelpers: viewHelpers,
-      serializeData: function() {
+      serializeData: function () {
         // Append an extra value to the model to distinguish which type of address is to be rendered.
         var data = this.model.toJSON();
         data.addressType = this.options.addressType;
@@ -169,7 +170,7 @@ define(function (require) {
       },
       itemViewContainer: '[data-region="billingAddressSelectorsRegion"]',
       events: {
-        'click [data-el-label="checkout.newBillingAddressBtn"]': function(event) {
+        'click [data-el-label="checkout.newBillingAddressBtn"]': function (event) {
           event.preventDefault();
           EventBus.trigger('checkout.addNewAddressBtnClicked');
         }
@@ -200,7 +201,7 @@ define(function (require) {
       },
       itemViewContainer: '[data-region="shippingAddressSelectorsRegion"]',
       events: {
-        'click [data-el-label="checkout.newShippingAddressBtn"]': function(event) {
+        'click [data-el-label="checkout.newShippingAddressBtn"]': function (event) {
           event.preventDefault();
           EventBus.trigger('checkout.addNewAddressBtnClicked');
         }
@@ -289,6 +290,12 @@ define(function (require) {
       ui: {
         // A jQuery selector for the DOM element to which an activity indicator should be applied.
         activityIndicatorEl: '[data-region="paymentMethodSelectorsRegion"]'
+      },
+      events: {
+        'click [data-el-label="checkout.newPaymentMethodBtn"]': function (event) {
+          event.preventDefault();
+          EventBus.trigger('checkout.addNewPaymentMethodBtnClicked');
+        }
       }
     });
 

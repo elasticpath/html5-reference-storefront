@@ -6,7 +6,41 @@
  * The HTML5 Reference Storefront's MVC Views for a displaying payment.
  */
 define(function (require) {
+  var ep = require('ep');
   var Marionette = require('marionette');
+  var EventBus = require('eventbus');
+  var ViewHelpers = require('viewHelpers');
+
+  var viewHelpers = ViewHelpers.extend();
+
+  function getPaymentFormValues() {
+    return {
+      "cardType": $("#CardType").val(),
+      "name": $("#CardHolderName").val(),
+      "cardNumber": $("#CardNumber").val(),
+      "expiry": {
+        "month": $("#ExpiryMonth").val(),
+        "year": $("#ExpiryYear").val()
+      },
+      "securityCode": $("#SecurityCode").val()
+    };
+  }
+
+  /**
+   * Displays error message feedback for payment form operations
+   * @param errKey error message to display
+   */
+  // checkIn Can we abstract this into util?
+  function displayPaymentFormErrorMsg(errKey) {
+    if (!errKey) {
+      ep.logger.warn('displayPaymentFormErrorMsg called without error message');
+      return; // skip rest of the function
+    }
+
+    var errorMsg = viewHelpers.getI18nLabel(errKey);
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
+    $('[data-region="componentPaymentFeedbackRegion"]').html(errorMsg);
+  }
 
   /**
    * Default Payment Method ItemView
@@ -22,7 +56,38 @@ define(function (require) {
     }
   });
 
+  var defaultPaymentFormView = Marionette.ItemView.extend({
+    template: '#MockPaymentMethodFormTemplate',
+    templateHelpers: viewHelpers,
+    className: 'container',
+    events: {
+      'click [data-el-label="paymentForm.save"]': function (event) {
+        event.preventDefault();
+        var href = this.model.get('href');
+        if (href) {
+          EventBus.trigger('payment.savePaymentMethodBtnClicked', href);
+        } else {
+          ep.logger.warn('unable to retrieve url to post address form');
+        }
+      },
+      'click [data-el-label="paymentForm.cancel"]': function (event) {
+        event.preventDefault();
+        EventBus.trigger('payment.cancelFormBtnClicked');
+      }
+    }
+  });
+
+  var __test_only__ = {};
+  __test_only__.viewHelpers = viewHelpers;
+
   return {
-    DefaultPaymentItemView: defaultPaymentItemView
+    /* test-code */
+    __test_only__: __test_only__,
+    /* end-test-code */
+
+    DefaultPaymentItemView: defaultPaymentItemView,
+    DefaultPaymentFormView: defaultPaymentFormView,
+    getPaymentFormValues: getPaymentFormValues,
+    displayPaymentFormErrorMsg: displayPaymentFormErrorMsg
   };
 });

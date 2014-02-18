@@ -25,7 +25,7 @@ define(function (require) {
 
         this.server = getFakeCheckoutServer(parsedJSONData.zoom, this.parsedResponse);
 
-        this.view = new controller.DefaultView();
+        this.view = new controller.DefaultController();
         this.view.render();
 
         // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
@@ -97,7 +97,7 @@ define(function (require) {
 
         this.server = getFakeCheckoutServer(parsedJSONData.zoom, parsedFakeResponse);
 
-        this.view = new controller.DefaultView();
+        this.view = new controller.DefaultController();
         this.view.render();
 
         // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
@@ -159,7 +159,7 @@ define(function (require) {
 
         this.server = getFakeCheckoutServer(parsedJSONData.zoom, parsedFakeResponse);
 
-        this.view = new controller.DefaultView();
+        this.view = new controller.DefaultController();
         this.view.render();
 
         // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
@@ -248,7 +248,7 @@ define(function (require) {
 
         this.server = getFakeCheckoutServer(parsedJSONData.zoom, parsedFakeResponse);
 
-        this.view = new controller.DefaultView();
+        this.view = new controller.DefaultController();
         this.view.render();
 
         // Notify Mocha that the 'before' hook is complete when the checkout order region is shown
@@ -292,7 +292,7 @@ define(function (require) {
 
         this.server = getFakeCheckoutServer(parsedJSONData.zoom, parsedFakeResponse);
 
-        this.view = new controller.DefaultView();
+        this.view = new controller.DefaultController();
         this.view.render();
 
         // Notify Mocha that the 'before' hook is complete when the checkout order region is shown

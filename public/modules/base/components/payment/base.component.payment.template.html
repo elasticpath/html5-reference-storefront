@@ -8,26 +8,29 @@
     <%= E.displayValue %>
   </script>
 
-  <!-- NOT USED -->
+  <!-- Renders the Payment Method Form-->
   <script id="MockPaymentMethodFormTemplate" type="text/template">
-    <h1>New Payment Method (Mock)</h1>
+    <h1><%= E.getI18nLabel('paymentForm.formTitle') %></h1>
 
-    <div class="payment-method-form-container">
+    <div class="feedback-label address-form-feedback-container" data-region="componentPaymentFeedbackRegion"></div>
+
+    <form role="form" method="POST" class="form-horizontal payment-method-form-container container">
       <div class="form-group">
         <label for="CardType" data-el-label="payment.cardType" class="control-label form-label"> <span
-          class="required-label">*</span> Card-Type</label>
+          class="required-label">*</span><%= E.getI18nLabel('paymentForm.cardType') %></label>
 
         <div class="form-input">
           <select id="CardType" name="CardType" class="form-control">
-            <option value="master">Master</option>
-            <option value="visa">Visa</option>
+            <option value="American Express"><%= E.getI18nLabel('paymentForm.type.americanExp') %></option>
+            <option value="master"><%= E.getI18nLabel('paymentForm.type.master') %></option>
+            <option value="visa"><%= E.getI18nLabel('paymentForm.type.visa') %></option>
           </select>
         </div>
       </div>
 
       <div class="form-group">
         <label for="CardHolderName" data-el-label="payment.cardHolderName" class="control-label form-label"> <span
-          class="required-label">*</span> Card Holder's Name</label>
+          class="required-label">*</span><%= E.getI18nLabel('paymentForm.name') %></label>
 
         <div class="form-input">
           <input id="CardHolderName" name="CardHolderName" class="form-control" type="text" autofocus="autofocus"/>
@@ -36,7 +39,7 @@
 
       <div class="form-group">
         <label for="CardNumber" data-el-label="payment.cardNum" class="control-label form-label"> <span
-          class="required-label">*</span> Credit Card Number</label>
+          class="required-label">*</span><%= E.getI18nLabel('paymentForm.cardNumber') %></label>
 
         <div class="form-input">
           <input id="CardNumber" name="CardNumber" class="form-control" type="text"/>
@@ -45,37 +48,35 @@
 
       <div class="form-group">
         <label for="ExpiryMonth" data-el-label="payment.expiryDate" class="control-label form-label"> <span
-          class="required-label">*</span> Expiry Date</label>
+          class="required-label">*</span><%= E.getI18nLabel('paymentForm.expiry') %></label>
 
         <div class="form-input">
-          <select id="ExpiryMonth" name="ExpiryMonth" <!-- class="what boostrap class to use?" --> >
-            <!-- generate using function <%= E.generateMonthDropdown() %>-->
-            <option value="1">01</option>
-            <option value="2">02</option>
+          <select id="ExpiryMonth" name="ExpiryMonth">
+            <%= E.generateNumericOptions(1, 12) %>
           </select>
           /
-          <select id="ExpiryYear" name="ExpiryYear" <!-- class="what boostra0p class to use?" --> >
-            <!-- generate using function <%= E.generateYearDropdown() %>-->
-            <option value="2014">2014</option>
-            <option value="2014">2015</option>
+          <select id="ExpiryYear" name="ExpiryYear">
+            <%= E.generateNumericOptions(2014, 10) %>
           </select>
         </div>
       </div>
 
       <div class="form-group">
         <label for="SecurityCode" data-el-label="payment.securityCode" class="control-label form-label"> <span
-          class="required-label">*</span> Security Code</label>
+          class="required-label">*</span><%= E.getI18nLabel('paymentForm.securityCode') %></label>
 
         <div class="form-input">
           <input id="SecurityCode" name="SecurityCode" class="form-control" type="text"/>
         </div>
       </div>
-    </div>
 
-    <div class="form-group create-address-btn-container container">
-      <button class="btn btn-primary payment-save-btn" data-el-label="payment.create"><%= E.getI18nLabel('paymentForm.saveBtn') %></button>
-      <button class="btn payment-cancel-btn" data-el-label="addressForm.cancel"><%= E.getI18nLabel('paymentForm.cancelBtn') %></button>
-    </div>
+      <div class="form-group create-address-btn-container container">
+        <button class="btn btn-primary payment-save-btn" data-el-label="paymentForm.save">
+          <%= E.getI18nLabel('paymentForm.saveBtn') %></button>
+        <button class="btn payment-cancel-btn" data-el-label="paymentForm.cancel">
+          <%= E.getI18nLabel('paymentForm.cancelBtn') %></button>
+      </div>
+    </form>
 
   </script>
 </div>

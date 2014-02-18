@@ -132,6 +132,7 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
        * @param quantity  initial selected quantity
        * @returns {string}  options HTML markup of a given range
        */
+        // FIXME convert using generateNumericOptions
       createQuantityOptions:function(min, max, quantity) {
         var optionHtml = '';
         var selected = '';

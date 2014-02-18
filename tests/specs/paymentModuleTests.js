@@ -10,6 +10,9 @@ define(function (require) {
     /*
      * Controller Tests
      */
+    // defaultCreatePaymentController Tests
+    require('specs/paymentComponentTests/controller/defaultCreatePaymentControllerTests.js');
+
     // controller general Events Tests
     require('specs/paymentComponentTests/controller/paymentEventsTests.js');
 
@@ -18,12 +21,20 @@ define(function (require) {
      * View Tests
      */
     // DefaultPaymentItemView Tests
-    require('specs/paymentComponentTests/view/DefaultPaymentItemViewTests.js');
+    require('specs/paymentComponentTests/view/defaultPaymentItemViewTests.js');
+
+    // DefaultPaymentFormView Tests
+    require('specs/paymentComponentTests/view/defaultPaymentFormViewTests.js');
+
+    // ViewHelpers Tests
+    require('specs/paymentComponentTests/view/paymentHelpersTests.js');
 
 
     /*
      * Models Tests
      */
+    // paymentForm Model tests
+    require('specs/paymentComponentTests/model/paymentFormModelTests.js');
 
 
   });

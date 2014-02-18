@@ -4,6 +4,7 @@
  */
 define(function (require) {
   var ep = require('ep');
+  var EventTestFactory = require('testfactory.event');
 
   describe('Checkout Payment Method Views', function () {
     var views = require('checkout.views');
@@ -55,14 +56,28 @@ define(function (require) {
       it('render() should return the view object', function () {
         expect(this.view.render()).to.be.equal(this.view);
       });
-      it('renders the view contents', function () {
-        // View should contain a heading element and a <div> region for shipping options
-        expect(this.view.el.childElementCount).to.be.equal(2);
-        expect(this.view.$el.find('[data-region="paymentMethodSelectorsRegion"]')).to.be.length(1);
+      it('has a sub-title element', function () {
+        expect(this.view.$el.find('h2')).to.be.length(1);
+      });
+      it('has a addNewPaymentMethod button', function () {
+        expect(this.view.$el.find('button[data-el-label="checkout.newPaymentMethodBtn"]')).to.be.length(1);
       });
       it('has an emptyView', function() {
         expect(this.view.emptyView).to.be.ok;
       });
+      it('defines correct itemViewContainer', function () {
+        var containerDOM = '[data-region="paymentMethodSelectorsRegion"]';
+        expect(this.view.itemViewContainer).to.be.equal(containerDOM);
+        expect(this.view.$el.find(containerDOM)).to.be.length(1);
+      });
+      it('and defines a target render element for activityIndicator', function () {
+        expect(this.view.ui.activityIndicatorEl).to.be.ok;
+      });
+
+      describe('add new payment method button clicked',
+        EventTestFactory.simpleBtnClickTest('checkout.addNewPaymentMethodBtnClicked',
+          '[data-el-label="checkout.newPaymentMethodBtn"]'));
+
     });
 
   });

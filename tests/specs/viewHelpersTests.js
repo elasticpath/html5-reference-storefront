@@ -5,7 +5,7 @@ define(function (require) {
   var i18n = require('i18n');
   var ep = require('ep');
 
-  describe("View  Helpers", function () {
+  describe("View Helpers", function () {
     var helpers = require('viewHelpers');
 
     describe('getI18nLabel', function () {
@@ -117,6 +117,49 @@ define(function (require) {
         });
       });
     });
+
+    describe('generateNumericOptions', function () {
+      describe('given valid arguments', function() {
+        var range = 12;
+        before(function () {
+          this.result = helpers.generateNumericOptions(1, range);
+          $("#Fixtures").append(this.result);
+
+        });
+
+        after(function () {
+          delete(this.result);
+          $("#Fixtures").empty();
+        });
+
+        it('creates correct number of options', function () {
+          expect($('#Fixtures option')).to.have.length(range);
+        });
+      });
+
+      describe('given invalid arguments', function() {
+        before(function () {
+          sinon.stub(ep.logger, 'warn');
+
+          this.result = helpers.generateNumericOptions(undefined, undefined);
+        });
+
+        after(function () {
+          ep.logger.warn.restore();
+          delete(this.result);
+        });
+
+        it('logs warning', function() {
+          expect(ep.logger.warn).to.be.calledOnce;
+        });
+
+        it('return empty String', function() {
+          expect(this.result).to.be.a('string');
+        });
+
+      });
+    });
+
   });
 
 });

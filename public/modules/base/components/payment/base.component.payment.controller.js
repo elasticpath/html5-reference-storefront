@@ -9,37 +9,115 @@
 define(function (require) {
   var ep = require('ep');
   var EventBus = require('eventbus');
+  var Mediator = require('mediator');
 
-  var View = require('payment.views');
+  var Views = require('payment.views');
+  var Model = require('payment.models');
   var template = require('text!modules/base/components/payment/base.component.payment.template.html');
 
   $('#TemplateContainer').append(template);
 
   _.templateSettings.variable = 'E';
 
-  /* *************** Event Listeners Functions *************** */
+  var defaultCreatePaymentController = function () {
+    // Attempt to retrieve an order link from session storage (set by the checkout module)
+    var orderLink = ep.io.sessionStore.getItem('orderLink');
+
+    // Trigger an error if we are unable to retrieve a Cortex order link
+    if (orderLink) {
+      var paymentFormModel = new Model.NewPaymentModel();
+      var defaultView = new Views.DefaultPaymentFormView({
+        model: paymentFormModel
+      });
+
+      paymentFormModel.fetch({
+        url: paymentFormModel.getUrl(orderLink),
+        success: function (response) {
+          paymentFormModel = response;
+        }
+      });
+
+      return defaultView;
+    }
+    else {
+      ep.logger.error('unable to load new payment method form - missing order link data');
+      ep.router.navigate(ep.app.config.routes.cart, true);
+    }
+  };
+
+  /* *************** Event Listeners: add new payment method *************** */
+  function parsePaymentForm(values) {
+    var displayValue;
+    var value;
+
+    if (values && values.cardNumber) {
+      value = values.cardNumber;
+
+      if (value.length > 3) {
+        displayValue = "********" + value.substring(value.length - 4);
+      }
+    }
+
+    return {
+      "display-value": displayValue,
+      "value": value
+    };
+  }
+
+  function submitForm(data, link) {
+    var ajaxModel = new ep.io.defaultAjaxModel({
+      type: 'POST',
+      url: link,
+      data: JSON.stringify(data),
+      success: function () {
+        EventBus.trigger('payment.submitPaymentFormSuccess');
+      },
+      customErrorFn: function (response) {
+        EventBus.trigger('payment.submitPaymentFormFailed');
+      }
+    });
+
+    ep.io.ajax(ajaxModel.toJSON());
+  }
+
+  EventBus.on('payment.cancelFormBtnClicked', function () {
+    Mediator.fire('mediator.paymentFormComplete');
+  });
+
+  EventBus.on('payment.savePaymentMethodBtnClicked', function (href) {
+    var formObj = Views.getPaymentFormValues();
+    var formData = parsePaymentForm(formObj);
+
+    submitForm(formData, href);
+  });
+
+  EventBus.on('payment.submitPaymentFormSuccess', function () {
+    Mediator.fire('mediator.paymentFormComplete');
+  });
+
+  EventBus.on('payment.submitPaymentFormFailed', function () {
+    Views.displayPaymentFormErrorMsg('paymentForm.errorMsg.generalSavePaymentFailedErrMsg');
+  });
+
+  /* *********** Event Listeners: load display address view  *********** */
   /**
-   * Renders a Default Address ItemView with regions and models passed in
+   * Listening to load default display payment view request,
+   * will render a Default Address ItemView with regions and models passed in.
    * @param paymentMethod  contains region to render in and the model to render with
    */
-  function loadPaymentView(region, paymentMethodModel) {
+  EventBus.on('payment.loadPaymentMethodViewRequest', function (region, paymentMethodModel) {
     try {
-      var paymentView = new View.DefaultPaymentItemView({
+      var paymentView = new Views.DefaultPaymentItemView({
         model: paymentMethodModel
       });
 
       region.show(paymentView);
     } catch (error) {
-      ep.logger.error('failed to load Payment Method View: ' + error.message);
+      ep.logger.error('failed to load Payment Method Views: ' + error.message);
     }
-  }
+  });
 
-  /* *********** Event Listeners: load display address view  *********** */
-  /**
-   * Listening to load default display payment view request,
-   * will load the default view in specified region.
-   */
-  EventBus.on('payment.loadPaymentMethodViewRequest', loadPaymentView);
-
-  return { };
+  return {
+    DefaultCreatePaymentController: defaultCreatePaymentController
+  };
 });

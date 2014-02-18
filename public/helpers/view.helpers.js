@@ -68,6 +68,22 @@ define(function (require) {
 
     getStatusDisplayText:function(status){
       return  this.getI18nLabel('purchaseStatus.' + status);
+    },
+
+    generateNumericOptions: function(start, range) {
+      if (isNaN(start) || isNaN(range)) {
+        ep.logger.warn("generateNumericOptions viewHelper called with invalid argument.");
+        return '';
+      }
+
+      var max = start + range - 1;
+      var html = "";
+
+      for (var i = start; i <= max; i++) {
+        html += '<option value="' + i + '">' + i + '</option>\n';
+      }
+
+      return html;
     }
 
   };

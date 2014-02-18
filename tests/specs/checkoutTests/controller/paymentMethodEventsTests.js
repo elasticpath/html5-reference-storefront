@@ -15,7 +15,7 @@ define(function (require) {
     describe('Responds to event: checkout.paymentMethodRadioChanged',
       selectionChangedEventTestFactory('checkout.paymentMethodRadioChanged', 'checkout.updateChosenPaymentMethodRequest'));
 
-    describe('Responds to event: checkout.updateChosenPaymentMethodRequest', function() {
+    describe('Responds to event: checkout.updateChosenPaymentMethodRequest', function () {
       var fakeActionLink = 'fakeActionLink';
 
       before(function () {
@@ -77,9 +77,27 @@ define(function (require) {
         }));
     });
 
+    describe('Responds to event: checkout.addNewPaymentMethodBtnClicked', function () {
+      before(function () {
+        sinon.stub(Mediator, 'fire');
+        EventBus.trigger('checkout.addNewPaymentMethodBtnClicked');
+      });
+
+      after(function () {
+        Mediator.fire.restore();
+      });
+
+      it("registers correct event listener", function () {
+        expect(EventBus._events['checkout.addNewPaymentMethodBtnClicked']).to.have.length(1);
+      });
+
+      it("calls correct mediator strategy", function() {
+        expect(Mediator.fire).to.be.calledWithExactly('mediator.addNewPaymentMethodRequest', 'checkout');
+      });
+    });
   });
 
-  function selectionChangedEventTestFactory (eventListener, eventToTrigger) {
+  function selectionChangedEventTestFactory(eventListener, eventToTrigger) {
     return function () {
       before(function () {
         sinon.spy(EventBus, 'trigger');
@@ -92,7 +110,7 @@ define(function (require) {
         EventTestHelpers.reset();
       });
 
-      it('triggers event: checkout.updateChosenSelectionRequest', function() {
+      it('triggers event: checkout.updateChosenSelectionRequest', function () {
         expect(EventBus.trigger).to.be.calledWithExactly(eventToTrigger, 'fakeSelectAction');
       });
     };
