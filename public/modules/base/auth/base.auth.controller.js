@@ -1,11 +1,19 @@
 /**
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *
- *
+ * MVC controller that manages events to
+ *  - login and logout users
+ *  - render the profile drop-down menu
  *
  */
-define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!modules/base/auth/base.auth.templates.html'],
-  function(ep, App, Mediator, EventBus, Model, View, template){
+define(function (require) {
+    var ep = require('ep');
+    var Mediator = require('mediator');
+    var EventBus = require('eventbus');
+
+    var Model = require('auth.models');
+    var View = require('auth.views');
+    var template = require('text!modules/base/auth/base.auth.templates.html');
 
     $('#TemplateContainer').append(template);
 
@@ -18,23 +26,6 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
     // This variable is used to hold a reference to the LoginFormView - making it accessible to event handlers
     var loginFormView = {};
 
-    /*
-    *
-    * Functions
-    *
-    * */
-
-
-    // log user out
-    function logUserOut(){
-
-    }
-
-    /*
-    *
-    * Event Listeners
-    *
-    * */
     /*
      * Load login menu - load login form or profile menu depend on authentication state
      */
@@ -56,7 +47,6 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
           view: 'LoginFormView'
         });
       }
-
     });
 
     // auth menu request
@@ -69,7 +59,6 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
       });
 
     });
-
 
     /*
      *
@@ -86,7 +75,6 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
 
     });
 
-
     /*
      * Authentication Request Types:
      *  - Login (POST)
@@ -96,7 +84,6 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
     EventBus.on('auth.authenticationRequest', function(authObj) {
       ep.io.ajax(authObj);
     });
-
 
     /*
      * Login Button Clicked - submit login form to server
@@ -137,7 +124,6 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
      * handles both login and logout requests
      * uses different verbs - (POST/DELETE)
      *
-     *
      */
     EventBus.on('auth.generatePublicAuthTokenRequest', function() {
       var authString = 'grant_type=password&scope=' + ep.app.config.cortexApi.scope + '&role=PUBLIC';
@@ -159,7 +145,6 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
       EventBus.trigger('auth.authenticationRequest', logoutModel.attributes);
     });
 
-
     return {
       DefaultView:defaultView,
       LoginFormView: function(options) {
@@ -167,8 +152,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
         loginFormView = new View.LoginFormView(options);
         return loginFormView;
       },
-      ProfileMenuView: function() {return new View.ProfileMenuView(); },
-      logUserOut:logUserOut
+      ProfileMenuView: function() {return new View.ProfileMenuView(); }
     };
   }
 );
