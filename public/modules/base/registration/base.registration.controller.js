@@ -218,6 +218,8 @@ define(function (require) {
         "error": errorMsg
       });
 
+      // Re-enable the save button and render error messages
+      ep.ui.enableButton(registrationLayout.registrationFormRegion.currentView, 'saveButton');
       renderErrorMessagesToFeedbackRegion();
     });
 
@@ -239,6 +241,8 @@ define(function (require) {
         });
       }
 
+      // Re-enable the save button and render error messages
+      ep.ui.enableButton(registrationLayout.registrationFormRegion.currentView, 'saveButton');
       renderErrorMessagesToFeedbackRegion();
     });
 
@@ -285,6 +289,8 @@ define(function (require) {
         });
         ep.io.ajax(ajaxModel.toJSON());
       } else {
+        // Re-enable the save button and render error messages
+        ep.ui.enableButton(registrationLayout.registrationFormRegion.currentView, 'saveButton');
         renderErrorMessagesToFeedbackRegion();
       }
     });
@@ -302,6 +308,8 @@ define(function (require) {
      * Checks if the form parameter is a DOM element and then triggers the submitForm event.
      */
     EventBus.on('registration.saveButtonClicked', function(form) {
+      ep.ui.disableButton(registrationLayout.registrationFormRegion.currentView, 'saveButton');
+
       if (_.isElement(form)) {
         EventBus.trigger('registration.submitForm', form);
       } else {

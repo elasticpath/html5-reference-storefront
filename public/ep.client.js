@@ -314,6 +314,47 @@ define(function (require) {
       }
     };
 
+    /**
+     * Get a jQuery object from a given Marionette.View and ui hash element name.
+     * @param {Marionette.View} a Marionette View with a ui hash
+     * @param elementName the name assigned to the element in the view's ui hash
+     * @returns the jQuery object or null
+     */
+    ep.ui.getUIElementFromView = function (view, elementName) {
+      if ((view && elementName) && (view.ui && _.has(view.ui, elementName))) {
+        return view.ui[elementName];
+      }
+      return null;
+    };
+
+    // CHECKIN add comment
+    ep.ui.disableButton = function (view, buttonElementName) {
+      var $button = ep.ui.getUIElementFromView(view, buttonElementName);
+      if ($button) {
+        // Set the button's disabled property
+        $button.prop('disabled', true);
+
+        // Use the jQuery spin plugin to apply an activity indicator to the button
+        $button.spin('small');
+      } else {
+        ep.logger.error('disableButton function called without a valid view and button');
+      }
+    };
+
+    // CHECKIN add comment
+    ep.ui.enableButton = function (view, buttonElementName) {
+      var $button = ep.ui.getUIElementFromView(view, buttonElementName);
+      if ($button) {
+        // Set the button's disabled property
+        $button.prop('disabled', false);
+
+        // Use the jQuery spin plugin to apply an activity indicator to the button
+        $button.spin(false);
+      } else {
+        ep.logger.error('enableButton function called without a valid view and button');
+      }
+    };
+
     /*
      * Is IUser
      * */
