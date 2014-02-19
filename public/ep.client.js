@@ -335,7 +335,10 @@ define(function (require) {
         $button.prop('disabled', true);
 
         // Use the jQuery spin plugin to apply an activity indicator to the button
-        $button.spin('small');
+        $button.spin({
+          // These settings generate a small loading indicator without an overlay
+          lines: 8, length: 4, width: 3, radius: 5, zIndex: 1000, overlay: false
+        });
       } else {
         ep.logger.error('disableButton function called without a valid view and button');
       }

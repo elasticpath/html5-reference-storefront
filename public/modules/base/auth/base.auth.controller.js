@@ -15,6 +15,8 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
       return new View.DefaultView(options);
     };
 
+    // This variable is used to hold a reference to the LoginFormView - making it accessible to event handlers
+    var loginFormView = {};
 
     /*
     *
@@ -74,10 +76,12 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
      * Login Error Message Feedback
      */
     EventBus.on("auth.loginRequestFailed", function(msg) {
+      ep.ui.enableButton(loginFormView, 'loginButton');
       View.displayLoginErrorMsg(msg);
     });
 
     EventBus.on("auth.loginFormValidationFailed", function(msg) {
+      ep.ui.enableButton(loginFormView, 'loginButton');
       View.displayLoginErrorMsg(msg);
 
     });
@@ -98,6 +102,7 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
      * Login Button Clicked - submit login form to server
      */
     EventBus.on('auth.loginFormSubmitButtonClicked', function () {
+      ep.ui.disableButton(loginFormView, 'loginButton');
       var requestModel = View.getLoginRequestModel();
 
       if (requestModel.isComplete()) {
@@ -158,7 +163,9 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
     return {
       DefaultView:defaultView,
       LoginFormView: function(options) {
-        return new View.LoginFormView(options);
+        // Store a reference to the LoginFormView before returning it
+        loginFormView = new View.LoginFormView(options);
+        return loginFormView;
       },
       ProfileMenuView: function() {return new View.ProfileMenuView(); },
       logUserOut:logUserOut

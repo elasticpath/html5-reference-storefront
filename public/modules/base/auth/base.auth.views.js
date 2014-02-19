@@ -99,12 +99,16 @@ define(function (require) {
       attributes: {
         "data-el-container":"global.loginMenu"
       },
+      ui: {
+        loginButton: '.btn-auth-login',
+        registerButton: '.btn-auth-register'
+      },
       events: {
-        'click .btn-auth-login': function (event) {
+        'click @ui.loginButton': function (event) {
           event.preventDefault();
           EventBus.trigger('auth.loginFormSubmitButtonClicked');
         },
-        'click .btn-auth-register': function (event) {
+        'click @ui.registerButton': function (event) {
           event.preventDefault();
           EventBus.trigger('auth.loginFormRegisterLinkClicked');
         }

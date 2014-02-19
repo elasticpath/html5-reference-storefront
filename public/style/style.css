@@ -8629,8 +8629,7 @@ reference:
 http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of-ems/
 */
 .btn,
-.btn-lg,
-.btn[disabled] {
+.btn-lg {
   border-radius: 2px;
   -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
