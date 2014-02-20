@@ -14,7 +14,44 @@ define(function(require) {
   var model = require('address.models');
   var template = require('text!modules/base/components/address/base.component.address.template.html');
 
+  describe('Submit Address Enable/Disable Button Tests', function() {
+    before(function() {
+      sinon.stub(ep.io, 'ajax');
+      sinon.stub(view, 'translateErrorMessage');
+      sinon.stub(view, 'displayAddressFormErrorMsg');
+    });
+
+    after(function() {
+      ep.io.ajax.restore();
+      view.translateErrorMessage.restore();
+      view.displayAddressFormErrorMsg.restore();
+    });
+
+    describe('responds to event: address.createAddressBtnClicked',
+      EventTestFactory.createEventBusBtnEnablementTest('address.createAddressBtnClicked', 'disableButton'));
+
+    describe('responds to event: address.editAddressBtnClicked',
+      EventTestFactory.createEventBusBtnEnablementTest('address.editAddressBtnClicked', 'disableButton'));
+
+    describe('responds to event: address.submitAddressFormFailed',
+      EventTestFactory.createEventBusBtnEnablementTest('address.submitAddressFormFailed', 'enableButton'));
+
+    describe('responds to event: address.submitAddressFormFailed.invalidFields',
+      EventTestFactory.createEventBusBtnEnablementTest('address.submitAddressFormFailed.invalidFields', 'enableButton'));
+  });
+
   describe('Submit Address Events Tests', function () {
+    before(function() {
+      // Stub the enable/disable button functions as they will be tested separately
+      sinon.stub(ep.ui, 'disableButton');
+      sinon.stub(ep.ui, 'enableButton');
+    });
+
+    after(function() {
+      ep.ui.disableButton.restore();
+      ep.ui.enableButton.restore();
+    });
+
     describe('responds to event: address.createAddressBtnClicked',
       simpleAddressBtnClickedEventTest('address.submitAddressRequest', 'address.createAddressBtnClicked', 'POST'));
 

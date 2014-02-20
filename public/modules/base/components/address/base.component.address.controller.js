@@ -25,6 +25,10 @@ define(function (require) {
 
   var addressFormView = new Views.DefaultAddressFormView();
 
+  // Define the create and edit layouts here to make them available to event handlers
+  var createAddressLayout;
+  var editAddressLayout;
+
   /**
    * Instantiate an DefaultCreateAddressLayout and load views into corresponding regions on DefaultCreateAddressLayout.
    * @returns {Views.DefaultCreateAddressLayout} fully rendered DefaultCreateAddressLayout
@@ -33,18 +37,18 @@ define(function (require) {
     // Ensure the user is authenticated before rendering the address form
     if (ep.app.isUserLoggedIn()) {
       var addressModel = new Models.CreateAddressModel();
-      var addressLayout = new Views.DefaultCreateAddressLayout({
+      createAddressLayout = new Views.DefaultCreateAddressLayout({
         model: addressModel
       });
 
       addressModel.fetch({
         success: function(response) {
           addressModel = response;
-          addressLayout.addressFormRegion.show(defaultAddressFormController(response));
+          createAddressLayout.addressFormRegion.show(defaultAddressFormController(response));
         }
       });
 
-      return addressLayout;
+      return createAddressLayout;
 
     } else {
       Mediator.fire('mediator.loadRegionContent', 'loginModal');
@@ -57,7 +61,7 @@ define(function (require) {
    */
   var defaultEditAddressController = function(href) {
     var addressModel = new Models.AddressModel();
-    var addressLayout = new Views.DefaultEditAddressLayout({
+    editAddressLayout = new Views.DefaultEditAddressLayout({
       model: addressModel
     });
 
@@ -65,11 +69,11 @@ define(function (require) {
       url: ep.ui.decodeUri(href),
       success: function(response) {
         addressModel = response;
-        addressLayout.addressFormRegion.show(defaultAddressFormController(response));
+        editAddressLayout.addressFormRegion.show(defaultAddressFormController(response));
       }
     });
 
-    return addressLayout;
+    return editAddressLayout;
   };
 
   /**
@@ -228,12 +232,26 @@ define(function (require) {
     selected.set('selected', true);
   }
 
+  /**
+   * Re-enables the relevant address form submit button based on
+   * which form (create or edit) is currently being displayed.
+   */
+  function enableAddressFormSubmitButton() {
+    // Identify the button to re-enable by checking whether or not the createAddressLayout is closed
+    if (createAddressLayout && !createAddressLayout.isClosed) {
+      ep.ui.enableButton(createAddressLayout, 'createAddressButton');
+    } else {
+      ep.ui.enableButton(editAddressLayout, 'editAddressButton');
+    }
+  }
+
   /* *************** Event Listeners: create address  *************** */
   /**
    * Listening to create address button clicked signal,
    * will trigger request to get address form (to get action link to post form to)
    */
   EventBus.on('address.createAddressBtnClicked', function (href) {
+    ep.ui.disableButton(createAddressLayout, 'createAddressButton');
     EventBus.trigger('address.submitAddressRequest', 'POST', href);
   });
 
@@ -242,6 +260,7 @@ define(function (require) {
    * will trigger request to get address form (to get action link to post form to)
    */
   EventBus.on('address.editAddressBtnClicked', function(href) {
+    ep.ui.disableButton(editAddressLayout, 'editAddressButton');
     EventBus.trigger('address.submitAddressRequest', 'PUT', href);
   });
 
@@ -258,6 +277,7 @@ define(function (require) {
    * will display generic error message.
    */
   EventBus.on('address.submitAddressFormFailed', function () {
+    enableAddressFormSubmitButton();
     Views.displayAddressFormErrorMsg(i18n.t('addressForm.errorMsg.generalSaveAddressFailedErrMsg'));
   });
 
@@ -267,6 +287,8 @@ define(function (require) {
    * @param errMsg an error message, or a i18n key to the error message
    */
   EventBus.on('address.submitAddressFormFailed.invalidFields', function (errMsg) {
+    enableAddressFormSubmitButton();
+
     // in the future, also highlight the invalid input box
     var translatedMsg = Views.translateErrorMessage(errMsg);
     Views.displayAddressFormErrorMsg(translatedMsg);
