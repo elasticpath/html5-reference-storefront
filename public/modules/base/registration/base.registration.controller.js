@@ -308,9 +308,8 @@ define(function (require) {
      * Checks if the form parameter is a DOM element and then triggers the submitForm event.
      */
     EventBus.on('registration.saveButtonClicked', function(form) {
-      ep.ui.disableButton(registrationLayout.registrationFormRegion.currentView, 'saveButton');
-
       if (_.isElement(form)) {
+        ep.ui.disableButton(registrationLayout.registrationFormRegion.currentView, 'saveButton');
         EventBus.trigger('registration.submitForm', form);
       } else {
         ep.logger.error("Registration form parameter is not a valid HTML element");

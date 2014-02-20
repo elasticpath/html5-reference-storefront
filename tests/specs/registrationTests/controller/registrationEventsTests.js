@@ -32,6 +32,7 @@ define(function (require) {
       before(function() {
         this.fakeFormEl = document.createElement('form');
         sinon.spy(EventBus, 'trigger');
+        sinon.stub(ep.ui, 'disableButton');
 
         sinon.stub(ep.io, 'ajax');
 
@@ -40,11 +41,13 @@ define(function (require) {
 
       after(function() {
         EventBus.trigger.restore();
+        ep.ui.disableButton.restore();
         ep.io.ajax.restore();
         delete(this.fakeFormEl);
       });
 
-      it("given a valid HTML form, triggers the registration.submitForm event", function() {
+      it("given a valid HTML form, disables the save button and triggers the registration.submitForm event", function() {
+        expect(ep.ui.disableButton).to.be.calledOnce;
         expect(EventBus.trigger).to.be.calledWithExactly('registration.submitForm', this.fakeFormEl);
       });
 
@@ -213,5 +216,61 @@ define(function (require) {
         });
       });
     });
+
+    describe('responds to event: registration.submitFormFailed', function() {
+      before(function() {
+        sinon.stub(ep.ui, 'enableButton');
+        sinon.stub(Backbone.Collection.prototype, 'add');
+
+        EventBus.trigger('registration.submitFormFailed', {status: 'something'});
+      });
+
+      after(function() {
+        ep.ui.enableButton.restore();
+        Backbone.Collection.prototype.add.restore();
+      });
+
+      it('should add a generic error to the errors collection', function () {
+        expect(Backbone.Collection.prototype.add).to.be.calledWith(
+          { error: "registration.errorMsg.generic" }
+        );
+      });
+      it('should re-enable to save button', function() {
+        expect(ep.ui.enableButton).to.be.calledOnce;
+      });
+    });
+
+    describe('responds to event: registration.submitFormFailed.invalidFields', function() {
+      before(function() {
+        sinon.stub(ep.ui, 'enableButton');
+
+        EventBus.trigger('registration.submitFormFailed.invalidFields', "");
+      });
+
+      after(function() {
+        ep.ui.enableButton.restore();
+      });
+
+      it('should re-enable to save button', function() {
+        expect(ep.ui.enableButton).to.be.calledOnce;
+      });
+    });
+
+    describe('responds to event: registration.submitFormFailed.invalidFields', function() {
+      before(function() {
+        sinon.stub(ep.ui, 'enableButton');
+
+        EventBus.trigger('registration.submitFormFailed.invalidFields', "");
+      });
+
+      after(function() {
+        ep.ui.enableButton.restore();
+      });
+
+      it('should re-enable to save button', function() {
+        expect(ep.ui.enableButton).to.be.calledOnce;
+      });
+    });
+
   });
 });
