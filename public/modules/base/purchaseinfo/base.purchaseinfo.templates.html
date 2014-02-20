@@ -18,11 +18,25 @@
 
   <!-- Renders the detailed information about a purchase: summary, purchased items, billing address, payment method -->
   <script id="PurchaseInformationTemplate" type="text/temmplate">
-    <div data-region="purchaseSummaryRegion"></div>
-    <h3><%= E.getI18nLabel('purchaseInfo.itemsTitle') %></h3>
-    <div data-region="purchaseLineItemsRegion" class="purchase-items-container"></div>
-    <div data-region="purchaseBillingAddressRegion"></div>
-    <div data-region="purchasePaymentMethodsRegion"></div>
+
+    <div class="column-purchase-summary">
+      <div data-region="purchaseSummaryRegion"></div>
+    </div>
+
+    <div class="column-purchase-items">
+      <h3><%= E.getI18nLabel('purchaseInfo.itemsTitle') %></h3>
+      <div data-region="purchaseLineItemsRegion" class="purchase-items-container"></div>
+    </div>
+
+    <hr>
+
+    <div class="column-purchase-address">
+      <div data-region="purchaseBillingAddressRegion"></div>
+    </div>
+
+    <div class="column-purchase-payment">
+      <div data-region="purchasePaymentMethodsRegion"></div>
+    </div>
   </script>
 
   <script id="PurchaseSummaryTemplate" type="text/template">
@@ -68,7 +82,7 @@
 
   <!-- Purchase Line Item -->
   <script id="PurchaseLineItem" type="text/template">
-    <table class="table">
+    <table class="table table-striped">
       <tbody>
         <tr>
           <td>

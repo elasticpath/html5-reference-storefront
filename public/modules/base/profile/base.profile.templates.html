@@ -3,17 +3,27 @@
 <div id="ProfileTemplateContainer">
 
   <script type="text/template" id="ProfileMainTemplate">
+    <div class="profile-main-inner">
 
-    <div data-region="profileTitleRegion"></div>
-    <div data-region="profileSummaryRegion">
-      <div class="activity-indicator-container">
-        <img class="activity-indicator" src="images/activity-indicator-strobe.gif"/>
+      <div class="profile-group-personal">
+        <div data-region="profileTitleRegion"></div>
+        <div data-region="profileSummaryRegion">
+          <div class="activity-indicator-container">
+            <img class="activity-indicator" src="images/activity-indicator-strobe.gif"/>
+          </div>
+
+
+        </div>
+
+        <div data-region="profileAddressesRegion"></div>
+        <div data-region="profilePaymentMethodsRegion"></div>
+      </div>
+
+      <div class="profile-group-transactional">
+        <div data-region="profileSubscriptionSummaryRegion"></div>
+        <div data-region="profilePurchaseHistoryRegion"></div>
       </div>
     </div>
-    <div data-region="profileSubscriptionSummaryRegion"></div>
-    <div data-region="profilePurchaseHistoryRegion"></div>
-    <div data-region="profileAddressesRegion"></div>
-    <div data-region="profilePaymentMethodsRegion"></div>
 
   </script>
 

@@ -77,7 +77,7 @@ define(function (require) {
      */
     var purchaseInformationLayout = Marionette.Layout.extend({
       template:'#PurchaseInformationTemplate',
-      className:'purchase-information-container container',
+      className:'purchase-information-container',
       regions:{
         purchaseSummaryRegion:'[data-region="purchaseSummaryRegion"]',
         purchaseLineItemsRegion:'[data-region="purchaseLineItemsRegion"]',
