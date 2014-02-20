@@ -153,7 +153,7 @@ define(function (require) {
         delete(parsedFakeResponse._billingaddressinfo[0]._selector[0]._chosen);
         delete(parsedFakeResponse._deliveries[0]._element[0]._destinationinfo[0]._selector[0]._chosen);
         delete(parsedFakeResponse._deliveries[0]._element[0]._shippingoptioninfo[0]._selector[0]._chosen);
-        delete(parsedFakeResponse._paymentmethodinfo[0]._selector[0]._chosen);
+        delete(parsedFakeResponse._paymentmethodinfo[0]._paymentmethod[0]);
 
         this.parsedFakeResponse = parsedFakeResponse;
 

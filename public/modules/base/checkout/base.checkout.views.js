@@ -260,6 +260,10 @@ define(function (require) {
         }
       },
       onShow: function () {
+        if (this.model.get('oneTime')) {
+          $('label', this.$el).prepend('<span>New Payment: </span>');
+        }
+
         // Fire event to load the address itemView from component
         Mediator.fire('mediator.loadPaymentMethodViewRequest', {
           region: this.checkoutPaymentRegion,
@@ -290,6 +294,14 @@ define(function (require) {
       ui: {
         // A jQuery selector for the DOM element to which an activity indicator should be applied.
         activityIndicatorEl: '[data-region="paymentMethodSelectorsRegion"]'
+      },
+      onRender: function() {
+        var oneTime = this.collection.where({oneTime: true})[0];
+
+        if (oneTime) {
+          this.collection.remove(oneTime);
+          this.collection.push(oneTime);
+        }
       },
       events: {
         'click [data-el-label="checkout.newPaymentMethodBtn"]': function (event) {

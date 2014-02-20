@@ -27,10 +27,10 @@ define(function (require) {
         this.numChosenShippingAddresses = jsonPath(this.rawData, '$.._destinationinfo[0].._chosen.._description[0]').length;
         this.numChoiceShippingAddresses = jsonPath(this.rawData, '$.._destinationinfo[0].._choice')[0].length;
 
-        this.numChosenPaymentMethods = jsonPath(this.rawData, '$.._shippingoptioninfo[0].._chosen.._description[0]').length;
+        this.numChosenShippingOptions = jsonPath(this.rawData, '$.._shippingoptioninfo[0].._chosen.._description[0]').length;
         this.numChoiceShippingOptions = jsonPath(this.rawData, '$.._shippingoptioninfo[0].._choice')[0].length;
 
-        this.numChosenPaymentMethods = jsonPath(this.rawData, '$.._paymentmethodinfo[0].._chosen.._description[0]').length;
+        this.numChosenPaymentMethods = jsonPath(this.rawData, '$.._paymentmethodinfo.._paymentmethod[0]').length;
         this.numChoicePaymentMethods = jsonPath(this.rawData, '$.._paymentmethodinfo[0].._choice')[0].length;
       });
 
@@ -43,7 +43,7 @@ define(function (require) {
         delete(this.numChosenShippingAddresses);
         delete(this.numChoiceShippingAddresses);
 
-        delete(this.numChosenPaymentMethods);
+        delete(this.numChosenShippingOptions);
         delete(this.numChoiceShippingOptions);
 
         delete(this.numChosenPaymentMethods);
@@ -73,22 +73,22 @@ define(function (require) {
         expect(this.model.showPaymentMethods).to.be.ok;
       });
       it('has parsed the shipping total', function() {
-        expect(this.model.summary.shippingTotal).to.not.eql({});
+        expect(this.model.summary.shippingTotal).to.not.empty;
       });
       it('parsed a billingAddresses object with the correct number of addresses', function () {
-        expect(this.model.billingAddresses).to.be.not.eql([]);
-        expect(this.model.billingAddresses.length).to.be.eql(this.numChosenBillingAddresses + this.numChoiceBillingAddresses);
+        expect(this.model.billingAddresses).to.be.not.empty;
+        expect(this.model.billingAddresses.length).to.be.equal(this.numChosenBillingAddresses + this.numChoiceBillingAddresses);
       });
       it('parsed a shippingAddresses object with the correct number of addresses', function () {
-        expect(this.model.shippingAddresses).to.be.not.eql([]);
-        expect(this.model.billingAddresses.length).to.be.eql(this.numChosenShippingAddresses + this.numChoiceShippingAddresses);
+        expect(this.model.shippingAddresses).to.be.not.empty;
+        expect(this.model.billingAddresses.length).to.be.equal(this.numChosenShippingAddresses + this.numChoiceShippingAddresses);
       });
       it('parsed a shippingOptions object with the correct number of options', function() {
-        expect(this.model.shippingOptions).to.be.not.eql([]);
-        expect(this.model.shippingOptions.length).to.be.eql(this.numChosenPaymentMethods + this.numChoiceShippingOptions);
+        expect(this.model.shippingOptions).to.be.not.empty;
+        expect(this.model.shippingOptions.length).to.be.equal(this.numChosenShippingOptions + this.numChoiceShippingOptions);
       });
       it('parsed a paymentMethods object with the correct number of options', function() {
-        expect(this.model.paymentMethods.length).to.be.eql(this.numChosenPaymentMethods + this.numChoicePaymentMethods);
+        expect(this.model.paymentMethods.length).to.be.equal(this.numChosenPaymentMethods + this.numChoicePaymentMethods);
       });
     });
 

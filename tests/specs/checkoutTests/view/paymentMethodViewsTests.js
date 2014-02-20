@@ -4,11 +4,18 @@
  */
 define(function (require) {
   var ep = require('ep');
+  var Backbone = require('backbone');
   var EventTestFactory = require('testfactory.event');
 
   describe('Checkout Payment Method Views', function () {
     var views = require('checkout.views');
     var template = require('text!modules/base/checkout/base.checkout.templates.html');
+
+    var StandardPayment = Backbone.Model.extend({
+      defaults: {
+        displayValue: "**********6754"
+      }
+    });
 
     before(function () {
       $("#Fixtures").append(template);
@@ -46,8 +53,16 @@ define(function (require) {
 
     describe('PaymentMethodsCompositeView', function () {
       before(function () {
-        this.view = new views.PaymentMethodsCompositeView();
+        this.collection = new Backbone.Collection([
+          new StandardPayment()
+        ]);
+        this.view = new views.PaymentMethodsCompositeView({collection: this.collection});
         this.view.render();
+      });
+
+      after(function() {
+        delete(this.collection);
+        delete(this.view);
       });
 
       it('should be an instance of Marionette CompositeView object', function () {

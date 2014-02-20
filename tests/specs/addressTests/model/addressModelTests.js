@@ -31,8 +31,8 @@ define(function (require) {
         expect(modelHelpers.parseAddress).to.be.calledOnce;
       });
       it('returns non-empty address object', function () {
-        expect(this.model).to.be.instanceOf(Object);
-        expect(this.model).to.not.eql({});  // test it's not empty
+        expect(this.model).to.be.instanceOf(Object)
+          .and.not.empty;
       });
     });
 
@@ -51,7 +51,7 @@ define(function (require) {
       });
 
       it('returns empty object', function () {
-        expect(this.model).to.be.eql({});
+        expect(this.model).to.be.empty;
       });
     });
   });

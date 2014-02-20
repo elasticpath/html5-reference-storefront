@@ -55,7 +55,6 @@ define(function (require) {
       });
     });
 
-    // CHECKIN remove this
     describe('sortByAscAlphabeticOrder', function() {
       describe('given an unsorted addresses array and a property name string to sort by', function() {
         before(function() {
