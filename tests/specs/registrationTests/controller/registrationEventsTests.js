@@ -242,28 +242,14 @@ define(function (require) {
 
     describe('responds to event: registration.submitFormFailed.invalidFields', function() {
       before(function() {
+        sinon.spy(EventBus, 'trigger');
         sinon.stub(ep.ui, 'enableButton');
 
         EventBus.trigger('registration.submitFormFailed.invalidFields', "");
       });
 
       after(function() {
-        ep.ui.enableButton.restore();
-      });
-
-      it('should re-enable to save button', function() {
-        expect(ep.ui.enableButton).to.be.calledOnce;
-      });
-    });
-
-    describe('responds to event: registration.submitFormFailed.invalidFields', function() {
-      before(function() {
-        sinon.stub(ep.ui, 'enableButton');
-
-        EventBus.trigger('registration.submitFormFailed.invalidFields', "");
-      });
-
-      after(function() {
+        EventBus.trigger.restore();
         ep.ui.enableButton.restore();
       });
 

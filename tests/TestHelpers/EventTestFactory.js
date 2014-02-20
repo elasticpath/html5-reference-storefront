@@ -7,6 +7,7 @@
 define(function (require) {
   var EventBus = require('eventbus');
   var EventTestHelpers = require('testhelpers.event');
+  var ep = require('ep');
 
   return {
     /**
@@ -128,6 +129,7 @@ define(function (require) {
     },
 
     // FIXME check with arguments
+    // test triggered with event name, and other options, triggering with exact parameter
     simpleEventTriggersMultiArgsEventTest: function (expectedEvent, expectedArguments, testTriggerEventName) {
       return this.simpleTriggerEventTest(expectedEvent, function () {
 
@@ -145,7 +147,35 @@ define(function (require) {
           });
         });
       });
+    },
+
+    /**
+     * Create a test that triggers an EventBus event and watches to see if
+     * one of the enable or disable button functions are called.
+     *
+     * @param {String} eventBusEventName The name of the EventBus event to trigger
+     * @param {String} btnEnablementFnName The name of the button enablement function to spy - supported values are
+     *                 'enableButton' and 'disableButton'
+     * @returns {Function} A sinon/Mocha unit test function that can be supplied to a describe statement
+     */
+    createEventBusBtnEnablementTest: function (eventBusEventName, btnEnablementFnName) {
+      return function() {
+        before(function () {
+          sinon.spy(EventBus, 'trigger');
+          sinon.stub(ep.ui, btnEnablementFnName);
+
+          EventBus.trigger(eventBusEventName);
+        });
+
+        after(function () {
+          EventBus.trigger.restore();
+          ep.ui[btnEnablementFnName].restore();
+        });
+
+        it('should call the ' + btnEnablementFnName + ' function', function () {
+          expect(ep.ui[btnEnablementFnName]).to.be.calledOnce;
+        });
+      };
     }
-    // test triggered with event name, and other options, triggering with exact parameter
   };
 });
