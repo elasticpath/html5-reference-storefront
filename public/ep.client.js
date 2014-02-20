@@ -327,7 +327,12 @@ define(function (require) {
       return null;
     };
 
-    // CHECKIN add comment
+    /**
+     * Disables a button element in the given view by setting its disabled property
+     * and adding a spinner activity indicator to it.
+     * @param view {Marionette.View} A Marionette View with a ui hash in which the button element is defined.
+     * @param buttonElementName {String} The name of the button element as it appears in the ui hash of the view.
+     */
     ep.ui.disableButton = function (view, buttonElementName) {
       var $button = ep.ui.getUIElementFromView(view, buttonElementName);
       if ($button) {
@@ -344,7 +349,12 @@ define(function (require) {
       }
     };
 
-    // CHECKIN add comment
+    /**
+     * Enables a button element in the given view by removing its disabled property
+     * and removing a spinner activity indicator from it.
+     * @param view {Marionette.View} A Marionette View with a ui hash in which the button element is defined.
+     * @param buttonElementName {String} The name of the button element as it appears in the ui hash of the view.
+     */
     ep.ui.enableButton = function (view, buttonElementName) {
       var $button = ep.ui.getUIElementFromView(view, buttonElementName);
       if ($button) {
