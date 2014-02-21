@@ -327,7 +327,7 @@ define(function (require) {
 
       before(function () {
         sinon.spy(EventBus, 'trigger');
-        sinon.spy(view, 'setCheckoutButtonProcessing');
+        sinon.spy(ep.ui, 'disableButton');
 
         EventTestHelpers.unbind(unboundEventKey);
         EventBus.trigger('checkout.submitOrderBtnClicked', actionLink);
@@ -335,17 +335,17 @@ define(function (require) {
 
       after(function () {
         EventBus.trigger.restore();
-        view.setCheckoutButtonProcessing.restore();
+        ep.ui.disableButton.restore();
 
         EventTestHelpers.reset();
       });
 
-      it("triggers event: checkout.submitOrderRequest", sinon.test(function () {
+      it("triggers event: checkout.submitOrderRequest", function () {
         expect(EventBus.trigger).to.be.calledWithExactly(unboundEventKey, actionLink);
-      }));
-      it('calls View.setCheckoutButtonProcessing function', sinon.test(function () {
-        expect(view.setCheckoutButtonProcessing).to.be.called;
-      }));
+      });
+      it('calls ep.ui.disableButton function', function () {
+        expect(ep.ui.disableButton).to.be.calledOnce;
+      });
     });
 
     describe('Responds to event: checkout.submitOrderRequest', function () {

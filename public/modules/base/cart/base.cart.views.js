@@ -154,16 +154,6 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
     * Functions
     *
     * */
-    // Set Checkout Button to Processing State
-    function setCheckoutButtonProcessing(){
-      $('.btn-cmd-submit-order').html('<img src="images/activity-indicator-strobe.gif" />');
-
-    }
-    // Set Checkout Button to Ready State
-    function resetCheckoutButtonText(){
-      $('.btn-cmd-submit-order').html(viewHelpers.getI18nLabel('cart.submitOrder'));
-    }
-
     // Default Layout
     var defaultLayout = Backbone.Marionette.Layout.extend({
       template:'#DefaultCartLayoutTemplate',
@@ -454,8 +444,6 @@ define(['ep','marionette','i18n','eventbus','mediator','pace'],
       CartCheckoutActionView:cartCheckoutActionView,
       CartCheckoutMasterLayout:cartCheckoutMasterLayout,
       CartRemoveLineItemConfirmView: cartRemoveLineItemConfirmView,
-      setCheckoutButtonProcessing:setCheckoutButtonProcessing,
-      resetCheckoutButtonText:resetCheckoutButtonText,
       resetQuantity: resetQuantity
     };
   }
