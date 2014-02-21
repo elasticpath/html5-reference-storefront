@@ -50,7 +50,7 @@
   "newcap"        : true,
   "noempty"       : false,
   "nonew"         : true,
-  "nomen"         : true,
+  "nomen"         : false,
   "onevar"        : false,
   "plusplus"      : false,
   "sub"           : false,

@@ -39,6 +39,10 @@ define(function (require) {
       it('should be an instance of ItemView object', function () {
         expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
       });
+      it('should have a ui hash for the save and cancel buttons', function() {
+        expect(this.view).to.have.deep.property('ui.saveButton');
+        expect(this.view).to.have.deep.property('ui.cancelButton');
+      });
       it('render() should return the view object', function () {
         expect(this.view.render()).to.be.equal(this.view);
       });

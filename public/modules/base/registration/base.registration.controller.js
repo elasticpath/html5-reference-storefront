@@ -218,6 +218,8 @@ define(function (require) {
         "error": errorMsg
       });
 
+      // Re-enable the save button and render error messages
+      ep.ui.enableButton(registrationLayout.registrationFormRegion.currentView, 'saveButton');
       renderErrorMessagesToFeedbackRegion();
     });
 
@@ -239,6 +241,8 @@ define(function (require) {
         });
       }
 
+      // Re-enable the save button and render error messages
+      ep.ui.enableButton(registrationLayout.registrationFormRegion.currentView, 'saveButton');
       renderErrorMessagesToFeedbackRegion();
     });
 
@@ -285,6 +289,8 @@ define(function (require) {
         });
         ep.io.ajax(ajaxModel.toJSON());
       } else {
+        // Re-enable the save button and render error messages
+        ep.ui.enableButton(registrationLayout.registrationFormRegion.currentView, 'saveButton');
         renderErrorMessagesToFeedbackRegion();
       }
     });
@@ -303,6 +309,7 @@ define(function (require) {
      */
     EventBus.on('registration.saveButtonClicked', function(form) {
       if (_.isElement(form)) {
+        ep.ui.disableButton(registrationLayout.registrationFormRegion.currentView, 'saveButton');
         EventBus.trigger('registration.submitForm', form);
       } else {
         ep.logger.error("Registration form parameter is not a valid HTML element");

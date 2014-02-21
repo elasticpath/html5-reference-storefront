@@ -74,16 +74,6 @@ define(function (require) {
      * Functions
      *
      * */
-    // Set Checkout Button to Processing State
-    function setCheckoutButtonProcessing() {
-      $('.btn-cmd-submit-order').html('<img src="images/activity-indicator-strobe.gif" />');
-    }
-
-    // Set Checkout Button to Ready State
-    function resetCheckoutButtonText() {
-      $('.btn-cmd-submit-order').html(viewHelpers.getI18nLabel('checkout.submitOrder'));
-    }
-
     /**
      * Default Checkout Layout to be rendered into appMain Region.
      * Defines top level regions on checkout page.
@@ -348,10 +338,11 @@ define(function (require) {
       },
       ui: {
         // A jQuery selector for the DOM element to which an activity indicator should be applied.
-        activityIndicatorEl: '.checkout-sidebar-inner'
+        activityIndicatorEl: '.checkout-sidebar-inner',
+        submitOrderButton: '.btn-cmd-submit-order'
       },
       events: {
-        'click .btn-cmd-submit-order': function () {
+        'click @ui.submitOrderButton': function () {
           EventBus.trigger('checkout.submitOrderBtnClicked', this.model.get('submitOrderActionLink'));
         }
       }
@@ -369,8 +360,6 @@ define(function (require) {
       CheckoutShippingTotalView: checkoutShippingTotalView,
       CheckoutTaxTotalView: checkoutTaxTotalView,
       CheckoutTaxesCollectionView: checkoutTaxesCollectionView,
-      setCheckoutButtonProcessing: setCheckoutButtonProcessing,
-      resetCheckoutButtonText: resetCheckoutButtonText,
       testVariables: {
         viewHelpers: viewHelpers,
         PaymentMethodSelectorView: paymentMethodSelectorView

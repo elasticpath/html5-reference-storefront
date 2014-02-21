@@ -33,14 +33,18 @@ define(function (require) {
       className: 'container',
       template: '#RegistrationFormTemplate',
       templateHelpers: ViewHelpers,
+      ui: {
+        cancelButton: '[data-el-label="registration.cancel"]',
+        saveButton: '[data-el-label="registration.save"]'
+      },
       events: {
-        'click [data-el-label="registration.save"]': function(event) {
+        'click @ui.saveButton': function(event) {
           event.preventDefault();
           // Get the registration form and trigger an event to process it and send it to Cortex
           var registrationForm = $(event.currentTarget).parents('form').get(0);
           EventBus.trigger('registration.saveButtonClicked', registrationForm);
         },
-        'click [data-el-label="registration.cancel"]': function(event) {
+        'click @ui.cancelButton': function(event) {
           event.preventDefault();
           EventBus.trigger('registration.cancelButtonClicked');
         }
