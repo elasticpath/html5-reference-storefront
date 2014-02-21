@@ -33,15 +33,22 @@
     }
   },
   "auth": {
-    "loginMenu": "Login",
+    "badCredentialErrMsg": "Your username or password is invalid. ",
     "login": "Login",
+<<<<<<< HEAD
     "loginTitle": "Login",
     "logout": "Logout",
     "profile": "Profile",
-    "password": "Password",
-    "userName": "Username",
+=======
     "loginFormMissingFieldsErrMsg": "Username or password are missing. ",
-    "badCredentialErrMsg": "Your username or password is invalid. "
+    "loginMenu": "Login",
+    "loginTitle":"Login",
+    "logout": "Logout",
+>>>>>>> INT
+    "password": "Password",
+    "profile":"Profile",
+    "register":"Register",
+    "userName": "Username"
   },
   "availability": {
     "ALWAYS": "Always",
@@ -200,5 +207,29 @@
     "COMPLETED": "Completed",
     "IN_PROGRESS": "In progress",
     "FAILED": "Failed"
+  },
+  "registration": {
+    "cancelBtn": "Cancel",
+    "errorMsg": {
+      "alreadyLoggedIn": "You are already logged in. Please logout if you wish to register a new account",
+      "generic": "I'm sorry, there was an error registering the account. Please contact your system administrator.",
+      "invalidEmailUsername": "Please enter a valid email address",
+      "invalidPassword": "Password must be at least 8 characters",
+      "missingEmailUsername": "Username is required",
+      "missingFirstName": "First Name is required",
+      "missingLastName": "Last Name is required",
+      "missingPassword": "Password is required",
+      "passwordsDoNotMatch": "Your password and password confirmation must match",
+      "usernameAlreadyExists": "A customer already exists with the given username"
+    },
+    "formLabel": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "emailUsername": "Email/Username",
+      "password": "Password",
+      "passwordConfirm": "Password Confirmation"
+    },
+    "pageTitle": "Register a New Account",
+    "saveBtn": "Save"
   }
 }

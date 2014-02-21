@@ -1,39 +1,31 @@
 /**
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *
- *
+ * MVC controller that manages events to
+ *  - login and logout users
+ *  - render the profile drop-down menu
  *
  */
-define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!modules/base/auth/base.auth.templates.html'],
-  function(ep, App, Mediator, EventBus, Model, View, template){
+define(function (require) {
+    var ep = require('ep');
+    var Mediator = require('mediator');
+    var EventBus = require('eventbus');
+
+    var Model = require('auth.models');
+    var View = require('auth.views');
+    var template = require('text!modules/base/auth/base.auth.templates.html');
 
     $('#TemplateContainer').append(template);
 
     _.templateSettings.variable = 'E';
 
     var defaultView = function(options) {
-      var authLayout =  new View.DefaultView(options);
-      return authLayout;
+      return new View.DefaultView(options);
     };
 
+    // This variable is used to hold a reference to the LoginFormView - making it accessible to event handlers
+    var loginFormView = {};
 
-    /*
-    *
-    * Functions
-    *
-    * */
-
-
-    // log user out
-    function logUserOut(){
-
-    }
-
-    /*
-    *
-    * Event Listeners
-    *
-    * */
     /*
      * Load login menu - load login form or profile menu depend on authentication state
      */
@@ -55,7 +47,6 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
           view: 'LoginFormView'
         });
       }
-
     });
 
     // auth menu request
@@ -69,20 +60,20 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
 
     });
 
-
     /*
      *
      * Login Error Message Feedback
      */
     EventBus.on("auth.loginRequestFailed", function(msg) {
+      ep.ui.enableButton(loginFormView, 'loginButton');
       View.displayLoginErrorMsg(msg);
     });
 
     EventBus.on("auth.loginFormValidationFailed", function(msg) {
+      ep.ui.enableButton(loginFormView, 'loginButton');
       View.displayLoginErrorMsg(msg);
 
     });
-
 
     /*
      * Authentication Request Types:
@@ -94,11 +85,11 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
       ep.io.ajax(authObj);
     });
 
-
     /*
      * Login Button Clicked - submit login form to server
      */
     EventBus.on('auth.loginFormSubmitButtonClicked', function () {
+      ep.ui.disableButton(loginFormView, 'loginButton');
       var requestModel = View.getLoginRequestModel();
 
       if (requestModel.isComplete()) {
@@ -118,12 +109,20 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
       }
     });
 
+    /**
+     * Handler for the click event on the login form register link. Fires a mediator strategy.
+     */
+    EventBus.on('auth.loginFormRegisterLinkClicked', function () {
+      // Close the login form modal
+      $.modal.close();
+      Mediator.fire('mediator.registrationRequest');
+    });
+
     /*
      * Generate Public Authentication Request
      *
      * handles both login and logout requests
      * uses different verbs - (POST/DELETE)
-     *
      *
      */
     EventBus.on('auth.generatePublicAuthTokenRequest', function() {
@@ -146,14 +145,14 @@ define(['ep', 'app', 'mediator', 'eventbus', 'auth.models', 'auth.views', 'text!
       EventBus.trigger('auth.authenticationRequest', logoutModel.attributes);
     });
 
-
     return {
       DefaultView:defaultView,
       LoginFormView: function(options) {
-        return new View.LoginFormView(options);
+        // Store a reference to the LoginFormView before returning it
+        loginFormView = new View.LoginFormView(options);
+        return loginFormView;
       },
-      ProfileMenuView: function() {return new View.ProfileMenuView(); },
-      logUserOut:logUserOut
+      ProfileMenuView: function() {return new View.ProfileMenuView(); }
     };
   }
 );

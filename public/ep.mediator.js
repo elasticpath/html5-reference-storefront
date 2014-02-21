@@ -148,6 +148,20 @@ define(function(require){
     },
     'mediator.addressFormComplete': function () {
       helpers.returnAfterFormDone('#profile', 'addressFormReturnTo');
+    },
+    'mediator.registrationRequest': function() {
+      require(['ep'], function (ep) {
+        // Get the current route as an object
+        var currentRoute = ep.router.getCurrentRoute();
+
+        // Stringify the return route object so it can be stored in sessionStorage
+        var routeForStorage = JSON.stringify(currentRoute);
+        ep.io.sessionStore.setItem('registrationFormReturnTo', routeForStorage);
+
+        // Navigate to the registration route
+        ep.router.navigate(ep.app.config.routes.registration, true);
+
+      });
     }
   };
 

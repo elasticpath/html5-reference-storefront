@@ -28,6 +28,7 @@ var config = {
       'modelHelpers': 'helpers/model.helpers',
       'router': 'router',
       'viewHelpers': 'helpers/view.helpers',
+      'utils': 'utils/utils',
 
       'cortex': 'modules/base/cortex/base.cortex.controller', // used by Search module only, remove after redo search
       'app': 'modules/base/app/base.app.controller',
@@ -63,6 +64,8 @@ var config = {
       'purchaseinfo': 'modules/base/purchaseinfo/base.purchaseinfo.controller',
       'purchaseinfo.models': 'modules/base/purchaseinfo/base.purchaseinfo.models',
       'purchaseinfo.views': 'modules/base/purchaseinfo/base.purchaseinfo.views',
+      'registration': 'modules/base/registration/base.registration.controller',
+      'registration.views': 'modules/base/registration/base.registration.views',
       'search': 'modules/base/search/base.search.controller',
       'search.models': 'modules/base/search/base.search.models',
       'search.views': 'modules/base/search/base.search.views',

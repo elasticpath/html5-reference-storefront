@@ -3,8 +3,12 @@
  *
  *
  */
-define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
-  function(ep, Marionette, EventBus, i18n, Model){
+define(function (require) {
+  var ep = require('ep');
+  var Marionette = require('marionette');
+  var EventBus = require('eventbus');
+  var i18n = require('i18n');
+  var Model = require('auth.models');
 
     var viewHelpers = {
       getI18nLabel:function(key){
@@ -13,7 +17,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
           retVal = i18n.t(key);
         }
         catch(e){
-          // slient failure on label rendering
+          // silent failure on label rendering
         }
 
         return retVal;
@@ -52,7 +56,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
     /*
      * Default Layout View: loginMenu button, and controlling the toggle menu
      */
-    var defaultLayout = Backbone.Marionette.Layout.extend({
+    var defaultLayout = Marionette.Layout.extend({
       template:'#DefaultAuthLayoutTemplate',
       className:'auth-container',
       templateHelpers:viewHelpers,
@@ -75,31 +79,38 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
         });
         // set up the global events to close the profile menu
         $('body').unbind().bind('click',function(event){
-          if ($('.auth-nav-container').is(':visible')){
-            var container = $('.auth-nav-container');
-            if (!container.is(event.target) && container.has(event.target).length === 0) {
-              container.hide();
+          var authNavContainer = $('.auth-nav-container');
+          if (authNavContainer.is(':visible')){
+            if (!authNavContainer.is(event.target) && authNavContainer.has(event.target).length === 0) {
+              authNavContainer.hide();
             }
           }
         });
-
       }
     });
 
     /*
      * Login Form View: login form and login button
      */
-    var loginFormView = Backbone.Marionette.ItemView.extend({
+    var loginFormView = Marionette.ItemView.extend({
       template:'#AuthLoginFormTemplate',
       templateHelpers:viewHelpers,
       className:'auth-login-container',
       attributes: {
         "data-el-container":"global.loginMenu"
       },
-      events:{
-        'click .btn-auth-login':function(event) {
+      ui: {
+        loginButton: '.btn-auth-login',
+        registerButton: '.btn-auth-register'
+      },
+      events: {
+        'click @ui.loginButton': function (event) {
           event.preventDefault();
           EventBus.trigger('auth.loginFormSubmitButtonClicked');
+        },
+        'click @ui.registerButton': function (event) {
+          event.preventDefault();
+          EventBus.trigger('auth.loginFormRegisterLinkClicked');
         }
       }
     });
@@ -108,7 +119,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
      * Profile Menu View: menu view presented after logging-in
      *  show logout button, and links and info regarding to user profile
      */
-    var profileMenuView = Backbone.Marionette.ItemView.extend({
+    var profileMenuView = Marionette.ItemView.extend({
       template:'#AuthProfileMenuTemplate',
       templateHelpers:viewHelpers,
       tagName:'ul',
@@ -121,7 +132,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
           event.preventDefault();
           EventBus.trigger("auth.logoutBtnClicked");
         },
-        'click .profile-link':function(event){
+        'click .profile-link':function () {
           $('.auth-nav-container').hide(250);
         }
       }
@@ -146,8 +157,9 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'auth.models'],
       if (msg) {
         var key = 'auth.' + msg;
         var errMsg = viewHelpers.getI18nLabel(key);
-        $('.auth-feedback-container').text(errMsg);
-        $('.auth-feedback-container').attr('data-i18n', key);
+        var authFeedBackContainer = $('.auth-feedback-container');
+        authFeedBackContainer.text(errMsg);
+        authFeedBackContainer.attr('data-i18n', key);
       }
       else {
         ep.logger.warn('DisplayLoginErrorMsg called without error message');

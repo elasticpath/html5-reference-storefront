@@ -35,7 +35,10 @@ $('#el').spin('flower', 'red');
 Overlay
 =======
 
-The plugin has been extended to position an overlay element over the jQuery object on which it is invoked.
+The plugin has been extended to position an overlay element over the jQuery object on which it is invoked. The default
+options call for the overlay to be displayed but these can be overridden e.g.
+
+$('#el').spin({overlay: false});
 
 The overlay functionality uses absolute positioning and assumes that the jQuery object
 to which the spinner is being added is itself relatively or absolutely positioned.
@@ -80,28 +83,31 @@ to which the spinner is being added is itself relatively or absolutely positione
         $this.find('.overlay').remove();
       }
       if (opts !== false) {
+        // Merge some default color and overlay options with those passed into the plugin
         opts = $.extend(
-          { color: color || $this.css('color') },
+          { color: color || $this.css('color'), overlay: true },
           $.fn.spin.presets[opts] || opts
         );
-        // Uses the inner (includes padding but not border) width and height of the target object
-        overlay.css({
-          width: $this.innerWidth(),
-          height: $this.innerHeight(),
-          left: 0,
-          top: 0
-        });
+        if (opts.overlay) {
+          // Uses the inner (includes padding but not border) width and height of the target object
+          overlay.css({
+            width: $this.innerWidth(),
+            height: $this.innerHeight(),
+            left: 0,
+            top: 0
+          });
 
-        overlay.appendTo(this);
+          overlay.appendTo(this);
+        }
         data.spinner = new Spinner(opts).spin(this);
       }
     });
   };
 
   $.fn.spin.presets = {
-    tiny: { lines: 8, length: 2, width: 2, radius: 3, zIndex: 1000  },
-    small: { lines: 8, length: 4, width: 3, radius: 5, zIndex: 1000 },
-    large: { lines: 10, length: 8, width: 4, radius: 8, zIndex: 1000 }
+    tiny: { lines: 8, length: 2, width: 2, radius: 3, zIndex: 1000, overlay: true  },
+    small: { lines: 8, length: 4, width: 3, radius: 5, zIndex: 1000, overlay: true },
+    large: { lines: 10, length: 8, width: 4, radius: 8, zIndex: 1000, overlay: true }
   };
 
 }));

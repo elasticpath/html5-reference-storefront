@@ -208,7 +208,8 @@ define(function (require) {
      * will trigger event to submit order to cortex
      */
     EventBus.on('checkout.submitOrderBtnClicked', function (submitOrderActionLink) {
-      View.setCheckoutButtonProcessing();
+      ep.ui.disableButton(checkoutLayout.checkoutOrderRegion.currentView, 'submitOrderButton');
+
       // if cortex says it's ok
       if (submitOrderActionLink) {
         EventBus.trigger('checkout.submitOrderRequest', submitOrderActionLink);
