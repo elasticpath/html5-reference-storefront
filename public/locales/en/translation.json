@@ -118,7 +118,7 @@
   },
   "paymentForm": {
     "cancelBtn": "Cancel",
-    "cardType": "Card-Type",
+    "cardType": "Card Type",
     "cardNumber": "Credit Card Number",
     "expiry": "Expiry Date",
     "formTitle": "New Payment Method",
@@ -131,7 +131,7 @@
       "visa": "Visa"
     },
     "errorMsg": {
-      "generalSavePaymentFailedErrMsg": "I'm sorry, there was an error saving this payment method. Please try again or contact your system administrator"
+      "generalSavePaymentFailedErrMsg": "I'm sorry, there was an error saving this payment method. Please try again or contact your system administrator."
     }
   },
   "profile": {
