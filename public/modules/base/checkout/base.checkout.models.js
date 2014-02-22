@@ -100,12 +100,8 @@ define(function (require) {
         }
 
         if (parsedPaymentMethods.length) {
-          // checkIn can collection comparator replace this?
-          // Sort the parsed payment methods alphabetically by the displayValue
-          checkoutObj.paymentMethods = modelHelpers.sortPaymentMethods(parsedPaymentMethods, 'displayValue');
-
           // Set a chosen payment method if there is not one set already
-          checkoutObj.paymentMethods = modelHelpers.setChosenEntity(checkoutObj.paymentMethods);
+          checkoutObj.paymentMethods = modelHelpers.setChosenEntity(parsedPaymentMethods);
         }
 
         checkoutObj.summary = modelHelpers.parseCheckoutSummary(response);
@@ -119,7 +115,10 @@ define(function (require) {
     }
   });
 
-  var paymentMethodsCollection = Backbone.Collection.extend();
+  var paymentMethodsCollection = Backbone.Collection.extend({
+    // sorts the Collection alphabetically by display value
+    comparator: 'displayValue'
+  });
   var shippingOptionsCollection = Backbone.Collection.extend();
   var checkoutSummaryModel = Backbone.Model.extend();
 
@@ -439,16 +438,6 @@ define(function (require) {
      */
     sortAddresses: function(addressArray, sortProperty) {
       return modelHelpers.sortByAscAlphabeticOrder(addressArray, sortProperty);
-    },
-
-    /**
-     * Sort array of payment methods by a given property.
-     * @param paymentMethodArray  Array to be sorted.
-     * @param sortProperty        Property to sort by.
-     * @returns {Array}           Sorted array of payment methods.
-     */
-    sortPaymentMethods: function(paymentMethodArray, sortProperty) {
-      return modelHelpers.sortByAscAlphabeticOrder(paymentMethodArray, sortProperty);
     }
   });
 
