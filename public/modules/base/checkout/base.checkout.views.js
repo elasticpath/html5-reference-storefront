@@ -17,21 +17,16 @@ define(function (require) {
     var viewHelpers = ViewHelpers.extend({
       /**
        * Determine if checkout button should be disabled, and return a disabled attribute or empty string respectively.
+       * Uses the getButtonDisabledAttr view helper function to construct the disabled attribute value.
        * Assuming must be authenticated to view the page if anonymous checkout is not allowed.
        *
        * @param submitOrderActionLink The action-link to which the submit order request is posted.
        * @returns {string} HTML disabled attribute or empty string
        */
-      // CHECKIN could this function be abstracted to be shared by cartSubmitBtn, itemAddToCartBtn, checkoutSubmitBtn etc etc?
       getSubmitOrderButtonDisabledAttr: function (submitOrderActionLink) {
-        // complete purchase disabled by default
-        var retVar = 'disabled="disabled"';
-
-        if (submitOrderActionLink) {
-          retVar = '';
-        }
-
-        return retVar;
+        return ViewHelpers.getButtonDisabledAttr(function() {
+          return submitOrderActionLink;
+        });
       },
 
       /**

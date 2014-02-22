@@ -52,6 +52,25 @@ define(function (require) {
     },
 
     /**
+     * Returns a disabled attribute string for an HTML button suitable for inclusion in templates or an empty
+     * string based on the outcome of testing a predicate function.
+     *
+     * @param predicateFn A predicate function to test.
+     * @returns {string} A constructed disabled attribute or empty.
+     */
+    getButtonDisabledAttr: function(predicateFn) {
+      var retVar = 'disabled="disabled"';
+
+      if (predicateFn && _.isFunction(predicateFn)) {
+        if ( predicateFn() ) {
+          retVar = '';
+        }
+      }
+
+      return retVar;
+    },
+
+    /**
      * Get link from ep.config.json file.
      * @param routeKey  key to access routes values
      * @returns String url link
