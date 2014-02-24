@@ -19,7 +19,6 @@ define(function (require) {
 
       before(function () {
         sinon.spy(EventBus, 'trigger');
-        sinon.spy(view, 'setCheckoutButtonProcessing');
 
         EventTestHelpers.unbind(unboundEventKey);
         EventBus.trigger('checkout.submitOrderBtnClicked', actionLink);
@@ -27,16 +26,11 @@ define(function (require) {
 
       after(function () {
         EventBus.trigger.restore();
-        view.setCheckoutButtonProcessing.restore();
-
         EventTestHelpers.reset();
       });
 
       it("triggers event: checkout.submitOrderRequest", sinon.test(function () {
         expect(EventBus.trigger).to.be.calledWithExactly(unboundEventKey, actionLink);
-      }));
-      it('calls View.setCheckoutButtonProcessing function', sinon.test(function () {
-        expect(view.setCheckoutButtonProcessing).to.be.called;
       }));
     });
 
