@@ -335,7 +335,7 @@ define(function (require) {
      */
     ep.ui.disableButton = function (view, buttonElementName) {
       var $button = ep.ui.getUIElementFromView(view, buttonElementName);
-      if ($button) {
+      if ( ($button) && ($button instanceof jQuery) ) {
         // Set the button's disabled property
         $button.prop('disabled', true);
 
@@ -357,7 +357,7 @@ define(function (require) {
      */
     ep.ui.enableButton = function (view, buttonElementName) {
       var $button = ep.ui.getUIElementFromView(view, buttonElementName);
-      if ($button) {
+      if ( ($button) && ($button instanceof jQuery) ) {
         // Set the button's disabled property
         $button.prop('disabled', false);
 
