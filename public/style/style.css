@@ -6114,7 +6114,7 @@ fieldset[disabled] .btn-auth-login.active {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border: 1px solid rgba(0, 144, 196, 0.667);
-  border-bottom: 1px solid: #000;
+  border-bottom: 1px solid #000;
   margin-bottom: 1px;
 }
 @media (max-width: 768px) {

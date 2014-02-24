@@ -160,6 +160,31 @@ define(function (require) {
       });
     });
 
+    describe('getButtonDisabledAttr', function() {
+      afterEach(function() {
+        delete(this.retVal);
+      });
+      describe('When called with a function that returns false', function() {
+        before(function() {
+          this.retVal = helpers.getButtonDisabledAttr(function() {
+            return false;
+          });
+        });
+        it('returns a constructed disabled attribute', function() {
+          expect(this.retVal).to.be.equal('disabled="disabled"');
+        });
+      });
+      describe('When called with a function that returns true', function() {
+        before(function() {
+          this.retVal = helpers.getButtonDisabledAttr(function() {
+            return true;
+          });
+        });
+        it('returns an empty string', function() {
+          expect(this.retVal).to.be.equal('');
+        });
+      });
+    });
   });
 
 });
