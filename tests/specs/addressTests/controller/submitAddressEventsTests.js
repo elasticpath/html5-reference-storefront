@@ -9,22 +9,23 @@ define(function(require) {
 
   var EventTestFactory = require('testfactory.event');
 
-  require('address'); // load controller file
+  var controller = require('address'); // load controller file
   var view = require('address.views');
   var model = require('address.models');
   var template = require('text!modules/base/components/address/base.component.address.template.html');
+  var utils = require('utils');
 
   describe('Submit Address Enable/Disable Button Tests', function() {
     before(function() {
       sinon.stub(ep.io, 'ajax');
       sinon.stub(view, 'translateErrorMessage');
-      sinon.stub(view, 'displayAddressFormErrorMsg');
+      sinon.stub(utils, 'renderMsgToPage');
     });
 
     after(function() {
       ep.io.ajax.restore();
       view.translateErrorMessage.restore();
-      view.displayAddressFormErrorMsg.restore();
+      utils.renderMsgToPage.restore();
     });
 
     describe('responds to event: address.createAddressBtnClicked',
@@ -148,39 +149,56 @@ define(function(require) {
         }));
     });
 
-    describe('responds to event: address.submitAddressFormFailed', function () {
-      before(function () {
-        sinon.stub(view, 'displayAddressFormErrorMsg');
-        EventBus.trigger('address.submitAddressFormFailed');
+    describe('responds to submit address form failure events', function() {
+      before(function (done) {
+        // Define a DefaultEditAddressView so the renderAddressFormErrorState function
+        // can use it when it's called by the address form failure events
+        sinon.stub(Backbone.Model.prototype, 'fetch');
+        sinon.stub(Backbone.Collection.prototype, 'fetch');
+
+        var fakeGetLink = "/integrator/address/fakeUrl";
+        this.view = controller.DefaultEditAddressView(fakeGetLink);
+
+        // Short delay to allow the fake AJAX request to complete
+        setTimeout(done, 200);
+
+        sinon.stub(utils, 'renderMsgToPage');
       });
 
       after(function () {
-        view.displayAddressFormErrorMsg.restore();
+        Backbone.Model.prototype.fetch.restore();
+        Backbone.Collection.prototype.fetch.restore();
+
+        utils.renderMsgToPage.restore();
       });
 
-      it('called method from view to display error message', function () {
-        expect(view.displayAddressFormErrorMsg).to.be.calledOnce;
-      });
-    });
+      describe('address.submitAddressFormFailed', function() {
+        before(function() {
+          EventBus.trigger('address.submitAddressFormFailed');
+        });
 
-    describe('responds to event: address.submitAddressFormFailed.invalidFields', function () {
-      var errMsg = 'some error message';
-      before(function () {
-        sinon.stub(view, 'translateErrorMessage');
-        sinon.stub(view, 'displayAddressFormErrorMsg');
-        EventBus.trigger('address.submitAddressFormFailed.invalidFields', errMsg);
+        it('calls functions to enable the submit button and render errors to the page', function () {
+          expect(ep.ui.enableButton).to.be.calledOnce;
+          expect(utils.renderMsgToPage).to.be.calledOnce;
+        });
       });
 
-      after(function () {
-        view.translateErrorMessage.restore();
-        view.displayAddressFormErrorMsg.restore();
-      });
+      describe('address.submitAddressFormFailed.invalidFields', function() {
+        var errMsg = 'some error message';
+        before(function () {
+          sinon.stub(view, 'translateErrorMessage');
+          EventBus.trigger('address.submitAddressFormFailed.invalidFields', errMsg);
+        });
 
-      it('called methods from view to translate error message', function () {
-        expect(view.translateErrorMessage).to.be.calledWith(errMsg);
-      });
-      it('called methods from view to display error message', function () {
-        expect(view.displayAddressFormErrorMsg).to.be.calledWith(view.translateErrorMessage(errMsg));
+        after(function () {
+          view.translateErrorMessage.restore();
+        });
+
+        it('calls functions to enable the submit button and render errors to the page', function () {
+          expect(ep.ui.enableButton).to.be.called;
+          expect(view.translateErrorMessage).to.be.calledWith(errMsg);
+          expect(utils.renderMsgToPage).to.be.called;
+        });
       });
     });
 

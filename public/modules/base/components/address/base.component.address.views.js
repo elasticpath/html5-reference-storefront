@@ -44,10 +44,10 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       templateHelpers: viewHelpers,
       className: 'create-address-container container',
       regions: {
-        addressFormRegion: '[data-region="componentAddressFormRegion"]',
-        addressFeedbackMsgRegion: '[data-region="componentAddressFeedbackRegion"]'
+        addressFormRegion: '[data-region="componentAddressFormRegion"]'
       },
       ui: {
+        addressFeedbackMsgRegion: '[data-region="componentAddressFeedbackRegion"]',
         createAddressButton: '[data-el-label="addressForm.create"]',
         cancelButton: '[data-el-label="addressForm.cancel"]'
       },
@@ -78,10 +78,10 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       templateHelpers: viewHelpers,
       className: 'create-address-container container',
       regions: {
-        addressFormRegion: '[data-region="componentAddressFormRegion"]',
-        addressFeedbackMsgRegion: '[data-region="componentAddressFeedbackRegion"]'
+        addressFormRegion: '[data-region="componentAddressFormRegion"]'
       },
       ui: {
+        addressFeedbackMsgRegion: '[data-region="componentAddressFeedbackRegion"]',
         editAddressButton: '[data-el-label="addressForm.edit"]',
         cancelButton: '[data-el-label="addressForm.cancel"]'
       },
@@ -114,7 +114,10 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
         countriesRegion: '[data-region="addressCountryRegion"]',
         regionsRegion: '[data-region="addressRegionsRegion"]'
       },
-      templateHelpers: viewHelpers
+      templateHelpers: viewHelpers,
+      ui: {
+        feedbackRegion: '[data-region="componentAddressFeedbackRegion"]'
+      }
     });
 
     /**
@@ -242,21 +245,6 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
     }
 
     /**
-     * Displays error message feedback for address form operations
-     * @param errorMsg error message to display
-     */
-    function displayAddressFormErrorMsg(errorMsg) {
-      if (!errorMsg) {
-        ep.logger.warn('displayAddressFormErrorMsg called without error message');
-        return; // skip rest of the function
-      }
-
-      $('html, body').animate({ scrollTop: 0 }, 'fast');
-      $('[data-region="componentAddressFeedbackRegion"]').html(errorMsg);
-//      $('[data-region="componentAddressFeedbackRegion"]').attr('data-i18n', key);
-    }
-
-    /**
      * Translate raw error response coming back from Cortex.
      * (This is a temporary fix until cortex return specific error code / key for localization mapping.)
      * @param rawMsg  error message from Cortex.
@@ -375,7 +363,6 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
 
       DefaultRegionsView: defaultRegionsView,
       getAddressFormValues: getAddressFormValues,
-      displayAddressFormErrorMsg: displayAddressFormErrorMsg,
       translateErrorMessage: translateErrorMessage
     };
   });

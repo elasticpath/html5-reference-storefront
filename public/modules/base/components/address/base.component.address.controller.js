@@ -15,6 +15,7 @@ define(function (require) {
   var Views = require('address.views');
   var Models = require('address.models');
   var template = require('text!modules/base/components/address/base.component.address.template.html');
+  var utils = require('utils');
 
   $('#TemplateContainer').append(template);
 
@@ -233,15 +234,27 @@ define(function (require) {
   }
 
   /**
-   * Re-enables the relevant address form submit button based on
-   * which form (create or edit) is currently being displayed.
+   * Re-enables the relevant address form submit button based on which form (create or edit)
+   * is currently being displayed and renders an error message to the appropriate region.
+   *
+   * @param errorMsg an error message, or an i18n key to the error message
    */
-  function enableAddressFormSubmitButton() {
-    // Identify the button to re-enable by checking whether or not the createAddressLayout is closed
+  function renderAddressFormErrorState(errorMsg) {
+    // Identify the current layout by checking whether or not the createAddressLayout is closed
     if (createAddressLayout && !createAddressLayout.isClosed) {
+      // The create address layout is being rendered
       ep.ui.enableButton(createAddressLayout, 'createAddressButton');
+      utils.renderMsgToPage(
+        errorMsg,
+        createAddressLayout.ui.addressFeedbackMsgRegion
+      );
     } else {
+      // The edit address layout is being rendered
       ep.ui.enableButton(editAddressLayout, 'editAddressButton');
+      utils.renderMsgToPage(
+        errorMsg,
+        editAddressLayout.ui.addressFeedbackMsgRegion
+      );
     }
   }
 
@@ -277,8 +290,7 @@ define(function (require) {
    * will display generic error message.
    */
   EventBus.on('address.submitAddressFormFailed', function () {
-    enableAddressFormSubmitButton();
-    Views.displayAddressFormErrorMsg(i18n.t('addressForm.errorMsg.generalSaveAddressFailedErrMsg'));
+    renderAddressFormErrorState('addressForm.errorMsg.generalSaveAddressFailedErrMsg');
   });
 
   /**
@@ -287,11 +299,9 @@ define(function (require) {
    * @param errMsg an error message, or a i18n key to the error message
    */
   EventBus.on('address.submitAddressFormFailed.invalidFields', function (errMsg) {
-    enableAddressFormSubmitButton();
-
     // in the future, also highlight the invalid input box
     var translatedMsg = Views.translateErrorMessage(errMsg);
-    Views.displayAddressFormErrorMsg(translatedMsg);
+    renderAddressFormErrorState(translatedMsg);
   });
 
   /**
@@ -338,8 +348,11 @@ define(function (require) {
     ep.io.ajax(ajaxModel.toJSON());
   }
 
+  /* test-code */
   var __test_only__ = {};
   __test_only__.defaultAddressFormController = defaultAddressFormController;
+  __test_only__.renderAddressFormErrorState = renderAddressFormErrorState;
+  /* end-test-code */
 
   return{
     /* test-code */

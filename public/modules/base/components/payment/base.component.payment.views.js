@@ -27,22 +27,6 @@ define(function (require) {
   }
 
   /**
-   * Displays error message feedback for payment form operations
-   * @param errKey error message to display
-   */
-  // checkIn Can we abstract this into util?
-  function displayPaymentFormErrorMsg(errKey) {
-    if (!errKey) {
-      ep.logger.warn('displayPaymentFormErrorMsg called without error message');
-      return; // skip rest of the function
-    }
-
-    var errorMsg = viewHelpers.getI18nLabel(errKey);
-    $('html, body').animate({ scrollTop: 0 }, 'fast');
-    $('[data-region="componentPaymentFeedbackRegion"]').html(errorMsg);
-  }
-
-  /**
    * Default Payment Method ItemView
    * Will render a default tokenized payment method
    * @type Marionette.ItemView
@@ -60,6 +44,9 @@ define(function (require) {
     template: '#MockPaymentMethodFormTemplate',
     templateHelpers: viewHelpers,
     className: 'container',
+    ui: {
+      'feedbackRegion': '[data-region="componentPaymentFeedbackRegion"]'
+    },
     events: {
       'click [data-el-label="paymentForm.save"]': function (event) {
         event.preventDefault();
@@ -87,7 +74,6 @@ define(function (require) {
 
     DefaultPaymentItemView: defaultPaymentItemView,
     DefaultPaymentFormView: defaultPaymentFormView,
-    getPaymentFormValues: getPaymentFormValues,
-    displayPaymentFormErrorMsg: displayPaymentFormErrorMsg
+    getPaymentFormValues: getPaymentFormValues
   };
 });

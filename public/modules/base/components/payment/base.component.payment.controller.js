@@ -14,10 +14,14 @@ define(function (require) {
   var Views = require('payment.views');
   var Model = require('payment.models');
   var template = require('text!modules/base/components/payment/base.component.payment.template.html');
+  var utils = require('utils');
 
   $('#TemplateContainer').append(template);
 
   _.templateSettings.variable = 'E';
+
+  // Defined here so event handlers have access to its regions
+  var defaultView;
 
   var defaultCreatePaymentController = function () {
     // Attempt to retrieve an order link from session storage (set by the checkout module)
@@ -26,7 +30,7 @@ define(function (require) {
     // Trigger an error if we are unable to retrieve a Cortex order link
     if (orderLink) {
       var paymentFormModel = new Model.NewPaymentModel();
-      var defaultView = new Views.DefaultPaymentFormView({
+      defaultView = new Views.DefaultPaymentFormView({
         model: paymentFormModel
       });
 
@@ -96,7 +100,7 @@ define(function (require) {
   });
 
   EventBus.on('payment.submitPaymentFormFailed', function () {
-    Views.displayPaymentFormErrorMsg('paymentForm.errorMsg.generalSavePaymentFailedErrMsg');
+    utils.renderMsgToPage('paymentForm.errorMsg.generalSavePaymentFailedErrMsg', defaultView.ui.feedbackRegion);
   });
 
   /* *********** Event Listeners: load display address view  *********** */
