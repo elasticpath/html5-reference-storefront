@@ -12,6 +12,7 @@ define(function (require) {
     var Mediator = require('mediator');
     var EventBus = require('eventbus');
     var Router = require('router');
+    var utils = require('utils');
     var config = require('text!ep.config.json');
 
     // require the follow is necessary to use their functions, but no need to variablize it.
@@ -268,6 +269,8 @@ define(function (require) {
       }
     };
 
+    // FIXME [CU-264] move these UI functions to app.controller.js as extension functions of Marionette.View
+
     // Load the spin.js library that provides the default activity indicators.
     require('spin');
     // Load an extended version of jQuery.spin.js that includes a loading overlay.
@@ -335,7 +338,8 @@ define(function (require) {
      */
     ep.ui.disableButton = function (view, buttonElementName) {
       var $button = ep.ui.getUIElementFromView(view, buttonElementName);
-      if ( ($button) && ($button instanceof jQuery) ) {
+
+      if ( utils.isButton($button) ) {
         // Set the button's disabled property
         $button.prop('disabled', true);
 
@@ -357,7 +361,7 @@ define(function (require) {
      */
     ep.ui.enableButton = function (view, buttonElementName) {
       var $button = ep.ui.getUIElementFromView(view, buttonElementName);
-      if ( ($button) && ($button instanceof jQuery) ) {
+      if ( utils.isButton($button) ) {
         // Set the button's disabled property
         $button.prop('disabled', false);
 

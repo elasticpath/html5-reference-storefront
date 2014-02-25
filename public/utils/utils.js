@@ -5,7 +5,6 @@
  */
 define(function(require){
   var _ = require('underscore');
-  var ep = require('ep');
   var i18n = require('i18n');
 
   return {
@@ -30,6 +29,18 @@ define(function(require){
       }
 
       return formattedMsg;
+    },
+
+    /**
+     * Boolean function to test if a given jQuery object is a HTML button.
+     * @param $obj a jQuery object
+     * @returns {Boolean}
+     */
+    isButton: function ($obj) {
+      return (
+        // Test if this is a valid jQuery object and that it refers to a <button> element
+        ($obj) && ($obj instanceof jQuery) && ($obj.prop('tagName') === 'BUTTON')
+      ) ? true : false;
     },
 
     /**
@@ -82,7 +93,7 @@ define(function(require){
           errMsgKeyList.push('addressForm.errorMsg.generalSaveAddressFailedErrMsg');
         }
         else {
-          ep.logger.warn('Unhandled address form err message: ' + unHandledErrMsgList);
+          console.warn('Unhandled address form err message: ' + unHandledErrMsgList);
         }
       }
 
