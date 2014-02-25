@@ -11,8 +11,6 @@ define(function (require) {
   var EventBus = require('eventbus');
   var ViewHelpers = require('viewHelpers');
 
-  var viewHelpers = ViewHelpers.extend();
-
   function getPaymentFormValues() {
     return {
       "cardType": $("#CardType").val(),
@@ -42,7 +40,7 @@ define(function (require) {
 
   var defaultPaymentFormView = Marionette.ItemView.extend({
     template: '#MockPaymentMethodFormTemplate',
-    templateHelpers: viewHelpers,
+    templateHelpers: ViewHelpers,
     className: 'container',
     ui: {
       'feedbackRegion': '[data-region="componentPaymentFeedbackRegion"]'
@@ -64,14 +62,7 @@ define(function (require) {
     }
   });
 
-  var __test_only__ = {};
-  __test_only__.viewHelpers = viewHelpers;
-
   return {
-    /* test-code */
-    __test_only__: __test_only__,
-    /* end-test-code */
-
     DefaultPaymentItemView: defaultPaymentItemView,
     DefaultPaymentFormView: defaultPaymentFormView,
     getPaymentFormValues: getPaymentFormValues

@@ -26,9 +26,6 @@ define(function (require) {
     // DefaultPaymentFormView Tests
     require('specs/paymentComponentTests/view/defaultPaymentFormViewTests.js');
 
-    // ViewHelpers Tests
-    require('specs/paymentComponentTests/view/paymentHelpersTests.js');
-
 
     /*
      * Models Tests

@@ -24,6 +24,7 @@ define(function (require) {
 
     after(function () {
       $("#Fixtures").empty();
+      delete(this.view);
     });
 
     describe('can render', function () {
@@ -39,7 +40,7 @@ define(function (require) {
       });
     });
 
-    describe('renders correctly with all fields of address model', function () {
+    describe('renders correctly with all fields of payment method model', function () {
       before(function () {
         this.model = new StandardTokenPaymentModel();
 
