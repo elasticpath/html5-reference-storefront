@@ -8,10 +8,9 @@
 define(function (require) {
   var ep = require('ep');
   var Backbone = require('backbone');
-  var ModelHelper = require('modelHelpers');
 
   /**
-   * Model containing link to post new payment form to cortex server.
+   * Model containing the Cortex server link to which the new payment form should be posted.
    * @type Backbone.Model
    */
   var newPaymentModel = Backbone.Model.extend({

@@ -60,6 +60,24 @@ define(function (require) {
         });
       });
     });
+
+    describe('responds to event: payment.savePaymentMethodBtnClicked', function() {
+      before(function() {
+        sinon.spy(EventBus, 'trigger');
+        sinon.stub(ep.ui, 'disableButton');
+
+        EventBus.trigger('payment.savePaymentMethodBtnClicked');
+      });
+
+      after(function() {
+        EventBus.trigger.restore();
+        ep.ui.disableButton.restore();
+      });
+
+      it("calls the disableButton function", function() {
+        expect(ep.ui.disableButton).to.be.calledOnce;
+      });
+    });
   });
 
 });

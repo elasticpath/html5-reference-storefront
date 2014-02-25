@@ -280,11 +280,15 @@ define(function (require) {
         activityIndicatorEl: '[data-region="paymentMethodSelectorsRegion"]'
       },
       onRender: function() {
-        var oneTime = this.collection.where({oneTime: true})[0];
+        // If there is more than one payment method, look for a one-time payment method
+        // and if found, move it to the end of the collection
+        if (this.collection.length > 1) {
+          var oneTime = this.collection.where({oneTime: true})[0];
 
-        if (oneTime) {
-          this.collection.remove(oneTime);
-          this.collection.push(oneTime);
+          if (oneTime) {
+            this.collection.remove(oneTime);
+            this.collection.push(oneTime);
+          }
         }
       },
       events: {
