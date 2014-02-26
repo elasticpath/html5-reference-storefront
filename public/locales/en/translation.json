@@ -37,14 +37,8 @@
     "login": "Login",
     "loginFormMissingFieldsErrMsg": "Username or password are missing. ",
     "loginMenu": "Login",
-    "loginTitle":"Login",
-    "logout": "Logout",
-<<<<<<< HEAD
-=======
     "loginTitle": "Login",
     "logout": "Logout",
-    "profile": "Profile",
->>>>>>> CU-70
     "password": "Password",
     "profile":"Profile",
     "register":"Register",
@@ -80,6 +74,7 @@
     "checkoutTitle": "Checkout Summary",
     "newAddressBtn": "Add a New Address",
     "newPaymentBtn": "Add a New Payment Method",
+    "newPaymentMethod": "New payment method",
     "paymentMethod": "Payment Method",
     "shippingAddress": "Shipping Address",
     "shippingOption": "Shipping Options",

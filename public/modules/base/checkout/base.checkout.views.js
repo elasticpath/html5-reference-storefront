@@ -245,7 +245,7 @@ define(function (require) {
       },
       onShow: function () {
         if (this.model.get('oneTime')) {
-          $('label', this.$el).prepend('<span>New Payment: </span>');
+          $('label', this.$el).prepend('<span>' + viewHelpers.getI18nLabel('checkout.newPaymentMethod') + ': </span>');
         }
 
         // Fire event to load the address itemView from component
