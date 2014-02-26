@@ -5,7 +5,11 @@
 define(function (require) {
   var EventBus = require('eventbus');
   var Backbone = require('backbone');
+  var Mediator = require('mediator');
   var ep = require('ep');
+  var utils = require('utils');
+  var controllerTestFactory = require('testfactory.controller');
+  var EventTestHelpers = require('testhelpers.event');
 
   describe('Payment Controller: Events Tests', function () {
     var paymentController = require('payment');
@@ -78,6 +82,104 @@ define(function (require) {
         expect(ep.ui.disableButton).to.be.calledOnce;
       });
     });
+
+    describe('responds to event: payment.cancelFormBtnClicked', function() {
+      before(function() {
+        sinon.stub(Mediator, 'fire');
+        EventBus.trigger('payment.cancelFormBtnClicked');
+      });
+
+      after(function() {
+        Mediator.fire.restore();
+      });
+
+      it("fires the relevant mediator strategy", function() {
+        expect(Mediator.fire).to.be.calledWithExactly('mediator.paymentFormComplete');
+      });
+    });
+
+    describe('submitForm function', function() {
+      // Common before() and after() sections for the AJAX form submit tests
+      before(function() {
+        // Some settings for our fakeServer
+        this.fakeSubmitUrl = "/fakeSubmitUrl";
+        this.response = {responseText: "some response text"};
+        this.fakeData = {
+          "display-value": undefined,
+          "value": undefined
+        };
+
+        sinon.spy(EventBus, 'trigger');
+        sinon.stub(ep.logger, 'error');
+      });
+      after(function() {
+        EventBus.trigger.restore();
+        ep.logger.error.restore();
+
+        delete(this.fakeSubmitUrl);
+        delete(this.response);
+        delete(this.fakePaymentControllerServer);
+      });
+
+      describe('when the server returns a 400 error', function() {
+        var submitPaymentFormFailedEvent = 'payment.submitPaymentFormFailed';
+
+        before(function(done) {
+          this.fakePaymentControllerServer = controllerTestFactory.getFakeServer({
+            method: 'POST',
+            response: this.response,
+            responseCode: 400,
+            requestUrl: this.fakeSubmitUrl
+          });
+
+          EventTestHelpers.unbind(submitPaymentFormFailedEvent);
+
+          EventBus.on(submitPaymentFormFailedEvent, function() {
+            done();
+          });
+
+          paymentController.__test_only__.submitForm(this.fakeData, this.fakeSubmitUrl);
+        });
+
+        after(function() {
+          EventTestHelpers.reset();
+        });
+
+        it("triggers the " + submitPaymentFormFailedEvent + " event", function() {
+          expect(EventBus.trigger).to.be.calledWith(submitPaymentFormFailedEvent);
+        });
+      });
+
+      describe('when the server returns a 200 response', function() {
+        var submitPaymentFormSuccessEvent = 'payment.submitPaymentFormSuccess';
+
+        before(function(done) {
+          this.fakePaymentControllerServer = controllerTestFactory.getFakeServer({
+            method: 'POST',
+            response: this.response,
+            responseCode: 200,
+            requestUrl: this.fakeSubmitUrl
+          });
+
+          EventTestHelpers.unbind(submitPaymentFormSuccessEvent);
+
+          EventBus.on(submitPaymentFormSuccessEvent, function() {
+            done();
+          });
+
+          paymentController.__test_only__.submitForm(this.fakeData, this.fakeSubmitUrl);
+        });
+
+        after(function() {
+          EventTestHelpers.reset();
+        });
+
+        it("triggers the " + submitPaymentFormSuccessEvent + " event", function() {
+          expect(EventBus.trigger).to.be.calledWith(submitPaymentFormSuccessEvent);
+        });
+      });
+    });
+
   });
 
 });

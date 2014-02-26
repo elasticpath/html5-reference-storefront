@@ -95,7 +95,7 @@ define(function (require) {
       success: function () {
         EventBus.trigger('payment.submitPaymentFormSuccess');
       },
-      customErrorFn: function (response) {
+      customErrorFn: function () {
         EventBus.trigger('payment.submitPaymentFormFailed');
       }
     });
