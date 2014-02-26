@@ -118,6 +118,7 @@ define(function(require){
       require(['ep'], function (ep) {
         var moduleName = ep.io.sessionStore.getItem('addressFormReturnTo');
 
+        // FIXME Change to use Router.getCurrentRoute() and Router.rebuildUrlFragment()
         if (!moduleName) {
           ep.router.navigate('#profile', true);  // if no return module specified, then return to profile
         }
@@ -130,6 +131,20 @@ define(function(require){
           ep.router.navigate(url, true);
           ep.io.sessionStore.removeItem('addressFormReturnTo');   // clear sessionStorage
         }
+      });
+    },
+    'mediator.registrationRequest': function() {
+      require(['ep'], function (ep) {
+        // Get the current route as an object
+        var currentRoute = ep.router.getCurrentRoute();
+
+        // Stringify the return route object so it can be stored in sessionStorage
+        var routeForStorage = JSON.stringify(currentRoute);
+        ep.io.sessionStore.setItem('registrationFormReturnTo', routeForStorage);
+
+        // Navigate to the registration route
+        ep.router.navigate(ep.app.config.routes.registration, true);
+
       });
     }
   };

@@ -55,7 +55,7 @@ define(function(require) {
         view:'IndexLayout'
       });
     },
-    item: function(href) {
+    itemDetail: function(href) {
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'appMainRegion',
         module:'item',
@@ -98,6 +98,13 @@ define(function(require) {
         module:'purchaseinfo',
         view:'PurchaseReceiptView',
         data:id
+      });
+    },
+    registration: function() {
+      EventBus.trigger('layout.loadRegionContentRequest', {
+        region:'appMainRegion',
+        module:'registration',
+        view:'DefaultController'
       });
     },
     search: function(keywords) {

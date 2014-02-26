@@ -1,0 +1,69 @@
+<!-- Copyright © 2014 Elastic Path Software Inc. All rights reserved. -->
+
+<div id="RegistrationTemplateContainer">
+  <!-- Registration Form Template -->
+  <script id="RegistrationDefaultTemplate" type="text/template">
+    <h3><%= E.getI18nLabel('registration.pageTitle') %></h3>
+
+    <div class="feedback-label registration-form-feedback-container" data-region="registrationFeedbackMsgRegion"></div>
+
+    <div data-region="registrationFormRegion"></div>
+
+  </script>
+
+  <!-- Form fields of the registration form -->
+  <!-- NOTE: the name attributes of the input fields must correspond with the JSON object property names expected by Cortex -->
+  <!-- Name attributes are only assigned to those fields that will be sent to Cortex -->
+  <script id="RegistrationFormTemplate" type="text/template">
+    <form role="form" method="POST" action="<%= E.submitUrl %>" class="form-horizontal">
+      <div class="form-group">
+        <label for="FirstName" data-el-label="registrationForm.firstName" class="control-label registration-form-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('registration.formLabel.firstName') %>
+        </label>
+        <div class="registration-form-input">
+          <input id="FirstName" name="given-name" class="form-control" type="text" autofocus="autofocus" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="LastName" data-el-label="registrationForm.lastName" class="control-label registration-form-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('registration.formLabel.lastName') %>
+        </label>
+        <div class="registration-form-input">
+          <input id="LastName" name="family-name" class="form-control" type="text" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="EmailUsername" data-el-label="registrationForm.emailUsername" class="control-label registration-form-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('registration.formLabel.emailUsername') %>
+        </label>
+        <div class="registration-form-input">
+          <input id="EmailUsername" name="username" class="form-control" type="text" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="Password" data-el-label="registrationForm.password" class="control-label registration-form-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('registration.formLabel.password') %>
+        </label>
+        <div class="registration-form-input">
+          <input id="Password" name="password" class="form-control" type="password" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="PasswordConfirm" data-el-label="registrationForm.passwordConfirm" class="control-label registration-form-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('registration.formLabel.passwordConfirm') %>
+        </label>
+        <div class="registration-form-input">
+          <input id="PasswordConfirm" name="passwordConfirm" class="form-control" type="password" />
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary registration-save-btn" data-el-label="registration.save"><%= E.getI18nLabel('registration.saveBtn') %></button>
+        <button class="btn registration-cancel-btn" data-el-label="registration.cancel"><%= E.getI18nLabel('registration.cancelBtn') %></button>
+      </div>
+    </form>
+  </script>
+
+  <script id="RegistrationFormErrorItemTemplate" type="text/template">
+    <%= E.error %>
+  </script>
+</div>

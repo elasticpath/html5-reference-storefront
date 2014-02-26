@@ -35,6 +35,7 @@ requirejs.config({
     'modelHelpers'    : 'helpers/model.helpers',
     'router'          : 'router',
     'viewHelpers'     : 'helpers/view.helpers',
+    'utils'           : 'utils/utils',
 
     'app'             : 'modules/base/app/base.app.controller',
     'app.models'      : 'modules/base/app/base.app.models',
@@ -78,6 +79,9 @@ requirejs.config({
     'address.models'  : 'modules/base/components/address/base.component.address.models',
     'payment'         : 'modules/base/components/payment/base.component.payment.controller',
     'payment.views'   : 'modules/base/components/payment/base.component.payment.views',
+
+    'registration': 'modules/base/registration/base.registration.controller',
+    'registration.views': 'modules/base/registration/base.registration.views',
 
     'chai'            : '../tests/libs/chai',
     'mocha.common'    : '../tests/libs/mocha.common',

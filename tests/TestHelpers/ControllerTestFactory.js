@@ -10,26 +10,40 @@ define(function (require) {
   return {
     /**
      * Creates a sinon.fakeServer for use with controller tests where a fetch from Cortex needs to be simulated.
-     * @param link The URL to which the fake server should respond
-     * @param zoom A string of zoom parameters to append to the link
-     * @param response The fake data response that the server should return
+     *
+     * @param opts An options object - see the default options in the function for supported properties
      * @returns {sinon.fakeServer} A fake server object
      */
-    getFakeServer: function (link, zoom, response) {
-      var fakeGetLink = link || "/integrator/module/fakeUrl";
-      var fakeServer = sinon.fakeServer.create();
+    getFakeServer: function(opts) {
+      // Default options
+      var options = {
+        method: 'GET',
+        // the fake data response that the server should return
+        response: {},
+        responseCode: 200,
+        // the URL to which the fake server should respond
+        requestUrl: "/fakeSubmitUrl",
+        // a string of zoom parameters to append to the link
+        zoom: ""
+      };
+
+      // Merge default options and external options
+      if (opts) {
+        options = _.extend({}, options, opts);
+      }
 
       ep.io.localStore.setItem('oAuthToken', 'fakeToken');
 
+      var fakeServer = sinon.fakeServer.create();
       fakeServer.autoRespond = true;
 
       fakeServer.respondWith(
-        "GET",
-        fakeGetLink + zoom,
+        options.method,
+        options.requestUrl + options.zoom,
         [
-          200,
+          options.responseCode,
           {"Content-Type": "application/json"},
-          JSON.stringify(response)
+          JSON.stringify(options.response)
         ]
       );
 

@@ -23,6 +23,7 @@
     "newAddress":"#newaddressform",
     "profile":"#profile",
     "purchaseHistory": "#purchaseDetails",
-    "purchaseReceipt": "#purchaseReceipt"
+    "purchaseReceipt": "#purchaseReceipt",
+    "registration": "#registration"
   }
 }

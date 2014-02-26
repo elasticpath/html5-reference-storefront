@@ -12,6 +12,7 @@ define(function (require) {
     var Mediator = require('mediator');
     var EventBus = require('eventbus');
     var Router = require('router');
+    var utils = require('utils');
     var config = require('text!ep.config.json');
 
     // require the follow is necessary to use their functions, but no need to variablize it.
@@ -268,6 +269,8 @@ define(function (require) {
       }
     };
 
+    // FIXME [CU-264] move these UI functions to app.controller.js as extension functions of Marionette.View
+
     // Load the spin.js library that provides the default activity indicators.
     require('spin');
     // Load an extended version of jQuery.spin.js that includes a loading overlay.
@@ -311,6 +314,61 @@ define(function (require) {
         view.ui.activityIndicatorEl.spin(false);
       } else {
         view.$el.spin(false);
+      }
+    };
+
+    /**
+     * Get a jQuery object from a given Marionette.View and ui hash element name.
+     * @param {Marionette.View} a Marionette View with a ui hash
+     * @param elementName the name assigned to the element in the view's ui hash
+     * @returns the jQuery object or null
+     */
+    ep.ui.getUIElementFromView = function (view, elementName) {
+      if ((view && elementName) && (view.ui && _.has(view.ui, elementName))) {
+        return view.ui[elementName];
+      }
+      return null;
+    };
+
+    /**
+     * Disables a button element in the given view by setting its disabled property
+     * and adding a spinner activity indicator to it.
+     * @param view {Marionette.View} A Marionette View with a ui hash in which the button element is defined.
+     * @param buttonElementName {String} The name of the button element as it appears in the ui hash of the view.
+     */
+    ep.ui.disableButton = function (view, buttonElementName) {
+      var $button = ep.ui.getUIElementFromView(view, buttonElementName);
+
+      if ( utils.isButton($button) ) {
+        // Set the button's disabled property
+        $button.prop('disabled', true);
+
+        // Use the jQuery spin plugin to apply an activity indicator to the button
+        $button.spin({
+          // These settings generate a small loading indicator without an overlay
+          lines: 8, length: 4, width: 3, radius: 5, zIndex: 1000, overlay: false
+        });
+      } else {
+        ep.logger.error('disableButton function called without a valid view and button');
+      }
+    };
+
+    /**
+     * Enables a button element in the given view by removing its disabled property
+     * and removing a spinner activity indicator from it.
+     * @param view {Marionette.View} A Marionette View with a ui hash in which the button element is defined.
+     * @param buttonElementName {String} The name of the button element as it appears in the ui hash of the view.
+     */
+    ep.ui.enableButton = function (view, buttonElementName) {
+      var $button = ep.ui.getUIElementFromView(view, buttonElementName);
+      if ( utils.isButton($button) ) {
+        // Set the button's disabled property
+        $button.prop('disabled', false);
+
+        // Use the jQuery spin plugin to apply an activity indicator to the button
+        $button.spin(false);
+      } else {
+        ep.logger.error('enableButton function called without a valid view and button');
       }
     };
 

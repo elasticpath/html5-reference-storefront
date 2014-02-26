@@ -47,8 +47,12 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
         addressFormRegion: '[data-region="componentAddressFormRegion"]',
         addressFeedbackMsgRegion: '[data-region="componentAddressFeedbackRegion"]'
       },
+      ui: {
+        createAddressButton: '[data-el-label="addressForm.create"]',
+        cancelButton: '[data-el-label="addressForm.cancel"]'
+      },
       events: {
-        'click [data-el-label="addressForm.create"]': function (event) {
+        'click @ui.createAddressButton': function (event) {
           event.preventDefault();
           var addressHref = this.model.get('href');
           if (addressHref) {
@@ -57,7 +61,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
             ep.logger.warn('unable to retrieve url to post address form');
           }
         },
-        'click [data-el-label="addressForm.cancel"]': function (event) {
+        'click @ui.cancelButton': function (event) {
           event.preventDefault();
           EventBus.trigger('address.cancelBtnClicked');
         }
@@ -77,8 +81,12 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
         addressFormRegion: '[data-region="componentAddressFormRegion"]',
         addressFeedbackMsgRegion: '[data-region="componentAddressFeedbackRegion"]'
       },
+      ui: {
+        editAddressButton: '[data-el-label="addressForm.edit"]',
+        cancelButton: '[data-el-label="addressForm.cancel"]'
+      },
       events: {
-        'click [data-el-label="addressForm.edit"]': function (event) {
+        'click @ui.editAddressButton': function (event) {
           event.preventDefault();
           var addressHref = this.model.get('href');
           if (addressHref) {
@@ -87,7 +95,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
             ep.logger.warn('unable to retrieve url to post address form');
           }
         },
-        'click [data-el-label="addressForm.cancel"]': function (event) {
+        'click @ui.cancelButton': function (event) {
           event.preventDefault();
           EventBus.trigger('address.cancelBtnClicked');
         }
@@ -337,7 +345,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
 
       // if there is more than 1 line, format it as list
       if (msgList.length > 1) {
-        formattedMsg = '<UL class="address-form-error-list">';
+        formattedMsg = '<UL class="error-list">';
         msgList.forEach(function (line) {
           formattedMsg += '<LI>' + line + '</LI>';
         });
