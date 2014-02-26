@@ -6,7 +6,7 @@ define(function (require) {
   var ep = require('ep');
   var modelTestFactory = require('testfactory.model');
   var models = require('profile.models');
-  var dataJSON = require('text!../../../tests/data/profile.json');
+  var dataJSON = require('text!../../../../tests/data/profile.json');
 
   describe('Profile Module: Models', function () {
     var profileModel = new models.ProfileModel();

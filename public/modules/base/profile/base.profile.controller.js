@@ -33,7 +33,7 @@ define(function (require) {
      * If user isn't logged in, trigger request to prompt user login.
      * @returns {View.DefaultLayout}  with populated data and child views ready to render.
      */
-    var defaultView = function () {
+    var defaultController = function () {
 
       // ensure the user is authenticated before continuing to process the request
       if (ep.app.isUserLoggedIn()) {
@@ -141,6 +141,6 @@ define(function (require) {
     });
 
     return {
-      DefaultView: defaultView
+      DefaultController: defaultController
     };
 });

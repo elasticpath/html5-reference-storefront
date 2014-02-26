@@ -8,72 +8,8 @@ define(function (require) {
   var Mediator = require('mediator');
   var ep = require('ep');
 
-  var EventTestFactory = require('testfactory.event');
-  var EventTestHelpers = require('testhelpers.event');
-  var controllerTestFactory = require('testfactory.controller');
-
-  describe('Profile Module: Controller', function () {
-    var profileController = require('profile');
-    var profileTemplate = require('text!modules/base/profile/base.profile.templates.html');
-
-    describe("DefaultView", function () {
-      before(function () {
-        sinon.stub(Backbone, 'sync');
-
-        $("#Fixtures").append(profileTemplate);
-      });
-
-      after(function () {
-        $("#Fixtures").empty();
-        Backbone.sync.restore();
-      });
-
-      describe('called when user logged in', function () {
-        before(function () {
-          sinon.stub(ep.app, 'isUserLoggedIn', function () {
-            return true;
-          });
-          this.viewLayout = new profileController.DefaultView();
-          this.viewLayout.render();
-        });
-
-        after(function () {
-          ep.app.isUserLoggedIn.restore();
-        });
-
-        it('should be an instance of Marionette Layout object', function () {
-          expect(this.viewLayout).to.be.an.instanceOf(Marionette.Layout);
-        });
-        it('view\'s DOM is rendered with 6 children (view content rendered)', function () {
-          expect(this.viewLayout.el.childElementCount).to.be.equal(6);
-        });
-        it('Model should have fetched info from server once', function () {
-          expect(Backbone.sync).to.be.calledOnce;
-        });
-      });
-      describe('called when user not logged in', function () {
-        before(function () {
-          sinon.stub(Mediator, 'fire');
-          sinon.stub(ep.app, 'isUserLoggedIn', function () {
-            return false;
-          });
-
-          this.viewLayout = new profileController.DefaultView();
-        });
-
-        after(function () {
-          ep.app.isUserLoggedIn.restore();
-          Mediator.fire.restore();
-        });
-
-        it('DefaultView should exist', function () {
-          expect(this.viewLayout).to.exist;
-        });
-        it('triggered with 2 arguments', function () {
-          expect(Mediator.fire).to.be.calledWithExactly('mediator.loadRegionContent', 'loginModal');
-        });
-      });
-    });
+  describe('Profile Module: Address Events', function () {
+    require('profile');
 
     describe('Responds to event: profile.addNewAddressBtnClicked', function () {
       before(function () {

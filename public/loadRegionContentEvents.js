@@ -88,7 +88,7 @@ define(function(require) {
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'appMainRegion',
         module:'profile',
-        view:'DefaultView'
+        view:'DefaultController'
       });
     },
     purchaseDetails: function(id){
