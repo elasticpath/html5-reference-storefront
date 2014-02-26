@@ -31,7 +31,9 @@
         <guid>502</guid>
         <guid>500</guid>
     </tax_codes>
-    <tax_jurisdictions/>
+    <tax_jurisdictions>
+        <jurisdiction>FF6E6776-16FB-7BB1-4B7E-DDF2F0D73FE7</jurisdiction>
+    </tax_jurisdictions>
 	<payment_gateways>
 		<gateway>DemoTokenPaymentProcessor</gateway>
 	</payment_gateways>

@@ -286,7 +286,7 @@ define(function (require) {
      */
     ep.ui.startActivityIndicator = function(view, option) {
       if (!view) {
-        ep.logger.error('missing view to startActivityIndicator');
+        ep.logger.error('missing view to start activity indicator');
         return;
       }
 
@@ -306,7 +306,7 @@ define(function (require) {
      */
     ep.ui.stopActivityIndicator = function(view) {
       if (!view) {
-        ep.logger.error('missing view to startActivityIndicator');
+        ep.logger.error('missing view to stop activity indicator');
         return;
       }
 

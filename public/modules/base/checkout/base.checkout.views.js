@@ -17,21 +17,16 @@ define(function (require) {
     var viewHelpers = ViewHelpers.extend({
       /**
        * Determine if checkout button should be disabled, and return a disabled attribute or empty string respectively.
+       * Uses the getButtonDisabledAttr view helper function to construct the disabled attribute value.
        * Assuming must be authenticated to view the page if anonymous checkout is not allowed.
        *
        * @param submitOrderActionLink The action-link to which the submit order request is posted.
        * @returns {string} HTML disabled attribute or empty string
        */
-        // FIXME could this function be abstracted to be shared by cartSubmitBtn, itemAddToCartBtn, checkoutSubmitBtn etc etc?
       getSubmitOrderButtonDisabledAttr: function (submitOrderActionLink) {
-        // complete purchase disabled by default
-        var retVar = 'disabled="disabled"';
-
-        if (submitOrderActionLink) {
-          retVar = '';
-        }
-
-        return retVar;
+        return ViewHelpers.getButtonDisabledAttr(function() {
+          return submitOrderActionLink;
+        });
       },
 
       /**
@@ -41,7 +36,7 @@ define(function (require) {
        * @param obj The checkout object being rendered (billing/shipping addresses and shipping options are supported)
        * @returns {string} HTML checked attribute or empty string
        */
-      getCheckoutRadioCheckedAttr: function(obj) {
+      getCheckoutRadioCheckedAttr: function (obj) {
         var checkedAttr = '';
 
         if (obj && obj.chosen === true) {
@@ -56,7 +51,7 @@ define(function (require) {
        * @param prefix text to prepend to the generated ID
        * @returns String an unique ID.
        */
-      getUniqueIdForFormInput: function(prefix) {
+      getUniqueIdForFormInput: function (prefix) {
         var uniqueId;
 
         if (prefix) {
@@ -111,7 +106,7 @@ define(function (require) {
     var checkoutAddressSelectorLayout = Marionette.Layout.extend({
       template: '#CheckoutAddressSelectorTemplate',
       templateHelpers: viewHelpers,
-      serializeData: function() {
+      serializeData: function () {
         // Append an extra value to the model to distinguish which type of address is to be rendered.
         var data = this.model.toJSON();
         data.addressType = this.options.addressType;
@@ -159,7 +154,7 @@ define(function (require) {
       },
       itemViewContainer: '[data-region="billingAddressSelectorsRegion"]',
       events: {
-        'click [data-el-label="checkout.newBillingAddressBtn"]': function(event) {
+        'click [data-el-label="checkout.newBillingAddressBtn"]': function (event) {
           event.preventDefault();
           EventBus.trigger('checkout.addNewAddressBtnClicked');
         }
@@ -190,7 +185,7 @@ define(function (require) {
       },
       itemViewContainer: '[data-region="shippingAddressSelectorsRegion"]',
       events: {
-        'click [data-el-label="checkout.newShippingAddressBtn"]': function(event) {
+        'click [data-el-label="checkout.newShippingAddressBtn"]': function (event) {
           event.preventDefault();
           EventBus.trigger('checkout.addNewAddressBtnClicked');
         }
@@ -249,6 +244,10 @@ define(function (require) {
         }
       },
       onShow: function () {
+        if (this.model.get('oneTime')) {
+          $('label', this.$el).prepend('<span>New Payment: </span>');
+        }
+
         // Fire event to load the address itemView from component
         Mediator.fire('mediator.loadPaymentMethodViewRequest', {
           region: this.checkoutPaymentRegion,
@@ -279,6 +278,24 @@ define(function (require) {
       ui: {
         // A jQuery selector for the DOM element to which an activity indicator should be applied.
         activityIndicatorEl: '[data-region="paymentMethodSelectorsRegion"]'
+      },
+      onRender: function() {
+        // If there is more than one payment method, look for a one-time payment method
+        // and if found, move it to the end of the collection
+        if (this.collection.length > 1) {
+          var oneTime = this.collection.where({oneTime: true})[0];
+
+          if (oneTime) {
+            this.collection.remove(oneTime);
+            this.collection.push(oneTime);
+          }
+        }
+      },
+      events: {
+        'click [data-el-label="checkout.newPaymentMethodBtn"]': function (event) {
+          event.preventDefault();
+          EventBus.trigger('checkout.addNewPaymentMethodBtnClicked');
+        }
       }
     });
 

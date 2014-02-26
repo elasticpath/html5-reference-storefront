@@ -12,24 +12,24 @@
     "region": "Province",
     "saveBtn": "Save",
     "streetAddress": "Street Address",
-    "errorMsg" : {
+    "errorMsg": {
       "generalSaveAddressFailedErrMsg": "I'm sorry, there was an error saving this address. Please try again or contact your system administrator",
-      "addressFormEmptyErrMsg" : "No fields specified",
-      "missingFamilyNameErrMsg" : "Missing required field \"Last Name\"",
-      "missingGivenNameErrMsg" : "Missing required field \"First Name\"",
-      "missingPostalCodeErrMsg" : "Missing required field \"Postal Code\"",
-      "missingStreetAddErrMsg" : "Missing required field \"Street Address\"",
-      "missingRegionErrMsg" : "Missing required field \"Province\"",
-      "missingLocalityErrMsg" : "Missing required field \"City\"",
-      "missingCountryErrMsg" : "Missing required field \"Country\"",
-      "invalidFamilyNameErrMsg" : "\"Last Name\" is invalid: must be between 1 to 100 characters",
-      "invalidGivenNameErrMsg" : "\"First Name\" is invalid:  must be between 1 to 100 characters",
-      "invalidPostalCodeErrMsg" : "\"Postal Code\" is invalid:  must be between 1 to 50 characters",
-      "invalidStreetAddErrMsg" : "\"Street Address\" is invalid: must be between 1 to 200 characters",
-      "invalidExtendedAddErrMsg" : "\"Extended Address\" is invalid: must be between 0 to 200 characters",
-      "invalidLocalityErrMsg" : "\"City\" is invalid: must be between 1 to 200 characters ",
-      "invalidRegionErrMsg" : "\"Province\" is invalid or not supported",
-      "invalidCountryErrMsg" : "\"Country\" is invalid or not supported"
+      "addressFormEmptyErrMsg": "No fields specified",
+      "missingFamilyNameErrMsg": "Missing required field \"Last Name\"",
+      "missingGivenNameErrMsg": "Missing required field \"First Name\"",
+      "missingPostalCodeErrMsg": "Missing required field \"Postal Code\"",
+      "missingStreetAddErrMsg": "Missing required field \"Street Address\"",
+      "missingRegionErrMsg": "Missing required field \"Province\"",
+      "missingLocalityErrMsg": "Missing required field \"City\"",
+      "missingCountryErrMsg": "Missing required field \"Country\"",
+      "invalidFamilyNameErrMsg": "\"Last Name\" is invalid: must be between 1 to 100 characters",
+      "invalidGivenNameErrMsg": "\"First Name\" is invalid:  must be between 1 to 100 characters",
+      "invalidPostalCodeErrMsg": "\"Postal Code\" is invalid:  must be between 1 to 50 characters",
+      "invalidStreetAddErrMsg": "\"Street Address\" is invalid: must be between 1 to 200 characters",
+      "invalidExtendedAddErrMsg": "\"Extended Address\" is invalid: must be between 0 to 200 characters",
+      "invalidLocalityErrMsg": "\"City\" is invalid: must be between 1 to 200 characters ",
+      "invalidRegionErrMsg": "\"Province\" is invalid or not supported",
+      "invalidCountryErrMsg": "\"Country\" is invalid or not supported"
     }
   },
   "auth": {
@@ -39,6 +39,12 @@
     "loginMenu": "Login",
     "loginTitle":"Login",
     "logout": "Logout",
+<<<<<<< HEAD
+=======
+    "loginTitle": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+>>>>>>> CU-70
     "password": "Password",
     "profile":"Profile",
     "register":"Register",
@@ -73,6 +79,7 @@
     "billingAddress": "Billing Address",
     "checkoutTitle": "Checkout Summary",
     "newAddressBtn": "Add a New Address",
+    "newPaymentBtn": "Add a New Payment Method",
     "paymentMethod": "Payment Method",
     "shippingAddress": "Shipping Address",
     "shippingOption": "Shipping Options",
@@ -88,10 +95,10 @@
     "noPaymentMethodsMsg": "You have no saved payment method.",
     "submitOrderError": "There was an error with your purchase. Please try again or contact support.",
     "updateChosenErrMsg": {
-      "billingAddress" : "I'm sorry, there was an error changing your selected billing address. Please contact your system administrator.",
-      "paymentMethod" : "I'm sorry, there was an error changing your selected payment method. Please contact your system administrator.",
-      "shippingAddress" : "I'm sorry, there was an error changing your selected shipping address. Please contact your system administrator.",
-      "shippingOption" : "I'm sorry, there was an error changing your selected shipping option. Please contact your system administrator."
+      "billingAddress": "I'm sorry, there was an error changing your selected billing address. Please contact your system administrator.",
+      "paymentMethod": "I'm sorry, there was an error changing your selected payment method. Please contact your system administrator.",
+      "shippingAddress": "I'm sorry, there was an error changing your selected shipping address. Please contact your system administrator.",
+      "shippingOption": "I'm sorry, there was an error changing your selected shipping option. Please contact your system administrator."
     }
   },
   "category": {
@@ -110,26 +117,44 @@
   "itemDetail": {
     "addToCart": "Add to Cart",
     "noImgLabel": "No Image Available",
-    "noPrice":"n/a",
+    "noPrice": "n/a",
     "listPrice": "Original Price",
     "purchasePrice": "Price",
     "quantity": "Quantity",
-    "rate":"Rate"
+    "rate": "Rate"
   },
-  "profile":{
-    "title":"Profile",
-    "address" :{
-      "create":"Add a New Address",
-      "delete":"Delete",
-      "edit":"Edit",
+  "paymentForm": {
+    "cancelBtn": "Cancel",
+    "cardType": "Card Type",
+    "cardNumber": "Credit Card Number",
+    "expiry": "Expiry Date",
+    "formTitle": "New Payment Method",
+    "name": "Card Holder's Name",
+    "saveBtn": "Continue",
+    "securityCode": "Security Code",
+    "type": {
+      "americanExp": "American Express",
+      "master": "Master",
+      "visa": "Visa"
+    },
+    "errorMsg": {
+      "generalSavePaymentFailedErrMsg": "I'm sorry, there was an error saving this payment method. Please try again or contact your system administrator."
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "address": {
+      "create": "Add a New Address",
+      "delete": "Delete",
+      "edit": "Edit",
       "title": "Addresses",
       "msg": {
         "deleteErr": "I'm sorry, there was an error deleting the address. Please contact your system administrator.",
-        "deleteConfirm":"Do you really want to delete this address?",
+        "deleteConfirm": "Do you really want to delete this address?",
         "noAddress": "You have no saved addresses."
       }
     },
-    "paymentMethods" : {
+    "paymentMethods": {
       "title": "Payment Methods",
       "msg": {
         "noPaymentMethod": "You have no saved payment methods"
@@ -140,22 +165,22 @@
       "firstName": "First Name",
       "lastName": "Last Name"
     },
-    "purchases" : {
-      "date":   "Date",
+    "purchases": {
+      "date": "Date",
       "noPurchaseMsg": "You haven't made any purchases",
       "number": "Purchase #",
       "status": "Status",
-      "title":  "Purchase History",
-      "total":  "Total"
+      "title": "Purchase History",
+      "total": "Total"
     },
-    "subscriptions" : {
+    "subscriptions": {
       "title": "Subscriptions",
       "product": "Subscription",
       "quantity": "Quantity",
       "nextBillingDate": "Next Billing Date"
     }
   },
-  "purchaseInfo":{
+  "purchaseInfo": {
     "purchaseDetails": {
       "backToProfile": "Go back to profile page",
       "pageTitle": "Purchase Details"
@@ -170,13 +195,13 @@
     "itemTax": "Tax",
     "itemsTitle": "Items",
     "itemTotal": "Item Total",
-    "orderDate":"Order Purchase Date",
+    "orderDate": "Order Purchase Date",
     "orderNumber": "Order Number",
     "orderStatus": "Status",
     "orderTaxTotal": "Order Tax Total",
     "orderTotal": "Order Total",
     "paymentMethodTitle": "Payment Method",
-    "summaryTitle":"Summary"
+    "summaryTitle": "Summary"
   },
   "purchaseStatus": {
     "COMPLETED": "Completed",

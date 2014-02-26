@@ -4,6 +4,23 @@
 define(function(require){
   var EventBus = require('eventbus');
 
+  var helpers = {
+    returnAfterFormDone: function (defaultReturn, returnTo) {
+      require(['ep'], function (ep) {
+        var moduleName = ep.io.sessionStore.getItem(returnTo);
+
+        if (!moduleName) {
+          ep.router.navigate(defaultReturn, true);  // if no return module specified, then return to profile
+        }
+        else {
+          var url = ep.app.config.routes[moduleName] || defaultReturn;
+          ep.router.navigate(url, true);
+          ep.io.sessionStore.removeItem(returnTo);   // clear sessionStorage
+        }
+      });
+    }
+  };
+
   var mediatorObj = {
     'mediator.loadRegionContent': function(controllerName) {
       require(['loadRegionContentEvents'], function(loadRegionContent) {
@@ -90,6 +107,18 @@ define(function(require){
         });
       }
     },
+    // FIXME [CU-234] could this and the addNewAddressRequest be consolidated?
+    'mediator.addNewPaymentMethodRequest': function (moduleName) {
+      require(['ep'], function (ep) {
+        if (moduleName) {
+          ep.io.sessionStore.setItem('paymentFormReturnTo', moduleName);
+          ep.router.navigate(ep.app.config.routes.newPayment, true);
+        }
+        else {
+          ep.logger.error('mediator.addNewPaymentMethodRequest was called with invalid moduleName: ' + moduleName);
+        }
+      });
+    },
     'mediator.addNewAddressRequest': function (moduleName) {
       require(['ep'], function (ep) {
         if (moduleName) {
@@ -114,7 +143,11 @@ define(function(require){
         }
       });
     },
+    'mediator.paymentFormComplete': function () {
+      helpers.returnAfterFormDone('#profile', 'paymentFormReturnTo');
+    },
     'mediator.addressFormComplete': function () {
+      helpers.returnAfterFormDone('#profile', 'addressFormReturnTo');
       require(['ep'], function (ep) {
         var moduleName = ep.io.sessionStore.getItem('addressFormReturnTo');
 

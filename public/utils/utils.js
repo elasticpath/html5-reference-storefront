@@ -110,6 +110,26 @@ define(function(require){
       } else {
         return translatedMsgList;
       }
+    },
+
+    /**
+     * Renders a message (from a i18n key) to a container referenced by a jQuery object.
+     * @param msgKey a message string or an i18n key to a message
+     * @param jQuery object
+     */
+    renderMsgToPage: function (msgKey, jQueryObj) {
+      // Test for a message and a valid jQuery object and exit early if either are missing
+      if (!msgKey || !jQueryObj || !(jQueryObj instanceof jQuery)) {
+        console.warn('renderMsgToPage called without a valid message or target region');
+        return; // skip rest of the function
+      }
+
+      var msg = i18n.t(msgKey);
+
+      // Perform an animated scroll to the top of the page
+      $('html, body').animate({ scrollTop: 0 }, 'fast');
+
+      jQueryObj.html(msg);
     }
   };
 });

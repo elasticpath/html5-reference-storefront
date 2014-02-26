@@ -1,5 +1,5 @@
 {
-  "zoom" : "?zoom=purchaseform,billingaddressinfo:selector:chosen:description,billingaddressinfo:selector:choice,billingaddressinfo:selector:choice:description,tax,total,cart,cart:total,deliveries:element,deliveries:element:destinationinfo:selector:chosen:description,deliveries:element:destinationinfo:selector:choice,deliveries:element:destinationinfo:selector:choice:description,deliveries:element:shippingoptioninfo:selector:chosen:description,deliveries:element:shippingoptioninfo:selector:choice,deliveries:element:shippingoptioninfo:selector:choice:description,paymentmethodinfo,paymentmethodinfo:selector:chosen:description,paymentmethodinfo:selector:choice,paymentmethodinfo:selector:choice:description",
+  "zoom" : "?zoom=purchaseform,billingaddressinfo:selector:chosen:description,billingaddressinfo:selector:choice,billingaddressinfo:selector:choice:description,tax,total,cart,cart:total,deliveries:element,deliveries:element:destinationinfo:selector:chosen:description,deliveries:element:destinationinfo:selector:choice,deliveries:element:destinationinfo:selector:choice:description,deliveries:element:shippingoptioninfo:selector:chosen:description,deliveries:element:shippingoptioninfo:selector:choice,deliveries:element:shippingoptioninfo:selector:choice:description,paymentmethodinfo,paymentmethodinfo:selector:chosen,paymentmethodinfo:paymentmethod,paymentmethodinfo:selector:choice,paymentmethodinfo:selector:choice:description",
   "retrievedOn" : "Dec 19, 2013",
   "retrievedCriteria": "purchase digital and physical item, must have 1 one-item item; registered user, must have at least 1 address, 1 tokenized payment method, chosen a default billing address , chosen a default shipping method, and chosen a default payment method",
   "response" : {
@@ -598,6 +598,18 @@
     ],
     "_paymentmethodinfo": [
       {
+        "_paymentmethod": [
+          {
+            "links": [],
+            "self": {
+              "type": "application/vnd.elasticpath.paymenttoken",
+              "uri": "/paymentmethods/orders/campus/myzdcy3dhfrdsljzgy3tkljuhazdsljyhbtdsljymzstinjuga4tqzlegm",
+              "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/paymentmethods/orders/campus/myzdcy3dhfrdsljzgy3tkljuhazdsljyhbtdsljymzstinjuga4tqzlegm",
+              "max-age": 0
+            },
+            "display-value": "********6745"
+          }
+        ],
         "_selector": [
           {
             "_choice": [
@@ -656,31 +668,26 @@
             ],
             "_chosen": [
               {
-                "_description": [
+                "links": [
                   {
-                    "links": [
-                      {
-                        "type": "application/vnd.elasticpath.profile",
-                        "rel": "profile",
-                        "href": "http://aws-qa3.elasticpath.net:13080/integrator/profiles/cshop/m5yxissunrjgovjqnrefsrluizlweqzxnnaweukhjm3dstligfxwm6cqme3wcmtmobwu42dclbbdcyzzn5auurkzgnhdatjqjzvvsmkmkvitctl2nn2e4rcoi5gvgmkckf5esm2mkrtxstlkljbu4vkoiniwwwjqjvat2pi",
-                        "uri": "/profiles/cshop/m5yxissunrjgovjqnrefsrluizlweqzxnnaweukhjm3dstligfxwm6cqme3wcmtmobwu42dclbbdcyzzn5auurkzgnhdatjqjzvvsmkmkvitctl2nn2e4rcoi5gvgmkckf5esm2mkrtxstlkljbu4vkoiniwwwjqjvat2pi"
-                      },
-                      {
-                        "type": "application/vnd.elasticpath.links",
-                        "rel": "list",
-                        "href": "http://aws-qa3.elasticpath.net:13080/integrator/paymentmethods/cshop",
-                        "uri": "/paymentmethods/cshop"
-                      }
-                    ],
-                    "self": {
-                      "type": "application/vnd.elasticpath.paymenttoken",
-                      "uri": "/paymentmethods/cshop/m5yxissunrjgovjqnrefsrluizlwercggnqwo4tenrmfo43koa4hczzyjvkumvdsobwu42dclbbdcyzwlf4u2rcbpbhfiqj5",
-                      "href": "http://aws-qa3.elasticpath.net:13080/integrator/paymentmethods/cshop/m5yxissunrjgovjqnrefsrluizlwercggnqwo4tenrmfo43koa4hczzyjvkumvdsobwu42dclbbdcyzwlf4u2rcbpbhfiqj5",
-                      "max-age": 0
-                    },
-                    "display-value": "MASTER-********3697"
+                    "type": "application/vnd.elasticpath.paymenttoken",
+                    "rel": "description",
+                    "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/paymentmethods/campus/giydamjvgm=",
+                    "uri": "/paymentmethods/campus/giydamjvgm="
+                  },
+                  {
+                    "type": "application/vnd.elasticpath.selector",
+                    "rel": "selector",
+                    "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/paymentmethods/selector/orders/campus/myzdcy3dhfrdsljzgy3tkljuhazdsljyhbtdsljymzstinjuga4tqzlegm",
+                    "uri": "/paymentmethods/selector/orders/campus/myzdcy3dhfrdsljzgy3tkljuhazdsljyhbtdsljymzstinjuga4tqzlegm"
                   }
-                ]
+                ],
+                "self": {
+                  "type": "application/vnd.elasticpath.links",
+                  "uri": "/paymentmethods/campus/giydamjvgm=/selector/orders/campus/myzdcy3dhfrdsljzgy3tkljuhazdsljyhbtdsljymzstinjuga4tqzlegm",
+                  "href": "http://ep-pd-ad-qa0.elasticpath.net:8080/cortex/paymentmethods/campus/giydamjvgm=/selector/orders/campus/myzdcy3dhfrdsljzgy3tkljuhazdsljyhbtdsljymzstinjuga4tqzlegm",
+                  "max-age": 0
+                }
               }
             ]
           }

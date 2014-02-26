@@ -35,8 +35,10 @@ define(function (require) {
     // in case user does not have any payment method,
     // need paymentmethodinfo to determine if payment method region need to show
     'paymentmethodinfo',
-    // chosen payment options
-    'paymentmethodinfo:selector:chosen:description',
+    // needed to determine if payment is one-time, for current order only
+    'paymentmethodinfo:selector:chosen',
+    // currently selected payment method
+    'paymentmethodinfo:paymentmethod',
     // choice payment options
     'paymentmethodinfo:selector:choice',
     'paymentmethodinfo:selector:choice:description'
@@ -98,11 +100,8 @@ define(function (require) {
         }
 
         if (parsedPaymentMethods.length) {
-          // Sort the parsed payment methods alphabetically by the displayValue
-          checkoutObj.paymentMethods = modelHelpers.sortPaymentMethods(parsedPaymentMethods, 'displayValue');
-
           // Set a chosen payment method if there is not one set already
-          checkoutObj.paymentMethods = modelHelpers.setChosenEntity(checkoutObj.paymentMethods);
+          checkoutObj.paymentMethods = modelHelpers.setChosenEntity(parsedPaymentMethods);
         }
 
         checkoutObj.summary = modelHelpers.parseCheckoutSummary(response);
@@ -116,7 +115,10 @@ define(function (require) {
     }
   });
 
-  var paymentMethodsCollection = Backbone.Collection.extend();
+  var paymentMethodsCollection = Backbone.Collection.extend({
+    // sorts the Collection alphabetically by display value
+    comparator: 'displayValue'
+  });
   var shippingOptionsCollection = Backbone.Collection.extend();
   var checkoutSummaryModel = Backbone.Model.extend();
 
@@ -331,13 +333,18 @@ define(function (require) {
       var paymentMethods = [];
 
       if (response) {
-        var chosenPaymentMethod = jsonPath(response, '$.._paymentmethodinfo.._chosen.._description[0]')[0];
+        var selectedPaymentMethod = jsonPath(response, '$.._paymentmethodinfo.._paymentmethod[0]')[0];
+        var chosenPaymentMethods = jsonPath(response, '$.._paymentmethodinfo.._chosen')[0];
         var choicePaymentMethods = jsonPath(response, '$.._paymentmethodinfo.._choice')[0];
 
-        if (chosenPaymentMethod) {
-          var chosen = modelHelpers.parseTokenPayment(chosenPaymentMethod);
+        if (selectedPaymentMethod) {
+          var chosen = modelHelpers.parseTokenPayment(selectedPaymentMethod);
 
           modelHelpers.markAsChosenObject(chosen);
+
+          if (!chosenPaymentMethods) {
+            chosen.oneTime = true;
+          }
 
           paymentMethods.push(chosen);
         }
@@ -431,16 +438,6 @@ define(function (require) {
      */
     sortAddresses: function(addressArray, sortProperty) {
       return modelHelpers.sortByAscAlphabeticOrder(addressArray, sortProperty);
-    },
-
-    /**
-     * Sort array of payment methods by a given property.
-     * @param paymentMethodArray  Array to be sorted.
-     * @param sortProperty        Property to sort by.
-     * @returns {Array}           Sorted array of payment methods.
-     */
-    sortPaymentMethods: function(paymentMethodArray, sortProperty) {
-      return modelHelpers.sortByAscAlphabeticOrder(paymentMethodArray, sortProperty);
     }
   });
 

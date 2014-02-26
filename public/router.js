@@ -19,6 +19,7 @@ define(function(require) {
         'itemdetail/:href': 'itemDetail',
         'editaddress/:href': 'editaddress',
         'newaddressform' : 'newaddressform',
+        'newpaymentform' : 'newpaymentform',
         'mycart': 'cart',
         'profile': 'profile',
         'purchaseReceipt/:id': 'purchaseReceipt',

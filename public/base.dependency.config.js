@@ -74,7 +74,8 @@ var config = {
       'address.views' : 'modules/base/components/address/base.component.address.views',
       'address.models': 'modules/base/components/address/base.component.address.models',
       'payment'       : 'modules/base/components/payment/base.component.payment.controller',
-      'payment.views' : 'modules/base/components/payment/base.component.payment.views'
+      'payment.views' : 'modules/base/components/payment/base.component.payment.views',
+      'payment.models' : 'modules/base/components/payment/base.component.payment.models'
     },
     shim: {
       'backbone': {

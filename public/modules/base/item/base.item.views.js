@@ -3,27 +3,19 @@
  *
  *
  */
-define(['ep','marionette','i18n','eventbus','pace'],
-  function(ep,Marionette,i18n,EventBus,pace){
-    //console.log('fuck:  ' + i18n);
-    var viewHelpers = {
+define(function (require) {
+    var ep = require('ep');
+    var Marionette = require('marionette');
+    var EventBus = require('eventbus');
+    var pace = require('pace');
+    var ViewHelpers = require('viewHelpers');
+
+    var viewHelpers = ViewHelpers.extend({
       getDisplayType:function(bHasChildren){
         if (bHasChildren){
           return 'inline-block';
         }
         return 'none';
-      },
-      getI18nLabel:function(key){
-        var retVal = key;
-        try{
-          retVal = i18n.t(key);
-        }
-        catch(e){
-          // slient failure on label rendering
-        }
-
-        return retVal;
-
       },
       getAvailabilityDisplayText:function(availability){
         var retVal = '';
@@ -82,20 +74,16 @@ define(['ep','marionette','i18n','eventbus','pace'],
 
         return retVar;
       },
-      checkForDisabledAddToCart:function(model){
-        // only check for the action link on the form as the
-        // determining whether the add to cart button should be active
-          // check if add to cart is available
-          if (!model.addtocart.actionlink){
-            return 'disabled="disabled"';
-          }
+      getDisabledAddToCartBtnAttr: function (model) {
+        return ViewHelpers.getButtonDisabledAttr(function() {
+          return model.addtocart.actionlink;
+        });
       },
       getDefaultImagePath:function(thumbnail){
         if (thumbnail && (thumbnail.length > 0)){
           for (var i = 0;i < thumbnail.length;i++){
-            if (thumbnail[i].name == 'default-image'){
+            if (thumbnail[i].name === 'default-image'){
               return thumbnail[i].absolutePath;
-              break;
             }
           }
         }
@@ -113,10 +101,10 @@ define(['ep','marionette','i18n','eventbus','pace'],
         }
         return retVar;
       }
-    };
+    });
 
     // Default Item Detail Layout
-    var defaultLayout = Backbone.Marionette.Layout.extend({
+    var defaultLayout = Marionette.Layout.extend({
       template:'#DefaultItemDetailLayoutTemplate',
       regions:{
         itemDetailTitleRegion:'[data-region="itemDetailTitleRegion"]',
@@ -131,7 +119,7 @@ define(['ep','marionette','i18n','eventbus','pace'],
     });
 
     // Default Title View
-    var defaultItemTitleView = Backbone.Marionette.ItemView.extend({
+    var defaultItemTitleView = Marionette.ItemView.extend({
       template:'#DefaultItemTitleTemplate',
       onShow:function(){
         pace.stop();
@@ -139,27 +127,27 @@ define(['ep','marionette','i18n','eventbus','pace'],
     });
 
     // Default Asset View
-    var defaultItemAssetView = Backbone.Marionette.ItemView.extend({
+    var defaultItemAssetView = Marionette.ItemView.extend({
       template:'#DefaultItemAssetTemplate',
       className:'itemdetail-asset-container',
       templateHelpers:viewHelpers
     });
 
     // Default Attribute item View
-    var defaultItemAttributeView = Backbone.Marionette.ItemView.extend({
+    var defaultItemAttributeView = Marionette.ItemView.extend({
       template:'#DefaultItemAttributeItemTemplate',
       tagName:'tr'
     });
 
     // Default Attribute List View
-    var defaultItemAttributeListView = Backbone.Marionette.CollectionView.extend({
+    var defaultItemAttributeListView = Marionette.CollectionView.extend({
       itemView:defaultItemAttributeView,
       tagName:'table',
       className:'table table-striped table-condensed'
     });
 
     // Default Item Availability View
-    var defaultItemAvailabilityView = Backbone.Marionette.ItemView.extend({
+    var defaultItemAvailabilityView = Marionette.ItemView.extend({
       template: '#ItemAvailabilityTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
@@ -175,7 +163,7 @@ define(['ep','marionette','i18n','eventbus','pace'],
     //
     // price master view
     //
-    var defaultItemPriceView = Backbone.Marionette.Layout.extend({
+    var defaultItemPriceView = Marionette.Layout.extend({
       template: '#ItemPriceMasterViewTemplate',
       regions: {
         itemPriceRegion: $('[data-region="itemPriceRegion"]', this.el),
@@ -206,7 +194,7 @@ define(['ep','marionette','i18n','eventbus','pace'],
     });
 
     // Item Price View
-    var itemPriceView = Backbone.Marionette.ItemView.extend({
+    var itemPriceView = Marionette.ItemView.extend({
       template: '#ItemPriceTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
@@ -219,21 +207,21 @@ define(['ep','marionette','i18n','eventbus','pace'],
     });
 
     // Item Rate ItemView
-    var itemRateItemView = Backbone.Marionette.ItemView.extend({
+    var itemRateItemView = Marionette.ItemView.extend({
       template: '#ItemRateTemplate',
       templateHelpers: viewHelpers,
       tagName: 'li'
     });
 
     // Item Rate CollectionView
-    var itemRateCollectionView = Backbone.Marionette.CollectionView.extend({
+    var itemRateCollectionView = Marionette.CollectionView.extend({
       itemView: itemRateItemView,
       tagName: 'ul',
       className: 'itemdetail-rate-container'
     });
 
     // Default Item Add to Cart View
-    var defaultItemAddToCartView = Backbone.Marionette.ItemView.extend({
+    var defaultItemAddToCartView = Marionette.ItemView.extend({
       template:'#DefaultItemDetailAddToCartTemplate',
       templateHelpers:viewHelpers,
       events:{
@@ -258,8 +246,6 @@ define(['ep','marionette','i18n','eventbus','pace'],
       DefaultItemPriceView:defaultItemPriceView,
       DefaultItemAddToCartView:defaultItemAddToCartView,
       getAddToCartQuantity:getAddToCartQuantity
-
-
     };
   }
 );
