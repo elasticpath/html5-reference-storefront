@@ -54,6 +54,47 @@ define(function (require) {
       });
     });
 
+    describe('Responds to event: profile.summarySaveBtnClicked',
+      EventTestFactory.simpleEventTriggersEventTest('profile.submitProfileSummaryFormRequest', 'profile.summarySaveBtnClicked'));
+
+    describe('Responds to event: profile.summaryCancelBtnClicked',
+      EventTestFactory.simpleEventTriggersEventTest('profile.loadSummaryViewRequest', 'profile.summaryCancelBtnClicked'));
+
+    describe('Responds to event: profile.loadSummaryViewRequest', function () {
+      before(function () {
+        sinon.stub(Backbone.Model.prototype, 'fetch');
+
+        this.formView = view.ProfileSummaryView;
+        this.formViewDouble = ControllerTestHelper.TestDouble();
+        view.ProfileSummaryView = this.formViewDouble.View;
+
+        EventBus.trigger('profile.loadSummaryViewRequest');
+      });
+
+      after(function () {
+        Backbone.Model.prototype.fetch.restore();
+
+        view.ProfileSummaryFormView = this.formView;
+        delete(this.formView);
+        delete(this.formViewDouble);
+      });
+
+      it('registers correct event listener', function () {
+        expect(EventBus._events['profile.loadSummaryViewRequest']).to.have.length(1);
+      });
+
+      it("fetches latest profile summary info from cortex server", function() {
+        expect(Backbone.Model.prototype.fetch).to.be.calledOnce;
+      });
+
+      it('ProfileSummaryView was rendered', function () {
+        expect(this.formViewDouble.wasRendered()).to.be.true;
+      });
+      it('ProfileSummaryView has a model', function () {
+        expect(this.formViewDouble.hasAModel()).to.be.true;
+      });
+    });
+
   });
 
 });

@@ -80,6 +80,9 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       ui: {
         editBtn: '[data-el-label="profile.editSummaryBtn"]'
       },
+      modelEvents: {
+        'change': 'render'
+      },
       events: {
         'click @ui.editBtn': function(event) {
           event.preventDefault();
@@ -114,13 +117,18 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       tagName:'tr',
       templateHelpers:viewHelpers
     });
+
     var profileSubscriptionSummaryView = Backbone.Marionette.CompositeView.extend({
       template:'#ProfileSubscriptionSummaryTemplate',
       itemView:profileSubscriptionItemView,
       itemViewContainer:'tbody',
       className:'table-responsive',
-      templateHelpers:viewHelpers
-
+      templateHelpers:viewHelpers,
+      onShow: function() {
+        if (this.collection && this.collection.length <= 0) {
+          $('[data-region="profileSubscriptionSummaryRegion"]').hide();
+        }
+      }
     });
 
     /**
