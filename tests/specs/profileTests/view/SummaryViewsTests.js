@@ -4,7 +4,9 @@
  */
 define(function (require) {
   var Backbone = require('backbone');
+  var EventBus = require('eventbus');
   var EventTestFactory = require('testfactory.event');
+  var EventTestHelpers = require('testhelpers.event');
   var ep = require('ep');
 
   var profileViews = require('profile.views');
@@ -14,7 +16,8 @@ define(function (require) {
     var StandardProfileInfoModel = Backbone.Model.extend({
       defaults: {
         givenName: 'ben',
-        familyName: 'boxer'
+        familyName: 'boxer',
+        actionLink: 'fakeActionLink'
       }
     });
 
@@ -68,8 +71,7 @@ define(function (require) {
       before(function () {
         // mock the model
         this.model = new StandardProfileInfoModel();
-        // CheckIn
-        this.view = new profileViews.ProfileSummaryView({model: this.model});
+        this.view = new profileViews.ProfileSummaryFormView({model: this.model});
         this.view.render();
       });
 
@@ -85,7 +87,38 @@ define(function (require) {
         expect(this.view.render()).to.be.equal(this.view);
       });
 
+      // test view's content rendered correctly
+      it('renders user given name input field with data', function () {
+        expect(this.view.$el.find('input[id="GivenName"]').val()).to.have.string(this.model.get('givenName'));
+      });
+      it('renders user family name input field with data', function () {
+        expect(this.view.$el.find('input[id="FamilyName"]').val()).to.have.string(this.model.get('familyName'));
+      });
+      it('renders a feedback region ', function () {
+        expect(this.view.$el.find('[data-region="componentPaymentFeedbackRegion"]')).to.have.length(1);
+      });
+      it('renders a save button ', function () {
+        expect(this.view.$el.find('button[data-el-label="profile.summary.saveBtn"]')).to.have.length(1);
+      });
+      it('renders a cancel button ', function () {
+        expect(this.view.$el.find('button[data-el-label="profile.summary.cancelBtn"]')).to.have.length(1);
+      });
 
+      it('defines ui component: saveBtn ', function () {
+        expect(this.view.ui.saveBtn).to.be.ok;
+      });
+      it('defines ui component: cancelBtn ', function () {
+        expect(this.view.ui.cancelBtn).to.be.ok;
+      });
+      it('defines ui component: feedbackRegion ', function () {
+        expect(this.view.ui.feedbackRegion).to.be.ok;
+      });
+
+      describe('save button clicked',
+        EventTestFactory.simpleBtnClickTest('profile.summarySaveBtnClicked', '[data-el-label="profile.summary.saveBtn"]'));
+
+      describe('cancel button clicked',
+        EventTestFactory.simpleBtnClickTest('profile.summaryCancelBtnClicked', '[data-el-label="profile.summary.cancelBtn"]'));
     });
 
   });

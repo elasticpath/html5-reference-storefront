@@ -38,12 +38,36 @@
   </script>
 
   <script id="ProfileSummaryFormTemplate" type="text/template">
-    <div class="form-group edit-profile-summary-btn-container container">
-      <button class="btn btn-primary summary-save-btn" data-el-label="profile.summary.saveBtn">
-        <%= E.getI18nLabel('profile.personalInfo.save') %></button>
-      <button class="btn address-cancel-btn" data-el-label="profile.profile.summary.cancelBtn">
-        <%= E.getI18nLabel('profile.personalInfo.cancel') %></button>
-    </div>
+    <h2><%= E.getI18nLabel('profile.personalInfo.title') %></h2>
+
+    <div class="feedback-label profile-summary-form-feedback-container" data-region="componentPaymentFeedbackRegion"></div>
+
+    <form role="form" method="POST" class="form-horizontal profile-summary-form-container container">
+      <div class="form-group">
+        <label for="GivenName" data-el-label="profile.givenName" class="control-label form-label">
+          <span class="required-label">*</span><%= E.getI18nLabel('profile.personalInfo.firstName') %>
+        </label>
+        <div class="form-input">
+          <input id="GivenName" name="GivenName" class="form-control" type="text" value="<%= E.givenName %>" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="FamilyName" data-el-label="profile.familyName" class="control-label form-label">
+          <span class="required-label">*</span><%= E.getI18nLabel('profile.personalInfo.lastName') %>
+        </label>
+        <div class="form-input">
+          <input id="FamilyName" name="FamilyName" class="form-control" type="text" value="<%= E.familyName %>" />
+        </div>
+      </div>
+
+      <div class="form-group edit-profile-summary-btn-container container">
+        <button class="btn btn-primary summary-save-btn" data-el-label="profile.summary.saveBtn">
+          <%= E.getI18nLabel('profile.personalInfo.save') %></button>
+        <button class="btn address-cancel-btn" data-el-label="profile.summary.cancelBtn">
+          <%= E.getI18nLabel('profile.personalInfo.cancel') %></button>
+      </div>
+    </form>
   </script>
 
   <!-- Profile Info Form Template -->

@@ -83,14 +83,29 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       events: {
         'click @ui.editBtn': function(event) {
           event.preventDefault();
-          EventBus.trigger('profile.editSummaryBtnClicked', this.model.get('editProfileInfoActionLink'));
+          EventBus.trigger('profile.editSummaryBtnClicked', this.model);
         }
       }
     });
 
     var profileSummaryFormView = Backbone.Marionette.ItemView.extend({
       template: '#ProfileSummaryFormTemplate',
-      templateHelpers: viewHelpers
+      templateHelpers: viewHelpers,
+      ui: {
+        saveBtn: '[data-el-label="profile.summary.saveBtn"]',
+        cancelBtn: '[data-el-label="profile.summary.cancelBtn"]',
+        feedbackRegion: '[data-region="componentPaymentFeedbackRegion"]'
+      },
+      events: {
+        'click @ui.saveBtn': function(event) {
+          event.preventDefault();
+          EventBus.trigger('profile.summarySaveBtnClicked', this.model.get('actionLink'));
+        },
+        'click @ui.cancelBtn': function(event) {
+          event.preventDefault();
+          EventBus.trigger('profile.summaryCancelBtnClicked');
+        }
+      }
     });
 
 
