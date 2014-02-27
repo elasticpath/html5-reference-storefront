@@ -9,6 +9,7 @@ define(function(require){
       require(['ep'], function (ep) {
         var moduleName = ep.io.sessionStore.getItem(returnTo);
 
+        // FIXME Change to use Router.getCurrentRoute() and Router.rebuildUrlFragment()
         if (!moduleName) {
           ep.router.navigate(defaultReturn, true);  // if no return module specified, then return to profile
         }
@@ -148,23 +149,6 @@ define(function(require){
     },
     'mediator.addressFormComplete': function () {
       helpers.returnAfterFormDone('#profile', 'addressFormReturnTo');
-      require(['ep'], function (ep) {
-        var moduleName = ep.io.sessionStore.getItem('addressFormReturnTo');
-
-        // FIXME Change to use Router.getCurrentRoute() and Router.rebuildUrlFragment()
-        if (!moduleName) {
-          ep.router.navigate('#profile', true);  // if no return module specified, then return to profile
-        }
-        else {
-//          require([moduleName], function() {
-//            EventBus.trigger(moduleName + '.addressFormComplete');
-//          });
-
-          var url = ep.app.config.routes[moduleName] || '#profile';
-          ep.router.navigate(url, true);
-          ep.io.sessionStore.removeItem('addressFormReturnTo');   // clear sessionStorage
-        }
-      });
     },
     'mediator.registrationRequest': function() {
       require(['ep'], function (ep) {
