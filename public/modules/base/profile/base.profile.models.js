@@ -27,8 +27,7 @@ define(function (require) {
     url: ep.io.getApiContext() + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=' + zoomArray.join(),
     parse: function (response) {
       var profileObj = {
-        familyName: undefined,
-        givenName: undefined,
+        summary: {},
         subscriptions: [],
         purchaseHistories: [],
         addresses: [],
@@ -37,8 +36,13 @@ define(function (require) {
 
       if (response) {
         // Profile Summary Info
-        profileObj.familyName = jsonPath(response, 'family-name')[0];
-        profileObj.givenName = jsonPath(response, 'given-name')[0];
+        profileObj.summary = {
+          familyName : jsonPath(response, 'family-name')[0],
+          givenName : jsonPath(response, 'given-name')[0],
+          // checkIn actionLink
+//          actionLink: ep.io.getApiContext() + '/profiles/' + ep.app.config.cortexApi.scope + '/default'
+          actionLink: jsonPath(response, 'self.href')[0]
+        };
 
         // Payment methods (tokenized only)
         // Only select payment methods with a display-value property (credit cards do not have this property)

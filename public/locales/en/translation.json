@@ -160,7 +160,10 @@
     "personalInfo": {
       "title": "Personal Information",
       "firstName": "First Name",
-      "lastName": "Last Name"
+      "lastName": "Last Name",
+      "edit": "Edit",
+      "save": "Save",
+      "cancel": "Cancel"
     },
     "purchases": {
       "date": "Date",

@@ -25,12 +25,25 @@
   <!-- Profile Summary View Template -->
   <script id="ProfileSummaryViewTemplate" type="text/template">
     <h2><%= E.getI18nLabel('profile.personalInfo.title') %></h2>
+    <!--CheckIn fix the css styles-->
     <dl class="row">
       <dt class="col-xs-4 col-xs-offset-2" data-el-label="profile.firstName"><%= E.getI18nLabel('profile.personalInfo.firstName') %>:</dt>
       <dd class="col-xs-6" data-el-value="givenName"><%= E.givenName %></dd>
       <dt class="col-xs-4 col-xs-offset-2" data-el-label="profile.lastName"><%= E.getI18nLabel('profile.personalInfo.lastName') %>:</dt>
       <dd class="col-xs-6" data-el-value="familyName"><%= E.familyName %></dd>
     </dl>
+
+    <button class="btn btn-primary profile-edit-summary-btn" data-el-label="profile.editSummaryBtn">
+      <%= E.getI18nLabel('profile.personalInfo.edit') %></button>
+  </script>
+
+  <script id="ProfileSummaryFormTemplate" type="text/template">
+    <div class="form-group edit-profile-summary-btn-container container">
+      <button class="btn btn-primary summary-save-btn" data-el-label="profile.summary.saveBtn">
+        <%= E.getI18nLabel('profile.personalInfo.save') %></button>
+      <button class="btn address-cancel-btn" data-el-label="profile.profile.summary.cancelBtn">
+        <%= E.getI18nLabel('profile.personalInfo.cancel') %></button>
+    </div>
   </script>
 
   <!-- Profile Info Form Template -->

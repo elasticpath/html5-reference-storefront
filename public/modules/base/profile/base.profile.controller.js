@@ -45,7 +45,7 @@ define(function (require) {
 
             // Profile Summary
             var profileSummaryView = new View.ProfileSummaryView({
-              model: response
+              model: new Backbone.Model(response.get('summary'))
             });
             defaultLayout.profileSummaryRegion.show(profileSummaryView);
 
@@ -89,7 +89,7 @@ define(function (require) {
 
     };
 
-    /* ********* EVENT LISTENERS ************ */
+    /* ********* Address EVENT LISTENERS ************ */
     /**
      * Listen to add new address button clicked signal
      * will load address form
@@ -140,7 +140,24 @@ define(function (require) {
       });
     });
 
-    return {
+  /* ********* Address EVENT LISTENERS ************ */
+  EventBus.on('profile.editSummaryBtnClicked', function(model){
+    EventBus.trigger('profile.loadSummaryFormViewRequest', model);
+  });
+
+  EventBus.on('profile.loadSummaryFormViewRequest', function(model) {
+    var SummaryRegion = new Marionette.Region({
+      el: '[data-region="profileSummaryRegion"]'
+    });
+
+    var summaryFormView = new View.ProfileSummaryFormView({
+      model: model
+    });
+
+    SummaryRegion.show(summaryFormView);
+  });
+
+  return {
       DefaultController: defaultController
     };
 });

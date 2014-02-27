@@ -60,7 +60,8 @@ define(function (require) {
     simpleExpectEmptyArrayTestFactory: function (jsonData, dataToRemove, model, arrayName) {
       return this.simpleMissingDataTestFactory(model, _.omit(jsonData, dataToRemove), function () {
         it('returns an empty ' + arrayName + ' array', function () {
-          expect(this.model[arrayName]).to.have.length(0);
+          expect(this.model[arrayName]).to.be.instanceOf(Array);
+          expect(this.model[arrayName]).to.be.empty;
         });
       });
     },
@@ -87,7 +88,7 @@ define(function (require) {
           expect(ep.logger.warn).to.be.calledOnce;
         });
 
-        it("return empty object given invalid data to parse", function () {
+        it("return empty model object given invalid data to parse", function () {
           var model = fnToTest({invalidData: 'invalid'});
           expect(model).to.be.ok;
         });

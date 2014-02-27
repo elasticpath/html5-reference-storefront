@@ -67,6 +67,33 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       templateHelpers:viewHelpers
     });
 
+
+    /**
+     * Profile Summary View
+     * will render a user's profile summary including first and last name,
+     * and a button to edit these information.
+     * @type Marionette.ItemView
+     */
+    var profileSummaryView = Backbone.Marionette.ItemView.extend({
+      template: '#ProfileSummaryViewTemplate',
+      templateHelpers: viewHelpers,
+      ui: {
+        editBtn: '[data-el-label="profile.editSummaryBtn"]'
+      },
+      events: {
+        'click @ui.editBtn': function(event) {
+          event.preventDefault();
+          EventBus.trigger('profile.editSummaryBtnClicked', this.model.get('editProfileInfoActionLink'));
+        }
+      }
+    });
+
+    var profileSummaryFormView = Backbone.Marionette.ItemView.extend({
+      template: '#ProfileSummaryFormTemplate',
+      templateHelpers: viewHelpers
+    });
+
+
     var profileSubscriptionItemView = Backbone.Marionette.ItemView.extend({
       template:'#SubscriptionItemTemplate',
       tagName:'tr',
@@ -126,13 +153,6 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       }
     });
 
-
-    // Profile Summary View
-    var profileSummaryView = Backbone.Marionette.ItemView.extend({
-      template: '#ProfileSummaryViewTemplate',
-      templateHelpers: viewHelpers
-
-    });
 
     /**
      * Profile Payment Method Item View
@@ -259,9 +279,10 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
     return {
       DefaultLayout:defaultLayout,
       ProfileTitleView: profileTitleView,
+      ProfileSummaryView:profileSummaryView,
+      ProfileSummaryFormView:profileSummaryFormView,
       ProfileSubscriptionSummaryView:profileSubscriptionSummaryView,
       ProfilePurchasesHistoryView: profilePurchasesHistoryView,
-      ProfileSummaryView:profileSummaryView,
       ProfilePaymentMethodsView:profilePaymentMethodsView,
       ProfileAddressesView: profileAddressesView,
       testVariables: {

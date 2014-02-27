@@ -8,7 +8,7 @@ define(function(require) {
   var EventBus = require('eventbus');
 
   var EventTestHelpers = require('testhelpers.event');
-  var ControllerTestHelper = require('testhelpers.defaultview');
+  var ControllerTestHelper = require('testhelpers.viewdoubles');
   var controllerTestFactory = require('testfactory.controller');
 
   var controller = require('address');

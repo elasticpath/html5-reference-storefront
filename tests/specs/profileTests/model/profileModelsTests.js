@@ -26,26 +26,29 @@ define(function (require) {
       });
 
       it('has non-empty familyName', function () {
-        expect(this.model.familyName).to.be.ok;
+        expect(this.model.summary.familyName).to.be.ok;
       });
       it('has non-empty givenName', function () {
-        expect(this.model.givenName).to.be.ok;
+        expect(this.model.summary.givenName).to.be.ok;
+      });
+      it('has non-empty summary actionLink', function () {
+        expect(this.model.summary.actionLink).to.be.ok;
       });
       it('has non-empty subscriptions array', function () {
         expect(this.model.subscriptions).to.be.instanceOf(Array);
-        expect(this.model.subscriptions).to.have.length.above(0);
+        expect(this.model.subscriptions).to.be.not.empty;
       });
       it('has non-empty addresses array', function () {
         expect(this.model.addresses).to.be.instanceOf(Array);
-        expect(this.model.addresses).to.have.length.above(0);
+        expect(this.model.addresses).to.be.not.empty;
       });
       it('has non-empty purchases array', function () {
         expect(this.model.purchaseHistories).to.be.instanceOf(Array);
-        expect(this.model.purchaseHistories).to.have.length.above(0);
+        expect(this.model.purchaseHistories).to.be.not.empty;
       });
       it('has non-empty paymentMethods array', function () {
         expect(this.model.paymentMethods).to.be.instanceOf(Array);
-        expect(this.model.paymentMethods).to.have.length.above(0);
+        expect(this.model.paymentMethods).to.be.not.empty;
       });
     });
 
@@ -119,7 +122,7 @@ define(function (require) {
         });
         it('returns 0 payment methods in the array', function() {
           var paymentMethodsArray = this.model.paymentMethods;
-          expect(paymentMethodsArray).to.have.length(0);
+          expect(paymentMethodsArray).to.be.empty;
         });
 
       });

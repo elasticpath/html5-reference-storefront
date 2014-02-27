@@ -96,7 +96,7 @@ requirejs.config({
     'testfactory.controller': '../tests/TestHelpers/ControllerTestFactory',
     'testfactory.model': '../tests/TestHelpers/ModelTestFactory',
     "testhelpers.event": '../tests/TestHelpers/EventTestHelpers',
-    'testhelpers.defaultview': '../tests/TestHelpers/DefaultViewTestHelper',
+    'testhelpers.viewdoubles': '../tests/TestHelpers/ControllerViewDoubleTestHelper',
 
     'phantom.bridge': '../tests/libs/phantomjs/bridge.js'
 
