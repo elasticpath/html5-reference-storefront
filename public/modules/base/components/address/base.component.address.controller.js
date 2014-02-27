@@ -269,12 +269,94 @@ define(function (require) {
   });
 
   /**
+   * Uses a modal window to confirm the delete action for an address.
+   * @param {Object} obj Contains an href representing the address to be deleted and an optional reference to a
+   *                     Marionette.View to which an activity indicator should be applied.
+   */
+  EventBus.on('address.deleteAddressConfirm', function (obj) {
+    EventBus.trigger('layout.loadRegionContentRequest', {
+      region: 'appModalRegion',
+      module: 'address',
+      view: 'DefaultDeleteAddressConfirmationView',
+      data: obj
+    });
+  });
+
+  /**
+   * Called when the yes button in the confirm deletion modal is clicked. This handler closes any open modal windows,
+   * optionally applies an activity indicator to the Marionette.View represented by the opts.indicatorView
+   * parameter and triggers the delete request to Cortex.
+   */
+  EventBus.on('address.deleteConfirmYesBtnClicked', function(opts) {
+    $.modal.close();
+    ep.ui.startActivityIndicator(opts.indicatorView);
+    EventBus.trigger('address.deleteAddressRequest', opts);
+  });
+
+  /**
    * Listening to create address button clicked signal,
    * will trigger request to get address form (to get action link to post form to)
    */
   EventBus.on('address.editAddressBtnClicked', function(href) {
     ep.ui.disableButton(editAddressLayout, 'editAddressButton');
     EventBus.trigger('address.submitAddressRequest', 'PUT', href);
+  });
+
+  /**
+   * Called when a request to delete an address from Cortex has failed. Displays a toast message and stops
+   * any activity indicator that has been applied to the Marionette.View referenced by the parameter.
+   * On close of the toast message, we invoke a full page refresh.
+   * @param indicatorView a reference to a Marionette.View to which an activity indicator has been applied
+   */
+  EventBus.on('address.deleteAddressFailed', function (indicatorView) {
+    $().toastmessage('showToast', {
+      text: i18n.t('addressForm.errorMsg.deleteErr'),
+      sticky: true,
+      position: 'middle-center',
+      type: 'error',
+      close: function() {
+        Backbone.history.loadUrl();
+      }
+    });
+
+    // Stop any activity indicator
+    if (indicatorView) {
+      ep.ui.stopActivityIndicator(indicatorView);
+    }
+  });
+
+  /**
+   * Called when an address has been successfully deleted from Cortex. Fires a mediator strategy to notify
+   * the referring module.
+   * @param indicatorView an optional reference to a Marionette.View used as the target for the activity indicator
+   */
+  EventBus.on('address.deleteAddressSuccess', function (indicatorView) {
+    Mediator.fire('mediator.deleteAddressComplete', indicatorView);
+  });
+
+  /**
+   * Builds and submits an AJAX request to Cortex to delete an address.
+   * @param {Object} opts Contains the href used to identify the address to be deleted in Cortex
+   */
+  EventBus.on('address.deleteAddressRequest', function (opts) {
+    if (_.isObject(opts)) {
+      // Build AJAX request
+      var ajaxModel = new ep.io.defaultAjaxModel({
+        type: 'DELETE',
+        url: opts.href,
+        success: function () {
+          EventBus.trigger('address.deleteAddressSuccess', opts.indicatorView);
+        },
+        customErrorFn: function () {
+          EventBus.trigger('address.deleteAddressFailed', opts.indicatorView);
+        }
+      });
+
+      // Send AJAX request to Cortex
+      ep.io.ajax(ajaxModel.toJSON());
+    } else {
+      ep.logger.error('deleteAddressRequest event triggered without a valid options object');
+    }
   });
 
   /**
@@ -359,6 +441,9 @@ define(function (require) {
     __test_only__: __test_only__,
     /* end-test-code */
     DefaultCreateAddressView: defaultCreateAddressController,
+    DefaultDeleteAddressConfirmationView: function(options) {
+      return new Views.DefaultDeleteAddressConfirmationView(options);
+    },
     DefaultEditAddressView: defaultEditAddressController
   };
 });

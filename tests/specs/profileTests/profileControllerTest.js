@@ -113,85 +113,33 @@ define(function (require) {
       });
     });
 
-    describe('Responds to event: profile.deleteAddressConfirmYesBtnClicked', function () {
+    describe('Responds to event: profile.deleteAddressBtnClicked', function () {
       before(function () {
-        sinon.stub(ep.ui, 'startActivityIndicator');
-        sinon.spy(EventBus, 'trigger');
-        sinon.spy($.modal, 'close');
-        EventTestHelpers.unbind('profile.deleteAddressRequest');
-
-        EventBus.trigger('profile.deleteAddressConfirmYesBtnClicked', 'someHref');
+        sinon.stub(Mediator, 'fire');
+        EventBus.trigger('profile.deleteAddressBtnClicked');
       });
 
       after(function () {
-        ep.ui.startActivityIndicator.restore();
-        EventBus.trigger.restore();
-        EventTestHelpers.reset();
-        $.modal.close.restore();
+        Mediator.fire.restore();
       });
 
-      it('starts the activity indicator and triggers a delete address request', function () {
-        expect($.modal.close).to.be.called;
-        expect(ep.ui.startActivityIndicator).to.be.called;
-        expect(EventBus.trigger).to.be.calledWithExactly('profile.deleteAddressRequest', 'someHref');
+      it('calls the correct mediator strategy', function() {
+        expect(Mediator.fire).to.be.called;
       });
     });
 
-    describe('Responds to event: profile.deleteAddressRequest', function () {
+    describe('Responds to event: profile.updateAddresses', function () {
       before(function () {
-        sinon.stub(ep.io, 'ajax');
-        EventBus.trigger('profile.deleteAddressRequest', 'someHref');
-        // get the arguments passed to ep.io.ajax
-        this.ajaxArgs = ep.io.ajax.args[0][0];
+        sinon.stub(Backbone.Model.prototype, 'fetch');
+        EventBus.trigger('profile.updateAddresses');
       });
-
       after(function () {
-        ep.io.ajax.restore();
+        Backbone.Model.prototype.fetch.restore();
       });
-
-      describe('Should make a delete request to Cortex', function () {
-        it('exactly once', function () {
-          expect(ep.io.ajax).to.be.calledOnce;
-        });
-        it('with a valid request', function () {
-          expect(this.ajaxArgs.type).to.be.string('DELETE');
-          expect(this.ajaxArgs.url).to.be.equal('someHref');
-        });
-      });
-
-      describe('and on success', function() {
-        before(function() {
-          sinon.stub(Backbone.Model.prototype, 'fetch');
-          EventBus.trigger('profile.deleteAddressSuccess');
-        });
-        after(function() {
-          Backbone.Model.prototype.fetch.restore();
-        });
-        // Backbone.Model.fetch triggers a Backbone.sync call
-        it('triggers a Backbone.Model fetch', function() {
-          expect(Backbone.Model.prototype.fetch).to.be.called;
-        });
-      });
-
-      describe('and on failure', function() {
-        before(function() {
-          sinon.stub($.fn, 'toastmessage');
-          sinon.stub(ep.ui, 'stopActivityIndicator');
-          EventBus.trigger('profile.deleteAddressFailed');
-        });
-        after(function() {
-          $.fn.toastmessage.restore();
-          ep.ui.stopActivityIndicator.restore();
-        });
-        // Backbone.Model.fetch triggers a Backbone.sync call
-        it('shows a toastmessage error and stops the activity indicator', function() {
-          expect($.fn.toastmessage).to.be.called;
-          expect(ep.ui.stopActivityIndicator).to.be.called;
-        });
+      it('calls Backbone.Model.fetch to update the profile model', function () {
+        expect(Backbone.Model.prototype.fetch).to.be.called;
       });
     });
-
-
   });
 
 });

@@ -109,97 +109,37 @@ define(function (require) {
     });
 
     /**
-    * Handler for the delete address button clicked signal, which triggers a request for confirmation from the user.
-    */
+     * Handler for the delete address button clicked signal, which triggers a mediator strategy
+     * to communicate the request to the address module.
+     */
     EventBus.on('profile.deleteAddressBtnClicked', function (href) {
-      EventBus.trigger('profile.deleteAddressConfirm', href);
-    });
-
-    /**
-     * Uses a modal window to confirm the delete action for a profile address.
-     * @param href A href used to identify the address to be deleted in Cortex
-     */
-    EventBus.on('profile.deleteAddressConfirm', function (href) {
-      EventBus.trigger('layout.loadRegionContentRequest', {
-        region: 'appModalRegion',
-        module: 'profile',
-        view: 'ProfileDeleteAddressConfirmationView',
-        data: {
-          href: href
-        }
+      Mediator.fire('mediator.deleteAddressRequest', {
+        "href": href,
+        "indicatorView": defaultLayout.profileAddressesRegion.currentView
       });
-    });
-
-    /**
-     * Called when the yes button in the confirm deletion modal is clicked. This handler closes any open modal windows,
-     * starts the activity indicator in the profile addresses region and trigger the delete request to Cortex.
-     */
-    EventBus.on('profile.deleteAddressConfirmYesBtnClicked', function(href) {
-      $.modal.close();
-      ep.ui.startActivityIndicator(defaultLayout.profileAddressesRegion.currentView);
-      EventBus.trigger('profile.deleteAddressRequest', href);
-    });
-
-    /**
-     * Called when a request to delete an address from Cortex has failed. Displays a toast message
-     * and stops the activity indicator in the profile addresses region.
-     * On close of the toast message, we invoke a full page refresh.
-     * @param href A href used to identify the address to be deleted in Cortex
-     */
-    EventBus.on('profile.deleteAddressFailed', function (response) {
-      $().toastmessage('showToast', {
-        text: i18n.t('profile.address.msg.deleteErr'),
-        sticky: true,
-        position: 'middle-center',
-        type: 'error',
-        close: function() {
-          Backbone.history.loadUrl();
-        }
-      });
-      ep.ui.stopActivityIndicator(defaultLayout.profileAddressesRegion.currentView);
     });
 
     /**
      * Called when an address has been successfully deleted from Cortex. Performs a fetch of the profile
      * model and updates the collection of addresses with the updated array from Cortex.
      */
-    EventBus.on('profile.deleteAddressSuccess', function () {
+    EventBus.on('profile.updateAddresses', function (indicatorView) {
       profileModel.fetch({
         success: function(response) {
           // Update the collection of addresses with the new array of addresses from Cortex
           var newAddresses = response.get('addresses');
 
-          // Stop the activity indicators on the cart regions that are being updated
-          ep.ui.stopActivityIndicator(defaultLayout.profileAddressesRegion.currentView);
+          if (indicatorView) {
+            // Stop the activity indicators on the cart regions that are being updated
+            ep.ui.stopActivityIndicator(indicatorView);
+          }
 
           addressesCollection.update(newAddresses);
         }
       });
     });
 
-    /**
-     * Makes an AJAX request to Cortex to delete an address.
-     * @param deleteActionLink A href used to identify the address to be deleted in Cortex
-     */
-    EventBus.on('profile.deleteAddressRequest', function (deleteActionLink) {
-      var ajaxModel = new ep.io.defaultAjaxModel({
-        type: 'DELETE',
-        url: deleteActionLink,
-        success: function () {
-          EventBus.trigger('profile.deleteAddressSuccess');
-        },
-        customErrorFn: function (response) {
-          EventBus.trigger('profile.deleteAddressFailed', response);
-        }
-      });
-
-      ep.io.ajax(ajaxModel.toJSON());
-    });
-
     return {
-      DefaultView: defaultView,
-      ProfileDeleteAddressConfirmationView: function(options) {
-        return new View.ProfileDeleteAddressConfirmationView(options);
-      }
+      DefaultView: defaultView
     };
 });

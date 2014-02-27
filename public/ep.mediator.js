@@ -131,6 +131,25 @@ define(function(require){
         }
       });
     },
+    /**
+     * Communicates delete address requests to the address module.
+     * @param {Object} opts Contains "href" and (optional) "indicatorView" properties used by the address module
+     */
+    'mediator.deleteAddressRequest': function (opts) {
+      require(['address'], function (address) {
+        // Triggers the delete confirmation event from the address module (the first step in the delete address process)
+        EventBus.trigger('address.deleteAddressConfirm', opts);
+      });
+    },
+    /**
+     * Communicates back to the referring module that a delete address request has succeeded.
+     * @param indicatorView An optional reference to a Marionette.View to which an activity indicator has been applied.
+     */
+    'mediator.deleteAddressComplete': function(indicatorView) {
+      require(['profile'], function(profile) {
+        EventBus.trigger('profile.updateAddresses', indicatorView);
+      });
+    },
     'mediator.editAddressRequest':function(arg){
       require(['ep'],function(ep){
         if (arg.returnModule) {

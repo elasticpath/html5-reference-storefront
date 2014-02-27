@@ -107,7 +107,7 @@ define(['ep', 'eventbus', 'backbone'],
           lineItemObj.rateCollection = parseRates(lineItemRates);
 
           // fake a price object when neither rate nor price present
-          if (!lineItemPurchasePrice && lineItemObj.rateCollection.length == 0) {
+          if (!lineItemPurchasePrice && lineItemObj.rateCollection.length === 0) {
             lineItemObj.price.purchase = {
               display: 'none'
             };
@@ -206,7 +206,7 @@ define(['ep', 'eventbus', 'backbone'],
           currency: priceObj[0].currency,
           amount: priceObj[0].amount,
           display: priceObj[0].display
-        }
+        };
       }
 
       return price;
@@ -229,12 +229,12 @@ define(['ep', 'eventbus', 'backbone'],
           amount: jsonPath(rates[i], '$.cost..amount')[0],
           currency: jsonPath(rates[i], '$.cost..currency')[0],
           display: jsonPath(rates[i], '$.cost..display')[0]
-        }
+        };
 
         rateObj.recurrence = {
           interval: jsonPath(rates[i], '$.recurrence..interval')[0],
           display: jsonPath(rates[i], '$.recurrence..display')[0]
-        }
+        };
 
         rateCollection.push(rateObj);
       }

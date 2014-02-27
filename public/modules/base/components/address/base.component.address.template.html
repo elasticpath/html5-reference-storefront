@@ -92,7 +92,6 @@
     ----
   </script>
 
-
   <!-- Default Create Address Form Template -->
   <script id="DefaultCreateAddressTemplate" type="text/template">
     <!-- defaultView, Layout tagName: div, class: create-address-container container-->
@@ -108,6 +107,12 @@
         <button class="btn address-cancel-btn" data-el-label="addressForm.cancel"><%= E.getI18nLabel('addressForm.cancelBtn') %></button>
       </div>
     </form>
+  </script>
+
+  <script id="DefaultDeleteAddressConfirmationModalTemplate" type="text/template">
+    <p><%= E.getI18nLabel('addressForm.errorMsg.deleteConfirm') %></p>
+    <button class="btn btn-primary btn-yes"><%= E.getI18nLabel('general.yes') %></button>
+    <button class="btn btn-primary btn-no"><%= E.getI18nLabel('general.no') %></button>
   </script>
 
   <!-- Renders a wrapper view around addressFormView to provide information such as title, edit btn -->

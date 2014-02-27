@@ -68,6 +68,26 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
     });
 
     /**
+     * This view is rendered in the modal region to obtain confirmation from the user before proceeding
+     * with a request to delete an address.
+     */
+    var defaultDeleteAddressConfirmationView = Backbone.Marionette.ItemView.extend({
+      className:'address-delete-confirm-modal',
+      template:'#DefaultDeleteAddressConfirmationModalTemplate',
+      templateHelpers:viewHelpers,
+      events:{
+        'click .btn-yes': function(event) {
+          event.preventDefault();
+          EventBus.trigger('address.deleteConfirmYesBtnClicked', this.options);
+        },
+        'click .btn-no': function(event) {
+          event.preventDefault();
+          $.modal.close();
+        }
+      }
+    });
+
+    /**
      * Default Edit Address Layout
      * wraps a default address form with elements specific to editing an address
      * @type Marionette.Layout
@@ -355,6 +375,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       /* end-test-code */
       DefaultAddressItemView: defaultAddressItemView,
       DefaultCreateAddressLayout: defaultCreateAddressLayout,
+      DefaultDeleteAddressConfirmationView: defaultDeleteAddressConfirmationView,
       DefaultEditAddressLayout: defaultEditAddressLayout,
       DefaultAddressFormView: defaultAddressFormView,
       DefaultCountriesView: defaultCountriesView,

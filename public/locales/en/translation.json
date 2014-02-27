@@ -13,8 +13,10 @@
     "saveBtn": "Save",
     "streetAddress": "Street Address",
     "errorMsg": {
-      "generalSaveAddressFailedErrMsg": "I'm sorry, there was an error saving this address. Please try again or contact your system administrator",
       "addressFormEmptyErrMsg": "No fields specified",
+      "deleteConfirm": "Do you really want to delete this address?",
+      "deleteErr": "I'm sorry, there was an error deleting the address. Please contact your system administrator.",
+      "generalSaveAddressFailedErrMsg": "I'm sorry, there was an error saving this address. Please try again or contact your system administrator",
       "missingFamilyNameErrMsg": "Missing required field \"Last Name\"",
       "missingGivenNameErrMsg": "Missing required field \"First Name\"",
       "missingPostalCodeErrMsg": "Missing required field \"Postal Code\"",
@@ -144,8 +146,6 @@
       "edit": "Edit",
       "title": "Addresses",
       "msg": {
-        "deleteErr": "I'm sorry, there was an error deleting the address. Please contact your system administrator.",
-        "deleteConfirm": "Do you really want to delete this address?",
         "noAddress": "You have no saved addresses."
       }
     },
