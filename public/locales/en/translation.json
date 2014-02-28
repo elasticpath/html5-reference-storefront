@@ -42,8 +42,8 @@
     "loginTitle": "Login",
     "logout": "Logout",
     "password": "Password",
-    "profile":"Profile",
-    "register":"Register",
+    "profile": "Profile",
+    "register": "Register",
     "userName": "Username"
   },
   "availability": {
@@ -163,7 +163,12 @@
       "lastName": "Last Name",
       "edit": "Edit",
       "save": "Save",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "errorMsg": {
+        "generic": "I'm sorry, there was an error editing your profile information. Please contact your system administrator.",
+        "missingFirstName": "First Name is required",
+        "missingLastName": "Last Name is required"
+      }
     },
     "purchases": {
       "date": "Date",

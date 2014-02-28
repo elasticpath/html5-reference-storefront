@@ -25,50 +25,54 @@
   <!-- Profile Summary View Template -->
   <script id="ProfileSummaryViewTemplate" type="text/template">
     <h2><%= E.getI18nLabel('profile.personalInfo.title') %></h2>
-    <!--CheckIn fix the css styles-->
-    <dl class="row">
-      <dt class="col-xs-4 col-xs-offset-2" data-el-label="profile.firstName"><%= E.getI18nLabel('profile.personalInfo.firstName') %>:</dt>
-      <dd class="col-xs-6" data-el-value="givenName"><%= E.givenName %></dd>
-      <dt class="col-xs-4 col-xs-offset-2" data-el-label="profile.lastName"><%= E.getI18nLabel('profile.personalInfo.lastName') %>:</dt>
-      <dd class="col-xs-6" data-el-value="familyName"><%= E.familyName %></dd>
+    <dl class="profile-info-container container">
+      <dt class="profile-info-label" data-el-label="profile.firstName"><%= E.getI18nLabel('profile.personalInfo.firstName') %>:</dt>
+      <dd class="profile-info-value" data-el-value="givenName"><%= E.givenName %></dd>
+      <dt class="profile-info-label" data-el-label="profile.lastName"><%= E.getI18nLabel('profile.personalInfo.lastName') %>:</dt>
+      <dd class="profile-info-value" data-el-value="familyName"><%= E.familyName %></dd>
     </dl>
 
-    <button class="btn btn-primary profile-edit-summary-btn" data-el-label="profile.editSummaryBtn">
+    <button class="btn btn-primary profile-info-edit-btn" data-el-label="profile.editSummaryBtn">
       <%= E.getI18nLabel('profile.personalInfo.edit') %></button>
   </script>
 
   <script id="ProfileSummaryFormTemplate" type="text/template">
     <h2><%= E.getI18nLabel('profile.personalInfo.title') %></h2>
 
-    <div class="feedback-label profile-summary-form-feedback-container" data-region="componentPaymentFeedbackRegion"></div>
+    <div class="feedback-label profile-info-form-feedback-container" data-region="profileInfoFeedbackRegion"></div>
 
-    <form role="form" method="POST" class="form-horizontal profile-summary-form-container container">
+    <form role="form" method="POST" class="form-horizontal profile-info-form-container container">
       <div class="form-group">
-        <label for="GivenName" data-el-label="profile.givenName" class="control-label form-label">
+        <label for="GivenName" data-el-label="profile.givenName" class="control-label profile-info-form-label">
           <span class="required-label">*</span><%= E.getI18nLabel('profile.personalInfo.firstName') %>
         </label>
-        <div class="form-input">
-          <input id="GivenName" name="GivenName" class="form-control" type="text" value="<%= E.givenName %>" />
+        <div class="profile-info-form-input">
+          <input id="GivenName" name="GivenName" class="form-control" type="text" value="<%= E.givenName %>" autofocus="autofocus" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="FamilyName" data-el-label="profile.familyName" class="control-label form-label">
+        <label for="FamilyName" data-el-label="profile.familyName" class="control-label profile-info-form-label">
           <span class="required-label">*</span><%= E.getI18nLabel('profile.personalInfo.lastName') %>
         </label>
-        <div class="form-input">
+        <div class="profile-info-form-input">
           <input id="FamilyName" name="FamilyName" class="form-control" type="text" value="<%= E.familyName %>" />
         </div>
       </div>
 
-      <div class="form-group edit-profile-summary-btn-container container">
-        <button class="btn btn-primary summary-save-btn" data-el-label="profile.summary.saveBtn">
+      <div class="form-group edit-profile-info-btn-container container">
+        <button class="btn btn-primary profile-info-save-btn" data-el-label="profile.summary.saveBtn">
           <%= E.getI18nLabel('profile.personalInfo.save') %></button>
         <button class="btn address-cancel-btn" data-el-label="profile.summary.cancelBtn">
           <%= E.getI18nLabel('profile.personalInfo.cancel') %></button>
       </div>
     </form>
   </script>
+
+  <script id="SummaryFormErrorItemTemplate" type="text/template">
+    <%= E.error %>
+  </script>
+
 
   <!-- Profile Info Form Template -->
   <script id="ProfileInfoFormTemplate" type="text/template">

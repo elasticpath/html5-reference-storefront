@@ -35,7 +35,7 @@ define(function (require) {
           status: 'COMPLETE',
           link: 'fakePurchaseDetailLink'
         });
-        this.view = new profileViews.testVariables.ProfilePurchaseDetailView({model: this.model});
+        this.view = new profileViews.__test_only__.ProfilePurchaseDetailView({model: this.model});
         this.view.render();
       });
 

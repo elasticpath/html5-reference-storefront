@@ -26,7 +26,7 @@ define(function (require) {
           quantity: 3,
           nextBillingDate: 'December 25, 2013'
         });
-        this.view = new profileViews.testVariables.ProfileSubscriptionItemView({model: this.model});
+        this.view = new profileViews.__test_only__.ProfileSubscriptionItemView({model: this.model});
         this.view.render();
       });
 

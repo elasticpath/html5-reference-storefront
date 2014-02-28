@@ -207,6 +207,9 @@ define(function (require) {
         ep.logger.error('response error: ' + response.responseText + ' : ' + response.status);
       };
 
+
+      // Checkin test can we remove this
+/*
       if (options.url) {
 
         // scrub out any absolute path (prior to /cortex) in the URL to avoid confusing the proxy
@@ -219,6 +222,7 @@ define(function (require) {
         }
         options.url = replaceUrl;
       }
+*/
 
 
       options.headers = options.headers || {};

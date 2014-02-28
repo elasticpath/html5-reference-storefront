@@ -4,75 +4,131 @@
  */
 define(function (require) {
   var ep = require('ep');
-  var profileViews = require('profile.views');
-  var viewHelpers = profileViews.testVariables.viewHelpers;
+  var utils = require('utils');
 
+  var views = require('profile.views');
+  var viewHelpers = views.__test_only__.viewHelpers;
+  var template = require('text!modules/base/profile/base.profile.templates.html');
 
-  describe('viewHelpers functions', function() {
+  describe("Profile Module: helper functions", function() {
+    var StandardProfileInfoModel = Backbone.Model.extend({
+      defaults: {
+        givenName: 'ben',
+        familyName: 'boxer',
+        actionLink: 'fakeActionLink'
+      }
+    });
 
-    describe('getDate', function() {
-      describe('given an date object', function() {
-        var dateObj = {
-          displayValue: 'fakeDateDisplayValue'
-        };
-        before(function() {
-          this.result = viewHelpers.getDate(dateObj);
+    describe('viewHelpers functions', function() {
+
+      describe('getDate', function() {
+        describe('given an date object', function() {
+          var dateObj = {
+            displayValue: 'fakeDateDisplayValue'
+          };
+          before(function() {
+            this.result = viewHelpers.getDate(dateObj);
+          });
+
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns the date display value', function() {
+            expect(this.result).to.be.equal(dateObj.displayValue);
+          });
         });
+        describe('given no input', function() {
+          before(function() {
+            this.result = viewHelpers.getDate(undefined);
+          });
 
-        after(function() {
-          delete(this.result);
-        });
+          after(function() {
+            delete(this.result);
+          });
 
-        it('returns the date display value', function() {
-          expect(this.result).to.be.equal(dateObj.displayValue);
+          it('returns an empty string', function() {
+            expect(this.result).to.be.a('String');
+          });
         });
       });
-      describe('given no input', function() {
-        before(function() {
-          this.result = viewHelpers.getDate(undefined);
-        });
 
-        after(function() {
-          delete(this.result);
-        });
+      describe('getTotal', function() {
+        describe('given an date object', function() {
+          var dateObj = {
+            display: 'fakeValue'
+          };
+          before(function() {
+            this.result = viewHelpers.getTotal(dateObj);
+          });
 
-        it('returns an empty string', function() {
-          expect(this.result).to.be.a('String');
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns the display value', function() {
+            expect(this.result).to.be.equal(dateObj.display);
+          });
         });
+        describe('given no input', function() {
+          before(function() {
+            this.result = viewHelpers.getDate(undefined);
+          });
+
+          after(function() {
+            delete(this.result);
+          });
+
+          it('returns an empty string', function() {
+            expect(this.result).to.be.a('String');
+          });
+        });
+      });
+
+    });
+
+    describe("translateSummaryFormErrorMessage function", function() {
+      before(function() {
+        sinon.stub(utils, 'translateErrorMessage');
+
+        views.translateSummaryFormErrorMessage("some error message");
+      });
+
+      after(function() {
+        utils.translateErrorMessage.restore();
+      });
+
+      it("calls the utils translateErrorMessage function", function() {
+        expect(utils.translateErrorMessage).to.be.calledOnce;
       });
     });
 
-    describe('getTotal', function() {
-      describe('given an date object', function() {
-        var dateObj = {
-          display: 'fakeValue'
-        };
-        before(function() {
-          this.result = viewHelpers.getTotal(dateObj);
-        });
+    describe("getSummaryFormValue function", function() {
+      before(function() {
+        $("#Fixtures").append(template);
+        $("#Fixtures").append('<div id="renderedView"></div>');
 
-        after(function() {
-          delete(this.result);
+        this.model = new StandardProfileInfoModel();
+        var summaryFormView = new views.ProfileSummaryFormView({
+          model: this.model
         });
+        $("#renderedView").append(summaryFormView.render().$el);
 
-        it('returns the display value', function() {
-          expect(this.result).to.be.equal(dateObj.display);
-        });
+        this.result = views.getSummaryFormValue();
       });
-      describe('given no input', function() {
-        before(function() {
-          this.result = viewHelpers.getDate(undefined);
-        });
 
-        after(function() {
-          delete(this.result);
-        });
+      after(function() {
+        $("#Fixtures").empty();
+      });
 
-        it('returns an empty string', function() {
-          expect(this.result).to.be.a('String');
-        });
+      it("returns family-name with value corresponding to form input", function() {
+        expect(this.result["family-name"]).to.be.equal(this.model.get("familyName"));
+      });
+
+      it("returns given-name with value corresponding to form input", function() {
+        expect(this.result["given-name"]).to.be.equal(this.model.get("givenName"));
       });
     });
-
   });
+
 });

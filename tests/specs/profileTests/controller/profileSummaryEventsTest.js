@@ -44,7 +44,7 @@ define(function (require) {
       it('registers correct event listener', function () {
         expect(EventBus._events['profile.loadSummaryFormViewRequest']).to.have.length(1);
       });
-      describe("loads profileSummaryFormView", function() {
+      describe("loads profileSummaryFormView", function () {
         it('ProfileSummaryFormView was rendered', function () {
           expect(this.formViewDouble.wasRendered()).to.be.true;
         });
@@ -55,7 +55,17 @@ define(function (require) {
     });
 
     describe('Responds to event: profile.summarySaveBtnClicked',
-      EventTestFactory.simpleEventTriggersEventTest('profile.submitProfileSummaryFormRequest', 'profile.summarySaveBtnClicked'));
+      EventTestFactory.simpleTriggerEventTest('profile.submitProfileSummaryFormRequest', function() {
+        var expectedEvent = "profile.submitProfileSummaryFormRequest";
+        it('should trigger event: ' + expectedEvent, function () {
+          sinon.stub(ep.ui, "disableButton");
+          EventBus.trigger('profile.summarySaveBtnClicked');
+
+          expect(EventBus.trigger).to.be.calledWith(expectedEvent);
+
+          ep.ui.disableButton.restore();
+        });
+      }));
 
     describe('Responds to event: profile.summaryCancelBtnClicked',
       EventTestFactory.simpleEventTriggersEventTest('profile.loadSummaryViewRequest', 'profile.summaryCancelBtnClicked'));
@@ -83,7 +93,7 @@ define(function (require) {
         expect(EventBus._events['profile.loadSummaryViewRequest']).to.have.length(1);
       });
 
-      it("fetches latest profile summary info from cortex server", function() {
+      it("fetches latest profile summary info from cortex server", function () {
         expect(Backbone.Model.prototype.fetch).to.be.calledOnce;
       });
 
@@ -95,6 +105,105 @@ define(function (require) {
       });
     });
 
+    describe('Responds to event: profile.submitProfileSummaryFormRequest', function () {
+      var fakeUrl = 'someHref';
+
+      before(function () {
+        sinon.stub(ep.io, 'ajax');
+        sinon.stub(ep.logger, 'error');
+        sinon.spy(view, 'getSummaryFormValue');
+
+        EventBus.trigger('profile.submitProfileSummaryFormRequest', fakeUrl);
+
+        // get first argument passed to ep.io.ajax,
+        // args[0] gets arguments passed in the first time ep.io.ajax is called
+        // args[0][0] gets the first argument of the first time arguments
+        this.ajaxArgs = ep.io.ajax.args[0][0];
+      });
+
+      after(function () {
+        ep.io.ajax.restore();
+        ep.logger.error.restore();
+        view.getSummaryFormValue.restore();
+      });
+
+      it('registers correct event listener', function () {
+        expect(EventBus._events['profile.submitProfileSummaryFormRequest']).to.have.length(1);
+      });
+
+      it("gets summary form value", function () {
+        expect(view.getSummaryFormValue).to.be.calledOnce;
+      });
+
+      describe('Should make a PUT request to Cortex', function () {
+        it('exactly once', function () {
+          expect(ep.io.ajax).to.be.calledOnce;
+        });
+        it('with a valid request', function () {
+          expect(this.ajaxArgs.type).to.be.string('PUT');
+          expect(this.ajaxArgs.url).to.be.equal(fakeUrl);
+        });
+      });
+
+      describe('and on success',
+        EventTestFactory.simpleTriggerEventTest('profile.submitSummaryFormSuccess', function () {
+          var testEventName = 'profile.submitSummaryFormSuccess';
+
+          it('should trigger ' + testEventName + ' event', function () {
+            this.ajaxArgs.success(); // trigger callback function on ajax call success
+            expect(EventBus.trigger).to.be.calledWithExactly(testEventName);
+          });
+        }));
+
+      describe('and on failure',
+        EventTestFactory.simpleTriggerEventTest('profile.submitSummaryFormFailed', function () {
+          var testEventName = 'profile.submitSummaryFormFailed';
+
+          it('should trigger ' + testEventName + ' event', function () {
+            ep.logger.error.reset();  // make sure other test's logger call doesn't interfere
+            this.ajaxArgs.error({
+              status: 'any error code'
+            });
+            expect(EventBus.trigger).to.be.calledWith(testEventName);
+          });
+        }));
+    });
+
+    describe('Responds to event: profile.submitSummaryFormSuccess',
+      EventTestFactory.simpleEventTriggersEventTest('profile.loadSummaryViewRequest', 'profile.submitSummaryFormSuccess'));
+
+    describe("Responds to event: profile.submitSummaryFormFailed", function () {
+
+      before(function () {
+        sinon.stub(ep.ui, "enableButton");
+        sinon.stub(view, 'translateSummaryFormErrorMessage');
+
+        this.errorView = view.ProfileSummaryFormErrorCollectionView;
+        this.errorViewDouble = ControllerTestHelper.TestDouble();
+        view.ProfileSummaryFormErrorCollectionView = this.errorViewDouble.View;
+
+        EventBus.trigger("profile.submitSummaryFormFailed");
+      });
+
+      after(function () {
+        ep.ui.enableButton.restore();
+        view.translateSummaryFormErrorMessage.restore();
+        view.ProfileSummaryFormErrorCollectionView = this.errorView;
+      });
+
+      it("calls view function to localize error message", function () {
+        expect(view.translateSummaryFormErrorMessage).to.be.calledOnce;
+      });
+
+      describe("displays the error message to feedback region", function() {
+        it("that ProfileSummaryFormErrorCollectionView is rendered", function() {
+          expect(this.errorViewDouble.wasRendered()).to.be.true;
+        });
+        it("and that this view has a collection", function() {
+          expect(this.errorViewDouble.hasACollection()).to.be.true;
+        });
+      });
+    });
   });
 
 });

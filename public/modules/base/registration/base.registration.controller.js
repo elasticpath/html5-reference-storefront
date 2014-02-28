@@ -233,13 +233,7 @@ define(function (require) {
     EventBus.on('registration.submitFormFailed.invalidFields', function (errMsg) {
       // Get the array of translated error messages
       var translatedErrorsArr = View.translateRegistrationErrorMessage(errMsg);
-
-      // Iterate over the array of error messages and add them to the Collection as Backbone Models
-      for (var i = 0, len = translatedErrorsArr.length; i < len; i++) {
-        formErrorsCollection.add({
-          "error": translatedErrorsArr[i]
-        });
-      }
+      formErrorsCollection.update(translatedErrorsArr);
 
       // Re-enable the save button and render error messages
       ep.ui.enableButton(registrationLayout.registrationFormRegion.currentView, 'saveButton');

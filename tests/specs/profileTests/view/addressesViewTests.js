@@ -24,7 +24,7 @@ define(function (require) {
         // mock the model
         this.model = new Backbone.Model();
         // setup the view
-        this.view = new profileViews.testVariables.ProfileAddressItemView({model: new Backbone.Model()});
+        this.view = new profileViews.__test_only__.ProfileAddressItemView({model: new Backbone.Model()});
         this.view.render();
       });
 

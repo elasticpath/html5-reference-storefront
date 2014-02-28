@@ -26,11 +26,9 @@ define(function (require) {
   var subscriptionCollection = new Backbone.Collection();
   var purchaseHistoryCollection = new Model.ProfilePurchaseCollection();
   var addressesCollection = new Backbone.Collection();
-  var defaultLayout = new View.DefaultLayout();
+  var formErrorsCollection = new Backbone.Collection({}, {comparator: "error"});
 
-  var SummaryRegion = new Marionette.Region({
-    el: '[data-region="profileSummaryRegion"]'
-  });
+  var defaultLayout = new View.DefaultLayout();
 
   var profileSummaryViewController = function (region) {
     var summaryView = new View.ProfileSummaryView({
@@ -168,10 +166,11 @@ define(function (require) {
       model: model
     });
 
-    SummaryRegion.show(summaryFormView);
+    defaultLayout.profileSummaryRegion.show(summaryFormView);
   });
 
   EventBus.on('profile.summarySaveBtnClicked', function (actionLink) {
+    ep.ui.disableButton(defaultLayout.profileSummaryRegion.currentView, 'saveBtn');
     EventBus.trigger('profile.submitProfileSummaryFormRequest', actionLink);
   });
 
@@ -185,15 +184,55 @@ define(function (require) {
         summaryModel.set(response.get('summary'));
       }
     });
-    profileSummaryViewController(SummaryRegion);
+    profileSummaryViewController(defaultLayout.profileSummaryRegion);
   });
 
-  EventBus.on('profile.submitProfileSummaryFormRequest', function () {
-    // submit form
-    // on success
-    // profile.profileSummaryFormDone
-    // on error
-    // display error
+  EventBus.on('profile.submitProfileSummaryFormRequest', function (actionLink) {
+    var formValue = View.getSummaryFormValue();
+
+    // Remove any form errors that were previously generated before we make the AJAX request
+    formErrorsCollection.reset();
+
+    var ajaxModel = new ep.io.defaultAjaxModel({
+      type: 'PUT',
+      url: actionLink,
+      data: JSON.stringify(formValue),
+      success: function () {
+        EventBus.trigger('profile.submitSummaryFormSuccess');
+      },
+      customErrorFn: function (response) {
+        EventBus.trigger('profile.submitSummaryFormFailed', response);
+      }
+    });
+
+    ep.io.ajax(ajaxModel.toJSON());
+  });
+
+  EventBus.on('profile.submitSummaryFormSuccess', function () {
+    EventBus.trigger('profile.loadSummaryViewRequest');
+  });
+
+  EventBus.on('profile.submitSummaryFormFailed', function (response) {
+    var errorMsg = i18n.t('profile.personalInfo.errorMsg.generic');
+    if (response && response.status === 400) {
+      errorMsg = response.responseText;
+    }
+
+    var translatedErrorsArr = View.translateSummaryFormErrorMessage(errorMsg);
+    formErrorsCollection.update(translatedErrorsArr);
+
+    var summaryFormView = defaultLayout.profileSummaryRegion.currentView;
+    var feedbackRegion = new Marionette.Region({
+      el: '[data-region="profileInfoFeedbackRegion"]'
+    });
+
+    ep.ui.enableButton(summaryFormView, 'saveBtn');
+
+    feedbackRegion.show(
+      new View.ProfileSummaryFormErrorCollectionView({
+        collection: formErrorsCollection
+      })
+    );
   });
 
   return {

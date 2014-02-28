@@ -7,8 +7,12 @@
  * addresses, and payment methods. Address and payment methods views are just wrappers, and calls address.component and
  * payment.component respectively to display address and payment information.
  */
-define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
-  function(Marionette, i18n, Mediator, EventBus, ViewHelpers){
+define(function (require) {
+    var Marionette = require('marionette');
+    var EventBus = require('eventbus');
+    var Mediator = require('mediator');
+    var ViewHelpers = require('viewHelpers');
+    var utils = require('utils');
 
     /**
      * Template helper functions
@@ -19,7 +23,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
        * @param dateObj date object
        * @returns string display value of date
        */
-      getDate: function(dateObj) {
+      getDate: function (dateObj) {
         var value = '';
 
         if (dateObj) {
@@ -34,10 +38,10 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
        * @param totalObj  total cost object
        * @returns string  display value of total cost
        */
-      getTotal: function(totalObj) {
+      getTotal: function (totalObj) {
         var total = '';
 
-        if(totalObj) {
+        if (totalObj) {
           total = totalObj.display;
         }
 
@@ -45,26 +49,45 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       }
     });
 
+    function getSummaryFormValue() {
+      return {
+        "family-name": $('#FamilyName').val(),
+        "given-name": $('#GivenName').val()
+      };
+    }
+
+    function translateSummaryFormErrorMessage(rawMsg) {
+      var cortexMsgToKeyMap = {
+        "Required fields 'family-name' or 'given-name' are missing" : 'generic',
+        "given-name: attribute is required"                         : 'missingFirstName',
+        "family-name: attribute is required"                        : 'missingLastName'
+      };
+
+      return utils.translateErrorMessage(rawMsg, cortexMsgToKeyMap, {
+        localePrefix: 'profile.personalInfo.errorMsg.'
+      });
+    }
+
     // Default Profile Layout
-    var defaultLayout = Backbone.Marionette.Layout.extend({
-      template:'#ProfileMainTemplate',
-      regions:{
-        profileTitleRegion:'[data-region="profileTitleRegion"]',
-        profileSummaryRegion:'[data-region="profileSummaryRegion"]',
-        profileSubscriptionSummaryRegion:'[data-region="profileSubscriptionSummaryRegion"]',
-        profilePurchaseHistoryRegion:'[data-region="profilePurchaseHistoryRegion"]',
-        profileAddressesRegion:'[data-region="profileAddressesRegion"]',
-        profilePaymentMethodsRegion:'[data-region="profilePaymentMethodsRegion"]'
+    var defaultLayout = Marionette.Layout.extend({
+      template: '#ProfileMainTemplate',
+      regions: {
+        profileTitleRegion: '[data-region="profileTitleRegion"]',
+        profileSummaryRegion: '[data-region="profileSummaryRegion"]',
+        profileSubscriptionSummaryRegion: '[data-region="profileSubscriptionSummaryRegion"]',
+        profilePurchaseHistoryRegion: '[data-region="profilePurchaseHistoryRegion"]',
+        profileAddressesRegion: '[data-region="profileAddressesRegion"]',
+        profilePaymentMethodsRegion: '[data-region="profilePaymentMethodsRegion"]'
       },
-      className:'container',
-      templateHelpers:viewHelpers
+      className: 'container',
+      templateHelpers: viewHelpers
 
     });
 
-    var profileTitleView = Backbone.Marionette.ItemView.extend({
-      template:'#ProfileTitleTemplate',
-      tagName:'h1',
-      templateHelpers:viewHelpers
+    var profileTitleView = Marionette.ItemView.extend({
+      template: '#ProfileTitleTemplate',
+      tagName: 'h1',
+      templateHelpers: viewHelpers
     });
 
 
@@ -74,7 +97,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
      * and a button to edit these information.
      * @type Marionette.ItemView
      */
-    var profileSummaryView = Backbone.Marionette.ItemView.extend({
+    var profileSummaryView = Marionette.ItemView.extend({
       template: '#ProfileSummaryViewTemplate',
       templateHelpers: viewHelpers,
       ui: {
@@ -84,47 +107,60 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
         'change': 'render'
       },
       events: {
-        'click @ui.editBtn': function(event) {
+        'click @ui.editBtn': function (event) {
           event.preventDefault();
           EventBus.trigger('profile.editSummaryBtnClicked', this.model);
         }
       }
     });
 
-    var profileSummaryFormView = Backbone.Marionette.ItemView.extend({
+    var profileSummaryFormView = Marionette.ItemView.extend({
       template: '#ProfileSummaryFormTemplate',
       templateHelpers: viewHelpers,
       ui: {
         saveBtn: '[data-el-label="profile.summary.saveBtn"]',
         cancelBtn: '[data-el-label="profile.summary.cancelBtn"]',
-        feedbackRegion: '[data-region="componentPaymentFeedbackRegion"]'
       },
       events: {
-        'click @ui.saveBtn': function(event) {
+        'click @ui.saveBtn': function (event) {
           event.preventDefault();
           EventBus.trigger('profile.summarySaveBtnClicked', this.model.get('actionLink'));
         },
-        'click @ui.cancelBtn': function(event) {
+        'click @ui.cancelBtn': function (event) {
           event.preventDefault();
           EventBus.trigger('profile.summaryCancelBtnClicked');
         }
       }
     });
 
-
-    var profileSubscriptionItemView = Backbone.Marionette.ItemView.extend({
-      template:'#SubscriptionItemTemplate',
-      tagName:'tr',
-      templateHelpers:viewHelpers
+    /**
+     * Renders individual validation errors as list items (used by registrationErrorCollectionView).
+     * @type Marionette.ItemView
+     */
+    var errorItemView = Marionette.ItemView.extend({
+      tagName: 'li',
+      template: '#SummaryFormErrorItemTemplate'
     });
 
-    var profileSubscriptionSummaryView = Backbone.Marionette.CompositeView.extend({
-      template:'#ProfileSubscriptionSummaryTemplate',
-      itemView:profileSubscriptionItemView,
-      itemViewContainer:'tbody',
-      className:'table-responsive',
-      templateHelpers:viewHelpers,
-      onShow: function() {
+    var summaryFormErrorCollectionView = Marionette.CollectionView.extend({
+      className: 'error-list',
+      itemView: errorItemView,
+      tagName: 'ul'
+    });
+
+    var profileSubscriptionItemView = Marionette.ItemView.extend({
+      template: '#SubscriptionItemTemplate',
+      tagName: 'tr',
+      templateHelpers: viewHelpers
+    });
+
+    var profileSubscriptionSummaryView = Marionette.CompositeView.extend({
+      template: '#ProfileSubscriptionSummaryTemplate',
+      itemView: profileSubscriptionItemView,
+      itemViewContainer: 'tbody',
+      className: 'table-responsive',
+      templateHelpers: viewHelpers,
+      onShow: function () {
         if (this.collection && this.collection.length <= 0) {
           $('[data-region="profileSubscriptionSummaryRegion"]').hide();
         }
@@ -137,9 +173,9 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
      * @type Marionette.Layout
      */
     var profilePurchaseDetailView = Marionette.ItemView.extend({
-      template:'#DefaultProfilePurchaseDetailTemplate',
-      tagName:'tr',
-      templateHelpers:viewHelpers
+      template: '#DefaultProfilePurchaseDetailTemplate',
+      tagName: 'tr',
+      templateHelpers: viewHelpers
     });
 
     /**
@@ -147,12 +183,12 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
      * will render a no-purchase-history-message when purchases collection is empty
      * @type Marionette.ItemView
      */
-    var profilePurchasesHistoryEmptyView = Backbone.Marionette.ItemView.extend({
+    var profilePurchasesHistoryEmptyView = Marionette.ItemView.extend({
       template: '#DefaultProfilePurchasesEmptyViewTemplate',
       className: 'profile-no-purchase-history-msg-container',
       templateHelpers: viewHelpers,
       attributes: {
-        'data-el-label' : 'profile.noPurchaseHistoryMsg'
+        'data-el-label': 'profile.noPurchaseHistoryMsg'
       }
     });
 
@@ -163,13 +199,13 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
      * @type Marionette.CompositeView
      */
     var profilePurchasesHistoryView = Marionette.CompositeView.extend({
-      template:'#DefaultProfilePurchasesHistoryTemplate',
-      itemViewContainer:'tbody',
+      template: '#DefaultProfilePurchasesHistoryTemplate',
+      itemViewContainer: 'tbody',
       itemView: profilePurchaseDetailView,
       emptyView: profilePurchasesHistoryEmptyView,
-      className:'table-responsive',
-      templateHelpers:viewHelpers,
-      onRender: function() {
+      className: 'table-responsive',
+      templateHelpers: viewHelpers,
+      onRender: function () {
         if (this.collection.length === 0) {
           $('thead', this.$el).hide();
         }
@@ -183,7 +219,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
      * will render a wrapper around the paymentMethod view
      * @type Marionette.Layout
      */
-    var profilePaymentMethodItemView = Backbone.Marionette.Layout.extend({
+    var profilePaymentMethodItemView = Marionette.Layout.extend({
       template: '#DefaultProfilePaymentMethodLayoutTemplate',
       tagName: 'li',
       className: 'profile-payment-method-container',
@@ -203,13 +239,13 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
      * will render a no-payment-method-message when payment methods collection is empty
      * @type Marionette.ItemView
      */
-    var profilePaymentMethodEmptyView = Backbone.Marionette.ItemView.extend({
+    var profilePaymentMethodEmptyView = Marionette.ItemView.extend({
       template: '#DefaultProfilePaymentMethodEmptyViewTemplate',
       tagName: 'li',
       className: 'profile-no-payment-method-msg-container',
       templateHelpers: viewHelpers,
       attributes: {
-        'data-el-label' : 'profile.noPaymentMethodMsg'
+        'data-el-label': 'profile.noPaymentMethodMsg'
       }
     });
 
@@ -219,7 +255,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
      * will render emptyView if collection empty.
      * @type Marionette.CompositeView
      */
-    var profilePaymentMethodsView = Backbone.Marionette.CompositeView.extend({
+    var profilePaymentMethodsView = Marionette.CompositeView.extend({
       template: '#DefaultProfilePaymentsTemplate',
       emptyView: profilePaymentMethodEmptyView,
       itemView: profilePaymentMethodItemView,
@@ -234,7 +270,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
      * and will render a wrapper around an address view with edit button.
      * @type Marionette.Layout
      */
-    var profileAddressItemView = Backbone.Marionette.Layout.extend({
+    var profileAddressItemView = Marionette.Layout.extend({
       template: '#DefaultProfileAddressLayoutTemplate',
       tagName: 'li',
       className: 'profile-address-container',
@@ -242,18 +278,18 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
         profileAddressComponentRegion: '[data-region="profileAddressComponentRegion"]'
       },
       templateHelpers: viewHelpers,
-      onShow: function() {
+      onShow: function () {
         Mediator.fire('mediator.loadAddressesViewRequest', {
           region: this.profileAddressComponentRegion,
           model: this.model
         });
       },
       events: {
-        'click [data-el-label="profile.deleteAddressBtn"]': function(event) {
+        'click [data-el-label="profile.deleteAddressBtn"]': function (event) {
           event.preventDefault();
           EventBus.trigger('profile.deleteAddressBtnClicked', this.model.get('href'));
         },
-        'click [data-el-label="profile.editAddressBtn"]': function(event) {
+        'click [data-el-label="profile.editAddressBtn"]': function (event) {
           event.preventDefault();
           EventBus.trigger('profile.editAddressBtnClicked', this.model.get('href'));
         }
@@ -265,13 +301,13 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
      * will render a no-address-message when addresses collection is empty
      * @type Marionette.ItemView
      */
-    var profileAddressesEmptyView = Backbone.Marionette.ItemView.extend({
+    var profileAddressesEmptyView = Marionette.ItemView.extend({
       template: '#DefaultProfileAddressesEmptyViewTemplate',
       tagName: 'li',
       className: 'profile-no-address-msg-container container',
       templateHelpers: viewHelpers,
       attributes: {
-        'data-el-label' : 'profile.noAddressMsg'
+        'data-el-label': 'profile.noAddressMsg'
       }
     });
 
@@ -281,7 +317,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
      * will render emptyView if collection empty.
      * @type Marionette.CompositeView
      */
-    var profileAddressesView = Backbone.Marionette.CompositeView.extend({
+    var profileAddressesView = Marionette.CompositeView.extend({
       template: '#DefaultProfileAddressesTemplate',
       emptyView: profileAddressesEmptyView,
       itemView: profileAddressItemView,
@@ -292,31 +328,42 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
         activityIndicatorEl: '.profile-addresses-listing'
       },
       events: {
-        'click [data-el-label="profile.addNewAddressBtn"]': function(event) {
+        'click [data-el-label="profile.addNewAddressBtn"]': function (event) {
           event.preventDefault();
           EventBus.trigger('profile.addNewAddressBtnClicked');
         }
       }
     });
 
+
+    var __test_only__ = {
+      viewHelpers: viewHelpers,
+      ProfileSubscriptionItemView: profileSubscriptionItemView,
+      ProfilePurchaseDetailView: profilePurchaseDetailView,
+      ProfilePaymentMethodItemView: profilePaymentMethodItemView,
+      ProfilePaymentMethodsEmptyView: profilePaymentMethodEmptyView,
+      ProfileAddressItemView: profileAddressItemView,
+      ProfileAddressesEmptyView: profileAddressesEmptyView,
+      ErrorItemView: errorItemView
+    };
+
     return {
-      DefaultLayout:defaultLayout,
+      /* test-code */
+      __test_only__: __test_only__,
+      /* end-test-code */
+
+      DefaultLayout: defaultLayout,
       ProfileTitleView: profileTitleView,
-      ProfileSummaryView:profileSummaryView,
-      ProfileSummaryFormView:profileSummaryFormView,
-      ProfileSubscriptionSummaryView:profileSubscriptionSummaryView,
+      ProfileSummaryView: profileSummaryView,
+      ProfileSummaryFormView: profileSummaryFormView,
+      ProfileSummaryFormErrorCollectionView: summaryFormErrorCollectionView,
+      ProfileSubscriptionSummaryView: profileSubscriptionSummaryView,
       ProfilePurchasesHistoryView: profilePurchasesHistoryView,
-      ProfilePaymentMethodsView:profilePaymentMethodsView,
+      ProfilePaymentMethodsView: profilePaymentMethodsView,
       ProfileAddressesView: profileAddressesView,
-      testVariables: {
-        viewHelpers: viewHelpers,
-        ProfileSubscriptionItemView: profileSubscriptionItemView,
-        ProfilePurchaseDetailView: profilePurchaseDetailView,
-        ProfilePaymentMethodItemView: profilePaymentMethodItemView,
-        ProfilePaymentMethodsEmptyView: profilePaymentMethodEmptyView,
-        ProfileAddressItemView: profileAddressItemView,
-        ProfileAddressesEmptyView: profileAddressesEmptyView
-      }
+
+      getSummaryFormValue: getSummaryFormValue,
+      translateSummaryFormErrorMessage: translateSummaryFormErrorMessage
     };
   }
 );

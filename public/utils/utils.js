@@ -54,7 +54,7 @@ define(function(require){
       // Default options
       var options = {
         localePrefix: '',
-        returnAsHTML: false,
+        returnAsHTML: false,  // NOTE: returnAsHTML option disabled
         sortArray: false
       };
 
@@ -90,6 +90,7 @@ define(function(require){
       // if non of raw messages are unhandled display a generic error message
       if (unHandledErrMsgList.length > 0) {
         if (errMsgKeyList.length === 0) {
+          // FIXME Generalize this
           errMsgKeyList.push('addressForm.errorMsg.generalSaveAddressFailedErrMsg');
         }
         else {
@@ -98,18 +99,18 @@ define(function(require){
       }
 
       _.each(errMsgKeyList, function(key) {
-        translatedMsgList.push(i18n.t(key));
+        translatedMsgList.push({error: i18n.t(key)});
       });
 
       if (options.sortArray) {
         translatedMsgList.sort();
       }
 
-      if (options.returnAsHTML) {
-        return this.formatMsgAsList(translatedMsgList);
-      } else {
-        return translatedMsgList;
-      }
+//      if (options.returnAsHTML) {
+//        return this.formatMsgAsList(translatedMsgList);
+//      } else {
+//      }
+      return translatedMsgList;
     },
 
     /**

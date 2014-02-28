@@ -8538,6 +8538,74 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
 [data-region="profileTitleRegion"] {
   margin-bottom: 0px;
 }
+.profile-info-container {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.profile-info-container:before,
+.profile-info-container:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.profile-info-container:after {
+  clear: both;
+}
+.profile-info-container:before,
+.profile-info-container:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.profile-info-container:after {
+  clear: both;
+}
+.profile-info-label {
+  position: relative;
+  float: left;
+  width: 33.33333333333333%;
+  min-height: 1px;
+  padding-left: 1;
+  padding-right: 1;
+}
+.profile-info-value {
+  position: relative;
+  float: left;
+  width: 50%;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.profile-info-form-label {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  .profile-info-form-label {
+    float: left;
+    width: 25%;
+  }
+}
+.profile-info-form-input {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  .profile-info-form-input {
+    float: left;
+    width: 50%;
+  }
+}
 .profile-addresses-listing {
   position: relative;
   padding: 0;
@@ -8747,6 +8815,7 @@ ul {
   list-style: none;
 }
 .btn-cmd {
+  padding-left: 0;
   border: 0 solid grey;
   font-size: 100%;
   background: transparent;

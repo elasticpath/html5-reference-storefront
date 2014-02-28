@@ -23,7 +23,7 @@ define(function (require) {
         // mock the model
         this.model = new Backbone.Model();
         // setup the view
-        this.view = new profileViews.testVariables.ProfilePaymentMethodItemView({model: new Backbone.Model()});
+        this.view = new profileViews.__test_only__.ProfilePaymentMethodItemView({model: new Backbone.Model()});
         this.view.render();
       });
 

@@ -19,12 +19,15 @@ define(function (require) {
     'paymentmethods:element'
   ];
 
+  var urlBase = ep.io.getApiContext() + '/profiles/' + ep.app.config.cortexApi.scope + '/default';
+
   /**
    * Model containing profile information of a registered user.
    * @type Backbone.Model
    */
   var profileModel = Backbone.Model.extend({
-    url: ep.io.getApiContext() + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=' + zoomArray.join(),
+    baseUrl: urlBase,
+    url: urlBase + '?zoom=' + zoomArray.join(),
     parse: function (response) {
       var profileObj = {
         summary: {},
@@ -117,11 +120,16 @@ define(function (require) {
     }
   });
 
+  var __test_only__ = {
+    modelHelpers: modelHelpers
+  };
+
   return {
+    /* test-code */
+    testVariable: __test_only__,
+    /* end-test-code */
+
     ProfileModel: profileModel,
-    ProfilePurchaseCollection: profilePurchaseCollection,
-    testVariable: {
-      modelHelpers: modelHelpers
-    }
+    ProfilePurchaseCollection: profilePurchaseCollection
   };
 });
