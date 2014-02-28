@@ -18,9 +18,14 @@
 	<description>Project for importing store data via importexport.</description>
 
 	<scm>
+<!--
 		<connection>scm:git:git://github.elasticpath.net/cortex/ui-storefront.git</connection>
 		<developerConnection>scm:git:git@github.elasticpath.net:cortex/ui-storefront.git</developerConnection>
 		<url>https://github.elasticpath.net/cortex/ui-storefront</url>
+-->
+		<connection>scm:git:git://github.elasticpath.net/gclaypack/ui-storefront.git</connection>
+		<developerConnection>scm:git:git@github.elasticpath.net:gclaypack/ui-storefront.git</developerConnection>
+		<url>https://github.elasticpath.net/gclaypack/ui-storefront</url>
 		<tag>HEAD</tag>
 	</scm>
 
