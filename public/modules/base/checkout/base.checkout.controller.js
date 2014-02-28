@@ -560,13 +560,24 @@ define(function (require) {
     EventBus.on('checkout.updateChosenPaymentMethodFailed', updateChosenPaymentMethodFailed);
 
 
-    /* ********** ADD NEW ADDRESS EVENT LISTENERS ************ */
+    /* ********** ADDRESS EVENT LISTENERS ************ */
     /**
      * Listen to add new address button clicked signal
      * will load address form
      */
     EventBus.on('checkout.addNewAddressBtnClicked', function () {
       Mediator.fire('mediator.addNewAddressRequest', 'checkout');
+    });
+
+    /**
+     * Listens to the edit address button clicked signal, fires a mediator strategy to communicate with
+     * the address module to render the edit address form.
+     */
+    EventBus.on('checkout.editAddressBtnClicked', function (href) {
+      Mediator.fire('mediator.editAddressRequest', {
+        returnModule: 'checkout',
+        href: href
+      });
     });
 
     /**

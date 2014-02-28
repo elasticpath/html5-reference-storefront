@@ -35,10 +35,15 @@
   <script id="CheckoutAddressSelectorTemplate" type="text/template">
     <!-- A unique ID to associate address labels with radio buttons -->
     <% var uniqueId = E.getUniqueIdForFormInput('shippingOption_'); %>
-    <input type="radio" name="<%= E.addressType %>" id="<%= uniqueId %>" class="checkout-address-radio" <%= E.getCheckoutRadioCheckedAttr(E) %> />
-    <label for="<%= uniqueId %>">
-      <div data-region="checkoutAddressRegion"></div>
-    </label>
+    <div class="address-ctrl-cell">
+      <input type="radio" name="<%= E.addressType %>" id="<%= uniqueId %>" class="checkout-address-radio" <%= E.getCheckoutRadioCheckedAttr(E) %> />
+      <label for="<%= uniqueId %>">
+        <div data-region="checkoutAddressRegion"></div>
+      </label>
+    </div>
+    <div class="address-btn-cell">
+      <button class="btn checkout-edit-address-btn" data-el-label="checkout.editAddressBtn"><%= E.getI18nLabel('checkout.editAddressBtn') %></button>
+    </div>
   </script>
 
   <!-- Rendered when there are no billing addresses to display -->

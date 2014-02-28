@@ -119,6 +119,10 @@ define(function (require) {
         'change input[type="radio"]': function () {
           var eventName = 'checkout.' + this.options.addressType + 'AddressRadioChanged';
           EventBus.trigger(eventName, this.model.get('selectAction'));
+        },
+        'click [data-el-label="checkout.editAddressBtn"]': function(event) {
+          event.preventDefault();
+          EventBus.trigger('checkout.editAddressBtnClicked', this.model.get('href'));
         }
       },
       onShow: function () {

@@ -86,8 +86,32 @@
   margin-right: 1rem;
 }
 
+.checkout-new-address-btn {
+  .pull-left();
+  clear: both;
+}
+
+.address-ctrl-cell {
+  .make-xs-column(7, @gutter: 0);
+  .make-sm-column(8, @gutter: 0);
+  .make-md-column(8, @gutter: 0);
+  .clearfix();
+  label {
+    width: 90%;
+  }
+}
+
+.address-btn-cell {
+  .make-xs-column(5, @gutter: 0);
+  .make-sm-column(4, @gutter: 0);
+  .make-md-column(4, @gutter: 0);
+}
+
 [data-region="billingAddressesRegion"] {
   margin-bottom: 3rem;
+  .make-md-column(7);
+  padding-left: 0;
+  padding-right: 0;
 
   h2 {
     margin-top: 0;
@@ -96,16 +120,25 @@
 
 .checkout-shipping-container {
   .make-row();
+  clear: both;
 
   [data-region="shippingAddressesRegion"] {
     margin-bottom: 3rem;
   }
-  [data-region="shippingAddressesRegion"],
-  [data-region="shippingOptionsRegion"] {
-    .make-md-column(6);
+  [data-region="shippingAddressesRegion"] {
+    .make-md-column(7, @gutter: 0);
+    padding-left: 15px;
   }
 
   [data-region="shippingOptionsRegion"] {
+    .make-xs-column(12);
+    .make-md-column(5);
+    // Override the standard gutter for medium and larger screens
+    @media (min-width: @screen-md) {
+      padding-left: 30px;
+      padding-right: 0;
+    }
+
     span {
       display: block;
     }
