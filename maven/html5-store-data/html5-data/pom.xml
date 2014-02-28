@@ -11,7 +11,7 @@
 
 	<groupId>com.elasticpath.html5</groupId>
 	<artifactId>html5-data</artifactId>
-	<version>0.10.0.2014022813</version>
+	<version>0.10.0-SNAPSHOT</version>
 
 	<name>HTML5 Data</name>
 	<description>ImportExport data for the HTML5 functional demo storefront.</description>
@@ -26,7 +26,7 @@
 		<developerConnection>scm:git:git@github.elasticpath.net:gclaypack/ui-storefront.git</developerConnection>
 		<url>https://github.elasticpath.net/gclaypack/ui-storefront</url>
 
-		<tag>ui-storefront-parent-0.10.0.2014022813</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<distributionManagement>
