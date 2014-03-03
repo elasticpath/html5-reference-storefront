@@ -69,6 +69,9 @@ define(function (require) {
       it('and re-renders when collection reset', function () {
         expect(this.view.collectionEvents.reset).to.be.equal('render');
       });
+      it('and has a ui hash element for the region select drop-down', function () {
+        expect(this.view.ui.regionSelect).to.be.instanceOf(jQuery);
+      });
 
       describe('region selection changed',
         EventTestFactory.simpleSelectionChangedTest('address.regionSelectionChanged', '#Region'));

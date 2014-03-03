@@ -39,6 +39,55 @@ define(function (require) {
 
     });
 
+    describe('Responds to event: checkout.deleteAddressBtnClicked', function() {
+      before(function () {
+        sinon.stub(Mediator, 'fire');
+        EventBus.trigger('checkout.deleteAddressBtnClicked', 'someHref');
+      });
+
+      after(function () {
+        Mediator.fire.restore();
+      });
+
+      it('fires the correct mediator strategy' ,function () {
+        expect(Mediator.fire).to.be.calledWith('mediator.deleteAddressRequest');
+      });
+    });
+
+    describe('Responds to event: checkout.editAddressBtnClicked', function() {
+      before(function () {
+        sinon.stub(Mediator, 'fire');
+        EventBus.trigger('checkout.editAddressBtnClicked', 'someHref');
+      });
+
+      after(function () {
+        Mediator.fire.restore();
+      });
+
+      it('fires the correct mediator strategy' ,function () {
+        expect(Mediator.fire).to.be.calledWith('mediator.editAddressRequest');
+      });
+    });
+
+    describe('Responds to event: checkout.updateAddresses', function() {
+      before(function () {
+        this.fakeView = new Marionette.View();
+        sinon.stub(ep.ui, 'stopActivityIndicator');
+        sinon.stub(Backbone.history, 'loadUrl');
+        EventBus.trigger('checkout.updateAddresses', this.fakeView);
+      });
+
+      after(function () {
+        ep.ui.stopActivityIndicator.restore();
+        Backbone.history.loadUrl.restore();
+      });
+
+      it('stops the activity indicator for the given view and triggers a full page refresh' ,function () {
+        expect(ep.ui.stopActivityIndicator).to.be.calledWithExactly(this.fakeView);
+        expect(Backbone.history.loadUrl).to.be.calledOnce;
+      });
+    });
+
   });
 
   function selectionChangedEventTestFactory (eventListener, eventToTrigger) {

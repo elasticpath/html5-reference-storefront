@@ -166,7 +166,7 @@ define(function(require){
       require(['ep', 'address'], function (ep, address) {
         // Store a return module so control can be returned to the correct module
         // (e.g. profile or checkout) upon completion of the delete operation
-        if (arg.returnModule) {
+        if (args.returnModule) {
           ep.io.sessionStore.setItem('deleteAddressReturnTo', args.returnModule);
         }
         // Triggers the delete confirmation event from the address module (the first step in the delete address process)

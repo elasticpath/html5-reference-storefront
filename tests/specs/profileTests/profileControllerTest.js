@@ -124,7 +124,7 @@ define(function (require) {
       });
 
       it('calls the correct mediator strategy', function() {
-        expect(Mediator.fire).to.be.called;
+        expect(Mediator.fire).to.be.calledWith('mediator.deleteAddressRequest');
       });
     });
 

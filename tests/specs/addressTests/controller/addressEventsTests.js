@@ -133,6 +133,7 @@ define(function (require) {
         before(function (done) {
           this.fakeUrl = '/fakeAddressUrl';
           sinon.spy(EventBus, 'trigger');
+          sinon.stub(ep.logger, 'error');
           this.server = controllerTestFactory.getFakeServer({
             method: 'DELETE',
             responseCode: 400,
@@ -154,6 +155,7 @@ define(function (require) {
           delete(this.fakeUrl);
           delete(this.server);
           EventBus.trigger.restore();
+          ep.logger.error.restore();
           EventTestHelpers.reset();
         });
 
