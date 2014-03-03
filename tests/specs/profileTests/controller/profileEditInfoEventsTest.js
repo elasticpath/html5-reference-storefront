@@ -6,11 +6,10 @@ define(function (require) {
   var Backbone = require('backbone');
   var EventBus = require('eventbus');
   var ep = require('ep');
-  var EventTestHelpers = require('testhelpers.event');
   var EventTestFactory = require('testfactory.event');
   var ControllerTestHelper = require('testhelpers.viewdoubles');
 
-  describe('Profile Module: Summary Events', function () {
+  describe('Profile Module: Edit Personal Info Events', function () {
     require('profile');
     var template = require('text!modules/base/profile/base.profile.templates.html');
     var view = require('profile.views');
@@ -23,43 +22,43 @@ define(function (require) {
       $("#Fixtures").empty();
     });
 
-    describe('Responds to event: profile.editSummaryBtnClicked',
-      EventTestFactory.simpleEventTriggersEventTest('profile.loadSummaryFormViewRequest', 'profile.editSummaryBtnClicked'));
+    describe('Responds to event: profile.editPersonalInfoBtnClicked',
+      EventTestFactory.simpleEventTriggersEventTest('profile.loadPersonalInfoFormViewRequest', 'profile.editPersonalInfoBtnClicked'));
 
-    describe('Responds to event: profile.loadSummaryFormViewRequest', function () {
+    describe('Responds to event: profile.loadPersonalInfoFormViewRequest', function () {
       before(function () {
-        this.formView = view.ProfileSummaryFormView;
+        this.formView = view.PersonalInfoFormView;
         this.formViewDouble = ControllerTestHelper.TestDouble();
-        view.ProfileSummaryFormView = this.formViewDouble.View;
+        view.PersonalInfoFormView = this.formViewDouble.View;
 
-        EventBus.trigger('profile.loadSummaryFormViewRequest', new Backbone.Model());
+        EventBus.trigger('profile.loadPersonalInfoFormViewRequest', new Backbone.Model());
       });
 
       after(function () {
-        view.ProfileSummaryFormView = this.formView;
+        view.PersonalInfoFormView = this.formView;
         delete(this.formView);
         delete(this.formViewDouble);
       });
 
       it('registers correct event listener', function () {
-        expect(EventBus._events['profile.loadSummaryFormViewRequest']).to.have.length(1);
+        expect(EventBus._events['profile.loadPersonalInfoFormViewRequest']).to.have.length(1);
       });
       describe("loads profileSummaryFormView", function () {
-        it('ProfileSummaryFormView was rendered', function () {
+        it('PersonalInfoFormView was rendered', function () {
           expect(this.formViewDouble.wasRendered()).to.be.true;
         });
-        it('ProfileSummaryFormView has a model', function () {
+        it('PersonalInfoFormView has a model', function () {
           expect(this.formViewDouble.hasAModel()).to.be.true;
         });
       });
     });
 
-    describe('Responds to event: profile.summarySaveBtnClicked',
-      EventTestFactory.simpleTriggerEventTest('profile.submitProfileSummaryFormRequest', function() {
-        var expectedEvent = "profile.submitProfileSummaryFormRequest";
+    describe('Responds to event: profile.personalInfoFormSaveBtnClicked',
+      EventTestFactory.simpleTriggerEventTest('profile.submitPersonalInfoFormRequest', function() {
+        var expectedEvent = "profile.submitPersonalInfoFormRequest";
         it('should trigger event: ' + expectedEvent, function () {
           sinon.stub(ep.ui, "disableButton");
-          EventBus.trigger('profile.summarySaveBtnClicked');
+          EventBus.trigger('profile.personalInfoFormSaveBtnClicked');
 
           expect(EventBus.trigger).to.be.calledWith(expectedEvent);
 
@@ -67,54 +66,55 @@ define(function (require) {
         });
       }));
 
-    describe('Responds to event: profile.summaryCancelBtnClicked',
-      EventTestFactory.simpleEventTriggersEventTest('profile.loadSummaryViewRequest', 'profile.summaryCancelBtnClicked'));
+    describe('Responds to event: profile.personalInfoFormCancelBtnClicked',
+      EventTestFactory.simpleEventTriggersEventTest('profile.loadPersonalInfoViewRequest', 'profile.personalInfoFormCancelBtnClicked'));
 
-    describe('Responds to event: profile.loadSummaryViewRequest', function () {
+    describe('Responds to event: profile.loadPersonalInfoViewRequest', function () {
       before(function () {
         sinon.stub(Backbone.Model.prototype, 'fetch');
 
-        this.formView = view.ProfileSummaryView;
+        this.formView = view.ProfilePersonalInfoView;
         this.formViewDouble = ControllerTestHelper.TestDouble();
-        view.ProfileSummaryView = this.formViewDouble.View;
+        view.ProfilePersonalInfoView = this.formViewDouble.View;
 
-        EventBus.trigger('profile.loadSummaryViewRequest');
+        EventBus.trigger('profile.loadPersonalInfoViewRequest');
       });
 
       after(function () {
         Backbone.Model.prototype.fetch.restore();
 
-        view.ProfileSummaryFormView = this.formView;
+        view.PersonalInfoFormView = this.formView;
         delete(this.formView);
         delete(this.formViewDouble);
       });
 
       it('registers correct event listener', function () {
-        expect(EventBus._events['profile.loadSummaryViewRequest']).to.have.length(1);
+        expect(EventBus._events['profile.loadPersonalInfoViewRequest']).to.have.length(1);
       });
 
       it("fetches latest profile summary info from cortex server", function () {
         expect(Backbone.Model.prototype.fetch).to.be.calledOnce;
       });
 
-      it('ProfileSummaryView was rendered', function () {
+      it('ProfilePersonalInfoView was rendered', function () {
         expect(this.formViewDouble.wasRendered()).to.be.true;
       });
-      it('ProfileSummaryView has a model', function () {
+      it('ProfilePersonalInfoView has a model', function () {
         expect(this.formViewDouble.hasAModel()).to.be.true;
       });
     });
 
-    describe('Responds to event: profile.submitProfileSummaryFormRequest', function () {
+    describe('Responds to event: profile.submitPersonalInfoFormRequest', function () {
       var fakeUrl = 'someHref';
 
       before(function () {
         sinon.stub(ep.io, 'ajax');
         sinon.stub(ep.logger, 'error');
-        sinon.spy(view, 'getSummaryFormValue');
+        sinon.spy(view, 'getPersonalInfoFormValue');
 
-        EventBus.trigger('profile.submitProfileSummaryFormRequest', fakeUrl);
+        EventBus.trigger('profile.submitPersonalInfoFormRequest', fakeUrl);
 
+        // FIXME create testfactory for reuse?
         // get first argument passed to ep.io.ajax,
         // args[0] gets arguments passed in the first time ep.io.ajax is called
         // args[0][0] gets the first argument of the first time arguments
@@ -124,15 +124,15 @@ define(function (require) {
       after(function () {
         ep.io.ajax.restore();
         ep.logger.error.restore();
-        view.getSummaryFormValue.restore();
+        view.getPersonalInfoFormValue.restore();
       });
 
       it('registers correct event listener', function () {
-        expect(EventBus._events['profile.submitProfileSummaryFormRequest']).to.have.length(1);
+        expect(EventBus._events['profile.submitPersonalInfoFormRequest']).to.have.length(1);
       });
 
       it("gets summary form value", function () {
-        expect(view.getSummaryFormValue).to.be.calledOnce;
+        expect(view.getPersonalInfoFormValue).to.be.calledOnce;
       });
 
       describe('Should make a PUT request to Cortex', function () {
@@ -146,8 +146,8 @@ define(function (require) {
       });
 
       describe('and on success',
-        EventTestFactory.simpleTriggerEventTest('profile.submitSummaryFormSuccess', function () {
-          var testEventName = 'profile.submitSummaryFormSuccess';
+        EventTestFactory.simpleTriggerEventTest('profile.submitPersonalInfoFormSuccess', function () {
+          var testEventName = 'profile.submitPersonalInfoFormSuccess';
 
           it('should trigger ' + testEventName + ' event', function () {
             this.ajaxArgs.success(); // trigger callback function on ajax call success
@@ -156,8 +156,8 @@ define(function (require) {
         }));
 
       describe('and on failure',
-        EventTestFactory.simpleTriggerEventTest('profile.submitSummaryFormFailed', function () {
-          var testEventName = 'profile.submitSummaryFormFailed';
+        EventTestFactory.simpleTriggerEventTest('profile.submitPersonalInfoFormFailed', function () {
+          var testEventName = 'profile.submitPersonalInfoFormFailed';
 
           it('should trigger ' + testEventName + ' event', function () {
             ep.logger.error.reset();  // make sure other test's logger call doesn't interfere
@@ -169,34 +169,34 @@ define(function (require) {
         }));
     });
 
-    describe('Responds to event: profile.submitSummaryFormSuccess',
-      EventTestFactory.simpleEventTriggersEventTest('profile.loadSummaryViewRequest', 'profile.submitSummaryFormSuccess'));
+    describe('Responds to event: profile.submitPersonalInfoFormSuccess',
+      EventTestFactory.simpleEventTriggersEventTest('profile.loadPersonalInfoViewRequest', 'profile.submitPersonalInfoFormSuccess'));
 
-    describe("Responds to event: profile.submitSummaryFormFailed", function () {
+    describe("Responds to event: profile.submitPersonalInfoFormFailed", function () {
 
       before(function () {
         sinon.stub(ep.ui, "enableButton");
-        sinon.stub(view, 'translateSummaryFormErrorMessage');
+        sinon.stub(view, 'translatePersonalInfoFormErrorMessage');
 
-        this.errorView = view.ProfileSummaryFormErrorCollectionView;
+        this.errorView = view.PersonalInfoFormErrorCollectionView;
         this.errorViewDouble = ControllerTestHelper.TestDouble();
-        view.ProfileSummaryFormErrorCollectionView = this.errorViewDouble.View;
+        view.PersonalInfoFormErrorCollectionView = this.errorViewDouble.View;
 
-        EventBus.trigger("profile.submitSummaryFormFailed");
+        EventBus.trigger("profile.submitPersonalInfoFormFailed");
       });
 
       after(function () {
         ep.ui.enableButton.restore();
-        view.translateSummaryFormErrorMessage.restore();
-        view.ProfileSummaryFormErrorCollectionView = this.errorView;
+        view.translatePersonalInfoFormErrorMessage.restore();
+        view.PersonalInfoFormErrorCollectionView = this.errorView;
       });
 
       it("calls view function to localize error message", function () {
-        expect(view.translateSummaryFormErrorMessage).to.be.calledOnce;
+        expect(view.translatePersonalInfoFormErrorMessage).to.be.calledOnce;
       });
 
       describe("displays the error message to feedback region", function() {
-        it("that ProfileSummaryFormErrorCollectionView is rendered", function() {
+        it("that PersonalInfoFormErrorCollectionView is rendered", function() {
           expect(this.errorViewDouble.wasRendered()).to.be.true;
         });
         it("and that this view has a collection", function() {

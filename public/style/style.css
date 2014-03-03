@@ -8511,7 +8511,7 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
  * Storefront profile styles
  */
 [data-region="profileTitleRegion"],
-[data-region="profileSummaryRegion"],
+[data-region="profilePersonalInfoRegion"],
 [data-region="profileSubscriptionSummaryRegion"],
 [data-region="profilePurchaseHistoryRegion"],
 [data-region="profilePaymentMethodsRegion"],
@@ -8520,7 +8520,7 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
   padding-bottom: 30px;
 }
 [data-region="profileTitleRegion"] h2,
-[data-region="profileSummaryRegion"] h2,
+[data-region="profilePersonalInfoRegion"] h2,
 [data-region="profileSubscriptionSummaryRegion"] h2,
 [data-region="profilePurchaseHistoryRegion"] h2,
 [data-region="profilePaymentMethodsRegion"] h2,
@@ -8528,7 +8528,7 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
   font-size: 2rem;
 }
 [data-region="profileTitleRegion"] .table-responsive table,
-[data-region="profileSummaryRegion"] .table-responsive table,
+[data-region="profilePersonalInfoRegion"] .table-responsive table,
 [data-region="profileSubscriptionSummaryRegion"] .table-responsive table,
 [data-region="profilePurchaseHistoryRegion"] .table-responsive table,
 [data-region="profilePaymentMethodsRegion"] .table-responsive table,
@@ -8538,12 +8538,12 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
 [data-region="profileTitleRegion"] {
   margin-bottom: 0px;
 }
-.profile-info-container {
+.profile-personal-info-container {
   margin-left: -15px;
   margin-right: -15px;
 }
-.profile-info-container:before,
-.profile-info-container:after {
+.profile-personal-info-container:before,
+.profile-personal-info-container:after {
   content: " ";
   /* 1 */
 
@@ -8551,11 +8551,11 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
   /* 2 */
 
 }
-.profile-info-container:after {
+.profile-personal-info-container:after {
   clear: both;
 }
-.profile-info-container:before,
-.profile-info-container:after {
+.profile-personal-info-container:before,
+.profile-personal-info-container:after {
   content: " ";
   /* 1 */
 
@@ -8563,10 +8563,10 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
   /* 2 */
 
 }
-.profile-info-container:after {
+.profile-personal-info-container:after {
   clear: both;
 }
-.profile-info-label {
+.profile-personal-info-label {
   position: relative;
   float: left;
   width: 33.33333333333333%;
@@ -8574,7 +8574,7 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
   padding-left: 1;
   padding-right: 1;
 }
-.profile-info-value {
+.profile-personal-info-value {
   position: relative;
   float: left;
   width: 50%;
@@ -8582,26 +8582,26 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
   padding-left: 15px;
   padding-right: 15px;
 }
-.profile-info-form-label {
+.profile-personal-info-form-label {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
 }
 @media (min-width: 768px) {
-  .profile-info-form-label {
+  .profile-personal-info-form-label {
     float: left;
     width: 25%;
   }
 }
-.profile-info-form-input {
+.profile-personal-info-form-input {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
 }
 @media (min-width: 768px) {
-  .profile-info-form-input {
+  .profile-personal-info-form-input {
     float: left;
     width: 50%;
   }

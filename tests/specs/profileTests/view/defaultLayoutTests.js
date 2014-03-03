@@ -38,9 +38,9 @@ define(function (require) {
           expect(this.view.profileTitleRegion).to.exist;
           expect(this.view.$el.find('[data-region="profileTitleRegion"]')).to.be.length(1);
         });
-        it('should have a profileSummaryRegion region', function () {
-          expect(this.view.profileSummaryRegion).to.exist;
-          expect(this.view.$el.find('[data-region="profileSummaryRegion"]')).to.be.length(1);
+        it('should have a profilePersonalInfoRegion region', function () {
+          expect(this.view.profilePersonalInfoRegion).to.exist;
+          expect(this.view.$el.find('[data-region="profilePersonalInfoRegion"]')).to.be.length(1);
         });
         it('should have a profileSubscriptionSummaryRegion region', function () {
           expect(this.view.profileSubscriptionSummaryRegion).to.exist;

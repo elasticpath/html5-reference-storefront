@@ -26,13 +26,13 @@ define(function (require) {
       });
 
       it('has non-empty familyName', function () {
-        expect(this.model.summary.familyName).to.be.ok;
+        expect(this.model.personalInfo.familyName).to.be.ok;
       });
       it('has non-empty givenName', function () {
-        expect(this.model.summary.givenName).to.be.ok;
+        expect(this.model.personalInfo.givenName).to.be.ok;
       });
-      it('has non-empty summary actionLink', function () {
-        expect(this.model.summary.actionLink).to.be.ok;
+      it('has non-empty editPersonalInfo actionLink', function () {
+        expect(this.model.personalInfo.actionLink).to.be.ok;
       });
       it('has non-empty subscriptions array', function () {
         expect(this.model.subscriptions).to.be.instanceOf(Array);

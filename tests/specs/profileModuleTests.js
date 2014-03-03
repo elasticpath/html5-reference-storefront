@@ -17,7 +17,7 @@ define(function (require) {
     require('specs/profileTests/controller/profileAddressEventsTest.js');
 
     // profile Summary Events Test
-    require('specs/profileTests/controller/profileSummaryEventsTest.js');
+    require('specs/profileTests/controller/profileEditInfoEventsTest.js');
 
 
     /*

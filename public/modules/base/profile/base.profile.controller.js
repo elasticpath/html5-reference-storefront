@@ -22,7 +22,7 @@ define(function (require) {
   _.templateSettings.variable = 'E';
 
   var profileModel = new Model.ProfileModel();
-  var summaryModel = new Backbone.Model();
+  var personalInfoModel = new Backbone.Model();
   var subscriptionCollection = new Backbone.Collection();
   var purchaseHistoryCollection = new Model.ProfilePurchaseCollection();
   var addressesCollection = new Backbone.Collection();
@@ -30,21 +30,21 @@ define(function (require) {
 
   var defaultLayout = new View.DefaultLayout();
 
-  var profileSummaryViewController = function (region) {
-    var summaryView = new View.ProfileSummaryView({
-      model: summaryModel
+  var showPersonalInfoView = function (region) {
+    var profileInfoView = new View.ProfilePersonalInfoView({
+      model: personalInfoModel
     });
-    region.show(summaryView);
+    region.show(profileInfoView);
   };
 
-  var profileSubscriptionViewController = function (region) {
+  var showSubscriptionView = function (region) {
     var profileSubscriptionView = new View.ProfileSubscriptionSummaryView({
       collection: subscriptionCollection
     });
     region.show(profileSubscriptionView);
   };
 
-  var profilePurchaseViewController = function (region) {
+  var showPurchaseView = function (region) {
     var profilePurchaseView = new View.ProfilePurchasesHistoryView({
       collection: purchaseHistoryCollection
     });
@@ -67,17 +67,17 @@ define(function (require) {
           var profileTitleView = new View.ProfileTitleView();
           defaultLayout.profileTitleRegion.show(profileTitleView);
 
-          // Profile Summary
-          summaryModel.set(response.get('summary'));
-          profileSummaryViewController(defaultLayout.profileSummaryRegion);
+          // Profile Personal Info
+          personalInfoModel.set(response.get('personalInfo'));
+          showPersonalInfoView(defaultLayout.profilePersonalInfoRegion);
 
           // Subscriptions
           subscriptionCollection.update(response.get('subscriptions'));
-          profileSubscriptionViewController(defaultLayout.profileSubscriptionSummaryRegion);
+          showSubscriptionView(defaultLayout.profileSubscriptionSummaryRegion);
 
           // Purchase History
           purchaseHistoryCollection.update(response.get('purchaseHistories'));
-          profilePurchaseViewController(defaultLayout.profilePurchaseHistoryRegion);
+          showPurchaseView(defaultLayout.profilePurchaseHistoryRegion);
 
           // Profile Addresses
           addressesCollection.update(response.get('addresses'));
@@ -157,38 +157,38 @@ define(function (require) {
   });
 
   /* ********* Address EVENT LISTENERS ************ */
-  EventBus.on('profile.editSummaryBtnClicked', function (model) {
-    EventBus.trigger('profile.loadSummaryFormViewRequest', model);
+  EventBus.on('profile.editPersonalInfoBtnClicked', function (model) {
+    EventBus.trigger('profile.loadPersonalInfoFormViewRequest', model);
   });
 
-  EventBus.on('profile.loadSummaryFormViewRequest', function (model) {
-    var summaryFormView = new View.ProfileSummaryFormView({
+  EventBus.on('profile.loadPersonalInfoFormViewRequest', function (model) {
+    var personalInfoFormView = new View.PersonalInfoFormView({
       model: model
     });
 
-    defaultLayout.profileSummaryRegion.show(summaryFormView);
+    defaultLayout.profilePersonalInfoRegion.show(personalInfoFormView);
   });
 
-  EventBus.on('profile.summarySaveBtnClicked', function (actionLink) {
-    ep.ui.disableButton(defaultLayout.profileSummaryRegion.currentView, 'saveBtn');
-    EventBus.trigger('profile.submitProfileSummaryFormRequest', actionLink);
+  EventBus.on('profile.personalInfoFormSaveBtnClicked', function (actionLink) {
+    ep.ui.disableButton(defaultLayout.profilePersonalInfoRegion.currentView, 'saveBtn');
+    EventBus.trigger('profile.submitPersonalInfoFormRequest', actionLink);
   });
 
-  EventBus.on('profile.summaryCancelBtnClicked', function () {
-    EventBus.trigger('profile.loadSummaryViewRequest');
+  EventBus.on('profile.personalInfoFormCancelBtnClicked', function () {
+    EventBus.trigger('profile.loadPersonalInfoViewRequest');
   });
 
-  EventBus.on('profile.loadSummaryViewRequest', function () {
+  EventBus.on('profile.loadPersonalInfoViewRequest', function () {
     profileModel.fetch({
       success: function (response) {
-        summaryModel.set(response.get('summary'));
+        personalInfoModel.set(response.get('personalInfo'));
       }
     });
-    profileSummaryViewController(defaultLayout.profileSummaryRegion);
+    showPersonalInfoView(defaultLayout.profilePersonalInfoRegion);
   });
 
-  EventBus.on('profile.submitProfileSummaryFormRequest', function (actionLink) {
-    var formValue = View.getSummaryFormValue();
+  EventBus.on('profile.submitPersonalInfoFormRequest', function (actionLink) {
+    var formValue = View.getPersonalInfoFormValue();
 
     // Remove any form errors that were previously generated before we make the AJAX request
     formErrorsCollection.reset();
@@ -198,38 +198,38 @@ define(function (require) {
       url: actionLink,
       data: JSON.stringify(formValue),
       success: function () {
-        EventBus.trigger('profile.submitSummaryFormSuccess');
+        EventBus.trigger('profile.submitPersonalInfoFormSuccess');
       },
       customErrorFn: function (response) {
-        EventBus.trigger('profile.submitSummaryFormFailed', response);
+        EventBus.trigger('profile.submitPersonalInfoFormFailed', response);
       }
     });
 
     ep.io.ajax(ajaxModel.toJSON());
   });
 
-  EventBus.on('profile.submitSummaryFormSuccess', function () {
-    EventBus.trigger('profile.loadSummaryViewRequest');
+  EventBus.on('profile.submitPersonalInfoFormSuccess', function () {
+    EventBus.trigger('profile.loadPersonalInfoViewRequest');
   });
 
-  EventBus.on('profile.submitSummaryFormFailed', function (response) {
+  EventBus.on('profile.submitPersonalInfoFormFailed', function (response) {
     var errorMsg = i18n.t('profile.personalInfo.errorMsg.generic');
     if (response && response.status === 400) {
       errorMsg = response.responseText;
     }
 
-    var translatedErrorsArr = View.translateSummaryFormErrorMessage(errorMsg);
+    var translatedErrorsArr = View.translatePersonalInfoFormErrorMessage(errorMsg);  // checkIn Personal Info
     formErrorsCollection.update(translatedErrorsArr);
 
-    var summaryFormView = defaultLayout.profileSummaryRegion.currentView;
+    var personalInfoFormView = defaultLayout.profilePersonalInfoRegion.currentView;
     var feedbackRegion = new Marionette.Region({
       el: '[data-region="profileInfoFeedbackRegion"]'
     });
 
-    ep.ui.enableButton(summaryFormView, 'saveBtn');
+    ep.ui.enableButton(personalInfoFormView, 'saveBtn');
 
     feedbackRegion.show(
-      new View.ProfileSummaryFormErrorCollectionView({
+      new View.PersonalInfoFormErrorCollectionView({
         collection: formErrorsCollection
       })
     );

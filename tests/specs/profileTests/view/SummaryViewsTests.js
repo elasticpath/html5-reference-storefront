@@ -10,7 +10,7 @@ define(function (require) {
   var views = require('profile.views');
   var template = require('text!modules/base/profile/base.profile.templates.html');
 
-  describe('Profile Module: Summary Views', function () {
+  describe('Profile Module: Profile Personal Info Views', function () {
     var StandardProfileInfoModel = Backbone.Model.extend({
       defaults: {
         givenName: 'ben',
@@ -27,11 +27,11 @@ define(function (require) {
       $("#Fixtures").empty();
     });
 
-    describe('ProfileSummaryView', function () {
+    describe('ProfilePersonalInfoView', function () {
       before(function () {
         // mock the model
         this.model = new StandardProfileInfoModel();
-        this.view = new views.ProfileSummaryView({model: this.model});
+        this.view = new views.ProfilePersonalInfoView({model: this.model});
         this.view.render();
       });
 
@@ -55,21 +55,21 @@ define(function (require) {
         expect(this.view.$el.text()).to.have.string(this.model.get('familyName'));
       });
       it('renders a profile information edit button ', function () {
-        expect(this.view.$el.find('button[data-el-label="profile.editSummaryBtn"]')).to.have.length(1);
+        expect(this.view.$el.find('button[data-el-label="profile.editPersonalInfoBtn"]')).to.have.length(1);
       });
       it('defines ui component: editBtn ', function () {
         expect(this.view.ui.editBtn).to.be.ok;
       });
 
       describe('edit summary button clicked',
-        EventTestFactory.simpleBtnClickTest('profile.editSummaryBtnClicked', '[data-el-label="profile.editSummaryBtn"]'));
+        EventTestFactory.simpleBtnClickTest('profile.editPersonalInfoBtnClicked', '[data-el-label="profile.editPersonalInfoBtn"]'));
     });
 
-    describe('ProfileSummaryFormView', function () {
+    describe('PersonalInfoFormView', function () {
       before(function () {
         // mock the model
         this.model = new StandardProfileInfoModel();
-        this.view = new views.ProfileSummaryFormView({model: this.model});
+        this.view = new views.PersonalInfoFormView({model: this.model});
         this.view.render();
       });
 
@@ -96,10 +96,10 @@ define(function (require) {
         expect(this.view.$el.find('[data-region="profileInfoFeedbackRegion"]')).to.have.length(1);
       });
       it('renders a save button ', function () {
-        expect(this.view.$el.find('button[data-el-label="profile.summary.saveBtn"]')).to.have.length(1);
+        expect(this.view.$el.find('button[data-el-label="profile.personalInfo.saveBtn"]')).to.have.length(1);
       });
       it('renders a cancel button ', function () {
-        expect(this.view.$el.find('button[data-el-label="profile.summary.cancelBtn"]')).to.have.length(1);
+        expect(this.view.$el.find('button[data-el-label="profile.personalInfo.cancelBtn"]')).to.have.length(1);
       });
 
       it('defines ui component: saveBtn ', function () {
@@ -110,15 +110,15 @@ define(function (require) {
       });
 
       describe('save button clicked',
-        EventTestFactory.simpleBtnClickTest('profile.summarySaveBtnClicked', '[data-el-label="profile.summary.saveBtn"]'));
+        EventTestFactory.simpleBtnClickTest('profile.personalInfoFormSaveBtnClicked', '[data-el-label="profile.personalInfo.saveBtn"]'));
 
       describe('cancel button clicked',
-        EventTestFactory.simpleBtnClickTest('profile.summaryCancelBtnClicked', '[data-el-label="profile.summary.cancelBtn"]'));
+        EventTestFactory.simpleBtnClickTest('profile.personalInfoFormCancelBtnClicked', '[data-el-label="profile.personalInfo.cancelBtn"]'));
     });
 
-    describe("ProfileSummaryFormErrorCollectionView", function() {
+    describe("PersonalInfoFormErrorCollectionView", function() {
       before(function() {
-        this.view = new views.ProfileSummaryFormErrorCollectionView();
+        this.view = new views.PersonalInfoFormErrorCollectionView();
         this.view.render();
       });
 

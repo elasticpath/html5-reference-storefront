@@ -49,14 +49,14 @@ define(function (require) {
       }
     });
 
-    function getSummaryFormValue() {
+    function getPersonalInfoFormValue() {
       return {
         "family-name": $('#FamilyName').val(),
         "given-name": $('#GivenName').val()
       };
     }
 
-    function translateSummaryFormErrorMessage(rawMsg) {
+    function translatePersonalInfoFormErrorMessage(rawMsg) {
       var cortexMsgToKeyMap = {
         "Required fields 'family-name' or 'given-name' are missing" : 'generic',
         "given-name: attribute is required"                         : 'missingFirstName',
@@ -73,7 +73,7 @@ define(function (require) {
       template: '#ProfileMainTemplate',
       regions: {
         profileTitleRegion: '[data-region="profileTitleRegion"]',
-        profileSummaryRegion: '[data-region="profileSummaryRegion"]',
+        profilePersonalInfoRegion: '[data-region="profilePersonalInfoRegion"]',
         profileSubscriptionSummaryRegion: '[data-region="profileSubscriptionSummaryRegion"]',
         profilePurchaseHistoryRegion: '[data-region="profilePurchaseHistoryRegion"]',
         profileAddressesRegion: '[data-region="profileAddressesRegion"]',
@@ -84,6 +84,10 @@ define(function (require) {
 
     });
 
+    /**
+     * Title View, will render profile page title.
+     * @type Marionette.ItemView
+     */
     var profileTitleView = Marionette.ItemView.extend({
       template: '#ProfileTitleTemplate',
       tagName: 'h1',
@@ -92,16 +96,16 @@ define(function (require) {
 
 
     /**
-     * Profile Summary View
-     * will render a user's profile summary including first and last name,
+     * Profile Personal Info View
+     * will render a user's personal information including first and last name,
      * and a button to edit these information.
      * @type Marionette.ItemView
      */
-    var profileSummaryView = Marionette.ItemView.extend({
-      template: '#ProfileSummaryViewTemplate',
+    var profilePersonalInfoView = Marionette.ItemView.extend({
+      template: '#ProfilePersonalInfoViewTemplate',
       templateHelpers: viewHelpers,
       ui: {
-        editBtn: '[data-el-label="profile.editSummaryBtn"]'
+        editBtn: '[data-el-label="profile.editPersonalInfoBtn"]'
       },
       modelEvents: {
         'change': 'render'
@@ -109,26 +113,31 @@ define(function (require) {
       events: {
         'click @ui.editBtn': function (event) {
           event.preventDefault();
-          EventBus.trigger('profile.editSummaryBtnClicked', this.model);
+          EventBus.trigger('profile.editPersonalInfoBtnClicked', this.model);  // checkin personalInfo
         }
       }
     });
 
-    var profileSummaryFormView = Marionette.ItemView.extend({
-      template: '#ProfileSummaryFormTemplate',
+    /**
+     * Personal Information Form View
+     * will render a form to edit user's personal info such as first and last name.
+     * @type Marionette.ItemView
+     */
+    var personalInfoFormView = Marionette.ItemView.extend({
+      template: '#ProfilePersonalInfoFormTemplate',
       templateHelpers: viewHelpers,
       ui: {
-        saveBtn: '[data-el-label="profile.summary.saveBtn"]',
-        cancelBtn: '[data-el-label="profile.summary.cancelBtn"]',
+        saveBtn: '[data-el-label="profile.personalInfo.saveBtn"]',
+        cancelBtn: '[data-el-label="profile.personalInfo.cancelBtn"]'
       },
       events: {
         'click @ui.saveBtn': function (event) {
           event.preventDefault();
-          EventBus.trigger('profile.summarySaveBtnClicked', this.model.get('actionLink'));
+          EventBus.trigger('profile.personalInfoFormSaveBtnClicked', this.model.get('actionLink'));
         },
         'click @ui.cancelBtn': function (event) {
           event.preventDefault();
-          EventBus.trigger('profile.summaryCancelBtnClicked');
+          EventBus.trigger('profile.personalInfoFormCancelBtnClicked');
         }
       }
     });
@@ -139,10 +148,15 @@ define(function (require) {
      */
     var errorItemView = Marionette.ItemView.extend({
       tagName: 'li',
-      template: '#SummaryFormErrorItemTemplate'
+      template: '#PersonalInfoFormErrorItemTemplate'
     });
 
-    var summaryFormErrorCollectionView = Marionette.CollectionView.extend({
+    /**
+     * Personal Info Form Error Collection
+     * will render the error(s) from personal info form submission.
+     * @type Marionette.CollectionView
+     */
+    var personalInfoFormErrorCollectionView = Marionette.CollectionView.extend({
       className: 'error-list',
       itemView: errorItemView,
       tagName: 'ul'
@@ -354,16 +368,16 @@ define(function (require) {
 
       DefaultLayout: defaultLayout,
       ProfileTitleView: profileTitleView,
-      ProfileSummaryView: profileSummaryView,
-      ProfileSummaryFormView: profileSummaryFormView,
-      ProfileSummaryFormErrorCollectionView: summaryFormErrorCollectionView,
+      ProfilePersonalInfoView: profilePersonalInfoView,
+      PersonalInfoFormView: personalInfoFormView,
+      PersonalInfoFormErrorCollectionView: personalInfoFormErrorCollectionView,
       ProfileSubscriptionSummaryView: profileSubscriptionSummaryView,
       ProfilePurchasesHistoryView: profilePurchasesHistoryView,
       ProfilePaymentMethodsView: profilePaymentMethodsView,
       ProfileAddressesView: profileAddressesView,
 
-      getSummaryFormValue: getSummaryFormValue,
-      translateSummaryFormErrorMessage: translateSummaryFormErrorMessage
+      getPersonalInfoFormValue: getPersonalInfoFormValue,
+      translatePersonalInfoFormErrorMessage: translatePersonalInfoFormErrorMessage
     };
   }
 );

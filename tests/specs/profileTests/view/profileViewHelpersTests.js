@@ -4,6 +4,7 @@
  */
 define(function (require) {
   var ep = require('ep');
+  var Backbone = require('backbone');
   var utils = require('utils');
 
   var views = require('profile.views');
@@ -87,11 +88,11 @@ define(function (require) {
 
     });
 
-    describe("translateSummaryFormErrorMessage function", function() {
+    describe("translatePersonalInfoFormErrorMessage function", function() {
       before(function() {
         sinon.stub(utils, 'translateErrorMessage');
 
-        views.translateSummaryFormErrorMessage("some error message");
+        views.translatePersonalInfoFormErrorMessage("some error message");
       });
 
       after(function() {
@@ -103,18 +104,18 @@ define(function (require) {
       });
     });
 
-    describe("getSummaryFormValue function", function() {
+    describe("getPersonalInfoFormValue function", function() {
       before(function() {
         $("#Fixtures").append(template);
         $("#Fixtures").append('<div id="renderedView"></div>');
 
         this.model = new StandardProfileInfoModel();
-        var summaryFormView = new views.ProfileSummaryFormView({
+        var summaryFormView = new views.PersonalInfoFormView({
           model: this.model
         });
         $("#renderedView").append(summaryFormView.render().$el);
 
-        this.result = views.getSummaryFormValue();
+        this.result = views.getPersonalInfoFormValue();
       });
 
       after(function() {

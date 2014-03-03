@@ -30,7 +30,7 @@ define(function (require) {
     url: urlBase + '?zoom=' + zoomArray.join(),
     parse: function (response) {
       var profileObj = {
-        summary: {},
+        personalInfo: {},
         subscriptions: [],
         purchaseHistories: [],
         addresses: [],
@@ -38,8 +38,8 @@ define(function (require) {
       };
 
       if (response) {
-        // Profile Summary Info
-        profileObj.summary = {
+        // Profile Personal Info
+        profileObj.personalInfo = {
           familyName : jsonPath(response, 'family-name')[0],
           givenName : jsonPath(response, 'given-name')[0],
           // checkIn actionLink
