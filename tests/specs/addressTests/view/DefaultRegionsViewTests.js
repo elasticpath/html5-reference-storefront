@@ -77,12 +77,12 @@ define(function (require) {
     describe('onRender', function () {
       beforeEach(function () {
         sinon.spy($.prototype, 'slideUp');
-        sinon.spy($.prototype, 'show');
+        sinon.spy($.prototype, 'slideDown');
       });
 
       afterEach(function () {
         $.prototype.slideUp.restore();
-        $.prototype.show.restore();
+        $.prototype.slideDown.restore();
       });
 
       it('hides the regionsRegion when collection return empty from server', function () {
@@ -108,7 +108,7 @@ define(function (require) {
         view.render();
 
         expect($.prototype.slideUp).to.be.not.called;
-        expect($.prototype.show).to.be.called;
+        expect($.prototype.slideDown).to.be.called;
       });
 
     });

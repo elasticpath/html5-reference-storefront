@@ -218,7 +218,8 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
       },
       ui: {
         // A jQuery selector for the DOM element to which an activity indicator should be applied.
-        activityIndicatorEl: '.activity-indicator-loading-region'
+        activityIndicatorEl: '.activity-indicator-loading-region',
+        regionSelect: '#Region'
       },
       onRender: function () {
         // hide regions area if model.fetch returned an empty region array
@@ -230,13 +231,15 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
           $('[data-region="addressRegionsRegion"]').slideUp();
         }
         else {
-          $('[data-region="addressRegionsRegion"]').show();
+          $('[data-region="addressRegionsRegion"]').slideDown();
         }
       },
       events: {
-        'change #Region': function (event) {
+        'change @ui.regionSelect': function (event) {
           var region = $(event.target).val();
           EventBus.trigger('address.regionSelectionChanged', region);
+          // Ensures the drop down doesn't lose focus if the region is re-rendered
+          this.ui.regionSelect.focus();
         }
       }
     });

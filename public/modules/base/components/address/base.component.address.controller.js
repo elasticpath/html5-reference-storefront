@@ -289,7 +289,10 @@ define(function (require) {
    */
   EventBus.on('address.deleteConfirmYesBtnClicked', function(opts) {
     $.modal.close();
-    ep.ui.startActivityIndicator(opts.indicatorView);
+    // Apply an activity indicator to any view passed in the options
+    if (opts.indicatorView) {
+      ep.ui.startActivityIndicator(opts.indicatorView);
+    }
     EventBus.trigger('address.deleteAddressRequest', opts);
   });
 

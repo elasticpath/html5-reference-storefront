@@ -120,6 +120,10 @@ define(function (require) {
           var eventName = 'checkout.' + this.options.addressType + 'AddressRadioChanged';
           EventBus.trigger(eventName, this.model.get('selectAction'));
         },
+        'click [data-el-label="checkout.deleteAddressBtn"]': function(event) {
+          event.preventDefault();
+          EventBus.trigger('checkout.deleteAddressBtnClicked', this.model.get('href'));
+        },
         'click [data-el-label="checkout.editAddressBtn"]': function(event) {
           event.preventDefault();
           EventBus.trigger('checkout.editAddressBtnClicked', this.model.get('href'));

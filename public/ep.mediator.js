@@ -132,22 +132,45 @@ define(function(require){
       });
     },
     /**
-     * Communicates delete address requests to the address module.
-     * @param {Object} opts Contains "href" and (optional) "indicatorView" properties used by the address module
-     */
-    'mediator.deleteAddressRequest': function (opts) {
-      require(['address'], function (address) {
-        // Triggers the delete confirmation event from the address module (the first step in the delete address process)
-        EventBus.trigger('address.deleteAddressConfirm', opts);
-      });
-    },
-    /**
      * Communicates back to the referring module that a delete address request has succeeded.
      * @param indicatorView An optional reference to a Marionette.View to which an activity indicator has been applied.
      */
-    'mediator.deleteAddressComplete': function(indicatorView) {
-      require(['profile'], function(profile) {
-        EventBus.trigger('profile.updateAddresses', indicatorView);
+    'mediator.deleteAddressComplete': function (indicatorView) {
+      require(['ep'], function (ep) {
+        var moduleName = ep.io.sessionStore.getItem('deleteAddressReturnTo');
+        ep.io.sessionStore.removeItem('deleteAddressReturnTo');
+        switch (moduleName) {
+          case 'profile':
+            require(['profile'], function (profile) {
+              EventBus.trigger('profile.updateAddresses', indicatorView);
+            });
+            break;
+          case 'checkout':
+            require(['checkout'], function (checkout) {
+              EventBus.trigger('checkout.updateAddresses', indicatorView);
+            });
+            break;
+          default:
+            ep.logger.error('mediator.deleteAddressComplete: unable to retrieve return module from session storage');
+        }
+      });
+    },
+    /**
+     * Communicates delete address requests to the address module.
+     * @param {Object} args Can contain:
+     *                      - href The href of the address to be deleted
+     *                      - indicatorView (optional) Marionette.View to which an activity indicator can be applied
+     *                      - returnModule The module to which control should be returned upon completion
+     */
+    'mediator.deleteAddressRequest': function (args) {
+      require(['ep', 'address'], function (ep, address) {
+        // Store a return module so control can be returned to the correct module
+        // (e.g. profile or checkout) upon completion of the delete operation
+        if (arg.returnModule) {
+          ep.io.sessionStore.setItem('deleteAddressReturnTo', args.returnModule);
+        }
+        // Triggers the delete confirmation event from the address module (the first step in the delete address process)
+        EventBus.trigger('address.deleteAddressConfirm', args);
       });
     },
     'mediator.editAddressRequest':function(arg){

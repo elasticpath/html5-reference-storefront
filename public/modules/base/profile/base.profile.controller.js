@@ -114,8 +114,9 @@ define(function (require) {
      */
     EventBus.on('profile.deleteAddressBtnClicked', function (href) {
       Mediator.fire('mediator.deleteAddressRequest', {
-        "href": href,
-        "indicatorView": defaultLayout.profileAddressesRegion.currentView
+        href: href,
+        indicatorView: defaultLayout.profileAddressesRegion.currentView,
+        returnModule: 'profile'
       });
     });
 

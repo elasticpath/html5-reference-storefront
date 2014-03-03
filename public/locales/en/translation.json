@@ -72,10 +72,10 @@
     "genericUpdateErrMsg": "I'm sorry, there was an error updating the lineItem quantity. Please contact your system administrator."
   },
   "checkout": {
-    "deleteAddressBtn": "delete",
-    "editAddressBtn": "edit",
     "billingAddress": "Billing Address",
     "checkoutTitle": "Checkout Summary",
+    "deleteAddressBtn": "delete",
+    "editAddressBtn": "edit",
     "newAddressBtn": "Add a New Address",
     "newPaymentBtn": "Add a New Payment Method",
     "newPaymentMethod": "New payment method",

@@ -570,6 +570,18 @@ define(function (require) {
     });
 
     /**
+     * Listens to the delete address button clicked signal, fires a mediator strategy to communicate with
+     * the address module to render the delete confirmation modal.
+     */
+    EventBus.on('checkout.deleteAddressBtnClicked', function (href) {
+      Mediator.fire('mediator.deleteAddressRequest', {
+        href: href,
+        indicatorView: checkoutLayout,
+        returnModule: 'checkout'
+      });
+    });
+
+    /**
      * Listens to the edit address button clicked signal, fires a mediator strategy to communicate with
      * the address module to render the edit address form.
      */
@@ -586,6 +598,19 @@ define(function (require) {
      */
     EventBus.on('checkout.addNewPaymentMethodBtnClicked', function () {
       Mediator.fire('mediator.addNewPaymentMethodRequest', 'checkout');
+    });
+
+    /**
+     * Called when an address has been successfully deleted from Cortex. Performs a fetch of the profile
+     * model and updates the collection of addresses with the updated array from Cortex.
+     */
+    EventBus.on('checkout.updateAddresses', function (indicatorView) {
+      ep.ui.stopActivityIndicator(indicatorView);
+      /**
+       * Many areas of the page need to be updated when an address is deleted, so we perform
+       * a full page refresh here instead of opting for a more granular approach
+       */
+      Backbone.history.loadUrl();
     });
 
     return {

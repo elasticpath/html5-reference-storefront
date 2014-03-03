@@ -7132,6 +7132,9 @@ Purchase Information
     width: 66.66666666666666%;
   }
 }
+.checkout-container {
+  position: relative;
+}
 .checkout-container-inner {
   margin-left: -15px;
   margin-right: -15px;
