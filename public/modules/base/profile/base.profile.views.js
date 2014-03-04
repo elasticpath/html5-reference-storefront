@@ -1,11 +1,10 @@
 /**
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *
- *
  * Default Profile Views
  * The HTML5 Reference Storefront's MVC Views for displaying user's basic information, subscription items information,
- * addresses, and payment methods. Address and payment methods views are just wrappers, and calls address.component and
- * payment.component respectively to display address and payment information.
+ * purchase histories, addresses, and payment methods. Address and payment methods views are just wrappers,
+ * and calls address.component and payment.component respectively to display address and payment information.
  */
 define(function (require) {
     var Marionette = require('marionette');
@@ -49,6 +48,10 @@ define(function (require) {
       }
     });
 
+    /**
+     * Grabs form input values and return as an JSON object for sending to cortex.
+     * @returns {{family-name: (*|jQuery), given-name: (*|jQuery)}}
+     */
     function getPersonalInfoFormValue() {
       return {
         "family-name": $('#FamilyName').val(),
@@ -56,6 +59,12 @@ define(function (require) {
       };
     }
 
+    /**
+     * Translate Personal information form's error messages to localizable version. This method should only be
+     * temporary fix until better cortex error handling is provided.
+     * @param rawMsg  error message from cortex - not localized.
+     * @returns array of object containing localized error message
+     */
     function translatePersonalInfoFormErrorMessage(rawMsg) {
       var cortexMsgToKeyMap = {
         "Required fields 'family-name' or 'given-name' are missing" : 'generic',
@@ -143,6 +152,7 @@ define(function (require) {
     });
 
     /**
+     * Error Item View
      * Renders individual validation errors as list items (used by registrationErrorCollectionView).
      * @type Marionette.ItemView
      */
@@ -161,6 +171,7 @@ define(function (require) {
       itemView: errorItemView,
       tagName: 'ul'
     });
+
 
     var profileSubscriptionItemView = Marionette.ItemView.extend({
       template: '#SubscriptionItemTemplate',
@@ -350,6 +361,8 @@ define(function (require) {
     });
 
 
+    /* test-code */
+    // exposed variable for testing purpose only, will be removed for distribution
     var __test_only__ = {
       viewHelpers: viewHelpers,
       ProfileSubscriptionItemView: profileSubscriptionItemView,
@@ -360,6 +373,7 @@ define(function (require) {
       ProfileAddressesEmptyView: profileAddressesEmptyView,
       ErrorItemView: errorItemView
     };
+    /* end-test-code */
 
     return {
       /* test-code */

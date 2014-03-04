@@ -1,10 +1,10 @@
 /**
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *
- *
  * Default Profile Controller
  * The HTML5 Reference Storefront's MVC controller instantiates the profile model and views,
- * renders profile views in designated regions. It also manages events and functions to add a new address.
+ * renders profile views in designated regions. It also manages events and functions to add a new address,
+ * edit personal info.
  */
 define(function (require) {
   var ep = require('ep');
@@ -45,10 +45,10 @@ define(function (require) {
   };
 
   var showPurchaseView = function (region) {
-    var profilePurchaseView = new View.ProfilePurchasesHistoryView({
-      collection: purchaseHistoryCollection
-    });
-    region.show(profilePurchaseView);
+      var profilePurchaseView = new View.ProfilePurchasesHistoryView({
+        collection: purchaseHistoryCollection
+      });
+      region.show(profilePurchaseView);
   };
 
   /**
@@ -96,6 +96,7 @@ define(function (require) {
           ep.logger.error('Error getting profile model: ' + JSON.stringify(response));
         }
       });
+
       return defaultLayout;
     }
     else {
@@ -122,7 +123,6 @@ define(function (require) {
       href: href
     });
   });
-
 
   /**
    * Handler for the delete address button clicked signal, which triggers a mediator strategy
@@ -178,6 +178,9 @@ define(function (require) {
     EventBus.trigger('profile.loadPersonalInfoViewRequest');
   });
 
+  /**
+   * Loads personal info view into profilePersonalInfoRegion.
+   */
   EventBus.on('profile.loadPersonalInfoViewRequest', function () {
     profileModel.fetch({
       success: function (response) {
@@ -187,6 +190,10 @@ define(function (require) {
     showPersonalInfoView(defaultLayout.profilePersonalInfoRegion);
   });
 
+  /**
+   * Submit Personal Info Form to cortex to update user's profile personal information.
+   * Will trigger notification events on success or failure.
+   */
   EventBus.on('profile.submitPersonalInfoFormRequest', function (actionLink) {
     var formValue = View.getPersonalInfoFormValue();
 
@@ -208,10 +215,16 @@ define(function (require) {
     ep.io.ajax(ajaxModel.toJSON());
   });
 
+  /**
+   * Will trigger event to load personal info view in place of edit form view.
+   */
   EventBus.on('profile.submitPersonalInfoFormSuccess', function () {
     EventBus.trigger('profile.loadPersonalInfoViewRequest');
   });
 
+  /**
+   * Will localize error message coming back from cortex, and display the localized messages into feedback region.
+   */
   EventBus.on('profile.submitPersonalInfoFormFailed', function (response) {
     var errorMsg = i18n.t('profile.personalInfo.errorMsg.generic');
     if (response && response.status === 400) {

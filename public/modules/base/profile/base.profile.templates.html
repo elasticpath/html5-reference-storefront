@@ -22,7 +22,7 @@
     <%= E.getI18nLabel('profile.title') %>
   </script>
 
-  <!-- Profile Personal Info View Template -->
+  <!-- Profile Personal Info View Template: render user's personal information -->
   <script id="ProfilePersonalInfoViewTemplate" type="text/template">
     <h2><%= E.getI18nLabel('profile.personalInfo.title') %></h2>
     <dl class="profile-personal-info-container container">
@@ -36,6 +36,7 @@
       <%= E.getI18nLabel('profile.personalInfo.edit') %></button>
   </script>
 
+  <!-- Profile Personal Information Form Template: will render a form to edit user's personal information -->
   <script id="ProfilePersonalInfoFormTemplate" type="text/template">
     <h2><%= E.getI18nLabel('profile.personalInfo.title') %></h2>
 
@@ -69,6 +70,7 @@
     </form>
   </script>
 
+  <!--Personal Information Form Error Item Template: will render 1 single error, used by collection view -->
   <script id="PersonalInfoFormErrorItemTemplate" type="text/template">
     <%= E.error %>
   </script>

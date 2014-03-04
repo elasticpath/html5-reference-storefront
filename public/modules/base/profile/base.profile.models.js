@@ -1,7 +1,6 @@
 /**
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *
- *
  * Default Profile Models
  * The HTML5 Reference Storefront's MVC Model manages zoom queries the model uses to ask cortex server.
  * It also parses the raw data returned from server, so necessary data are surfaced, and renamed into desired format.
