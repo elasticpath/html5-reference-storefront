@@ -68,6 +68,7 @@ define(function (require) {
     describe('responds to event: payment.savePaymentMethodBtnClicked', function() {
       before(function() {
         sinon.spy(EventBus, 'trigger');
+        sinon.stub(ep.io, 'ajax');
         sinon.stub(ep.ui, 'disableButton');
 
         EventBus.trigger('payment.savePaymentMethodBtnClicked');
@@ -75,6 +76,7 @@ define(function (require) {
 
       after(function() {
         EventBus.trigger.restore();
+        ep.io.ajax.restore();
         ep.ui.disableButton.restore();
       });
 
