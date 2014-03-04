@@ -19,6 +19,7 @@ define(function (require) {
 
       before(function () {
         sinon.spy(EventBus, 'trigger');
+        sinon.stub(ep.ui, 'disableButton');
 
         EventTestHelpers.unbind(unboundEventKey);
         EventBus.trigger('checkout.submitOrderBtnClicked', actionLink);
@@ -26,6 +27,7 @@ define(function (require) {
 
       after(function () {
         EventBus.trigger.restore();
+        ep.ui.disableButton.restore();
         EventTestHelpers.reset();
       });
 
