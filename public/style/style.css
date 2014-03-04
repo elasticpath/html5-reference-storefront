@@ -7329,13 +7329,7 @@ fieldset[disabled] .btn-cmd-submit-order.active {
   padding-left: 0;
   padding-right: 0;
 }
-@media (min-width: 768px) {
-  .address-ctrl-cell {
-    float: left;
-    width: 66.66666666666666%;
-  }
-}
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .address-ctrl-cell {
     float: left;
     width: 66.66666666666666%;
@@ -7376,13 +7370,7 @@ fieldset[disabled] .btn-cmd-submit-order.active {
   padding-left: 0;
   padding-right: 0;
 }
-@media (min-width: 768px) {
-  .address-btn-cell {
-    float: left;
-    width: 33.33333333333333%;
-  }
-}
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .address-btn-cell {
     float: left;
     width: 33.33333333333333%;

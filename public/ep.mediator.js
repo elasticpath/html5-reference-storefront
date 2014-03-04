@@ -151,6 +151,8 @@ define(function(require){
             });
             break;
           default:
+            // Navigate to the home page route as a default and log an error message
+            ep.router.navigate('', true);
             ep.logger.error('mediator.deleteAddressComplete: unable to retrieve return module from session storage');
         }
       });

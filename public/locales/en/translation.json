@@ -74,8 +74,8 @@
   "checkout": {
     "billingAddress": "Billing Address",
     "checkoutTitle": "Checkout Summary",
-    "deleteAddressBtn": "delete",
-    "editAddressBtn": "edit",
+    "deleteAddressBtn": "Delete",
+    "editAddressBtn": "Edit",
     "newAddressBtn": "Add a New Address",
     "newPaymentBtn": "Add a New Payment Method",
     "newPaymentMethod": "New payment method",
