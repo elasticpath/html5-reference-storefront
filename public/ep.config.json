@@ -21,6 +21,7 @@
     "editAddress": "#editaddress",
     "itemDetail":"#itemdetail",
     "newAddress":"#newaddressform",
+    "newPayment":"#newpaymentform",
     "profile":"#profile",
     "purchaseHistory": "#purchaseDetails",
     "purchaseReceipt": "#purchaseReceipt",

@@ -39,7 +39,7 @@ define(function (require) {
      * Instantiate an checkout DefaultLayout and load views into corresponding regions
      * @returns {View.DefaultLayout}  fully rendered checkout DefaultLayout
      */
-    var defaultView = function () {
+    var defaultController = function () {
       var orderLink = getOrderLink();
 
       pace.start();
@@ -121,6 +121,21 @@ define(function (require) {
         }
       });
 
+      /**
+       * If the model suggests we need to set a chosen (billing/ shipping address, or shipping option),
+       * trigger a call to Cortex to formerly set it to display correct summary information
+       * @param arrayName name of array of the selectors
+       * @param eventName name of event to update chosen selection.
+       */
+      function setAsChosen (arrayName, eventName) {
+        if (checkoutModel.get(arrayName).length && checkoutModel.get(arrayName)[0].setAsDefaultChoice) {
+          EventBus.trigger(
+            eventName,
+            checkoutModel.get(arrayName)[0].selectAction
+          );
+        }
+      }
+
       return checkoutLayout;
     };
 
@@ -140,20 +155,6 @@ define(function (require) {
       return orderLink;
     }
 
-    /**
-     * If the model suggests we need to set a chosen (billing/ shipping address, or shipping option),
-     * trigger a call to Cortex to formerly set it to display correct summary information
-     * @param arrayName name of array of the selectors
-     * @param eventName name of event to update chosen selection.
-     */
-    function setAsChosen (arrayName, eventName) {
-      if (checkoutModel.get(arrayName).length && checkoutModel.get(arrayName)[0].setAsDefaultChoice) {
-        EventBus.trigger(
-          eventName,
-          checkoutModel.get(arrayName)[0].selectAction
-        );
-      }
-    }
 
     /* ********** SUBMIT ORDER EVENT LISTENERS ************ */
     /**
@@ -264,30 +265,6 @@ define(function (require) {
     }
 
     /**
-     * Handler for the checkout.billingAddressRadioChanged event.
-     */
-    EventBus.on('checkout.billingAddressRadioChanged', function(actionLink) {
-      EventBus.trigger('checkout.updateChosenBillingAddressRequest', actionLink);
-    });
-
-    /**
-     * Listening to request to update the chosen billing address. Will request to the Cortex server.
-     */
-    EventBus.on('checkout.updateChosenBillingAddressRequest', updateChosenBillingAddress);
-
-    /**
-     * Listening to the event fired on successful update of the chosen billing address.
-     * Reload regions so display in in-sync with server
-     */
-    EventBus.on('checkout.updateChosenBillingAddressSuccess', refreshBillingAddressViews);
-
-    /**
-     * Listening to the event fired when the update of a chosen billing address fails.
-     * Displays a toast error message, and reload regions so display in in-sync with server.
-     */
-    EventBus.on('checkout.updateChosenBillingAddressFail', updateChosenBillingAddressFailed);
-
-    /**
      * Make a ajax POST request to cortex server with given action links, and trigger corresponding events
      * in case of success or error. Start activity indicator in affected regions.
      *
@@ -331,32 +308,32 @@ define(function (require) {
       refreshBillingAddressViews();
     }
 
-
-    /* ********** CHOOSE SHIPPING ADDRESS EVENT LISTENERS ************ */
     /**
-     * Handler for the checkout.shippingAddressRadioChanged event.
+     * Handler for the checkout.billingAddressRadioChanged event.
      */
-    EventBus.on('checkout.shippingAddressRadioChanged', function(actionLink) {
-      EventBus.trigger('checkout.updateChosenShippingAddressRequest', actionLink);
+    EventBus.on('checkout.billingAddressRadioChanged', function(actionLink) {
+      EventBus.trigger('checkout.updateChosenBillingAddressRequest', actionLink);
     });
 
     /**
-     * Listening to request to update the chosen shipping address. Will request to the Cortex server.
+     * Listening to request to update the chosen billing address. Will request to the Cortex server.
      */
-    EventBus.on('checkout.updateChosenShippingAddressRequest', updateChosenShippingAddress);
+    EventBus.on('checkout.updateChosenBillingAddressRequest', updateChosenBillingAddress);
 
     /**
-     * Listening to the event fired on successful update of the chosen shipping address.
+     * Listening to the event fired on successful update of the chosen billing address.
      * Reload regions so display in in-sync with server
      */
-    EventBus.on('checkout.updateChosenShippingAddressSuccess', refreshShippingAddressViews);
+    EventBus.on('checkout.updateChosenBillingAddressSuccess', refreshBillingAddressViews);
 
     /**
-     * Listening to the event fired when the update of a chosen shipping address fails.
+     * Listening to the event fired when the update of a chosen billing address fails.
      * Displays a toast error message, and reload regions so display in in-sync with server.
      */
-    EventBus.on('checkout.updateChosenShippingAddressFail', updateChosenShippingAddressFailed);
+    EventBus.on('checkout.updateChosenBillingAddressFail', updateChosenBillingAddressFailed);
 
+
+    /* ********** CHOOSE SHIPPING ADDRESS EVENT LISTENERS ************ */
     /**
      * Make a ajax POST request to cortex server with given action links, and trigger corresponding events
      * in case of success or error. Start activity indicator in affected regions.
@@ -402,32 +379,32 @@ define(function (require) {
       refreshShippingAddressViews();
     }
 
-
-    /* ********** CHOOSE SHIPPING OPTION EVENT LISTENERS ************ */
     /**
-     * Handler for the checkout.shippingOptionRadioChanged event.
+     * Handler for the checkout.shippingAddressRadioChanged event.
      */
-    EventBus.on('checkout.shippingOptionRadioChanged', function(actionLink) {
-      EventBus.trigger('checkout.updateChosenShippingOptionRequest', actionLink);
+    EventBus.on('checkout.shippingAddressRadioChanged', function(actionLink) {
+      EventBus.trigger('checkout.updateChosenShippingAddressRequest', actionLink);
     });
 
     /**
-     * Listening to request to update the chosen shipping option. Will request to the Cortex server.
+     * Listening to request to update the chosen shipping address. Will request to the Cortex server.
      */
-    EventBus.on('checkout.updateChosenShippingOptionRequest', updateChosenShippingOption);
+    EventBus.on('checkout.updateChosenShippingAddressRequest', updateChosenShippingAddress);
 
     /**
-     * Listening to the event fired on successful update of the chosen shipping option.
+     * Listening to the event fired on successful update of the chosen shipping address.
      * Reload regions so display in in-sync with server
      */
-    EventBus.on('checkout.updateChosenShippingOptionSuccess', refreshShippingOptionViews);
+    EventBus.on('checkout.updateChosenShippingAddressSuccess', refreshShippingAddressViews);
 
     /**
-     * Listening to the event fired when the update of a chosen shipping option fails.
+     * Listening to the event fired when the update of a chosen shipping address fails.
      * Displays a toast error message, and reload regions so display in in-sync with server.
      */
-    EventBus.on('checkout.updateChosenShippingOptionFailed', updateChosenShippingOptionFailed);
+    EventBus.on('checkout.updateChosenShippingAddressFail', updateChosenShippingAddressFailed);
 
+
+    /* ********** CHOOSE SHIPPING OPTION EVENT LISTENERS ************ */
     /**
      * Make a ajax POST request to cortex server with given action links, and trigger corresponding events
      * in case of success or error. Start activity indicator in affected regions.
@@ -472,32 +449,32 @@ define(function (require) {
       refreshShippingOptionViews();
     }
 
-
-    /* ********** CHOOSE PAYMENT METHOD EVENT LISTENERS ************ */
     /**
-     * Handler for the checkout.paymentMethodRadioChanged event.
+     * Handler for the checkout.shippingOptionRadioChanged event.
      */
-    EventBus.on('checkout.paymentMethodRadioChanged', function(actionLink) {
-      EventBus.trigger('checkout.updateChosenPaymentMethodRequest', actionLink);
+    EventBus.on('checkout.shippingOptionRadioChanged', function(actionLink) {
+      EventBus.trigger('checkout.updateChosenShippingOptionRequest', actionLink);
     });
 
     /**
-     * Listening to request to update the chosen payment method. Will request to the Cortex server.
+     * Listening to request to update the chosen shipping option. Will request to the Cortex server.
      */
-    EventBus.on('checkout.updateChosenPaymentMethodRequest', updateChosenPaymentMethod);
+    EventBus.on('checkout.updateChosenShippingOptionRequest', updateChosenShippingOption);
 
     /**
-     * Listening to the event fired on successful update of the chosen payment method.
+     * Listening to the event fired on successful update of the chosen shipping option.
      * Reload regions so display in in-sync with server
      */
-    EventBus.on('checkout.updateChosenPaymentMethodSuccess', refreshPaymentMethodViews);
+    EventBus.on('checkout.updateChosenShippingOptionSuccess', refreshShippingOptionViews);
 
     /**
-     * Listening to the event fired when the update of a chosen payment method fails.
+     * Listening to the event fired when the update of a chosen shipping option fails.
      * Displays a toast error message, and reload regions so display in in-sync with server.
      */
-    EventBus.on('checkout.updateChosenPaymentMethodFailed', updateChosenPaymentMethodFailed);
+    EventBus.on('checkout.updateChosenShippingOptionFailed', updateChosenShippingOptionFailed);
 
+
+    /* ********** CHOOSE PAYMENT METHOD EVENT LISTENERS ************ */
     /**
      * Make a ajax POST request to cortex server with given action links, and trigger corresponding events
      * in case of success or error. Start activity indicator in affected regions.
@@ -558,6 +535,30 @@ define(function (require) {
       refreshPaymentMethodViews();
     }
 
+    /**
+     * Handler for the checkout.paymentMethodRadioChanged event.
+     */
+    EventBus.on('checkout.paymentMethodRadioChanged', function(actionLink) {
+      EventBus.trigger('checkout.updateChosenPaymentMethodRequest', actionLink);
+    });
+
+    /**
+     * Listening to request to update the chosen payment method. Will request to the Cortex server.
+     */
+    EventBus.on('checkout.updateChosenPaymentMethodRequest', updateChosenPaymentMethod);
+
+    /**
+     * Listening to the event fired on successful update of the chosen payment method.
+     * Reload regions so display in in-sync with server
+     */
+    EventBus.on('checkout.updateChosenPaymentMethodSuccess', refreshPaymentMethodViews);
+
+    /**
+     * Listening to the event fired when the update of a chosen payment method fails.
+     * Displays a toast error message, and reload regions so display in in-sync with server.
+     */
+    EventBus.on('checkout.updateChosenPaymentMethodFailed', updateChosenPaymentMethodFailed);
+
 
     /* ********** ADD NEW ADDRESS EVENT LISTENERS ************ */
     /**
@@ -568,8 +569,16 @@ define(function (require) {
       Mediator.fire('mediator.addNewAddressRequest', 'checkout');
     });
 
+    /**
+     * Listen to add new payment method button clicked signal
+     * will load add new payment method form
+     */
+    EventBus.on('checkout.addNewPaymentMethodBtnClicked', function () {
+      Mediator.fire('mediator.addNewPaymentMethodRequest', 'checkout');
+    });
+
     return {
-      DefaultView: defaultView
+      DefaultController: defaultController
     };
   }
 );

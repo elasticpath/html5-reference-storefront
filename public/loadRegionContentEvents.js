@@ -37,7 +37,7 @@ define(function(require) {
       EventBus.trigger('layout.loadRegionContentRequest', {
         region:'appMainRegion',
         module:'checkout',
-        view:'DefaultView'
+        view:'DefaultController'
       });
     },
     editaddress: function(href) {
@@ -75,6 +75,13 @@ define(function(require) {
         region: 'appMainRegion',
         module: 'address',
         view: 'DefaultCreateAddressView'
+      });
+    },
+    newpaymentform: function() {
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region: 'appMainRegion',
+        module: 'payment',
+        view: 'DefaultCreatePaymentController'
       });
     },
     profile: function(){

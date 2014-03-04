@@ -5851,14 +5851,14 @@ td.visible-print {
   }
 }
 .address-form-feedback-container {
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
   padding-top: 3rem;
   padding-bottom: 2rem;
 }
 .error-list {
   list-style: circle;
+}
+.payment-option-radio {
+  vertical-align: top;
 }
 /*
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
@@ -6167,7 +6167,7 @@ fieldset[disabled] .btn-auth-login.active {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border: 1px solid rgba(0, 144, 196, 0.667);
-  border-bottom: 1px solid: #000;
+  border-bottom: 1px solid #000;
   margin-bottom: 1px;
 }
 @media (max-width: 768px) {
@@ -8810,4 +8810,9 @@ ul {
 }
 .is-hidden {
   display: none;
+}
+/* Custom field styling for credit card expiry dates */
+.expiry-date {
+  width: 100px;
+  display: inline-block;
 }

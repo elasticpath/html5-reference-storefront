@@ -1,0 +1,35 @@
+{
+  "zoom": "?zoom=paymentmethodinfo:createpaymenttokenform",
+  "retrievedOn" : "Feb 18, 2014",
+  "response": {
+    "self": {
+      "type": "application/vnd.elasticpath.order",
+      "uri": "/orders/campus/gezdcmjzmy4dqljsgezgiljugjstsljzha4tolldgmzdenbvgbrtqnzvmu?zoom=paymentmethodinfo:createpaymenttokenform",
+      "href": "ROOT/orders/campus/gezdcmjzmy4dqljsgezgiljugjstsljzha4tolldgmzdenbvgbrtqnzvmu?zoom=paymentmethodinfo:createpaymenttokenform",
+      "max-age": 0
+    },
+    "_paymentmethodinfo": [
+      {
+        "_createpaymenttokenform": [
+          {
+            "links": [
+              {
+                "rel": "createpaymenttokenfororderaction",
+                "href": "ROOT/paymenttokens/orders/campus/ID",
+                "uri": "/paymenttokens/orders/campus/gezdcmjzmy4dqljsgezgiljugjstsljzha4tolldgmzdenbvgbrtqnzvmu"
+              }
+            ],
+            "self": {
+              "type": "application/vnd.elasticpath.paymenttoken",
+              "uri": "/paymenttokens/orders/campus/gezdcmjzmy4dqljsgezgiljugjstsljzha4tolldgmzdenbvgbrtqnzvmu/form",
+              "href": "ROOT/paymenttokens/orders/campus/gezdcmjzmy4dqljsgezgiljugjstsljzha4tolldgmzdenbvgbrtqnzvmu/form",
+              "max-age": 0
+            },
+            "display-value": "",
+            "value": ""
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -44,14 +44,10 @@ define(function (require) {
       delete(this.view);
     });
 
-    describe('should have valid regions', function () {
+    describe('should have valid regions and ui elements', function () {
       it('addressFormRegion', function () {
         expect(this.view.addressFormRegion).to.exist;
         expect(this.view.$el.find('[data-region="componentAddressFormRegion"]')).to.be.length(1);
-      });
-      it('addressFeedbackMsgRegion', function () {
-        expect(this.view.addressFeedbackMsgRegion).to.exist;
-        expect(this.view.$el.find('[data-region="componentAddressFeedbackRegion"]')).to.be.length(1);
       });
     });
 

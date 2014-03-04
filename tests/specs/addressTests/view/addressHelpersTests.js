@@ -54,29 +54,6 @@ define(function (require) {
       $("#Fixtures").empty();
     });
 
-    describe('helper function: displayAddressFormErrorMsg', function () {
-      var errMsg = 'Address form error message to be displayed';
-      before(function () {
-        this.view = new addressView.DefaultCreateAddressLayout();
-        renderViewIntoFixture(this.view);
-
-        this.feedbackRegion = $('#renderedView [data-region="componentAddressFeedbackRegion"]');
-        // check feedback region is empty, make sure previous results isn't interfering
-        expect(this.feedbackRegion.text()).to.be.string('');
-        addressView.displayAddressFormErrorMsg(errMsg);
-      });
-
-      after(function () {
-        delete(this.feedbackRegion);
-        delete(this.view);
-        removeRenderedView();
-      });
-
-      it('displays error message in errorFeedbackRegion', function () {
-        expect(this.feedbackRegion.text()).to.be.string(errMsg);
-      });
-    });
-
     describe('function: formatMsgAsList', function () {
       before(function () {
         this.testFn = addressView.__test_only__.formatMsgAsList;
