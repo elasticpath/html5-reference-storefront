@@ -50,7 +50,7 @@ What is the Cortex API?
 Cortex API is Elastic Path's powerful <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">RESTful</a> e-commerce API.
 The API can surface up data from any e-commerce backend system in a RESTful manner.
 
-To learn more aboutb Cortex API, see <a href="http://api-cortex-developers.docs.elasticpath.com">api-cortex-developers.docs.elasticpath.com</a>
+To learn more about Cortex API, see <a href="http://api-cortex-developers.docs.elasticpath.com">api-cortex-developers.docs.elasticpath.com</a>
 
 ![Cortex](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/cortex-page-diagram.png)
 
