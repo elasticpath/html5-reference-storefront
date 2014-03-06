@@ -31,26 +31,31 @@
     box-shadow:          0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
 
+// Creates an affixed (sticky) sidebar for elements like the summary container on the checkout and cart pages.
+// For medium and large resolutions only.
+.affixed-sidebar {
+  // Fix the position (and reluctantly) the width at the medium and large Bootstrap resolution breakpoints
+  @media screen and (min-width: @screen-md) {
+    width: 293.328px;
+    position: fixed;
+    display: block;
+  }
+  @media screen and (min-width: @screen-lg) {
+    width: 262.5px;
+  }
 
-.separated{
-    position: relative;
-    &:before{
-        position: relative;
-        // left: -9999px;
-        top: 0px;
-        border-top: 1px solid #ddd;
-        display: block;
-        width: 100%;
-        height: 100%;
-        margin-left: 0!important;
-        margin-right: 0!important;
-        background-color: #888;
-    }
-    // margin: 0;
-    // padding: 0;
+  display: inline-block;
+  padding: 2rem;
+  border: 3px solid @brand-primary;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.6);
+  text-align: left;
+  position: relative;
+
+  h3 {
+    margin: 0 0 2rem 0;
+  }
 }
-
-
 
 // style mixins to flatten UI elements
 
@@ -60,5 +65,3 @@
         background: red;
     }
 }
-
-

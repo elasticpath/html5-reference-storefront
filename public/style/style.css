@@ -5801,19 +5801,29 @@ td.visible-print {
  *
  * Storefront style mixins
  */
-.separated {
+.affixed-sidebar {
+  display: inline-block;
+  padding: 2rem;
+  border: 3px solid rgba(0, 163, 221, 0.667);
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.6);
+  text-align: left;
   position: relative;
 }
-.separated:before {
-  position: relative;
-  top: 0px;
-  border-top: 1px solid #ddd;
-  display: block;
-  width: 100%;
-  height: 100%;
-  margin-left: 0!important;
-  margin-right: 0!important;
-  background-color: #888;
+@media screen and (min-width: 992px) {
+  .affixed-sidebar {
+    width: 293.328px;
+    position: fixed;
+    display: block;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .affixed-sidebar {
+    width: 262.5px;
+  }
+}
+.affixed-sidebar h3 {
+  margin: 0 0 2rem 0;
 }
 .flatform {
   background: red;
@@ -6696,11 +6706,6 @@ nav.main-nav {
  *
  * Storefront Cart View
  */
-.cart-outer {
-  background: transparent url(images/bg-vector-splat.jpg) no-repeat center top;
-  background-size: cover;
-  padding-top: 60px;
-}
 .cart-container h1 {
   margin: 0 0 3rem 0;
 }
@@ -6967,9 +6972,6 @@ fieldset[disabled] .btn-cmd-checkout.active {
   font-size: 0.85em;
   color: #888888;
 }
-/*.cart-lineitem-purchase-price{
-    font-weight: bold;
-}*/
 .cart-lineitem-table-headings {
   border: none;
 }
@@ -7012,24 +7014,24 @@ fieldset[disabled] .btn-cmd-checkout.active {
   margin-bottom: 4rem;
 }
 .cart-main-container {
-  position: relative;
   float: left;
   width: 100%;
+  position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
   margin-bottom: 2em;
 }
-@media (min-width: 1200px) {
-  .cart-main-container {
-    float: left;
-    width: 75%;
-  }
-}
 @media (min-width: 992px) {
   .cart-main-container {
     float: left;
     width: 66.66666666666666%;
+  }
+}
+@media (min-width: 1200px) {
+  .cart-main-container {
+    float: left;
+    width: 75%;
   }
 }
 .cart-main-container h2 {
@@ -7042,23 +7044,23 @@ fieldset[disabled] .btn-cmd-checkout.active {
   margin-top: 2rem;
 }
 .cart-sidebar {
-  position: relative;
   float: left;
   width: 100%;
+  position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
-}
-@media (min-width: 1200px) {
-  .cart-sidebar {
-    float: left;
-    width: 25%;
-  }
 }
 @media (min-width: 992px) {
   .cart-sidebar {
     float: left;
     width: 33.33333333333333%;
+  }
+}
+@media (min-width: 1200px) {
+  .cart-sidebar {
+    float: left;
+    width: 25%;
   }
 }
 @media screen and (min-width: 992px) {
@@ -7074,6 +7076,18 @@ fieldset[disabled] .btn-cmd-checkout.active {
   background-color: rgba(255, 255, 255, 0.6);
   text-align: left;
   position: relative;
+}
+@media screen and (min-width: 992px) {
+  .cart-sidebar .cart-sidebar-inner {
+    width: 293.328px;
+    position: fixed;
+    display: block;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .cart-sidebar .cart-sidebar-inner {
+    width: 262.5px;
+  }
 }
 .cart-sidebar .cart-sidebar-inner h3 {
   margin: 0 0 2rem 0;
@@ -7112,24 +7126,24 @@ Purchase Information
  * Storefront Checkout styles
  */
 .checkout-main-container {
-  position: relative;
   float: left;
   width: 100%;
+  position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
   margin-bottom: 2em;
 }
-@media (min-width: 1200px) {
-  .checkout-main-container {
-    float: left;
-    width: 75%;
-  }
-}
 @media (min-width: 992px) {
   .checkout-main-container {
     float: left;
     width: 66.66666666666666%;
+  }
+}
+@media (min-width: 1200px) {
+  .checkout-main-container {
+    float: left;
+    width: 75%;
   }
 }
 .checkout-container {
@@ -7164,23 +7178,23 @@ Purchase Information
   clear: both;
 }
 .checkout-sidebar {
-  position: relative;
   float: left;
   width: 100%;
+  position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
-}
-@media (min-width: 1200px) {
-  .checkout-sidebar {
-    float: left;
-    width: 25%;
-  }
 }
 @media (min-width: 992px) {
   .checkout-sidebar {
     float: left;
     width: 33.33333333333333%;
+  }
+}
+@media (min-width: 1200px) {
+  .checkout-sidebar {
+    float: left;
+    width: 25%;
   }
 }
 @media screen and (min-width: 992px) {
@@ -7196,6 +7210,18 @@ Purchase Information
   background-color: rgba(255, 255, 255, 0.6);
   text-align: left;
   position: relative;
+}
+@media screen and (min-width: 992px) {
+  .checkout-sidebar .checkout-sidebar-inner {
+    width: 293.328px;
+    position: fixed;
+    display: block;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .checkout-sidebar .checkout-sidebar-inner {
+    width: 262.5px;
+  }
 }
 .checkout-sidebar .checkout-sidebar-inner h3 {
   margin: 0 0 2rem 0;

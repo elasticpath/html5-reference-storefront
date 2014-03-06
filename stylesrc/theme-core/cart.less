@@ -4,14 +4,7 @@
  * Storefront Cart View
  */
 
-.cart-outer{
-    background: transparent url(images/bg-vector-splat.jpg) no-repeat center top;
-    background-size: cover;
-    padding-top: 60px;
-}
-
 .cart-container{
-
 
     h1{
         margin: 0 0 3rem 0;
@@ -72,8 +65,6 @@
 
                     .btn-cart-removelineitem{
                         text-shadow: none;
-                        // margin-top: 5px;
-                        // padding: 0 0 2px 0px;
                         padding: 0;
                         height: 21px;
                         width: 21px;
@@ -83,11 +74,8 @@
                         border-radius: 2px;
                         text-align: middle;
 
-
-                            box-shadow: none;
-                            border-bottom: none;
-
-
+                        box-shadow: none;
+                        border-bottom: none;
 
                         &:hover{
                             background-color: @brand-danger;
@@ -118,7 +106,6 @@
             td{
                 &:last-child{
                     text-align: center;
-                    // padding-right: 30px;
                 }
                 &:first-child{
                     padding-left: 30px;
@@ -131,16 +118,7 @@
     }
 }
 
-
-
-
 .cart-main-inner{
-    // background: #f2f2f2;
-    // font-size: 1.3rem;
-    // color: @gray;
-    // border-radius: 6px;
-    // -webkit-box-shadow:  0px 0px 10px 3px rgba(0, 0, 0, 0.17);
-    // box-shadow:  0px 0px 10px 3px rgba(0, 0, 0, 0.17);
     position: relative;
     .chromed(6px,0);
     border-top: 0;
@@ -159,8 +137,6 @@
         box-shadow: none;
     }
 }
-
-
 
 .cart-heading-quantity,
 .cart-lineitem-quantity-col,
@@ -184,17 +160,9 @@
     color: lighten(@gray, 20%);
 }
 
-// can't find this class in DOM
-/*.cart-lineitem-purchase-price{
-    font-weight: bold;
-}*/
-
-
 .cart-lineitem-table-headings{
     border: none;
 }
-
-
 
 //------------------ grid
 .cart-container-inner{ //wraps title, main cart table, summary --- applies bootstrap row
@@ -211,9 +179,9 @@
 }
 
 .cart-main-container{ //wraps main cart table --- applies bootstrap column classes
-    .make-lg-column(9);
-    .make-md-column(8);
-    .make-xs-column(12);
+  .make-xs-column(12);
+  .make-md-column(8);
+  .make-lg-column(9);
     margin-bottom: 2em;
 
     h2 {
@@ -222,22 +190,17 @@
 }
 
 .cart-summary-container{ //wraps cart summary
-    // .make-md-column(3);
-    // .make-xs-column(12);
     display: inline-block;
 }
 
 .cart-checkout-container{ //wraps cart summary
-    // .make-sm-column(3);
     margin-top: 2rem;
-    // display: inline-block;
-    // .clearfix;
 }
 
 .cart-sidebar{ // wraps cart summary --- applies bootstrap column classes
-    .make-lg-column(3);
-    .make-md-column(4);
-    .make-xs-column(12);
+  .make-xs-column(12);
+  .make-md-column(4);
+  .make-lg-column(3);
 
     // Right align the checkout summary on desktop displays and larger
     @media screen and (min-width: @screen-desktop) {
@@ -245,17 +208,7 @@
     }
 
     .cart-sidebar-inner{
-        display: inline-block;
-        padding: 2rem;
-        border: 3px solid @brand-primary;
-        border-radius: 6px;
-        background-color: rgba(255,255,255,0.6);
-        text-align: left;
-        position: relative;
-
-        h3{
-            margin: 0 0 2rem 0;
-        }
+      .affixed-sidebar;
     }
 }
 

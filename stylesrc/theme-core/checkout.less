@@ -4,9 +4,9 @@
  * Storefront Checkout styles
  */
 .checkout-main-container {
-  .make-lg-column(9);
-  .make-md-column(8);
   .make-xs-column(12);
+  .make-md-column(8);
+  .make-lg-column(9);
   margin-bottom: 2em;
 }
 
@@ -20,9 +20,9 @@
 }
 
 .checkout-sidebar { // wraps cart summary + cart checkout --- applies bootstrap column classes
-  .make-lg-column(3);
-  .make-md-column(4);
   .make-xs-column(12);
+  .make-md-column(4);
+  .make-lg-column(3);
 
   // Right align the checkout summary on desktop displays and larger
   @media screen and (min-width: @screen-desktop) {
@@ -30,17 +30,7 @@
   }
 
   .checkout-sidebar-inner {
-    display: inline-block;
-    padding: 2rem;
-    border: 3px solid @brand-primary;
-    border-radius: 6px;
-    background-color: rgba(255, 255, 255, 0.6);
-    text-align: left;
-    position: relative;
-
-    h3 {
-      margin: 0 0 2rem 0;
-    }
+    .affixed-sidebar;
   }
 }
 
@@ -54,16 +44,11 @@
 }
 
 .cart-summary-container { //wraps summary
-  // .make-md-column(3);
-  // .make-xs-column(12);
   display: inline-block;
 }
 
 .submit-order-container { //wraps submit order action region
-  // .make-sm-column(3);
   margin-top: 2rem;
-  // display: inline-block;
-  // .clearfix;
 }
 
 .checkout-tax-list {
