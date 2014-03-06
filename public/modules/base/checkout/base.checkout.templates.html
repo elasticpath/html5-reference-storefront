@@ -49,7 +49,7 @@
   <script id="CheckoutAddressSelectorTemplate" type="text/template">
     <!-- A unique ID to associate address labels with radio buttons -->
     <% var uniqueId = E.getUniqueIdForFormInput('shippingOption_'); %>
-    <div class="address-ctrl-cell">
+    <div class="address-ctrl-cell" data-region="checkoutAddressSelector">
       <input type="radio" name="<%= E.addressType %>" id="<%= uniqueId %>" class="checkout-address-radio" <%= E.getCheckoutRadioCheckedAttr(E) %> />
       <label for="<%= uniqueId %>">
         <div data-region="checkoutAddressRegion"></div>
