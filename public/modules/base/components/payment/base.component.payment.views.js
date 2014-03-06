@@ -20,6 +20,7 @@
 define(function (require) {
   var ep = require('ep');
   var Marionette = require('marionette');
+  var Mediator = require('mediator');
   var EventBus = require('eventbus');
   var ViewHelpers = require('viewHelpers');
 
@@ -68,16 +69,19 @@ define(function (require) {
     ui: {
       'cancelButton': '[data-el-label="paymentForm.cancel"]',
       'feedbackRegion': '[data-region="componentPaymentFeedbackRegion"]',
+      'saveToProfileCheckbox': '[data-el-label="payment.saveToProfile"]',
       'saveButton': '[data-el-label="paymentForm.save"]'
     },
     events: {
       'click @ui.saveButton': function (event) {
         event.preventDefault();
-        var href = this.model.get('href');
-        if (href) {
-          EventBus.trigger('payment.savePaymentMethodBtnClicked', href);
+        // Triggers an event which goes on to request the payment form action URL from Cortex.
+        // A boolean value is passed to indicate the permanence of the new payment method (whether it needs to be
+        // saved in the shopper's profile or just treated as a one-time payment method.
+        if (this.ui.saveToProfileCheckbox.prop('checked')) {
+          EventBus.trigger('payment.savePaymentMethodBtnClicked', true);
         } else {
-          ep.logger.warn('unable to retrieve url to post address form');
+          EventBus.trigger('payment.savePaymentMethodBtnClicked');
         }
       },
       'click @ui.cancelButton': function (event) {

@@ -130,6 +130,7 @@
     "formTitle": "New Payment Method",
     "name": "Card Holder's Name",
     "saveBtn": "Continue",
+    "saveToProfile": "Save this payment method to my profile",
     "securityCode": "Security Code",
     "type": {
       "americanExp": "American Express",
