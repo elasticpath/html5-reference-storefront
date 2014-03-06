@@ -58,7 +58,7 @@ define(function (require) {
         });
         it('should have a profilePaymentMethodsRegion region', function () {
           expect(this.view.profilePaymentMethodsRegion).to.exist;
-          expect(this.view.$el.find('[data-region="profilePaymentMethodsRegion"]')).to.be.length(1);
+          expect(this.view.$el.find('[data-region="paymentMethodsRegion"]')).to.be.length(1);
         });
       });
     });
@@ -417,9 +417,9 @@ define(function (require) {
         it('view content is rendered with DOM elements', function () {
           expect(this.view.el.childElementCount).to.be.above(0);
         });
-        it('should have a profilePaymentMethodComponentRegion region', function () {
+        it('should have a paymentMethodComponentRegion region', function () {
           expect(this.view.profilePaymentMethodComponentRegion).to.exist;
-          expect(this.view.$el.find('[data-region="profilePaymentMethodComponentRegion"]')).to.be.length(1);
+          expect(this.view.$el.find('[data-region="paymentMethodComponentRegion"]')).to.be.length(1);
         });
       });
 

@@ -54,7 +54,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
         profileSubscriptionSummaryRegion:'[data-region="profileSubscriptionSummaryRegion"]',
         profilePurchaseHistoryRegion:'[data-region="profilePurchaseHistoryRegion"]',
         profileAddressesRegion:'[data-region="profileAddressesRegion"]',
-        profilePaymentMethodsRegion:'[data-region="profilePaymentMethodsRegion"]'
+        profilePaymentMethodsRegion:'[data-region="paymentMethodsRegion"]'
       },
       className:'container',
       templateHelpers:viewHelpers
@@ -136,7 +136,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
 
     /**
      * Profile Payment Method Item View
-     * make mediator request to load an paymentMethod view in region: profilePaymentMethodComponentRegion,
+     * make mediator request to load an paymentMethod view in region: paymentMethodComponentRegion,
      * will render a wrapper around the paymentMethod view
      * @type Marionette.Layout
      */
@@ -145,7 +145,7 @@ define(['marionette','i18n', 'mediator', 'eventbus', 'viewHelpers'],
       tagName: 'li',
       className: 'profile-payment-method-container',
       regions: {
-        profilePaymentMethodComponentRegion: '[data-region="profilePaymentMethodComponentRegion"]'
+        profilePaymentMethodComponentRegion: '[data-region="paymentMethodComponentRegion"]'
       },
       onShow: function () {
         Mediator.fire('mediator.loadPaymentMethodViewRequest', {

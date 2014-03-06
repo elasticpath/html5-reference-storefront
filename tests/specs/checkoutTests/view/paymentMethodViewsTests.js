@@ -41,11 +41,11 @@ define(function (require) {
       it('renders the view contents', function () {
         // View should contain a heading element and a <div> region for shipping options
         expect(this.view.el.childElementCount).to.be.equal(2);
-        expect(this.view.$el.find('[data-region="checkoutPaymentMethodRegion"]')).to.be.length(1);
+        expect(this.view.$el.find('[data-region="paymentMethodComponentRegion"]')).to.be.length(1);
       });
       it('should have a checkoutPaymentRegion region', function () {
         expect(this.view.checkoutPaymentRegion).to.exist;
-        expect(this.view.$el.find('[data-region="checkoutPaymentMethodRegion"]')).to.be.length(1);
+        expect(this.view.$el.find('[data-region="paymentMethodComponentRegion"]')).to.be.length(1);
       });
 
       // FIXME unable to test selection change trigger event
