@@ -219,24 +219,6 @@ define(function (require) {
         ep.logger.error('response error: ' + response.responseText + ' : ' + response.status);
       };
 
-
-      // Checkin test can we remove this
-/*
-      if (options.url) {
-
-        // scrub out any absolute path (prior to /cortex) in the URL to avoid confusing the proxy
-        // ie all requests are relative path
-        var replaceUrl = options.url;
-        var testPath = ep.io.getApiContext();
-        var pathIndex = replaceUrl.indexOf(testPath);
-        if (pathIndex > 0) {
-          replaceUrl = replaceUrl.substring(pathIndex, replaceUrl.length);
-        }
-        options.url = replaceUrl;
-      }
-*/
-
-
       options.headers = options.headers || {};
 
       var authToken = getAuthToken();

@@ -134,7 +134,7 @@ define(function (require) {
       events: {
         'click @ui.editBtn': function (event) {
           event.preventDefault();
-          EventBus.trigger('profile.editPersonalInfoBtnClicked', this.model);  // checkin personalInfo
+          EventBus.trigger('profile.editPersonalInfoBtnClicked', this.model);
         }
       }
     });

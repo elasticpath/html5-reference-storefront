@@ -197,9 +197,9 @@ define(function (require) {
     profileModel.fetch({
       success: function (response) {
         personalInfoModel.set(response.get('personalInfo'));
+        showPersonalInfoView(defaultLayout.profilePersonalInfoRegion);
       }
     });
-    showPersonalInfoView(defaultLayout.profilePersonalInfoRegion);
   });
 
   /**
@@ -243,7 +243,7 @@ define(function (require) {
       errorMsg = response.responseText;
     }
 
-    var translatedErrorsArr = View.translatePersonalInfoFormErrorMessage(errorMsg);  // checkIn Personal Info
+    var translatedErrorsArr = View.translatePersonalInfoFormErrorMessage(errorMsg);
     formErrorsCollection.update(translatedErrorsArr);
 
     var personalInfoFormView = defaultLayout.profilePersonalInfoRegion.currentView;

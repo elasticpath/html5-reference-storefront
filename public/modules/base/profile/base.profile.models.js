@@ -53,8 +53,6 @@ define(function (require) {
         profileObj.personalInfo = {
           familyName : jsonPath(response, 'family-name')[0],
           givenName : jsonPath(response, 'given-name')[0],
-          // checkIn actionLink
-//          actionLink: ep.io.getApiContext() + '/profiles/' + ep.app.config.cortexApi.scope + '/default'
           actionLink: jsonPath(response, 'self.href')[0]
         };
 
