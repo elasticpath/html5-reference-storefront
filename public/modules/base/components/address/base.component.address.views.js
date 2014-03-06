@@ -59,7 +59,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
         addressFormRegion: '[data-region="componentAddressFormRegion"]'
       },
       ui: {
-        createAddressButton: '[data-el-label="addressForm.create"]',
+        createAddressButton: '[data-el-label="addressForm.save"]',
         cancelButton: '[data-el-label="addressForm.cancel"]'
       },
       events: {
@@ -112,7 +112,7 @@ define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
         addressFormRegion: '[data-region="componentAddressFormRegion"]'
       },
       ui: {
-        editAddressButton: '[data-el-label="addressForm.edit"]',
+        editAddressButton: '[data-el-label="addressForm.save"]',
         cancelButton: '[data-el-label="addressForm.cancel"]'
       },
       events: {

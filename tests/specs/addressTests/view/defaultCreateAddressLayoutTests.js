@@ -74,7 +74,7 @@ define(function (require) {
         expect(this.view.el.childElementCount).to.be.above(0);
       });
       it('the "save" button', function () {
-        expect(this.view.$el.find('button[data-el-label="addressForm.create"]')).to.be.length(1);
+        expect(this.view.$el.find('button[data-el-label="addressForm.save"]')).to.be.length(1);
       });
       it('the "cancel" button', function () {
         expect(this.view.$el.find('button[data-el-label="addressForm.cancel"]')).to.be.length(1);
@@ -82,7 +82,7 @@ define(function (require) {
     });
 
     describe('create address button clicked',
-      EventTestFactory.simpleBtnClickTest('address.createAddressBtnClicked', '[data-el-label="addressForm.create"]'));
+      EventTestFactory.simpleBtnClickTest('address.createAddressBtnClicked', '[data-el-label="addressForm.save"]'));
 
     describe('cancel address form button clicked',
       EventTestFactory.simpleBtnClickTest('address.cancelBtnClicked', '[data-el-label="addressForm.cancel"]'));
