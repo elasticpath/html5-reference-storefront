@@ -10,14 +10,14 @@
 
 	<groupId>com.elasticpath.cortex.ui</groupId>
 	<artifactId>ui-storefront-parent</artifactId>
-	<version>0.10.0-SNAPSHOT</version>
+	<version>0.10.0.2014030713</version>
 	<packaging>pom</packaging>
 
 	<scm>
 		<connection>scm:git:git://github.elasticpath.net/cortex/ui-storefront.git</connection>
 		<developerConnection>scm:git:git@github.elasticpath.net:cortex/ui-storefront.git</developerConnection>
 		<url>https://github.elasticpath.net/cortex/ui-storefront</url>
-		<tag>HEAD</tag>
+		<tag>ui-storefront-parent-0.10.0.2014030713</tag>
 	</scm>
 
 	<distributionManagement>
