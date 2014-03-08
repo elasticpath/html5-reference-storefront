@@ -20,6 +20,9 @@ define(function (require) {
   var ep = require('ep');
   var EventTestFactory = require('testfactory.event');
   var ControllerTestHelper = require('testhelpers.viewdoubles');
+  var ControllerTestFactory = require('testfactory.controller');
+
+  var model = require('profile.models');
 
   describe('Profile Module: Edit Personal Info Events', function () {
     require('profile');
@@ -82,14 +85,22 @@ define(function (require) {
       EventTestFactory.simpleEventTriggersEventTest('profile.loadPersonalInfoViewRequest', 'profile.personalInfoFormCancelBtnClicked'));
 
     describe('Responds to event: profile.loadPersonalInfoViewRequest', function () {
-      before(function () {
-        sinon.stub(Backbone.Model.prototype, 'fetch');
+      before(function (done) {
+        sinon.spy(Backbone.Model.prototype, 'fetch');
 
         this.formView = view.ProfilePersonalInfoView;
         this.formViewDouble = ControllerTestHelper.TestDouble();
         view.ProfilePersonalInfoView = this.formViewDouble.View;
 
+        var fakeUrl = model.ProfileModel.prototype.url;
+        var fakeAddressResponse = {};
+        this.server = ControllerTestFactory.getFakeServer({
+          response: fakeAddressResponse,
+          requestUrl: fakeUrl
+        });
+
         EventBus.trigger('profile.loadPersonalInfoViewRequest');
+        done();
       });
 
       after(function () {
