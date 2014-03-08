@@ -256,7 +256,7 @@ define(function (require) {
       template: '#PaymentMethodSelectorTemplate',
       templateHelpers: viewHelpers,
       regions: {
-        checkoutPaymentRegion: '[data-region="checkoutPaymentMethodRegion"]'
+        checkoutPaymentRegion: '[data-region="paymentMethodComponentRegion"]'
       },
       events: {
         'change input[type="radio"]': function () {

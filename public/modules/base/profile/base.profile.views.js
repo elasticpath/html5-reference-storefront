@@ -98,7 +98,7 @@ define(function (require) {
         profileSubscriptionSummaryRegion: '[data-region="profileSubscriptionSummaryRegion"]',
         profilePurchaseHistoryRegion: '[data-region="profilePurchaseHistoryRegion"]',
         profileAddressesRegion: '[data-region="profileAddressesRegion"]',
-        profilePaymentMethodsRegion: '[data-region="profilePaymentMethodsRegion"]'
+        profilePaymentMethodsRegion:'[data-region="paymentMethodsRegion"]'
       },
       className: 'container',
       templateHelpers: viewHelpers
@@ -252,7 +252,7 @@ define(function (require) {
 
     /**
      * Profile Payment Method Item View
-     * make mediator request to load an paymentMethod view in region: profilePaymentMethodComponentRegion,
+     * make mediator request to load an paymentMethod view in region: paymentMethodComponentRegion,
      * will render a wrapper around the paymentMethod view
      * @type Marionette.Layout
      */
@@ -261,7 +261,7 @@ define(function (require) {
       tagName: 'li',
       className: 'profile-payment-method-container',
       regions: {
-        profilePaymentMethodComponentRegion: '[data-region="profilePaymentMethodComponentRegion"]'
+        profilePaymentMethodComponentRegion: '[data-region="paymentMethodComponentRegion"]'
       },
       onShow: function () {
         Mediator.fire('mediator.loadPaymentMethodViewRequest', {

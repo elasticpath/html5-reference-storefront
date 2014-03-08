@@ -68,7 +68,7 @@ define(function (require) {
         });
         it('should have a profilePaymentMethodsRegion region', function () {
           expect(this.view.profilePaymentMethodsRegion).to.exist;
-          expect(this.view.$el.find('[data-region="profilePaymentMethodsRegion"]')).to.be.length(1);
+          expect(this.view.$el.find('[data-region="paymentMethodsRegion"]')).to.be.length(1);
         });
       });
     });

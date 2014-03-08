@@ -42,7 +42,7 @@ define(function (require) {
 
     var checkoutModel = new Model.CheckoutModel();
     var checkoutSummaryModel;
-    var paymentMethodCollection;
+    var paymentMethodCollection = new Model.CheckoutPaymentMethodsCollection();
     var shippingOptionsCollection;
 
     var checkoutLayout = new View.DefaultLayout();
@@ -91,7 +91,7 @@ define(function (require) {
           }
 
           if (checkoutModel.get('showPaymentMethods')) {
-            paymentMethodCollection = new Model.CheckoutPaymentMethodsCollection(response.get('paymentMethods'));
+            paymentMethodCollection.update(response.get('paymentMethods'));
             checkoutLayout.paymentMethodsRegion.show(
               new View.PaymentMethodsCompositeView({
                 collection: paymentMethodCollection
@@ -517,7 +517,7 @@ define(function (require) {
     }
 
     /**
-     * Refresh views affected by changing payment method selector with data from Cortex.
+     * Refresh views affected by changing payment mthod selector with data from Cortex.
      * Removes activity indicator on reload success.
      */
     function refreshPaymentMethodViews() {
@@ -531,6 +531,11 @@ define(function (require) {
           // need to move it into view so display logic isn't lost on this fetch
 //          checkoutSummaryModel.set(response.get('summary'));
           paymentMethodCollection.update(response.get('paymentMethods'));
+          checkoutLayout.paymentMethodsRegion.show(
+            new View.PaymentMethodsCompositeView({
+              collection: paymentMethodCollection
+            })
+          );
 
           ep.ui.stopActivityIndicator(checkoutLayout.paymentMethodsRegion.currentView);
           ep.ui.stopActivityIndicator(checkoutLayout.checkoutOrderRegion.currentView);
@@ -572,7 +577,7 @@ define(function (require) {
     EventBus.on('checkout.updateChosenPaymentMethodFailed', updateChosenPaymentMethodFailed);
 
 
-    /* ********** ADDRESS EVENT LISTENERS ************ */
+    /* ********** ADD NEW ADDRESS EVENT LISTENERS ************ */
     /**
      * Listen to add new address button clicked signal
      * will load address form
