@@ -25,7 +25,57 @@ define(function (require) {
 
   describe('Payment Controller: Events Tests', function () {
     var paymentController = require('payment');
+    var paymentModel = require('payment.models');
     var paymentTemplate = require('text!modules/base/components/payment/base.component.payment.template.html');
+    var paymentView = require('payment.views');
+
+    describe('responds to event: payment.getPaymentFormSubmitUrl', function () {
+      describe('when a valid Cortex order URL is retrieved from sessionStorage', function () {
+        before(function () {
+          sinon.stub(ep.io.sessionStore, 'getItem', function() {
+            return 'someURLString';
+          });
+          sinon.stub(Backbone.Model.prototype, 'fetch');
+          sinon.spy(paymentModel, 'NewPaymentModel');
+          EventBus.trigger('payment.getPaymentFormSubmitUrl');
+        });
+
+        after(function () {
+          ep.io.sessionStore.getItem.restore();
+          Backbone.Model.prototype.fetch.restore();
+          paymentModel.NewPaymentModel.restore();
+        });
+
+        it('instantiates a NewPaymentModel Backbone model' ,function () {
+          expect(paymentModel.NewPaymentModel).to.be.called;
+        });
+        it('calls Backbone.Model fetch' ,function () {
+          expect(Backbone.Model.prototype.fetch).to.be.called;
+        });
+      });
+
+      describe('when a valid Cortex order URL cannot be retrieved from sessionStorage', function () {
+        before(function () {
+          // Unable to test showMissingSubmitUrlToastMessage(), so testing $.fn.toastmessage instead
+          sinon.stub($.fn, 'toastmessage');
+          sinon.stub(ep.logger, 'error');
+          sinon.stub(ep.io.sessionStore, 'getItem', function() {
+            return false;
+          });
+          EventBus.trigger('payment.getPaymentFormSubmitUrl');
+        });
+
+        after(function () {
+          $.fn.toastmessage.restore();
+          ep.logger.error.restore();
+          ep.io.sessionStore.getItem.restore();
+        });
+
+        it('shows a toast message to report the error to the shopper' ,function () {
+          expect($.fn.toastmessage).to.be.calledWith('showToast');
+        });
+      });
+    });
 
     describe('responds to event: payment.loadPaymentMethodViewRequest', function () {
       before(function () {
@@ -80,20 +130,48 @@ define(function (require) {
     describe('responds to event: payment.savePaymentMethodBtnClicked', function() {
       before(function() {
         sinon.spy(EventBus, 'trigger');
-        sinon.stub(ep.io, 'ajax');
+        sinon.spy(paymentView, 'getPaymentFormValues');
         sinon.stub(ep.ui, 'disableButton');
-
-        EventBus.trigger('payment.savePaymentMethodBtnClicked');
+        sinon.stub(Mediator, 'fire');
+        EventTestHelpers.unbind('payment.getPaymentFormSubmitUrl');
       });
 
       after(function() {
         EventBus.trigger.restore();
-        ep.io.ajax.restore();
+        paymentView.getPaymentFormValues.restore();
         ep.ui.disableButton.restore();
+        Mediator.fire.restore();
+        EventTestHelpers.reset();
       });
 
-      it("calls the disableButton function", function() {
-        expect(ep.ui.disableButton).to.be.calledOnce;
+      describe('when the "save to profile" checkbox is checked', function() {
+        before(function() {
+          EventBus.trigger('payment.savePaymentMethodBtnClicked', true);
+        });
+        it('calls the disableButton function', function() {
+          expect(ep.ui.disableButton).to.be.called;
+        });
+        it('calls the getPaymentFormValues function from the view', function() {
+          expect(paymentView.getPaymentFormValues).to.be.calledOnce;
+        });
+        it('fires the correct mediator strategy' ,function () {
+          expect(Mediator.fire).to.be.called;
+        });
+      });
+
+      describe('when the saveToProfile checkbox is NOT checked', function() {
+        before(function() {
+          EventBus.trigger('payment.savePaymentMethodBtnClicked');
+        });
+        it('calls the disableButton function', function() {
+          expect(ep.ui.disableButton).to.be.called;
+        });
+        it('calls the getPaymentFormValues function from the view', function() {
+          expect(paymentView.getPaymentFormValues).to.be.called;
+        });
+        it('triggers the correct EventBus signal' ,function () {
+          expect(EventBus.trigger).to.be.calledWith('payment.getPaymentFormSubmitUrl');
+        });
       });
     });
 
@@ -112,7 +190,7 @@ define(function (require) {
       });
     });
 
-    describe('submitForm function', function() {
+    describe('submitPaymentMethodForm event', function() {
       // Common before() and after() sections for the AJAX form submit tests
       before(function() {
         // Some settings for our fakeServer
@@ -152,7 +230,7 @@ define(function (require) {
             done();
           });
 
-          paymentController.__test_only__.submitForm(this.fakeData, this.fakeSubmitUrl);
+          EventBus.trigger('payment.submitPaymentMethodForm', this.fakeData, this.fakeSubmitUrl);
         });
 
         after(function() {
@@ -181,7 +259,7 @@ define(function (require) {
             done();
           });
 
-          paymentController.__test_only__.submitForm(this.fakeData, this.fakeSubmitUrl);
+          EventBus.trigger('payment.submitPaymentMethodForm', this.fakeData, this.fakeSubmitUrl);
         });
 
         after(function() {

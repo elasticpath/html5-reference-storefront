@@ -127,25 +127,6 @@ define(function (require) {
     }
   });
 
-  /**
-   * Model that returns the action href to which the new payment method form should be submitted.
-   * Used when a one-time payment method is added during checkout.
-   * @type Backbone.Model
-   */
-  var checkoutOneTimePaymentMethodActionModel = Backbone.Model.extend({
-    getUrl: function (href) {
-      return href + '?zoom=paymentmethodinfo:createpaymenttokenform';
-    },
-    parse: function (response) {
-      if (response) {
-        // parse the JSON response and return the href if one is found
-        return jsonPath(response, "$..links[?(@.rel=='createpaymenttokenfororderaction')].href")[0];
-      }
-      ep.logger.error("Unable to fetch one-time payment method action link.");
-      return false;
-    }
-  });
-
   var paymentMethodsCollection = Backbone.Collection.extend({
     // sorts the Collection alphabetically by display value
     comparator: 'displayValue'
@@ -474,7 +455,6 @@ define(function (require) {
 
   return {
     CheckoutModel: checkoutModel,
-    CheckoutOneTimePaymentMethodActionModel: checkoutOneTimePaymentMethodActionModel,
     CheckoutPaymentMethodsCollection: paymentMethodsCollection,
     CheckoutShippingOptionsCollection: shippingOptionsCollection,
     CheckoutSummaryModel: checkoutSummaryModel,

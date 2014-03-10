@@ -20,7 +20,6 @@
 define(function (require) {
   var ep = require('ep');
   var Marionette = require('marionette');
-  var Mediator = require('mediator');
   var EventBus = require('eventbus');
   var ViewHelpers = require('viewHelpers');
 

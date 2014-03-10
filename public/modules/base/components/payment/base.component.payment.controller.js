@@ -121,6 +121,14 @@ define(function (require) {
   });
 
 
+  /**
+   * Triggered when a shopper selects to create a new one-time payment method.
+   * Makes a request to Cortex using the NewPaymentModel Backbone Model to obtain
+   * the URL to which the new payment method request form data should be posted.
+   *
+   * When successful, triggers an EventBus signal that constructs and sends the actual AJAX request.
+   * @param formData {Object} An object representing the data entered in the fields of the new payment method form.
+   */
   EventBus.on('payment.getPaymentFormSubmitUrl', function (formData) {
     // Attempt to retrieve an order link from session storage (set by the checkout module)
     var orderLink = ep.io.sessionStore.getItem('orderLink');
@@ -135,6 +143,7 @@ define(function (require) {
         success: function (response) {
           var submitUrl = response.get('href');
           if (submitUrl) {
+            // Trigger the AJAX request with the entered form data and the URL retrieved
             EventBus.trigger('payment.submitPaymentMethodForm', formData, submitUrl);
           } else {
             showMissingSubmitUrlToastMessage();
@@ -202,7 +211,7 @@ define(function (require) {
   return {
     /* test-code */
     __test_only__: {
-//      submitForm: submitForm
+      showMissingSubmitUrlToastMessage: showMissingSubmitUrlToastMessage
     },
     /* end-test-code */
     DefaultCreatePaymentController: defaultCreatePaymentController

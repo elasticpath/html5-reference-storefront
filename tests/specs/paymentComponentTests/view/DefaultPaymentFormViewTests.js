@@ -65,7 +65,7 @@ define(function (require) {
         expect(this.view.$el.find('button')).to.be.length(2);
       });
       it("form input fields", function() {
-        expect(this.view.$el.find('input')).to.be.length(3);
+        expect(this.view.$el.find('input')).to.be.length(4);
         expect(this.view.$el.find('select')).to.be.length(3);
       });
     });

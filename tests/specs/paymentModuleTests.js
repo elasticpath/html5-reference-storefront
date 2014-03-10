@@ -28,6 +28,8 @@ define(function (require) {
     // controller general Events Tests
     require('specs/paymentComponentTests/controller/paymentEventsTests.js');
 
+    // controller helper functions
+    require('specs/paymentComponentTests/controller/paymentControllerHelperTests.js');
 
     /*
      * View Tests
