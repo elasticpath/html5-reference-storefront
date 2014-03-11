@@ -98,9 +98,11 @@ define(function (require) {
           });
           defaultLayout.profileAddressesRegion.show(profileAddressesView);
 
-          // Profile Payment Methods
+          // Profile Payment Methods sorted alphabetically by displayValue
           var profilePaymentMethodsView = new View.ProfilePaymentMethodsView({
-            collection: new Backbone.Collection(response.get('paymentMethods'))
+            collection: new Backbone.Collection(response.get('paymentMethods'), {
+              comparator: 'displayValue'
+            })
           });
           defaultLayout.profilePaymentMethodsRegion.show(profilePaymentMethodsView);
         },
@@ -192,7 +194,7 @@ define(function (require) {
     });
   });
 
-  /* ********* Address EVENT LISTENERS ************ */
+  /* ********* Personal Info EVENT LISTENERS ************ */
   EventBus.on('profile.editPersonalInfoBtnClicked', function (model) {
     EventBus.trigger('profile.loadPersonalInfoFormViewRequest', model);
   });
@@ -282,6 +284,11 @@ define(function (require) {
         collection: formErrorsCollection
       })
     );
+  });
+
+  /* ********* Payment Method EVENT LISTENERS ************ */
+  EventBus.on('profile.addNewPaymentMethodBtnClicked', function () {
+    Mediator.fire('mediator.addNewPaymentMethodRequest', 'profile');
   });
 
   return {

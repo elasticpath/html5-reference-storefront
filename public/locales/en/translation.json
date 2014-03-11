@@ -156,7 +156,8 @@
       "title": "Payment Methods",
       "msg": {
         "noPaymentMethod": "You have no saved payment methods"
-      }
+      },
+      "newPaymentBtn": "Add a New Payment Method"
     },
     "personalInfo": {
       "title": "Personal Information",

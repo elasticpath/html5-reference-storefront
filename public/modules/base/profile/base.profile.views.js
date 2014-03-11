@@ -297,7 +297,13 @@ define(function (require) {
       emptyView: profilePaymentMethodEmptyView,
       itemView: profilePaymentMethodItemView,
       itemViewContainer: 'ul',
-      templateHelpers: viewHelpers
+      templateHelpers: viewHelpers,
+      events: {
+        'click [data-el-label="profile.addNewPaymentMethodBtn"]': function (event) {
+          event.preventDefault();
+          EventBus.trigger('profile.addNewPaymentMethodBtnClicked');
+        }
+      }
     });
 
 

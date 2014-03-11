@@ -69,15 +69,23 @@ define(function (require) {
       'cancelButton': '[data-el-label="paymentForm.cancel"]',
       'feedbackRegion': '[data-region="componentPaymentFeedbackRegion"]',
       'saveToProfileCheckbox': '[data-el-label="payment.saveToProfile"]',
+      'saveToProfileFormGroup': '[data-el-label="payment.saveToProfileFormGroup"]',
       'saveButton': '[data-el-label="paymentForm.save"]'
     },
     events: {
       'click @ui.saveButton': function (event) {
         event.preventDefault();
-        // Triggers an event which goes on to request the payment form action URL from Cortex.
-        // A boolean value is passed to indicate the permanence of the new payment method (whether it needs to be
-        // saved in the shopper's profile or just treated as a one-time payment method.
-        if (this.ui.saveToProfileCheckbox.prop('checked')) {
+        /**
+         * Test if the shopper is adding a one-time or permanent payment method.
+         * If the saveToProfileFormGroup element is hidden (see onRender function below) or the saveToProfileCheckbox
+         * element is checked, this is a permanent new payment method (to be added to the shopper's profile).
+         */
+        if ( this.ui.saveToProfileFormGroup.hasClass('hidden') || this.ui.saveToProfileCheckbox.prop('checked') ) {
+          /**
+           * Triggers an event which goes on to request the payment form action URL from Cortex.
+           * A boolean value is passed to indicate the permanence of the new payment method (true if permanent,
+           * false or not present missing if one-time).
+           */
           EventBus.trigger('payment.savePaymentMethodBtnClicked', true);
         } else {
           EventBus.trigger('payment.savePaymentMethodBtnClicked');
@@ -86,6 +94,12 @@ define(function (require) {
       'click @ui.cancelButton': function (event) {
         event.preventDefault();
         EventBus.trigger('payment.cancelFormBtnClicked');
+      }
+    },
+    onRender: function () {
+      // Hide the 'save to profile' checkbox if the shopper has accessed the new payment method form from profile
+      if ( ep.io.sessionStore.getItem('paymentFormReturnTo') === 'profile' ) {
+        this.ui.saveToProfileFormGroup.addClass('hidden');
       }
     }
   });

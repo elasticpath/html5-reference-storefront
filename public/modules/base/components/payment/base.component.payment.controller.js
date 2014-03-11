@@ -169,6 +169,7 @@ define(function (require) {
     var formData = parsePaymentForm(formObj);
 
     if (saveToProfile) {
+      // FIXME This may be a misuse of the mediator pattern, creating a dependency of sorts between payment and profile
       // Fire a mediator strategy that will retrieve the URL to which the form should be submitted
       Mediator.fire('mediator.savePaymentMethodToProfileRequest', formData);
     } else {

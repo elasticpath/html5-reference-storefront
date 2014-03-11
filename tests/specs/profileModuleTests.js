@@ -31,6 +31,9 @@ define(function (require) {
     // profile Summary Events Test
     require('specs/profileTests/controller/profileEditInfoEventsTest.js');
 
+    // profile Payment Methods Test
+    require('specs/profileTests/controller/profilePaymentMethodEventsTest.js');
+
 
     /*
      * View Tests
