@@ -16,25 +16,15 @@
  *
  */
 define(function (require) {
-  var ep = require('ep');
-  var Marionette = require('marionette');
-  var EventBus = require('eventbus');
-  var i18n = require('i18n');
-  var Model = require('auth.models');
+    var ep = require('ep');
+    var Marionette = require('marionette');
+    var EventBus = require('eventbus');
+    var i18n = require('i18n');
+    var ViewHelpers = require('viewHelpers');
+    var Model = require('auth.models');
 
-    var viewHelpers = {
-      getI18nLabel:function(key){
-        var retVal = key;
-        try{
-          retVal = i18n.t(key);
-        }
-        catch(e){
-          // silent failure on label rendering
-        }
-
-        return retVal;
-      },
-      getLoginText:function() {
+    var viewHelpers = ViewHelpers.extend({
+      getLoginText: function () {
         var retVal;
         if (ep.io.localStore.getItem('oAuthRole') === 'PUBLIC') {
           retVal = this.getI18nLabel('auth.loginMenu');
@@ -43,56 +33,76 @@ define(function (require) {
         }
         return retVal;
       },
-      getMenuItemText:function(){
+      getMenuItemText: function () {
         var retVal = '';
         if (ep.io.localStore.getItem('oAuthRole') === 'PUBLIC') {
           retVal = 'auth.loginMenu';
         }
         return retVal;
-      },
-      generateHref: function (route) {
-        return  ep.app.config.routes[route] || null;
       }
-    };
+    });
 
     /*
-    * Show the Profile Dropdown menu
-    * */
-    function showProfileMenu(){
+     * Show the Profile Dropdown menu
+     * */
+    function showProfileMenu() {
       $('.auth-nav-container').show(250);
     }
-    function hideProfileMenu(){
+
+    function hideProfileMenu() {
       $('.auth-nav-container').hide(250);
     }
+
+    var getLoginRequestModel = function () {
+      var retVal = new Model.LoginFormModel();
+      retVal.set('userName', $('#OAuthUserName').val());
+      retVal.set('password', $('#OAuthPassword').val());
+      retVal.set('role', 'REGISTERED');
+      retVal.set('scope', ep.app.config.cortexApi.scope);
+      return retVal;
+    };
+
+    var displayLoginErrorMsg = function (msg) {
+      if (msg) {
+        var key = 'auth.' + msg;
+        var errMsg = viewHelpers.getI18nLabel(key);
+        var authFeedBackContainer = $('.auth-feedback-container');
+        authFeedBackContainer.text(errMsg);
+        authFeedBackContainer.attr('data-i18n', key);
+      }
+      else {
+        ep.logger.warn('DisplayLoginErrorMsg called without error message');
+      }
+    };
 
     /*
      * Default Layout View: loginMenu button, and controlling the toggle menu
      */
     var defaultLayout = Marionette.Layout.extend({
-      template:'#DefaultAuthLayoutTemplate',
-      className:'auth-container',
-      templateHelpers:viewHelpers,
-      events:{
-        'click .btn-auth-menu':function(event){
+      template: '#DefaultAuthLayoutTemplate',
+      className: 'auth-container',
+      templateHelpers: viewHelpers,
+      events: {
+        'click .btn-auth-menu': function (event) {
           event.preventDefault();
           event.stopPropagation();
           // don't bother firing any events if the menu is open
-          if(!$('.auth-nav-container').is(':visible')){
+          if (!$('.auth-nav-container').is(':visible')) {
             EventBus.trigger('auth.btnAuthGlobalMenuItemClicked');
           }
-          else{
+          else {
             hideProfileMenu();
           }
         }
       },
-      onShow:function() {
+      onShow: function () {
         ep.app.addRegions({
-          mainAuthView:'[data-region="authMainRegion"]'
+          mainAuthView: '[data-region="authMainRegion"]'
         });
         // set up the global events to close the profile menu
-        $('body').unbind().bind('click',function(event){
+        $('body').unbind().bind('click', function (event) {
           var authNavContainer = $('.auth-nav-container');
-          if (authNavContainer.is(':visible')){
+          if (authNavContainer.is(':visible')) {
             if (!authNavContainer.is(event.target) && authNavContainer.has(event.target).length === 0) {
               authNavContainer.hide();
             }
@@ -105,11 +115,11 @@ define(function (require) {
      * Login Form View: login form and login button
      */
     var loginFormView = Marionette.ItemView.extend({
-      template:'#AuthLoginFormTemplate',
-      templateHelpers:viewHelpers,
-      className:'auth-login-container',
+      template: '#AuthLoginFormTemplate',
+      templateHelpers: viewHelpers,
+      className: 'auth-login-container',
       attributes: {
-        "data-el-container":"global.loginMenu"
+        "data-el-container": "global.loginMenu"
       },
       ui: {
         loginButton: '.btn-auth-login',
@@ -132,60 +142,32 @@ define(function (require) {
      *  show logout button, and links and info regarding to user profile
      */
     var profileMenuView = Marionette.ItemView.extend({
-      template:'#AuthProfileMenuTemplate',
-      templateHelpers:viewHelpers,
-      tagName:'ul',
+      template: '#AuthProfileMenuTemplate',
+      templateHelpers: viewHelpers,
+      tagName: 'ul',
       className: 'auth-profile-menu-list',
-      attributes:{
-        "data-el-container":"global.profileMenu"
+      attributes: {
+        "data-el-container": "global.profileMenu"
       },
-      events:{
-        'click .btn-auth-logout':function(event){
+      events: {
+        'click .btn-auth-logout': function (event) {
           event.preventDefault();
           EventBus.trigger("auth.logoutBtnClicked");
         },
-        'click .profile-link':function () {
+        'click .profile-link': function () {
           $('.auth-nav-container').hide(250);
         }
       }
     });
 
-
-    /*
-     *
-     * Functions
-     *
-     * */
-    var getLoginRequestModel = function(){
-      var retVal = new Model.LoginFormModel();
-      retVal.set('userName',$('#OAuthUserName').val());
-      retVal.set('password',$('#OAuthPassword').val());
-      retVal.set('role','REGISTERED');
-      retVal.set('scope',ep.app.config.cortexApi.scope);
-      return retVal;
-    };
-
-    var displayLoginErrorMsg = function(msg){
-      if (msg) {
-        var key = 'auth.' + msg;
-        var errMsg = viewHelpers.getI18nLabel(key);
-        var authFeedBackContainer = $('.auth-feedback-container');
-        authFeedBackContainer.text(errMsg);
-        authFeedBackContainer.attr('data-i18n', key);
-      }
-      else {
-        ep.logger.warn('DisplayLoginErrorMsg called without error message');
-      }
-    };
-
     return {
-      DefaultView:defaultLayout,
-      LoginFormView:loginFormView,
-      ProfileMenuView:profileMenuView,
-      getLoginRequestModel:getLoginRequestModel,
-      displayLoginErrorMsg:displayLoginErrorMsg,
-      showProfileMenu:showProfileMenu,
-      hideProfileMenu:hideProfileMenu
+      DefaultView: defaultLayout,
+      LoginFormView: loginFormView,
+      ProfileMenuView: profileMenuView,
+      getLoginRequestModel: getLoginRequestModel,
+      displayLoginErrorMsg: displayLoginErrorMsg,
+      showProfileMenu: showProfileMenu,
+      hideProfileMenu: hideProfileMenu
     };
   }
 );

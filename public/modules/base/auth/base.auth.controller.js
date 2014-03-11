@@ -53,23 +53,14 @@ define(function (require) {
       }
       // show the login modal
       if (triggerLogIn){
-        EventBus.trigger('layout.loadRegionContentRequest', {
-          region: 'appModalRegion',
-          module: 'auth',
-          view: 'LoginFormView'
-        });
+        Mediator.fire("mediator.loadRegionContent", "loginModal");
       }
     });
 
     // auth menu request
     EventBus.on('auth.loadAuthMenuRequest', function() {
       View.showProfileMenu();
-      EventBus.trigger('layout.loadRegionContentRequest',{
-        region:'mainAuthView',
-        module:'auth',
-        view: 'ProfileMenuView'
-      });
-
+      Mediator.fire("mediator.loadRegionContent", "authProfileMenu");
     });
 
     /*

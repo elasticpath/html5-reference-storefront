@@ -80,7 +80,7 @@ define(function (require) {
         before(function () {
           sinon.stub(ep.logger, 'warn');
 
-          this.url = helpers.generateUrl(undefined, undefined);
+          this.url = helpers.generateUrl('profile', undefined);
         });
 
         after(function () {
@@ -90,20 +90,15 @@ define(function (require) {
         it('logs warning', function() {
           expect(ep.logger.warn).to.be.calledOnce;
         });
-
-        it('return empty String', function() {
-          expect(this.url).to.be.a('string');
-        });
-
       });
     });
 
-    describe('getLink', function() {
+    describe('getUrlHash', function() {
       describe("given valid argument", function() {
         var anyValidKey = 'cart';
 
         before(function () {
-          this.url = helpers.getLink(anyValidKey);
+          this.url = helpers.getUrlHash(anyValidKey);
         });
 
         it('returns a link', function () {
@@ -117,7 +112,7 @@ define(function (require) {
         before(function () {
           sinon.stub(ep.logger, 'warn');
 
-          this.url = helpers.getLink(undefined);
+          this.url = helpers.getUrlHash(undefined);
         });
 
         after(function () {

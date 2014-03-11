@@ -27,6 +27,13 @@ define(function(require) {
         view:'AppHeaderView'
       });
     },
+    authProfileMenu: function() {
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region:'mainAuthView',
+        module:'auth',
+        view: 'ProfileMenuView'
+      });
+    },
     cart: function(){
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'appMainRegion',

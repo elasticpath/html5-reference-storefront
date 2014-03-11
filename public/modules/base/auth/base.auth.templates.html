@@ -61,7 +61,7 @@
 
   <!-- Auth Profile Menu Template -->
   <script id="AuthProfileMenuTemplate" type="text/template">
-    <li><a href="<%= E.generateHref('profile') %>" class="profile-link" data-el-label="auth.profile"><span class="icon"></span><%=
+    <li><a href="<%= E.getUrlHash('profile') %>" class="profile-link" data-el-label="auth.profile"><span class="icon"></span><%=
       E.getI18nLabel('auth.profile') %></a></li>
     <li>
       <button class="btn-cmd btn-auth-logout" data-el-label="auth.logout"><span class="icon"></span><%= E.getI18nLabel('auth.logout') %></button>
