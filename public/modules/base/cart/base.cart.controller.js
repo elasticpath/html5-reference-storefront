@@ -317,14 +317,15 @@ define(function (require) {
       ep.router.controller.cart();
     });
 
+    /* ********** Checkout EVENT LISTENERS ********** */
     // Proceed to checkout button checks if the user is logged in and loads the checkout summary
     EventBus.on('cart.checkoutBtnClicked', function(checkoutLink) {
       // User not logged in and config set to require login
-      if (ep.app.config.requireAuthToCheckout && (!ep.app.isUserLoggedIn())) {
-        // Fire event to get authenticated (e.g. load the login form in a modal)
-        Mediator.fire('mediator.getAuthentication');
-      } else {
+      if ((ep.app.isUserLoggedIn())) {
         Mediator.fire('mediator.navigateToCheckoutRequest', checkoutLink);
+      } else {
+        // Fire event to get authenticated for checkout
+        Mediator.fire('mediator.authenticateForCheckout', checkoutLink);
       }
     });
 

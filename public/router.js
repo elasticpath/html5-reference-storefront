@@ -38,7 +38,8 @@ define(function(require) {
         'purchaseDetails/:id': 'purchaseDetails',
         'registration' : 'registration',
         'search' : 'search',
-        'search/:keywords' : 'search'
+        'search/:keywords' : 'search',
+        'signIn': 'authCheckout'
       },
       controller:loadRegionContentController,
       /**

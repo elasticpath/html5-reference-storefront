@@ -35,6 +35,10 @@ define(function (require) {
       return new View.DefaultView(options);
     };
 
+    var authCheckoutController = function() {
+      return new View.LoginFormView();
+    };
+
     // This variable is used to hold a reference to the LoginFormView - making it accessible to event handlers
     var loginFormView = {};
 
@@ -87,6 +91,15 @@ define(function (require) {
     EventBus.on('auth.authenticationRequest', function(authObj) {
       ep.io.ajax(authObj);
     });
+
+    function generateAuthData(role, authForm) {
+      var authFormValue = authForm || {};
+
+      return 'grant_type=password&scope=' + ep.app.config.cortexApi.scope
+        + '&role=' + role
+        + '&username=' + authFormValue.userName
+        + '&password=' + authFormValue.password;
+    }
 
     /*
      * Login Button Clicked - submit login form to server
@@ -150,6 +163,7 @@ define(function (require) {
 
     return {
       DefaultView:defaultView,
+      AuthCheckoutController: authCheckoutController,
       LoginFormView: function(options) {
         // Store a reference to the LoginFormView before returning it
         loginFormView = new View.LoginFormView(options);

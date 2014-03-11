@@ -81,6 +81,15 @@ define(function(require){
         EventBus.trigger('app.authInit');
       }
     },
+    'mediator.authenticateForCheckout': function(link) {
+      require(['ep'], function(ep) {
+        // The order link from the cart model is stored in session for anonymous checkout
+        // can be overwritten later
+        ep.io.sessionStore.setItem('orderLink', link);
+
+        ep.router.navigate(ep.app.config.routes.signIn, true);
+      });
+    },
     'mediator.cart.DefaultViewRendered':function(){
       require(['ia'],function(mod){
         EventBus.trigger('ia.clearSelectedNavRequest');
