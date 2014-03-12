@@ -41,6 +41,25 @@
     "loginMenu": "Login",
     "loginTitle": "Login",
     "logout": "Logout",
+    "checkoutAuthOption": {
+      "title": "Sign In to proceed to checkout",
+      "anonymous": {
+        "title": "Continue without an account",
+        "checkoutBtn": "Continue to checkout",
+        "email": "Email",
+        "explainMsg": "To proceed without setting up an account, please enter a valid email and click on \"Continue to checkout\" "
+      },
+      "cancelBtn": "Cancel",
+      "login": {
+        "title": "I have an account",
+        "loginBtn": "Login and continue"
+      },
+      "register": {
+        "title": "Create an account",
+        "registerBtn": "Register",
+        "explainMsg": "Create an account with us to enjoy fast and easy checkout, online address book, purchase history and more!"
+      }
+    },
     "password": "Password",
     "profile": "Profile",
     "register": "Register",

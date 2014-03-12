@@ -16,11 +16,14 @@
  *
  */
 define(function (require) {
+    require('equalize');
     var ep = require('ep');
+    var i18n = require('i18n');
     var Marionette = require('marionette');
     var EventBus = require('eventbus');
-    var i18n = require('i18n');
+
     var ViewHelpers = require('viewHelpers');
+
     var Model = require('auth.models');
 
     var viewHelpers = ViewHelpers.extend({
@@ -53,6 +56,7 @@ define(function (require) {
       $('.auth-nav-container').hide(250);
     }
 
+    // CheckIn no model in view
     var getLoginRequestModel = function () {
       var retVal = new Model.LoginFormModel();
       retVal.set('userName', $('#OAuthUserName').val());
@@ -62,6 +66,7 @@ define(function (require) {
       return retVal;
     };
 
+    // Checkin can be replaced by utils function?
     var displayLoginErrorMsg = function (msg) {
       if (msg) {
         var key = 'auth.' + msg;
@@ -128,16 +133,16 @@ define(function (require) {
       events: {
         'click @ui.loginButton': function (event) {
           event.preventDefault();
-          EventBus.trigger('auth.loginFormSubmitButtonClicked');
+          EventBus.trigger('auth.loginButtonClicked');
         },
         'click @ui.registerButton': function (event) {
           event.preventDefault();
-          EventBus.trigger('auth.loginFormRegisterLinkClicked');
+          EventBus.trigger('auth.registrationButtonClicked');
         }
       }
     });
 
-    /*
+    /**
      * Profile Menu View: menu view presented after logging-in
      *  show logout button, and links and info regarding to user profile
      */
@@ -160,10 +165,84 @@ define(function (require) {
       }
     });
 
+
+    var checkoutAuthOptionsLayout = Marionette.Layout.extend({
+      template: '#CheckoutAuthOptionsLayoutTemplate',
+      templateHelpers: viewHelpers,
+      className: 'container',
+      regions: {
+        loginRegion: '[data-region="checkoutAuthLoginOptionRegion"]',
+        registrationRegion: '[data-region="checkoutAutRegisterOptionRegion"]',
+        anonymousCheckoutRegion: '[data-region="checkoutAuthAnonymousOptionRegion"]'
+      },
+      ui: {
+        cancelButton: '[data-el-label="checkoutAuthOption.cancel"]'
+      },
+      events: {
+        'click @ui.cancelButton': function (event) {
+          event.preventDefault();
+          EventBus.trigger('auth.checkoutAuthOptionCancelBtnClicked');
+        }
+      },
+      onShow: function() {
+        $('.checkout-auth-option-container').equalHeights();
+      }
+    });
+
+    var checkoutAuthLoginOptionView = Marionette.ItemView.extend({
+      template: '#CheckoutAuthLoginOptionTemplate',
+      templateHelpers: viewHelpers,
+      className: "checkout-auth-option-container",
+      ui: {
+        loginButton: '[data-el-label="checkoutAuthOption.login"]'
+      },
+      events: {
+        'click @ui.loginButton': function (event) {
+          event.preventDefault();
+          EventBus.trigger('auth.loginButtonClicked', ep.app.config.routes.cart);
+        }
+      }
+    });
+
+    var checkoutAuthRegisterOptionView = Marionette.ItemView.extend({
+      template: '#CheckoutAuthRegisterOptionTemplate',
+      templateHelpers: viewHelpers,
+      className: "checkout-auth-option-container",
+      ui: {
+        registerButton: '[data-el-label="checkoutAuthOption.register"]'
+      },
+      events: {
+        'click @ui.registerButton': function (event) {
+          event.preventDefault();
+          EventBus.trigger('auth.registrationButtonClicked');
+        }
+      }
+    });
+
+    var checkoutAuthAnonymousOptionView = Marionette.ItemView.extend({
+      template: '#CheckoutAuthAnonymousOptionTemplate',
+      templateHelpers: viewHelpers,
+      className: "checkout-auth-option-container",
+      ui: {
+        checkoutButton: '[data-el-label="checkoutAuthOption.anonymousCheckout"]'
+      },
+      events: {
+        'click @ui.checkoutButton': function (event) {
+          event.preventDefault();
+          EventBus.trigger('auth.continueCheckoutAnonymouslyBtnClicked');
+        }
+      }
+    });
+
     return {
       DefaultView: defaultLayout,
       LoginFormView: loginFormView,
       ProfileMenuView: profileMenuView,
+      CheckoutAuthOptionsLayout: checkoutAuthOptionsLayout,
+      CheckoutAuthLoginOptionView: checkoutAuthLoginOptionView,
+      CheckoutAuthRegisterOptionView: checkoutAuthRegisterOptionView,
+      CheckoutAuthAnonymousOptionView: checkoutAuthAnonymousOptionView,
+
       getLoginRequestModel: getLoginRequestModel,
       displayLoginErrorMsg: displayLoginErrorMsg,
       showProfileMenu: showProfileMenu,

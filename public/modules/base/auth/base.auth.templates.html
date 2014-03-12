@@ -18,8 +18,6 @@
 
   <!-- Default Auth Main Template -->
   <script id="DefaultAuthLayoutTemplate" type="text/template">
-
-
     <div class="auth-container">
       <button class="global-nav-link global-nav-login btn-auth-menu" data-toggle="modal" data-target="#login-modal"
               data-i18n="<%= E.getMenuItemText() %>" data-el-label="global.profile">
@@ -67,4 +65,68 @@
       <button class="btn-cmd btn-auth-logout" data-el-label="auth.logout"><span class="icon"></span><%= E.getI18nLabel('auth.logout') %></button>
     </li>
   </script>
+
+  <script id="CheckoutAuthOptionsLayoutTemplate" type="text/template">
+    <h3><%= E.getI18nLabel('auth.checkoutAuthOption.title') %></h3>
+    <div class="checkout-auth-option-list equalize">
+      <div data-region="checkoutAuthLoginOptionRegion"></div>
+      <div data-region="checkoutAutRegisterOptionRegion"></div>
+      <div data-region="checkoutAuthAnonymousOptionRegion"></div>
+    </div>
+    <button class="btn checkout-auth-option-cancel-btn" data-el-label="checkoutAuthOption.cancel">
+      <%= E.getI18nLabel('auth.checkoutAuthOption.cancelBtn') %></button>
+  </script>
+
+  <script id="CheckoutAuthLoginOptionTemplate" type="text/template">
+    <h3><%= E.getI18nLabel('auth.checkoutAuthOption.login.title') %></h3>
+
+    <form role="form" method="POST">
+      <div class="auth-feedback-container" data-region="authLoginFormFeedbackRegion"></div>
+
+      <div class="form-group checkout-auth-form-group">
+        <label for="OAuthUserName" data-el-label="checkoutAuthOption.username" class="control-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('auth.userName') %>:
+        </label>
+        <input class="form-control" id="OAuthUserName" name="OAuthUserName" type="text" autofocus="autofocus"/>
+      </div>
+      <div class="form-group checkout-auth-form-group">
+        <label for="OAuthPassword" data-el-label="checkoutAuthOption.password" class="control-label">
+          <span class="required-label">*</span> <%= E.getI18nLabel('auth.password') %>:
+        </label>
+        <input class="form-control" id="OAuthPassword" name="OAuthPassword" type="password"/>
+      </div>
+      <input id="OAuthScope" name="OAuthScope" list="oAuthScopeList" type="hidden" value="<%= E.scope%>">
+      <input id="OAuthRole" name="OAuthRole" list="oAuthRoleList" type="hidden" value="REGISTERED">
+      <button class="btn btn-primary checkout-auth-option-login-btn" data-el-label="checkoutAuthOption.login">
+            <%= E.getI18nLabel('auth.checkoutAuthOption.login.loginBtn') %></button>
+    </form>
+  </script>
+
+  <script id="CheckoutAuthRegisterOptionTemplate" type="text/template">
+    <h3><%= E.getI18nLabel('auth.checkoutAuthOption.register.title') %></h3>
+    <p><%= E.getI18nLabel('auth.checkoutAuthOption.register.explainMsg') %></p>
+    <button class="btn btn-primary checkout-auth-option-register-btn" data-el-label="checkoutAuthOption.register">
+      <%= E.getI18nLabel('auth.checkoutAuthOption.register.registerBtn') %></button>
+  </script>
+
+  <script id="CheckoutAuthAnonymousOptionTemplate" type="text/template">
+    <h3><%= E.getI18nLabel('auth.checkoutAuthOption.anonymous.title') %></h3>
+    <p><%= E.getI18nLabel('auth.checkoutAuthOption.anonymous.explainMsg') %></p>
+
+    <form role="form" method="POST">
+      <div class="anonymous-checkout-feedback-container"></div>
+
+      <div class="form-group checkout-auth-form-group">
+        <label for="Email" data-el-label="checkoutAuthOption.email" class="control-label">
+          <span class="required-label">*</span><%= E.getI18nLabel('auth.checkoutAuthOption.anonymous.email') %>:
+        </label>
+        <input id="Email" name="Email" class="form-control" type="text" />
+      </div>
+
+      <button class="btn btn-primary checkout-auth-option-anonymous-checkout-btn" data-el-label="checkoutAuthOption.anonymousCheckout">
+        <%= E.getI18nLabel('auth.checkoutAuthOption.anonymous.checkoutBtn') %></button>
+    </form>
+
+  </script>
+
 </div>

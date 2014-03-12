@@ -39,7 +39,7 @@ define(function(require) {
         'registration' : 'registration',
         'search' : 'search',
         'search/:keywords' : 'search',
-        'signIn': 'authCheckout'
+        'signIn': 'checkoutAuth'
       },
       controller:loadRegionContentController,
       /**

@@ -27,11 +27,11 @@ define(function(require) {
         view:'AppHeaderView'
       });
     },
-    authCheckout: function() {
+    checkoutAuth: function() {
       EventBus.trigger('layout.loadRegionContentRequest', {
         region: 'appMainRegion',
         module: 'auth',
-        view: 'AuthCheckoutController'
+        view: 'CheckoutAuthOptionsController'
       });
     },
     authProfileMenu: function() {

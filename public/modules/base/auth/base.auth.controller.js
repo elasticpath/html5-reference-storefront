@@ -35,8 +35,16 @@ define(function (require) {
       return new View.DefaultView(options);
     };
 
-    var authCheckoutController = function() {
-      return new View.LoginFormView();
+    var checkoutAuthOptionsController = function() {
+      var checkoutAuthOptionsView = new View.CheckoutAuthOptionsLayout();
+
+      checkoutAuthOptionsView.on('show', function() {
+        checkoutAuthOptionsView.loginRegion.show(new View.CheckoutAuthLoginOptionView());
+        checkoutAuthOptionsView.registrationRegion.show(new View.CheckoutAuthRegisterOptionView());
+        checkoutAuthOptionsView.anonymousCheckoutRegion.show(new View.CheckoutAuthAnonymousOptionView());
+      });
+
+      return checkoutAuthOptionsView;
     };
 
     // This variable is used to hold a reference to the LoginFormView - making it accessible to event handlers
@@ -104,7 +112,7 @@ define(function (require) {
     /*
      * Login Button Clicked - submit login form to server
      */
-    EventBus.on('auth.loginFormSubmitButtonClicked', function () {
+    EventBus.on('auth.loginButtonClicked', function () {
       ep.ui.disableButton(loginFormView, 'loginButton');
       var requestModel = View.getLoginRequestModel();
 
@@ -128,7 +136,7 @@ define(function (require) {
     /**
      * Handler for the click event on the login form register link. Fires a mediator strategy.
      */
-    EventBus.on('auth.loginFormRegisterLinkClicked', function () {
+    EventBus.on('auth.registrationButtonClicked', function () {
       // Close the login form modal
       $.modal.close();
       Mediator.fire('mediator.registrationRequest');
@@ -163,7 +171,7 @@ define(function (require) {
 
     return {
       DefaultView:defaultView,
-      AuthCheckoutController: authCheckoutController,
+      CheckoutAuthOptionsController: checkoutAuthOptionsController,
       LoginFormView: function(options) {
         // Store a reference to the LoginFormView before returning it
         loginFormView = new View.LoginFormView(options);

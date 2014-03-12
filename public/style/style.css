@@ -5983,10 +5983,12 @@ td.visible-print {
   display: block;
   width: 16rem;
 }
-.auth-feedback-container {
+.auth-feedback-container,
+.anonymous-checkout-feedback-container {
   color: #ff0000;
   padding-left: 1rem;
   padding-right: 1rem;
+  padding-top: 1.5rem;
 }
 .auth-profile-menu-list button {
   width: 100%;
@@ -6131,6 +6133,57 @@ fieldset[disabled] .btn-auth-login.active {
 .register-cell .btn-link {
   float: right !important;
   padding-right: 0;
+}
+.checkout-auth-option-list {
+  margin-left: -30px;
+  margin-right: -30px;
+}
+.checkout-auth-option-list:before,
+.checkout-auth-option-list:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.checkout-auth-option-list:after {
+  clear: both;
+}
+.checkout-auth-option-list:before,
+.checkout-auth-option-list:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.checkout-auth-option-list:after {
+  clear: both;
+}
+.checkout-auth-option-container {
+  float: left;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: relative;
+  min-height: 1px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 30px;
+}
+@media (min-width: 768px) {
+  .checkout-auth-option-container {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 1200px) {
+  .checkout-auth-option-container {
+    float: left;
+    width: 50%;
+  }
 }
 /*
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
@@ -9102,7 +9155,7 @@ ul {
 */
 /* Form Feedback */
 .feedback-label {
-  color: red;
+  color: #ff0000;
 }
 .required-label {
   color: red;

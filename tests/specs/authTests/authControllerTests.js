@@ -92,8 +92,8 @@ define(function (require) {
           EventTestHelpers.reset('auth.loginFormValidationFailed');
         });
 
-        describe('responds to event: auth.loginFormSubmitButtonClicked',
-          EventTestFactory.createEventBusBtnEnablementTest('auth.loginFormSubmitButtonClicked', 'disableButton'));
+        describe('responds to event: auth.loginButtonClicked',
+          EventTestFactory.createEventBusBtnEnablementTest('auth.loginButtonClicked', 'disableButton'));
       });
 
     });
