@@ -16,8 +16,6 @@
  */
 define(['ep', 'app', 'backbone'],
   function (ep, app, Backbone) {
-    var ItemModels = {};
-
 
     var itemModel = Backbone.Model.extend({
       getUrl: function (href) {
@@ -70,7 +68,6 @@ define(['ep', 'app', 'backbone'],
         var addToCartFormAction = jsonPath(item, "$._addtocartform..links[?(@.rel='addtodefaultcartaction')].rel")[0];
         if (addToCartFormAction) {
           itemObj.addtocart.actionlink = jsonPath(item, "$._addtocartform..links[?(@.rel='addtodefaultcartaction')].href")[0];
-          ;
         }
 
 
@@ -90,7 +87,7 @@ define(['ep', 'app', 'backbone'],
           //itemObj.asset.url = 'http://localhost:3007/images/testdata/finding-nemo.jpg';
           //itemObj.asset.url = defaultImage['content-location'];
           assetObj.absolutePath = defaultImage['content-location'];
-          assetObj.name = defaultImage['name'];
+          assetObj.name = defaultImage.name;
           assetObj.relativePath = defaultImage['relative-location'];
           assetsListArray.push(assetObj);
         }
@@ -133,7 +130,7 @@ define(['ep', 'app', 'backbone'],
 
 
         // fake a price object when neither rate nor price present
-        if (!purchasePriceObject && itemObj.rateCollection.length == 0) {
+        if (!purchasePriceObject && itemObj.rateCollection.length === 0) {
           itemObj.price.purchase = {
             display: 'none'
           };
@@ -185,7 +182,7 @@ define(['ep', 'app', 'backbone'],
         if (releaseDate) {
           availability.releaseDate = {
             displayValue: releaseDate['display-value'],
-            value: releaseDate['value']
+            value: releaseDate.value
           };
         }
       }
@@ -202,7 +199,7 @@ define(['ep', 'app', 'backbone'],
           currency: jsonPath(rawObject, '$.currency')[0],
           amount: jsonPath(rawObject, '$.amount')[0],
           display: jsonPath(rawObject, '$.display')[0]
-        }
+        };
       }
       catch (error) {
         ep.logger.error('Error building price object: ' + error.message);
@@ -228,18 +225,18 @@ define(['ep', 'app', 'backbone'],
           amount: jsonPath(rates[i], '$.cost..amount')[0],
           currency: jsonPath(rates[i], '$.cost..currency')[0],
           display: jsonPath(rates[i], '$.cost..display')[0]
-        }
+        };
 
         rateObj.recurrence = {
           interval: jsonPath(rates[i], '$.recurrence..interval')[0],
           display: jsonPath(rates[i], '$.recurrence..display')[0]
-        }
+        };
 
         rateCollection.push(rateObj);
       }
 
       return rateCollection;
-    }
+    };
 
     // Required, return the module for AMD compliance
     return {
