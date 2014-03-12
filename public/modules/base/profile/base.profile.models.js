@@ -97,7 +97,7 @@ define(function (require) {
    * @type Backbone.Model
    */
   var profilePaymentMethodActionModel = Backbone.Model.extend({
-    url: urlBase + '?zoom=paymentmethods:createpaymenttokenform',
+    url: urlBase + '?zoom=paymentmethods:paymenttokenform',
     parse: function (response) {
       if (response) {
         // parse the JSON response and return the href if one is found
