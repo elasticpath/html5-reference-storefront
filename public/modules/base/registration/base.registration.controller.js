@@ -21,6 +21,7 @@
 define(function (require) {
     var ep = require('ep');
     var EventBus = require('eventbus');
+    var Mediator = require('mediator');
     var Backbone = require('backbone');
 
     var View = require('registration.views');
@@ -135,7 +136,7 @@ define(function (require) {
         }
 
         if (storedRouteObj.name) {
-          urlFragment = ep.router.rebuildUrlFragment(ep.app.config.routes, storedRouteObj.name, storedRouteObj.params);
+          urlFragment = ep.router.rebuildUrlFragment(ep.router.urlHashes, storedRouteObj.name, storedRouteObj.params);
         }
       }
 
@@ -187,7 +188,7 @@ define(function (require) {
      * Routes the user to a return route held in sessionStorage or back to the homepage
      * @param showLogin {Boolean} Show the login form after navigating to the return route
      */
-    EventBus.on('registration.navigateToReturnRoute', function (showLogin) {
+    EventBus.on('registration.navigateToReturnRoute', function (isRegistered) {
       var routeFromStorage = getRouteObjFromStorage();
       if (routeFromStorage) {
         // Navigate to the route and call its associated function
@@ -197,13 +198,9 @@ define(function (require) {
         ep.router.navigate('', true);
       }
 
-      if (showLogin) {
+      if (isRegistered) {
         // Prompt the user to login
-        EventBus.trigger('layout.loadRegionContentRequest', {
-          region: 'appModalRegion',
-          module: 'auth',
-          view: 'LoginFormView'
-        });
+        Mediator.fire('mediator.loadRegionContent', 'loginModal');
       }
     });
 

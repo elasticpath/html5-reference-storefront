@@ -26,6 +26,6 @@
     "purchaseHistory": "#purchaseDetails",
     "purchaseReceipt": "#purchaseReceipt",
     "registration": "#registration",
-    "signIn": "#signIn"
+    "checkoutAuth": "#signIn"
   }
 }

@@ -50,10 +50,10 @@ define(function (require) {
     // This variable is used to hold a reference to the LoginFormView - making it accessible to event handlers
     var loginFormView = {};
 
-    /*
+    /* ********* Load auth views EVENT LISTENERS ************ */
+    /**
      * Load login menu - load login form or profile menu depend on authentication state
      */
-    // auth menu item dropdown clicked
     // FIXME abstract logic 1 level down from btnClicked event
     EventBus.on('auth.btnAuthGlobalMenuItemClicked',function(){
       var triggerLogIn = true;
@@ -69,25 +69,32 @@ define(function (require) {
       }
     });
 
-    // auth menu request
+    /**
+     * Load profile dropdown menu in app header global nav
+     */
     EventBus.on('auth.loadAuthMenuRequest', function() {
       View.showProfileMenu();
       Mediator.fire("mediator.loadRegionContent", "authProfileMenu");
     });
 
+    /* ********* Authentication EVENT LISTENERS (login, logout, public auth) ************ */
     /*
-     *
-     * Login Error Message Feedback
+     * Login Button Clicked - submit login form to server
      */
-    EventBus.on("auth.loginRequestFailed", function(msg) {
-      ep.ui.enableButton(loginFormView, 'loginButton');
-      View.displayLoginErrorMsg(msg);
+    EventBus.on('auth.loginButtonClicked', function (redirectLocation) {
+      ep.ui.disableButton(loginFormView, 'loginButton');
+      EventBus.trigger('auth.submitLoginFormRequest', redirectLocation);
     });
 
-    EventBus.on("auth.loginFormValidationFailed", function(msg) {
-      ep.ui.enableButton(loginFormView, 'loginButton');
-      View.displayLoginErrorMsg(msg);
+    /*
+     * Logout Button Clicked - make logout request to server
+     */
+    EventBus.on('auth.logoutBtnClicked', function() {
+      // Clear sessionStorage on logout
+      ep.io.sessionStore.clear();
 
+      var logoutModel = new Model.LogoutModel();
+      EventBus.trigger('auth.authenticationRequest', logoutModel.toJSON());
     });
 
     /*
@@ -109,11 +116,7 @@ define(function (require) {
         + '&password=' + authFormValue.password;
     }
 
-    /*
-     * Login Button Clicked - submit login form to server
-     */
-    EventBus.on('auth.loginButtonClicked', function () {
-      ep.ui.disableButton(loginFormView, 'loginButton');
+    EventBus.on('auth.submitLoginFormRequest', function (redirectLocation) {
       var requestModel = View.getLoginRequestModel();
 
       if (requestModel.isComplete()) {
@@ -125,21 +128,24 @@ define(function (require) {
         var loginModel = new Model.LoginModel();
         loginModel.set('data', authString);
         loginModel.set('userName', requestModel.attributes.userName);
+        loginModel.set('redirect', redirectLocation);
 
-        EventBus.trigger('auth.authenticationRequest', loginModel.attributes);
+        EventBus.trigger('auth.authenticationRequest', loginModel.toJSON());
       }
       else {
         EventBus.trigger('auth.loginFormValidationFailed', 'loginFormMissingFieldsErrMsg');
       }
     });
 
-    /**
-     * Handler for the click event on the login form register link. Fires a mediator strategy.
-     */
-    EventBus.on('auth.registrationButtonClicked', function () {
-      // Close the login form modal
-      $.modal.close();
-      Mediator.fire('mediator.registrationRequest');
+    EventBus.on("auth.loginRequestFailed", function(msg) {
+      ep.ui.enableButton(loginFormView, 'loginButton');
+      View.displayLoginErrorMsg(msg);
+    });
+
+    EventBus.on("auth.loginFormValidationFailed", function(msg) {
+      ep.ui.enableButton(loginFormView, 'loginButton');
+      View.displayLoginErrorMsg(msg);
+
     });
 
     /*
@@ -158,16 +164,21 @@ define(function (require) {
       EventBus.trigger('auth.authenticationRequest', publicAuthModel.attributes);
     });
 
-    /*
-     * Logout Button Clicked - make logout request to server
-     */
-    EventBus.on('auth.logoutBtnClicked', function() {
-      // Clear sessionStorage on logout
-      ep.io.sessionStore.clear();
 
-      var logoutModel = new Model.LogoutModel();
-      EventBus.trigger('auth.authenticationRequest', logoutModel.attributes);
+    /* ********* Registration EVENT LISTENERS ************ */
+    /**
+     * Handler for the click event on the login form register link. Fires a mediator strategy.
+     */
+    EventBus.on('auth.registrationButtonClicked', function (redirect) {
+      // Close the login form modal
+      $.modal.close();
+      Mediator.fire('mediator.registrationRequest', redirect);
     });
+
+    /*
+     auth.checkoutAuthOptionCancelBtnClicked
+     auth.continueCheckoutAnonymouslyBtnClicked
+     */
 
     return {
       DefaultView:defaultView,

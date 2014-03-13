@@ -36,6 +36,7 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
      defaults: {
        userName:'Anonymous',
        authRequest: true,
+       redirect: '',  // location redirect to on success, placeholder for success function
        url: ep.io.getApiContext() + '/oauth2/tokens',
        type: 'POST',
        contentType: 'application/x-www-form-urlencoded',
@@ -45,7 +46,7 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
          ep.io.localStore.setItem('oAuthToken', 'Bearer ' + json.access_token);
          ep.io.localStore.setItem('oAuthUserName', this.userName);
 
-         Mediator.fire('mediator.authenticationSuccess', json.role);
+         Mediator.fire('mediator.authenticationSuccess', this.redirect);
        },
        error: function(response) {
          if (response.status === 401) {

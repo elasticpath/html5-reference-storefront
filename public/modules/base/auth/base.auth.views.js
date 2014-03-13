@@ -199,7 +199,7 @@ define(function (require) {
       events: {
         'click @ui.loginButton': function (event) {
           event.preventDefault();
-          EventBus.trigger('auth.loginButtonClicked', ep.app.config.routes.cart);
+          EventBus.trigger('auth.loginButtonClicked', ep.router.urlHashes.cart);
         }
       }
     });
@@ -214,7 +214,7 @@ define(function (require) {
       events: {
         'click @ui.registerButton': function (event) {
           event.preventDefault();
-          EventBus.trigger('auth.registrationButtonClicked');
+          EventBus.trigger('auth.registrationButtonClicked', ep.router.urlHashes.cart);
         }
       }
     });

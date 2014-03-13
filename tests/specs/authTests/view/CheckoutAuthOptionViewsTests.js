@@ -21,6 +21,7 @@ define(function (require) {
 
   var ep = require('ep');
   var Backbone = require('backbone');
+  var Router = require('router');
   var Marionette = require('marionette');
   var EventTestFactory = require('testfactory.event');
 
@@ -78,6 +79,8 @@ define(function (require) {
 
     describe('CheckoutAuthLoginOptionView', function() {
       before(function () {
+        ep.router = new Router.AppRouter();
+
         this.view = new views.CheckoutAuthLoginOptionView();
         this.view.render();
       });

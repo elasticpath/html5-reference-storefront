@@ -71,15 +71,16 @@ define(function(require){
         EventBus.trigger('auth.generatePublicAuthTokenRequest');
       });
     },
-    'mediator.authenticationSuccess':function(role){
-      // check if this is an anonymous authentication request
-      if (role === 'PUBLIC') {
-        EventBus.trigger('app.authInit'); // FIXME [CU-89] granular page reload
-      }
-      // else this should be a registered login authentication request
-      else {
-        EventBus.trigger('app.authInit');
-      }
+    'mediator.authenticationSuccess':function(redirect){
+      require(['ep'], function(ep) {
+        if (redirect) {
+          ep.router.navigate(redirect, true);
+        }
+        // else this should be a registered login authentication request
+        else {
+          EventBus.trigger('app.authInit');  // FIXME [CU-89] granular page reload
+        }
+      });
     },
     'mediator.authenticateForCheckout': function(link) {
       require(['ep'], function(ep) {
@@ -87,7 +88,7 @@ define(function(require){
         // can be overwritten later
         ep.io.sessionStore.setItem('orderLink', link);
 
-        ep.router.navigate(ep.app.config.routes.signIn, true);
+        ep.router.navigate(ep.app.config.routes.checkoutAuth, true);
       });
     },
     'mediator.cart.DefaultViewRendered':function(){
@@ -215,10 +216,15 @@ define(function(require){
     'mediator.addressFormComplete': function () {
       helpers.returnAfterFormDone('#profile', 'addressFormReturnTo');
     },
-    'mediator.registrationRequest': function() {
+    'mediator.registrationRequest': function(redirect) {
       require(['ep'], function (ep) {
         // Get the current route as an object
         var currentRoute = ep.router.getCurrentRoute();
+
+        // if redirect location is specified, store it as well so can be redirected to specified location on registration success,
+        if (redirect) {
+          currentRoute.redirect = redirect;
+        }
 
         // Stringify the return route object so it can be stored in sessionStorage
         var routeForStorage = JSON.stringify(currentRoute);
