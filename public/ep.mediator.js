@@ -221,7 +221,7 @@ define(function(require){
         // Get the current route as an object
         var currentRoute = ep.router.getCurrentRoute();
 
-        // if redirect location is specified, store it as well so can be redirected to specified location on registration success,
+        // if redirect location is specified, store it as well so can be redirected on registration success,
         if (redirect) {
           currentRoute.redirect = redirect;
         }
