@@ -169,15 +169,6 @@ define(function (require) {
         registrationRegion: '[data-region="checkoutAutRegisterOptionRegion"]',
         anonymousCheckoutRegion: '[data-region="checkoutAuthAnonymousOptionRegion"]'
       },
-      ui: {
-        cancelButton: '[data-el-label="checkoutAuthOption.cancel"]'
-      },
-      events: {
-        'click @ui.cancelButton': function (event) {
-          event.preventDefault();
-          EventBus.trigger('auth.checkoutAuthOptionCancelBtnClicked');
-        }
-      },
       onShow: function() {
         $('.checkout-auth-option-container').equalHeights();
       }

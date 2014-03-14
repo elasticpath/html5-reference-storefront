@@ -61,7 +61,6 @@
           "missingEmail": "Email field must not be blank"
         }
       },
-      "cancelBtn": "Cancel",
       "login": {
         "title": "I have an account",
         "loginBtn": "Login and continue"

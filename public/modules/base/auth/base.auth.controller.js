@@ -246,11 +246,6 @@ define(function (require) {
       Mediator.fire('mediator.registrationRequest', redirect);
     });
 
-    EventBus.on('auth.checkoutAuthOptionCancelBtnClicked', function() {
-      ep.router.navigate(ep.router.urlHashes.cart, true);
-      ep.io.sessionStore.removeItem('orderLink');   // clear sessionStorage
-    });
-
     /* ********* Anonymous Checkout EVENT LISTENERS ************ */
     EventBus.on('auth.continueCheckoutAnonymouslyBtnClicked', function(submitFormActionLink) {
       ep.ui.disableButton(checkoutAuthOptionsView.anonymousCheckoutRegion.currentView, 'checkoutButton');

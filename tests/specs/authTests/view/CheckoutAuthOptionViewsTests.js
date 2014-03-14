@@ -53,10 +53,6 @@ define(function (require) {
         expect(this.view).to.be.an.instanceOf(Marionette.Layout);
       });
 
-      it('defines and renders ui element: cancel button', function () {
-        expect(this.view.ui.cancelButton).to.be.ok;
-      });
-
       describe('has regions', function () {
         it('loginRegion', function () {
           expect(this.view.loginRegion).to.exist;
@@ -71,9 +67,6 @@ define(function (require) {
           expect(this.view.$el.find(this.view.regions.anonymousCheckoutRegion)).to.be.length(1);
         });
       });
-
-      describe('cancel authorization for checkout button clicked',
-        EventTestFactory.simpleBtnClickTest('auth.checkoutAuthOptionCancelBtnClicked', '[data-el-label="checkoutAuthOption.cancel"]'));
     });
 
 
