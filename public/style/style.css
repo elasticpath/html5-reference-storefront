@@ -5989,6 +5989,7 @@ td.visible-print {
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 1.5rem;
+  width: 280px;
 }
 .auth-profile-menu-list button {
   width: 100%;

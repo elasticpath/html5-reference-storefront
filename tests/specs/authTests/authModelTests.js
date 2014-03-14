@@ -15,17 +15,56 @@
  * Functional Storefront Unit Test - Auth Models
  */
 define(function (require) {
-  var authModel = require('auth.models');
+  var ep = require('ep');
+  var _ = require('underscore');
 
-  describe('Auth Module: Models', function () {
+  var authModels = require('auth.models');
+  var dataJSON = require('text!../../../tests/data/auth.json');
+
+  describe("Auth Module: Models", function() {
     it("LogoutModel should exist", function () {
-      expect(authModel.LogoutModel).to.exist;
-    });
-    it("LoginFormModel should exist", function () {
-      expect(authModel.LoginFormModel).to.exist;
+      expect(authModels.LogoutModel).to.exist;
     });
     it("LoginModel should exist", function () {
-      expect(authModel.LoginModel).to.exist;
+      expect(authModels.LoginModel).to.exist;
+    });
+
+    describe('AnonymousCheckoutModel', function () {
+      var authData = JSON.parse(_.clone(dataJSON)).response.anonymousForm;
+      var anonymousModel = new authModels.AnonymousCheckoutModel();
+
+      describe('given valid response', function () {
+        before(function () {
+          this.model = anonymousModel.parse(authData);
+        });
+
+        after(function () {
+          delete(this.model);
+        });
+
+        it('returns create email action link', function () {
+          expect(this.model.emailActionLink).to.be.equal('ROOT/emails/campus');
+        });
+      });
+
+      describe('given no response', function () {
+        before(function () {
+          sinon.stub(ep.logger, 'error');
+          this.model = anonymousModel.parse(undefined);
+        });
+
+        after(function () {
+          ep.logger.error.restore();
+        });
+
+        it('logs an error', function () {
+          expect(ep.logger.error).to.be.called;
+        });
+
+        it('returns empty object', function () {
+          expect(this.model).to.be.eql({});
+        });
+      });
     });
   });
 });

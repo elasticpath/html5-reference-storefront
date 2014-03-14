@@ -18,20 +18,10 @@
 define(['ep', 'mediator', 'eventbus', 'backbone'],
   function(ep, Mediator, EventBus, Backbone){
 
-
-    /*
-     * Login Form Model: store data from login form fields
-     */
-    var loginFormModel = Backbone.Model.extend({
-      isComplete:function() {
-        return this.get('userName') && this.get('password') && this.get('role') && this.get('scope');
-      }
-    });
-
-
     /*
      * Login Model: store default login / public auth request ajax call properties
      */
+    // FIXME is this really proper use of model? should this logic live in model? I feel it should be in success
     var loginModel = Backbone.Model.extend({
      defaults: {
        userName:'Anonymous',
@@ -49,11 +39,12 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
          Mediator.fire('mediator.authenticationSuccess', this.redirect);
        },
        error: function(response) {
-         if (response.status === 401) {
-           EventBus.trigger('auth.loginRequestFailed', 'badCredentialErrMsg');
-         } else {
-           ep.logger.error('response code ' + response.status + ': ' + response.responseText);
-         }
+         EventBus.trigger('auth.loginRequestFailed', {
+           status: response.status,
+           responseText: response.responseText
+         });
+
+         ep.logger.error('response code ' + response.status + ': ' + response.responseText);
        }
      }
     });
@@ -84,10 +75,30 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
       }
     });
 
+    var anonymousCheckoutModel = Backbone.Model.extend({
+      getUrl: function (href) {
+        return href + '?zoom=emailinfo:emailform';
+      },
+      parse: function(response) {
+        var emailForm = {};
+
+        if (response) {
+          emailForm =  {
+            emailActionLink: jsonPath(response, '$.._emailinfo..links[?(@.rel=="createemailaction")].href')[0]
+          };
+        }
+        else {
+          ep.logger.error("new payment form model wasn't able to fetch valid data for parsing. ");
+        }
+
+        return emailForm;
+      }
+    });
+
     return {
-      LoginFormModel:loginFormModel,
       LogoutModel:logoutModel,
-      LoginModel:loginModel
+      LoginModel:loginModel,
+      AnonymousCheckoutModel: anonymousCheckoutModel
     };
   }
 );

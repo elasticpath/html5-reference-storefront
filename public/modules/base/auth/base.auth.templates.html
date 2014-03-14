@@ -33,7 +33,7 @@
   <!-- Auth Login Form Template -->
   <script id="AuthLoginFormTemplate" type="text/template">
     <h2><%= E.getI18nLabel('auth.loginTitle') %></h2>
-    <div class="auth-feedback-container" data-i18n=""></div>
+    <div class="auth-feedback-container" data-i18n="" data-region="authLoginFormFeedbackRegion"></div>
 
     <form role="form" method="POST">
       <div class="form-group">
@@ -44,7 +44,7 @@
         <label for="OAuthPassword"><%= E.getI18nLabel('auth.password') %>:</label>
         <input class="form-control" id="OAuthPassword" name="OAuthPassword" type="password"/>
       </div>
-      <input id="OAuthScope" name="OAuthScope" list="oAuthScopeList" type="hidden" value="<%= E.scope%>">
+      <input id="OAuthScope" name="OAuthScope" list="oAuthScopeList" type="hidden" value="<%= E.getStoreScope() %>">
       <input id="OAuthRole" name="OAuthRole" list="oAuthRoleList" type="hidden" value="REGISTERED">
       <div class="form-group action-row">
         <div class="login-cell">
@@ -69,8 +69,8 @@
   <script id="CheckoutAuthOptionsLayoutTemplate" type="text/template">
     <h3><%= E.getI18nLabel('auth.checkoutAuthOption.title') %></h3>
     <div class="checkout-auth-option-list equalize">
-      <div data-region="checkoutAuthLoginOptionRegion"></div>
       <div data-region="checkoutAutRegisterOptionRegion"></div>
+      <div data-region="checkoutAuthLoginOptionRegion"></div>
       <div data-region="checkoutAuthAnonymousOptionRegion"></div>
     </div>
     <button class="btn checkout-auth-option-cancel-btn" data-el-label="checkoutAuthOption.cancel">
@@ -95,7 +95,7 @@
         </label>
         <input class="form-control" id="OAuthPassword" name="OAuthPassword" type="password"/>
       </div>
-      <input id="OAuthScope" name="OAuthScope" list="oAuthScopeList" type="hidden" value="<%= E.scope%>">
+      <input id="OAuthScope" name="OAuthScope" list="oAuthScopeList" type="hidden" value="<%= E.getStoreScope() %>">
       <input id="OAuthRole" name="OAuthRole" list="oAuthRoleList" type="hidden" value="REGISTERED">
       <button class="btn btn-primary checkout-auth-option-login-btn" data-el-label="checkoutAuthOption.login">
             <%= E.getI18nLabel('auth.checkoutAuthOption.login.loginBtn') %></button>
@@ -114,7 +114,7 @@
     <p><%= E.getI18nLabel('auth.checkoutAuthOption.anonymous.explainMsg') %></p>
 
     <form role="form" method="POST">
-      <div class="anonymous-checkout-feedback-container"></div>
+      <div class="anonymous-checkout-feedback-container" data-region="anonymousCheckoutFeedbackRegion"></div>
 
       <div class="form-group checkout-auth-form-group">
         <label for="Email" data-el-label="checkoutAuthOption.email" class="control-label">

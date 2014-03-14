@@ -29,7 +29,7 @@ define(function (require) {
      * View Tests
      */
     require('specs/authTests/view/defaultAuthViewTests.js');
-    require('specs/authTests/view/CheckoutAuthOptionViewsTests.js');
+    require('specs/authTests/view/checkoutAuthOptionViewsTests.js');
 
 
     /*

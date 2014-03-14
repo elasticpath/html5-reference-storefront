@@ -64,23 +64,17 @@ define(function (require) {
     });
 
     describe('Events tests', function() {
-
       before(function() {
         // Stub and unbind some events for all of the button enablement functions
-        sinon.stub(authView, 'displayLoginErrorMsg');
         EventTestHelpers.unbind('auth.authenticationRequest');
       });
 
       after(function() {
-        authView.displayLoginErrorMsg.restore();
         EventTestHelpers.reset('auth.authenticationRequest');
       });
 
       describe('responds to event: auth.loginRequestFailed',
         EventTestFactory.createEventBusBtnEnablementTest('auth.loginRequestFailed', 'enableButton'));
-
-      describe('responds to event: auth.loginFormValidationFailed',
-        EventTestFactory.createEventBusBtnEnablementTest('auth.loginFormValidationFailed', 'enableButton'));
 
       describe('loginFormSubmitButtonClicked event tests', function() {
         before(function() {

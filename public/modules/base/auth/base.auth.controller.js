@@ -22,33 +22,69 @@ define(function (require) {
     var ep = require('ep');
     var Mediator = require('mediator');
     var EventBus = require('eventbus');
+    var i18n = require('i18n');
+    var utils = require('utils');
 
     var Model = require('auth.models');
     var View = require('auth.views');
     var template = require('text!modules/base/auth/base.auth.templates.html');
 
     $('#TemplateContainer').append(template);
-
     _.templateSettings.variable = 'E';
+
+    var checkoutAuthOptionsView;
 
     var defaultView = function(options) {
       return new View.DefaultView(options);
     };
 
     var checkoutAuthOptionsController = function() {
-      var checkoutAuthOptionsView = new View.CheckoutAuthOptionsLayout();
+      if (ep.app.isUserLoggedIn()) {
+        // if user is logged, shouldn't be allowed to authenticate again. Redirect to index
+        ep.router.navigate('', true);
+      }
+      else {
+        checkoutAuthOptionsView = new View.CheckoutAuthOptionsLayout();
+        checkoutAuthOptionsView.on('show', function() {
+          checkoutAuthOptionsView.loginRegion.show(new View.CheckoutAuthLoginOptionView());
+          checkoutAuthOptionsView.registrationRegion.show(new View.CheckoutAuthRegisterOptionView());
 
-      checkoutAuthOptionsView.on('show', function() {
-        checkoutAuthOptionsView.loginRegion.show(new View.CheckoutAuthLoginOptionView());
-        checkoutAuthOptionsView.registrationRegion.show(new View.CheckoutAuthRegisterOptionView());
-        checkoutAuthOptionsView.anonymousCheckoutRegion.show(new View.CheckoutAuthAnonymousOptionView());
-      });
+          // Attempt to retrieve an order link from session storage (set by the checkout module)
+          var orderLink = ep.io.sessionStore.getItem('orderLink');
 
-      return checkoutAuthOptionsView;
+          if (orderLink) {
+            var anonymousCheckoutModel = new Model.AnonymousCheckoutModel();
+            anonymousCheckoutModel.fetch({
+              url: anonymousCheckoutModel.getUrl(orderLink),
+              success: function() {
+                checkoutAuthOptionsView.anonymousCheckoutRegion.show(new View.CheckoutAuthAnonymousOptionView({
+                  model: anonymousCheckoutModel
+                }));
+              }
+            });
+          }
+        });
+
+        return checkoutAuthOptionsView;
+      }
+
     };
 
     // This variable is used to hold a reference to the LoginFormView - making it accessible to event handlers
     var loginFormView = {};
+
+
+    function translateErrMsg(rawMsg) {
+      var cortexErrMsgToI18nKeyMap = {
+        "Email is missing.": "checkoutAuthOption.anonymous.errorMsg.missingEmail",
+        "Email: not a well-formed email address": "checkoutAuthOption.anonymous.errorMsg.invalidEmail",
+        "Username, password are missing.":"loginForm.errorMsg.missingUsernamePasswordErr",
+        "Username is missing.":"loginForm.errorMsg.missingUsernameErr",
+        "Password is missing.":"loginForm.errorMsg.missingPasswordErr"
+      };
+
+      return utils.translateErrorMessage(rawMsg, cortexErrMsgToI18nKeyMap, {localePrefix: 'auth.'});
+    }
 
     /* ********* Load auth views EVENT LISTENERS ************ */
     /**
@@ -81,9 +117,16 @@ define(function (require) {
     /*
      * Login Button Clicked - submit login form to server
      */
-    EventBus.on('auth.loginButtonClicked', function (redirectLocation) {
+    EventBus.on('auth.loginButtonClicked', function () {
       ep.ui.disableButton(loginFormView, 'loginButton');
-      EventBus.trigger('auth.submitLoginFormRequest', redirectLocation);
+
+      EventBus.trigger('auth.submitLoginFormRequest');
+    });
+
+    EventBus.on('auth.checkoutAuthLoginButtonClicked', function (redirectLocation) {
+      ep.ui.disableButton(checkoutAuthOptionsView.loginRegion.currentView, 'loginButton');
+
+      EventBus.trigger('auth.submitCheckoutAuthLoginFormRequest', redirectLocation);
     });
 
     /*
@@ -107,53 +150,11 @@ define(function (require) {
       ep.io.ajax(authObj);
     });
 
-    function generateAuthData(role, authForm) {
-      var authFormValue = authForm || {};
-
-      return 'grant_type=password&scope=' + ep.app.config.cortexApi.scope
-        + '&role=' + role
-        + '&username=' + authFormValue.userName
-        + '&password=' + authFormValue.password;
-    }
-
-    EventBus.on('auth.submitLoginFormRequest', function (redirectLocation) {
-      var requestModel = View.getLoginRequestModel();
-
-      if (requestModel.isComplete()) {
-        var authString = 'grant_type=password&username=' + requestModel.get('userName')
-          + '&password=' + requestModel.get('password')
-          + '&scope=' + requestModel.get('scope')
-          + '&role=' + requestModel.get('role');
-
-        var loginModel = new Model.LoginModel();
-        loginModel.set('data', authString);
-        loginModel.set('userName', requestModel.attributes.userName);
-        loginModel.set('redirect', redirectLocation);
-
-        EventBus.trigger('auth.authenticationRequest', loginModel.toJSON());
-      }
-      else {
-        EventBus.trigger('auth.loginFormValidationFailed', 'loginFormMissingFieldsErrMsg');
-      }
-    });
-
-    EventBus.on("auth.loginRequestFailed", function(msg) {
-      ep.ui.enableButton(loginFormView, 'loginButton');
-      View.displayLoginErrorMsg(msg);
-    });
-
-    EventBus.on("auth.loginFormValidationFailed", function(msg) {
-      ep.ui.enableButton(loginFormView, 'loginButton');
-      View.displayLoginErrorMsg(msg);
-
-    });
-
     /*
      * Generate Public Authentication Request
      *
      * handles both login and logout requests
      * uses different verbs - (POST/DELETE)
-     *
      */
     EventBus.on('auth.generatePublicAuthTokenRequest', function() {
       var authString = 'grant_type=password&scope=' + ep.app.config.cortexApi.scope + '&role=PUBLIC';
@@ -163,6 +164,76 @@ define(function (require) {
 
       EventBus.trigger('auth.authenticationRequest', publicAuthModel.attributes);
     });
+
+    function submitLoginForm(loginModel, redirectLocation) {
+      var loginFormValues = View.getLoginFormValues();
+
+      var authString = 'grant_type=password'
+        + '&username=' + loginFormValues.userName
+        + '&password=' + loginFormValues.password
+        + '&scope=' + loginFormValues.scope
+        + '&role=' + loginFormValues.role;
+
+      loginModel.set('data', authString);
+      loginModel.set('userName', loginFormValues.userName);
+      loginModel.set('redirect', redirectLocation);
+
+      EventBus.trigger('auth.authenticationRequest', loginModel.toJSON());
+    }
+
+
+    /**
+     * Make submit login form to cortex server for registered authentication.
+     */
+    EventBus.on('auth.submitLoginFormRequest', function() {
+      var loginModel = new Model.LoginModel();
+      submitLoginForm(loginModel);
+    });
+
+    EventBus.on('auth.submitCheckoutAuthLoginFormRequest', function(redirectUrl) {
+      var errorFn = function(response) {
+        EventBus.trigger('auth.checkoutAuthLoginRequestFailed', {
+          status: response.status,
+          responseText: response.responseText
+        });
+
+        ep.logger.error('response code ' + response.status + ': ' + response.responseText);
+      };
+
+      var loginModel = new Model.LoginModel();
+      loginModel.set('error', errorFn);
+
+      submitLoginForm(loginModel, redirectUrl);
+    });
+
+    function displayLoginFormError(response) {
+      var errMsgKey = 'auth.loginForm.errorMsg.generic';
+      if (response) {
+        if (response.status === 401) {
+          errMsgKey = 'auth.loginForm.errorMsg.badCredentialErr';
+        } else if (response.status === 400) {
+          errMsgKey = translateErrMsg(response.responseText)[0].error;
+        }
+      }
+
+      utils.renderMsgToPage(errMsgKey, $('[data-region="authLoginFormFeedbackRegion"]'));
+    }
+
+    /**
+     * Handles error case of login request failure. Will translate error message and display it in feedback region.
+     */
+    EventBus.on("auth.loginRequestFailed", function(response) {
+      ep.ui.enableButton(loginFormView, 'loginButton');
+
+      displayLoginFormError(response);
+    });
+
+    EventBus.on("auth.checkoutAuthLoginRequestFailed", function(response) {
+      ep.ui.enableButton(checkoutAuthOptionsView.loginRegion.currentView, 'loginButton');
+
+      displayLoginFormError(response);
+    });
+
 
 
     /* ********* Registration EVENT LISTENERS ************ */
@@ -175,10 +246,59 @@ define(function (require) {
       Mediator.fire('mediator.registrationRequest', redirect);
     });
 
-    /*
-     auth.checkoutAuthOptionCancelBtnClicked
-     auth.continueCheckoutAnonymouslyBtnClicked
+    EventBus.on('auth.checkoutAuthOptionCancelBtnClicked', function() {
+      ep.router.navigate(ep.router.urlHashes.cart, true);
+      ep.io.sessionStore.removeItem('orderLink');   // clear sessionStorage
+    });
+
+    /* ********* Anonymous Checkout EVENT LISTENERS ************ */
+    EventBus.on('auth.continueCheckoutAnonymouslyBtnClicked', function(submitFormActionLink) {
+      ep.ui.disableButton(checkoutAuthOptionsView.anonymousCheckoutRegion.currentView, 'checkoutButton');
+      EventBus.trigger('auth.submitAnonymousCheckoutFormRequest', submitFormActionLink);
+    });
+
+    /**
+     * Submit form with required information for anonymous checkout
      */
+    EventBus.on('auth.submitAnonymousCheckoutFormRequest', function(submitFormActionLink) {
+      var formValue = View.getAnonymousFormValue();
+
+      var ajaxModel = new ep.io.defaultAjaxModel({
+        type: 'POST',
+        url: submitFormActionLink,
+        data: JSON.stringify(formValue),
+        success: function () {
+          ep.ui.enableButton(checkoutAuthOptionsView.anonymousCheckoutRegion.currentView, 'checkoutButton');
+          EventBus.trigger('auth.submitAnonymousCheckoutFormSuccess');
+        },
+        customErrorFn: function (response) {
+          ep.ui.enableButton(checkoutAuthOptionsView.anonymousCheckoutRegion.currentView, 'checkoutButton');
+          EventBus.trigger('auth.submitAnonymousCheckoutFormFailed', {
+            status: response.status,
+            responseText: response.responseText
+          });
+        }
+      });
+
+      ep.io.ajax(ajaxModel.toJSON());
+    });
+
+    EventBus.on('auth.submitAnonymousCheckoutFormSuccess', function() {
+      var checkoutLink = ep.io.sessionStore.getItem('orderLink');
+      Mediator.fire('mediator.navigateToCheckoutRequest', checkoutLink);
+    });
+
+    EventBus.on('auth.submitAnonymousCheckoutFormFailed', function(response) {
+      var errMsgKey = 'auth.checkoutAuthOption.anonymous.errorMsg.generic';
+
+      if (response && response.status === 400) {
+        errMsgKey = translateErrMsg(response.responseText)[0].error;
+      }
+
+      utils.renderMsgToPage(errMsgKey, checkoutAuthOptionsView.anonymousCheckoutRegion.currentView.ui.feedbackRegion);
+
+      ep.ui.enableButton(checkoutAuthOptionsView.anonymousCheckoutRegion.currentView, 'saveBtn');
+    });
 
     return {
       DefaultView:defaultView,

@@ -35,9 +35,16 @@
     }
   },
   "auth": {
-    "badCredentialErrMsg": "Your username or password is invalid. ",
+    "loginForm": {
+      "errorMsg": {
+        "generic": "I'm sorry, there was an error with the login form. Please contact your system administrator",
+        "badCredentialErr": "Your username or password is invalid. ",
+        "missingUsernamePasswordErr": "Username and password are missing. ",
+        "missingPasswordErr": "Password is missing",
+        "missingUsernameErr": "Username is missing"
+      }
+    },
     "login": "Login",
-    "loginFormMissingFieldsErrMsg": "Username or password are missing. ",
     "loginMenu": "Login",
     "loginTitle": "Login",
     "logout": "Logout",
@@ -47,7 +54,12 @@
         "title": "Continue without an account",
         "checkoutBtn": "Continue to checkout",
         "email": "Email",
-        "explainMsg": "To proceed without setting up an account, please enter a valid email and click on \"Continue to checkout\" "
+        "explainMsg": "To proceed without setting up an account, please enter a valid email and click on \"Continue to checkout\" ",
+        "errorMsg": {
+          "generic": "I'm sorry, there was an error with the form. Please contact your system administrator",
+          "invalidEmail": "Please enter a valid email",
+          "missingEmail": "Email field must not be blank"
+        }
       },
       "cancelBtn": "Cancel",
       "login": {

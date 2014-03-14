@@ -42,6 +42,9 @@ define(function (require) {
           retVal = 'auth.loginMenu';
         }
         return retVal;
+      },
+      getStoreScope: function() {
+        return ep.app.config.cortexApi.scope;
       }
     });
 
@@ -56,28 +59,21 @@ define(function (require) {
       $('.auth-nav-container').hide(250);
     }
 
-    // CheckIn no model in view
-    var getLoginRequestModel = function () {
-      var retVal = new Model.LoginFormModel();
-      retVal.set('userName', $('#OAuthUserName').val());
-      retVal.set('password', $('#OAuthPassword').val());
-      retVal.set('role', 'REGISTERED');
-      retVal.set('scope', ep.app.config.cortexApi.scope);
-      return retVal;
+    var getLoginFormValue = function () {
+      var formValues = {
+        "userName": $('#OAuthUserName').val(),
+        "password": $('#OAuthPassword').val(),
+        "role": $('#OAuthRole').val(),
+        "scope": $('#OAuthScope').val()
+      };
+
+      return formValues;
     };
 
-    // Checkin can be replaced by utils function?
-    var displayLoginErrorMsg = function (msg) {
-      if (msg) {
-        var key = 'auth.' + msg;
-        var errMsg = viewHelpers.getI18nLabel(key);
-        var authFeedBackContainer = $('.auth-feedback-container');
-        authFeedBackContainer.text(errMsg);
-        authFeedBackContainer.attr('data-i18n', key);
-      }
-      else {
-        ep.logger.warn('DisplayLoginErrorMsg called without error message');
-      }
+    var getAnonymousFormValue = function() {
+      return {
+        "email": $('#Email').val()
+      };
     };
 
     /*
@@ -199,7 +195,7 @@ define(function (require) {
       events: {
         'click @ui.loginButton': function (event) {
           event.preventDefault();
-          EventBus.trigger('auth.loginButtonClicked', ep.router.urlHashes.cart);
+          EventBus.trigger('auth.checkoutAuthLoginButtonClicked', ep.router.urlHashes.cart);
         }
       }
     });
@@ -224,12 +220,13 @@ define(function (require) {
       templateHelpers: viewHelpers,
       className: "checkout-auth-option-container",
       ui: {
-        checkoutButton: '[data-el-label="checkoutAuthOption.anonymousCheckout"]'
+        checkoutButton: '[data-el-label="checkoutAuthOption.anonymousCheckout"]',
+        feedbackRegion: '[data-region="anonymousCheckoutFeedbackRegion"]'
       },
       events: {
         'click @ui.checkoutButton': function (event) {
           event.preventDefault();
-          EventBus.trigger('auth.continueCheckoutAnonymouslyBtnClicked');
+          EventBus.trigger('auth.continueCheckoutAnonymouslyBtnClicked', this.model.get('emailActionLink'));
         }
       }
     });
@@ -243,8 +240,8 @@ define(function (require) {
       CheckoutAuthRegisterOptionView: checkoutAuthRegisterOptionView,
       CheckoutAuthAnonymousOptionView: checkoutAuthAnonymousOptionView,
 
-      getLoginRequestModel: getLoginRequestModel,
-      displayLoginErrorMsg: displayLoginErrorMsg,
+      getLoginFormValues: getLoginFormValue,
+      getAnonymousFormValue: getAnonymousFormValue,
       showProfileMenu: showProfileMenu,
       hideProfileMenu: hideProfileMenu
     };

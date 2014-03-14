@@ -115,7 +115,7 @@ define(function (require) {
       });
 
       describe('login form login button clicked',
-        EventTestFactory.simpleBtnClickTest('auth.loginButtonClicked', '[data-el-label="checkoutAuthOption.login"]'));
+        EventTestFactory.simpleBtnClickTest('auth.checkoutAuthLoginButtonClicked', '[data-el-label="checkoutAuthOption.login"]'));
     });
 
     describe('CheckoutAuthRegisterOptionView', function() {
@@ -142,7 +142,9 @@ define(function (require) {
 
     describe('CheckoutAuthAnonymousOptionView', function() {
       before(function () {
-        this.view = new views.CheckoutAuthAnonymousOptionView();
+        this.view = new views.CheckoutAuthAnonymousOptionView({
+          model: new Backbone.Model()
+        });
         this.view.render();
       });
 
