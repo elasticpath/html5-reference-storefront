@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.elasticpath.stores</groupId>
 		<artifactId>store-data-exporter-parent</artifactId>
-		<version>6.10.0.2014031215</version>
+		<version>6.10.0-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 
