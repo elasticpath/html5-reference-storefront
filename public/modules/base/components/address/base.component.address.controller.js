@@ -48,7 +48,6 @@ define(function (require) {
    */
   var defaultCreateAddressController = function () {
     // Ensure the user is authenticated before rendering the address form
-    if (ep.app.isUserLoggedIn()) {
       var addressModel = new Models.CreateAddressModel();
       createAddressLayout = new Views.DefaultCreateAddressLayout({
         model: addressModel
@@ -62,10 +61,6 @@ define(function (require) {
       });
 
       return createAddressLayout;
-
-    } else {
-      Mediator.fire('mediator.loadRegionContent', 'loginModal');
-    }
   };
 
   /**

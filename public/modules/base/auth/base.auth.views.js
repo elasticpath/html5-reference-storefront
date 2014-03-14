@@ -24,8 +24,6 @@ define(function (require) {
 
     var ViewHelpers = require('viewHelpers');
 
-    var Model = require('auth.models');
-
     var viewHelpers = ViewHelpers.extend({
       getLoginText: function () {
         var retVal;
