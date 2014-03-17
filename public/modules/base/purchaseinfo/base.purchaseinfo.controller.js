@@ -76,7 +76,8 @@ define(function (require) {
 
       purchasesModel.fetch({
         url: purchasesModel.getUrl(receiptLink),
-
+        // disable caching of the GET request to avoid suppression of 403 authentication errors
+        cache: false,
         success: function (response) {
           var purchaseSummaryView = new View.PurchaseSummaryView({
             model: purchasesModel
