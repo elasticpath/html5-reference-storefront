@@ -75,6 +75,10 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
       }
     });
 
+    /**
+     * Stores link needed to submit anonymous checkout form.
+     * @type Backbone.Model
+     */
     var anonymousCheckoutModel = Backbone.Model.extend({
       getUrl: function (href) {
         return href + '?zoom=emailinfo:emailform';

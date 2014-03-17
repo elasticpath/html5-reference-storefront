@@ -247,6 +247,10 @@ define(function (require) {
     });
 
     /* ********* Anonymous Checkout EVENT LISTENERS ************ */
+    /**
+     * Waiting for continue checkout anonymously button clicked, disable the button,
+     * and trigger submit anonymous checkout form request.
+     */
     EventBus.on('auth.continueCheckoutAnonymouslyBtnClicked', function(submitFormActionLink) {
       ep.ui.disableButton(checkoutAuthOptionsView.anonymousCheckoutRegion.currentView, 'checkoutButton');
       EventBus.trigger('auth.submitAnonymousCheckoutFormRequest', submitFormActionLink);
@@ -278,11 +282,18 @@ define(function (require) {
       ep.io.ajax(ajaxModel.toJSON());
     });
 
+    /**
+     * On submit anonymous checkout form success, continue checkout process
+     */
     EventBus.on('auth.submitAnonymousCheckoutFormSuccess', function() {
       var checkoutLink = ep.io.sessionStore.getItem('orderLink');
       Mediator.fire('mediator.navigateToCheckoutRequest', checkoutLink);
     });
 
+    /**
+     * On submit anonymous checkout form failure, localize the raw cortex error message, and displays the message
+     * on page.
+     */
     EventBus.on('auth.submitAnonymousCheckoutFormFailed', function(response) {
       var errMsgKey = 'auth.checkoutAuthOption.anonymous.errorMsg.generic';
 

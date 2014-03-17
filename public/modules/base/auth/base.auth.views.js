@@ -160,6 +160,10 @@ define(function (require) {
     });
 
 
+    /**
+     * Checkout Authentication Options Layout - will render placeholders for authentication options' regions.
+     * @type Marionette.Layout
+     */
     var checkoutAuthOptionsLayout = Marionette.Layout.extend({
       template: '#CheckoutAuthOptionsLayoutTemplate',
       templateHelpers: viewHelpers,
@@ -174,6 +178,10 @@ define(function (require) {
       }
     });
 
+    /**
+     * Checkout Authentication Login Options - will render login form for checkout
+     * @type Marionette.ItemView
+     */
     var checkoutAuthLoginOptionView = Marionette.ItemView.extend({
       template: '#CheckoutAuthLoginOptionTemplate',
       templateHelpers: viewHelpers,
@@ -189,6 +197,10 @@ define(function (require) {
       }
     });
 
+    /**
+     * Checkout Authentication Registration Options - will render registration button.
+     * @type Marionette.ItemView
+     */
     var checkoutAuthRegisterOptionView = Marionette.ItemView.extend({
       template: '#CheckoutAuthRegisterOptionTemplate',
       templateHelpers: viewHelpers,
@@ -204,6 +216,10 @@ define(function (require) {
       }
     });
 
+    /**
+     * Checkout Authentication Anonymous Checkout Options - will anonymous checkout form - create email form.
+     * @type Marionette.ItemView
+     */
     var checkoutAuthAnonymousOptionView = Marionette.ItemView.extend({
       template: '#CheckoutAuthAnonymousOptionTemplate',
       templateHelpers: viewHelpers,
