@@ -98,9 +98,11 @@ define(function (require) {
           });
           defaultLayout.profileAddressesRegion.show(profileAddressesView);
 
-          // Profile Payment Methods
+          // Profile Payment Methods sorted alphabetically by displayValue
           var profilePaymentMethodsView = new View.ProfilePaymentMethodsView({
-            collection: new Backbone.Collection(response.get('paymentMethods'))
+            collection: new Backbone.Collection(response.get('paymentMethods'), {
+              comparator: 'displayValue'
+            })
           });
           defaultLayout.profilePaymentMethodsRegion.show(profilePaymentMethodsView);
         },
@@ -149,6 +151,30 @@ define(function (require) {
   });
 
   /**
+   * Fetches a simple Backbone model that requests from Cortex the URL to which the payment method form
+   * should be submitted (when it needs to save the payment method to the shopper's profile).
+   *
+   * When a URL is successfully retrieved, a mediator strategy is fired to return the action URL and
+   * data to the payment module so it can be sent to Cortex.
+   *
+   * @param formData {Object} Data to be submitted from the payment method form.
+   */
+  EventBus.on('profile.getSavePaymentMethodToProfileUrl', function (formData) {
+    var paymentActionModel = new Model.ProfilePaymentMethodActionModel();
+    paymentActionModel.fetch({
+      success: function (response) {
+        Mediator.fire('mediator.submitPaymentMethodForm', {
+          data: formData,
+          url: response.get('url')
+        });
+      },
+      error: function (response) {
+        ep.logger.error('Error retrieving profile save payment token URL: ' + JSON.stringify(response));
+      }
+    });
+  });
+
+  /**
    * Called when an address has been successfully deleted from Cortex. Performs a fetch of the profile
    * model and updates the collection of addresses with the updated array from Cortex.
    */
@@ -168,7 +194,7 @@ define(function (require) {
     });
   });
 
-  /* ********* Address EVENT LISTENERS ************ */
+  /* ********* Personal Info EVENT LISTENERS ************ */
   EventBus.on('profile.editPersonalInfoBtnClicked', function (model) {
     EventBus.trigger('profile.loadPersonalInfoFormViewRequest', model);
   });
@@ -258,6 +284,11 @@ define(function (require) {
         collection: formErrorsCollection
       })
     );
+  });
+
+  /* ********* Payment Method EVENT LISTENERS ************ */
+  EventBus.on('profile.addNewPaymentMethodBtnClicked', function () {
+    Mediator.fire('mediator.addNewPaymentMethodRequest', 'profile');
   });
 
   return {

@@ -22,6 +22,7 @@ define(function (require) {
   var ep = require('ep');
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
+  var i18n = require('i18n');
 
   var Views = require('payment.views');
   var Model = require('payment.models');
@@ -36,30 +37,8 @@ define(function (require) {
   var defaultView;
 
   var defaultCreatePaymentController = function () {
-    // Attempt to retrieve an order link from session storage (set by the checkout module)
-    var orderLink = ep.io.sessionStore.getItem('orderLink');
-
-    // Trigger an error if we are unable to retrieve a Cortex order link
-    if (orderLink) {
-      var paymentFormModel = new Model.NewPaymentModel();
-      defaultView = new Views.DefaultPaymentFormView({
-        model: paymentFormModel
-      });
-
-      // Fetch the payment form model that contains the URL to which the form should be submitted
-      paymentFormModel.fetch({
-        url: paymentFormModel.getUrl(orderLink),
-        success: function (response) {
-          paymentFormModel = response;
-        }
-      });
-
-      return defaultView;
-    }
-    else {
-      ep.logger.error('unable to load new payment method form - missing order link data');
-      ep.router.navigate(ep.app.config.routes.cart, true);
-    }
+    defaultView = new Views.DefaultPaymentFormView();
+    return defaultView;
   };
 
   /**
@@ -93,13 +72,31 @@ define(function (require) {
   }
 
   /**
+   * Renders a toast message to the centre of the viewport when an error is encountered retrieving a submit URL from
+   * Cortex for the new payment method request from Cortex. We reload the page on close of the toast message.
+   */
+  function showMissingSubmitUrlToastMessage() {
+    ep.logger.error('Unable to retrieve payment method submit URL');
+
+    $().toastmessage('showToast', {
+      text: i18n.t('paymentForm.errorMsg.generalSavePaymentFailedErrMsg'),
+      sticky: true,
+      position: 'middle-center',
+      type: 'error',
+      close: function() {
+        Backbone.history.loadUrl();
+      }
+    });
+  }
+
+  /**
    * Constructs and submits an AJAX request to Cortex with the parsed payment form data
    * and the URL retrieved from the payment method model.
    *
    * @param data {Object} Parsed data from the new payment method form
    * @param link {String} The URL to which the AJAX request should be sent
    */
-  function submitForm(data, link) {
+  EventBus.on('payment.submitPaymentMethodForm', function (data, link) {
     var ajaxModel = new ep.io.defaultAjaxModel({
       type: 'POST',
       url: link,
@@ -113,7 +110,7 @@ define(function (require) {
     });
 
     ep.io.ajax(ajaxModel.toJSON());
-  }
+  });
 
   /* *************** Event Listeners: add new payment method *************** */
   /**
@@ -123,17 +120,61 @@ define(function (require) {
     Mediator.fire('mediator.paymentFormComplete');
   });
 
+
+  /**
+   * Triggered when a shopper selects to create a new one-time payment method.
+   * Makes a request to Cortex using the NewPaymentModel Backbone Model to obtain
+   * the URL to which the new payment method request form data should be posted.
+   *
+   * When successful, triggers an EventBus signal that constructs and sends the actual AJAX request.
+   * @param formData {Object} An object representing the data entered in the fields of the new payment method form.
+   */
+  EventBus.on('payment.getPaymentFormSubmitUrl', function (formData) {
+    // Attempt to retrieve an order link from session storage (set by the checkout module)
+    var orderLink = ep.io.sessionStore.getItem('orderLink');
+
+    // Trigger an error if we are unable to retrieve a Cortex order link
+    if (orderLink) {
+      var paymentFormModel = new Model.NewPaymentModel();
+
+      // Fetch the payment form model that contains the URL to which the form should be submitted
+      paymentFormModel.fetch({
+        url: paymentFormModel.getUrl(orderLink),
+        success: function (response) {
+          var submitUrl = response.get('href');
+          if (submitUrl) {
+            // Trigger the AJAX request with the entered form data and the URL retrieved
+            EventBus.trigger('payment.submitPaymentMethodForm', formData, submitUrl);
+          } else {
+            showMissingSubmitUrlToastMessage();
+          }
+        }
+      });
+    }
+    else {
+      showMissingSubmitUrlToastMessage();
+    }
+  });
+
   /**
    * On click of the save payment method button, this handler disables the form submit button, retrieves the parsed
    * form data and passes it to a function that builds and sends the AJAX request to Cortex.
+   * @param saveToProfile {Boolean} Indicates whether this payment method should be saved to the profile for future
+   *                                use or if it is a one-time payment method.
    */
-  EventBus.on('payment.savePaymentMethodBtnClicked', function (href) {
+  EventBus.on('payment.savePaymentMethodBtnClicked', function (saveToProfile) {
     ep.ui.disableButton(defaultView, 'saveButton');
 
     var formObj = Views.getPaymentFormValues();
     var formData = parsePaymentForm(formObj);
 
-    submitForm(formData, href);
+    if (saveToProfile) {
+      // FIXME This may be a misuse of the mediator pattern, creating a dependency of sorts between payment and profile
+      // Fire a mediator strategy that will retrieve the URL to which the form should be submitted
+      Mediator.fire('mediator.savePaymentMethodToProfileRequest', formData);
+    } else {
+      EventBus.trigger('payment.getPaymentFormSubmitUrl', formData);
+    }
   });
 
   /**
@@ -171,7 +212,7 @@ define(function (require) {
   return {
     /* test-code */
     __test_only__: {
-      submitForm: submitForm
+      showMissingSubmitUrlToastMessage: showMissingSubmitUrlToastMessage
     },
     /* end-test-code */
     DefaultCreatePaymentController: defaultCreatePaymentController

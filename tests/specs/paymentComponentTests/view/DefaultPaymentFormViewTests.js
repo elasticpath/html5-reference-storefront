@@ -54,6 +54,38 @@ define(function (require) {
       expect(this.view.render()).to.be.equal(this.view);
     });
 
+    describe('when the referring module is profile', function () {
+      before(function () {
+        // Stub the sessionStorage retrieval function to simulate a shopper arriving at the form from profile
+        sinon.stub(ep.io.sessionStore, 'getItem', function (param) {
+          return 'profile';
+        });
+        this.profileReferredView = this.view.render();
+      });
+      after(function () {
+        ep.io.sessionStore.getItem.restore();
+      });
+      it('on render, a "hidden" class is added to the saveToProfileFormGroup' ,function () {
+        expect(this.profileReferredView.ui.saveToProfileFormGroup.hasClass('hidden')).to.be.true;
+      });
+    });
+
+    describe('when the referring module is NOT profile', function () {
+      before(function () {
+        // Stub the sessionStorage retrieval function to simulate a shopper arriving at the form from checkout
+        sinon.stub(ep.io.sessionStore, 'getItem', function (param) {
+          return 'checkout';
+        });
+        this.profileReferredView = this.view.render();
+      });
+      after(function () {
+        ep.io.sessionStore.getItem.restore();
+      });
+      it('on render, a "hidden" class is NOT added to the saveToProfileFormGroup' ,function () {
+        expect(this.profileReferredView.ui.saveToProfileFormGroup.hasClass('hidden')).to.be.false;
+      });
+    });
+
     describe('renders required elements:', function() {
       it('a title element', function () {
         expect(this.view.$el.find('h1')).to.be.length(1);
@@ -65,7 +97,7 @@ define(function (require) {
         expect(this.view.$el.find('button')).to.be.length(2);
       });
       it("form input fields", function() {
-        expect(this.view.$el.find('input')).to.be.length(3);
+        expect(this.view.$el.find('input')).to.be.length(4);
         expect(this.view.$el.find('select')).to.be.length(3);
       });
     });

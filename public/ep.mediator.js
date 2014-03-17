@@ -132,6 +132,28 @@ define(function(require){
         }
       });
     },
+    /**
+     * Strategy fired by the payment module to notify the profile module of a request
+     * to save a new payment method to a shopper's profile.
+     *
+     * @param formData {Object} Data retrieved from the fields of the new payment method form
+     */
+    'mediator.savePaymentMethodToProfileRequest': function (formData) {
+      require(['profile'], function (profile) {
+        EventBus.trigger('profile.getSavePaymentMethodToProfileUrl', formData);
+      });
+    },
+    /**
+     * Strategy to notify the payment module that a new payment method request is ready to be sent to Cortex.
+     * This strategy is fired after the action URL for the new payment method request has been retrieved.
+     *
+     * @param requestObj {Object} Contains the action URL and new payment method form data for the Cortex request.
+     */
+    'mediator.submitPaymentMethodForm': function (requestObj) {
+      require(['payment'], function (payment) {
+        EventBus.trigger('payment.submitPaymentMethodForm', requestObj.data, requestObj.url);
+      });
+    },
     'mediator.addNewAddressRequest': function (moduleName) {
       require(['ep'], function (ep) {
         if (moduleName) {
