@@ -22,6 +22,14 @@
     <%= E.displayValue %>
   </script>
 
+
+  <script id="DefaultDeletePaymentConfirmationModalTemplate" type="text/template">
+    <p><%= E.getI18nLabel('paymentForm.msg.deleteConfirmation') %></p>
+    <button class="btn btn-primary btn-yes"><%= E.getI18nLabel('general.yes') %></button>
+    <button class="btn btn-primary btn-no"><%= E.getI18nLabel('general.no') %></button>
+  </script>
+
+
   <!-- Renders the Payment Method Form-->
   <script id="MockPaymentMethodFormTemplate" type="text/template">
     <h1><%= E.getI18nLabel('paymentForm.formTitle') %></h1>

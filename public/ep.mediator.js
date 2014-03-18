@@ -222,6 +222,49 @@ define(function(require){
         }
       });
     },
+    /**
+     * Communicates delete address requests to the address module.
+     * @param {Object} args Can contain:
+     *                      - href The href of the address to be deleted
+     *                      - indicatorView (optional) Marionette.View to which an activity indicator can be applied
+     *                      - returnModule The module to which control should be returned upon completion
+     */
+    'mediator.deletePaymentRequest': function (args) {
+      require(['ep', 'payment'], function (ep, address) {
+        // Store a return module so control can be returned to the correct module
+        // (e.g. profile or checkout) upon completion of the delete operation
+        if (args.returnModule) {
+          ep.io.sessionStore.setItem('deletePaymentReturnTo', args.returnModule);
+        }
+        EventBus.trigger('payment.deletePaymentConfirm', args);
+      });
+    },
+    /**
+     * Communicates back to the referring module that a delete payment request has succeeded.
+     * @param indicatorView An optional reference to a Marionette.View to which an activity indicator has been applied.
+     */
+    'mediator.deletePaymentComplete': function (indicatorView) {
+      require(['ep'], function (ep) {
+        var moduleName = ep.io.sessionStore.getItem('deletePaymentReturnTo');
+        ep.io.sessionStore.removeItem('deletePaymentReturnTo');
+        switch (moduleName) {
+          case 'profile':
+            require(['profile'], function (profile) {
+              EventBus.trigger('profile.updatePaymentMethods', indicatorView);
+            });
+            break;
+//          case 'checkout':
+//            require(['checkout'], function (checkout) {
+//              EventBus.trigger('checkout.updatePaymentMethods', indicatorView);
+//            });
+//            break;
+          default:
+            // Navigate to the home page route as a default and log an error message
+            ep.router.navigate('', true);
+            ep.logger.error('mediator.deletePaymentComplete: unable to retrieve return module from session storage');
+        }
+      });
+    },
     'mediator.paymentFormComplete': function () {
       helpers.returnAfterFormDone('#profile', 'paymentFormReturnTo');
     },

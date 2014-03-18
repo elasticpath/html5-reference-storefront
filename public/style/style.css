@@ -8852,9 +8852,57 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
   }
 }
 .profile-payment-methods-listing {
+  margin-left: -15px;
+  margin-right: -15px;
   padding: 0;
 }
+.profile-payment-methods-listing:before,
+.profile-payment-methods-listing:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.profile-payment-methods-listing:after {
+  clear: both;
+}
+.profile-payment-methods-listing:before,
+.profile-payment-methods-listing:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.profile-payment-methods-listing:after {
+  clear: both;
+}
 .profile-payment-method-container {
+  margin-bottom: 2rem;
+  float: left;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  .profile-payment-method-container {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 1200px) {
+  .profile-payment-method-container {
+    float: left;
+    width: 50%;
+  }
+}
+.profile-delete-payment-btn {
+  margin-top: .75rem;
   margin-bottom: 1rem;
 }
 .toast-container {

@@ -38,6 +38,7 @@ define(function (require) {
   var subscriptionCollection = new Backbone.Collection();
   var purchaseHistoryCollection = new Model.ProfilePurchaseCollection();
   var addressesCollection = new Backbone.Collection();
+  var paymentsCollection = new Backbone.Collection([], {comparator: "displayValue"});
   var formErrorsCollection = new Backbone.Collection({}, {comparator: "error"});
 
   var defaultLayout = new View.DefaultLayout();
@@ -63,6 +64,20 @@ define(function (require) {
       region.show(profilePurchaseView);
   };
 
+  var showPaymentMethodsView = function (region) {
+      var profilePaymentMethodsView = new View.ProfilePaymentMethodsView({
+        collection: paymentsCollection
+      });
+      region.show(profilePaymentMethodsView);
+  };
+
+  var showAddressesView = function (region) {
+    var profileAddressesView = new View.ProfileAddressesView({
+      collection: addressesCollection
+    });
+    region.show(profileAddressesView);
+  };
+
   /**
    * If user is logged in renders the DefaultLayout of profile module, and fetch model from backend;
    * upon model fetch success, renders profile views in designated regions.
@@ -79,32 +94,20 @@ define(function (require) {
           var profileTitleView = new View.ProfileTitleView();
           defaultLayout.profileTitleRegion.show(profileTitleView);
 
-          // Profile Personal Info
           personalInfoModel.set(response.get('personalInfo'));
           showPersonalInfoView(defaultLayout.profilePersonalInfoRegion);
 
-          // Subscriptions
           subscriptionCollection.update(response.get('subscriptions'));
           showSubscriptionView(defaultLayout.profileSubscriptionSummaryRegion);
 
-          // Purchase History
           purchaseHistoryCollection.update(response.get('purchaseHistories'));
           showPurchaseView(defaultLayout.profilePurchaseHistoryRegion);
 
-          // Profile Addresses
           addressesCollection.update(response.get('addresses'));
-          var profileAddressesView = new View.ProfileAddressesView({
-            collection: addressesCollection
-          });
-          defaultLayout.profileAddressesRegion.show(profileAddressesView);
+          showAddressesView(defaultLayout.profileAddressesRegion);
 
-          // Profile Payment Methods sorted alphabetically by displayValue
-          var profilePaymentMethodsView = new View.ProfilePaymentMethodsView({
-            collection: new Backbone.Collection(response.get('paymentMethods'), {
-              comparator: 'displayValue'
-            })
-          });
-          defaultLayout.profilePaymentMethodsRegion.show(profilePaymentMethodsView);
+          paymentsCollection.update(response.get('paymentMethods'));
+          showPaymentMethodsView(defaultLayout.profilePaymentMethodsRegion);
         },
         error: function (response) {
           ep.logger.error('Error getting profile model: ' + JSON.stringify(response));
@@ -290,6 +293,39 @@ define(function (require) {
   EventBus.on('profile.addNewPaymentMethodBtnClicked', function () {
     Mediator.fire('mediator.addNewPaymentMethodRequest', 'profile');
   });
+
+
+  /**
+   * Handler for the delete payment button clicked signal, which triggers a mediator strategy
+   * to communicate the request to the payment module.
+   */
+  EventBus.on('profile.deletePaymentBtnClicked', function (href) {
+    Mediator.fire('mediator.deletePaymentRequest', {
+      href: href,
+      indicatorView: defaultLayout.profilePaymentMethodsRegion.currentView,
+      returnModule: 'profile'
+    });
+  });
+
+  /**
+   * Called when an payment method has been successfully deleted from Cortex. Performs a fetch of the profile
+   * model and updates the collection of payment methods with the updated array from Cortex.
+   */
+  EventBus.on('profile.updatePaymentMethods', function (indicatorView) {
+    profileModel.fetch({
+      success: function (response) {
+        if (indicatorView) {
+          // Stop the activity indicators on the cart regions that are being updated
+          ep.ui.stopActivityIndicator(indicatorView);
+        }
+
+        // Update the collection of addresses with the new array of addresses from Cortex
+        var newPaymentMethods = response.get('paymentMethods');
+        paymentsCollection.update(newPaymentMethods);
+      }
+    });
+  });
+
 
   return {
     DefaultController: defaultController

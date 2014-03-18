@@ -200,7 +200,8 @@
   <!--Default Profile Payment Method Layout Template-->
   <script id="DefaultProfilePaymentMethodLayoutTemplate" type="text/template">
     <!-- defaultView, layout tagName: li, class: profile-payment-method-container-->
-    <div data-region="paymentMethodComponentRegion"></div>
+    <div data-region="paymentMethodComponentRegion" class="profile-payment-method-label-container"></div>
+    <button class="btn profile-delete-payment-btn" data-el-label="profile.deletePaymentBtn"><%= E.getI18nLabel('profile.paymentMethods.delete') %></button>
   </script>
 
   <!-- Default Profile Payment Method EmptyView Template -->

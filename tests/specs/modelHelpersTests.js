@@ -129,10 +129,14 @@ define(function (require) {
         parserTestFactory(testDataSubscription, expectedSubscription, helpers.parseSubscription));
 
       var testDataToken = {
-        "display-value": "timmins-token-X"
+        "display-value": "timmins-token-X",
+        "self": {
+          "href": "paymentmethods/scope/id"
+        }
       };
       var expectedToken = {
-        displayValue: 'timmins-token-X'
+        displayValue: 'timmins-token-X',
+        "href": "paymentmethods/scope/id"
       };
       describe('helper: parseSubscription',
         parserTestFactory(testDataToken, expectedToken, helpers.parseTokenPayment));

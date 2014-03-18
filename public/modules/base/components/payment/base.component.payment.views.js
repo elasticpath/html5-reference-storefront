@@ -24,6 +24,11 @@ define(function (require) {
   var ViewHelpers = require('viewHelpers');
 
   /**
+   * Template helper functions
+   */
+  var viewHelpers = ViewHelpers.extend();
+
+  /**
    * Simple function to build a payment method object from the values supplied in the form.
    * It is expected that this form will be provided by a payment gateway in future.
    *
@@ -104,9 +109,32 @@ define(function (require) {
     }
   });
 
+
+  /**
+   * This view is rendered in the modal region to obtain confirmation from the user before proceeding
+   * with a request to delete an payment.
+   */
+  var defaultDeletePaymentConfirmationView = Marionette.ItemView.extend({
+    className:'payment-delete-confirm-modal',
+    template:'#DefaultDeletePaymentConfirmationModalTemplate',
+    templateHelpers:viewHelpers,
+    events:{
+      'click .btn-yes': function(event) {
+        event.preventDefault();
+        EventBus.trigger('payment.deleteConfirmYesBtnClicked', this.options);
+      },
+      'click .btn-no': function(event) {
+        event.preventDefault();
+        $.modal.close();
+      }
+    }
+  });
+
   return {
     DefaultPaymentItemView: defaultPaymentItemView,
     DefaultPaymentFormView: defaultPaymentFormView,
+    DefaultDeletePaymentConfirmationView: defaultDeletePaymentConfirmationView,
+
     getPaymentFormValues: getPaymentFormValues
   };
 });
