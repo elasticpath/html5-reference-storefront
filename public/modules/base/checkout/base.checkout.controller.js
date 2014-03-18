@@ -41,11 +41,79 @@ define(function (require) {
 
 
     var checkoutModel = new Model.CheckoutModel();
-    var checkoutSummaryModel;
+    var checkoutSummaryModel = new Model.CheckoutSummaryModel();
+    var billingAddressCollection = new Backbone.Collection();
+    var shippingAddressCollection = new Backbone.Collection();
+    var shippingOptionsCollection = new Model.CheckoutShippingOptionsCollection();
     var paymentMethodCollection = new Model.CheckoutPaymentMethodsCollection();
-    var shippingOptionsCollection;
 
     var checkoutLayout = new View.DefaultLayout();
+
+
+    var showBillingAddressesView = function(region) {
+      var profileBillingAddressesView =  new View.BillingAddressesCompositeView({
+        collection: billingAddressCollection
+      });
+
+      region.show(profileBillingAddressesView);
+    };
+
+    var showShippingAddressesView = function(region) {
+      var profileShippingAddressesView = new View.ShippingAddressesCompositeView({
+        collection: shippingAddressCollection
+      });
+
+      region.show(profileShippingAddressesView);
+    };
+
+    var showSippingOptionsView = function(region) {
+      var profileShippingOptionsView = new View.ShippingOptionsCompositeView({
+        collection: shippingOptionsCollection
+      });
+      region.show(profileShippingOptionsView);
+    };
+
+    var showPaymentMethodsView = function (region) {
+      var profilePaymentMethodsView = new View.PaymentMethodsCompositeView({
+        collection: paymentMethodCollection
+      });
+      region.show(profilePaymentMethodsView);
+    };
+
+    var showCheckoutSummaryView = function (region) {
+      var checkoutSummaryView = new View.CheckoutSummaryView({
+        model: checkoutSummaryModel
+      });
+
+      checkoutSummaryView.on('show', function() {
+        // Only show taxes summary if tax amount is greater than zero
+        var taxes = checkoutSummaryModel.get('taxes');
+        if ( taxes && taxes.length && taxes[0].amount > 0 ) {
+          checkoutSummaryView.checkoutTaxTotalRegion.show(
+            new View.CheckoutTaxTotalView({
+              model: new Backbone.Model(checkoutSummaryModel.get('taxTotal'))
+            })
+          );
+          checkoutSummaryView.checkoutTaxBreakDownRegion.show(
+            new View.CheckoutTaxesCollectionView({
+              collection: new Backbone.Collection(taxes)
+            })
+          );
+        }
+        // If there are shipping costs, show them in the checkout summary
+        var shippingTotal = checkoutSummaryModel.get('shippingTotal');
+        if (shippingTotal) {
+          checkoutSummaryView.checkoutShippingTotalRegion.show(
+            new View.CheckoutShippingTotalView({
+              model: new Backbone.Model(shippingTotal)
+            })
+          );
+        }
+      });
+
+      region.show(checkoutSummaryView);
+    };
+
 
     /**
      * Instantiate an checkout DefaultLayout and load views into corresponding regions
@@ -53,8 +121,6 @@ define(function (require) {
      */
     var defaultController = function () {
       var orderLink = getOrderLink();
-
-      pace.start();
 
       checkoutModel.fetch({
         url: checkoutModel.getUrl(orderLink),
@@ -66,90 +132,49 @@ define(function (require) {
 
           checkoutLayout.checkoutTitleRegion.show(new View.CheckoutTitleView());
 
-          checkoutLayout.billingAddressesRegion.show(
-            new View.BillingAddressesCompositeView({
-              collection: new Backbone.Collection(checkoutModel.get('billingAddresses'))
-            })
-          );
+          billingAddressCollection.update(checkoutModel.get('billingAddresses'));
+          showBillingAddressesView(checkoutLayout.billingAddressesRegion);
 
           // Only show if the cart contains physical items requiring shipment
           if (checkoutModel.get('deliveryType') === "SHIPMENT") {
-            checkoutLayout.shippingAddressesRegion.show(
-              new View.ShippingAddressesCompositeView({
-                collection: new Backbone.Collection(checkoutModel.get('shippingAddresses'))
-              })
-            );
+            shippingAddressCollection.update(checkoutModel.get('shippingAddresses'));
+            showShippingAddressesView(checkoutLayout.shippingAddressesRegion);
+
             // Only populate the shipping options region if there is at least one shipping address
-            if (checkoutModel.get('shippingAddresses').length > 0) {
-              shippingOptionsCollection = new Model.CheckoutShippingOptionsCollection(response.get('shippingOptions'));
-              checkoutLayout.shippingOptionsRegion.show(
-                new View.ShippingOptionsCompositeView({
-                  collection: shippingOptionsCollection
-                })
-              );
+            if (shippingAddressCollection.length > 0) {
+              shippingOptionsCollection.update(checkoutModel.get('shippingOptions'));
+              showSippingOptionsView(checkoutLayout.shippingOptionsRegion);
             }
           }
 
           if (checkoutModel.get('showPaymentMethods')) {
             paymentMethodCollection.update(response.get('paymentMethods'));
-            checkoutLayout.paymentMethodsRegion.show(
-              new View.PaymentMethodsCompositeView({
-                collection: paymentMethodCollection
-              })
-            );
+            showPaymentMethodsView(checkoutLayout.paymentMethodsRegion);
           }
 
-          checkoutSummaryModel = new Model.CheckoutSummaryModel(response.get('summary'));
-          var checkoutSummaryView = new View.CheckoutSummaryView({
-            model: checkoutSummaryModel
-          });
-
-          checkoutSummaryView.on('show', function() {
-            // Only show taxes summary if tax amount is greater than zero
-            if ( (checkoutModel.get('summary').taxes.length) &&
-                 (checkoutModel.get('summary').taxes[0].amount > 0) ) {
-              checkoutSummaryView.checkoutTaxTotalRegion.show(
-                new View.CheckoutTaxTotalView({
-                  model: new Backbone.Model(checkoutModel.get('summary').taxTotal)
-                })
-              );
-              checkoutSummaryView.checkoutTaxBreakDownRegion.show(
-                new View.CheckoutTaxesCollectionView({
-                  collection: new Backbone.Collection(checkoutModel.get('summary').taxes)
-                })
-              );
-            }
-            // If there are shipping costs, show them in the checkout summary
-            if (checkoutModel.get('summary').shippingTotal) {
-                checkoutSummaryView.checkoutShippingTotalRegion.show(
-                  new View.CheckoutShippingTotalView({
-                    model: new Backbone.Model(checkoutModel.get('summary').shippingTotal)
-                  })
-                );
-            }
-          });
-
-          checkoutLayout.checkoutOrderRegion.show(checkoutSummaryView);
+          checkoutSummaryModel.clear();
+          checkoutSummaryModel.set(response.get('summary'));
+          showCheckoutSummaryView(checkoutLayout.checkoutOrderRegion);
         }
       });
 
-      /**
-       * If the model suggests we need to set a chosen (billing/ shipping address, or shipping option),
-       * trigger a call to Cortex to formerly set it to display correct summary information
-       * @param arrayName name of array of the selectors
-       * @param eventName name of event to update chosen selection.
-       */
-      function setAsChosen (arrayName, eventName) {
-        if (checkoutModel.get(arrayName).length && checkoutModel.get(arrayName)[0].setAsDefaultChoice) {
-          EventBus.trigger(
-            eventName,
-            checkoutModel.get(arrayName)[0].selectAction
-          );
-        }
-      }
-
       return checkoutLayout;
     };
+
+    /**
+     * If the model suggests we need to set a chosen (billing/ shipping address, or shipping option),
+     * trigger a call to Cortex to formerly set it to display correct summary information
+     * @param arrayName name of array of the selectors
+     * @param eventName name of event to update chosen selection.
+     */
+    function setAsChosen (arrayName, eventName) {
+      if (checkoutModel.get(arrayName).length && checkoutModel.get(arrayName)[0].setAsDefaultChoice) {
+        EventBus.trigger(
+          eventName,
+          checkoutModel.get(arrayName)[0].selectAction
+        );
+      }
+    }
 
     /**
      * Get a order link for model fetch url, or trigger checkout access error event
@@ -296,6 +321,9 @@ define(function (require) {
         });
 
         ep.io.ajax(ajaxModel.toJSON());
+
+        ep.ui.startActivityIndicator(checkoutLayout.billingAddressesRegion.currentView);
+        ep.ui.startActivityIndicator(checkoutLayout.checkoutOrderRegion.currentView);
       }
       else {
         ep.logger.error("Trying to update chosen billing address without action link");
@@ -308,7 +336,22 @@ define(function (require) {
      * Removes activity indicator on reload success.
      */
     function refreshBillingAddressViews() {
-      Backbone.history.loadUrl();
+      var orderLink = getOrderLink();
+
+      checkoutModel.fetch({
+        url: checkoutModel.getUrl(orderLink),
+        success: function(response) {
+          billingAddressCollection.update(response.get('billingAddresses'));
+          showBillingAddressesView(checkoutLayout.billingAddressesRegion);
+
+          checkoutSummaryModel.clear();
+          checkoutSummaryModel.set(response.get('summary'));
+          showCheckoutSummaryView(checkoutLayout.checkoutOrderRegion);
+
+          ep.ui.stopActivityIndicator(checkoutLayout.billingAddressesRegion.currentView);
+          ep.ui.stopActivityIndicator(checkoutLayout.checkoutOrderRegion.currentView);
+        }
+      });
     }
 
     /**
@@ -366,6 +409,10 @@ define(function (require) {
         });
 
         ep.io.ajax(ajaxModel.toJSON());
+
+        ep.ui.startActivityIndicator(checkoutLayout.shippingAddressesRegion.currentView);
+        ep.ui.startActivityIndicator(checkoutLayout.shippingOptionsRegion.currentView);
+        ep.ui.startActivityIndicator(checkoutLayout.checkoutOrderRegion.currentView);
       }
       else {
         ep.logger.error("Trying to update chosen shipping address without action link");
@@ -378,7 +425,30 @@ define(function (require) {
      * Removes activity indicator on reload success.
      */
     function refreshShippingAddressViews() {
-      Backbone.history.loadUrl();
+      var orderLink = getOrderLink();
+
+      checkoutModel.fetch({
+        url: checkoutModel.getUrl(orderLink),
+        success: function(response) {
+          shippingAddressCollection.update(checkoutModel.get('shippingAddresses'));
+          showShippingAddressesView(checkoutLayout.shippingAddressesRegion);
+
+          // Only populate the shipping options region if there is at least one shipping address
+          if (shippingAddressCollection.length > 0) {
+            setAsChosen('shippingOptions', 'checkout.updateChosenShippingOptionRequest');
+            shippingOptionsCollection.update(checkoutModel.get('shippingOptions'));
+            showSippingOptionsView(checkoutLayout.shippingOptionsRegion);
+          }
+
+          checkoutSummaryModel.clear();
+          checkoutSummaryModel.set(response.get('summary'));
+          showCheckoutSummaryView(checkoutLayout.checkoutOrderRegion);
+
+          ep.ui.stopActivityIndicator(checkoutLayout.shippingAddressesRegion.currentView);
+          ep.ui.stopActivityIndicator(checkoutLayout.shippingOptionsRegion.currentView);
+          ep.ui.stopActivityIndicator(checkoutLayout.checkoutOrderRegion.currentView);
+        }
+      });
     }
 
     /* ********** SHIPPING OPTION EVENT LISTENERS ************ */
@@ -437,6 +507,9 @@ define(function (require) {
         });
 
         ep.io.ajax(ajaxModel.toJSON());
+
+        ep.ui.startActivityIndicator(checkoutLayout.shippingOptionsRegion.currentView);
+        ep.ui.startActivityIndicator(checkoutLayout.checkoutOrderRegion.currentView);
       }
       else {
         ep.logger.error("Trying to update chosen shipping option without action link");
@@ -449,7 +522,22 @@ define(function (require) {
      * Removes activity indicator on reload success.
      */
     function refreshShippingOptionViews() {
-      Backbone.history.loadUrl();
+      var orderLink = getOrderLink();
+
+      checkoutModel.fetch({
+        url: checkoutModel.getUrl(orderLink),
+        success: function(response) {
+          shippingOptionsCollection.update(response.get('shippingOptions'));
+          showSippingOptionsView(checkoutLayout.shippingOptionsRegion);
+
+          checkoutSummaryModel.clear();
+          checkoutSummaryModel.set(response.get('summary'));
+          showCheckoutSummaryView(checkoutLayout.checkoutOrderRegion);
+
+          ep.ui.stopActivityIndicator(checkoutLayout.shippingOptionsRegion.currentView);
+          ep.ui.stopActivityIndicator(checkoutLayout.checkoutOrderRegion.currentView);
+        }
+      });
     }
 
     /**
@@ -526,16 +614,12 @@ define(function (require) {
       checkoutModel.fetch({
         url: checkoutModel.getUrl(orderLink),
         success: function(response) {
-          // FIXME summary view needs to setup modelEvent to reload on change.
-          // however, this cannot be done. onShow function is inside DefaultView function,
-          // need to move it into view so display logic isn't lost on this fetch
-//          checkoutSummaryModel.set(response.get('summary'));
           paymentMethodCollection.update(response.get('paymentMethods'));
-          checkoutLayout.paymentMethodsRegion.show(
-            new View.PaymentMethodsCompositeView({
-              collection: paymentMethodCollection
-            })
-          );
+          showPaymentMethodsView(checkoutLayout.paymentMethodsRegion);
+
+          checkoutSummaryModel.clear();
+          checkoutSummaryModel.set(response.get('summary'));
+          showCheckoutSummaryView(checkoutLayout.checkoutOrderRegion);
 
           ep.ui.stopActivityIndicator(checkoutLayout.paymentMethodsRegion.currentView);
           ep.ui.stopActivityIndicator(checkoutLayout.checkoutOrderRegion.currentView);
