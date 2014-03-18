@@ -294,7 +294,6 @@ define(function (require) {
     Mediator.fire('mediator.addNewPaymentMethodRequest', 'profile');
   });
 
-
   /**
    * Handler for the delete payment button clicked signal, which triggers a mediator strategy
    * to communicate the request to the payment module.

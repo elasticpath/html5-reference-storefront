@@ -7447,11 +7447,13 @@ fieldset[disabled] .btn-cmd-submit-order.active {
   margin-bottom: 1.5rem;
 }
 .checkout-address-radio,
-.shipping-option-radio {
+.shipping-option-radio,
+.payment-option-radio {
   vertical-align: top;
   margin-right: 1rem;
 }
-.checkout-new-address-btn {
+.checkout-new-address-btn,
+.checkout-new-payment-btn {
   float: left !important;
   clear: both;
 }
@@ -7510,7 +7512,8 @@ fieldset[disabled] .btn-cmd-submit-order.active {
     width: 33.33333333333333%;
   }
 }
-[data-region="billingAddressesRegion"] {
+[data-region="billingAddressesRegion"],
+[data-region="paymentMethodsRegion"] {
   margin-bottom: 3rem;
   position: relative;
   min-height: 1px;
@@ -7520,12 +7523,14 @@ fieldset[disabled] .btn-cmd-submit-order.active {
   padding-right: 0;
 }
 @media (min-width: 992px) {
-  [data-region="billingAddressesRegion"] {
+  [data-region="billingAddressesRegion"],
+  [data-region="paymentMethodsRegion"] {
     float: left;
     width: 58.333333333333336%;
   }
 }
-[data-region="billingAddressesRegion"] h2 {
+[data-region="billingAddressesRegion"] h2,
+[data-region="paymentMethodsRegion"] h2 {
   margin-top: 0;
 }
 .checkout-shipping-container {
@@ -7595,6 +7600,63 @@ fieldset[disabled] .btn-cmd-submit-order.active {
 }
 .checkout-shipping-container [data-region="shippingOptionsRegion"] span {
   display: block;
+}
+.payment-ctrl-cell {
+  float: left;
+  width: 58.333333333333336%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (min-width: 1200px) {
+  .payment-ctrl-cell {
+    float: left;
+    width: 66.66666666666666%;
+  }
+}
+.payment-ctrl-cell:before,
+.payment-ctrl-cell:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.payment-ctrl-cell:after {
+  clear: both;
+}
+.payment-ctrl-cell:before,
+.payment-ctrl-cell:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.payment-ctrl-cell:after {
+  clear: both;
+}
+.payment-ctrl-cell label {
+  width: 90%;
+}
+.payment-btn-cell {
+  float: left;
+  width: 41.66666666666667%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0;
+  padding-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+@media (min-width: 1200px) {
+  .payment-btn-cell {
+    float: left;
+    width: 33.33333333333333%;
+  }
 }
 [data-region="billingAddressesRegion"],
 [data-region="shippingAddressesRegion"],

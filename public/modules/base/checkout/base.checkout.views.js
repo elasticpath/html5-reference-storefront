@@ -258,9 +258,16 @@ define(function (require) {
       regions: {
         checkoutPaymentRegion: '[data-region="paymentMethodComponentRegion"]'
       },
+      ui: {
+        deleteButton: '[data-el-label="checkout.deletePaymentBtn"]'
+      },
       events: {
         'change input[type="radio"]': function () {
           EventBus.trigger('checkout.paymentMethodRadioChanged', this.model.get('selectAction'));
+        },
+        'click @ui.deleteButton': function (event) {
+          event.preventDefault();
+          EventBus.trigger('checkout.deletePaymentBtnClicked', this.model.get('href'));
         }
       },
       onShow: function () {

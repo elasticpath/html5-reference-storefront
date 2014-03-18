@@ -577,7 +577,7 @@ define(function (require) {
     EventBus.on('checkout.updateChosenPaymentMethodFailed', updateChosenPaymentMethodFailed);
 
 
-    /* ********** ADD NEW ADDRESS EVENT LISTENERS ************ */
+    /* ********** ADD / DELETE NEW ADDRESS EVENT LISTENERS ************ */
     /**
      * Listen to add new address button clicked signal
      * will load address form
@@ -610,14 +610,6 @@ define(function (require) {
     });
 
     /**
-     * Listen to add new payment method button clicked signal
-     * will load add new payment method form
-     */
-    EventBus.on('checkout.addNewPaymentMethodBtnClicked', function () {
-      Mediator.fire('mediator.addNewPaymentMethodRequest', 'checkout');
-    });
-
-    /**
      * Called when an address has been successfully deleted from Cortex. Performs a fetch of the profile
      * model and updates the collection of addresses with the updated array from Cortex.
      */
@@ -629,6 +621,42 @@ define(function (require) {
        */
       Backbone.history.loadUrl();
     });
+
+    /* ********** ADD / DELETE NEW PAYMENT EVENT LISTENERS ************ */
+    /**
+     * Listen to add new payment method button clicked signal
+     * will load add new payment method form
+     */
+    EventBus.on('checkout.addNewPaymentMethodBtnClicked', function () {
+      Mediator.fire('mediator.addNewPaymentMethodRequest', 'checkout');
+    });
+
+    /**
+     * Handler for the delete payment button clicked signal, which triggers a mediator strategy
+     * to communicate the request to the payment module.
+     */
+    EventBus.on('checkout.deletePaymentBtnClicked', function (href) {
+      Mediator.fire('mediator.deletePaymentRequest', {
+        href: href,
+        indicatorView: checkoutLayout,
+        returnModule: 'checkout'
+      });
+    });
+
+    /**
+     * Called when an payment method has been successfully deleted from Cortex. Performs a fetch of the profile
+     * model and updates the collection of payment methods with the updated array from Cortex.
+     */
+    EventBus.on('checkout.updatePaymentMethods', function (indicatorView) {
+      if (indicatorView) {
+        // Stop the activity indicators on the cart regions that are being updated
+        ep.ui.stopActivityIndicator(indicatorView);
+      }
+      ep.ui.startActivityIndicator(checkoutLayout.paymentMethodsRegion.currentView);
+      ep.ui.startActivityIndicator(checkoutLayout.checkoutOrderRegion.currentView);
+      refreshPaymentMethodViews();
+    });
+
 
     return {
       DefaultController: defaultController

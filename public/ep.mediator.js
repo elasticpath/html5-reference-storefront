@@ -253,11 +253,11 @@ define(function(require){
               EventBus.trigger('profile.updatePaymentMethods', indicatorView);
             });
             break;
-//          case 'checkout':
-//            require(['checkout'], function (checkout) {
-//              EventBus.trigger('checkout.updatePaymentMethods', indicatorView);
-//            });
-//            break;
+          case 'checkout':
+            require(['checkout'], function (checkout) {
+              EventBus.trigger('checkout.updatePaymentMethods', indicatorView);
+            });
+            break;
           default:
             // Navigate to the home page route as a default and log an error message
             ep.router.navigate('', true);
