@@ -272,7 +272,11 @@ define(function (require) {
       },
       onShow: function () {
         if (this.model.get('oneTime')) {
+          // adds additional label for one-time payment method. e.g. "New Payment Method:"
           $('label', this.$el).prepend('<span>' + viewHelpers.getI18nLabel('checkout.newPaymentMethod') + ': </span>');
+
+          // hides delete button (since one-time cannot be deleted)
+          this.ui.deleteButton.hide();
         }
 
         // Fire event to load the address itemView from component

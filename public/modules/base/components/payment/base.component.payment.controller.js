@@ -253,8 +253,11 @@ define(function (require) {
         success: function () {
           EventBus.trigger('payment.deletePaymentSuccess', opts.indicatorView);
         },
-        customErrorFn: function () {
-          EventBus.trigger('payment.deletePaymentFailed', opts.indicatorView);
+        customErrorFn: function (response) {
+          EventBus.trigger('payment.deletePaymentFailed', {
+            status: response.status,
+            responseText: response.responseText
+          }, opts.indicatorView);
         }
       });
 
@@ -281,15 +284,26 @@ define(function (require) {
    * On close of the toast message, we invoke a full page refresh.
    * @param indicatorView a reference to a Marionette.View to which an activity indicator has been applied
    */
-  EventBus.on('payment.deletePaymentFailed', function (indicatorView) {
+  EventBus.on('payment.deletePaymentFailed', function (response, indicatorView) {
+    var key = 'paymentForm.errorMsg.deleteErr';
+    var onClose = function() {
+      Backbone.history.loadUrl();
+    };
+
+    if (response && response.status === 403) {
+      key = 'paymentForm.errorMsg.cannotDeleteSelectedErr';
+      onClose = function() {
+        // do nothing on close message
+        return;
+      };
+    }
+
     $().toastmessage('showToast', {
-      text: i18n.t('paymentForm.errorMsg.deleteErr'),
+      text: i18n.t(key),
       sticky: true,
       position: 'middle-center',
       type: 'error',
-      close: function() {
-        Backbone.history.loadUrl();
-      }
+      close: onClose
     });
 
     // Stop any activity indicator
