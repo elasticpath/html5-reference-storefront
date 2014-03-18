@@ -74,7 +74,13 @@ define(function(require){
     'mediator.authenticationSuccess':function(redirect){
       require(['ep'], function(ep) {
         if (redirect) {
-          ep.router.navigate(redirect, true);
+          // Navigate to the route fragment _without_ calling its associated function
+          ep.router.navigate(redirect);
+          /**
+           * Trigger a page reload at the new route to ensure all auth-related
+           * elements of the page are refreshed e.g. login/user menu in header
+           */
+          window.location.reload();
         }
         // else this should be a registered login authentication request
         else {
