@@ -21,9 +21,8 @@ define(function (require) {
   var view = require('payment.views');
   var template = require('text!modules/base/components/payment/base.component.payment.template.html');
 
-  describe('Payment Controller: DefaultCreatePaymentController', function () {
-
-    describe('renders the correct view', function () {
+  describe('Payment Controller:', function () {
+    describe('DefaultCreatePaymentController renders the correct view', function () {
       before(function () {
         $("#Fixtures").append(template);
         this.view = controller.DefaultCreatePaymentController();

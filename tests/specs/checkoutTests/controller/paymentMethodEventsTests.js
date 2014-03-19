@@ -16,6 +16,7 @@
  */
 define(function (require) {
   var ep = require('ep');
+  var Backbone = require('backbone');
   var EventBus = require('eventbus');
   var Mediator = require('mediator');
   var EventTestHelpers = require('testhelpers.event');
@@ -24,8 +25,22 @@ define(function (require) {
   describe('Payment Method Events', function () {
     require('checkout');
 
-    describe('Responds to event: checkout.paymentMethodRadioChanged',
-      selectionChangedEventTestFactory('checkout.paymentMethodRadioChanged', 'checkout.updateChosenPaymentMethodRequest'));
+    describe('Responds to event: checkout.paymentMethodRadioChanged', function() {
+      before(function () {
+        sinon.spy(EventBus, 'trigger');
+        EventTestHelpers.unbind('checkout.updateChosenPaymentMethodRequest');
+        EventBus.trigger('checkout.paymentMethodRadioChanged', 'fakeSelectAction');
+      });
+
+      after(function () {
+        EventBus.trigger.restore();
+        EventTestHelpers.reset();
+      });
+      it('triggers event: checkout.updateChosenSelectionRequest', function () {
+        expect(EventBus.trigger).to.be.calledWithExactly('checkout.updateChosenPaymentMethodRequest', 'fakeSelectAction');
+      });
+
+    });
 
     describe('Responds to event: checkout.updateChosenPaymentMethodRequest', function () {
       var fakeActionLink = 'fakeActionLink';
@@ -107,25 +122,43 @@ define(function (require) {
         expect(Mediator.fire).to.be.calledWithExactly('mediator.addNewPaymentMethodRequest', 'checkout');
       });
     });
-  });
 
-  function selectionChangedEventTestFactory(eventListener, eventToTrigger) {
-    return function () {
+    describe('Responds to event: checkout.deletePaymentBtnClicked', function () {
+      var fakeHref = "fakeDeletePaymentActionLink";
       before(function () {
-        sinon.spy(EventBus, 'trigger');
-        EventTestHelpers.unbind(eventToTrigger);
-        EventBus.trigger(eventListener, 'fakeSelectAction');
+        sinon.stub(Mediator, 'fire');
+
+        EventBus.trigger('checkout.deletePaymentBtnClicked', fakeHref);
       });
 
       after(function () {
-        EventBus.trigger.restore();
-        EventTestHelpers.reset();
+        Mediator.fire.restore();
       });
 
-      it('triggers event: checkout.updateChosenSelectionRequest', function () {
-        expect(EventBus.trigger).to.be.calledWithExactly(eventToTrigger, 'fakeSelectAction');
+      it('calls the correct mediator strategy', function () {
+        expect(Mediator.fire).to.be.calledWith('mediator.deletePaymentRequest');
       });
-    };
-  }
+    });
+
+    describe('Responds to event: checkout.updatePaymentMethods', function () {
+      before(function () {
+        sinon.stub(Backbone.Model.prototype, 'fetch');
+        sinon.stub(ep.ui, 'startActivityIndicator');
+
+        ep.io.sessionStore.setItem('orderLink', 'fakeToken');
+
+        EventBus.trigger('checkout.updatePaymentMethods');
+      });
+      after(function () {
+        Backbone.Model.prototype.fetch.restore();
+        ep.ui.startActivityIndicator.restore();
+        ep.io.sessionStore.removeItem('orderLink');
+      });
+      it('calls Backbone.Model.fetch to update the profile model', function () {
+        expect(Backbone.Model.prototype.fetch).to.be.called;
+      });
+    });
+
+  });
 
 });

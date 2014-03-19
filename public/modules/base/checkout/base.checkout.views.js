@@ -270,7 +270,7 @@ define(function (require) {
           EventBus.trigger('checkout.deletePaymentBtnClicked', this.model.get('href'));
         }
       },
-      onShow: function () {
+      onRender: function () {
         if (this.model.get('oneTime')) {
           // adds additional label for one-time payment method. e.g. "New Payment Method:"
           $('label', this.$el).prepend('<span>' + viewHelpers.getI18nLabel('checkout.newPaymentMethod') + ': </span>');

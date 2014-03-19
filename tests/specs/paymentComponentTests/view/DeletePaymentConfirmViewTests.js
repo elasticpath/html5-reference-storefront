@@ -12,23 +12,18 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * Functional Storefront Unit Test - Paynment Component Views
+ * Functional Storefront Unit Test - Payment Component Views
  */
 define(function (require) {
   var ep = require('ep');
-  var Backbone = require('backbone');
+  var EventTestFactory = require('testfactory.event');
 
   var paymentView = require('payment.views');
   var paymentTemplate = require('text!modules/base/components/payment/base.component.payment.template.html');
 
 
   describe('Payment Module: View:', function () {
-    describe('DefaultPaymentItemView', function () {
-      var StandardTokenPaymentModel = Backbone.Model.extend({
-        defaults: {
-          displayValue: 'timmins-token-X'
-        }
-      });
+    describe('DefaultDeletePaymentConfirmationView', function () {
 
       before(function () {
         // append templates
@@ -42,35 +37,30 @@ define(function (require) {
 
       describe('can render', function () {
         before(function () {
-          this.view = new paymentView.DefaultPaymentItemView({model: new Backbone.Model()});
+          this.view = new paymentView.DefaultDeletePaymentConfirmationView();
+          this.view.render();
         });
 
         it('should be an instance of ItemView object', function () {
           expect(this.view).to.be.an.instanceOf(Marionette.ItemView);
         });
-        it('render() should return the view object', function () {
-          expect(this.view.render()).to.be.equal(this.view);
-        });
-      });
 
-      describe('renders correctly with all fields of payment method model', function () {
-        before(function () {
-          this.model = new StandardTokenPaymentModel();
+        describe('Payment method delete confirmation yes button clicked',
+          EventTestFactory.simpleBtnClickTest('payment.deleteConfirmYesBtnClicked', '.btn-yes'));
 
-          // setup view & render
-          this.view = new paymentView.DefaultPaymentItemView({model: this.model});
-          this.view.render();
-        });
+        describe("Payment method delete confirmation cancel button clicked", function() {
+          before(function() {
+            sinon.stub($.modal, 'close');
+            this.view.$el.find('.btn-no').trigger('click');
+          });
 
-        after(function () {
-          this.model.destroy();
-        });
+          after(function() {
+            $.modal.close.restore();
+          });
 
-        it('should render as UL (unordered list)', function () {
-          expect(this.view.el.nodeName).to.equal('SPAN');
-        });
-        it('should render token payment display value', function () {
-          expect(this.view.$el.text()).to.have.string(this.model.get('displayValue'));
+          it("closes the confirmation modal", function() {
+            expect($.modal.close).to.be.calledOnce;
+          });
         });
       });
     });
