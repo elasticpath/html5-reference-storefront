@@ -52,7 +52,18 @@ define(function (require) {
           // Attempt to retrieve an order link from session storage (set by the checkout module)
           var orderLink = ep.io.sessionStore.getItem('orderLink');
 
+          // If there is no 'orderLink' item in sessionStorage, check if it is filed under
+          // 'anonymousCheckoutOrderLink' (in case we have visited this page before)
+          if (!orderLink) {
+            orderLink = ep.io.sessionStore.getItem('anonymousCheckoutOrderLink');
+          }
+
           if (orderLink) {
+            // Move the orderLink to a different session storage item so the checkout module doesn't have access
+            // to it should a shopper try to directly access the checkout page via the address bar.
+            ep.io.sessionStore.setItem('anonymousCheckoutOrderLink', orderLink);
+            ep.io.sessionStore.removeItem('orderLink');
+
             var anonymousCheckoutModel = new Model.AnonymousCheckoutModel();
             anonymousCheckoutModel.fetch({
               url: anonymousCheckoutModel.getUrl(orderLink),
@@ -286,7 +297,8 @@ define(function (require) {
      * On submit anonymous checkout form success, continue checkout process
      */
     EventBus.on('auth.submitAnonymousCheckoutFormSuccess', function() {
-      var checkoutLink = ep.io.sessionStore.getItem('orderLink');
+      var checkoutLink = ep.io.sessionStore.getItem('anonymousCheckoutOrderLink');
+      ep.io.sessionStore.removeItem('anonymousCheckoutOrderLink');
       Mediator.fire('mediator.navigateToCheckoutRequest', checkoutLink);
     });
 
