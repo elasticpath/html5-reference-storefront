@@ -69,7 +69,7 @@
   <!-- Provides a wrapper for a list of billing addresses -->
   <script id="BillingAddressesTemplate" type="text/template">
     <h2><%= E.getI18nLabel('checkout.billingAddress') %></h2>
-    <div data-region="billingAddressSelectorsRegion"></div>
+    <div data-region="billingAddressSelectorsRegion" class="checkout-region-inner-container"></div>
     <button class="btn btn-primary checkout-new-address-btn" data-el-label="checkout.newBillingAddressBtn"><%= E.getI18nLabel('checkout.newAddressBtn')%></button>
   </script>
 
@@ -81,7 +81,7 @@
   <!-- Provides a wrapper for a list of shipping addresses -->
   <script id="ShippingAddressesTemplate" type="text/template">
     <h2><%= E.getI18nLabel('checkout.shippingAddress') %></h2>
-    <div data-region="shippingAddressSelectorsRegion"></div>
+    <div data-region="shippingAddressSelectorsRegion" class="checkout-region-inner-container"></div>
     <button class="btn btn-primary checkout-new-address-btn" data-el-label="checkout.newShippingAddressBtn"><%= E.getI18nLabel('checkout.newAddressBtn')%></button>
   </script>
 
@@ -115,7 +115,7 @@
   <!-- Provides a wrapper for a list of payment options -->
   <script id="PaymentMethodsTemplate" type="text/template">
     <h2><%= E.getI18nLabel('checkout.paymentMethod') %></h2>
-    <div data-region="paymentMethodSelectorsRegion"></div>
+    <div data-region="paymentMethodSelectorsRegion" class="checkout-region-inner-container"></div>
     <button class="btn btn-primary checkout-new-payment-btn" data-el-label="checkout.newPaymentMethodBtn"><%= E.getI18nLabel('checkout.newPaymentBtn')%></button>
   </script>
 

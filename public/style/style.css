@@ -7664,6 +7664,10 @@ fieldset[disabled] .btn-cmd-submit-order.active {
 [data-region="paymentMethodSelectorsRegion"] {
   position: relative;
 }
+.checkout-region-inner-container {
+  float: left;
+  width: 100%;
+}
 /*
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *

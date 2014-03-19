@@ -141,7 +141,7 @@ define(function (require) {
           EventBus.trigger('checkout.editAddressBtnClicked', this.model.get('href'));
         }
       },
-      onShow: function () {
+      onRender: function () {
         // Fire event to load the address itemView from component
         Mediator.fire('mediator.loadAddressesViewRequest', {
           region: this.checkoutAddressRegion,
@@ -171,6 +171,10 @@ define(function (require) {
       // Make the type of address available to the itemView
       itemViewOptions: {
         addressType: 'billing'
+      },
+      ui: {
+        // A jQuery selector for the DOM element to which an activity indicator should be applied.
+        activityIndicatorEl: '[data-region="billingAddressSelectorsRegion"]'
       },
       itemViewContainer: '[data-region="billingAddressSelectorsRegion"]',
       events: {
@@ -202,6 +206,10 @@ define(function (require) {
       // Make the type of address available to the itemView
       itemViewOptions: {
         addressType: 'shipping'
+      },
+      ui: {
+        // A jQuery selector for the DOM element to which an activity indicator should be applied.
+        activityIndicatorEl: '[data-region="shippingAddressSelectorsRegion"]'
       },
       itemViewContainer: '[data-region="shippingAddressSelectorsRegion"]',
       events: {
@@ -244,7 +252,10 @@ define(function (require) {
       templateHelpers: viewHelpers,
       itemView: shippingOptionsSelectorView,
       emptyView: shippingOptionsEmptyView,
-      itemViewContainer: '[data-region="shippingOptionSelectorsRegion"]'
+      itemViewContainer: '[data-region="shippingOptionSelectorsRegion"]',
+      ui: {
+        activityIndicatorEl: '[data-region="shippingOptionSelectorsRegion"]'
+      }
     });
 
 

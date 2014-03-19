@@ -292,10 +292,7 @@ define(function (require) {
 
     if (response && response.status === 403) {
       key = 'paymentForm.errorMsg.cannotDeleteSelectedErr';
-      onClose = function() {
-        // do nothing on close message
-        return;
-      };
+      onClose = undefined; // do nothing on close message
     }
 
     $().toastmessage('showToast', {

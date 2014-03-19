@@ -63,6 +63,13 @@ define(function (require) {
         collection: shippingAddressCollection
       });
 
+      // Only populate the shipping options region if there is at least one shipping address
+      if (shippingAddressCollection.length > 0) {
+        setAsChosen('shippingOptions', 'checkout.updateChosenShippingOptionRequest');
+        shippingOptionsCollection.update(checkoutModel.get('shippingOptions'));
+        showSippingOptionsView(checkoutLayout.shippingOptionsRegion);
+      }
+
       region.show(profileShippingAddressesView);
     };
 
@@ -125,28 +132,20 @@ define(function (require) {
       checkoutModel.fetch({
         url: checkoutModel.getUrl(orderLink),
         success: function (response) {
-          setAsChosen('billingAddresses', 'checkout.updateChosenBillingAddressRequest');
-          setAsChosen('shippingAddresses', 'checkout.updateChosenShippingAddressRequest');
-          setAsChosen('shippingOptions', 'checkout.updateChosenShippingOptionRequest');
-          setAsChosen('paymentMethods', 'checkout.updateChosenPaymentMethodRequest');
-
           checkoutLayout.checkoutTitleRegion.show(new View.CheckoutTitleView());
 
+          setAsChosen('billingAddresses', 'checkout.updateChosenBillingAddressRequest');
           billingAddressCollection.update(checkoutModel.get('billingAddresses'));
           showBillingAddressesView(checkoutLayout.billingAddressesRegion);
 
           // Only show if the cart contains physical items requiring shipment
           if (checkoutModel.get('deliveryType') === "SHIPMENT") {
+            setAsChosen('shippingAddresses', 'checkout.updateChosenShippingAddressRequest');
             shippingAddressCollection.update(checkoutModel.get('shippingAddresses'));
             showShippingAddressesView(checkoutLayout.shippingAddressesRegion);
-
-            // Only populate the shipping options region if there is at least one shipping address
-            if (shippingAddressCollection.length > 0) {
-              shippingOptionsCollection.update(checkoutModel.get('shippingOptions'));
-              showSippingOptionsView(checkoutLayout.shippingOptionsRegion);
-            }
           }
 
+          setAsChosen('paymentMethods', 'checkout.updateChosenPaymentMethodRequest');
           if (checkoutModel.get('showPaymentMethods')) {
             paymentMethodCollection.update(response.get('paymentMethods'));
             showPaymentMethodsView(checkoutLayout.paymentMethodsRegion);
@@ -432,13 +431,6 @@ define(function (require) {
         success: function(response) {
           shippingAddressCollection.update(checkoutModel.get('shippingAddresses'));
           showShippingAddressesView(checkoutLayout.shippingAddressesRegion);
-
-          // Only populate the shipping options region if there is at least one shipping address
-          if (shippingAddressCollection.length > 0) {
-            setAsChosen('shippingOptions', 'checkout.updateChosenShippingOptionRequest');
-            shippingOptionsCollection.update(checkoutModel.get('shippingOptions'));
-            showSippingOptionsView(checkoutLayout.shippingOptionsRegion);
-          }
 
           checkoutSummaryModel.clear();
           checkoutSummaryModel.set(response.get('summary'));
@@ -738,6 +730,7 @@ define(function (require) {
       }
       ep.ui.startActivityIndicator(checkoutLayout.paymentMethodsRegion.currentView);
       ep.ui.startActivityIndicator(checkoutLayout.checkoutOrderRegion.currentView);
+
       refreshPaymentMethodViews();
     });
 
