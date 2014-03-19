@@ -40,8 +40,8 @@ define(function (require) {
 
     var checkoutAuthOptionsController = function() {
       if (ep.app.isUserLoggedIn()) {
-        // if user is logged, shouldn't be allowed to authenticate again. Redirect to index
-        ep.router.navigate('', true);
+        // If user is already logged in, they shouldn't be allowed to authenticate again - redirect to cart.
+        ep.router.navigate(ep.app.config.routes.cart, true);
       }
       else {
         checkoutAuthOptionsView = new View.CheckoutAuthOptionsLayout();
@@ -176,8 +176,16 @@ define(function (require) {
       EventBus.trigger('auth.authenticationRequest', publicAuthModel.attributes);
     });
 
-    function submitLoginForm(loginModel, redirectLocation) {
-      var loginFormValues = View.getLoginFormValues();
+    /**
+     * Retrieves the login form values from the view, stores these values in a Backbone Model and passes a
+     * JSON formatted version of this model to the authentication request event
+     * @param {Backbone.Model} loginModel The model to which the login form values should be stored
+     * @param {JQuery} formRegionObj jQuery object used to identify the login form being submitted
+     * @param {String} [redirectLocation] If applicable, a string identifying the route to be followed
+     *                                    upon successful login
+     */
+    function submitLoginForm (loginModel, formRegionObj, redirectLocation) {
+      var loginFormValues = View.getLoginFormValues(formRegionObj);
 
       var authString = 'grant_type=password'
         + '&username=' + loginFormValues.userName
@@ -192,13 +200,12 @@ define(function (require) {
       EventBus.trigger('auth.authenticationRequest', loginModel.toJSON());
     }
 
-
     /**
      * Make submit login form to cortex server for registered authentication.
      */
     EventBus.on('auth.submitLoginFormRequest', function() {
       var loginModel = new Model.LoginModel();
-      submitLoginForm(loginModel);
+      submitLoginForm(loginModel, loginFormView.$el);
     });
 
     EventBus.on('auth.submitCheckoutAuthLoginFormRequest', function(redirectUrl) {
@@ -214,7 +221,7 @@ define(function (require) {
       var loginModel = new Model.LoginModel();
       loginModel.set('error', errorFn);
 
-      submitLoginForm(loginModel, redirectUrl);
+      submitLoginForm(loginModel, checkoutAuthOptionsView.loginRegion.$el, redirectUrl);
     });
 
     function displayLoginFormError(response) {

@@ -57,15 +57,21 @@ define(function (require) {
       $('.auth-nav-container').hide(250);
     }
 
-    var getLoginFormValue = function () {
-      var formValues = {
-        "userName": $('#OAuthUserName').val(),
-        "password": $('#OAuthPassword').val(),
-        "role": $('#OAuthRole').val(),
-        "scope": $('#OAuthScope').val()
-      };
-
-      return formValues;
+    /**
+     * Simple function to gather form input values form a login form and return them in an object
+     * @param formRegionObj A jquery object representing a container region where the form inputs are to be found
+     * @returns {Object} An object of form values suitable for use in an AJAX request to Cortex
+     */
+    var getLoginFormValue = function (formRegionObj) {
+      if (formRegionObj) {
+        return {
+          "userName": formRegionObj.find('#OAuthUserName').val(),
+          "password": formRegionObj.find('#OAuthPassword').val(),
+          "role": formRegionObj.find('#OAuthRole').val(),
+          "scope": formRegionObj.find('#OAuthScope').val()
+        };
+      }
+      return {};
     };
 
     var getAnonymousFormValue = function() {
