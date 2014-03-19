@@ -43,6 +43,10 @@ define(function (require) {
 
   var defaultLayout = new View.DefaultLayout();
 
+  /**
+   * Controller logic to render profile personal info views in designated region
+   * @param region  region to render the view into
+   */
   var showPersonalInfoView = function (region) {
     var profileInfoView = new View.ProfilePersonalInfoView({
       model: personalInfoModel
@@ -50,6 +54,10 @@ define(function (require) {
     region.show(profileInfoView);
   };
 
+  /**
+   * Controller logic to render profile subscription views in designated region
+   * @param region  region to render the view into
+   */
   var showSubscriptionView = function (region) {
     var profileSubscriptionView = new View.ProfileSubscriptionSummaryView({
       collection: subscriptionCollection
@@ -57,6 +65,10 @@ define(function (require) {
     region.show(profileSubscriptionView);
   };
 
+  /**
+   * Controller logic to render profile purchases views in designated region
+   * @param region  region to render the view into
+   */
   var showPurchaseView = function (region) {
       var profilePurchaseView = new View.ProfilePurchasesHistoryView({
         collection: purchaseHistoryCollection
@@ -64,6 +76,10 @@ define(function (require) {
       region.show(profilePurchaseView);
   };
 
+  /**
+   * Controller logic to render profile payment methods views in designated region
+   * @param region  region to render the view into
+   */
   var showPaymentMethodsView = function (region) {
       var profilePaymentMethodsView = new View.ProfilePaymentMethodsView({
         collection: paymentsCollection
@@ -71,6 +87,10 @@ define(function (require) {
       region.show(profilePaymentMethodsView);
   };
 
+  /**
+   * Controller logic to render profile addresses views in designated region
+   * @param region  region to render the view into
+   */
   var showAddressesView = function (region) {
     var profileAddressesView = new View.ProfileAddressesView({
       collection: addressesCollection

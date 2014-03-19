@@ -50,6 +50,10 @@ define(function (require) {
     var checkoutLayout = new View.DefaultLayout();
 
 
+    /**
+     * Controller logic to render billing address views in designated region
+     * @param region  region to render the view into
+     */
     var showBillingAddressesView = function(region) {
       var profileBillingAddressesView =  new View.BillingAddressesCompositeView({
         collection: billingAddressCollection
@@ -58,6 +62,11 @@ define(function (require) {
       region.show(profileBillingAddressesView);
     };
 
+    /**
+     * Controller logic to render shipping address views in designated region (and calls showShippingOptionView function
+     * to render shipping option views into shippingOptionsRegion
+     * @param region  region to render the view into
+     */
     var showShippingAddressesView = function(region) {
       var profileShippingAddressesView = new View.ShippingAddressesCompositeView({
         collection: shippingAddressCollection
@@ -73,6 +82,10 @@ define(function (require) {
       region.show(profileShippingAddressesView);
     };
 
+    /**
+     * Controller logic to render shipping option views in designated region
+     * @param region  region to render the view into
+     */
     var showSippingOptionsView = function(region) {
       var profileShippingOptionsView = new View.ShippingOptionsCompositeView({
         collection: shippingOptionsCollection
@@ -80,6 +93,10 @@ define(function (require) {
       region.show(profileShippingOptionsView);
     };
 
+    /**
+     * Controller logic to render payment method views in designated region
+     * @param region  region to render the view into
+     */
     var showPaymentMethodsView = function (region) {
       var profilePaymentMethodsView = new View.PaymentMethodsCompositeView({
         collection: paymentMethodCollection
@@ -87,6 +104,10 @@ define(function (require) {
       region.show(profilePaymentMethodsView);
     };
 
+    /**
+     * Controller logic to render checkout summary views in designated region
+     * @param region  region to render the summary view into
+     */
     var showCheckoutSummaryView = function (region) {
       var checkoutSummaryView = new View.CheckoutSummaryView({
         model: checkoutSummaryModel
@@ -142,6 +163,8 @@ define(function (require) {
           if (checkoutModel.get('deliveryType') === "SHIPMENT") {
             setAsChosen('shippingAddresses', 'checkout.updateChosenShippingAddressRequest');
             shippingAddressCollection.update(checkoutModel.get('shippingAddresses'));
+            // shipping Options views' rendering logic is included inside showShippingAddressView
+            // as shipping options view will change when shipping address changes
             showShippingAddressesView(checkoutLayout.shippingAddressesRegion);
           }
 

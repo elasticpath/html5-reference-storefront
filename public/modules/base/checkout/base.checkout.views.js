@@ -406,8 +406,19 @@ define(function (require) {
         }
       }
     });
+    /* test-code */
+    // exposed variable for testing purpose only, will be removed for distribution
+    var __test_only__ = {
+      viewHelpers: viewHelpers,
+      PaymentMethodSelectorView: paymentMethodSelectorView
+    };
+    /* end-test-code */
 
     return {
+      /* test-code */
+      testVariables: __test_only__,
+      /* end-test-code */
+
       DefaultLayout: defaultLayout,
       CheckoutTitleView: checkoutTitleView,
       CheckoutAddressSelectorLayout: checkoutAddressSelectorLayout,
@@ -418,11 +429,7 @@ define(function (require) {
       CheckoutSummaryView: checkoutSummaryView,
       CheckoutShippingTotalView: checkoutShippingTotalView,
       CheckoutTaxTotalView: checkoutTaxTotalView,
-      CheckoutTaxesCollectionView: checkoutTaxesCollectionView,
-      testVariables: {
-        viewHelpers: viewHelpers,
-        PaymentMethodSelectorView: paymentMethodSelectorView
-      }
+      CheckoutTaxesCollectionView: checkoutTaxesCollectionView
     };
   }
 );
