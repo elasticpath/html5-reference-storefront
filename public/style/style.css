@@ -6163,6 +6163,12 @@ fieldset[disabled] .btn-auth-login.active {
 .checkout-auth-option-list:after {
   clear: both;
 }
+@media (max-width: 768px) {
+  .checkout-auth-option-list {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
 .checkout-auth-option-container {
   float: left;
   width: 100%;
@@ -6184,6 +6190,13 @@ fieldset[disabled] .btn-auth-login.active {
   .checkout-auth-option-container {
     float: left;
     width: 50%;
+  }
+}
+@media (max-width: 768px) {
+  .checkout-auth-option-container {
+    padding-left: 0;
+    padding-right: 0;
+    min-height: 0 !important;
   }
 }
 /*
