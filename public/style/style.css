@@ -7649,8 +7649,7 @@ fieldset[disabled] .btn-cmd-submit-order.active {
   min-height: 1px;
   padding-left: 0;
   padding-right: 0;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 @media (min-width: 1200px) {
   .payment-btn-cell {
