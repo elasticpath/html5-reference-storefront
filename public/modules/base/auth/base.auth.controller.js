@@ -321,8 +321,6 @@ define(function (require) {
       }
 
       utils.renderMsgToPage(errMsgKey, checkoutAuthOptionsView.anonymousCheckoutRegion.currentView.ui.feedbackRegion);
-
-      ep.ui.enableButton(checkoutAuthOptionsView.anonymousCheckoutRegion.currentView, 'saveBtn');
     });
 
     return {
