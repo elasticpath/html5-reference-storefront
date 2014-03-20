@@ -737,7 +737,7 @@ define(function (require) {
     EventBus.on('checkout.deletePaymentBtnClicked', function (href) {
       Mediator.fire('mediator.deletePaymentRequest', {
         href: href,
-        indicatorView: checkoutLayout,
+        indicatorView: checkoutLayout.paymentMethodsRegion.currentView,
         returnModule: 'checkout'
       });
     });
@@ -756,7 +756,6 @@ define(function (require) {
 
       refreshPaymentMethodViews();
     });
-
 
     return {
       DefaultController: defaultController
