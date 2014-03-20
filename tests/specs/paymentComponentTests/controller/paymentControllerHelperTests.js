@@ -20,22 +20,24 @@ define(function (require) {
 
   var controller = require('payment');
 
-  describe('Payment Controller: showMissingSubmitUrlToastMessage', function () {
+  describe('Payment Controller:', function () {
+    describe('showMissingSubmitUrlToastMessage', function () {
 
-    before(function () {
-      sinon.stub(ep.logger, 'error');
-      sinon.stub($.fn, 'toastmessage');
-      controller.__test_only__.showMissingSubmitUrlToastMessage();
-    });
+      before(function () {
+        sinon.stub(ep.logger, 'error');
+        sinon.stub($.fn, 'toastmessage');
+        controller.__test_only__.showMissingSubmitUrlToastMessage();
+      });
 
-    after(function () {
-      ep.logger.error.restore();
-      $.fn.toastmessage.restore();
-    });
+      after(function () {
+        ep.logger.error.restore();
+        $.fn.toastmessage.restore();
+      });
 
-    it('logs an error and shows a toast message' ,function () {
-      expect(ep.logger.error).to.be.calledOnce;
-      expect($.fn.toastmessage).to.be.calledWith('showToast');
+      it('logs an error and shows a toast message', function () {
+        expect(ep.logger.error).to.be.calledOnce;
+        expect($.fn.toastmessage).to.be.calledWith('showToast');
+      });
     });
   });
 });

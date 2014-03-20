@@ -17,7 +17,7 @@
 define(function (require) {
   var ep = require('ep');
 
-  describe('Checkout Shipping Option Views', function () {
+  describe('Checkout Module: Views: ', function () {
     var views = require('checkout.views');
     var template = require('text!modules/base/checkout/base.checkout.templates.html');
 
@@ -40,13 +40,19 @@ define(function (require) {
       it('should be an instance of Marionette CompositeView object', function () {
         expect(this.view).to.be.an.instanceOf(Marionette.CompositeView);
       });
-      it('render() should return the view object', function () {
-        expect(this.view.render()).to.be.equal(this.view);
+      it('has valid templateHelpers', function () {
+        expect(this.view.templateHelpers).to.be.ok;
       });
-      it('renders the view contents', function () {
-        // View should contain a heading element and a <div> region for shipping options
-        expect(this.view.el.childElementCount).to.be.equal(2);
-        expect(this.view.$el.find('[data-region="shippingOptionSelectorsRegion"]')).to.be.length(1);
+      it('has an emptyView', function () {
+        expect(this.view.emptyView).to.be.ok;
+      });
+      it('defines correct itemViewContainer', function () {
+        expect(this.view.itemViewContainer).to.be.ok;
+        expect(this.view.$el.find(this.view.itemViewContainer)).to.be.length(1);
+      });
+      it('defines a target render element for activityIndicator', function () {
+        expect(this.view.ui.activityIndicatorEl).to.be.ok;
+        expect(this.view.$el.find(this.view.ui.activityIndicatorEl)).to.be.length(1);
       });
     });
   });

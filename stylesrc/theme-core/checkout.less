@@ -83,12 +83,14 @@
 }
 
 .checkout-address-radio,
-.shipping-option-radio {
+.shipping-option-radio,
+.payment-option-radio {
   vertical-align: top;
   margin-right: 1rem;
 }
 
-.checkout-new-address-btn {
+.checkout-new-address-btn,
+.checkout-new-payment-btn {
   .pull-left();
   clear: both;
 }
@@ -107,7 +109,8 @@
   .make-lg-column(4, @gutter: 0);
 }
 
-[data-region="billingAddressesRegion"] {
+[data-region="billingAddressesRegion"],
+[data-region="paymentMethodsRegion"] {
   margin-bottom: 3rem;
   .make-md-column(7);
   padding-left: 0;
@@ -145,9 +148,31 @@
   }
 }
 
+
+.payment-ctrl-cell {
+  .make-xs-column(7, @gutter: 0);
+  .make-lg-column(8, @gutter: 0);
+  .clearfix();
+  label {
+    width: 90%;
+  }
+}
+
+.payment-btn-cell {
+  .make-xs-column(5, @gutter: 0);
+  .make-lg-column(4, @gutter: 0);
+
+  margin-bottom: 2rem;
+}
+
 [data-region="billingAddressesRegion"],
 [data-region="shippingAddressesRegion"],
 [data-region="shippingOptionsRegion"],
 [data-region="paymentMethodSelectorsRegion"]{
   position: relative;
+}
+
+.checkout-region-inner-container {
+  float: left;
+  width: 100%;
 }

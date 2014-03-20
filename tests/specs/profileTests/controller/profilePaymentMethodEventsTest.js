@@ -17,6 +17,7 @@
 define(function (require) {
   var Backbone = require('backbone');
   var EventBus = require('eventbus');
+  var Mediator = require('mediator');
   var ep = require('ep');
 
   describe('Profile Module: Payment Method Events', function () {
@@ -41,5 +42,40 @@ define(function (require) {
         expect(Backbone.Model.prototype.fetch).to.be.called;
       });
     });
+
+    describe('Responds to event: profile.deletePaymentBtnClicked', function () {
+      var fakeHref = "fakeDeletePaymentActionLink";
+      before(function () {
+        sinon.stub(Mediator, 'fire');
+
+        EventBus.trigger('profile.deletePaymentBtnClicked', fakeHref);
+      });
+
+      after(function () {
+        Mediator.fire.restore();
+      });
+
+      it('calls the correct mediator strategy', function () {
+        expect(Mediator.fire).to.be.calledWith('mediator.deletePaymentRequest', {
+          href: fakeHref,
+          indicatorView: undefined, // expect to pass an indicator view, but it is undefined in test
+          returnModule: 'profile'
+        });
+      });
+    });
+
+    describe('Responds to event: profile.updatePaymentMethods', function () {
+      before(function () {
+        sinon.stub(Backbone.Model.prototype, 'fetch');
+        EventBus.trigger('profile.updatePaymentMethods');
+      });
+      after(function () {
+        Backbone.Model.prototype.fetch.restore();
+      });
+      it('calls Backbone.Model.fetch to update the profile model', function () {
+        expect(Backbone.Model.prototype.fetch).to.be.called;
+      });
+    });
+
   });
 });

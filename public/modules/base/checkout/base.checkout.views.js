@@ -141,7 +141,7 @@ define(function (require) {
           EventBus.trigger('checkout.editAddressBtnClicked', this.model.get('href'));
         }
       },
-      onShow: function () {
+      onRender: function () {
         // Fire event to load the address itemView from component
         Mediator.fire('mediator.loadAddressesViewRequest', {
           region: this.checkoutAddressRegion,
@@ -171,6 +171,10 @@ define(function (require) {
       // Make the type of address available to the itemView
       itemViewOptions: {
         addressType: 'billing'
+      },
+      ui: {
+        // A jQuery selector for the DOM element to which an activity indicator should be applied.
+        activityIndicatorEl: '[data-region="billingAddressSelectorsRegion"]'
       },
       itemViewContainer: '[data-region="billingAddressSelectorsRegion"]',
       events: {
@@ -202,6 +206,10 @@ define(function (require) {
       // Make the type of address available to the itemView
       itemViewOptions: {
         addressType: 'shipping'
+      },
+      ui: {
+        // A jQuery selector for the DOM element to which an activity indicator should be applied.
+        activityIndicatorEl: '[data-region="shippingAddressSelectorsRegion"]'
       },
       itemViewContainer: '[data-region="shippingAddressSelectorsRegion"]',
       events: {
@@ -244,7 +252,10 @@ define(function (require) {
       templateHelpers: viewHelpers,
       itemView: shippingOptionsSelectorView,
       emptyView: shippingOptionsEmptyView,
-      itemViewContainer: '[data-region="shippingOptionSelectorsRegion"]'
+      itemViewContainer: '[data-region="shippingOptionSelectorsRegion"]',
+      ui: {
+        activityIndicatorEl: '[data-region="shippingOptionSelectorsRegion"]'
+      }
     });
 
 
@@ -258,14 +269,25 @@ define(function (require) {
       regions: {
         checkoutPaymentRegion: '[data-region="paymentMethodComponentRegion"]'
       },
+      ui: {
+        deleteButton: '[data-el-label="checkout.deletePaymentBtn"]'
+      },
       events: {
         'change input[type="radio"]': function () {
           EventBus.trigger('checkout.paymentMethodRadioChanged', this.model.get('selectAction'));
+        },
+        'click @ui.deleteButton': function (event) {
+          event.preventDefault();
+          EventBus.trigger('checkout.deletePaymentBtnClicked', this.model.get('href'));
         }
       },
-      onShow: function () {
+      onRender: function () {
         if (this.model.get('oneTime')) {
+          // adds additional label for one-time payment method. e.g. "New Payment Method:"
           $('label', this.$el).prepend('<span>' + viewHelpers.getI18nLabel('checkout.newPaymentMethod') + ': </span>');
+
+          // hides delete button (since one-time cannot be deleted)
+          this.ui.deleteButton.hide();
         }
 
         // Fire event to load the address itemView from component
@@ -384,8 +406,19 @@ define(function (require) {
         }
       }
     });
+    /* test-code */
+    // exposed variable for testing purpose only, will be removed for distribution
+    var __test_only__ = {
+      viewHelpers: viewHelpers,
+      PaymentMethodSelectorView: paymentMethodSelectorView
+    };
+    /* end-test-code */
 
     return {
+      /* test-code */
+      testVariables: __test_only__,
+      /* end-test-code */
+
       DefaultLayout: defaultLayout,
       CheckoutTitleView: checkoutTitleView,
       CheckoutAddressSelectorLayout: checkoutAddressSelectorLayout,
@@ -396,11 +429,7 @@ define(function (require) {
       CheckoutSummaryView: checkoutSummaryView,
       CheckoutShippingTotalView: checkoutShippingTotalView,
       CheckoutTaxTotalView: checkoutTaxTotalView,
-      CheckoutTaxesCollectionView: checkoutTaxesCollectionView,
-      testVariables: {
-        viewHelpers: viewHelpers,
-        PaymentMethodSelectorView: paymentMethodSelectorView
-      }
+      CheckoutTaxesCollectionView: checkoutTaxesCollectionView
     };
   }
 );

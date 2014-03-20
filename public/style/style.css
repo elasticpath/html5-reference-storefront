@@ -7514,11 +7514,13 @@ fieldset[disabled] .btn-cmd-submit-order.active {
   margin-bottom: 1.5rem;
 }
 .checkout-address-radio,
-.shipping-option-radio {
+.shipping-option-radio,
+.payment-option-radio {
   vertical-align: top;
   margin-right: 1rem;
 }
-.checkout-new-address-btn {
+.checkout-new-address-btn,
+.checkout-new-payment-btn {
   float: left !important;
   clear: both;
 }
@@ -7577,7 +7579,8 @@ fieldset[disabled] .btn-cmd-submit-order.active {
     width: 33.33333333333333%;
   }
 }
-[data-region="billingAddressesRegion"] {
+[data-region="billingAddressesRegion"],
+[data-region="paymentMethodsRegion"] {
   margin-bottom: 3rem;
   position: relative;
   min-height: 1px;
@@ -7587,12 +7590,14 @@ fieldset[disabled] .btn-cmd-submit-order.active {
   padding-right: 0;
 }
 @media (min-width: 992px) {
-  [data-region="billingAddressesRegion"] {
+  [data-region="billingAddressesRegion"],
+  [data-region="paymentMethodsRegion"] {
     float: left;
     width: 58.333333333333336%;
   }
 }
-[data-region="billingAddressesRegion"] h2 {
+[data-region="billingAddressesRegion"] h2,
+[data-region="paymentMethodsRegion"] h2 {
   margin-top: 0;
 }
 .checkout-shipping-container {
@@ -7663,11 +7668,71 @@ fieldset[disabled] .btn-cmd-submit-order.active {
 .checkout-shipping-container [data-region="shippingOptionsRegion"] span {
   display: block;
 }
+.payment-ctrl-cell {
+  float: left;
+  width: 58.333333333333336%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (min-width: 1200px) {
+  .payment-ctrl-cell {
+    float: left;
+    width: 66.66666666666666%;
+  }
+}
+.payment-ctrl-cell:before,
+.payment-ctrl-cell:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.payment-ctrl-cell:after {
+  clear: both;
+}
+.payment-ctrl-cell:before,
+.payment-ctrl-cell:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.payment-ctrl-cell:after {
+  clear: both;
+}
+.payment-ctrl-cell label {
+  width: 90%;
+}
+.payment-btn-cell {
+  float: left;
+  width: 41.66666666666667%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 2rem;
+}
+@media (min-width: 1200px) {
+  .payment-btn-cell {
+    float: left;
+    width: 33.33333333333333%;
+  }
+}
 [data-region="billingAddressesRegion"],
 [data-region="shippingAddressesRegion"],
 [data-region="shippingOptionsRegion"],
 [data-region="paymentMethodSelectorsRegion"] {
   position: relative;
+}
+.checkout-region-inner-container {
+  float: left;
+  width: 100%;
 }
 /*
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
@@ -8919,9 +8984,57 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
   }
 }
 .profile-payment-methods-listing {
+  margin-left: -15px;
+  margin-right: -15px;
   padding: 0;
 }
+.profile-payment-methods-listing:before,
+.profile-payment-methods-listing:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.profile-payment-methods-listing:after {
+  clear: both;
+}
+.profile-payment-methods-listing:before,
+.profile-payment-methods-listing:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.profile-payment-methods-listing:after {
+  clear: both;
+}
 .profile-payment-method-container {
+  margin-bottom: 2rem;
+  float: left;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  .profile-payment-method-container {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 1200px) {
+  .profile-payment-method-container {
+    float: left;
+    width: 50%;
+  }
+}
+.profile-delete-payment-btn {
+  margin-top: .75rem;
   margin-bottom: 1rem;
 }
 .toast-container {

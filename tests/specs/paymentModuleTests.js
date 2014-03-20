@@ -25,8 +25,14 @@ define(function (require) {
     // defaultCreatePaymentController Tests
     require('specs/paymentComponentTests/controller/defaultCreatePaymentControllerTests.js');
 
-    // controller general Events Tests
-    require('specs/paymentComponentTests/controller/paymentEventsTests.js');
+    // controller load payment view event Tests
+    require('specs/paymentComponentTests/controller/loadPaymentViewEventsTests.js');
+
+    // controller add new payment event Tests
+    require('specs/paymentComponentTests/controller/addNewPaymentEventsTests.js');
+
+    // controller delete payment event Tests
+    require('specs/paymentComponentTests/controller/deletePaymentEventsTests.js');
 
     // controller helper functions
     require('specs/paymentComponentTests/controller/paymentControllerHelperTests.js');
@@ -39,6 +45,9 @@ define(function (require) {
 
     // DefaultPaymentFormView Tests
     require('specs/paymentComponentTests/view/defaultPaymentFormViewTests.js');
+
+    // DeletePaymentConfirmView Tests
+    require('specs/paymentComponentTests/view/DeletePaymentConfirmViewTests.js');
 
 
     /*

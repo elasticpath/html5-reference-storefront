@@ -17,6 +17,7 @@
 define(function (require) {
   var Backbone = require('backbone');
   var ep = require('ep');
+  var EventTestFactory = require('testfactory.event');
 
   var profileViews = require('profile.views');
   var profileTemplate = require('text!modules/base/profile/base.profile.templates.html');
@@ -51,16 +52,16 @@ define(function (require) {
         expect(this.view.getTemplate()).to.be.equal(templateId);
         expect($(templateId)).to.exist;
       });
-      it('render() should return the view object', function () {
-        expect(this.view.render()).to.be.equal(this.view);
-      });
-      it('view content is rendered with DOM elements', function () {
-        expect(this.view.el.childElementCount).to.be.above(0);
-      });
       it('should have a profilePaymentMethodComponentRegion region', function () {
         expect(this.view.profilePaymentMethodComponentRegion).to.exist;
         expect(this.view.$el.find('[data-region="paymentMethodComponentRegion"]')).to.be.length(1);
       });
+      it('defines and renders ui element delete button', function () {
+        expect(this.view.ui.deleteButton).to.be.ok;
+      });
+
+      describe('payment method delete button clicked',
+        EventTestFactory.simpleBtnClickTest('profile.deletePaymentBtnClicked', '[data-el-label="profile.deletePaymentBtn"]'));
     });
 
     describe('ProfilePaymentMethodsView', function () {
