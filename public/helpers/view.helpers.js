@@ -45,22 +45,32 @@ define(function (require) {
     },
 
     /**
+     * Get url hash from ep.config.json file.
+     * @param routeKey  key to access routes values
+     * @returns String url hash
+     */
+    getUrlHash: function(routeKey) {
+      var link = ep.app.config.routes[routeKey];
+
+      if (routeKey !== 'home' && link === undefined){
+        ep.logger.warn("this route with key " + routeKey + " does  not exist.");
+      }
+
+      return link;
+    },
+
+    /**
      * Generate url with specified route root and encoded href
      * @param routeKey route key to access hash url root (e.g. #myCart)
      * @param href     href to cortex resource
      * @returns String   generated url matching a router url pattern
      */
     generateUrl: function (routeKey, href) {
-      var link = '';
-
-      if (href && ep.app.config.routes[routeKey]) {
-        link = ep.app.config.routes[routeKey] + '/' + ep.ui.encodeUri(href);
-      }
-      else {
-        ep.logger.warn('Unable to generate url; missing href or routeKey');
+      if (!href) {
+        ep.logger.warn('viewHelper.generateUrl called without href');
       }
 
-      return link;
+      return this.getUrlHash(routeKey) + '/' + ep.ui.encodeUri(href);
     },
 
     /**
@@ -80,21 +90,6 @@ define(function (require) {
       }
 
       return retVar;
-    },
-
-    /**
-     * Get link from ep.config.json file.
-     * @param routeKey  key to access routes values
-     * @returns String url link
-     */
-    getLink: function(routeKey) {
-      var link = ep.app.config.routes[routeKey];
-
-      if (!link) {
-        ep.logger.warn("Unable to get link from ep.config; check if routes key correct.");
-      }
-
-      return link;
     },
 
     getStatusDisplayText:function(status){

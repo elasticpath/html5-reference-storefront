@@ -19,6 +19,7 @@
  *  app.js
  *
  */
+/* global process, __dirname */
 var express = require('express');
 var http = require('http');
 var path = require('path');

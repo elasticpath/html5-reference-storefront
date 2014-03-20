@@ -21,6 +21,7 @@
 define(function (require) {
     var ep = require('ep');
     var EventBus = require('eventbus');
+    var Mediator = require('mediator');
     var Backbone = require('backbone');
 
     var View = require('registration.views');
@@ -113,13 +114,13 @@ define(function (require) {
     /**
      * Attempts to parse a route (stored in JSON) from the 'registrationFormReturnTo' sessionStorage item.
      *
-     * @returns {string} Undefined or the URL fragment (including parameters) from sessionStorage
+     * @returns {}  the URL fragment (including parameters) from sessionStorage and redirectUrl
      */
     function getRouteObjFromStorage() {
       // Attempt to get a stored route from sessionStorage
       var storedRoute = ep.io.sessionStore.getItem('registrationFormReturnTo');
 
-      var urlFragment;
+      var urlFragment = {};
 
       if (storedRoute) {
         var storedRouteObj = {};
@@ -135,8 +136,10 @@ define(function (require) {
         }
 
         if (storedRouteObj.name) {
-          urlFragment = ep.router.rebuildUrlFragment(ep.app.config.routes, storedRouteObj.name, storedRouteObj.params);
+          urlFragment.returnUrl = ep.router.rebuildUrlFragment(ep.router.urlHashes, storedRouteObj.name, storedRouteObj.params);
         }
+
+        urlFragment.redirectUrl = storedRouteObj.redirect;
       }
 
       return urlFragment;
@@ -187,24 +190,38 @@ define(function (require) {
      * Routes the user to a return route held in sessionStorage or back to the homepage
      * @param showLogin {Boolean} Show the login form after navigating to the return route
      */
-    EventBus.on('registration.navigateToReturnRoute', function (showLogin) {
-      var routeFromStorage = getRouteObjFromStorage();
-      if (routeFromStorage) {
-        // Navigate to the route and call its associated function
-        ep.router.navigate(routeFromStorage, true);
-      } else {
-        // Navigate to the homepage route
-        ep.router.navigate('', true);
+    EventBus.on('registration.navigateToReturnRoute', function (isRegistered) {
+      var routeFromStorage = getRouteObjFromStorage() || {};
+      var url = '';
+
+      if (isRegistered) {
+        // Prompt the user to login
+        Mediator.fire('mediator.loadRegionContent', 'loginModal');
+
+        // on registration success, redirect to specified url or return to previous page
+        // or if no url specified at all: log error & goto index
+        if (routeFromStorage.redirectUrl) {
+          url = routeFromStorage.redirectUrl;
+        }
+        else if (routeFromStorage.returnUrl) {
+          url = routeFromStorage.returnUrl;
+        }
+        else {
+          ep.logger.warn("No redirect or return url specified for registration success");
+
+        }
+      }
+      else {
+        // if registratio is cancelled, return to previous page; if returnUrl is undefined: log error & goto index
+        if (routeFromStorage.returnUrl) {
+          url = routeFromStorage.returnUrl;
+        }
+        else {
+          ep.logger.warn("No return url specified for redirect after cancel registration");
+        }
       }
 
-      if (showLogin) {
-        // Prompt the user to login
-        EventBus.trigger('layout.loadRegionContentRequest', {
-          region: 'appModalRegion',
-          module: 'auth',
-          view: 'LoginFormView'
-        });
-      }
+      ep.router.navigate(url, true);
     });
 
     /**

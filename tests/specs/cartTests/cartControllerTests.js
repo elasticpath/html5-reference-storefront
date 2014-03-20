@@ -356,7 +356,7 @@ define(function (require) {
       });
 
       it('fires correct mediator event to load authentication view', sinon.test(function () {
-        expect(Mediator.fire).to.be.calledWithExactly('mediator.getAuthentication');
+        expect(Mediator.fire).to.be.calledWithExactly('mediator.authenticateForCheckout', actionLink);
       }));
     });
 

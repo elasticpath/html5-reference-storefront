@@ -18,6 +18,7 @@
 define(function (require) {
     var ep = require('ep');
     var Marionette = require('marionette');
+    var Backbone = require('backbone');
     var EventBus = require('eventbus');
     var pace = require('pace');
     var ViewHelpers = require('viewHelpers');
@@ -167,7 +168,7 @@ define(function (require) {
       onShow: function () {
         // if no release date, hide dom element with release-date & the label
         if (!viewHelpers.getAvailabilityReleaseDate(this.model.get('releaseDate'))) {
-          $('[data-region="itemAvailabilityDescriptionRegion"]', this.el).addClass('is-hidden');
+          $('[data-region="itemAvailabilityDescriptionRegion"]', this.$el).addClass('is-hidden');
         }
       }
     });
@@ -185,7 +186,7 @@ define(function (require) {
         // if item has rate, load rate view
         if (this.model.attributes.rateCollection.length > 0) {
           this.itemRateRegion.show(
-            new itemRateCollectionView({
+            new ItemRateCollectionView({
               collection: new Backbone.Collection(this.model.attributes.rateCollection)
             })
           );
@@ -194,7 +195,7 @@ define(function (require) {
         // if item has one-time purchase price, load price view
         if (this.model.get('price').purchase.display) {
           this.itemPriceRegion.show(
-            new itemPriceView({
+            new ItemPriceView({
               model: new Backbone.Model(this.model.attributes.price)
             })
           );
@@ -206,14 +207,14 @@ define(function (require) {
     });
 
     // Item Price View
-    var itemPriceView = Marionette.ItemView.extend({
+    var ItemPriceView = Marionette.ItemView.extend({
       template: '#ItemPriceTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
       className: 'itemdetail-price-container',
       onShow: function () {
         if (!viewHelpers.getListPrice(this.model.attributes)) {
-          $('[data-region="itemListPriceRegion"]', this.el).addClass('is-hidden');
+          $('[data-region="itemListPriceRegion"]', this.$el).addClass('is-hidden');
         }
       }
     });
@@ -226,7 +227,7 @@ define(function (require) {
     });
 
     // Item Rate CollectionView
-    var itemRateCollectionView = Marionette.CollectionView.extend({
+    var ItemRateCollectionView = Marionette.CollectionView.extend({
       itemView: itemRateItemView,
       tagName: 'ul',
       className: 'itemdetail-rate-container'

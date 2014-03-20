@@ -41,7 +41,8 @@ define(['ep','eventbus'],
       templateHelpers: viewHelpers,
       attributes:function(){
         return{
-          'data-name':this.model.get('displayName')
+          'data-name':this.model.get('displayName'),
+          'data-el-container': "category-nav-item-container"
         };
       },
       onShow:function(){

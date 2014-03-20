@@ -15,9 +15,10 @@
  * Functional Storefront Unit Test - Auth Views
  */
 define(function (require) {
+  var Backbone = require('backbone');
+
   var templates = require('text!modules/base/auth/base.auth.templates.html');
-  var authView = require('auth.views');
-  var authModel = require('auth.models');
+  var views = require('auth.views');
 
   describe('Auth Module: Views', function () {
     before(function() {
@@ -28,8 +29,8 @@ define(function (require) {
         el: '[data-region="authMenuItemRegion"]'
       });
 
-      this.view = new authView.DefaultView({
-        model: new authModel.LoginFormModel()
+      this.view = new views.DefaultView({
+        model: new Backbone.Model()
       });
       this.authMenuItemRegion.show(this.view);
     });
@@ -39,16 +40,13 @@ define(function (require) {
     });
 
     it("DefaultView should exist", function () {
-      expect(authView.DefaultView).to.exist;
+      expect(views.DefaultView).to.exist;
     });
     it("LoginFormView should exist", function () {
-      expect(authView.LoginFormView).to.exist;
+      expect(views.LoginFormView).to.exist;
     });
     it("ProfileMenuView should exist", function () {
-      expect(authView.ProfileMenuView).to.exist;
-    });
-    it("getLoginRequestModel should exist", function () {
-      expect(authView.getLoginRequestModel).to.exist;
+      expect(views.ProfileMenuView).to.exist;
     });
     it("Login Button and hidden menu container should exist", function () {
       expect($('.btn-auth-menu').html()).to.exist;

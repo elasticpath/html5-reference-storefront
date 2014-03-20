@@ -16,25 +16,16 @@
  *
  */
 define(function (require) {
-  var ep = require('ep');
-  var Marionette = require('marionette');
-  var EventBus = require('eventbus');
-  var i18n = require('i18n');
-  var Model = require('auth.models');
+    require('equalize');
+    var ep = require('ep');
+    var i18n = require('i18n');
+    var Marionette = require('marionette');
+    var EventBus = require('eventbus');
 
-    var viewHelpers = {
-      getI18nLabel:function(key){
-        var retVal = key;
-        try{
-          retVal = i18n.t(key);
-        }
-        catch(e){
-          // silent failure on label rendering
-        }
+    var ViewHelpers = require('viewHelpers');
 
-        return retVal;
-      },
-      getLoginText:function() {
+    var viewHelpers = ViewHelpers.extend({
+      getLoginText: function () {
         var retVal;
         if (ep.io.localStore.getItem('oAuthRole') === 'PUBLIC') {
           retVal = this.getI18nLabel('auth.loginMenu');
@@ -43,56 +34,80 @@ define(function (require) {
         }
         return retVal;
       },
-      getMenuItemText:function(){
+      getMenuItemText: function () {
         var retVal = '';
         if (ep.io.localStore.getItem('oAuthRole') === 'PUBLIC') {
           retVal = 'auth.loginMenu';
         }
         return retVal;
       },
-      generateHref: function (route) {
-        return  ep.app.config.routes[route] || null;
+      getStoreScope: function() {
+        return ep.app.config.cortexApi.scope;
       }
-    };
+    });
 
     /*
-    * Show the Profile Dropdown menu
-    * */
-    function showProfileMenu(){
+     * Show the Profile Dropdown menu
+     * */
+    function showProfileMenu() {
       $('.auth-nav-container').show(250);
     }
-    function hideProfileMenu(){
+
+    function hideProfileMenu() {
       $('.auth-nav-container').hide(250);
     }
+
+    /**
+     * Simple function to gather form input values form a login form and return them in an object
+     * @param formRegionObj A jquery object representing a container region where the form inputs are to be found
+     * @returns {Object} An object of form values suitable for use in an AJAX request to Cortex
+     */
+    var getLoginFormValue = function (formRegionObj) {
+      if (formRegionObj) {
+        return {
+          "userName": formRegionObj.find('#OAuthUserName').val(),
+          "password": formRegionObj.find('#OAuthPassword').val(),
+          "role": formRegionObj.find('#OAuthRole').val(),
+          "scope": formRegionObj.find('#OAuthScope').val()
+        };
+      }
+      return {};
+    };
+
+    var getAnonymousFormValue = function() {
+      return {
+        "email": $('#Email').val()
+      };
+    };
 
     /*
      * Default Layout View: loginMenu button, and controlling the toggle menu
      */
     var defaultLayout = Marionette.Layout.extend({
-      template:'#DefaultAuthLayoutTemplate',
-      className:'auth-container',
-      templateHelpers:viewHelpers,
-      events:{
-        'click .btn-auth-menu':function(event){
+      template: '#DefaultAuthLayoutTemplate',
+      className: 'auth-container',
+      templateHelpers: viewHelpers,
+      events: {
+        'click .btn-auth-menu': function (event) {
           event.preventDefault();
           event.stopPropagation();
           // don't bother firing any events if the menu is open
-          if(!$('.auth-nav-container').is(':visible')){
+          if (!$('.auth-nav-container').is(':visible')) {
             EventBus.trigger('auth.btnAuthGlobalMenuItemClicked');
           }
-          else{
+          else {
             hideProfileMenu();
           }
         }
       },
-      onShow:function() {
+      onShow: function () {
         ep.app.addRegions({
-          mainAuthView:'[data-region="authMainRegion"]'
+          mainAuthView: '[data-region="authMainRegion"]'
         });
         // set up the global events to close the profile menu
-        $('body').unbind().bind('click',function(event){
+        $('body').unbind().bind('click', function (event) {
           var authNavContainer = $('.auth-nav-container');
-          if (authNavContainer.is(':visible')){
+          if (authNavContainer.is(':visible')) {
             if (!authNavContainer.is(event.target) && authNavContainer.has(event.target).length === 0) {
               authNavContainer.hide();
             }
@@ -105,11 +120,11 @@ define(function (require) {
      * Login Form View: login form and login button
      */
     var loginFormView = Marionette.ItemView.extend({
-      template:'#AuthLoginFormTemplate',
-      templateHelpers:viewHelpers,
-      className:'auth-login-container',
+      template: '#AuthLoginFormTemplate',
+      templateHelpers: viewHelpers,
+      className: 'auth-login-container',
       attributes: {
-        "data-el-container":"global.loginMenu"
+        "data-el-container": "global.loginMenu"
       },
       ui: {
         loginButton: '.btn-auth-login',
@@ -118,74 +133,128 @@ define(function (require) {
       events: {
         'click @ui.loginButton': function (event) {
           event.preventDefault();
-          EventBus.trigger('auth.loginFormSubmitButtonClicked');
+          EventBus.trigger('auth.loginButtonClicked');
         },
         'click @ui.registerButton': function (event) {
           event.preventDefault();
-          EventBus.trigger('auth.loginFormRegisterLinkClicked');
+          EventBus.trigger('auth.registrationButtonClicked');
         }
       }
     });
 
-    /*
+    /**
      * Profile Menu View: menu view presented after logging-in
      *  show logout button, and links and info regarding to user profile
      */
     var profileMenuView = Marionette.ItemView.extend({
-      template:'#AuthProfileMenuTemplate',
-      templateHelpers:viewHelpers,
-      tagName:'ul',
+      template: '#AuthProfileMenuTemplate',
+      templateHelpers: viewHelpers,
+      tagName: 'ul',
       className: 'auth-profile-menu-list',
-      attributes:{
-        "data-el-container":"global.profileMenu"
+      attributes: {
+        "data-el-container": "global.profileMenu"
       },
-      events:{
-        'click .btn-auth-logout':function(event){
+      events: {
+        'click .btn-auth-logout': function (event) {
           event.preventDefault();
           EventBus.trigger("auth.logoutBtnClicked");
         },
-        'click .profile-link':function () {
+        'click .profile-link': function () {
           $('.auth-nav-container').hide(250);
         }
       }
     });
 
 
-    /*
-     *
-     * Functions
-     *
-     * */
-    var getLoginRequestModel = function(){
-      var retVal = new Model.LoginFormModel();
-      retVal.set('userName',$('#OAuthUserName').val());
-      retVal.set('password',$('#OAuthPassword').val());
-      retVal.set('role','REGISTERED');
-      retVal.set('scope',ep.app.config.cortexApi.scope);
-      return retVal;
-    };
+    /**
+     * Checkout Authentication Options Layout - will render placeholders for authentication options' regions.
+     * @type Marionette.Layout
+     */
+    var checkoutAuthOptionsLayout = Marionette.Layout.extend({
+      template: '#CheckoutAuthOptionsLayoutTemplate',
+      templateHelpers: viewHelpers,
+      className: 'container',
+      regions: {
+        loginRegion: '[data-region="checkoutAuthLoginOptionRegion"]',
+        registrationRegion: '[data-region="checkoutAutRegisterOptionRegion"]',
+        anonymousCheckoutRegion: '[data-region="checkoutAuthAnonymousOptionRegion"]'
+      },
+      onShow: function() {
+        $('.checkout-auth-option-container').equalHeights();
+      }
+    });
 
-    var displayLoginErrorMsg = function(msg){
-      if (msg) {
-        var key = 'auth.' + msg;
-        var errMsg = viewHelpers.getI18nLabel(key);
-        var authFeedBackContainer = $('.auth-feedback-container');
-        authFeedBackContainer.text(errMsg);
-        authFeedBackContainer.attr('data-i18n', key);
+    /**
+     * Checkout Authentication Login Options - will render login form for checkout
+     * @type Marionette.ItemView
+     */
+    var checkoutAuthLoginOptionView = Marionette.ItemView.extend({
+      template: '#CheckoutAuthLoginOptionTemplate',
+      templateHelpers: viewHelpers,
+      className: "checkout-auth-option-container",
+      ui: {
+        loginButton: '[data-el-label="checkoutAuthOption.login"]'
+      },
+      events: {
+        'click @ui.loginButton': function (event) {
+          event.preventDefault();
+          EventBus.trigger('auth.checkoutAuthLoginButtonClicked', ep.router.urlHashes.cart);
+        }
       }
-      else {
-        ep.logger.warn('DisplayLoginErrorMsg called without error message');
+    });
+
+    /**
+     * Checkout Authentication Registration Options - will render registration button.
+     * @type Marionette.ItemView
+     */
+    var checkoutAuthRegisterOptionView = Marionette.ItemView.extend({
+      template: '#CheckoutAuthRegisterOptionTemplate',
+      templateHelpers: viewHelpers,
+      className: "checkout-auth-option-container",
+      ui: {
+        registerButton: '[data-el-label="checkoutAuthOption.register"]'
+      },
+      events: {
+        'click @ui.registerButton': function (event) {
+          event.preventDefault();
+          EventBus.trigger('auth.registrationButtonClicked', ep.router.urlHashes.cart);
+        }
       }
-    };
+    });
+
+    /**
+     * Checkout Authentication Anonymous Checkout Options - will anonymous checkout form - create email form.
+     * @type Marionette.ItemView
+     */
+    var checkoutAuthAnonymousOptionView = Marionette.ItemView.extend({
+      template: '#CheckoutAuthAnonymousOptionTemplate',
+      templateHelpers: viewHelpers,
+      className: "checkout-auth-option-container",
+      ui: {
+        checkoutButton: '[data-el-label="checkoutAuthOption.anonymousCheckout"]',
+        feedbackRegion: '[data-region="anonymousCheckoutFeedbackRegion"]'
+      },
+      events: {
+        'click @ui.checkoutButton': function (event) {
+          event.preventDefault();
+          EventBus.trigger('auth.continueCheckoutAnonymouslyBtnClicked', this.model.get('emailActionLink'));
+        }
+      }
+    });
 
     return {
-      DefaultView:defaultLayout,
-      LoginFormView:loginFormView,
-      ProfileMenuView:profileMenuView,
-      getLoginRequestModel:getLoginRequestModel,
-      displayLoginErrorMsg:displayLoginErrorMsg,
-      showProfileMenu:showProfileMenu,
-      hideProfileMenu:hideProfileMenu
+      DefaultView: defaultLayout,
+      LoginFormView: loginFormView,
+      ProfileMenuView: profileMenuView,
+      CheckoutAuthOptionsLayout: checkoutAuthOptionsLayout,
+      CheckoutAuthLoginOptionView: checkoutAuthLoginOptionView,
+      CheckoutAuthRegisterOptionView: checkoutAuthRegisterOptionView,
+      CheckoutAuthAnonymousOptionView: checkoutAuthAnonymousOptionView,
+
+      getLoginFormValues: getLoginFormValue,
+      getAnonymousFormValue: getAnonymousFormValue,
+      showProfileMenu: showProfileMenu,
+      hideProfileMenu: hideProfileMenu
     };
   }
 );
