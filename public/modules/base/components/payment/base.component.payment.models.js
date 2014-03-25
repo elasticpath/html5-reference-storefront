@@ -27,7 +27,7 @@ define(function (require) {
    */
   var newPaymentModel = Backbone.Model.extend({
     getUrl: function (href) {
-      return href + '?zoom=paymentmethodinfo:createpaymenttokenform';
+      return href + '?zoom=paymentmethodinfo:paymenttokenform';
     },
     parse: function (response) {
       var paymentFormObj = {};

@@ -83,7 +83,7 @@ define(['ep', 'eventbus', 'backbone'],
           /*
            * quantity
            */
-          lineItemObj.quantity = currObj['quantity'];
+          lineItemObj.quantity = currObj.quantity;
 
           /*
            * item unit price
@@ -184,7 +184,7 @@ define(['ep', 'eventbus', 'backbone'],
         defaultImg = {
           absolutePath: imgObj['content-location'],
           relativePath: imgObj['relative-location'],
-          name: imgObj['name']
+          name: imgObj.name
         };
       }
 
@@ -201,7 +201,7 @@ define(['ep', 'eventbus', 'backbone'],
         if (releaseDate) {
           availability.releaseDate = {
             displayValue: releaseDate['display-value'],
-            value: releaseDate['value']
+            value: releaseDate.value
           };
         }
       }

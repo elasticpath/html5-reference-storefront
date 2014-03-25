@@ -22,6 +22,14 @@
     <%= E.displayValue %>
   </script>
 
+  <!-- Renders a confirmation message with continue & cancel buttons -->
+  <script id="DefaultDeletePaymentConfirmationModalTemplate" type="text/template">
+    <p><%= E.getI18nLabel('paymentForm.msg.deleteConfirmation') %></p>
+    <button class="btn btn-primary btn-yes"><%= E.getI18nLabel('general.yes') %></button>
+    <button class="btn btn-primary btn-no"><%= E.getI18nLabel('general.no') %></button>
+  </script>
+
+
   <!-- Renders the Payment Method Form-->
   <script id="MockPaymentMethodFormTemplate" type="text/template">
     <h1><%= E.getI18nLabel('paymentForm.formTitle') %></h1>
@@ -82,6 +90,11 @@
         <div class="form-input">
           <input id="SecurityCode" name="SecurityCode" class="form-control" maxlength="4" type="text"/>
         </div>
+      </div>
+
+      <div class="form-group" data-el-label="payment.saveToProfileFormGroup">
+        <input type="checkbox" id="saveToProfile" data-el-label="payment.saveToProfile"/>
+        <label for="saveToProfile" class="control-label form-label"><%= E.getI18nLabel('paymentForm.saveToProfile') %></label>
       </div>
 
       <div class="form-group create-address-btn-container">

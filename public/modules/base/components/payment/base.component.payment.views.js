@@ -24,6 +24,11 @@ define(function (require) {
   var ViewHelpers = require('viewHelpers');
 
   /**
+   * Template helper functions
+   */
+  var viewHelpers = ViewHelpers.extend();
+
+  /**
    * Simple function to build a payment method object from the values supplied in the form.
    * It is expected that this form will be provided by a payment gateway in future.
    *
@@ -68,21 +73,59 @@ define(function (require) {
     ui: {
       'cancelButton': '[data-el-label="paymentForm.cancel"]',
       'feedbackRegion': '[data-region="componentPaymentFeedbackRegion"]',
+      'saveToProfileCheckbox': '[data-el-label="payment.saveToProfile"]',
+      'saveToProfileFormGroup': '[data-el-label="payment.saveToProfileFormGroup"]',
       'saveButton': '[data-el-label="paymentForm.save"]'
     },
     events: {
       'click @ui.saveButton': function (event) {
         event.preventDefault();
-        var href = this.model.get('href');
-        if (href) {
-          EventBus.trigger('payment.savePaymentMethodBtnClicked', href);
+        /**
+         * Test if the shopper is adding a one-time or permanent payment method.
+         * If the saveToProfileFormGroup element is hidden (see onRender function below) or the saveToProfileCheckbox
+         * element is checked, this is a permanent new payment method (to be added to the shopper's profile).
+         */
+        if ( this.ui.saveToProfileFormGroup.hasClass('hidden') || this.ui.saveToProfileCheckbox.prop('checked') ) {
+          /**
+           * Triggers an event which goes on to request the payment form action URL from Cortex.
+           * A boolean value is passed to indicate the permanence of the new payment method (true if permanent,
+           * false or not present missing if one-time).
+           */
+          EventBus.trigger('payment.savePaymentMethodBtnClicked', true);
         } else {
-          ep.logger.warn('unable to retrieve url to post address form');
+          EventBus.trigger('payment.savePaymentMethodBtnClicked');
         }
       },
       'click @ui.cancelButton': function (event) {
         event.preventDefault();
         EventBus.trigger('payment.cancelFormBtnClicked');
+      }
+    },
+    onRender: function () {
+      // Hide the 'save to profile' checkbox if the shopper has accessed the new payment method form from profile
+      if ( ep.io.sessionStore.getItem('paymentFormReturnTo') === 'profile' ) {
+        this.ui.saveToProfileFormGroup.addClass('hidden');
+      }
+    }
+  });
+
+
+  /**
+   * This view is rendered in the modal region to obtain confirmation from the user before proceeding
+   * with a request to delete an payment.
+   */
+  var defaultDeletePaymentConfirmationView = Marionette.ItemView.extend({
+    className:'payment-delete-confirm-modal',
+    template:'#DefaultDeletePaymentConfirmationModalTemplate',
+    templateHelpers:viewHelpers,
+    events:{
+      'click .btn-yes': function(event) {
+        event.preventDefault();
+        EventBus.trigger('payment.deleteConfirmYesBtnClicked', this.options);
+      },
+      'click .btn-no': function(event) {
+        event.preventDefault();
+        $.modal.close();
       }
     }
   });
@@ -90,6 +133,8 @@ define(function (require) {
   return {
     DefaultPaymentItemView: defaultPaymentItemView,
     DefaultPaymentFormView: defaultPaymentFormView,
+    DefaultDeletePaymentConfirmationView: defaultDeletePaymentConfirmationView,
+
     getPaymentFormValues: getPaymentFormValues
   };
 });

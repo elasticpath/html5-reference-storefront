@@ -18,6 +18,7 @@
 define(function (require) {
     var ep = require('ep');
     var Marionette = require('marionette');
+    var Backbone = require('backbone');
     var i18n = require('i18n');
     var EventBus = require('eventbus');
     var Mediator = require('mediator');
@@ -229,7 +230,7 @@ define(function (require) {
         // show availability if at least has availability state
         if (this.model.get('availability').state) {
           this.cartLineitemAvailabilityRegion.show(
-            new itemAvailabilityView({
+            new ItemAvailabilityView({
               model: new Backbone.Model(this.model.get('availability'))
             })
           );
@@ -237,7 +238,7 @@ define(function (require) {
 
         // show unit price
         this.cartLineitemUnitPriceRegion.show(
-          new itemUnitPriceLayout({
+          new ItemUnitPriceLayout({
             model: new Backbone.Model({
               price: this.model.attributes.unitPrice,
               rateCollection: this.model.attributes.unitRateCollection
@@ -247,7 +248,7 @@ define(function (require) {
 
         // show total price
         this.cartLineitemTotalPriceRegion.show(
-          new itemTotalPriceLayout({
+          new ItemTotalPriceLayout({
             model: new Backbone.Model({
               price: this.model.attributes.price,
               rateCollection: this.model.attributes.rateCollection
@@ -259,7 +260,7 @@ define(function (require) {
     });
 
     // Item Availability
-    var itemAvailabilityView = Marionette.ItemView.extend({
+    var ItemAvailabilityView = Marionette.ItemView.extend({
       template: '#CartLineItemAvailabilityTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
@@ -275,7 +276,7 @@ define(function (require) {
     //
     // price master view
     //
-    var itemUnitPriceLayout = Marionette.Layout.extend({
+    var ItemUnitPriceLayout = Marionette.Layout.extend({
       template: '#CartLineItemUnitPriceMasterTemplate',
       regions: {
         itemPriceRegion: $('[data-region="itemUnitPriceRegion"]', this.el),
@@ -285,7 +286,7 @@ define(function (require) {
         // if item has rate, load rate view
         if (this.model.attributes.rateCollection.length > 0) {
           this.itemRateRegion.show(
-            new itemRateCollectionView({
+            new ItemRateCollectionView({
               className: 'cart-lineitem-unit-rate-container',
               collection: new Backbone.Collection(this.model.attributes.rateCollection)
             })
@@ -295,7 +296,7 @@ define(function (require) {
         // if item has one-time purchase price, load price view
         if (this.model.get('price').purchase.display) {
           this.itemPriceRegion.show(
-            new itemPriceView({
+            new ItemPriceView({
               template: '#CartLineItemUnitPriceTemplate',
               model: new Backbone.Model(this.model.attributes.price)
             })
@@ -307,7 +308,7 @@ define(function (require) {
       }
     });
 
-    var itemTotalPriceLayout = Marionette.Layout.extend({
+    var ItemTotalPriceLayout = Marionette.Layout.extend({
       template: '#CartLineItemTotalPriceMasterTemplate',
       regions: {
         itemPriceRegion: $('[data-region="itemTotalPriceRegion"]', this.el),
@@ -317,7 +318,7 @@ define(function (require) {
         // if item has rate, load rate view
         if (this.model.attributes.rateCollection.length > 0) {
           this.itemRateRegion.show(
-            new itemRateCollectionView({
+            new ItemRateCollectionView({
               className: 'cart-lineitem-total-rate-container',
               collection: new Backbone.Collection(this.model.attributes.rateCollection)
             })
@@ -327,7 +328,7 @@ define(function (require) {
         // if item has one-time purchase price, load price view
         if (this.model.get('price').purchase.display) {
           this.itemPriceRegion.show(
-            new itemPriceView({
+            new ItemPriceView({
               template: '#CartLineItemTotalPriceTemplate',
               model: new Backbone.Model(this.model.attributes.price)
             })
@@ -341,13 +342,13 @@ define(function (require) {
 
 
     // Item Price View
-    var itemPriceView = Marionette.ItemView.extend({
+    var ItemPriceView = Marionette.ItemView.extend({
       templateHelpers: viewHelpers,
       className: 'cart-lineitem-price-container',
       tagName: 'ul',
       onShow: function () {
         if (!viewHelpers.getListPrice(this.model.attributes)) {
-          $('[data-region="itemListPriceRegion"]', this.el).addClass('is-hidden');
+          $('[data-region="itemListPriceRegion"]', this.$el).addClass('is-hidden');
         }
       }
     });
@@ -361,7 +362,7 @@ define(function (require) {
     });
 
     // Item Rate CollectionView
-    var itemRateCollectionView = Marionette.CollectionView.extend({
+    var ItemRateCollectionView = Marionette.CollectionView.extend({
       itemView: itemRateItemView,
       tagName: 'ul'
     });

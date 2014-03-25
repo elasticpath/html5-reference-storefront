@@ -12,30 +12,31 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * Functional Storefront Unit Test - Payment Component Controller
+ *
+ * Functional Storefront Unit Test - Payment component controller helper functions
  */
 define(function (require) {
   var ep = require('ep');
 
   var controller = require('payment');
-  var view = require('payment.views');
-  var template = require('text!modules/base/components/payment/base.component.payment.template.html');
 
   describe('Payment Controller:', function () {
-    describe('DefaultCreatePaymentController renders the correct view', function () {
+    describe('showMissingSubmitUrlToastMessage', function () {
+
       before(function () {
-        $("#Fixtures").append(template);
-        this.view = controller.DefaultCreatePaymentController();
-        this.view.render();
+        sinon.stub(ep.logger, 'error');
+        sinon.stub($.fn, 'toastmessage');
+        controller.__test_only__.showMissingSubmitUrlToastMessage();
       });
 
       after(function () {
-        $("#Fixtures").empty();
-        delete(this.view);
+        ep.logger.error.restore();
+        $.fn.toastmessage.restore();
       });
 
-      it('should return a view that is an instance of DefaultPaymentFormView', function () {
-        expect(this.view).to.be.an.instanceOf(view.DefaultPaymentFormView);
+      it('logs an error and shows a toast message', function () {
+        expect(ep.logger.error).to.be.calledOnce;
+        expect($.fn.toastmessage).to.be.calledWith('showToast');
       });
     });
   });

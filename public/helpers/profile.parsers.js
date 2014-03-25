@@ -104,7 +104,8 @@ define(function (require) {
 
       if (rawObject) {
         token = {
-          displayValue: jsonPath(rawObject, 'display-value')[0]
+          displayValue: jsonPath(rawObject, 'display-value')[0],
+          href: jsonPath(rawObject, 'self.href')[0]
         };
       }
       else {

@@ -16,7 +16,7 @@
  *
  */
 define(function(require) {
-  var ep = require('ep')
+  var ep = require('ep');
   var i18n = require('i18n');
   var pace = require('pace');
   var equalize = require('equalize');
@@ -202,10 +202,10 @@ define(function(require) {
 
         // show price
         var priceRegion = new Backbone.Marionette.Region({
-          el: $('[data-region="priceRegion"]', this.el)
+          el: $('[data-region="priceRegion"]', this.$el)
         });
         priceRegion.show(
-          new itemPriceLayout({
+          new ItemPriceLayout({
             model: new Backbone.Model({
               price: this.model.attributes.price,
               rateCollection: this.model.attributes.rateCollection
@@ -217,10 +217,10 @@ define(function(require) {
         // show availability if at least has availability state
         if (this.model.get('availability').state) {
           var availabilityRegion = new Backbone.Marionette.Region({
-            el: $('[data-region="availabilityRegion"]', this.el)
+            el: $('[data-region="availabilityRegion"]', this.$el)
           });
           availabilityRegion.show(
-            new itemAvailabilityView({
+            new ItemAvailabilityView({
               model: new Backbone.Model(this.model.get('availability'))
             })
           );
@@ -229,7 +229,7 @@ define(function(require) {
     });
 
     // Item Availability
-    var itemAvailabilityView = Backbone.Marionette.ItemView.extend({
+    var ItemAvailabilityView = Backbone.Marionette.ItemView.extend({
       template: '#CategoryItemAvailabilityTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
@@ -237,7 +237,7 @@ define(function(require) {
       onShow: function () {
         // if no release date, hide dom element with release-date & the label
         if (!viewHelpers.getAvailabilityReleaseDate(this.model.get('releaseDate'))) {
-          $('[data-region="itemAvailabilityDescriptionRegion"]', this.el).addClass('is-hidden');
+          $('[data-region="itemAvailabilityDescriptionRegion"]', this.$el).addClass('is-hidden');
         }
       }
     });
@@ -245,7 +245,7 @@ define(function(require) {
     //
     // price master view
     //
-    var itemPriceLayout = Backbone.Marionette.Layout.extend({
+    var ItemPriceLayout = Backbone.Marionette.Layout.extend({
       template: '#CategoryItemPriceMasterViewTemplate',
       regions: {
         itemPriceRegion: $('[data-region="itemPriceRegion"]', this.el),
@@ -255,7 +255,7 @@ define(function(require) {
         // if item has rate, load rate view
         if (this.model.attributes.rateCollection.length > 0) {
           this.itemRateRegion.show(
-            new itemRateCollectionView({
+            new ItemRateCollectionView({
               collection: new Backbone.Collection(this.model.attributes.rateCollection)
             })
           );
@@ -264,7 +264,7 @@ define(function(require) {
         // if item has one-time purchase price, load price view
         if (this.model.get('price').purchase.display) {
           this.itemPriceRegion.show(
-            new itemPriceView({
+            new ItemPriceView({
               model: new Backbone.Model(this.model.attributes.price)
             })
           );
@@ -276,14 +276,14 @@ define(function(require) {
     });
 
     // Item Price View
-    var itemPriceView = Backbone.Marionette.ItemView.extend({
+    var ItemPriceView = Backbone.Marionette.ItemView.extend({
       template: '#CategoryItemPriceTemplate',
       templateHelpers: viewHelpers,
       tagName: 'ul',
       className: 'category-item-price-container',
       onShow: function () {
         if (!viewHelpers.getListPrice(this.model.attributes)) {
-          $('[data-region="itemListPriceRegion"]', this.el).addClass('is-hidden');
+          $('[data-region="itemListPriceRegion"]', this.$el).addClass('is-hidden');
         }
 
       }
@@ -297,7 +297,7 @@ define(function(require) {
     });
 
     // Item Rate CollectionView
-    var itemRateCollectionView = Backbone.Marionette.CollectionView.extend({
+    var ItemRateCollectionView = Backbone.Marionette.CollectionView.extend({
       itemView: itemRateItemView,
       tagName: 'ul',
       className: 'category-item-rate-container'
@@ -318,7 +318,8 @@ define(function(require) {
           $('.category-item-title').equalHeights();
           $('.category-item-inner').equalHeights();
           $('.category-item-price-container').equalHeights();
-        }
+        };
+
        // setTimeout(function(){matchHeights();},1000);
         matchHeights();
 

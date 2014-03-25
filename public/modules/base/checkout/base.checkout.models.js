@@ -453,13 +453,21 @@ define(function (require) {
     }
   });
 
+  /* test-code */
+  // exposed variable for testing purpose only, will be removed for distribution
+  var __test_only__ = {
+    modelHelpers: modelHelpers
+  };
+  /* end-test-code */
+
   return {
+    /* test-code */
+    testVariable: __test_only__,
+    /* end-test-code */
+
     CheckoutModel: checkoutModel,
     CheckoutPaymentMethodsCollection: paymentMethodsCollection,
     CheckoutShippingOptionsCollection: shippingOptionsCollection,
-    CheckoutSummaryModel: checkoutSummaryModel,
-    testVariable: {
-      modelHelpers: modelHelpers
-    }
+    CheckoutSummaryModel: checkoutSummaryModel
   };
 });

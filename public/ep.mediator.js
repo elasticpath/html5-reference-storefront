@@ -71,15 +71,31 @@ define(function(require){
         EventBus.trigger('auth.generatePublicAuthTokenRequest');
       });
     },
-    'mediator.authenticationSuccess':function(role){
-      // check if this is an anonymous authentication request
-      if (role === 'PUBLIC') {
-        EventBus.trigger('app.authInit'); // FIXME [CU-89] granular page reload
-      }
-      // else this should be a registered login authentication request
-      else {
-        EventBus.trigger('app.authInit');
-      }
+    'mediator.authenticationSuccess':function(redirect){
+      require(['ep'], function(ep) {
+        if (redirect) {
+          // Navigate to the route fragment _without_ calling its associated function
+          ep.router.navigate(redirect);
+          /**
+           * Trigger a page reload at the new route to ensure all auth-related
+           * elements of the page are refreshed e.g. login/user menu in header
+           */
+          window.location.reload();
+        }
+        // else this should be a registered login authentication request
+        else {
+          EventBus.trigger('app.authInit');  // FIXME [CU-89] granular page reload
+        }
+      });
+    },
+    'mediator.authenticateForCheckout': function(link) {
+      require(['ep'], function(ep) {
+        // The order link from the cart model is stored in session for anonymous checkout
+        // can be overwritten later
+        ep.io.sessionStore.setItem('orderLink', link);
+
+        ep.router.navigate(ep.app.config.routes.checkoutAuth, true);
+      });
     },
     'mediator.cart.DefaultViewRendered':function(){
       require(['ia'],function(mod){
@@ -130,6 +146,28 @@ define(function(require){
         else {
           ep.logger.error('mediator.addNewPaymentMethodRequest was called with invalid moduleName: ' + moduleName);
         }
+      });
+    },
+    /**
+     * Strategy fired by the payment module to notify the profile module of a request
+     * to save a new payment method to a shopper's profile.
+     *
+     * @param formData {Object} Data retrieved from the fields of the new payment method form
+     */
+    'mediator.savePaymentMethodToProfileRequest': function (formData) {
+      require(['profile'], function (profile) {
+        EventBus.trigger('profile.getSavePaymentMethodToProfileUrl', formData);
+      });
+    },
+    /**
+     * Strategy to notify the payment module that a new payment method request is ready to be sent to Cortex.
+     * This strategy is fired after the action URL for the new payment method request has been retrieved.
+     *
+     * @param requestObj {Object} Contains the action URL and new payment method form data for the Cortex request.
+     */
+    'mediator.submitPaymentMethodForm': function (requestObj) {
+      require(['payment'], function (payment) {
+        EventBus.trigger('payment.submitPaymentMethodForm', requestObj.data, requestObj.url);
       });
     },
     'mediator.addNewAddressRequest': function (moduleName) {
@@ -200,16 +238,64 @@ define(function(require){
         }
       });
     },
+    /**
+     * Communicates delete address requests to the address module.
+     * @param {Object} args Can contain:
+     *                      - href The href of the address to be deleted
+     *                      - indicatorView (optional) Marionette.View to which an activity indicator can be applied
+     *                      - returnModule The module to which control should be returned upon completion
+     */
+    'mediator.deletePaymentRequest': function (args) {
+      require(['ep', 'payment'], function (ep, address) {
+        // Store a return module so control can be returned to the correct module
+        // (e.g. profile or checkout) upon completion of the delete operation
+        if (args.returnModule) {
+          ep.io.sessionStore.setItem('deletePaymentReturnTo', args.returnModule);
+        }
+        EventBus.trigger('payment.deletePaymentConfirm', args);
+      });
+    },
+    /**
+     * Communicates back to the referring module that a delete payment request has succeeded.
+     * @param indicatorView An optional reference to a Marionette.View to which an activity indicator has been applied.
+     */
+    'mediator.deletePaymentComplete': function (indicatorView) {
+      require(['ep'], function (ep) {
+        var moduleName = ep.io.sessionStore.getItem('deletePaymentReturnTo');
+        ep.io.sessionStore.removeItem('deletePaymentReturnTo');
+        switch (moduleName) {
+          case 'profile':
+            require(['profile'], function (profile) {
+              EventBus.trigger('profile.updatePaymentMethods', indicatorView);
+            });
+            break;
+          case 'checkout':
+            require(['checkout'], function (checkout) {
+              EventBus.trigger('checkout.updatePaymentMethods', indicatorView);
+            });
+            break;
+          default:
+            // Navigate to the home page route as a default and log an error message
+            ep.router.navigate('', true);
+            ep.logger.error('mediator.deletePaymentComplete: unable to retrieve return module from session storage');
+        }
+      });
+    },
     'mediator.paymentFormComplete': function () {
       helpers.returnAfterFormDone('#profile', 'paymentFormReturnTo');
     },
     'mediator.addressFormComplete': function () {
       helpers.returnAfterFormDone('#profile', 'addressFormReturnTo');
     },
-    'mediator.registrationRequest': function() {
+    'mediator.registrationRequest': function(redirect) {
       require(['ep'], function (ep) {
         // Get the current route as an object
         var currentRoute = ep.router.getCurrentRoute();
+
+        // if redirect location is specified, store it as well so can be redirected on registration success,
+        if (redirect) {
+          currentRoute.redirect = redirect;
+        }
 
         // Stringify the return route object so it can be stored in sessionStorage
         var routeForStorage = JSON.stringify(currentRoute);

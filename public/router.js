@@ -38,9 +38,27 @@ define(function(require) {
         'purchaseDetails/:id': 'purchaseDetails',
         'registration' : 'registration',
         'search' : 'search',
-        'search/:keywords' : 'search'
+        'search/:keywords' : 'search',
+        'signIn': 'checkoutAuth'
       },
       controller:loadRegionContentController,
+      // property names of urlHashes should match property value of appRoutes for rebuildUrlFragment function
+      // e.g. property name of "checkoutAuth": "#signIn" matches property value of 'signIn': 'checkoutAuth'
+      // FIXME deprecate ep.app.config.route
+      urlHashes: {
+        "cart":"#mycart",
+        "category":"#category",
+        "checkout" : "#checkout",
+        "editAddress": "#editaddress",
+        "itemDetail":"#itemdetail",
+        "newAddress":"#newaddressform",
+        "newPayment":"#newpaymentform",
+        "profile":"#profile",
+        "purchaseHistory": "#purchaseDetails",
+        "purchaseReceipt": "#purchaseReceipt",
+        "registration": "#registration",
+        "checkoutAuth": "#signIn"
+      },
       /**
        * Matches the Backbone.history.fragment (the current URL) to a route from the AppRouter
        * and separates out any parameters appended to the current route.

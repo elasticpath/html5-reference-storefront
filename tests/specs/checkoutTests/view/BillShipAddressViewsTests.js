@@ -18,8 +18,9 @@ define(function (require) {
   var Backbone = require('backbone');
   var ep = require('ep');
   var EventTestFactory = require('testfactory.event');
+  var Mediator = require('mediator');
 
-  describe('Checkout Billing / Shipping Address Views', function () {
+  describe('Checkout Module: Views: ', function () {
     var views = require('checkout.views');
     var template = require('text!modules/base/checkout/base.checkout.templates.html');
 
@@ -33,6 +34,7 @@ define(function (require) {
 
     describe('CheckoutAddressSelectorLayout', function () {
       before(function () {
+        sinon.stub(Mediator, 'fire');
         // Instantiate view with an empty model so it can be modified in the serializeData function
         this.view = new views.CheckoutAddressSelectorLayout({
           model: new Backbone.Model({})
@@ -40,23 +42,40 @@ define(function (require) {
         this.view.render();
       });
 
+      after(function() {
+        Mediator.fire.restore();
+        delete(this.view);
+      });
+
       it('should be an instance of Marionette Layout object', function () {
         expect(this.view).to.be.an.instanceOf(Marionette.Layout);
       });
-      it('render() should return the view object', function () {
-        expect(this.view.render()).to.be.equal(this.view);
-      });
-      it('view contents are rendered', function () {
-        // There should be 2 child elements (address radio and address label)
-        expect(this.view.el.childElementCount).to.be.equal(2);
-      });
 
-      describe('regions', function () {
+      describe("renders correctly", function() {
         it('should have a checkoutAddressRegion region', function () {
           expect(this.view.checkoutAddressRegion).to.exist;
-          expect(this.view.$el.find('[data-region="checkoutAddressRegion"]')).to.be.length(1);
+          expect(this.view.$el.find(this.view.regions.checkoutAddressRegion)).to.be.length(1);
+        });
+        it('has valid templateHelpers', function () {
+          expect(this.view.templateHelpers).to.be.ok;
+        });
+        it('renders a radio button', function () {
+          expect(this.view.$el.find('input[type="radio"]')).to.be.length(1);
+        });
+        it('and a corresponding label', function () {
+          expect(this.view.$el.find('label')).to.be.length(1);
         });
       });
+
+      it("calls mediator strategy to load address view onRender", function() {
+        expect(Mediator.fire).to.be.calledWith("mediator.loadAddressesViewRequest");
+      });
+
+      describe("checkout delete address button clicked",
+        EventTestFactory.simpleBtnClickTest('checkout.deleteAddressBtnClicked', '[data-el-label="checkout.deleteAddressBtn"]'));
+
+      describe("checkout edit address button clicked",
+        EventTestFactory.simpleBtnClickTest('checkout.editAddressBtnClicked', '[data-el-label="checkout.editAddressBtn"]'));
     });
 
     describe('BillingAddressesCompositeView', function () {
@@ -68,11 +87,21 @@ define(function (require) {
       it('should be an instance of Marionette CompositeView object', function () {
         expect(this.view).to.be.an.instanceOf(Marionette.CompositeView);
       });
-      it('render() should return the view object', function () {
-        expect(this.view.render()).to.be.equal(this.view);
+      it('has valid templateHelpers', function () {
+        expect(this.view.templateHelpers).to.be.ok;
       });
-      it('renders view contents', function () {
-        expect(this.view.$el.find('[data-region="billingAddressSelectorsRegion"]')).to.be.length(1);
+      it('has an emptyView', function () {
+        expect(this.view.emptyView).to.be.ok;
+      });
+      it('defines correct itemViewContainer', function () {
+        expect(this.view.itemViewContainer).to.be.ok;
+        expect(this.view.$el.find(this.view.itemViewContainer)).to.be.length(1);
+      });
+      it('defines a target render element for activityIndicator', function () {
+        expect(this.view.ui.activityIndicatorEl).to.be.ok;
+        expect(this.view.$el.find(this.view.ui.activityIndicatorEl)).to.be.length(1);
+      });
+      it('renders a "Add New Address" button', function () {
         expect(this.view.$el.find('[data-el-label="checkout.newBillingAddressBtn"]')).to.be.length(1);
       });
 
@@ -89,11 +118,22 @@ define(function (require) {
       it('should be an instance of Marionette CompositeView object', function () {
         expect(this.view).to.be.an.instanceOf(Marionette.CompositeView);
       });
-      it('render() should return the view object', function () {
-        expect(this.view.render()).to.be.equal(this.view);
+      it('has valid templateHelpers', function () {
+        expect(this.view.templateHelpers).to.be.ok;
       });
-      it('view contents are rendered', function () {
-        expect(this.view.$el.find('[data-region="shippingAddressSelectorsRegion"]')).to.be.length(1);
+      it('has an emptyView', function () {
+        expect(this.view.emptyView).to.be.ok;
+      });
+      it('defines correct itemViewContainer', function () {
+        expect(this.view.itemViewContainer).to.be.ok;
+        expect(this.view.$el.find(this.view.itemViewContainer)).to.be.length(1);
+      });
+      it('defines a target render element for activityIndicator', function () {
+        expect(this.view.ui.activityIndicatorEl).to.be.ok;
+        expect(this.view.$el.find(this.view.ui.activityIndicatorEl)).to.be.length(1);
+      });
+
+      it('renders a "Add New Address" button', function () {
         expect(this.view.$el.find('[data-el-label="checkout.newShippingAddressBtn"]')).to.be.length(1);
       });
 

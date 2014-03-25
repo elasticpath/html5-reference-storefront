@@ -258,16 +258,26 @@ define(function (require) {
      */
     var profilePaymentMethodItemView = Marionette.Layout.extend({
       template: '#DefaultProfilePaymentMethodLayoutTemplate',
+      templateHelpers: viewHelpers,
       tagName: 'li',
       className: 'profile-payment-method-container',
       regions: {
         profilePaymentMethodComponentRegion: '[data-region="paymentMethodComponentRegion"]'
+      },
+      ui: {
+        deleteButton: '[data-el-label="profile.deletePaymentBtn"]'
       },
       onShow: function () {
         Mediator.fire('mediator.loadPaymentMethodViewRequest', {
           region: this.profilePaymentMethodComponentRegion,
           model: this.model
         });
+      },
+      events: {
+        'click @ui.deleteButton': function (event) {
+          event.preventDefault();
+          EventBus.trigger('profile.deletePaymentBtnClicked', this.model.get('href'));
+        }
       }
     });
 
@@ -297,7 +307,13 @@ define(function (require) {
       emptyView: profilePaymentMethodEmptyView,
       itemView: profilePaymentMethodItemView,
       itemViewContainer: 'ul',
-      templateHelpers: viewHelpers
+      templateHelpers: viewHelpers,
+      events: {
+        'click [data-el-label="profile.addNewPaymentMethodBtn"]': function (event) {
+          event.preventDefault();
+          EventBus.trigger('profile.addNewPaymentMethodBtnClicked');
+        }
+      }
     });
 
 

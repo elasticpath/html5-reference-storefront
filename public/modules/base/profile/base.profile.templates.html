@@ -194,12 +194,14 @@
     <ul class="profile-payment-methods-listing">
       <!-- collection target region -->
     </ul>
+    <button class="btn btn-primary profile-new-payment-btn" data-el-label="profile.addNewPaymentMethodBtn"><%= E.getI18nLabel('profile.paymentMethods.newPaymentBtn')%></button>
   </script>
 
   <!--Default Profile Payment Method Layout Template-->
   <script id="DefaultProfilePaymentMethodLayoutTemplate" type="text/template">
     <!-- defaultView, layout tagName: li, class: profile-payment-method-container-->
-    <div data-region="paymentMethodComponentRegion"></div>
+    <div data-region="paymentMethodComponentRegion" class="profile-payment-method-label-container"></div>
+    <button class="btn profile-delete-payment-btn" data-el-label="profile.deletePaymentBtn"><%= E.getI18nLabel('profile.paymentMethods.delete') %></button>
   </script>
 
   <!-- Default Profile Payment Method EmptyView Template -->

@@ -90,6 +90,27 @@ define(function (require) {
   });
 
   /**
+   * Model that returns the action href to which the new payment method form should be submitted.
+   * This href can be used either:
+   * - when payment methods are added from profile
+   * - when payment methods are added from checkout AND the shopper has chosen to save the payment method to profile
+   * @type Backbone.Model
+   */
+  var profilePaymentMethodActionModel = Backbone.Model.extend({
+    url: urlBase + '?zoom=paymentmethods:paymenttokenform',
+    parse: function (response) {
+      if (response) {
+        // parse the JSON response and return the href if one is found
+        return {
+          url: jsonPath(response, "$..links[?(@.rel=='createpaymenttokenaction')].href")[0]
+        };
+      }
+      ep.logger.error("Unable to fetch profile model payment method action link.");
+      return false;
+    }
+  });
+
+  /**
    * Placeholder to keep purchase collection for keeping track of model changes.
    * Do not fetch or parse data itself, Will have data passed in.
    * @type Backbone.Collection
@@ -139,6 +160,7 @@ define(function (require) {
     /* end-test-code */
 
     ProfileModel: profileModel,
+    ProfilePaymentMethodActionModel: profilePaymentMethodActionModel,
     ProfilePurchaseCollection: profilePurchaseCollection
   };
 });

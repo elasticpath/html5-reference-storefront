@@ -16,8 +16,12 @@
  */
 define(function (require) {
   var ep = require('ep');
+  var EventBus = require('eventbus');
+  var Mediator = require('mediator');
   var EventTestFactory = require('testfactory.event');
   var EventTestHelpers = require('testhelpers.event');
+  var utils = require('utils');
+
   var authController = require('auth');
   var authView = require('auth.views');
   var authModel = require('auth.models');
@@ -64,23 +68,17 @@ define(function (require) {
     });
 
     describe('Events tests', function() {
-
       before(function() {
         // Stub and unbind some events for all of the button enablement functions
-        sinon.stub(authView, 'displayLoginErrorMsg');
         EventTestHelpers.unbind('auth.authenticationRequest');
       });
 
       after(function() {
-        authView.displayLoginErrorMsg.restore();
         EventTestHelpers.reset('auth.authenticationRequest');
       });
 
       describe('responds to event: auth.loginRequestFailed',
         EventTestFactory.createEventBusBtnEnablementTest('auth.loginRequestFailed', 'enableButton'));
-
-      describe('responds to event: auth.loginFormValidationFailed',
-        EventTestFactory.createEventBusBtnEnablementTest('auth.loginFormValidationFailed', 'enableButton'));
 
       describe('loginFormSubmitButtonClicked event tests', function() {
         before(function() {
@@ -92,10 +90,71 @@ define(function (require) {
           EventTestHelpers.reset('auth.loginFormValidationFailed');
         });
 
-        describe('responds to event: auth.loginFormSubmitButtonClicked',
-          EventTestFactory.createEventBusBtnEnablementTest('auth.loginFormSubmitButtonClicked', 'disableButton'));
+        describe('responds to event: auth.loginButtonClicked',
+          EventTestFactory.createEventBusBtnEnablementTest('auth.loginButtonClicked', 'disableButton'));
+      });
+    });
+
+    describe("Anonymous Checkout Events", function() {
+
+      before(function() {
+        sinon.stub(ep.ui, 'disableButton');
+        sinon.stub(ep.ui, 'enableButton');
       });
 
+      after(function() {
+        ep.ui.disableButton.restore();
+        ep.ui.enableButton.restore();
+      });
+
+      // Cannot stub checkoutAuthOptionsView.anonymousCheckoutRegion.currentView references
+//      describe('auth.continueCheckoutAnonymouslyBtnClicked',
+//        EventTestFactory.simpleEventTriggersEventTest('auth.submitAnonymousCheckoutFormRequest', 'auth.continueCheckoutAnonymouslyBtnClicked'));
+
+      describe('auth.submitAnonymousCheckoutFormSuccess', function() {
+        before(function() {
+          sinon.stub(Mediator, 'fire');
+          EventBus.trigger('auth.submitAnonymousCheckoutFormSuccess');
+        });
+
+        after(function() {
+          Mediator.fire.restore();
+        });
+
+        it('calls correct mediator strategy', function() {
+          expect(Mediator.fire).to.be.calledWith('mediator.navigateToCheckoutRequest');
+        });
+      });
+
+      // Cannot stub checkoutAuthOptionsView.anonymousCheckoutRegion.currentView references
+/*
+      describe('auth.submitAnonymousCheckoutFormFailed', function() {
+        before(function() {
+          sinon.stub(utils, 'renderMsgToPage');
+          sinon.stub(utils, 'translateErrorMessage', function() {
+            return [{error: 'fakeTranslatedErrorMessage'}];
+          });
+
+          var response = {
+            status: 400
+          };
+          EventBus.trigger('auth.submitAnonymousCheckoutFormFailed', response);
+        });
+
+        after(function() {
+          utils.renderMsgToPage.restore();
+          utils.translateErrorMessage.restore();
+        });
+
+        it('calls function to localize raw cortex error message', function() {
+          expect(utils.translateErrorMessage).to.be.calledOnce;
+        });
+
+        it('calls function to renders error message to page', function() {
+          expect(utils.renderMsgToPage).to.be.calledOnce;
+        });
+      });
+*/
     });
 
   });
