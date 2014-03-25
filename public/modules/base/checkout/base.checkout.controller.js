@@ -194,7 +194,7 @@ define(function (require) {
           linkModel.fetch({
             success: function() {
               ep.io.sessionStore.setItem('orderLink', linkModel.get('link'));
-              Backbone.history.loadUrl();
+              ep.router.navigate(ep.router.urlHashes.cart, true);
             }
           });
         }
