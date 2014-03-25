@@ -142,7 +142,11 @@
   },
   "general": {
     "no": "No",
-    "yes": "Yes"
+    "yes": "Yes",
+    "errMsg": {
+      "contactAdmin": "I'm sorry, there was an error. Please contact your system administrator.",
+      "serverDown": "I'm sorry, there is a maintenance error. We will be back shortly."
+    }
   },
   "itemDetail": {
     "addToCart": "Add to Cart",

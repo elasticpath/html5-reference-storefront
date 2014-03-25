@@ -17,6 +17,7 @@
 define(function (require) {
     var $ = require('jquery');
     var _ = require('underscore');
+    var i18n = require('i18n');
     var Backbone = require('backbone');
     var Marionette = require('marionette');
     var Modernizr = require('modernizr');
@@ -195,6 +196,18 @@ define(function (require) {
 
     }
 
+    /**
+     * A sticky (will not disappear on itself) toast error message
+     * @param errMsg Error message to display on toast message
+     */
+    function stickyErrMsg(errMsg) {
+      $().toastmessage('showToast', {
+        text: errMsg,
+        sticky: true,
+        position: 'middle-center',
+        type: 'error'
+      });
+    }
 
     var baseSync = Backbone.sync;
     Backbone.sync = function (method, model, options) {
@@ -211,6 +224,21 @@ define(function (require) {
           ep.logger.error('Please login to access the following content.');
 
           Mediator.fire('mediator.getAuthentication');
+        },
+        errorFn404: function() {
+          stickyErrMsg(i18n.t('general.errMsg.contactAdmin'));
+
+          // can be thrown by apache proxy when cortexApi.path from ep.config.json mismatch proxy setting
+          ep.logger.warn('Check if cortexApi.path in ep.config.json matches proxy');
+        },
+        errorFn405: function() {
+          stickyErrMsg(i18n.t('general.errMsg.contactAdmin'));
+        },
+        errorFn500: function() {
+          stickyErrMsg(i18n.t('general.errMsg.serverDown'));
+        },
+        errorFn503: function() {
+          stickyErrMsg(i18n.t('general.errMsg.serverDown'));
         }
       };
 
@@ -218,15 +246,37 @@ define(function (require) {
       // for any colliding value, value of latter param overrides value of former param
       options = _.extend(errorFunctions, options);
       options.error = function (data, response, options) {
+        // 401 error for unauthorized access (no token at all)
         if (response.status === 401) {
           options.errorFn401();
         }
 
+        // 403 error for GET without valid permission, or with invalid id
         if (response.status === 403) {
           options.errorFn403();
         }
 
-        ep.logger.error('Response error ' + response.responseText + ' : ' + response.status);
+        // 404 error for resource not found,
+        if (response.status === 404) {
+          options.errorFn404();
+        }
+
+        // 405 error for invalid operation, e.g. try POST to GET only resource
+        if (response.status === 405) {
+          options.errorFn405();
+        }
+
+        // 500 error for generic server error (request problem at server side)
+        if (response.status === 500) {
+          options.errorFn500();
+        }
+
+        // 503 error for server down completely error
+        if (response.status === 500) {
+          options.errorFn503();
+        }
+
+        ep.logger.error('Response error ' + response.status + ' : ' + response.responseText);
       };
 
       options.headers = options.headers || {};
