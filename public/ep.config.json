@@ -8,7 +8,7 @@
     "showInstrumentation":false
   },
   "cortexApi":{
-    "path":"integrator",
+    "path":"cortex",
     "scope":"campus"
   },
   "deployMode":"development",
