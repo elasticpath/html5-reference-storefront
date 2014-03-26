@@ -85,6 +85,21 @@ define(function (require) {
         contentType: 'application/json',
         error: function(response) {
           try {
+            // 405 error for invalid operation, e.g. try POST to GET only resource
+            if (response.status === 405) {
+              this.errorFn405();
+            }
+
+            // 500 error for generic server error (request problem at server side)
+            if (response.status === 500) {
+              this.errorFn500();
+            }
+
+            // 503 error for server down completely error
+            if (response.status === 503) {
+              this.errorFn503();
+            }
+
             this.customErrorFn(response);
           }
           finally {
@@ -92,7 +107,16 @@ define(function (require) {
           }
         },
         // FIXME [CU-88] use standard error function
-        customErrorFn: function(response) {}
+        customErrorFn: function(response) {},
+        errorFn405: function() {
+          stickyErrMsg(i18n.t('general.errMsg.contactAdmin'));
+        },
+        errorFn500: function() {
+          stickyErrMsg(i18n.t('general.errMsg.serverDown'));
+        },
+        errorFn503: function() {
+          stickyErrMsg(i18n.t('general.errMsg.serverDown'));
+        }
       }
     });
 
@@ -272,7 +296,7 @@ define(function (require) {
         }
 
         // 503 error for server down completely error
-        if (response.status === 500) {
+        if (response.status === 503) {
           options.errorFn503();
         }
 
