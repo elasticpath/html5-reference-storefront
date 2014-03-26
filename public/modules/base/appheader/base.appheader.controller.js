@@ -56,12 +56,8 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.view
         // load search
 
 
-        // load main nav
-        EventBus.trigger('layout.loadRegionContentRequest',{
-          region:'mainNavRegion',
-          module:'ia',
-          view:'MainNavView'
-        });
+        // load main nav (ia module) & login (auth module)
+        Mediator.fire('mediator.appHeaderRendered');
         logoContainer = $('.logo-container');
 
         EventBus.trigger('appheader.loadLogoComponentRequest');

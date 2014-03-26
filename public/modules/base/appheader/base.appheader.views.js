@@ -37,10 +37,9 @@ define(['ep', 'mediator', 'eventbus','backbone','marionette','i18n','appheader.m
       template:'#AppHeaderDefaultTemplateContainer',
       templateHelpers:viewHelpers,
       className:'container appheader-container',
-      onShow:function(){
+      onRender:function(){
         var elementWidth = $('.logo-container').outerWidth();
         EventBus.trigger('view.headerLogoViewRendered', elementWidth);
-        Mediator.fire('mediator.appHeaderRendered');
       }
     });
     var HeaderLogoView = Backbone.Marionette.Layout.extend({
