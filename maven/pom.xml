@@ -39,4 +39,16 @@
 		<module>application</module>
 		<module>html5-store-data</module>
 	</modules>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<tagNameFormat>ui-storefront-@{project.version}</tagNameFormat>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
