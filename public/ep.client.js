@@ -50,25 +50,80 @@ define(function (require) {
       return ep.app.config.deployMode || 'development';
     };
 
-
-    // determine if touch enabled
-    ep.ui.touchEnabled = function () {
-      // logic to return if this is a touch interface
-      return Modernizr.touch;
-    };
-
-
-    ep.ui.encodeUri = function (uri) {
-      if (uri) {
-        return encodeURIComponent(uri);
+    ep.app.isUserLoggedIn = function () {
+      var retVar = false;
+      // check if there is an auth token
+      if (ep.io.localStore.getItem('oAuthRole') && ep.io.localStore.getItem('oAuthRole') === 'REGISTERED') {
+        retVar = true;
       }
+
+      return retVar;
     };
 
-    ep.ui.decodeUri = function (uri) {
-      if (uri) {
-        return decodeURIComponent(uri);
+    /* * User Preferences * */
+    ep.app.getUserPref = function (prop) {
+      // test if user pref exists
+      var retVal = null;
+      if (ep.io.localStore) {
+        if (ep.io.localStore.getItem('epUserPrefs')) {
+          ep.app.epUserPrefs = JSON.parse(ep.io.localStore.getItem('epUserPrefs'));
+          if (ep.app.epUserPrefs[prop]) {
+            return ep.app.epUserPrefs[prop];
+          }
+          else {
+            return null;
+          }
+        }
       }
+      return retVal;
     };
+    ep.app.setUserPref = function (prop, val) {
+      // test if user pref exists
+      if (ep.io.localStore) {
+        if (!ep.io.localStore.getItem('epUserPrefs')) {
+          ep.io.localStore.setItem('epUserPrefs', '{}');
+        }
+        ep.app.epUserPrefs = JSON.parse(ep.io.localStore.getItem('epUserPrefs'));
+        ep.app.epUserPrefs[prop] = val;
+        ep.io.localStore.setItem('epUserPrefs', JSON.stringify(ep.app.epUserPrefs));
+      }
+      else {
+        ep.logger.warn('attempt to set user pref but localStorage not supported');
+      }
+      return val;
+    };
+
+    // bootstrap initialization complete (main.js)
+    // time to start up the application
+    EventBus.on('app.bootstrapInitSuccess', function () {
+      // when ready start the router
+      ep.app.addInitializer(function (options) {
+        // do useful stuff here
+        ep.router = new Router.AppRouter();
+
+      });
+      // wait until the application and DOM are spun up
+      // then start the history manager
+      ep.app.on("initialize:after", function () {
+        if (Backbone.history) {
+          //Backbone.history.start({ pushState: true });
+          Backbone.history.start();
+        }
+      });
+
+      EventBus.trigger('ep.startAppRequest');
+
+    });
+
+    EventBus.on('ep.startAppRequest', function () {
+      // turn the key and give 'er some gass
+      try {
+        ep.app.start();
+      }
+      catch (e) {
+
+      }
+    });
 
 
     /*
@@ -79,6 +134,68 @@ define(function (require) {
      *
      * */
     // io namespace
+    EventBus.on('io.ajaxRequest', function (options) {
+      if (options) {
+        ep.io.ajax(options);
+      }
+    });
+
+    EventBus.on('app.authInit', function () {
+      document.location.reload();
+    });
+
+    /**
+     * Get the context to prefix to cortex request url.
+     * @returns {string}  cortex api context
+     */
+    ep.io.getApiContext = function () {
+      var config = ep.app.config;
+      var retVal = '';
+
+      if (config && config.cortexApi && config.cortexApi.path) {
+        /**
+         * In some scenarios (e.g. PhoneGap apps), the path to the Cortex API (as defined in ep.config.json) will not be
+         * a relative string like "integrator" but an absolute path like "http://54.200.118.70:13080/integrator"
+         *
+         * Only prepend the Cortex API path with a forward-slash if it is a relative path (does not start with 'http')
+         */
+        if (/^http/.test(config.cortexApi.path)) {
+          retVal = config.cortexApi.path;
+        } else {
+          retVal = '/' + config.cortexApi.path;
+        }
+      }
+      else {
+        ep.logger.error('cortexApi context path is not defined.');
+      }
+
+      return retVal;
+    };
+
+    ep.io.localStore = window.localStorage;
+    ep.io.sessionStore = window.sessionStorage;
+
+    function getAuthToken() {
+      var oAuthToken;
+
+      // check and see if there is a local auth token
+      // if yes, is it still valid
+      if (ep.io.localStore) {
+        // check for auth token
+        oAuthToken = ep.io.localStore.getItem('oAuthToken');
+
+        //if (!oAuthRole)
+      }
+      else {
+        ep.logger.warn('check before cortex api call for auth token but local storage is not supported');
+      }
+
+
+      return oAuthToken;
+
+
+    }
+
     // reserved for any io but simple jQuery ajax wrapper out of the gate
     ep.io.defaultAjaxModel = Backbone.Model.extend({
       defaults: {
@@ -120,7 +237,6 @@ define(function (require) {
       }
     });
 
-
     // AJAX lives here!
     ep.io.ajax = function (ioObj) {
       var oAuthToken = getAuthToken();
@@ -155,83 +271,6 @@ define(function (require) {
         ep.logger.error('AJAX request attempt without request body');
       }
     };
-
-
-    EventBus.on('io.ajaxRequest', function (options) {
-      if (options) {
-        ep.io.ajax(options);
-      }
-    });
-
-    /**
-     * Get the context to prefix to cortex request url.
-     * @returns {string}  cortex api context
-     */
-    ep.io.getApiContext = function () {
-      var config = ep.app.config;
-      var retVal = '';
-
-      if (config && config.cortexApi && config.cortexApi.path) {
-        /**
-         * In some scenarios (e.g. PhoneGap apps), the path to the Cortex API (as defined in ep.config.json) will not be
-         * a relative string like "integrator" but an absolute path like "http://54.200.118.70:13080/integrator"
-         *
-         * Only prepend the Cortex API path with a forward-slash if it is a relative path (does not start with 'http')
-         */
-        if (/^http/.test(config.cortexApi.path)) {
-          retVal = config.cortexApi.path;
-        } else {
-          retVal = '/' + config.cortexApi.path;
-        }
-      }
-      else {
-        ep.logger.error('cortexApi context path is not defined.');
-      }
-
-      return retVal;
-    };
-
-    ep.io.localStore = window.localStorage;
-
-    ep.io.sessionStore = window.sessionStorage;
-
-    EventBus.on('app.authInit', function () {
-      document.location.reload();
-    });
-
-    function getAuthToken() {
-      var oAuthToken;
-
-      // check and see if there is a local auth token
-      // if yes, is it still valid
-      if (ep.io.localStore) {
-        // check for auth token
-        oAuthToken = ep.io.localStore.getItem('oAuthToken');
-
-        //if (!oAuthRole)
-      }
-      else {
-        ep.logger.warn('check before cortex api call for auth token but local storage is not supported');
-      }
-
-
-      return oAuthToken;
-
-
-    }
-
-    /**
-     * A sticky (will not disappear on itself) toast error message
-     * @param errMsg Error message to display on toast message
-     */
-    function stickyErrMsg(errMsg) {
-      $().toastmessage('showToast', {
-        text: errMsg,
-        sticky: true,
-        position: 'middle-center',
-        type: 'error'
-      });
-    }
 
     var baseSync = Backbone.sync;
     Backbone.sync = function (method, model, options) {
@@ -318,39 +357,14 @@ define(function (require) {
     };
 
 
-    // logging utility
-    ep.log = function () {
-      ep.log.history = ep.log.history || [];   // store logs to an array for reference
-      ep.log.history.push(arguments);
-      if (window.console) {
-        console.log(Array.prototype.slice.call(arguments));
-      }
-    };
-    ep.logger = {};
-    ep.logger.info = function () {
-      if (ep.app.config.logging.logInfo) {
-        var args = Array.prototype.slice.call(arguments);
-        args.unshift('INFO: ');
-        ep.log(args.join(' '));
-      }
-    };
-    ep.logger.warn = function () {
-      if (ep.app.config.logging.logWarnings) {
-        var args = Array.prototype.slice.call(arguments);
-        args.unshift('WARN: ');
-        ep.log(args.join(' '));
-      }
-    };
-    ep.logger.error = function () {
-      if (ep.app.config.logging.logErrors) {
-        var args = Array.prototype.slice.call(arguments);
-        args.unshift('ERROR: ');
-        ep.log(args.join(' '));
-      }
-    };
-
+    /*
+     *
+     *
+     *   UI
+     *
+     *
+     * */
     // FIXME [CU-264] move these UI functions to app.controller.js as extension functions of Marionette.View
-
     // Load the spin.js library that provides the default activity indicators.
     require('spin');
     // Load an extended version of jQuery.spin.js that includes a loading overlay.
@@ -452,91 +466,69 @@ define(function (require) {
       }
     };
 
-    /*
-     * Is IUser
-     * */
-    ep.app.isUserLoggedIn = function () {
-      var retVar = false;
-      // check if there is an auth token
-      if (ep.io.localStore.getItem('oAuthRole') && ep.io.localStore.getItem('oAuthRole') === 'REGISTERED') {
-        retVar = true;
-      }
-
-      return retVar;
+    // determine if touch enabled
+    ep.ui.touchEnabled = function () {
+      // logic to return if this is a touch interface
+      return Modernizr.touch;
     };
 
-    /*
-     *
-     * User Preferences
-     *
-     * */
-    ep.app.getUserPref = function (prop) {
-      // test if user pref exists
-      var retVal = null;
-      if (ep.io.localStore) {
-        if (ep.io.localStore.getItem('epUserPrefs')) {
-          ep.app.epUserPrefs = JSON.parse(ep.io.localStore.getItem('epUserPrefs'));
-          if (ep.app.epUserPrefs[prop]) {
-            return ep.app.epUserPrefs[prop];
-          }
-          else {
-            return null;
-          }
-        }
+
+    ep.ui.encodeUri = function (uri) {
+      if (uri) {
+        return encodeURIComponent(uri);
       }
-      return retVal;
     };
-    ep.app.setUserPref = function (prop, val) {
-      // test if user pref exists
-      if (ep.io.localStore) {
-        if (!ep.io.localStore.getItem('epUserPrefs')) {
-          ep.io.localStore.setItem('epUserPrefs', '{}');
-        }
-        ep.app.epUserPrefs = JSON.parse(ep.io.localStore.getItem('epUserPrefs'));
-        ep.app.epUserPrefs[prop] = val;
-        ep.io.localStore.setItem('epUserPrefs', JSON.stringify(ep.app.epUserPrefs));
+
+    ep.ui.decodeUri = function (uri) {
+      if (uri) {
+        return decodeURIComponent(uri);
       }
-      else {
-        ep.logger.warn('attempt to set user pref but localStorage not supported');
-      }
-      return val;
     };
-    /*
-     * end user prefs
-     * */
 
-
-    // bootstrap initialization complete (main.js)
-    // time to start up the application
-    EventBus.on('app.bootstrapInitSuccess', function () {
-      // when ready start the router
-      ep.app.addInitializer(function (options) {
-        // do useful stuff here
-        ep.router = new Router.AppRouter();
-
+    /**
+     * A sticky (will not disappear on itself) toast error message
+     * @param errMsg Error message to display on toast message
+     */
+    function stickyErrMsg(errMsg) {
+      $().toastmessage('showToast', {
+        text: errMsg,
+        sticky: true,
+        position: 'middle-center',
+        type: 'error'
       });
-      // wait until the application and DOM are spun up
-      // then start the history manager
-      ep.app.on("initialize:after", function () {
-        if (Backbone.history) {
-          //Backbone.history.start({ pushState: true });
-          Backbone.history.start();
-        }
-      });
+    }
 
-      EventBus.trigger('ep.startAppRequest');
 
-    });
-
-    EventBus.on('ep.startAppRequest', function () {
-      // turn the key and give 'er some gass
-      try {
-        ep.app.start();
+    // logging utility
+    ep.log = function () {
+      ep.log.history = ep.log.history || [];   // store logs to an array for reference
+      ep.log.history.push(arguments);
+      if (window.console) {
+        console.log(Array.prototype.slice.call(arguments));
       }
-      catch (e) {
-
+    };
+    ep.logger = {};
+    ep.logger.info = function () {
+      if (ep.app.config.logging.logInfo) {
+        var args = Array.prototype.slice.call(arguments);
+        args.unshift('INFO: ');
+        ep.log(args.join(' '));
       }
-    });
+    };
+    ep.logger.warn = function () {
+      if (ep.app.config.logging.logWarnings) {
+        var args = Array.prototype.slice.call(arguments);
+        args.unshift('WARN: ');
+        ep.log(args.join(' '));
+      }
+    };
+    ep.logger.error = function () {
+      if (ep.app.config.logging.logErrors) {
+        var args = Array.prototype.slice.call(arguments);
+        args.unshift('ERROR: ');
+        ep.log(args.join(' '));
+      }
+    };
 
 
     // recieves an object literal with refrence to
