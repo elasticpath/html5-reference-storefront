@@ -196,6 +196,7 @@ define(function (require) {
 
     }
 
+    // FIXME consolidate the redundant error handling functions for both ep.io.ajax and backbone sync. 
     // reserved for any io but simple jQuery ajax wrapper out of the gate
     ep.io.defaultAjaxModel = Backbone.Model.extend({
       defaults: {
@@ -226,13 +227,13 @@ define(function (require) {
         // FIXME [CU-88] use standard error function
         customErrorFn: function(response) {},
         errorFn405: function() {
-          stickyErrMsg(i18n.t('general.errMsg.contactAdmin'));
+          ep.ui.notification.stickyError(i18n.t('general.errMsg.contactAdmin'));
         },
         errorFn500: function() {
-          stickyErrMsg(i18n.t('general.errMsg.serverDown'));
+          ep.ui.notification.stickyError(i18n.t('general.errMsg.serverDown'));
         },
         errorFn503: function() {
-          stickyErrMsg(i18n.t('general.errMsg.serverDown'));
+          ep.ui.notification.stickyError(i18n.t('general.errMsg.serverDown'));
         }
       }
     });
@@ -274,12 +275,9 @@ define(function (require) {
 
     var baseSync = Backbone.sync;
     Backbone.sync = function (method, model, options) {
-      var isTokenDirty = false;
       var errorFunctions = {
         errorFn401: function() {
-          if (!isTokenDirty) {
-            Mediator.fire('mediator.getPublicAuthTokenRequest');
-          }
+          Mediator.fire('mediator.getPublicAuthTokenRequest');
         },
         errorFn403: function() {
           // If 403 errors are used in future when logged in users do not have the correct permissions to
@@ -289,19 +287,19 @@ define(function (require) {
           Mediator.fire('mediator.getAuthentication');
         },
         errorFn404: function() {
-          stickyErrMsg(i18n.t('general.errMsg.contactAdmin'));
+          ep.ui.notification.stickyError(i18n.t('general.errMsg.contactAdmin'));
 
           // can be thrown by apache proxy when cortexApi.path from ep.config.json mismatch proxy setting
           ep.logger.warn('Check if cortexApi.path in ep.config.json matches proxy');
         },
         errorFn405: function() {
-          stickyErrMsg(i18n.t('general.errMsg.contactAdmin'));
+          ep.ui.notification.stickyError(i18n.t('general.errMsg.contactAdmin'));
         },
         errorFn500: function() {
-          stickyErrMsg(i18n.t('general.errMsg.serverDown'));
+          ep.ui.notification.stickyError(i18n.t('general.errMsg.serverDown'));
         },
         errorFn503: function() {
-          stickyErrMsg(i18n.t('general.errMsg.serverDown'));
+          ep.ui.notification.stickyError(i18n.t('general.errMsg.serverDown'));
         }
       };
 
@@ -351,7 +349,6 @@ define(function (require) {
       }
       else {
         ep.logger.warn('Backbone sync called with no auth token');
-        isTokenDirty = true;
         Mediator.fire('mediator.getPublicAuthTokenRequest');
       }
     };
@@ -485,18 +482,21 @@ define(function (require) {
       }
     };
 
-    /**
-     * A sticky (will not disappear on itself) toast error message
-     * @param errMsg Error message to display on toast message
-     */
-    function stickyErrMsg(errMsg) {
-      $().toastmessage('showToast', {
-        text: errMsg,
-        sticky: true,
-        position: 'middle-center',
-        type: 'error'
-      });
-    }
+    ep.ui.notification = {
+      /**
+       * A sticky (will not disappear on itself) error message
+       * @param errMsg Error message to display on toast message
+       */
+      stickyError: function(errMsg) {
+        $().toastmessage('showToast', {
+          text: errMsg,
+          sticky: true,
+          position: 'middle-center',
+          type: 'error'
+        });
+
+      }
+    };
 
 
     // logging utility
