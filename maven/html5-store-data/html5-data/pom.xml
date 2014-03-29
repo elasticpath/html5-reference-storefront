@@ -11,7 +11,7 @@
 
 	<groupId>com.elasticpath.html5</groupId>
 	<artifactId>html5-data</artifactId>
-	<version>0.10.0.2014032817</version>
+	<version>0.10.0-SNAPSHOT</version>
 
 	<name>HTML5 Data</name>
 	<description>ImportExport data for the HTML5 functional demo storefront.</description>
@@ -20,7 +20,7 @@
 		<connection>scm:git:git://github.elasticpath.net/cortex/ui-storefront.git</connection>
 		<developerConnection>scm:git:git@github.elasticpath.net:cortex/ui-storefront.git</developerConnection>
 		<url>https://github.elasticpath.net/cortex/ui-storefront</url>
-		<tag>ui-storefront-0.10.0.2014032817</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<distributionManagement>
