@@ -1,80 +1,276 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Experiment Github Page : playground for setup Github page and its git flow life-cycle" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Experiment Github Page by ama</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Experiment Github Page</title>
   </head>
-
   <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.elasticpath.net/ama/github-pages-exp">View on GitHub</a>
+      <header>
+        <h1>Experiment Github Page</h1>
+        <p>playground for setup Github page and its git flow life-cycle</p>
+      </header>
 
-          <h1 id="project_title">Experiment Github Page</h1>
-          <h2 id="project_tagline">playground for setup Github page and its git flow life-cycle</h2>
+      <div id="banner">
+        <span id="logo"></span>
 
-        </header>
-    </div>
+        <a href="https://github.elasticpath.net/ama/github-pages-exp" class="button fork"><strong>View On GitHub</strong></a>
+      </div><!-- end banner -->
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h2>
-<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a name="html5-reference-storefront" class="anchor" href="#html5-reference-storefront"><span class="octicon octicon-link"></span></a>HTML5 Reference Storefront</h1>
+
+<p>Welcome to the Elastic Path's HTML5 Reference Storefront!
+We have the following docs:</p>
 
 <ul>
-<li><a href="intro.md">Introduction</a></li>
+<li>
+<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/introduction.md">Introduction</a> <br>
+HTML5 Storefront introduction, overview of the Storefront's customization layers, Cortex API introduction, HTML5 Reference Storefront feature list, and documentation notes.</li>
+<li>
+<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/technologyoverview.md">HTML5 Storefront Technology</a>  <br>
+Platform architecture, technology stack, testing frameworks, project code structure, platform support.</li>
+<li>
+<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/extending.md">Extending HTML5 Storefront Features</a> <br>
+Overview of HTML5 Storefront's MVC framework, synopsis of the Storefront's extension model, and a tutorial that teaches how to create an extension to Items.</li>
+<li>
+<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/theming.md">Theming</a>  <br>
+Introduction to HTML5 Storefront presentation layer, theme basics, and a tutorial on creating a theme.</li>
+<li>
+<a href="">Testing</a>  <br>
+Introduction to HTML5 Storefront testing framework, overview of unit testing, and steps on how to add a new test to the testing framework.</li>
+<li>
+<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/howTOs.md">How Tos</a>  <br>
+Describes how to code your JavaScript for some of the more advanced Cortex API features: selectors, forms, searches, authentication, and so on.</li>
+</ul><h1>
+<a name="installing-and-running" class="anchor" href="#installing-and-running"><span class="octicon octicon-link"></span></a>Installing and Running</h1>
+
+<p>The HTML5 Reference Storefront requires the following installed:</p>
+
+<ul>
+<li><a href="http://git-scm.com/downloads" target="_blank">GIT Client <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a></li>
+<li><a href="http://nodejs.org/" target="_blank">Node.js <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a></li>
+</ul><p>Once those are installed, proceed to <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#installing-html5-reference-storefront-sources">Install HTML5 Reference Storefront Sources</a> and then run the Storefront either
+<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#running-html5-reference-storefront-locally"><b>locally</b></a> or <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#running-html5-reference-storefront-remotely"><b>remotely</b></a>.</p>
+
+<p><strong>NOTE: <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a></strong> Due to CORS, you must set up a proxy to handle the requests between Cortex API and HTML5 Storefront.
+We use Apache HTTP Server 2.4 in the instructions below. For reference, we provide pre-configured Apache config files you can copy over to your local Apache deployment.
+Any proxy works, but Apache HTTP Server is the only server we test.</p>
+
+<p><strong>NOTE: Port 80 Conflicts</strong> Often on Windows 7, <code>port 80</code> is in use by a system service. To have Apache listen on another port, like <code>port 81</code>, change the following:</p>
+
+<ul>
+<li>Apache <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a><br><code>Listen 81</code>
+</li>
+<li>Apache <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a><br><code>RequestHeader append X-Forwarded-Base "http://localhost:81/cortex"</code>
+</li>
+<li>For HTML5 Storefront Selenium Tests, update <code>server.port</code> in <code><a href="https://github.elasticpath.net/cortex/selenium/blob/master/testng-ui/pom.xml">repository/selenium/testng-ui/pom.xml</a></code>:<br><pre>
+&lt;properties&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;server.port&gt;81&lt;/server.port&gt;
+    &lt;selenium.session.baseurl.ui&gt;http://localhost:${server.port}/html5storefront/&lt;/selenium.session.baseurl.ui&gt;
+&lt;/properties&gt;
+</pre>
+</li>
+</ul><p>Now access Storefront through: <code>localhost:81/html5storefront</code></p>
+
+<h3>
+<a name="installing-html5-reference-storefront-sources" class="anchor" href="#installing-html5-reference-storefront-sources"><span class="octicon octicon-link"></span></a>Installing HTML5 Reference Storefront Sources</h3>
+
+<ol>
+<li>Fetch HTML5 Reference Storefront sources: <br><code>https://github.elasticpath.net/cortex/ui-storefront</code>
+</li>
+<li>Install the Storefront's dependencies by navigating to HTML5 Reference Storefront directory and running:<br><code>npm install</code>
+</li>
+</ol><h3>
+<a name="running-html5-reference-storefront-locally" class="anchor" href="#running-html5-reference-storefront-locally"><span class="octicon octicon-link"></span></a>Running HTML5 Reference Storefront Locally</h3>
+
+<p>Running locally means all your applications, Cortex API, Search, HTML5 Storefront, etc, are running on your local computer on these ports:</p>
+
+<ul>
+<li>
+<a href="https://docs.elasticpath.com/display/EPCAPIDEV/Installation+and+Configuration+Guide" target="_blank">Cortex API <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port <code>9080</code>
+</li>
+<li>
+<a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Search Server <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port <code>8080</code>
+</li>
+<li>
+<a href="http://nodejs.org/" target="_blank">node.js <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a> Port <code>3008</code>
+</li>
+<li><a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Commerce Engine <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a></li>
+</ul><p><img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/local_proxy_setup.png" alt="localSetup"></p>
+
+<p><b>To run locally:</b></p>
+
+<ul>
+<li>
+<b>Install and configure Apache 2.4 HTTP Server</b>
+<ol>
+<li>Download Apache 2.4 zip from (http://www.apachelounge.com/download/)</li>
+<li>Extract the Apache24 folder locally to <code>C:\Apache24</code>
+</li>
+<li>Copy over the reference configuration files [<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>] to <code>C:\Apache24\conf</code><br><b>NOTE:</b> The configurations files are set to run on your local, so no extra setup should be required.</li>
+<li>Run the proxy: open a command line, navigate to <code>C:\Apache24\bin</code>, and run<br><code>httpd.exe</code>
+</li>
+</ol>
+</li>
+<li>
+<b>Configure HTML5 Reference Storefront for the Cortex mobee Store</b>
+<ul>
+<li>Open <code>ui-storefront/public/ep.config.json</code> and change the cortexAPI JSON element to the following:<br><pre>
+"cortexApi":{
+"path":"cortex",
+"scope":"mobee"
+},
+</pre>
+</li>
+</ul>
+<p></p>
+</li>
+<li>
+<b>Start up Node.js</b>
+
+<ul>
+<li>Open a command line, navigate to your HTML5 Storefront directory, and run<br><code>node app</code>
+</li>
+</ul>
+<p></p>
+</li>
+<li>
+<b>Access HTML5 Reference Storefront</b>
+
+<ul>
+<li>Open your browser and navigate to<br><code>localhost/html5storefront/</code>
+</li>
+</ul>
+<p></p>
+</li>
 </ul><h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<a name="running-html5-reference-storefront-remotely" class="anchor" href="#running-html5-reference-storefront-remotely"><span class="octicon octicon-link"></span></a>Running HTML5 Reference Storefront Remotely</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>Running remotely means your HTML5 Reference Storefront runs locally on port <code>3008</code>, but Cortex API, Search, Commerce Engine, etc, run on an external server.
+When running remotely, we expect your Cortex API is using Elastic Path Integrator, see <a href="http://docs.elasticpath.com">http://docs.elasticpath.com</a> for more information on Integrator.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<p><img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/remote_proxy_setup.png" alt="localSetup"></p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p><b>To run remotely:</b></p>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<ul>
+<li>
+<b>Install and configure Apache 2.4 HTTP Server</b>
+<ol>
+<li>Download Apache 2.4 zip from (http://www.apachelounge.com/download/)</li>
+<li>Extract the Apache24 folder locally to <code>C:\Apache24</code>
+</li>
+<li>Copy over the reference configuration files [<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>] to <code>C:\Apache24\conf</code><br>
+</li>
+<li>In <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a>,
+comment out LOCAL SETUP and uncomment REMOTE SETUP.</li>
+<li>In REMOTE SETUP, set the web address and port for Integrator. For example, if Integrator ran at <code>http://aws-qa3.elasticpath.net:13080/integrator</code><br><pre>
+#################REMOTE SETUP#################
+RequestHeader append X-Forwarded-Base "http://localhost/integrator"
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+ProxyPass /integrator http://aws-qa3.elasticpath.net:13080/integrator
+ProxyPassReverse /integrator http://aws-qa3.elasticpath.net:13080/integrator
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+ProxyPass /html5storefront http://localhost:3008
+ProxyPassReverse /html5storefront http://localhost:3008
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+#################REMOTE SETUP#################
+</pre>
+<b>NOTE:</b> Ignore Studio setting if not using Studio.</li>
+<li>Run the proxy: open a command line, navigate to <code>C:\Apache24\bin</code>, and run<br><code>httpd.exe</code>
+</li>
+</ol>
+</li>
+<li>
+<b>Configure HTML5 Reference Storefront for the Cortex telcooperative Store</b>
+<ul>
+<li>Open <code>ui-storefront/public/ep.config.json</code> and change the cortexAPI JSON element to the following:<br><pre>
+  "cortexApi":{
+    "path":"integrator",
+    "scope":"telcooperative"
+  },
+</pre>
+</li>
+</ul>
+<p></p>
+</li>
+<li>
+<b>Configure your Remote Server's Firewall and Proxy</b>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<ul>
+<li>Configure your Remote Server's firewall and proxy to allow requests to/from your local Apache proxy.</li>
+</ul>
+<p></p>
+</li>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (@defunkt), PJ Hyett (@pjhyett), and Tom Preston-Werner (@mojombo) founded GitHub.</p>
+<li>
+<b>Start up Node.js</b>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<ul>
+<li>Open a command line, navigate to your HTML5 Storefront directory, and run<br><code>node app</code>
+</li>
+</ul>
+<p></p>
+</li>
+<li>
+<b>Access HTML5 Reference Storefront</b>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<ul>
+<li>Open your browser and navigate to<br><code>localhost/html5storefront/</code>
+</li>
+</ul>
+<p></p>
+</li>
+</ul><h1>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h1>
+
+<p>The documentation is available online through GitHub: <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md">https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md</a></p>
+
+<p>Alternatively, you can generate the documentation locally using DOCCO (<a href="http://jashkenas.github.io/docco/">http://jashkenas.github.io/docco/</a>).</p>
+
+<p>To generate the documentation locally:</p>
+
+<ol>
+<li>Install DOCCO: <code>npm install -g docco</code>
+</li>
+<li>From cygwin command line, run <code>docco ui-storefront/documentation/*.md -l linear</code>
+</li>
+</ol><p>Files generate to: ui-storefront/docs</p>
+
+<p><strong>Notes:</strong></p>
+
+<ul>
+<li>Use cygwin for the windows command line. Windows command line can't handle the * character</li>
+<li>DOCCO does not copy the image files to the output folder. Copy over manually.</li>
+<li>Links (images + hrefs)are hardcoded to GitHub. To generate locally, change the image references so they are local.</li>
+</ul><h6>
+<a name="legal-mumbo-jumbo" class="anchor" href="#legal-mumbo-jumbo"><span class="octicon octicon-link"></span></a>Legal Mumbo Jumbo</h6>
+
+<p>This document is confidential and proprietary information of Elastic Path Software Inc. Copyright © 2013 Elastic Path Software Inc. All rights reserved. Elastic Path®, the Elastic Path logo, EP Commerce Engine™, EP Cortex™, and EP Subscriptions™ are trademarks or registered trademarks of Elastic Path Software Inc. All other trademarks are the property of their respective owners.</p>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Experiment Github Page maintained by <a href="https://github.elasticpath.net/ama">ama</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p>Project maintained by <a href="https://github.elasticpath.net/ama">ama</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
-
-
-
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
   </body>
 </html>
