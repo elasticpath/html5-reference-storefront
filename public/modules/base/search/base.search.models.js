@@ -20,6 +20,11 @@ define(['ep','app', 'eventbus','backbone','cortex','jsonpath'],
   function(ep, app, EventBus, Backbone,Cortex){
 
     var initCachedSearch = Backbone.Model.extend({
+      // Please do not follow this example. This module is designated to be removed.
+      // One should not construct urls, unless it's an API entry point
+      // in this case ep.io.getApiContext() +'/searches/' + ep.app.config.cortexApi.scope is a entry point
+      // the posting url for search form should be retrieved by follow link keywordsearchform and parse out
+      // the action link to post the query to
       url: ep.io.getApiContext() +'/searches/' + ep.app.config.cortexApi.scope + '/keywords/items'
     });
 

@@ -122,6 +122,7 @@ define(['ep', 'app', 'eventbus', 'ia.models', 'ia.views', 'text!modules/base/ia/
       View.clearSelectedMainNav();
     });
 
+    // NOTE this event listener is currently not in use
     // Render Browse Category Request
     EventBus.on('ia.renderBrowseCategoryRequest',function renderBrowseCategory(){
       var subCategoryNavCollection = new Model.BrowseCategoryCollection();

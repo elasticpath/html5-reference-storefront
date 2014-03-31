@@ -17,9 +17,18 @@
 define(['ep', 'app', 'backbone'],
   function (ep, app, Backbone) {
 
+    var zoomArray = [
+      'availability',
+      'addtocartform',
+      'price',
+      'rate',
+      'definition',
+      'definition:assets:element'
+    ];
+
     var itemModel = Backbone.Model.extend({
       getUrl: function (href) {
-        return ep.ui.decodeUri(href) + '?zoom=availability,addtocartform,price,rate,definition,definition:assets:element';
+        return ep.ui.decodeUri(href) + '?zoom=' + zoomArray.join();
       },
       parse: function (item) {
 
