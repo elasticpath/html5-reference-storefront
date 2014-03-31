@@ -40,22 +40,22 @@ We have the following docs:</p>
 
 <ul>
 <li>
-<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/introduction.md">Introduction</a> <br>
+<a href="documentation/introduction.md">Introduction</a> <br>
 HTML5 Storefront introduction, overview of the Storefront's customization layers, Cortex API introduction, HTML5 Reference Storefront feature list, and documentation notes.</li>
 <li>
-<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/technologyoverview.md">HTML5 Storefront Technology</a>  <br>
+<a href="documentation/technologyoverview.md">HTML5 Storefront Technology</a>  <br>
 Platform architecture, technology stack, testing frameworks, project code structure, platform support.</li>
 <li>
-<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/extending.md">Extending HTML5 Storefront Features</a> <br>
+<a href="documentation/extending.md">Extending HTML5 Storefront Features</a> <br>
 Overview of HTML5 Storefront's MVC framework, synopsis of the Storefront's extension model, and a tutorial that teaches how to create an extension to Items.</li>
 <li>
-<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/theming.md">Theming</a>  <br>
+<a href="documentation/theming.md">Theming</a>  <br>
 Introduction to HTML5 Storefront presentation layer, theme basics, and a tutorial on creating a theme.</li>
 <li>
 <a href="">Testing</a>  <br>
 Introduction to HTML5 Storefront testing framework, overview of unit testing, and steps on how to add a new test to the testing framework.</li>
 <li>
-<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/howTOs.md">How Tos</a>  <br>
+<a href="documentation/howTOs.md">How Tos</a>  <br>
 Describes how to code your JavaScript for some of the more advanced Cortex API features: selectors, forms, searches, authentication, and so on.</li>
 </ul><h1>
 <a name="installing-and-running" class="anchor" href="#installing-and-running"><span class="octicon octicon-link"></span></a>Installing and Running</h1>
@@ -65,8 +65,8 @@ Describes how to code your JavaScript for some of the more advanced Cortex API f
 <ul>
 <li><a href="http://git-scm.com/downloads" target="_blank">GIT Client <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a></li>
 <li><a href="http://nodejs.org/" target="_blank">Node.js <img src="https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/extlink.png"></a></li>
-</ul><p>Once those are installed, proceed to <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#installing-html5-reference-storefront-sources">Install HTML5 Reference Storefront Sources</a> and then run the Storefront either
-<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#running-html5-reference-storefront-locally"><b>locally</b></a> or <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md#running-html5-reference-storefront-remotely"><b>remotely</b></a>.</p>
+</ul><p>Once those are installed, proceed to <a href="README.md#installing-html5-reference-storefront-sources">Install HTML5 Reference Storefront Sources</a> and then run the Storefront either
+<a href="README.md#running-html5-reference-storefront-locally"><b>locally</b></a> or <a href="README.md#running-html5-reference-storefront-remotely"><b>remotely</b></a>.</p>
 
 <p><strong>NOTE: <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a></strong> Due to CORS, you must set up a proxy to handle the requests between Cortex API and HTML5 Storefront.
 We use Apache HTTP Server 2.4 in the instructions below. For reference, we provide pre-configured Apache config files you can copy over to your local Apache deployment.
@@ -75,9 +75,9 @@ Any proxy works, but Apache HTTP Server is the only server we test.</p>
 <p><strong>NOTE: Port 80 Conflicts</strong> Often on Windows 7, <code>port 80</code> is in use by a system service. To have Apache listen on another port, like <code>port 81</code>, change the following:</p>
 
 <ul>
-<li>Apache <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a><br><code>Listen 81</code>
+<li>Apache <a href="documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a><br><code>Listen 81</code>
 </li>
-<li>Apache <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a><br><code>RequestHeader append X-Forwarded-Base "http://localhost:81/cortex"</code>
+<li>Apache <a href="documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a><br><code>RequestHeader append X-Forwarded-Base "http://localhost:81/cortex"</code>
 </li>
 <li>For HTML5 Storefront Selenium Tests, update <code>server.port</code> in <code><a href="https://github.elasticpath.net/cortex/selenium/blob/master/testng-ui/pom.xml">repository/selenium/testng-ui/pom.xml</a></code>:<br><pre>
 &lt;properties&gt;
@@ -124,7 +124,7 @@ Any proxy works, but Apache HTTP Server is the only server we test.</p>
 <li>Download Apache 2.4 zip from (http://www.apachelounge.com/download/)</li>
 <li>Extract the Apache24 folder locally to <code>C:\Apache24</code>
 </li>
-<li>Copy over the reference configuration files [<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>] to <code>C:\Apache24\conf</code><br><b>NOTE:</b> The configurations files are set to run on your local, so no extra setup should be required.</li>
+<li>Copy over the reference configuration files [<a href="documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>] to <code>C:\Apache24\conf</code><br><b>NOTE:</b> The configurations files are set to run on your local, so no extra setup should be required.</li>
 <li>Run the proxy: open a command line, navigate to <code>C:\Apache24\bin</code>, and run<br><code>httpd.exe</code>
 </li>
 </ol>
@@ -177,9 +177,9 @@ When running remotely, we expect your Cortex API is using Elastic Path Integrato
 <li>Download Apache 2.4 zip from (http://www.apachelounge.com/download/)</li>
 <li>Extract the Apache24 folder locally to <code>C:\Apache24</code>
 </li>
-<li>Copy over the reference configuration files [<a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>] to <code>C:\Apache24\conf</code><br>
+<li>Copy over the reference configuration files [<a href="documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a> and <a href="documentation/apacheConfigs/httpd.conf"><code>httpd.conf</code></a>] to <code>C:\Apache24\conf</code><br>
 </li>
-<li>In <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a>,
+<li>In <a href="documentation/apacheConfigs/ep-cortex-proxy.conf"><code>ep-cortex-proxy.conf</code></a>,
 comment out LOCAL SETUP and uncomment REMOTE SETUP.</li>
 <li>In REMOTE SETUP, set the web address and port for Integrator. For example, if Integrator ran at <code>http://aws-qa3.elasticpath.net:13080/integrator</code><br><pre>
 #################REMOTE SETUP#################
@@ -241,7 +241,7 @@ ProxyPassReverse /html5storefront http://localhost:3008
 </ul><h1>
 <a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h1>
 
-<p>The documentation is available online through GitHub: <a href="https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md">https://github.elasticpath.net/cortex/ui-storefront/blob/master/README.md</a></p>
+<p>The documentation is available online through GitHub: README.md</p>
 
 <p>Alternatively, you can generate the documentation locally using DOCCO (<a href="http://jashkenas.github.io/docco/">http://jashkenas.github.io/docco/</a>).</p>
 
