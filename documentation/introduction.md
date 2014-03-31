@@ -2,7 +2,7 @@ Introducing HTML5 Reference Storefront
 ====================
 Welcome to the Elastic Path's HTML5 Reference Storefront!
 
-HTML5 Storefront is a flexible e-commerce website backed by Elastic Path's Cortex API.
+HTML5 Storefront is an flexible e-commerce website backed by Elastic Path's Cortex API.
 HTML5 Storefront, comprised of the latest technologies (JavaScript, HTML5, jQuery, CSS3, {less}, Marionette, Node.js, etc.), is designed for extensibility.
 
 E-commerce functionality (cart, authentication, profile, search, etc.) is separated from the website's presentation, allowing
