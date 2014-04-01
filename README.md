@@ -1,4 +1,7 @@
-HTML5 Reference Storefront
+---
+title: some test page title
+
+ HTML5 Reference Storefront
 =============
 Welcome to the Elastic Path's HTML5 Reference Storefront!
 We have the following docs:
