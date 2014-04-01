@@ -1,6 +1,3 @@
----
-title: some title
----
 Customizing HTML5 Features
 ====================
 HTML5 Reference Storefront functionality is divided into modules. For example, profile, cart, authentication, checkout, and so on are all separate modules.
