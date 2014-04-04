@@ -23,8 +23,10 @@ Installing and Running
 ====================
 The HTML5 Reference Storefront requires the following installed:
 
-* <a href="http://git-scm.com/downloads" target="_blank">GIT Client</a> <img src="{{ site.baseurl }}/documentation/img/extlink.png" alt="External link" />
-* <a href="http://nodejs.org/" target="_blank">Node.js</a> <img src="{{ site.baseurl }}/documentation/img/extlink.png" alt="External link" />
+<ul>
+<li><a href="http://git-scm.com/downloads" target="_blank">GIT Client <img src="{{ site.baseurl }}/documentation/img/extlink.png" /></a></li>
+<li><a href="http://nodejs.org/" target="_blank">Node.js <img src="{{ site.baseurl }}/documentation/img/extlink.png" /></a></li>
+</ul>
 
 Once those are installed, proceed to [Install HTML5 Reference Storefront Sources](#installing-html5-reference-storefront-sources) and then run the Storefront either
 **[locally](#running-html5-reference-storefront-locally)** or **[remotely](#running-html5-reference-storefront-remotely)**.
