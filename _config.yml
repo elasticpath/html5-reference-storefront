@@ -1,0 +1,3 @@
+baseurl: /cortex/ui-storefront
+relative_permalinks: false
+repository: https://github.elasticpath.net/cortex/ui-storefront
