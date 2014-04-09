@@ -16,6 +16,12 @@
  *
  */
 module.exports = function(grunt){
+  /**
+   * Cortex Configuration
+   */
+  var CORTEX_HOST = '54.213.124.208';
+  var CORTEX_PORT = '8080';
+  var CORTEX_CONTEXT = '/cortex';
 
   grunt.initConfig({
 
@@ -96,6 +102,44 @@ module.exports = function(grunt){
           ]
         }]
       }
+    },
+    connect: {
+      server: {
+        options: {
+          port: 3007,
+          hostname: 'localhost',
+          keepalive: true,
+          appendProxies: false,
+          // This middleware function ensures all requests go through the proxies
+          middleware: function(connect) {
+            var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
+            return [proxySnippet];
+          }
+        },
+        proxies: [
+          {
+            /**
+             * Proxy to send Cortex API responses to a Cortex end-point
+             */
+            host: CORTEX_HOST,
+            port: CORTEX_PORT,
+            context: CORTEX_CONTEXT
+          },
+          {
+            /**
+             * Proxy to send localhost requests to 3008 where the node app runs
+             */
+            context: '/',
+            host: 'localhost',
+            port: 3008,
+            // This rewrite allows the app to be accessed at:
+            // http://localhost:3007/ AND http://localhost:3007/html5storefront/
+            rewrite: {
+              '^/html5storefront/': '/'
+            }
+          }
+        ]
+      }
     }
   });
 
@@ -107,6 +151,8 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-copyright-reporter');
+  grunt.loadNpmTasks('grunt-connect-proxy');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Make watch the default task
   grunt.registerTask('default', ['watch']);
@@ -121,4 +167,23 @@ module.exports = function(grunt){
     grunt.option('force', true);
     grunt.task.run(['less', 'jshint', 'mocha', 'copyright_reporter']);
   });
+
+  /**
+   * A function containing key startup tasks.
+   * Starts the 'grunt-contrib-connect' web server with the 'grunt-connect-proxy' proxy functionality.
+   * Starts the node app
+   */
+  grunt.registerTask('start', 'Starts a web server and node app', function () {
+    // Start the web server and proxy
+    grunt.task.run([
+      'configureProxies:server',
+      'connect:server'
+    ]);
+    // Start the node app
+    grunt.util.spawn({
+      cmd: 'node',
+      args: ['app.js']
+    });
+  });
+
 };
