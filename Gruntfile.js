@@ -96,6 +96,51 @@ module.exports = function(grunt){
           ]
         }]
       }
+    },
+    connect: {
+      server: {
+        options: {
+          port: 3007,
+          hostname: 'localhost',
+          keepalive: true,
+          appendProxies: false,
+          // This middleware function ensures all requests go through the proxies
+          middleware: function(connect) {
+            var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
+            return [proxySnippet];
+          }
+        },
+        proxies: [
+          {
+            /**
+             * Proxy to send Cortex API responses to a Cortex end-point
+             */
+            // PD-QA0
+            host: 'ep-pd-ad-qa0.elasticpath.net',
+            // PD-QA1
+//            host: 'ep-pd-ad-qa1.elasticpath.net',
+            // AWS-QA2
+//            host: 'aws-qa2.elasticpath.net',
+            // PhoneGap/pd-partners environment
+//            host: '54.200.118.70',
+            port: 8080,
+            context: '/cortex'
+          },
+          {
+            /**
+             * Proxy to send localhost requests to 3008 where the node app runs
+             */
+            context: '/',
+            host: 'localhost',
+            port: 3008,
+            // This rewrite allows the app to be accessed at:
+            // http://localhost:3007/ AND http://localhost:3007/html5storefront/
+            rewrite: {
+              '^/html5storefront/': '/'
+            }
+          }
+        ]
+      }
     }
   });
 
@@ -107,6 +152,8 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-copyright-reporter');
+  grunt.loadNpmTasks('grunt-connect-proxy');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Make watch the default task
   grunt.registerTask('default', ['watch']);
@@ -121,4 +168,12 @@ module.exports = function(grunt){
     grunt.option('force', true);
     grunt.task.run(['less', 'jshint', 'mocha', 'copyright_reporter']);
   });
+
+  grunt.registerTask('server', function (target) {
+    grunt.task.run([
+      'configureProxies:server',
+      'connect:server'
+    ]);
+  });
+
 };
