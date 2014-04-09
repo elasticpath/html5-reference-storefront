@@ -16,6 +16,12 @@
  *
  */
 module.exports = function(grunt){
+  /**
+   * Cortex Configuration
+   */
+  var CORTEX_HOST = '54.213.124.208';
+  var CORTEX_PORT = '8080';
+  var CORTEX_CONTEXT = '/cortex';
 
   grunt.initConfig({
 
@@ -115,16 +121,9 @@ module.exports = function(grunt){
             /**
              * Proxy to send Cortex API responses to a Cortex end-point
              */
-            // PD-QA0
-            host: 'ep-pd-ad-qa0.elasticpath.net',
-            // PD-QA1
-//            host: 'ep-pd-ad-qa1.elasticpath.net',
-            // AWS-QA2
-//            host: 'aws-qa2.elasticpath.net',
-            // PhoneGap/pd-partners environment
-//            host: '54.200.118.70',
-            port: 8080,
-            context: '/cortex'
+            host: CORTEX_HOST,
+            port: CORTEX_PORT,
+            context: CORTEX_CONTEXT
           },
           {
             /**
@@ -169,11 +168,22 @@ module.exports = function(grunt){
     grunt.task.run(['less', 'jshint', 'mocha', 'copyright_reporter']);
   });
 
-  grunt.registerTask('server', function (target) {
+  /**
+   * A function containing key startup tasks.
+   * Starts the 'grunt-contrib-connect' web server with the 'grunt-connect-proxy' proxy functionality.
+   * Starts the node app
+   */
+  grunt.registerTask('start', 'Starts a web server and node app', function () {
+    // Start the web server and proxy
     grunt.task.run([
       'configureProxies:server',
       'connect:server'
     ]);
+    // Start the node app
+    grunt.util.spawn({
+      cmd: 'node',
+      args: ['app.js']
+    });
   });
 
 };
