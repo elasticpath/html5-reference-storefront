@@ -16,7 +16,7 @@ Platform architecture, technology stack, testing frameworks, project code struct
 Overview of HTML5 Storefront's MVC framework, synopsis of the Storefront's extension model, and a tutorial that teaches how to create an extension to Items.
 * [Theming]({{ site.baseurl }}/documentation/theming/)   
 Introduction to HTML5 Storefront presentation layer, theme basics, and a tutorial on creating a theme.
-* [Testing]()  - *Coming soon*
+* [Testing]()  - *Coming soon*   
 Introduction to HTML5 Storefront testing framework, overview of unit testing, and steps on how to add a new test to the testing framework.
 * [How Tos]({{ site.baseurl }}/documentation/howTOs/)   
 Describes how to code your JavaScript for some of the more advanced Cortex API features: selectors, forms, searches, authentication, and so on.
@@ -34,7 +34,7 @@ Once those are installed, proceed to [Install HTML5 Reference Storefront Sources
 **[locally](#running-html5-reference-storefront-locally)** or **[remotely](#running-html5-reference-storefront-remotely)**.
 
 ### <a name="installing-html5-reference-storefront-sources"> </a> Installing HTML5 Reference Storefront Sources
-1. Fetch HTML5 Reference Storefront sources:
+1. Fetch HTML5 Reference Storefront sources:   
 `https://github.elasticpath.net/cortex/ui-storefront`
 2. Install the Storefront's dependencies by navigating to HTML5 Reference Storefront directory and running:   
 `npm install`
@@ -62,7 +62,7 @@ Running locally means all your applications, Cortex API, Search, HTML5 Storefron
 
 * **Start the app**
 
-  * Open a command line, navigate to your HTML5 Storefront directory, and run
+  * Open a command line, navigate to your HTML5 Storefront directory, and run   
     `grunt start`
 
 * **Access HTML5 Reference Storefront**
