@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="{{ site.baseurl }}/stylesheets/blue.css">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ site.baseurl }}/stylesheets/jekyll.css">
 
-    <title>HTML5 Storefront - Elastic Path</title>
+    <title>HTML5 Storefront - Elastic Path - {{ page.title }}</title>
   </head>
 
   <body class="html not-front logged-in one-sidebar sidebar-first page-node page-node- page-node-1843 node-type-page navbar-is-fixed-top">
@@ -27,7 +27,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/" title="Home">
-            <img src="http://touchpoint-developers.elasticpath.com/sites/cortex-developers.docs-staging.elasticpath.net/files/logo.png" alt="Home" width="155">
+            <img src="{{ site.baseurl }}/images/logo.png" alt="Home" width="155">
           </a>
         </div>
 
@@ -39,7 +39,7 @@
               {% for p in site.pages %}
               {% if p.weight == weight %}
               <li class="leaf {% if p.url == page.url %}active"{% endif %}">
-                <a href="{{ p.url }}">
+                <a href="{{ site.baseurl }}{{ p.url }}">
                 {{ p.title }}
                 </a>
               </li>
@@ -80,7 +80,7 @@
       </div>
     </div>
 
-    <script src="javascript/bootstrap.min.js"></script>
+    <script src="{{ site.baseurl }}/javascript/bootstrap.min.js"></script>
 
   </body>
 </html>
