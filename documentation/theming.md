@@ -100,5 +100,4 @@ Keep in mind:
 * `mixins.less` - Embeds other CSS properties into the Storefront's general CSS classes.
 * Templates - Are described in [Customizing HTML5 Features]({{ site.baseurl  }}/documentation/extending/).
 
-###### Legal Mumbo Jumbo
-This document is confidential and proprietary information of Elastic Path Software Inc. Copyright © 2013 Elastic Path Software Inc. All rights reserved. Elastic Path®, the Elastic Path logo, EP Commerce Engine™, EP Cortex™, and EP Subscriptions™ are trademarks or registered trademarks of Elastic Path Software Inc. All other trademarks are the property of their respective owners.
+{% include legal.html %}

@@ -1,3 +1,8 @@
+/**
+ * Some override styles for the Jekyll/GitHub Pages site to slightly customize
+ * the styles brought across from the Developer Portal
+*/
+
 /* Fix to prevent wrapping menu overlapping page header */
 @media screen and (min-width: 768px) {
     body.navbar-is-fixed-top {
@@ -36,4 +41,19 @@ a[name] {
 
 img {
     max-width: 100% !important;
+}
+
+/*
+ * No need (based on the current number of menu items) to restrict the
+ * height of the fly-out menu on smaller screen resolutions
+*/
+.navbar-collapse {
+    max-height: inherit !important;
+}
+
+/* Prevent fly-out menu floating right at smaller resolutions */
+@media screen and (max-width: 767px) {
+    #navbar .navbar-nav {
+        float: none;
+    }
 }

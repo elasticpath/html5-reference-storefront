@@ -81,5 +81,4 @@ Audience
 ---------------------
 This document is written for experienced JavaScript developers and front-end UI developers who want to learn how to customize/extend HTML5 Reference Storefront.
 
-###### Legal Mumbo Jumbo
-This document is confidential and proprietary information of Elastic Path Software Inc. Copyright © 2013 Elastic Path Software Inc. All rights reserved. Elastic Path®, the Elastic Path logo, EP Commerce Engine™, EP Cortex™, and EP Subscriptions™ are trademarks or registered trademarks of Elastic Path Software Inc. All other trademarks are the property of their respective owners.
+{% include legal.html %}
