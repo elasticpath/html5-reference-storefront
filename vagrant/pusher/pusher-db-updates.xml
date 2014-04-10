@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:ep="http://www.elasticpath.com/liquibase/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+    logicalFilePath="ep/workspace/database/pusher-db-updates.xml">
+    <changeSet author="ep-perf" id="local-db-updates" dbms="mysql,oracle" failOnError="false" runAlways="true" runOnChange="true">
+        <sql>
+            update TSETTINGDEFINITION set DEFAULT_VALUE='dev-smtp.elasticpath.net' where PATH='COMMERCE/SYSTEM/EMAIL/mailHost';
+            update TSETTINGDEFINITION set DEFAULT_VALUE='25' where PATH='COMMERCE/SYSTEM/EMAIL/mailPort';
+            update TSETTINGDEFINITION set DEFAULT_VALUE='customerService@elasticpath.com' where PATH='COMMERCE/SYSTEM/EMAIL/emailGlobalSenderAddress';
+            update TSETTINGDEFINITION set DEFAULT_VALUE='http://localhost:8080/search' where PATH='COMMERCE/SYSTEM/SEARCH/searchHost';
+            update TSETTINGVALUE set CONTEXT_VALUE = '/ep/assets' where setting_definition_uid = (select UIDPK from TSETTINGDEFINITION where PATH='COMMERCE/SYSTEM/ASSETS/assetLocation');
+            update TSETTINGVALUE set CONTEXT_VALUE='http://127.0.0.1:8080/search' where setting_definition_uid = (select UIDPK from TSETTINGDEFINITION where PATH='COMMERCE/SYSTEM/SEARCH/searchHost');
+            update TSETTINGVALUE set CONTEXT_VALUE='http://127.0.0.1:8080/cmserver' where setting_definition_uid = (select UIDPK from TSETTINGDEFINITION where PATH='COMMERCE/SYSTEM/EMAIL/emailCmUrl');
+            update TSETTINGVALUE set CONTEXT_VALUE = 'http://192.168.100.101:3000/productimages/' where SETTING_DEFINITION_UID = (select UIDPK from TSETTINGDEFINITION where PATH='COMMERCE/STORE/ASSETS/assetServerBaseUrl');
+            update TSTORE set URL='http://demo.elasticpath.com:8080/storefront' where storecode='SNAPITUP';
+            insert into TINDEXNOTIFY (uidpk, index_type, update_type) (select uidpk, index_type, 'REBUILD' from tindexbuildstatus);
+        </sql>
+    </changeSet>
+</databaseChangeLog>
