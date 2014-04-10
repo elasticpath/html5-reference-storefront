@@ -24,7 +24,7 @@ Take a look at the [Platform Architecture]({{ site.baseurl }}//documentation/tec
 This layer is where JavaScript developers build/extend HTML5 Storefront's functionality.
 JavaScript modules are independent units of code that represent distinct pieces of functionality.
 Together, the modules comprise the entire system of HTML5 Storefront functionality.
-For more information on extending/customizing modules, see [Customizing Storefront Features]({{ site.baseurl }}//documentation/extending/).
+For more information on extending/customizing modules, see [Customizing Storefront Features]({{ site.baseurl }}/documentation/extending/).
 
 **What are HTML5 Storefront modules?**
 
@@ -56,7 +56,7 @@ What is the Cortex API?
 Cortex API is Elastic Path's powerful [RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer) e-commerce API.
 The API can surface up data from any e-commerce backend system in a RESTful manner.
 
-To learn more about Cortex API, see [api-cortex-developers.docs.elasticpath.com](http://api-cortex-developers.docs.elasticpath.com)
+To learn more about Cortex API, see our [Developer Portal](http://touchpoint-developers.elasticpath.com/).
 
 ![Cortex]({{ site.baseurl }}/documentation/img/cortex-page-diagram.png)
 

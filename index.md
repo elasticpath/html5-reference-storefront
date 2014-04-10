@@ -16,7 +16,7 @@ Platform architecture, technology stack, testing frameworks, project code struct
 Overview of HTML5 Storefront's MVC framework, synopsis of the Storefront's extension model, and a tutorial that teaches how to create an extension to Items.
 * [Theming]({{ site.baseurl }}/documentation/theming/)   
 Introduction to HTML5 Storefront presentation layer, theme basics, and a tutorial on creating a theme.
-* [Testing]()  - *Coming soon*   
+* [Testing]()  - *Coming soon*
 Introduction to HTML5 Storefront testing framework, overview of unit testing, and steps on how to add a new test to the testing framework.
 * [How Tos]({{ site.baseurl }}/documentation/howTOs/)   
 Describes how to code your JavaScript for some of the more advanced Cortex API features: selectors, forms, searches, authentication, and so on.
