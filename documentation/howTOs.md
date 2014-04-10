@@ -1,6 +1,8 @@
 ---
 layout: master
 permalink: /documentation/howTOs/
+title: How Tos
+weight: 6
 ---
 How To Handle:
 ====================

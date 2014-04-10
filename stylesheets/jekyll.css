@@ -1,0 +1,39 @@
+/* Fix to prevent wrapping menu overlapping page header */
+@media screen and (min-width: 768px) {
+    body.navbar-is-fixed-top {
+        padding-top: 120px !important;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    body.navbar-is-fixed-top {
+        padding-top: 64px !important;
+    }
+}
+
+/* Fix for the visibility of anchors with a fixed header */
+a[name] {
+    display: block;
+    position: relative;
+    visibility: hidden;
+    top: -64px;
+}
+@media screen and (min-width: 768px) {
+    a[name] {
+        top: -120px;
+    }
+}
+@media screen and (min-width: 992px) {
+    a[name] {
+        top: -64px;
+    }
+}
+
+/* Extra spacing above the footer */
+.footer-after {
+    margin-top: 20px;
+}
+
+img {
+    max-width: 100% !important;
+}

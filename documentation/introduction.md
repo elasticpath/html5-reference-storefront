@@ -1,8 +1,10 @@
 ---
 layout: master
 permalink: /documentation/introduction/
+title: Introduction
+weight: 2
 ---
-Introducing HTML5 Reference Storefront
+Introduction
 ====================
 Welcome to the Elastic Path's HTML5 Reference Storefront!
 

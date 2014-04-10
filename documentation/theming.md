@@ -1,6 +1,8 @@
 ---
 layout: master
 permalink: /documentation/theming/
+title: Theming
+weight: 4
 ---
 Theming
 ====================

@@ -5,36 +5,82 @@
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
 
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ site.baseurl }}/stylesheets/system.base.css">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ site.baseurl }}/stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ site.baseurl }}/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ site.baseurl }}/stylesheets/blue.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ site.baseurl }}/stylesheets/jekyll.css">
 
     <title>HTML5 Storefront - Elastic Path</title>
   </head>
 
-  <body>
+  <body class="html not-front logged-in one-sidebar sidebar-first page-node page-node- page-node-1843 node-type-page navbar-is-fixed-top">
 
     <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="{{ site.repository }}">View on GitHub</a>
+    <header id="navbar" role="navigation" class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/" title="Home">
+            <img src="http://touchpoint-developers.elasticpath.com/sites/cortex-developers.docs-staging.elasticpath.net/files/logo.png" alt="Home" width="155">
+          </a>
+        </div>
 
-          <h1 id="project_title"><a href="{{ site.baseurl }}/">HTML5 Reference Storefront</a></h1>
-          <h2 id="project_tagline">Elastic Path</h2>
-        </header>
+        <div class="navbar-collapse collapse">
+          <nav role="navigation">
+            <!-- Simple (and ugly) menu generator for Jekyll -->
+            <ul class="menu nav navbar-nav">
+              {% for weight in (1..10) %}
+              {% for p in site.pages %}
+              {% if p.weight == weight %}
+              <li class="leaf {% if p.url == page.url %}active"{% endif %}">
+                <a href="{{ p.url }}">
+                {{ p.title }}
+                </a>
+              </li>
+              {% endif %}
+              {% endfor %}
+              {% endfor %}
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+    </header>
+    <div class="section-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">HTML5 Reference Storefront</h1>
+          </div>
+        </div>
+      </div> <!-- /.container -->
     </div>
 
     <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-		{{ content }}
-      </section>
+    <div class="main-container container">
+      <div class="row">
+        <section id="main_content" class="col-sm-12">
+          {{ content }}
+        </section>
+      </div>
     </div>
 
     <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
+    <div class="footer-after">
+      <div class="container">
+        <div class="row">
+          <p class="col-md-9">©2014 Elastic Path Software Inc. All rights reserved.</p>
+        </div>
+      </div>
     </div>
+
+    <script src="javascript/bootstrap.min.js"></script>
 
   </body>
 </html>
