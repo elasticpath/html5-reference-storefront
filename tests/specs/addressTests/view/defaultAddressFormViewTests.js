@@ -66,8 +66,8 @@ define(function (require) {
       it('as correct HTML element', function () {
         expect(this.view.el.nodeName).to.equal('DIV');
       });
-      it('8 child DOM elements (view content rendered)', function () {
-        expect(this.view.el.childElementCount).to.equal(8);
+      it('9 child DOM elements (view content rendered)', function () {
+        expect(this.view.el.childElementCount).to.equal(9);
       });
 
       describe('should have valid regions', function () {

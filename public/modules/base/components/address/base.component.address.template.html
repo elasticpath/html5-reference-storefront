@@ -32,6 +32,7 @@
 
   <!-- Default Address Form Template -->
   <script id="DefaultAddressFormTemplate" type="text/template">
+    <div class="feedback-label address-form-feedback-container" data-region="componentAddressFeedbackRegion"></div>
     <!-- defaultView, itemView tagName:div, class: address-form-container -->
       <div class="form-group">
         <label for="FirstName" data-el-label="addressForm.firstName" class="control-label address-form-label">
@@ -111,8 +112,6 @@
     <!-- defaultView, Layout tagName: div, class: create-address-container container-->
     <h3><%= E.getI18nLabel('addressForm.createAddressTitle') %></h3>
 
-    <div class="feedback-label address-form-feedback-container" data-region="componentAddressFeedbackRegion"></div>
-
     <form role="form" method="POST" class="form-horizontal">
       <div data-region="componentAddressFormRegion"></div>
 
@@ -133,8 +132,6 @@
   <script id="DefaultEditAddressTemplate" type="text/template">
     <!-- defaultView, Layout tagName: div, class: create-address-container container-->
     <h3><%= E.getI18nLabel('addressForm.editAddressTitle') %></h3>
-
-    <div class="feedback-label address-form-feedback-container" data-region="componentAddressFeedbackRegion"></div>
 
     <form role="form" method="POST" class="form-horizontal">
       <div data-region="componentAddressFormRegion"></div>

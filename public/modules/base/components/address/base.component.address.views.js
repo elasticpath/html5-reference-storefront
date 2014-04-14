@@ -18,8 +18,12 @@
  * The HTML5 Reference Storefront's MVC Views for an address, address form,
  * and helper functions that manipulate DOM elements.
  */
-define(['ep', 'marionette', 'eventbus', 'i18n', 'viewHelpers'],
-  function (ep, Marionette, EventBus, i18n, ViewHelpers) {
+define(function(require) {
+    var ep = require('ep');
+    var Marionette = require('marionette');
+    var EventBus = require('eventbus');
+    var i18n = require('i18n');
+    var ViewHelpers = require('viewHelpers');
 
     /**
      * Template helper functions

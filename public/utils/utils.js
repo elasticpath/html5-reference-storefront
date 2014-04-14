@@ -21,6 +21,41 @@ define(function(require){
 
   return {
     /**
+     * Helper function to descend through the properties of a given object based on an array of strings.
+     * Returns the value of the final property listed in the parameters if it is reachable.
+     * Returns undefined if the final property is unreachable.
+     *
+     * @example
+     * var someObj = {a: {b: {c: {d:1} } } };
+     * getDescendedPropertyValue(someObj, ['a', 'b', 'c', 'd']);
+     * // returns 1
+     *
+     * @param {Object} obj The object whose properties are to be descended
+     * @param {String[]} propArray An array of one or more strings representing the properties to be descended
+     * @returns {*|undefined} The value of the final property passed if it is found OR undefined
+     */
+    getDescendedPropertyValue: function (obj, propArray) {
+      // The current object/property to inspect
+      var current;
+      // Check that we have suitable parameters to work with
+      if (_.isObject(obj) && _.isArray(propArray) && propArray.length) {
+        current = obj;
+        for (var i = 0, j = propArray.length; i < j; i++) {
+          var propName = propArray[i];
+          // Descend through the object using the next property name in the array
+          current = current[propName];
+
+          if(typeof(current) === 'undefined') {
+            return current;
+          }
+        }
+      } else {
+        console.warn('getDescendedPropertyValue called with unsuitable or missing parameters.');
+      }
+      return current;
+    },
+
+    /**
      * Format message list into HTML unordered list.
      * @param msgList array of messages
      * @returns String messages in unordered list, or just message if only 1 line.
