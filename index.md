@@ -5,94 +5,77 @@ title: Home
 weight: 1
 ---
 
-Welcome to Elastic Path's HTML5 Reference Storefront!
-We have the following docs:
+HTML5 Storefront is a flexible e-commerce website backed by Elastic Path's Cortex API.
+HTML5 Storefront, comprised of the latest technologies (JavaScript, HTML5, jQuery, CSS3, {less}, Marionette, Node.js, etc.), is designed for extensibility.
 
-* [Introduction]({{ site.baseurl }}/documentation/introduction/)   
-HTML5 Storefront introduction, overview of the Storefront's customization layers, Cortex API introduction, HTML5 Reference Storefront feature list, and documentation notes.
-* [HTML5 Storefront Technology]({{ site.baseurl }}/documentation/technologyoverview/)   
-Platform architecture, technology stack, testing frameworks, project code structure, platform support.
-* [Extending HTML5 Storefront Features]({{ site.baseurl }}/documentation/extending/)   
-Overview of HTML5 Storefront's MVC framework, synopsis of the Storefront's extension model, and a tutorial that teaches how to create an extension to Items.
-* [Theming]({{ site.baseurl }}/documentation/theming/)   
-Introduction to HTML5 Storefront presentation layer, theme basics, and a tutorial on creating a theme.
-* [Testing]()  - *Coming soon*   
-Introduction to HTML5 Storefront testing framework, overview of unit testing, and steps on how to add a new test to the testing framework.
-* [How Tos]({{ site.baseurl }}/documentation/howTOs/)   
-Describes how to code your JavaScript for some of the more advanced Cortex API features: selectors, forms, searches, authentication, and so on.
+E-commerce functionality (cart, authentication, profile, search, etc.) is separated from the website's presentation, allowing
+front-end developers to work on the CSS without having to touch the JavaScript, while JavaScript developers can develop
+functionality without having to touch the front end. Each customization layer is separated from HTML5 Storefront's core code, so
+neither developer has to touch the Storefront's engine.
 
-Installing and Running
-====================
-The HTML5 Reference Storefront requires the following installed:
+###Customization Layers
+JavaScript developers make their customizations in the Module Layer, while front-end developers customize the Presentation Layer.
+Take a look at the [Platform Architecture]({{ site.baseurl }}/documentation/technologyoverview/) to see where the layers are positioned in regards to the rest of the system.
 
-<ul>
-<li><a href="http://git-scm.com/downloads" target="_blank">GIT Client <img src="{{ site.baseurl }}/documentation/img/extlink.png" /></a></li>
-<li><a href="http://nodejs.org/" target="_blank">Node.js <img src="{{ site.baseurl }}/documentation/img/extlink.png" /></a></li>
-</ul>
+####Module Layer
+This layer is where JavaScript developers build/extend HTML5 Storefront's functionality.
+JavaScript modules are independent units of code that represent distinct pieces of functionality.
+Together, the modules comprise the entire system of HTML5 Storefront functionality.
+For more information on extending/customizing modules, see [Customizing Storefront Features]({{ site.baseurl }}/documentation/extending/).
 
-Once those are installed, proceed to [Install HTML5 Reference Storefront Sources](#installing-html5-reference-storefront-sources) and then run the Storefront either
-**[locally](#running-html5-reference-storefront-locally)** or **[remotely](#running-html5-reference-storefront-remotely)**.
+**What are HTML5 Storefront modules?**
 
-### <a name="installing-html5-reference-storefront-sources"> </a> Installing HTML5 Reference Storefront Sources
-1. Fetch HTML5 Reference Storefront sources:   
-`https://github.elasticpath.net/cortex/ui-storefront`
-2. Install the Storefront's dependencies by navigating to HTML5 Reference Storefront directory and running:   
-`npm install`
+An HTML5 Storefront module is the view, plus the code backing the view. For example, the cart module is
+comprised of the `cart.controller.js`, `cart.model.js`, `cart.templates.html`, and the `cart.view.js`:
 
-### <a name="running-html5-reference-storefront-locally"> </a>Running HTML5 Reference Storefront Locally
-Running locally means all your applications, Cortex API, Search, HTML5 Storefront, etc, are running on your local computer on these ports:
+![Cart Module]({{ site.baseurl }}/documentation/img/cartModule.png)
 
-<ul>
-<li><a href="https://docs.elasticpath.com/display/EPCAPIDEV/Installation+and+Configuration+Guide" target="_blank">Cortex API <img src="{{ site.baseurl }}/documentation/img/extlink.png" /></a> Port <code>9080</code></li>
-<li><a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Search Server <img src="{{ site.baseurl }}/documentation/img/extlink.png" /></a> Port <code>8080</code></li>
-<li><a href="http://nodejs.org/" target="_blank">node.js <img src="{{ site.baseurl }}/documentation/img/extlink.png" /></a> Port <code>3008</code></li>
-<li><a href="https://docs.elasticpath.com/display/EP680DEV/Installation+and+Configuration+Guide" target="_blank">Commerce Engine <img src="{{ site.baseurl }}/documentation/img/extlink.png" /></a></li>
-</ul>
+Cart functionality such as checkout, item prices, item availability, lineitems, etc. is provided by the `cart.controller` and `cart.model`.
+While the view, the output representations of these features, is handled by the `cart.templates.html` and the `cart.view.js`.
+HTML5 Storefront views only define the regions where the cart representation appears, while the cart's look and feel is defined through the Presentation Layer with a theme.
 
-![localSetup]({{ site.baseurl }}/documentation/img/local_proxy_setup.png)
 
-**To run locally:**
+**Why combine view, model, controller into one module?**
 
-* **Set the Cortex end-point configuration to point to your local Cortex instance**
+This makes the modules as self-contained as possible, minimizes the references required to other modules, and saves the JS developer from having to customize the
+Storefront's engine controller every time a module is added or changed.
 
-  * Open `ui-storefront/Gruntfile.js` and change the `CORTEX_HOST`, `CORTEX_PORT` variables as follows:
+####Presentation Layer
 
-        var CORTEX_HOST = 'localhost';
-        var CORTEX_PORT = '9080';
+HTML5 Storefront has a simple Presentation Layer (html/css), allowing front-end developers to customize the look and feel without having to touch the JS code.
+Front-end developers can create themes to give HTML5 Storefront different look and feels. For more information on creating a theme, see the [Theming Tutorial]({{ site.baseurl }}/documentation/theming/#tutorialTheme).
 
-* **Start the app**
 
-  * Open a command line, navigate to your HTML5 Storefront directory, and run   
-    `grunt start`
 
-* **Access HTML5 Reference Storefront**
 
-  * Open your browser and navigate to   
-    `localhost:3007/html5storefront/`
+What is the Cortex API?
+-------------------
+Cortex API is Elastic Path's powerful [RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer) e-commerce API.
+The API can surface up data from any e-commerce backend system in a RESTful manner.
 
-### <a name="running-html5-reference-storefront-remotely"> </a>Running HTML5 Reference Storefront Remotely
-Running remotely means your HTML5 Reference Storefront runs locally on port `3008`, but Cortex API, Search, Commerce Engine, etc, run on an external server.
-When running remotely, we expect your Cortex API is using Elastic Path Integrator, see [http://docs.elasticpath.com](http://docs.elasticpath.com) for more information on Integrator.
+To learn more about Cortex API, see our [Developer Portal](http://touchpoint-developers.elasticpath.com/).
 
-![localSetup]({{ site.baseurl }}/documentation/img/remote_proxy_setup.png)
+![Cortex]({{ site.baseurl }}/documentation/img/cortex-page-diagram.png)
 
-**To run remotely:**
 
-* **Set the Cortex end-point configuration to point to a remote Cortex instance**
+HTML5 Reference Storefront Features
+---------------------
+![Feature Guide]({{ site.baseurl }}/documentation/img/featureSupport.png)
 
-  * Open `ui-storefront/Gruntfile.js` and change the `CORTEX_HOST`, `CORTEX_PORT` variables as follows:
 
-          var CORTEX_HOST = '54.213.124.208';
-          var CORTEX_PORT = '8080';
+About the Documentation
+---------------------
+This document is written for knowledgeable JavaScript developers who are extending/customizing HTML5 Storefront modules and
+for knowledgeable front-end developers who are extending/customizing HTML5 Storefront themes. This document is not a primer for JavaScript, CSS, etc. Before you begin, you should have working knowledge of the following technologies:
 
-  * **Start the app**
+* Backbone.js
+* jQuery.js
+* Marionette.js
+* CSS/{less}
+* DOM/CRUD Operations
 
-    * Open a command line, navigate to your HTML5 Storefront directory, and run   
-    `grunt start`
-
-  * **Access HTML5 Reference Storefront**
-
-    * Open your browser and navigate to   
-    `localhost:3007/html5storefront/`
+Audience
+---------------------
+This document is written for experienced JavaScript developers and front-end UI developers who want to learn how to customize/extend HTML5 Reference Storefront.
 
 {% include legal.html %}
