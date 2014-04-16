@@ -28,7 +28,7 @@ requirejs.config({
     'backbone'        : 'scripts/lib/backbone',
     'bootstrap'       : 'scripts/lib/bootstrap.min',
     'equalize'        : 'scripts/lib/plugins/jquery-equalheights',
-    'i18n'            : 'scripts/lib/i18next.amd-1.6.0',
+    'i18n'            : 'scripts/lib/i18next.amd-1.7.2',
     'jquery'          : 'scripts/lib/jquery-1.8.3',
     'jsonpath'        : 'scripts/lib/jsonpath-0.8.0',
     'marionette'      : 'scripts/lib/backbone.marionette',
@@ -150,6 +150,10 @@ window.notrack = true;
 
 // Run the tests
 var runMocha = function () {
+  // Initializing i18next - our translation.json files won't be loaded but init() ensures keys are returned (for
+  // use in our test assertions) when the translations are found to be missing
+  var i18n = require('i18n');
+  i18n.init();
 
   // Add Sinon assertions to Chai
   setupSinonChai();
