@@ -177,26 +177,6 @@ define(function (require) {
           checkoutSummaryModel.clear();
           checkoutSummaryModel.set(response.get('summary'));
           showCheckoutSummaryView(checkoutLayout.checkoutOrderRegion);
-        },
-        // passing a cutomized 403 error handling function to override default one
-        // on 403 read order error, update order link & reload checkout page
-        errorFn403: function() {
-          var OrderLinkModel = Backbone.Model.extend({
-            url: ep.io.getApiContext() + '/carts/' + ep.app.config.cortexApi.scope + '/default?zoom=nothing', // FIXME cannot get default without zoom
-            parse: function (response) {
-              return {
-                link: jsonPath(response, '$.links[?(@.rel=="order")].href')[0]
-              };
-            }
-          });
-
-          var linkModel = new OrderLinkModel();
-          linkModel.fetch({
-            success: function() {
-              ep.io.sessionStore.setItem('orderLink', linkModel.get('link'));
-              ep.router.navigate(ep.router.urlHashes.cart, true);
-            }
-          });
         }
       });
 

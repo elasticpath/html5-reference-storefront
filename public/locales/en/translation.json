@@ -230,9 +230,7 @@
       "pageTitle": "Purchase Details"
     },
     "purchaseReceipt": {
-      "pageTitle": "Thank you. Your order has been processed",
-      "promoteRegisterMsg": "Become a registered user for easy checkout.",
-      "register": "Register Now!"
+      "pageTitle": "Thank you. Your order has been processed"
     },
     "billingTitle": "Billing Information",
     "itemName": "Name",

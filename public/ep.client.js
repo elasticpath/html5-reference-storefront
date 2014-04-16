@@ -199,34 +199,24 @@ define(function (require) {
     var baseSync = Backbone.sync;
     Backbone.sync = function (method, model, options) {
       var isTokenDirty = false;
-      var errorFunctions = {
-        errorFn401: function() {
+      options = options || {};
+      options.error = function (data, response, options) {
+        if (response.status === 401) {
+          ep.logger.error('response error: ' + response.responseText + ' : ' + response.status);
           if (!isTokenDirty) {
             Mediator.fire('mediator.getPublicAuthTokenRequest');
           }
-        },
-        errorFn403: function() {
-          // If 403 errors are used in future when logged in users do not have the correct permissions to
-          // access a particular resource, a more granular handler for this error will be required.
-          ep.logger.error('Please login to access the following content.');
-
-          Mediator.fire('mediator.getAuthentication');
-        }
-      };
-
-      // merge the default error handling functions with customized ones passed in as part of options
-      // for any colliding value, value of latter param overrides value of former param
-      options = _.extend(errorFunctions, options);
-      options.error = function (data, response, options) {
-        if (response.status === 401) {
-          options.errorFn401();
         }
 
         if (response.status === 403) {
-          options.errorFn403();
+          // If 403 errors are used in future when logged in users do not have the correct permissions to
+          // access a particular resource, a more granular handler for this error will be required.
+          ep.logger.error('Please login to access the following content. Error ' + response.status + ': ' + response.responseText);
+
+          Mediator.fire('mediator.getAuthentication');
         }
 
-        ep.logger.error('Response error ' + response.responseText + ' : ' + response.status);
+        ep.logger.error('response error: ' + response.responseText + ' : ' + response.status);
       };
 
       options.headers = options.headers || {};
@@ -241,6 +231,8 @@ define(function (require) {
         isTokenDirty = true;
         Mediator.fire('mediator.getPublicAuthTokenRequest');
       }
+
+
     };
 
 
