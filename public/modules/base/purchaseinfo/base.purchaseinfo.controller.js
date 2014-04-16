@@ -21,6 +21,8 @@
 define(function (require) {
     var ep = require('ep');
     var Backbone = require('backbone');
+    var Mediator = require('mediator');
+    var EventBus = require('eventbus');
     var pace = require('pace');
     var i18n = require('i18n');
 
@@ -105,6 +107,9 @@ define(function (require) {
       return purchaseInfoLayout;
     };
 
+    EventBus.on('purchaseinfo.registrationButtonClicked', function() {
+      Mediator.fire('mediator.registrationRequest');
+    });
 
     return {
       PurchaseReceiptView: purchaseReceiptView,

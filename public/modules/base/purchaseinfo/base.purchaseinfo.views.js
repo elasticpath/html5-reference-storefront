@@ -21,6 +21,7 @@ define(function (require) {
   var ep = require('ep');
   var i18n = require('i18n');
   var Mediator = require('mediator');
+  var EventBus = require('eventbus');
   var Marionette = require('marionette');
   var ViewHelpers = require('viewHelpers');
 
@@ -61,8 +62,23 @@ define(function (require) {
       template: '#PurchaseReceiptTemplate',
       className: 'container',
       templateHelpers:viewHelpers,
+      ui: {
+        registerButton: '[data-el-label="purchaseInfo.register"]'
+      },
       regions: {
         purchaseInfoRegion: '[data-region="purchaseInformationRegion"]'
+      },
+      onRender: function() {
+        // registered user shouldn't see registration link
+        if (ep.app.isUserLoggedIn()) {
+          $('[data-el-container="purchaseInfo.promoteRegistration"]', this.$el).hide();
+        }
+      },
+      events: {
+        'click @ui.registerButton': function (event) {
+          event.preventDefault();
+          EventBus.trigger('purchaseinfo.registrationButtonClicked');
+        }
       }
     });
 
