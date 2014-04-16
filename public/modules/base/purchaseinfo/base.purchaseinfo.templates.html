@@ -20,6 +20,11 @@
   <!-- can render purchase success messages, and provide redirect link -->
   <script id="PurchaseReceiptTemplate" type="text/template">
     <h2><%= E.getI18nLabel('purchaseInfo.purchaseReceipt.pageTitle') %></h2>
+    <div data-el-container="purchaseInfo.promoteRegistration" class="purchase-info-promote-registration">
+      <span class="purchase-info-promote-registration-msg"><%= E.getI18nLabel('purchaseInfo.purchaseReceipt.promoteRegisterMsg') %></span>
+      <button class="btn-purchase-info-register btn btn-link" data-el-label="purchaseInfo.register">
+        <%= E.getI18nLabel('purchaseInfo.purchaseReceipt.register') %></button>
+    </div>
     <div data-region="purchaseInformationRegion"></div>
   </script>
 
