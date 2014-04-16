@@ -31,13 +31,11 @@ define(function(require) {
     before(function() {
       sinon.stub(ep.io, 'ajax');
       sinon.stub(view, 'translateErrorMessage');
-      sinon.stub(utils, 'renderMsgToPage');
     });
 
     after(function() {
       ep.io.ajax.restore();
       view.translateErrorMessage.restore();
-      utils.renderMsgToPage.restore();
     });
 
     describe('responds to event: address.createAddressBtnClicked',
@@ -45,12 +43,6 @@ define(function(require) {
 
     describe('responds to event: address.editAddressBtnClicked',
       EventTestFactory.createEventBusBtnEnablementTest('address.editAddressBtnClicked', 'disableButton'));
-
-    describe('responds to event: address.submitAddressFormFailed',
-      EventTestFactory.createEventBusBtnEnablementTest('address.submitAddressFormFailed', 'enableButton'));
-
-    describe('responds to event: address.submitAddressFormFailed.invalidFields',
-      EventTestFactory.createEventBusBtnEnablementTest('address.submitAddressFormFailed.invalidFields', 'enableButton'));
   });
 
   describe('Submit Address Events Tests', function () {
@@ -127,7 +119,8 @@ define(function(require) {
             this.ajaxArgs.success(); // trigger callback function on ajax call success
             expect(EventBus.trigger).to.be.calledWithExactly(testEventName);
           });
-        }));
+        })
+      );
 
       describe('and on failure with 400 status code',
         EventTestFactory.simpleTriggerEventTest('address.submitAddressFormFailed.invalidFields', function () {
@@ -143,7 +136,8 @@ define(function(require) {
             expect(ep.logger.error).to.be.calledOnce
               .and.to.be.calledWithMatch('400');
           });
-        }));
+        })
+      );
 
       describe('and on failure with any other status code',
         EventTestFactory.simpleTriggerEventTest('address.submitAddressFormFailed', function () {
@@ -158,112 +152,94 @@ define(function(require) {
             expect(ep.logger.error).to.be.calledOnce
               .and.to.be.calledWithMatch('any error code');
           });
-        }));
+        })
+      );
     });
-
-    describe('responds to submit address form failure events', function() {
-      before(function (done) {
-        // Define a DefaultEditAddressView so the renderAddressFormErrorState function
-        // can use it when it's called by the address form failure events
-        sinon.stub(Backbone.Model.prototype, 'fetch');
-        sinon.stub(Backbone.Collection.prototype, 'fetch');
-
-        var fakeGetLink = "/integrator/address/fakeUrl";
-        this.view = controller.DefaultEditAddressView(fakeGetLink);
-
-        // Short delay to allow the fake AJAX request to complete
-        setTimeout(done, 200);
-
-        sinon.stub(utils, 'renderMsgToPage');
-      });
-
-      after(function () {
-        Backbone.Model.prototype.fetch.restore();
-        Backbone.Collection.prototype.fetch.restore();
-
-        utils.renderMsgToPage.restore();
-      });
-
-      describe('address.submitAddressFormFailed', function() {
-        before(function() {
-          EventBus.trigger('address.submitAddressFormFailed');
-        });
-
-        it('calls functions to enable the submit button and render errors to the page', function () {
-          expect(ep.ui.enableButton).to.be.calledOnce;
-          expect(utils.renderMsgToPage).to.be.calledOnce;
-        });
-      });
-
-      describe('address.submitAddressFormFailed.invalidFields', function() {
-        var errMsg = 'some error message';
-        before(function () {
-          sinon.stub(view, 'translateErrorMessage');
-          EventBus.trigger('address.submitAddressFormFailed.invalidFields', errMsg);
-        });
-
-        after(function () {
-          view.translateErrorMessage.restore();
-        });
-
-        it('calls functions to enable the submit button and render errors to the page', function () {
-          expect(ep.ui.enableButton).to.be.called;
-          expect(view.translateErrorMessage).to.be.calledWith(errMsg);
-          expect(utils.renderMsgToPage).to.be.called;
-        });
-      });
-    });
-
-    describe('responds to event: address.submitAddressFormSuccess', function () {
-      before(function () {
-        sinon.stub(Mediator, 'fire');
-        EventBus.trigger('address.submitAddressFormSuccess');
-      });
-
-      after(function () {
-        Mediator.fire.restore();
-      });
-
-      it('registers correct event listener', function () {
-        expect(EventBus._events['address.submitAddressFormSuccess']).to.have.length(1);
-      });
-      it('calls correct mediator strategy to notify storefront address form module is complete', function () {
-        expect(Mediator.fire).to.be.calledWithExactly('mediator.addressFormComplete');
-      });
-    });
-
-    describe('responds to event: address.cancelBtnClicked', function () {
-      before(function () {
-        sinon.stub(Mediator, 'fire');
-        EventBus.trigger('address.cancelBtnClicked');
-      });
-
-      after(function () {
-        Mediator.fire.restore();
-      });
-      it('registers correct event listener', function () {
-        expect(EventBus._events['address.cancelBtnClicked']).to.have.length(1);
-      });
-      it('calls correct mediator strategy to notify storefront address form module is complete: ', function () {
-        expect(Mediator.fire).to.be.calledWithExactly('mediator.addressFormComplete');
-      });
-    });
-
-    function simpleAddressBtnClickedEventTest(expected, listener, method) {
-      return EventTestFactory.simpleTriggerEventTest(expected, function () {
-
-        it("registers correct event listener", function () {
-          expect(EventBus._events[listener]).to.have.length(1);
-        });
-
-        it('should trigger event: ' + expected, function () {
-          var href = 'fakeAddressSubmitHref';
-          EventBus.trigger(listener, href);
-
-          expect(EventBus.trigger).to.be.calledWith(expected, method, href);
-        });
-      });
-    }
   });
+
+  describe('responds to submit address form failure events', function() {
+
+    beforeEach(function () {
+      sinon.stub(utils, 'getDescendedPropertyValue', function (obj, propArray) {
+        return 'feedbackMsgRegion';
+      });
+      sinon.stub(ep.ui, 'enableButton');
+      sinon.stub(utils, 'renderMsgToPage');
+    });
+
+    afterEach(function () {
+      utils.getDescendedPropertyValue.restore();
+        ep.ui.enableButton.restore();
+      utils.renderMsgToPage.restore();
+    });
+
+    describe('responds to event: address.submitAddressFormFailed', function () {
+      it('should re-enable the form submit button and render an error message to the page ', function () {
+        EventBus.trigger('address.submitAddressFormFailed');
+        expect(ep.ui.enableButton).to.be.calledOnce;
+        expect(utils.renderMsgToPage).to.be.calledOnce;
+      });
+    });
+
+    describe('responds to event: address.submitAddressFormFailed.invalidFields', function () {
+      it('should re-enable the form submit button and render an error message to the page ', function () {
+        EventBus.trigger('address.submitAddressFormFailed.invalidFields', 'someErrorMessage');
+        expect(ep.ui.enableButton).to.be.calledOnce;
+        expect(utils.renderMsgToPage).to.be.calledOnce;
+      });
+    });
+
+  });
+
+  describe('responds to event: address.submitAddressFormSuccess', function () {
+    before(function () {
+      sinon.stub(Mediator, 'fire');
+      EventBus.trigger('address.submitAddressFormSuccess');
+    });
+
+    after(function () {
+      Mediator.fire.restore();
+    });
+
+    it('registers correct event listener', function () {
+      expect(EventBus._events['address.submitAddressFormSuccess']).to.have.length(1);
+    });
+    it('calls correct mediator strategy to notify storefront address form module is complete', function () {
+      expect(Mediator.fire).to.be.calledWithExactly('mediator.addressFormComplete');
+    });
+  });
+
+  describe('responds to event: address.cancelBtnClicked', function () {
+    before(function () {
+      sinon.stub(Mediator, 'fire');
+      EventBus.trigger('address.cancelBtnClicked');
+    });
+
+    after(function () {
+      Mediator.fire.restore();
+    });
+    it('registers correct event listener', function () {
+      expect(EventBus._events['address.cancelBtnClicked']).to.have.length(1);
+    });
+    it('calls correct mediator strategy to notify storefront address form module is complete: ', function () {
+      expect(Mediator.fire).to.be.calledWithExactly('mediator.addressFormComplete');
+    });
+  });
+
+  function simpleAddressBtnClickedEventTest(expected, listener, method) {
+    return EventTestFactory.simpleTriggerEventTest(expected, function () {
+
+      it("registers correct event listener", function () {
+        expect(EventBus._events[listener]).to.have.length(1);
+      });
+
+      it('should trigger event: ' + expected, function () {
+        var href = 'fakeAddressSubmitHref';
+        EventBus.trigger(listener, href);
+
+        expect(EventBus.trigger).to.be.calledWith(expected, method, href);
+      });
+    });
+  }
 
 });

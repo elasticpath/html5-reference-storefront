@@ -37,6 +37,45 @@ define(function (require) {
       });
 
     });
+
+    describe('getDescendedPropertyValue', function () {
+      beforeEach(function() {
+        sinon.stub(console, 'warn');
+      });
+      afterEach(function() {
+        console.warn.restore();
+        delete(this.returnValue);
+      });
+      describe('when called without a valid object', function () {
+        it('returns undefined and logs a warning to the console' ,function () {
+          this.returnValue = utils.getDescendedPropertyValue('not an Object', ['a', 'valid', 'array']);
+          expect(this.returnValue).to.be.undefined;
+          expect(console.warn).to.be.calledOnce;
+        });
+      });
+      describe('when called without a valid array', function () {
+        it('returns undefined and logs a warning to the console' ,function () {
+          this.returnValue = utils.getDescendedPropertyValue({}, 'not an Array');
+          expect(this.returnValue).to.be.undefined;
+          expect(console.warn).to.be.calledOnce;
+        });
+      });
+      describe('when called with an empty array', function () {
+        it('returns undefined and logs a warning to the console' ,function () {
+          this.returnValue = utils.getDescendedPropertyValue({}, []);
+          expect(this.returnValue).to.be.undefined;
+          expect(console.warn).to.be.calledOnce;
+        });
+      });
+      describe('when called with a valid object and array', function () {
+        it('returns the value of the relevant property and does not log a warning to the console' ,function () {
+          this.returnValue = utils.getDescendedPropertyValue({a: {b: {c: {d:1} } } }, ['a', 'b', 'c', 'd']);
+          expect(this.returnValue).to.deep.equal(1);
+          expect(console.warn).to.not.be.called;
+        });
+      });
+    });
+
   });
 
 });
