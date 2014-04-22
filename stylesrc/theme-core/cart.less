@@ -16,6 +16,12 @@
  * Storefront Cart View
  */
 
+@subscreen: calc(@screen-sm - 1140px);
+// @subsm: calc(@screen-sm - 1px);
+ // table-responsive-overrides
+
+
+
 .cart-container{
 
     h1{
@@ -78,8 +84,22 @@
                     .btn-cart-removelineitem{
                         text-shadow: none;
                         padding: 0;
-                        height: 21px;
-                        width: 21px;
+
+
+
+                        @media(max-width: @screen-sm){
+                            padding: 8px!important;
+                            white-space: nowrap;
+                            height: auto;
+                            // min-width: 50%;
+                            display: inline-block;
+                            // text-align: center;
+                        }
+                        @media(min-width: @screen-sm){
+                            height: 21px;
+                             width: 21px;
+                        }
+
                         color: @gray-lighter;
                         background-color: @gray-light;
                         border: none;
@@ -99,10 +119,19 @@
                             .glyphicon-remove;
                             margin: auto;
                             padding: 2px 0 0 0;
+                            display: inline-block;
+                            clear: none;
                         }
 
                         .btn-text{
-                            display: none;
+                            // display: none;
+                            display: inline-block;
+
+
+                            @media(min-width: @screen-sm) {
+                                display: none;
+                            }
+
                         }
                     }
                 }
@@ -255,3 +284,96 @@ Purchase Information
 .cart-total-container {
   margin-bottom: 10px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: @screen-sm){
+    .cart-container {
+        table, thead, tbody, th, td, tr {
+            // display: block;
+            // width: 100%;
+        }
+
+        table{
+            display: block;
+            width: 100%;
+            thead{
+                display: block;
+                width: 100%;
+            }
+
+            tbody{
+                display: block;
+                width: 100%;
+                tr{
+                    display: block;
+                    width: 100%;
+                    td{
+                        display: block!important;
+                        width: 100%!important;
+                    }
+
+                }
+            }
+
+        }
+
+        .cart-main-inner table{
+            border: 1px solid #ddd;
+        }
+
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        tr {
+                border: 1px solid #eee;
+                margin-bottom: 30px;
+                &:last-child{
+                    margin: 0;
+                }
+        }
+
+        td {
+            /* Behave  like a "row" */
+            // border: none;
+            border: 0!important;
+            position: relative;
+            text-align: center;
+            word-wrap: break-word;
+            padding: 6px!important;
+            a{
+                word-wrap: break-word!important;
+                white-space: normal!important;
+            }
+        }
+
+        td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+    }
+}
+
+ // end table responsive overrides

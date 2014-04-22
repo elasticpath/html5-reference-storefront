@@ -25,6 +25,7 @@
 
 .navbar{
   min-height: 100px;
+
   @media (max-width: @grid-float-breakpoint) {
     min-height: 50px;
   }
@@ -33,10 +34,15 @@
 
         box-shadow:  0px 4px 4px 0px rgba(0, 0, 0, 0.3);
   }
+  @media (min-width: @screen-sm) and (max-width: @screen-md) {
+    min-height: 130px;
+  }
 
   background-color: @navbar-background;
   margin: 0;
   border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid darken(@brand-primary, 25%);
   -webkit-border-radius: 0;
 
   .navbar-nav{
@@ -44,7 +50,9 @@
   }
 
   &.navbar-inverse{
+    border: 0;
     .navbar-nav{
+      border: 0;
       .active{
         a{
           background: darken(@brand-primary,10%);
@@ -128,7 +136,8 @@
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border: 1px solid darken(@brand-primary, 5%);
-  border-bottom: 1px solid #000;
+  // border-bottom: 1px solid #000;
+  // border-bottom: 1px solid rgba();
   margin-bottom: 1px;
   // margin: 0 15px 1px 15px;
 
@@ -158,6 +167,10 @@
     .img-responsive;
   }
   z-index: (@zindex-navbar-fixed + 1); //ensures that logo is in higher z-index than bootstrap's default fixed navbar z-index.
+
+  @media (min-width: @screen-sm) and (max-width: @screen-md) {
+    margin-top: 33px;
+  }
 }
 
 
@@ -176,6 +189,10 @@
     margin: 0px 0 20px 0;
     padding: 0;
     .clearfix;
+  }
+  @media (min-width: @screen-sm) and (max-width: @screen-md) {
+    right: 15px;
+    top: 50px;
   }
 
   li{
@@ -212,11 +229,25 @@
       .glyphicon-shopping-cart;
       margin-right: 5px;
     }
+
+    @media screen and (max-width: @screen-sm){
+      margin-top: 10px;
+      // display: block;
+      // clear: both;
+      border-radius: 0px;
+    }
   }
 
   .global-nav-login{
     .btn-group-xs > .btn;
     .btn-success;
+
+    @media screen and (max-width: @screen-sm){
+      margin-top: 10px;
+      // display: block;
+      // clear: both;
+      border-radius: 0;
+    }
 
     .icon{
         .glyphicon;
@@ -238,6 +269,13 @@
     // top: 0px;
 
   }
+
+  @media (min-width: @screen-sm) and (max-width: @screen-md) {
+    // position: relative;
+
+  }
+
+  // .hidden-sm;
 
 
 
@@ -269,7 +307,8 @@
   // line-height: 24px;
   // border-bottom: 0!important;
   // box-shadow: none;
-  // -webkit-box-shadow: none;
+   // -webkit-box-shadow: none;
+   vertical-align: top;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   margin-left: -5px; // scooch the button over to butt up to the form input
@@ -305,6 +344,7 @@
   left: 0;
   right: 0;
   min-height: 100px;
+  border-bottom: 0;
 
   // margin: 15px;
 
@@ -314,7 +354,12 @@
     left: auto;
     right: auto;
     min-height: 50px;
-    background: darken(@brand-primary, 5%)
+    background: darken(@brand-primary, 5%);
+    // text-align: center;
+  }
+
+  @media (min-width: @screen-sm) and (max-width: @screen-md) {
+    min-height: 130px;
   }
 
   .navbar-form{
@@ -349,4 +394,8 @@
 
 nav.main-nav{
   position: relative;
+  @media (max-width: @grid-float-breakpoint) {
+    text-align: center;
+  }
+
 }
