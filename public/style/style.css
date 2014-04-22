@@ -6891,8 +6891,6 @@ nav.main-nav {
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem {
   text-shadow: none;
   padding: 0;
-  height: 21px;
-  width: 21px;
   color: #eeeeee;
   background-color: #999999;
   border: none;
@@ -6901,6 +6899,19 @@ nav.main-nav {
   box-shadow: none;
   border-bottom: none;
 }
+@media (max-height: 768px) {
+  .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem {
+    padding: 4px;
+    white-space: nowrap;
+    height: auto;
+  }
+}
+@media (min-height: 768px) {
+  .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem {
+    height: 21px;
+    width: 21px;
+  }
+}
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem:hover {
   background-color: #d9534f;
   color: #fff;
@@ -6908,7 +6919,6 @@ nav.main-nav {
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .icon {
   position: relative;
   top: 1px;
-  display: inline-block;
   font-family: 'Glyphicons Halflings';
   font-style: normal;
   font-weight: normal;
@@ -6916,12 +6926,19 @@ nav.main-nav {
   -webkit-font-smoothing: antialiased;
   margin: auto;
   padding: 2px 0 0 0;
+  display: inline-block;
+  clear: none;
 }
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .icon:before {
   content: "\e014";
 }
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .btn-text {
-  display: none;
+  display: inline-block;
+}
+@media screen and (min-width: 768px) {
+  .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .btn-text {
+    display: none;
+  }
 }
 .cart-container table tr:last-child td {
   border-bottom: none;
@@ -7242,9 +7259,6 @@ Purchase Information
 @media screen and (max-width: 768px) {
   .cart-container {
     /* Hide table headers (but not display: none;, for accessibility) */
-    /*
-        Label the data
-        */
   }
   .cart-container table,
   .cart-container thead,
@@ -7275,6 +7289,7 @@ Purchase Information
     position: relative;
     text-align: center;
     word-wrap: break-word;
+    padding: 6px!important;
   }
   .cart-container td a {
     word-wrap: break-word !important;
