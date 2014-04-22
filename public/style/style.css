@@ -5870,6 +5870,11 @@ td.visible-print {
     width: 262.5px;
   }
 }
+@media screen and (max-width: 768px) {
+  .affixed-sidebar {
+    width: 100%;
+  }
+}
 .affixed-sidebar h3 {
   margin: 0 0 2rem 0;
 }
@@ -6221,6 +6226,8 @@ fieldset[disabled] .btn-auth-login.active {
   background-color: rgba(47, 157, 204, 0.85);
   margin: 0;
   border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 69, 94, 0.667);
   -webkit-border-radius: 0;
 }
 @media (max-width: 768px) {
@@ -6234,17 +6241,10 @@ fieldset[disabled] .btn-auth-login.active {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
   }
 }
-.navbar .navbar-nav:before,
-.navbar .navbar-nav:after {
-  content: " ";
-  /* 1 */
-
-  display: table;
-  /* 2 */
-
-}
-.navbar .navbar-nav:after {
-  clear: both;
+@media (min-width: 768px) and (max-width: 992px) {
+  .navbar {
+    min-height: 130px;
+  }
 }
 .navbar .navbar-nav:before,
 .navbar .navbar-nav:after {
@@ -6257,6 +6257,24 @@ fieldset[disabled] .btn-auth-login.active {
 }
 .navbar .navbar-nav:after {
   clear: both;
+}
+.navbar .navbar-nav:before,
+.navbar .navbar-nav:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.navbar .navbar-nav:after {
+  clear: both;
+}
+.navbar.navbar-inverse {
+  border: 0;
+}
+.navbar.navbar-inverse .navbar-nav {
+  border: 0;
 }
 .navbar.navbar-inverse .navbar-nav .active a {
   background: rgba(0, 125, 170, 0.667);
@@ -6328,7 +6346,6 @@ fieldset[disabled] .btn-auth-login.active {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border: 1px solid rgba(0, 144, 196, 0.667);
-  border-bottom: 1px solid #000;
   margin-bottom: 1px;
 }
 @media (max-width: 768px) {
@@ -6383,6 +6400,11 @@ fieldset[disabled] .btn-auth-login.active {
   max-width: 100%;
   height: auto;
 }
+@media (min-width: 768px) and (max-width: 992px) {
+  .logo-container {
+    margin-top: 33px;
+  }
+}
 .global-nav-container {
   position: absolute;
   display: inline-block;
@@ -6422,6 +6444,12 @@ fieldset[disabled] .btn-auth-login.active {
   }
   .global-nav-container:after {
     clear: both;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .global-nav-container {
+    right: 15px;
+    top: 50px;
   }
 }
 .global-nav-container li {
@@ -6544,6 +6572,12 @@ fieldset[disabled] .global-nav-container .global-nav-cart.active {
 .global-nav-container .global-nav-cart .icon:before {
   content: "\e116";
 }
+@media screen and (max-width: 768px) {
+  .global-nav-container .global-nav-cart {
+    margin-top: 10px;
+    border-radius: 0px;
+  }
+}
 .global-nav-container .global-nav-login {
   padding: 5px 10px;
   font-size: 12px;
@@ -6586,6 +6620,12 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
+@media screen and (max-width: 768px) {
+  .global-nav-container .global-nav-login {
+    margin-top: 10px;
+    border-radius: 0;
+  }
+}
 .global-nav-container .global-nav-login .icon {
   position: relative;
   top: 1px;
@@ -6607,6 +6647,9 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   margin: 0 0 0 0;
 }
 @media (max-width: 768px) {
+  
+}
+@media (min-width: 768px) and (max-width: 992px) {
   
 }
 @media (max-width: 768px) {
@@ -6678,6 +6721,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   border-color: #4cae4c;
   height: 22px;
   padding: 0px 5px;
+  vertical-align: top;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   margin-left: -5px;
@@ -6813,6 +6857,7 @@ textarea.header-search-input {
   left: 0;
   right: 0;
   min-height: 100px;
+  border-bottom: 0;
 }
 @media (max-width: 768px) {
   .navbar-collapse {
@@ -6822,6 +6867,11 @@ textarea.header-search-input {
     right: auto;
     min-height: 50px;
     background: rgba(0, 144, 196, 0.667);
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .navbar-collapse {
+    min-height: 130px;
   }
 }
 .navbar-collapse .navbar-form {
@@ -6851,6 +6901,11 @@ textarea.header-search-input {
 }
 nav.main-nav {
   position: relative;
+}
+@media (max-width: 768px) {
+  nav.main-nav {
+    text-align: center;
+  }
 }
 /*
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
@@ -6922,8 +6977,6 @@ nav.main-nav {
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem {
   text-shadow: none;
   padding: 0;
-  height: 21px;
-  width: 21px;
   color: #eeeeee;
   background-color: #999999;
   border: none;
@@ -6932,6 +6985,20 @@ nav.main-nav {
   box-shadow: none;
   border-bottom: none;
 }
+@media (max-width: 768px) {
+  .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem {
+    padding: 8px!important;
+    white-space: nowrap;
+    height: auto;
+    display: inline-block;
+  }
+}
+@media (min-width: 768px) {
+  .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem {
+    height: 21px;
+    width: 21px;
+  }
+}
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem:hover {
   background-color: #d9534f;
   color: #fff;
@@ -6939,7 +7006,6 @@ nav.main-nav {
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .icon {
   position: relative;
   top: 1px;
-  display: inline-block;
   font-family: 'Glyphicons Halflings';
   font-style: normal;
   font-weight: normal;
@@ -6947,12 +7013,19 @@ nav.main-nav {
   -webkit-font-smoothing: antialiased;
   margin: auto;
   padding: 2px 0 0 0;
+  display: inline-block;
+  clear: none;
 }
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .icon:before {
   content: "\e014";
 }
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .btn-text {
-  display: none;
+  display: inline-block;
+}
+@media (min-width: 768px) {
+  .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .btn-text {
+    display: none;
+  }
 }
 .cart-container table tr:last-child td {
   border-bottom: none;
@@ -7252,6 +7325,11 @@ fieldset[disabled] .btn-cmd-checkout.active {
     width: 262.5px;
   }
 }
+@media screen and (max-width: 768px) {
+  .cart-sidebar .cart-sidebar-inner {
+    width: 100%;
+  }
+}
 .cart-sidebar .cart-sidebar-inner h3 {
   margin: 0 0 2rem 0;
 }
@@ -7282,6 +7360,72 @@ Purchase Information
 }
 .cart-total-container {
   margin-bottom: 10px;
+}
+@media screen and (max-width: 768px) {
+  .cart-container {
+    /* Hide table headers (but not display: none;, for accessibility) */
+  
+  }
+  .cart-container table {
+    display: block;
+    width: 100%;
+  }
+  .cart-container table thead {
+    display: block;
+    width: 100%;
+  }
+  .cart-container table tbody {
+    display: block;
+    width: 100%;
+  }
+  .cart-container table tbody tr {
+    display: block;
+    width: 100%;
+  }
+  .cart-container table tbody tr td {
+    display: block!important;
+    width: 100%!important;
+  }
+  .cart-container .cart-main-inner table {
+    border: 1px solid #ddd;
+  }
+  .cart-container thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .cart-container tr {
+    border: 1px solid #eee;
+    margin-bottom: 30px;
+  }
+  .cart-container tr:last-child {
+    margin: 0;
+  }
+  .cart-container td {
+    /* Behave  like a "row" */
+  
+    border: 0!important;
+    position: relative;
+    text-align: center;
+    word-wrap: break-word;
+    padding: 6px!important;
+  }
+  .cart-container td a {
+    word-wrap: break-word !important;
+    white-space: normal!important;
+  }
+  .cart-container td:before {
+    /* Now like a table header */
+  
+    position: absolute;
+    /* Top/left values mimic padding */
+  
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
 }
 /*
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
@@ -7352,6 +7496,11 @@ Purchase Information
 .checkout-container-inner:after {
   clear: both;
 }
+@media screen and (max-width: 768px) {
+  .checkout-container-inner {
+    font-size: 1.6rem;
+  }
+}
 .checkout-sidebar {
   float: left;
   width: 100%;
@@ -7396,6 +7545,11 @@ Purchase Information
 @media screen and (min-width: 1200px) {
   .checkout-sidebar .checkout-sidebar-inner {
     width: 262.5px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .checkout-sidebar .checkout-sidebar-inner {
+    width: 100%;
   }
 }
 .checkout-sidebar .checkout-sidebar-inner h3 {
@@ -7526,7 +7680,7 @@ fieldset[disabled] .btn-cmd-submit-order.active {
 }
 .address-ctrl-cell {
   float: left;
-  width: 58.333333333333336%;
+  width: 100%;
   position: relative;
   min-height: 1px;
   padding-left: 0;
@@ -7567,7 +7721,7 @@ fieldset[disabled] .btn-cmd-submit-order.active {
 }
 .address-btn-cell {
   float: left;
-  width: 41.66666666666667%;
+  width: 100%;
   position: relative;
   min-height: 1px;
   padding-left: 0;
@@ -7952,6 +8106,11 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 .itemdetail-rate {
   font-weight: bold;
 }
+@media screen and (max-width: 768px) {
+  .itemdetail-title {
+    font-size: 2rem;
+  }
+}
 /*
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *
@@ -7977,18 +8136,25 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   font-weight: bold;
 }
 .category-item-title {
-  font-size: 134%;
+  font-size: 1.4rem;
+  word-wrap: break-word;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #ddd;
+}
+@media screen and (min-width: 768px) {
+  .category-item-title {
+    font-size: 1.8rem;
+    word-wrap: normal;
+  }
 }
 .category-item-title a {
   text-decoration: none;
 }
 .category-items-listing {
   padding: 4rem 0;
-  margin-left: -15px;
-  margin-right: -15px;
+  margin-left: -7.5px;
+  margin-right: -7.5px;
 }
 .category-items-listing:before,
 .category-items-listing:after {
@@ -8013,15 +8179,45 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 }
 .category-items-listing:after {
   clear: both;
+}
+@media (min-width: 992px) {
+  .category-items-listing {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+  .category-items-listing:before,
+  .category-items-listing:after {
+    content: " ";
+    /* 1 */
+  
+    display: table;
+    /* 2 */
+  
+  }
+  .category-items-listing:after {
+    clear: both;
+  }
+  .category-items-listing:before,
+  .category-items-listing:after {
+    content: " ";
+    /* 1 */
+  
+    display: table;
+    /* 2 */
+  
+  }
+  .category-items-listing:after {
+    clear: both;
+  }
 }
 .category-item-container {
   margin-bottom: 3rem;
   float: left;
-  width: 50%;
+  width: 100%;
   position: relative;
   min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 7.5px;
+  padding-right: 7.5px;
 }
 @media (min-width: 768px) {
   .category-item-container {
@@ -8031,11 +8227,13 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
 }
 @media (min-width: 992px) {
   .category-item-container {
-    float: left;
-    width: 25%;
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 992px) and (min-width: 1200px) {
   .category-item-container {
     float: left;
     width: 25%;
@@ -8343,6 +8541,11 @@ fieldset[disabled] .btn-itemdetail-addtocart.active {
   text-align: center;
   margin: 10px 0;
 }
+@media screen and (max-width: 768px) {
+  .pagination-container {
+    width: 100%;
+  }
+}
 .paginationStatsContainer {
   margin-bottom: 10px;
 }
@@ -8572,6 +8775,15 @@ fieldset[disabled] .btn-pagination.pagination-link-disabled.active {
 }
 .search-results-inner:after {
   clear: both;
+}
+.search-results-inner .no-results-container {
+  position: relative;
+  float: left;
+  width: 100%;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
 }
 .search-results-item {
   float: left;
@@ -9037,6 +9249,15 @@ fieldset[disabled] .search-results-item-inner .btn-addtocart.active {
   margin-top: .75rem;
   margin-bottom: 1rem;
 }
+@media screen and (max-width: 768px) {
+  .btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    margin-top: 8px;
+  }
+}
 .toast-container {
   width: 280px;
   z-index: 9999;
@@ -9182,9 +9403,6 @@ http://webdesign.tutsplus.com/articles/typography-articles/taking-the-erm-out-of
 hr {
   margin: 60px 0;
 }
-body {
-  margin-top: 100px;
-}
 ul {
   list-style: none;
 }
@@ -9210,6 +9428,11 @@ ul {
 .view-title {
   color: #000000;
   text-transform: capitalize;
+}
+@media screen and (max-width: 768px) {
+  .view-title {
+    text-align: center;
+  }
 }
 #contextmenu {
   margin: 0;
