@@ -16,8 +16,8 @@
  * Storefront Cart View
  */
 
-
-
+@subscreen: calc(@screen-sm - 1140px);
+// @subsm: calc(@screen-sm - 1px);
  // table-responsive-overrides
 
 
@@ -84,8 +84,22 @@
                     .btn-cart-removelineitem{
                         text-shadow: none;
                         padding: 0;
-                        height: 21px;
-                        width: 21px;
+
+
+
+                        @media(max-width: @screen-sm){
+                            padding: 8px!important;
+                            white-space: nowrap;
+                            height: auto;
+                            // min-width: 50%;
+                            display: inline-block;
+                            // text-align: center;
+                        }
+                        @media(min-width: @screen-sm){
+                            height: 21px;
+                             width: 21px;
+                        }
+
                         color: @gray-lighter;
                         background-color: @gray-light;
                         border: none;
@@ -105,10 +119,19 @@
                             .glyphicon-remove;
                             margin: auto;
                             padding: 2px 0 0 0;
+                            display: inline-block;
+                            clear: none;
                         }
 
                         .btn-text{
-                            display: none;
+                            // display: none;
+                            display: inline-block;
+
+
+                            @media(min-width: @screen-sm) {
+                                display: none;
+                            }
+
                         }
                     }
                 }
@@ -278,7 +301,32 @@ Purchase Information
 @media screen and (max-width: @screen-sm){
     .cart-container {
         table, thead, tbody, th, td, tr {
+            // display: block;
+            // width: 100%;
+        }
+
+        table{
             display: block;
+            width: 100%;
+            thead{
+                display: block;
+                width: 100%;
+            }
+
+            tbody{
+                display: block;
+                width: 100%;
+                tr{
+                    display: block;
+                    width: 100%;
+                    td{
+                        display: block!important;
+                        width: 100%!important;
+                    }
+
+                }
+            }
+
         }
 
         .cart-main-inner table{
@@ -308,6 +356,7 @@ Purchase Information
             position: relative;
             text-align: center;
             word-wrap: break-word;
+            padding: 6px!important;
             a{
                 word-wrap: break-word!important;
                 white-space: normal!important;
@@ -324,17 +373,6 @@ Purchase Information
             padding-right: 10px;
             white-space: nowrap;
         }
-
-        /*
-        Label the data
-        */
-                // td:nth-of-type(1):before { font-size: .9em; content: "Image"; }
-                // td:nth-of-type(2):before { font-size: .9em; content: "Name"; }
-                // td:nth-of-type(3):before { font-size: .9em; content: "Availability"; }
-                // td:nth-of-type(4):before { font-size: .9em; content: "Unit Price"; }
-                // td:nth-of-type(5):before { font-size: .9em; content: "Quantity"; }
-                // td:nth-of-type(6):before { font-size: .9em; content: "Total Price"; }
-                // td:nth-of-type(7):before { font-size: .9em; content: "Remove"; }
     }
 }
 

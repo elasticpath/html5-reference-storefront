@@ -6636,6 +6636,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   border-color: #4cae4c;
   height: 22px;
   padding: 0px 5px;
+  vertical-align: top;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   margin-left: -5px;
@@ -6891,8 +6892,6 @@ nav.main-nav {
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem {
   text-shadow: none;
   padding: 0;
-  height: 21px;
-  width: 21px;
   color: #eeeeee;
   background-color: #999999;
   border: none;
@@ -6901,6 +6900,20 @@ nav.main-nav {
   box-shadow: none;
   border-bottom: none;
 }
+@media (max-width: 768px) {
+  .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem {
+    padding: 8px!important;
+    white-space: nowrap;
+    height: auto;
+    display: inline-block;
+  }
+}
+@media (min-width: 768px) {
+  .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem {
+    height: 21px;
+    width: 21px;
+  }
+}
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem:hover {
   background-color: #d9534f;
   color: #fff;
@@ -6908,7 +6921,6 @@ nav.main-nav {
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .icon {
   position: relative;
   top: 1px;
-  display: inline-block;
   font-family: 'Glyphicons Halflings';
   font-style: normal;
   font-weight: normal;
@@ -6916,12 +6928,19 @@ nav.main-nav {
   -webkit-font-smoothing: antialiased;
   margin: auto;
   padding: 2px 0 0 0;
+  display: inline-block;
+  clear: none;
 }
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .icon:before {
   content: "\e014";
 }
 .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .btn-text {
-  display: none;
+  display: inline-block;
+}
+@media (min-width: 768px) {
+  .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem .btn-text {
+    display: none;
+  }
 }
 .cart-container table tr:last-child td {
   border-bottom: none;
@@ -7242,17 +7261,26 @@ Purchase Information
 @media screen and (max-width: 768px) {
   .cart-container {
     /* Hide table headers (but not display: none;, for accessibility) */
-    /*
-        Label the data
-        */
   }
-  .cart-container table,
-  .cart-container thead,
-  .cart-container tbody,
-  .cart-container th,
-  .cart-container td,
-  .cart-container tr {
+  .cart-container table {
     display: block;
+    width: 100%;
+  }
+  .cart-container table thead {
+    display: block;
+    width: 100%;
+  }
+  .cart-container table tbody {
+    display: block;
+    width: 100%;
+  }
+  .cart-container table tbody tr {
+    display: block;
+    width: 100%;
+  }
+  .cart-container table tbody tr td {
+    display: block!important;
+    width: 100%!important;
   }
   .cart-container .cart-main-inner table {
     border: 1px solid #ddd;
@@ -7275,6 +7303,7 @@ Purchase Information
     position: relative;
     text-align: center;
     word-wrap: break-word;
+    padding: 6px!important;
   }
   .cart-container td a {
     word-wrap: break-word !important;
