@@ -29,6 +29,9 @@
 
 .checkout-container-inner {
   .make-row();
+  @media screen and (max-width: @screen-sm){
+    font-size: 1.6rem;
+  }
 }
 
 .checkout-sidebar { // wraps cart summary + cart checkout --- applies bootstrap column classes
@@ -96,7 +99,7 @@
 }
 
 .address-ctrl-cell {
-  .make-xs-column(7, @gutter: 0);
+  .make-xs-column(12, @gutter: 0);
   .make-lg-column(8, @gutter: 0);
   .clearfix();
   label {
@@ -105,7 +108,7 @@
 }
 
 .address-btn-cell {
-  .make-xs-column(5, @gutter: 0);
+  .make-xs-column(12, @gutter: 0);
   .make-lg-column(4, @gutter: 0);
 }
 

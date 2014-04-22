@@ -16,6 +16,12 @@
  * Storefront Cart View
  */
 
+
+
+ // table-responsive-overrides
+
+
+
 .cart-container{
 
     h1{
@@ -255,3 +261,81 @@ Purchase Information
 .cart-total-container {
   margin-bottom: 10px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: @screen-sm){
+    .cart-container {
+        table, thead, tbody, th, td, tr {
+            display: block;
+        }
+
+        .cart-main-inner table{
+            border: 1px solid #ddd;
+        }
+
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        tr {
+                border: 1px solid #eee;
+                margin-bottom: 30px;
+                &:last-child{
+                    margin: 0;
+                }
+        }
+
+        td {
+            /* Behave  like a "row" */
+            // border: none;
+            border: 0!important;
+            position: relative;
+            text-align: center;
+            word-wrap: break-word;
+            a{
+                word-wrap: break-word!important;
+                white-space: normal!important;
+            }
+        }
+
+        td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+
+        /*
+        Label the data
+        */
+                // td:nth-of-type(1):before { font-size: .9em; content: "Image"; }
+                // td:nth-of-type(2):before { font-size: .9em; content: "Name"; }
+                // td:nth-of-type(3):before { font-size: .9em; content: "Availability"; }
+                // td:nth-of-type(4):before { font-size: .9em; content: "Unit Price"; }
+                // td:nth-of-type(5):before { font-size: .9em; content: "Quantity"; }
+                // td:nth-of-type(6):before { font-size: .9em; content: "Total Price"; }
+                // td:nth-of-type(7):before { font-size: .9em; content: "Remove"; }
+    }
+}
+
+ // end table responsive overrides
