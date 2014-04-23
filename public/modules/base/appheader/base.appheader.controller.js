@@ -113,11 +113,6 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.view
     });
 
 
-    // authenticate
-    EventBus.on('profile.authButtonClicked',function(event){
-      ep.logger.info('FIRE AUTH REQUEST');
-    });
-
     return {
       AppHeaderView:appHeaderView,
       HeaderLogoView:function(){

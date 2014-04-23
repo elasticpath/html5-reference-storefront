@@ -48,10 +48,10 @@
       <input id="OAuthRole" name="OAuthRole" list="oAuthRoleList" type="hidden" value="REGISTERED">
       <div class="form-group action-row">
         <div class="login-cell">
-          <button class="btn-auth-login" data-cmd="login"><%= E.getI18nLabel('auth.login') %></button>
+          <button class="btn-auth-login" data-cmd="login" data-toggle="collapse" data-target=".navbar-collapse"><%= E.getI18nLabel('auth.login') %></button>
         </div>
         <div class="register-cell">
-            <button class="btn-auth-register btn btn-link" data-cmd="register"><%= E.getI18nLabel('auth.register') %></button>
+            <button class="btn-auth-register btn btn-link" data-cmd="register" data-toggle="collapse" data-target=".navbar-collapse"><%= E.getI18nLabel('auth.register') %></button>
         </div>
       </div>
     </form>
@@ -59,7 +59,7 @@
 
   <!-- Auth Profile Menu Template -->
   <script id="AuthProfileMenuTemplate" type="text/template">
-    <li><a href="<%= E.getUrlHash('profile') %>" class="profile-link" data-el-label="auth.profile"><span class="icon">
+    <li><a href="<%= E.getUrlHash('profile') %>" class="profile-link" data-el-label="auth.profile" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon">
     </span><%= E.getI18nLabel('auth.profile') %></a></li>
     <li>
       <button class="btn-cmd btn-auth-logout" data-el-label="auth.logout"><span class="icon"></span><%= E.getI18nLabel('auth.logout') %></button>
@@ -118,7 +118,7 @@
         <label for="Email" data-el-label="checkoutAuthOption.email" class="control-label">
           <span class="required-label">*</span><%= E.getI18nLabel('auth.checkoutAuthOption.anonymous.email') %>:
         </label>
-        <input id="Email" name="Email" class="form-control" type="text" />
+        <input id="Email" name="Email" class="form-control" type="email" />
       </div>
 
       <button class="btn btn-primary checkout-auth-option-anonymous-checkout-btn" data-el-label="checkoutAuthOption.anonymousCheckout">

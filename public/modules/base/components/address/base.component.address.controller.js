@@ -247,20 +247,26 @@ define(function (require) {
    * @param errorMsg an error message, or an i18n key to the error message
    */
   function renderAddressFormErrorState(errorMsg) {
+    var currentLayout;
+    var buttonName;
+
     // Identify the current layout by checking whether or not the createAddressLayout is closed
     if (createAddressLayout && !createAddressLayout.isClosed) {
-      // The create address layout is being rendered
-      ep.ui.enableButton(createAddressLayout, 'createAddressButton');
-      utils.renderMsgToPage(
-        errorMsg,
-        createAddressLayout.ui.addressFeedbackMsgRegion
-      );
+      currentLayout = createAddressLayout;
+      buttonName = 'createAddressButton';
     } else {
-      // The edit address layout is being rendered
-      ep.ui.enableButton(editAddressLayout, 'editAddressButton');
+      currentLayout = editAddressLayout;
+      buttonName = 'editAddressButton';
+    }
+
+    // Attempt to retrieve the value of addressFormRegion.currentView.ui.feedbackRegion from the current layout
+    var feedbackMsgRegion = utils.getDescendedPropertyValue(currentLayout, ['addressFormRegion', 'currentView', 'ui', 'feedbackRegion']);
+    if (feedbackMsgRegion ) {
+      // The create address layout is being rendered
+      ep.ui.enableButton(currentLayout, buttonName);
       utils.renderMsgToPage(
         errorMsg,
-        editAddressLayout.ui.addressFeedbackMsgRegion
+        feedbackMsgRegion
       );
     }
   }

@@ -18,6 +18,16 @@
 define(['ep', 'eventbus', 'backbone'],
   function (ep, EventBus, Backbone) {
 
+    // Array of zoom parameters to pass to Cortex
+    var itemPageZoomArray = [
+      'element',
+      'element:availability',
+      'element:definition',
+      'element:definition:assets:element',
+      'element:price',
+      'element:rate'
+    ];
+
     /*
      * Category Model (fetching category info from server)
      */
@@ -43,7 +53,7 @@ define(['ep', 'eventbus', 'backbone'],
      */
     var categoryItemPageModel = Backbone.Model.extend({
       getUrl: function (href) {
-        return ep.ui.decodeUri(href) + '?zoom=element, element:availability,element:definition,element:definition:assets:element,element:price,element:rate';
+        return ep.ui.decodeUri(href) + '?zoom=' + itemPageZoomArray.join();
       },
       parse: function (response) {
         var categoryObj = {};
