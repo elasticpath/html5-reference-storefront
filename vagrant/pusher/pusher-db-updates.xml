@@ -12,7 +12,7 @@
             update TSETTINGVALUE set CONTEXT_VALUE = '/ep/assets' where setting_definition_uid = (select UIDPK from TSETTINGDEFINITION where PATH='COMMERCE/SYSTEM/ASSETS/assetLocation');
             update TSETTINGVALUE set CONTEXT_VALUE='http://127.0.0.1:8080/search' where setting_definition_uid = (select UIDPK from TSETTINGDEFINITION where PATH='COMMERCE/SYSTEM/SEARCH/searchHost');
             update TSETTINGVALUE set CONTEXT_VALUE='http://127.0.0.1:8080/cmserver' where setting_definition_uid = (select UIDPK from TSETTINGDEFINITION where PATH='COMMERCE/SYSTEM/EMAIL/emailCmUrl');
-	    update TSETTINGVALUE set CONTEXT_VALUE = 'http://cdn.elasticpath.net/images/' where SETTING_DEFINITION_UID = (select UIDPK from TSETTINGDEFINITION where PATH='COMMERCE/STORE/ASSETS/assetServerBaseUrl');
+	    update TSETTINGVALUE set CONTEXT_VALUE = 'http://192.168.100.101:3000/images/' where SETTING_DEFINITION_UID = (select UIDPK from TSETTINGDEFINITION where PATH='COMMERCE/STORE/ASSETS/assetServerBaseUrl');
             update TSTORE set URL='http://demo.elasticpath.com:8080/storefront' where storecode='SNAPITUP';
             insert into TINDEXNOTIFY (uidpk, index_type, update_type) (select uidpk, index_type, 'REBUILD' from tindexbuildstatus);
         </sql>
