@@ -72,7 +72,6 @@
 			<properties>
 				<ui.storefront.snapshot.repository.url>http://maven.elasticpath.com/nexus/content/repositories/${env.UI_STOREFRONT_REPOSITORY_ID}</ui.storefront.snapshot.repository.url>
 				<ui.storefront.release.repository.url>http://maven.elasticpath.com/nexus/content/repositories/${env.UI_STOREFRONT_REPOSITORY_ID}</ui.storefront.release.repository.url>
-				<ui.storefront.site.url/>
 			</properties>
 		</profile>
 	</profiles>
@@ -80,11 +79,6 @@
 	<!-- These passwords require the ~/.m2/settings-security.xml file on Build Slaves -->
 	<!-- Follow the guide here: http://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords to set your passwords in here encrypted. -->
 	<servers>
-		<server>
-			<id>ui-storefront-site</id>
-			<username>maven-deployer</username>
-			<password>{1Nte6eUXvf8H/nxSUvXr76rsa4h+AaQE5S5IsN977q0=}</password>
-		</server>
 		<server>
 			<id>ui-storefront-snapshots</id>
 			<username>maven-deployer</username>

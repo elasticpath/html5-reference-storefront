@@ -32,10 +32,6 @@
 			<id>ui-storefront-snapshots</id>
 			<url>${ui.storefront.snapshot.repository.url}</url>
 		</snapshotRepository>
-		<site>
-			<id>ui-storefront-site</id>
-			<url>${ui.storefront.site.url}</url>
-		</site>
 	</distributionManagement>
 	
 	<build>
