@@ -1,3 +1,4 @@
 baseurl: /pages/cortex/ui-storefront
+exclude: [node_modules, non-distributable]
 relative_permalinks: false
 repository: https://github.elasticpath.net/cortex/ui-storefront

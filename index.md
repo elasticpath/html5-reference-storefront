@@ -5,6 +5,8 @@ title: Home
 weight: 1
 ---
 
+[Jump to: **Release Notes**](#release-notes)
+
 HTML5 Storefront is a flexible e-commerce website backed by Elastic Path's Cortex API.
 HTML5 Storefront, comprised of the latest technologies (JavaScript, HTML5, jQuery, CSS3, {less}, Marionette, Node.js, etc.), is designed for extensibility.
 
@@ -77,5 +79,31 @@ for knowledgeable front-end developers who are extending/customizing HTML5 Store
 Audience
 ---------------------
 This document is written for experienced JavaScript developers and front-end UI developers who want to learn how to customize/extend HTML5 Reference Storefront.
+
+* * *
+
+## <a name="release-notes"> </a>Release Notes
+#### Release 6.10
+>##### New features:
+>  + Registration link on purchase receipt page for anonymous users <sub>ref. CU-283</sub>
+>  + Grunt task to launch a web server, proxy and Node app in one command to replace Apache <sub>ref. CU-250</sub>
+>  + Improved storefront documentation <sub>ref. CU-255, CU-288</sub>
+>  
+>##### Bug fixes:
+>  + Improved handling of HTTP 500 errors from Cortex API <sub>ref. CU-223</sub>
+>  + Fix for broken locale strings on PhoneGap iOS app <sub>ref. CU-275</sub>
+#### Previous releases
+>  + Anonymous checkout <sub>ref. CU-127</sub>
+>  + Ability to add/delete payment methods <sub>ref. CU-41, CU-70, CU-237</sub>
+>  + Editing and deletion of addresses <sub>ref. CU-329</sub>
+>  + Editing of personal info <sub>ref. CU-211</sub>
+>  + Country/region lookup on address forms <sub>ref. CU-224</sub>
+>  + New account registration <sub>ref. CU-48</sub>
+>  + Cart page
+>  + Category (item listing page)
+>  + Checkout page
+>  + Item detail page
+>  + Profile page with purchase history
+>  + Purchase receipt   
 
 {% include legal.html %}
