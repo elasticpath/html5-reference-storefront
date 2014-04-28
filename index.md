@@ -83,7 +83,7 @@ This document is written for experienced JavaScript developers and front-end UI 
 * * *
 
 ## <a name="release-notes"> </a>Release Notes
-#### Release 6.10
+#### Release 6.10 (April drop)
 >##### New features:
 >  + Registration link on purchase receipt page for anonymous users <sub>ref. CU-283</sub>
 >  + Grunt task to launch a web server, proxy and Node app in one command to replace Apache <sub>ref. CU-250</sub>
