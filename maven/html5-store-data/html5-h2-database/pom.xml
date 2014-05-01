@@ -11,7 +11,7 @@
 
 	<groupId>com.elasticpath.html5</groupId>
 	<artifactId>html5-h2-database</artifactId>
-	<version>0.10.0.2014050109</version>
+	<version>0.10.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>HTML5 H2 Database</name>
@@ -21,7 +21,7 @@
 		<connection>scm:git:git://github.elasticpath.net/cortex/ui-storefront.git</connection>
 		<developerConnection>scm:git:git@github.elasticpath.net:cortex/ui-storefront.git</developerConnection>
 		<url>https://github.elasticpath.net/cortex/ui-storefront</url>
-		<tag>ui-storefront-0.10.0.2014050109</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<distributionManagement>
@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>com.elasticpath.html5</groupId>
 			<artifactId>html5-data</artifactId>
-			<version>0.10.0.2014050109</version>
+			<version>0.10.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
