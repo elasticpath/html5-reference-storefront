@@ -42,5 +42,13 @@
 			</org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper>
 		]]>
 		</buildWrappers>
+
+		<process>	  	
+			<![CDATA[	  	
+			  ${configureScmProcessGroovy}
+			  def wipeOutWorkspace = node.depthFirst().find { it instanceof Node && it.name() == 'wipeOutWorkspace' }	  	
+			  wipeOutWorkspace.setValue('true')
+			]]>              
+		</process>
 	</job>
 </jobs>
