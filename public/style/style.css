@@ -6409,7 +6409,15 @@ fieldset[disabled] .btn-auth-login.active {
   position: absolute;
   display: inline-block;
   top: 12px;
-  right: 275px;
+  right: 15px;
+  /*
+  // on small screen move global nav under search
+  @media (min-width: @screen-sm) and (max-width: @screen-md) {
+    right: 15px;
+    top: 50px;
+  }
+*/
+
 }
 @media (max-width: 768px) {
   .global-nav-container {
@@ -6444,12 +6452,6 @@ fieldset[disabled] .btn-auth-login.active {
   }
   .global-nav-container:after {
     clear: both;
-  }
-}
-@media (min-width: 768px) and (max-width: 992px) {
-  .global-nav-container {
-    right: 15px;
-    top: 50px;
   }
 }
 .global-nav-container li {

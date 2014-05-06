@@ -31,7 +31,7 @@ var config = {
       'jquerySpin': 'scripts/lib/plugins/jquery.spin',
       'toast': 'scripts/lib/plugins/jquery.toastmessage',
       'underscore': 'scripts/lib/underscore',
-      'URI': 'scripts/lib/URI',   // used by Cortex module only, remove after redo search
+//      'URI': 'scripts/lib/URI',   // used by Cortex module only, remove after redo search
 
       'ep': 'ep.client',
       'eventbus': 'eventbus',
@@ -42,7 +42,7 @@ var config = {
       'viewHelpers': 'helpers/view.helpers',
       'utils': 'utils/utils',
 
-      'cortex': 'modules/base/cortex/base.cortex.controller', // used by Search module only, remove after redo search
+//      'cortex': 'modules/base/cortex/base.cortex.controller', // used by Search module only, remove after redo search
       'app': 'modules/base/app/base.app.controller',
       'app.models': 'modules/base/app/base.app.models',
       'app.views': 'modules/base/app/base.app.views',
@@ -78,9 +78,9 @@ var config = {
       'purchaseinfo.views': 'modules/base/purchaseinfo/base.purchaseinfo.views',
       'registration': 'modules/base/registration/base.registration.controller',
       'registration.views': 'modules/base/registration/base.registration.views',
-      'search': 'modules/base/search/base.search.controller',
-      'search.models': 'modules/base/search/base.search.models',
-      'search.views': 'modules/base/search/base.search.views',
+//      'search': 'modules/base/search/base.search.controller',
+//      'search.models': 'modules/base/search/base.search.models',
+//      'search.views': 'modules/base/search/base.search.views',
 
       'address'       : 'modules/base/components/address/base.component.address.controller',
       'address.views' : 'modules/base/components/address/base.component.address.views',
