@@ -72,7 +72,7 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <jdk>jdk7u21</jdk>
+  <jdk>jdk7u51</jdk>
   <triggers>
     <hudson.triggers.SCMTrigger>
       <spec># Poll source control approximately every 3 minutes
