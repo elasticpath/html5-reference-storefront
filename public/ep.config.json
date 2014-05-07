@@ -11,6 +11,14 @@
     "path":"cortex",
     "scope":"campus"
   },
+  "localization": {
+    "locale" :"en",
+    "currency" :  "USD"
+  },
+  "paymentGateway": {
+    "access_key" : "eee40421a3a637a08280add4e130bc56",
+    "profile_id" : "html5sf"
+  },
   "deployMode":"development",
   "requireAuthToCheckout":true,
   "viewFadeInValue":500,

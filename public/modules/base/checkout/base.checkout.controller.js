@@ -747,7 +747,22 @@ define(function (require) {
      * will load add new payment method form
      */
     EventBus.on('checkout.addNewPaymentMethodBtnClicked', function () {
-      Mediator.fire('mediator.addNewPaymentMethodRequest', 'checkout');
+      // TODO get selected billing address?
+      var selectedBillings = billingAddressCollection.where({chosen: true});
+
+      if (selectedBillings) {
+        var billing =  selectedBillings[0].toJSON();
+        var cyberSourceBilling = {
+          // TODO transform billing data into cybersource compliant form
+          // bill_to_forename,bill_to_surname,bill_to_email,bill_to_address_line1,bill_to_address_city,bill_to_address_state,bill_to_address_country,bill_to_address_postal_code
+        };
+
+        var options = _.extend(cyberSourceBilling, {returnModule: 'checkout'});
+        Mediator.fire('mediator.addNewPaymentMethodRequest', options);
+      }
+      else {
+        // TODO show sticky warning
+      }
     });
 
     /**
