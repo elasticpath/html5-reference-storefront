@@ -36,8 +36,23 @@ define(function (require) {
   // Defined here so event handlers have access to its regions
   var defaultView;
 
-  var defaultCreatePaymentController = function () {
+  var defaultCreatePaymentController = function (data) {
     defaultView = new Views.DefaultPaymentFormView();
+
+    defaultView.on('render', function() {
+      // post information to JSP page, and load the xhr on success
+      ep.io.ajax({
+        url: '/gateway/payment_form.jsp',
+        type: 'POST',
+        contentType: 'application/x-www-form-urlencoded',
+        data: data,
+        success: function(xhr) {
+          $('[data-region="paymentFormContainer"]').append(xhr);  // TODO move this to view
+        }
+      });
+
+    });
+
     return defaultView;
   };
 

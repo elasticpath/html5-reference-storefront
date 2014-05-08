@@ -753,8 +753,13 @@ define(function (require) {
       if (selectedBillings) {
         var billing =  selectedBillings[0].toJSON();
         var cyberSourceBilling = {
-          // TODO transform billing data into cybersource compliant form
-          // bill_to_forename,bill_to_surname,bill_to_email,bill_to_address_line1,bill_to_address_city,bill_to_address_state,bill_to_address_country,bill_to_address_postal_code
+          bill_to_forename: billing.givenName,
+          bill_to_surname: billing.familyName,
+          bill_to_address_line1: billing.streetAddress,
+          bill_to_address_city: billing.city,
+          bill_to_address_state: billing.region,
+          bill_to_address_country: billing.country,
+          bill_to_address_postal_code: billing.postalCode
         };
 
         var options = _.extend(cyberSourceBilling, {returnModule: 'checkout'});
