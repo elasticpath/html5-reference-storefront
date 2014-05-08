@@ -34,76 +34,8 @@
   <script id="MockPaymentMethodFormTemplate" type="text/template">
     <h1><%= E.getI18nLabel('paymentForm.formTitle') %></h1>
 
-    <div class="feedback-label address-form-feedback-container" data-region="componentPaymentFeedbackRegion"></div>
+    <div data-region="paymentFormContainer" class="payment-form-outer-container"></div>
 
-    <form role="form" method="POST" class="form-horizontal payment-method-form-container container">
-      <div class="form-group">
-        <label for="CardType" data-el-label="payment.cardType" class="control-label form-label"> <span
-          class="required-label">*</span><%= E.getI18nLabel('paymentForm.cardType') %></label>
-
-        <div class="form-input">
-          <select id="CardType" name="CardType" class="form-control">
-            <option value="American Express"><%= E.getI18nLabel('paymentForm.type.americanExp') %></option>
-            <option value="master"><%= E.getI18nLabel('paymentForm.type.master') %></option>
-            <option value="visa"><%= E.getI18nLabel('paymentForm.type.visa') %></option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="CardHolderName" data-el-label="payment.cardHolderName" class="control-label form-label"> <span
-          class="required-label">*</span><%= E.getI18nLabel('paymentForm.name') %></label>
-
-        <div class="form-input">
-          <input id="CardHolderName" name="CardHolderName" class="form-control" type="text" autofocus="autofocus"/>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="CardNumber" data-el-label="payment.cardNum" class="control-label form-label"> <span
-          class="required-label">*</span><%= E.getI18nLabel('paymentForm.cardNumber') %></label>
-
-        <div class="form-input">
-          <input id="CardNumber" name="CardNumber" class="form-control" type="text"/>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="ExpiryMonth" data-el-label="payment.expiryDate" class="control-label form-label"> <span
-          class="required-label">*</span><%= E.getI18nLabel('paymentForm.expiry') %></label>
-        <div class="form-inline">
-          <select id="ExpiryMonth" name="ExpiryMonth" class="form-control expiry-date">
-            <%= E.generateNumericOptions(1, 12) %>
-          </select>
-          /
-          <select id="ExpiryYear" name="ExpiryYear" class="form-control expiry-date">
-            <%= E.generateNumericOptions(2014, 10) %>
-          </select>
-
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="SecurityCode" data-el-label="payment.securityCode" class="control-label form-label"> <span
-          class="required-label">*</span><%= E.getI18nLabel('paymentForm.securityCode') %></label>
-
-        <div class="form-input">
-          <input id="SecurityCode" name="SecurityCode" class="form-control" maxlength="4" type="text"/>
-        </div>
-      </div>
-
-      <div class="form-group" data-el-label="payment.saveToProfileFormGroup">
-        <input type="checkbox" id="saveToProfile" data-el-label="payment.saveToProfile"/>
-        <label for="saveToProfile" class="control-label form-label"><%= E.getI18nLabel('paymentForm.saveToProfile') %></label>
-      </div>
-
-      <div class="form-group create-address-btn-container">
-        <button class="btn btn-primary payment-save-btn" data-el-label="paymentForm.save">
-          <%= E.getI18nLabel('paymentForm.saveBtn') %></button>
-        <button class="btn payment-cancel-btn" data-el-label="paymentForm.cancel">
-          <%= E.getI18nLabel('paymentForm.cancelBtn') %></button>
-      </div>
-    </form>
-
+    <!--<iframe class="payment-form-outer-container" src="/gateway/payment_form.jsp"> </iframe>-->
   </script>
 </div>
