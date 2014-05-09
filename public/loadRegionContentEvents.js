@@ -103,11 +103,21 @@ define(function(require) {
         view: 'DefaultCreateAddressView'
       });
     },
-    newpaymentform: function() {
+    newpaymentform: function(options) {
       EventBus.trigger('layout.loadRegionContentRequest',{
         region: 'appMainRegion',
         module: 'payment',
-        view: 'DefaultCreatePaymentController'
+        view: 'DefaultCreatePaymentController',
+        data: options
+      });
+    },
+    paymentReceipt: function(decision, token, display) {
+      require(['payment'], function (payment) {
+        if (decision === "ACCEPT") {
+          EventBus.trigger('payment.tokenCreationSuccess', token, display);
+        }else {
+          EventBus.trigger('payment.tokenCreationFailure');
+        }
       });
     },
     profile: function(){

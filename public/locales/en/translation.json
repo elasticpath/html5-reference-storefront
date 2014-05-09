@@ -171,7 +171,9 @@
     "errorMsg": {
       "deleteErr": "I'm sorry, there was an error deleting this payment method. Please contact your system administrator.",
       "cannotDeleteSelectedErr": "This payment method you are trying to delete is in use, please chose another payment method before you delete this one.",
-      "generalSavePaymentFailedErrMsg": "I'm sorry, there was an error saving this payment method. Please try again or contact your system administrator."
+      "generalSavePaymentFailedErrMsg": "I'm sorry, there was an error saving this payment method. Please try again or contact your system administrator.",
+      "tokenCreationFailed": "I'm sorry the payment method was not saved, some information was either missing or invalid. Please check your billing and credit card information again.",
+      "missingBillingInfo": "Please selected a billing address before proceed to creating new payment method"
     },
     "msg": {
       "deleteConfirmation": "Do you really want to delete this payment method?"

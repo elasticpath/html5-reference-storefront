@@ -51,7 +51,22 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+app.post("/", function(req, res) {
 
+  var origin = req.get("Origin") || "";
+  if (origin.indexOf("cybersource.com")) {
+    // Parse the response - extract the vaues you want
+    var status = req.body.decision;
+    var displayValue = req.body.req_card_number;
+    var token = req.body.payment_token;
+
+    // Return a 302 redirect to the address page, tack on the info as a query param (or three)
+    res.status(302);
+    res.set("Location", "http://localhost:3007/html5storefront/#paymentreceipt/" + status + "/" + token + "/" + displayValue);
+    res.end();
+  }
+
+});
 
 /*
  *

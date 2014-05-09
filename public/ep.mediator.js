@@ -137,43 +137,16 @@ define(function(require){
       }
     },
     // FIXME [CU-234] could this and the addNewAddressRequest be consolidated?
-    'mediator.addNewPaymentMethodRequest': function (options) {
-      require(['ep'], function (ep) {
+    'mediator.checkoutAddNewPaymentMethodRequest': function (options) {
+      require(['ep', 'loadRegionContentEvents'], function (ep, loadRegionContent) {
         if (options) {
-          ep.io.sessionStore.setItem('paymentFormReturnTo', options.returnModule);
-          delete options.returnModule;
-
-          // TODO gather other payment form information
-          var formInfo = {
-            // retrieve from config (hard coded, RE script change)
-            access_key: ep.app.config.paymentGateway.access_key,
-            profile_id: ep.app.config.paymentGateway.profile_id,
-            locale: ep.app.config.localization.locale,
-            currency: ep.app.config.localization.currency,
-            // hard-coded
-            transaction_type: 'create_payment_token',
-            payment_method: 'card',
-            signed_field_names: "access_key,profile_id,transaction_uuid,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,reference_number,currency,payment_method,bill_to_forename,bill_to_surname,bill_to_address_line1,bill_to_address_city,bill_to_address_state,bill_to_address_country,bill_to_address_postal_code",
-            unsigned_field_names: "card_type,card_number,card_expiry_date,card_cvn,bill_to_email"
-        };
-
-          // TODO this number should be unique
-          formInfo.reference_number = 123456789;
-
-
-            // combine billing + payment form info into signed info
-          var data = _.extend(options, formInfo);
+          ep.io.sessionStore.setItem('paymentFormReturnTo', 'checkout');
 
           ep.router.navigate(ep.app.config.routes.newPayment);
-          EventBus.trigger('layout.loadRegionContentRequest', {
-            region: 'appMainRegion',
-            module: 'payment',
-            view: 'DefaultCreatePaymentController',
-            data: data
-          });
+          loadRegionContent.newpaymentform(options);
         }
         else {
-          ep.logger.error('mediator.addNewPaymentMethodRequest was called with invalid moduleName: ' + options);
+          ep.logger.error('mediator.addNewPaymentMethodRequest was called with invalid options: ' + options);
         }
       });
     },

@@ -36,10 +36,28 @@ define(function (require) {
   // Defined here so event handlers have access to its regions
   var defaultView;
 
-  var defaultCreatePaymentController = function (data) {
+  var defaultCreatePaymentController = function (billingInfo) {
     defaultView = new Views.DefaultPaymentFormView();
 
     defaultView.on('render', function() {
+
+
+      var formInfo = {
+        // retrieve from config (hard coded, RE script change)
+        override_custom_receipt_page: ep.app.config.paymentGateway.receipt_page,
+        locale: ep.app.config.localization.locale,
+        currency: ep.app.config.localization.currency,
+        // hard-coded
+        transaction_type: 'create_payment_token',
+        payment_method: 'card',
+        signed_field_names: "access_key,profile_id,transaction_uuid,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,reference_number,currency,payment_method,override_custom_receipt_page,bill_to_forename,bill_to_surname,bill_to_address_line1,bill_to_address_city,bill_to_address_state,bill_to_address_country,bill_to_address_postal_code",
+        unsigned_field_names: "card_type,card_number,card_expiry_date,card_cvn,bill_to_email"
+      };
+
+      formInfo.reference_number = 'fakeReferenceNum' + Math.floor((Math.random() * 100) + 1);
+
+      var data = _.extend(formInfo, billingInfo);
+
       // post information to JSP page, and load the xhr on success
       ep.io.ajax({
         url: '/gateway/payment_form.jsp',
@@ -47,7 +65,7 @@ define(function (require) {
         contentType: 'application/x-www-form-urlencoded',
         data: data,
         success: function(xhr) {
-          $('[data-region="paymentFormContainer"]').append(xhr);  // TODO move this to view
+          Views.renderSecurePaymentForm(xhr);
         }
       });
 
@@ -135,6 +153,28 @@ define(function (require) {
     Mediator.fire('mediator.paymentFormComplete');
   });
 
+  EventBus.on('payment.tokenCreationSuccess', function(token, displayValue) {
+    // post to cortex
+    var formData = {
+      "display-value": displayValue,
+      "value": token
+    };
+
+    EventBus.trigger('payment.getPaymentFormSubmitUrl', formData);
+  });
+
+  EventBus.on('payment.tokenCreationFailure', function() {
+    $().toastmessage('showToast', {
+      text:  i18n.t('paymentForm.errorMsg.tokenCreationFailed'),
+      sticky: true,
+      position: 'middle-center',
+      type: 'error',
+      close: function() {
+        ep.router.navigate(ep.router.urlHashes.checkout, true);
+      }
+    });
+
+  });
 
   /**
    * Triggered when a shopper selects to create a new one-time payment method.

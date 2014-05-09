@@ -16,8 +16,7 @@
     "currency" :  "USD"
   },
   "paymentGateway": {
-    "access_key" : "eee40421a3a637a08280add4e130bc56",
-    "profile_id" : "html5sf"
+    "receipt_page": "http://localhost:3007/html5storefront/#paymentreceipt"
   },
   "deployMode":"development",
   "requireAuthToCheckout":true,

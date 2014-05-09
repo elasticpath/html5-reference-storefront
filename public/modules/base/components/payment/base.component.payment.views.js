@@ -47,6 +47,10 @@ define(function (require) {
     };
   }
 
+  function renderSecurePaymentForm(html) {
+    $('[data-region="paymentFormContainer"]').append(html);
+  }
+
   /**
    * Default Payment Method ItemView
    * Will render a default tokenized payment method
@@ -141,6 +145,7 @@ define(function (require) {
     DefaultPaymentFormView: defaultPaymentFormView,
     DefaultDeletePaymentConfirmationView: defaultDeletePaymentConfirmationView,
 
-    getPaymentFormValues: getPaymentFormValues
+    getPaymentFormValues: getPaymentFormValues,
+    renderSecurePaymentForm: renderSecurePaymentForm
   };
 });

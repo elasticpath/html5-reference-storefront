@@ -33,6 +33,8 @@ define(function(require) {
         'newaddressform' : 'newaddressform',
         'newpaymentform' : 'newpaymentform',
         'mycart': 'cart',
+        'paymentreceipt/:decision/:token/:display': 'paymentReceipt',
+        'paymentreceipt/:decision': 'paymentReceipt',
         'profile': 'profile',
         'purchaseReceipt/:id': 'purchaseReceipt',
         'purchaseDetails/:id': 'purchaseDetails',

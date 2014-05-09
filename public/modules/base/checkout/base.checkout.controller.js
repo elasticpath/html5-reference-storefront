@@ -182,7 +182,7 @@ define(function (require) {
         // on 403 read order error, update order link & reload checkout page
         errorFn403: function() {
           var OrderLinkModel = Backbone.Model.extend({
-            url: ep.io.getApiContext() + '/carts/' + ep.app.config.cortexApi.scope + '/default?zoom=nothing', // FIXME cannot get default without zoom
+            url: ep.io.getApiContext() + '/carts/' + ep.app.config.cortexApi.scope + '/default',
             parse: function (response) {
               return {
                 link: jsonPath(response, '$.links[?(@.rel=="order")].href')[0]
@@ -747,10 +747,9 @@ define(function (require) {
      * will load add new payment method form
      */
     EventBus.on('checkout.addNewPaymentMethodBtnClicked', function () {
-      // TODO get selected billing address?
+      // # get selected billing address
       var selectedBillings = billingAddressCollection.where({chosen: true});
-
-      if (selectedBillings) {
+      if (selectedBillings.length > 0) {
         var billing =  selectedBillings[0].toJSON();
         var cyberSourceBilling = {
           bill_to_forename: billing.givenName,
@@ -762,11 +761,15 @@ define(function (require) {
           bill_to_address_postal_code: billing.postalCode
         };
 
-        var options = _.extend(cyberSourceBilling, {returnModule: 'checkout'});
-        Mediator.fire('mediator.addNewPaymentMethodRequest', options);
+        Mediator.fire('mediator.checkoutAddNewPaymentMethodRequest', cyberSourceBilling);
       }
       else {
-        // TODO show sticky warning
+        $().toastmessage('showToast', {
+          text:  i18n.t('paymentForm.errorMsg.missingBillingInfo'),
+          sticky: true,
+          position: 'middle-center',
+          type: 'warning'
+        });
       }
     });
 
