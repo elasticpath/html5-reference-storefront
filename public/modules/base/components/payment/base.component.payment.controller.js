@@ -28,10 +28,13 @@ define(function (require) {
   var Model = require('payment.models');
   var template = require('text!modules/base/components/payment/base.component.payment.template.html');
   var utils = require('utils');
+  var loadRegionContent = require('loadRegionContentEvents');
 
   $('#TemplateContainer').append(template);
 
   _.templateSettings.variable = 'E';
+
+  var billingAddresses = new Model.BillingAddressesCollection();
 
   // Defined here so event handlers have access to its regions
   var defaultView;
@@ -40,7 +43,6 @@ define(function (require) {
     defaultView = new Views.DefaultPaymentFormView();
 
     defaultView.on('render', function() {
-
 
       var formInfo = {
         // retrieve from config (hard coded, RE script change)
@@ -53,9 +55,7 @@ define(function (require) {
         signed_field_names: "access_key,profile_id,transaction_uuid,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,reference_number,currency,payment_method,override_custom_receipt_page,bill_to_forename,bill_to_surname,bill_to_address_line1,bill_to_address_city,bill_to_address_state,bill_to_address_country,bill_to_address_postal_code",
         unsigned_field_names: "card_type,card_number,card_expiry_date,card_cvn,bill_to_email"
       };
-
       formInfo.reference_number = 'fakeReferenceNum' + Math.floor((Math.random() * 100) + 1);
-
       var data = _.extend(formInfo, billingInfo);
 
       // post information to JSP page, and load the xhr on success
@@ -73,6 +73,26 @@ define(function (require) {
 
     return defaultView;
   };
+
+
+  /**
+   * Renders a Billing Address Select page as 1st step of creating
+   * new payment method
+   */
+  var newPaymentSelectBillingController = function () {
+    var billingSelectView = new Views.SelectBillingAddressView({
+      collection: billingAddresses
+    });
+
+    billingAddresses.fetch({
+      success: function(response) {
+        billingSelectView.collection = response;
+      }
+    });
+
+    return billingSelectView;
+  };
+
 
   /**
    * Parses the object of field values retrieved from the new payment method form. The card number from the form
@@ -122,6 +142,73 @@ define(function (require) {
     });
   }
 
+  /* *************** Event Listeners: add new payment method *************** */
+
+  /**
+   * NOTE!! currently not used as cancel button event disabled in view
+   *
+   * Fires a mediator strategy on click of the cancel button, that returns the user to the referring module.
+   */
+  EventBus.on('payment.cancelFormBtnClicked', function () {
+    Mediator.fire('mediator.paymentFormComplete');
+  });
+
+  /**
+   * NOTE!! currently not used as cancel button event disabled in view
+   *
+   * On click of the save payment method button, this handler disables the form submit button, retrieves the parsed
+   * form data and passes it to a function that builds and sends the AJAX request to Cortex.
+   * @param saveToProfile {Boolean} Indicates whether this payment method should be saved to the profile for future
+   *                                use or if it is a one-time payment method.
+   */
+  EventBus.on('payment.savePaymentMethodBtnClicked', function (saveToProfile) {
+    ep.ui.disableButton(defaultView, 'saveButton');
+
+    var formObj = Views.getPaymentFormValues();
+    var formData = parsePaymentForm(formObj);
+
+    if (saveToProfile) {
+      // FIXME This may be a misuse of the mediator pattern, creating a dependency of sorts between payment and profile
+      // Fire a mediator strategy that will retrieve the URL to which the form should be submitted
+      Mediator.fire('mediator.savePaymentMethodToProfileRequest', formData);
+    } else {
+      EventBus.trigger('payment.getPaymentFormSubmitUrl', formData);
+    }
+  });
+
+
+  EventBus.on('payment.tokenCreationSuccess', function(token, displayValue) {
+    // post to cortex
+    var formData = {
+      "display-value": displayValue,
+      "value": token
+    };
+
+    // use paymentFormReturnTo value to determine where the new payment method request come from.
+    var saveToProfile = ep.io.sessionStore.getItem('paymentFormReturnTo');
+    if (saveToProfile === "profile") {
+      // FIXME This may be a misuse of the mediator pattern, creating a dependency of sorts between payment and profile
+      // Fire a mediator strategy that will retrieve the URL to which the form should be submitted
+      Mediator.fire('mediator.savePaymentMethodToProfileRequest', formData);
+    } else {
+      EventBus.trigger('payment.getPaymentFormSubmitUrl', formData);
+    }
+  });
+
+  EventBus.on('payment.tokenCreationFailure', function() {
+    $().toastmessage('showToast', {
+      text:  i18n.t('paymentForm.errorMsg.tokenCreationFailed'),
+      sticky: true,
+      position: 'middle-center',
+      type: 'error',
+      close: function() {
+        Mediator.fire('mediator.paymentFormComplete');
+      }
+    });
+
+  });
+
+
   /**
    * Constructs and submits an AJAX request to Cortex with the parsed payment form data
    * and the URL retrieved from the payment method model.
@@ -143,37 +230,6 @@ define(function (require) {
     });
 
     ep.io.ajax(ajaxModel.toJSON());
-  });
-
-  /* *************** Event Listeners: add new payment method *************** */
-  /**
-   * Fires a mediator strategy on click of the cancel button, that returns the user to the referring module.
-   */
-  EventBus.on('payment.cancelFormBtnClicked', function () {
-    Mediator.fire('mediator.paymentFormComplete');
-  });
-
-  EventBus.on('payment.tokenCreationSuccess', function(token, displayValue) {
-    // post to cortex
-    var formData = {
-      "display-value": displayValue,
-      "value": token
-    };
-
-    EventBus.trigger('payment.getPaymentFormSubmitUrl', formData);
-  });
-
-  EventBus.on('payment.tokenCreationFailure', function() {
-    $().toastmessage('showToast', {
-      text:  i18n.t('paymentForm.errorMsg.tokenCreationFailed'),
-      sticky: true,
-      position: 'middle-center',
-      type: 'error',
-      close: function() {
-        ep.router.navigate(ep.router.urlHashes.checkout, true);
-      }
-    });
-
   });
 
   /**
@@ -208,27 +264,6 @@ define(function (require) {
     }
     else {
       showMissingSubmitUrlToastMessage();
-    }
-  });
-
-  /**
-   * On click of the save payment method button, this handler disables the form submit button, retrieves the parsed
-   * form data and passes it to a function that builds and sends the AJAX request to Cortex.
-   * @param saveToProfile {Boolean} Indicates whether this payment method should be saved to the profile for future
-   *                                use or if it is a one-time payment method.
-   */
-  EventBus.on('payment.savePaymentMethodBtnClicked', function (saveToProfile) {
-    ep.ui.disableButton(defaultView, 'saveButton');
-
-    var formObj = Views.getPaymentFormValues();
-    var formData = parsePaymentForm(formObj);
-
-    if (saveToProfile) {
-      // FIXME This may be a misuse of the mediator pattern, creating a dependency of sorts between payment and profile
-      // Fire a mediator strategy that will retrieve the URL to which the form should be submitted
-      Mediator.fire('mediator.savePaymentMethodToProfileRequest', formData);
-    } else {
-      EventBus.trigger('payment.getPaymentFormSubmitUrl', formData);
     }
   });
 
@@ -364,6 +399,33 @@ define(function (require) {
     }
   });
 
+
+  /* *************** Event Listeners: select billing address for payment method *************** */
+  /**
+   * Listen to add new address button clicked signal
+   * will load address form
+   */
+  EventBus.on('payment.addNewAddressBtnClicked', function () {
+    Mediator.fire('mediator.addNewAddressRequest', 'newPaymentBilling');
+  });
+
+  EventBus.on('payment.proceedToNextBtnClicked', function (chosenModelCid) {
+    var billingAddress = billingAddresses.get(chosenModelCid).toJSON();
+
+    var cyberSourceBilling = {
+      bill_to_forename: billingAddress.givenName,
+      bill_to_surname: billingAddress.familyName,
+      bill_to_address_line1: billingAddress.streetAddress,
+      bill_to_address_city: billingAddress.city,
+      bill_to_address_state: billingAddress.region || "",
+      bill_to_address_country: billingAddress.country,
+      bill_to_address_postal_code: billingAddress.postalCode
+    };
+
+    ep.router.navigate(ep.router.urlHashes.newPayment);
+    loadRegionContent.newpaymentform(cyberSourceBilling);
+  });
+
   return {
     /* test-code */
     __test_only__: {
@@ -372,6 +434,7 @@ define(function (require) {
     /* end-test-code */
 
     DefaultCreatePaymentController: defaultCreatePaymentController,
+    NewPaymentSelectBillingController: newPaymentSelectBillingController,
     DefaultDeletePaymentConfirmationView: function(options) {
       return new Views.DefaultDeletePaymentConfirmationView(options);
     }

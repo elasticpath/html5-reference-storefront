@@ -311,7 +311,7 @@ define(function (require) {
 
   /* ********* Payment Method EVENT LISTENERS ************ */
   EventBus.on('profile.addNewPaymentMethodBtnClicked', function () {
-    Mediator.fire('mediator.addNewPaymentMethodRequest', 'profile');
+    Mediator.fire('mediator.profileAddNewPaymentMethodRequest');
   });
 
   /**

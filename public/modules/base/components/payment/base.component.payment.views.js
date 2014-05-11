@@ -21,6 +21,7 @@ define(function (require) {
   var ep = require('ep');
   var Marionette = require('marionette');
   var EventBus = require('eventbus');
+  var Mediator = require('mediator');
   var ViewHelpers = require('viewHelpers');
 
   /**
@@ -82,24 +83,18 @@ define(function (require) {
       'saveButton': '[data-el-label="paymentForm.save"]'
     },
 /*
+    // disabled because using Form Posting method now
     events: {
       'click @ui.saveButton': function (event) {
         event.preventDefault();
-        */
-/**
-         * Test if the shopper is adding a one-time or permanent payment method.
-         * If the saveToProfileFormGroup element is hidden (see onRender function below) or the saveToProfileCheckbox
-         * element is checked, this is a permanent new payment method (to be added to the shopper's profile).
-         *//*
 
-        if ( this.ui.saveToProfileFormGroup.hasClass('hidden') || this.ui.saveToProfileCheckbox.prop('checked') ) {
-          */
-/**
-           * Triggers an event which goes on to request the payment form action URL from Cortex.
-           * A boolean value is passed to indicate the permanence of the new payment method (true if permanent,
-           * false or not present missing if one-time).
-           *//*
-
+        // Test if the shopper is adding a one-time or permanent payment method.
+        // If the saveToProfileFormGroup element is hidden (see onRender function below) or the saveToProfileCheckbox
+        // element is checked, this is a permanent new payment method (to be added to the shopper's profile).
+        if (this.ui.saveToProfileFormGroup.hasClass('hidden') || this.ui.saveToProfileCheckbox.prop('checked')) {
+          // Triggers an event which goes on to request the payment form action URL from Cortex.
+          // A boolean value is passed to indicate the permanence of the new payment method (true if permanent,
+          // false or not present missing if one-time).
           EventBus.trigger('payment.savePaymentMethodBtnClicked', true);
         } else {
           EventBus.trigger('payment.savePaymentMethodBtnClicked');
@@ -119,6 +114,83 @@ define(function (require) {
     }
   });
 
+  /**
+   * A layout for rendering billing address radio buttons and their labels.
+   * Makes a mediator request to load an address view in region: billingAddressRegion.
+   * @type Marionette.Layout
+   */
+  var billingAddressSelectorLayout = Marionette.Layout.extend({
+    template: '#PaymentBillingAddressSelectorTemplate',
+    templateHelpers: viewHelpers,
+    regions: {
+      billingAddressRegion: '[data-region="paymentBillingAddressRegion"]'
+    },
+    onRender: function () {
+      // Fire event to load the address itemView from component
+      Mediator.fire('mediator.loadAddressesViewRequest', {
+        region: this.billingAddressRegion,
+        model: this.model
+      });
+    }
+  });
+
+  /**
+   * Rendered by BillingAddressesCompositeView when there are no billing addresses to be displayed.
+   * @type Marionette.ItemView
+   */
+  var billingAddressesEmptyView = Marionette.ItemView.extend({
+    template: '#PaymentEmptyBillingAddressesTemplate',
+    templateHelpers: viewHelpers
+  });
+
+  /**
+   * Renders a heading and a list of billing addresses.
+   * @type Marionette.CompositeView
+   */
+  var selectBillingAddressView = Marionette.CompositeView.extend({
+    templateHelpers: viewHelpers,
+    className: 'container',
+    template: '#PaymentBillingAddressesTemplate',
+    itemView: billingAddressSelectorLayout,
+    emptyView: billingAddressesEmptyView,
+    ui: {
+      // A jQuery selector for the DOM element to which an activity indicator should be applied.
+      activityIndicatorEl: '[data-region="billingAddressSelectorsRegion"]',
+      newBillingAddressBtn: '[data-el-label="payment.newBillingAddressBtn"]',
+      nextButton: '[data-el-label="payment.nextBtn"]'
+    },
+    itemViewContainer: '[data-region="billingAddressSelectorsRegion"]',
+    events: {
+      'change input[type="radio"]': function () {
+        // unset previous chosen choice from model
+        var prevChosen = this.collection.get(this.collection.chosenCid);
+        if (prevChosen) {
+          prevChosen.unset('chosen');
+        }
+
+        // record the chosen address into model
+        var selectedModelId = Number($(event.target).prop("id"));
+        var currChosen = this.collection.where({idNum: selectedModelId});
+        if (currChosen.length > 0) {
+          this.collection.chosenCid = currChosen[0].cid;
+          currChosen[0].set('chosen', true);
+        }
+
+        // enable the next button now an address is chosen
+        $(this.ui.nextButton).prop("disabled", false);
+      },
+
+      'click @ui.newBillingAddressBtn': function (event) {
+        event.preventDefault();
+        EventBus.trigger('payment.addNewAddressBtnClicked');
+      },
+
+      'click @ui.nextButton': function(event) {
+        event.preventDefault();
+        EventBus.trigger('payment.proceedToNextBtnClicked', this.collection.chosenCid);
+      }
+    }
+  });
 
   /**
    * This view is rendered in the modal region to obtain confirmation from the user before proceeding
@@ -143,6 +215,7 @@ define(function (require) {
   return {
     DefaultPaymentItemView: defaultPaymentItemView,
     DefaultPaymentFormView: defaultPaymentFormView,
+    SelectBillingAddressView: selectBillingAddressView,
     DefaultDeletePaymentConfirmationView: defaultDeletePaymentConfirmationView,
 
     getPaymentFormValues: getPaymentFormValues,

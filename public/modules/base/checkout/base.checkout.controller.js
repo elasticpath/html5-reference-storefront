@@ -756,7 +756,7 @@ define(function (require) {
           bill_to_surname: billing.familyName,
           bill_to_address_line1: billing.streetAddress,
           bill_to_address_city: billing.city,
-          bill_to_address_state: billing.region,
+          bill_to_address_state: billing.region || "",
           bill_to_address_country: billing.country,
           bill_to_address_postal_code: billing.postalCode
         };

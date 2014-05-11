@@ -38,4 +38,38 @@
 
     <!--<iframe class="payment-form-outer-container" src="/gateway/payment_form.jsp"> </iframe>-->
   </script>
+
+
+
+  <!-- Provides a wrapper for a list of billing addresses -->
+  <script id="PaymentBillingAddressesTemplate" type="text/template">
+    <h2><%= E.getI18nLabel('paymentForm.billingInfo.title') %></h2>
+    <div class="payment-select-billing-address-container">
+      <div data-region="billingAddressSelectorsRegion" class="payment-region-inner-container"></div>
+      <button class="btn btn-primary payment-new-address-btn" data-el-label="payment.newBillingAddressBtn">
+        <%= E.getI18nLabel('paymentForm.billingInfo.newAddressBtn')%></button>
+      <div class="payment-proceed-to-complete-form">
+        <button class="btn btn-primary payment-method-next-btn" data-el-label="payment.nextBtn" disabled>
+          <%= E.getI18nLabel('paymentForm.billingInfo.nextBtn')%></button>
+        </button>
+      </div>
+    </div>
+  </script>
+
+  <!-- Rendered when there are no billing addresses to display -->
+  <script id="PaymentEmptyBillingAddressesTemplate" type="text/template">
+    <p data-el-value="payment.noBillingAddressesMsg"><%= E.getI18nLabel('paymentForm.billingInfo.noBillingAddressesMsg') %></p>
+  </script>
+
+  <!-- Renders a radio button and label for the selection of an individual address -->
+  <script id="PaymentBillingAddressSelectorTemplate" type="text/template">
+    <!-- A unique ID to associate address labels with radio buttons -->
+    <div class="address-ctrl-cell" data-region="paymentAddressSelector">
+      <input type="radio" name="billing_address" id="<%= E.idNum %>" class="payment-address-radio" <%= E.getAddressRadioCheckedAttr(E) %> />
+      <label for="<%= E.idNum %>">
+        <div data-region="paymentBillingAddressRegion"></div>
+      </label>
+    </div>
+  </script>
+
 </div>

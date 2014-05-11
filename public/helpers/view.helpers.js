@@ -110,7 +110,25 @@ define(function (require) {
       }
 
       return html;
-    }
+    },
+
+    /**
+     * Determines if the object (billing/shipping address or shipping option) being rendered has been marked as
+     * chosen (selected). If so, returns the HTML checked attribute to be applied to the associated radio button.
+     *
+     * @param obj The checkout object being rendered (billing/shipping addresses and shipping options are supported)
+     * @returns {string} HTML checked attribute or empty string
+     */
+    getAddressRadioCheckedAttr: function (obj) {
+      var checkedAttr = '';
+
+      if (obj && obj.chosen === true) {
+        checkedAttr = 'checked="checked"';
+      }
+
+      return checkedAttr;
+    },
+
 
   };
 

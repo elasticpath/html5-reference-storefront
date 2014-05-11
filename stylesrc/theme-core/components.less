@@ -54,3 +54,40 @@
 .payment-save-btn {
   margin-left: -15px;
 }
+
+// address selector style
+[data-region="billingAddressSelectorsRegion"] {
+  margin-bottom: 3rem;
+  .make-md-column(7);
+  padding-left: 0;
+  padding-right: 0;
+
+  h2 {
+    margin-top: 0;
+  }
+}
+
+.address-ctrl-cell {
+  .make-xs-column(12, @gutter: 0);
+  .make-lg-column(8, @gutter: 0);
+  .clearfix();
+  label {
+    width: 90%;
+    margin-left: 5px;
+  }
+}
+
+.payment-address-radio {
+  vertical-align: top;
+  padding-right: 5px;
+}
+
+.payment-new-address-btn {
+  .pull-left();
+  clear: both;
+}
+
+.payment-proceed-to-complete-form {
+  .pull-right();
+  clear: both;
+}

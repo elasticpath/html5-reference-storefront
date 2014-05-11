@@ -20,6 +20,7 @@
 define(function (require) {
   var ep = require('ep');
   var Backbone = require('backbone');
+  var ModelHelper = require('modelHelpers');
 
   /**
    * Model containing the Cortex server link to which the new payment form should be posted.
@@ -43,7 +44,31 @@ define(function (require) {
     }
   });
 
+  var billingAddressesCollection = Backbone.Collection.extend({
+    url: ep.io.getApiContext() + '/profiles/' + ep.app.config.cortexApi.scope + '/default?zoom=addresses:element',
+    parse: function(response) {
+      var billingAddresses = [];
+
+      var addressesArray = jsonPath(response, '$._addresses.._element')[0];
+      if (addressesArray) {
+        billingAddresses = modelHelpers.parseArray(addressesArray, modelHelpers.parseAddress);
+      }
+
+      // give a id number to each address
+      var addressesLen = billingAddresses.length;
+
+      for(var i = 0; i < addressesLen; i++) {
+        billingAddresses[i].idNum = i;
+      }
+
+      return billingAddresses;
+    }
+  });
+
+  var modelHelpers = ModelHelper.extend({});
+
   return {
-    NewPaymentModel: newPaymentModel
+    NewPaymentModel: newPaymentModel,
+    BillingAddressesCollection: billingAddressesCollection
   };
 });

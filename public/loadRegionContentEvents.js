@@ -111,6 +111,13 @@ define(function(require) {
         data: options
       });
     },
+    newPaymentBilling: function() {
+      EventBus.trigger('layout.loadRegionContentRequest',{
+        region: 'appMainRegion',
+        module: 'payment',
+        view: 'NewPaymentSelectBillingController'
+      });
+    },
     paymentReceipt: function(decision, token, display) {
       require(['payment'], function (payment) {
         if (decision === "ACCEPT") {

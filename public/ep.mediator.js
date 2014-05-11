@@ -26,7 +26,7 @@ define(function(require){
           ep.router.navigate(defaultReturn, true);  // if no return module specified, then return to profile
         }
         else {
-          var url = ep.app.config.routes[moduleName] || defaultReturn;
+          var url = ep.router.urlHashes[moduleName] || defaultReturn;
           ep.router.navigate(url, true);
           ep.io.sessionStore.removeItem(returnTo);   // clear sessionStorage
         }
@@ -94,7 +94,7 @@ define(function(require){
         // can be overwritten later
         ep.io.sessionStore.setItem('orderLink', link);
 
-        ep.router.navigate(ep.app.config.routes.checkoutAuth, true);
+        ep.router.navigate(ep.router.urlHashes.checkoutAuth, true);
       });
     },
     'mediator.cart.DefaultViewRendered':function(){
@@ -105,7 +105,7 @@ define(function(require){
     'mediator.orderProcessSuccess':function(uri){
       if (uri){
         require(['ep'], function(ep){
-          var link = ep.app.config.routes.purchaseReceipt + '/' + ep.ui.encodeUri(uri);
+          var link = ep.router.urlHashes.purchaseReceipt + '/' + ep.ui.encodeUri(uri);
           ep.router.navigate(link, true);
         });
       }
@@ -132,7 +132,7 @@ define(function(require){
           // The order link from the cart model is stored in session for use during checkout
           ep.io.sessionStore.setItem('orderLink', link);
 
-          ep.router.navigate(ep.app.config.routes.checkout, true);
+          ep.router.navigate(ep.router.urlHashes.checkout, true);
         });
       }
     },
@@ -142,12 +142,18 @@ define(function(require){
         if (options) {
           ep.io.sessionStore.setItem('paymentFormReturnTo', 'checkout');
 
-          ep.router.navigate(ep.app.config.routes.newPayment);
+          ep.router.navigate(ep.router.urlHashes.newPayment);
           loadRegionContent.newpaymentform(options);
         }
         else {
           ep.logger.error('mediator.addNewPaymentMethodRequest was called with invalid options: ' + options);
         }
+      });
+    },
+    'mediator.profileAddNewPaymentMethodRequest': function () {
+      require(['ep'], function (ep) {
+        ep.io.sessionStore.setItem('paymentFormReturnTo', 'profile');
+        ep.router.navigate(ep.router.urlHashes.newPaymentBilling, true);
       });
     },
     /**
@@ -176,7 +182,7 @@ define(function(require){
       require(['ep'], function (ep) {
         if (moduleName) {
           ep.io.sessionStore.setItem('addressFormReturnTo', moduleName);
-          ep.router.navigate(ep.app.config.routes.newAddress, true);
+          ep.router.navigate(ep.router.urlHashes.newAddress, true);
         }
         else {
           ep.logger.error('mediator.addNewAddressRequest was called with invalid moduleName: ' + moduleName);
@@ -232,7 +238,7 @@ define(function(require){
         if (arg.returnModule) {
           ep.io.sessionStore.setItem('addressFormReturnTo', arg.returnModule);
 
-          var editAddressLink = ep.app.config.routes.editAddress + '/' + ep.ui.encodeUri(arg.href);
+          var editAddressLink = ep.router.urlHashes.editAddress + '/' + ep.ui.encodeUri(arg.href);
           ep.router.navigate(editAddressLink, true);
         }
         else {
@@ -304,7 +310,7 @@ define(function(require){
         ep.io.sessionStore.setItem('registrationFormReturnTo', routeForStorage);
 
         // Navigate to the registration route
-        ep.router.navigate(ep.app.config.routes.registration, true);
+        ep.router.navigate(ep.router.urlHashes.registration, true);
 
       });
     }

@@ -5947,6 +5947,78 @@ td.visible-print {
 .payment-save-btn {
   margin-left: -15px;
 }
+[data-region="billingAddressSelectorsRegion"] {
+  margin-bottom: 3rem;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (min-width: 992px) {
+  [data-region="billingAddressSelectorsRegion"] {
+    float: left;
+    width: 58.333333333333336%;
+  }
+}
+[data-region="billingAddressSelectorsRegion"] h2 {
+  margin-top: 0;
+}
+.address-ctrl-cell {
+  float: left;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (min-width: 1200px) {
+  .address-ctrl-cell {
+    float: left;
+    width: 66.66666666666666%;
+  }
+}
+.address-ctrl-cell:before,
+.address-ctrl-cell:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.address-ctrl-cell:after {
+  clear: both;
+}
+.address-ctrl-cell:before,
+.address-ctrl-cell:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.address-ctrl-cell:after {
+  clear: both;
+}
+.address-ctrl-cell label {
+  width: 90%;
+  margin-left: 5px;
+}
+.payment-address-radio {
+  vertical-align: top;
+  padding-right: 5px;
+}
+.payment-new-address-btn {
+  float: left !important;
+  clear: both;
+}
+.payment-proceed-to-complete-form {
+  float: right !important;
+  clear: both;
+}
 /*
  * Copyright © 2014 Elastic Path Software Inc. All rights reserved.
  *

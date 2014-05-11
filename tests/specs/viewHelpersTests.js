@@ -192,6 +192,56 @@ define(function (require) {
         });
       });
     });
+
+    describe('getAddressRadioCheckedAttr', function() {
+      var expectedResult = 'checked="checked"';
+      describe('given an object with chosen set true', function() {
+        before(function() {
+          var input = {
+            chosen: true
+          };
+          this.result = helpers.getAddressRadioCheckedAttr(input);
+        });
+
+        after(function() {
+          delete(this.result);
+        });
+
+        it('returns html segment with checked attribute', function() {
+          expect(this.result).to.be.eql(expectedResult);
+        });
+      });
+      describe('given an object without chosen property', function() {
+        before(function() {
+          var input = {};
+          this.result = helpers.getAddressRadioCheckedAttr(input);
+        });
+
+        after(function() {
+          delete(this.result);
+        });
+
+        it('returns empty string', function() {
+          expect(this.result).to.be.a('String');
+          expect(this.result).to.be.empty;
+        });
+      });
+      describe('given no input', function() {
+        before(function() {
+          this.result = helpers.getAddressRadioCheckedAttr(undefined);
+        });
+
+        after(function() {
+          delete(this.result);
+        });
+
+        it('returns empty string', function() {
+          expect(this.result).to.be.a('String');
+          expect(this.result).to.be.empty;
+        });
+      });
+    });
+
   });
 
 });

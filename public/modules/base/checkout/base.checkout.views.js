@@ -42,23 +42,6 @@ define(function (require) {
       },
 
       /**
-       * Determines if the object (billing/shipping address or shipping option) being rendered has been marked as
-       * chosen (selected). If so, returns the HTML checked attribute to be applied to the associated radio button.
-       *
-       * @param obj The checkout object being rendered (billing/shipping addresses and shipping options are supported)
-       * @returns {string} HTML checked attribute or empty string
-       */
-      getCheckoutRadioCheckedAttr: function (obj) {
-        var checkedAttr = '';
-
-        if (obj && obj.chosen === true) {
-          checkedAttr = 'checked="checked"';
-        }
-
-        return checkedAttr;
-      },
-
-      /**
        * Generate an unique Id value for form input. Taking 1 parameter for prefix to append to the ID.
        * @param prefix text to prepend to the generated ID
        * @returns String an unique ID.

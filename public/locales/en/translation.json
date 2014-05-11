@@ -154,6 +154,13 @@
     "rate": "Rate"
   },
   "paymentForm": {
+    "billingInfo": {
+      "title": "New Payment Method - Billing Information",
+      "editAddressBtn": "Edit",
+      "newAddressBtn": "Create New Billing Address",
+      "nextBtn": "Continue",
+      "noBillingAddressesMsg": "Currently you have no saved address, please create one."
+    },
     "cancelBtn": "Cancel",
     "cardType": "Card Type",
     "cardNumber": "Credit Card Number",

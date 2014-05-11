@@ -50,7 +50,7 @@
     <!-- A unique ID to associate address labels with radio buttons -->
     <% var uniqueId = E.getUniqueIdForFormInput('address_'); %>
     <div class="address-ctrl-cell" data-region="checkoutAddressSelector">
-      <input type="radio" name="<%= E.addressType %>" id="<%= uniqueId %>" class="checkout-address-radio" <%= E.getCheckoutRadioCheckedAttr(E) %> />
+      <input type="radio" name="<%= E.addressType %>" id="<%= uniqueId %>" class="checkout-address-radio" <%= E.getAddressRadioCheckedAttr(E) %> />
       <label for="<%= uniqueId %>">
         <div data-region="checkoutAddressRegion"></div>
       </label>
@@ -94,7 +94,7 @@
   <script id="ShippingOptionSelectorTemplate" type="text/template">
     <!-- A unique ID to associate address labels with radio buttons -->
     <% var uniqueId = E.getUniqueIdForFormInput('shippingOption_'); %>
-    <input type="radio" name="shippingOption" id="<%= uniqueId %>" class="shipping-option-radio" <%= E.getCheckoutRadioCheckedAttr(E) %> />
+    <input type="radio" name="shippingOption" id="<%= uniqueId %>" class="shipping-option-radio" <%= E.getAddressRadioCheckedAttr(E) %> />
     <label for="<%= uniqueId %>">
       <span data-el-value="shippingOptionDisplayName"><%= E.displayName %></span>
       <span data-el-value="shippingOptionCarrier"><%= E.carrier %></span>
@@ -129,7 +129,7 @@
     <div class="payment-ctrl-cell" data-region="paymentSelector">
       <!-- A unique ID to associate address labels with radio buttons -->
       <% var uniqueId = E.getUniqueIdForFormInput('paymentMethod_'); %>
-      <input type="radio" name="paymentMethod" id="<%= uniqueId %>" class="payment-option-radio" <%= E.getCheckoutRadioCheckedAttr(E) %> />
+      <input type="radio" name="paymentMethod" id="<%= uniqueId %>" class="payment-option-radio" <%= E.getAddressRadioCheckedAttr(E) %> />
       <label for="<%= uniqueId %>">
         <div data-region="paymentMethodComponentRegion"></div>
       </label>
