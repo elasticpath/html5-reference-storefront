@@ -119,7 +119,7 @@ define(function (require) {
       });
 
       it("calls correct mediator strategy", function() {
-        expect(Mediator.fire).to.be.calledWithExactly('mediator.addNewPaymentMethodRequest', 'checkout');
+        expect(Mediator.fire).to.be.calledWith('mediator.checkoutAddNewPaymentMethodRequest');
       });
     });
 
