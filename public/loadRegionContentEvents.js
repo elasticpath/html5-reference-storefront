@@ -139,8 +139,10 @@ define(function(require) {
         module:'registration',
         view:'DefaultController'
       });
-    },
-    search: function(keywords) {
+    }
+/*
+    // search function disabled
+,    search: function(keywords) {
       EventBus.trigger('layout.loadRegionContentRequest',{
         region:'appMainRegion',
         module:'search',
@@ -148,6 +150,7 @@ define(function(require) {
         data:keywords
       });
     }
+*/
   };
 
   return loadRegionContentEvents;
