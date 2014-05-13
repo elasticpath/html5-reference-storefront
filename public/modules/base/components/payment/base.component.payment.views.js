@@ -82,9 +82,9 @@ define(function (require) {
       'saveToProfileFormGroup': '[data-el-label="payment.saveToProfileFormGroup"]',
       'saveButton': '[data-el-label="paymentForm.save"]'
     },
-/*
-    // disabled because using Form Posting method now
     events: {
+/*
+      // disabled because using Form Posting method now
       'click @ui.saveButton': function (event) {
         event.preventDefault();
 
@@ -100,12 +100,12 @@ define(function (require) {
           EventBus.trigger('payment.savePaymentMethodBtnClicked');
         }
       },
+ */
       'click @ui.cancelButton': function (event) {
         event.preventDefault();
         EventBus.trigger('payment.cancelFormBtnClicked');
       }
     },
-*/
     onRender: function () {
       // Hide the 'save to profile' checkbox if the shopper has accessed the new payment method form from profile
       if ( ep.io.sessionStore.getItem('paymentFormReturnTo') === 'profile' ) {

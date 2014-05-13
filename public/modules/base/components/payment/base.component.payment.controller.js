@@ -143,16 +143,6 @@ define(function (require) {
   }
 
   /* *************** Event Listeners: add new payment method *************** */
-
-  /**
-   * NOTE!! currently not used as cancel button event disabled in view
-   *
-   * Fires a mediator strategy on click of the cancel button, that returns the user to the referring module.
-   */
-  EventBus.on('payment.cancelFormBtnClicked', function () {
-    Mediator.fire('mediator.paymentFormComplete');
-  });
-
   /**
    * NOTE!! currently not used as cancel button event disabled in view
    *
@@ -176,6 +166,13 @@ define(function (require) {
     }
   });
 
+
+  /**
+   * Fires a mediator strategy on click of the cancel button, that returns the user to the referring module.
+   */
+  EventBus.on('payment.cancelFormBtnClicked', function () {
+    Mediator.fire('mediator.paymentFormComplete');
+  });
 
   EventBus.on('payment.tokenCreationSuccess', function(token, displayValue) {
     // post to cortex
