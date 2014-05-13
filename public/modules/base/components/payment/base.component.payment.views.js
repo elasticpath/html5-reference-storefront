@@ -161,7 +161,7 @@ define(function (require) {
     },
     itemViewContainer: '[data-region="billingAddressSelectorsRegion"]',
     events: {
-      'change input[type="radio"]': function () {
+      'change input[type="radio"]': function (event) {
         // unset previous chosen choice from model
         var prevChosen = this.collection.get(this.collection.chosenCid);
         if (prevChosen) {
