@@ -18,9 +18,9 @@
 	<description>A H2 compatible database built from the data in the html5-data artifact.</description>
 	
 	<scm>
-		<connection>scm:git:git://github.elasticpath.net/cortex/ui-storefront.git</connection>
-		<developerConnection>scm:git:git@github.elasticpath.net:cortex/ui-storefront.git</developerConnection>
-		<url>https://github.elasticpath.net/cortex/ui-storefront</url>
+		<connection>scm:git:git://github.com:elasticpath/html5-storefront-touchpoint-reference.git</connection>
+		<developerConnection>scm:git:git@github.com:elasticpath/html5-storefront-touchpoint-reference.git</developerConnection>
+		<url>https://github.com/elasticpath/html5-storefront-touchpoint-reference</url>
 		<tag>HEAD</tag>
 	</scm>
 
