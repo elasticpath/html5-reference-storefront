@@ -18,7 +18,7 @@ HTML5 Storefront's Modular Design Benefits:
 
 **HTML5 Reference Storefront Modules**
 
-![List of Modules](https://github.elasticpath.net/cortex/ui-storefront/raw/master/documentation/img/modulesList.png)
+![List of Modules]({{ site.baseurl }}/documentation/img/modulesList.png)
 
 **Components vs Modules**
 

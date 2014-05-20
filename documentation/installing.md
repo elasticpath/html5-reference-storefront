@@ -18,7 +18,7 @@ Once those are installed, proceed to [Install HTML5 Reference Storefront Sources
 
 ### <a name="installing-html5-reference-storefront-sources"> </a> Installing HTML5 Reference Storefront Sources
 1. Fetch HTML5 Reference Storefront sources:   
-`https://github.elasticpath.net/cortex/ui-storefront`
+`{{ site.repository }}`
 2. Install the Storefront's dependencies by navigating to HTML5 Reference Storefront directory and running:   
 `npm install`
 

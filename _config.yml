@@ -1,4 +1,4 @@
-baseurl: /pages/cortex/ui-storefront
+baseurl: /html5-storefront-touchpoint-reference
 exclude: [node_modules, non-distributable]
 relative_permalinks: false
-repository: https://github.elasticpath.net/cortex/ui-storefront
+repository: https://github.com/elasticpath/html5-storefront-touchpoint-reference
