@@ -4,6 +4,7 @@ Release Note Draft (release time unkown)
 #### Release x.xx 
 >##### New Feature:
 >  + creating tokenized payment method through real payment gateway (Cybersource). <sub>ref. CU-248</sub>
+>
 >##### Known Issue:
 > + Ideally a cortex resource should be built handle the integration with specifically Cybersource. However, currently, some work around are used to build this PoC. Please note, to accommodate the work around and because time limit, this feature has some known security flaws. For example, when sending the user’s information to Cybersource, you should use SSL HTTPS connection instead.
 
