@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
+ * Search function disabled because it's not functional with latest version of storefront.
  */
 /*jshint ignore: start*/
 define(['ep','eventbus','search.views','search.models','text!modules/base/search/base.search.templates.html'],

@@ -44,7 +44,7 @@ define(function (require) {
         options = _.extend({}, options, opts);
       }
 
-      ep.io.localStore.setItem('oAuthToken', 'fakeToken');
+      ep.io.localStore.setItem(ep.app.config.cortexApi.scope + '_oAuthToken', 'fakeToken');
 
       var fakeServer = sinon.fakeServer.create();
       fakeServer.autoRespond = true;

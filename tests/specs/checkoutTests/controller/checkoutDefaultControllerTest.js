@@ -48,7 +48,7 @@ define(function (require) {
 
       after(function () {
         $("#Fixtures").empty();
-        ep.io.localStore.removeItem('oAuthToken');
+        ep.io.localStore.removeItem(ep.app.config.cortexApi.scope + '_oAuthToken');
         ep.io.sessionStore.removeItem('orderLink');
         delete(this.parsedResponse);
         this.server.restore();
@@ -120,7 +120,7 @@ define(function (require) {
 
       after(function () {
         $("#Fixtures").empty();
-        ep.io.localStore.removeItem('oAuthToken');
+        ep.io.localStore.removeItem(ep.app.config.cortexApi.scope + '_oAuthToken');
         ep.io.sessionStore.removeItem('orderLink');
         this.server.restore();
       });
@@ -189,7 +189,7 @@ define(function (require) {
 
         EventTestHelpers.reset();
 
-        ep.io.localStore.removeItem('oAuthToken');
+        ep.io.localStore.removeItem(ep.app.config.cortexApi.scope + '_oAuthToken');
         ep.io.sessionStore.removeItem('orderLink');
         delete(this.parsedFakeResponse);
       });
@@ -274,7 +274,7 @@ define(function (require) {
         $("#Fixtures").empty();
         EventBus.trigger.restore();
         ep.io.ajax.restore();
-        ep.io.localStore.removeItem('oAuthToken');
+        ep.io.localStore.removeItem(ep.app.config.cortexApi.scope + '_oAuthToken');
         ep.io.sessionStore.removeItem('orderLink');
         this.server.restore();
       });
@@ -318,7 +318,7 @@ define(function (require) {
         $("#Fixtures").empty();
         EventBus.trigger.restore();
         ep.io.ajax.restore();
-        ep.io.localStore.removeItem('oAuthToken');
+        ep.io.localStore.removeItem(ep.app.config.cortexApi.scope + '_oAuthToken');
         ep.io.sessionStore.removeItem('orderLink');
         this.server.restore();
       });
@@ -340,7 +340,7 @@ define(function (require) {
     var fakeGetLink = "/integrator/orders/fakeUrl";
     var fakeCheckoutServer = sinon.fakeServer.create();
 
-    ep.io.localStore.setItem('oAuthToken', 'fakeToken');
+    ep.io.localStore.setItem(ep.app.config.cortexApi.scope + '_oAuthToken', 'fakeToken');
 
     fakeCheckoutServer.autoRespond = true;
 

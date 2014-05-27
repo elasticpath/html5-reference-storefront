@@ -105,7 +105,7 @@ define(function (require) {
     EventBus.on('auth.btnAuthGlobalMenuItemClicked',function(){
       var triggerLogIn = true;
       // if user is logged in then show the menu dropdown
-      var currentRole = ep.io.localStore.getItem('oAuthRole');
+      var currentRole = ep.io.localStore.getItem(ep.app.config.cortexApi.scope + '_oAuthRole');
       if (currentRole && (currentRole === 'REGISTERED')){
         EventBus.trigger("auth.loadAuthMenuRequest");
         triggerLogIn = false;

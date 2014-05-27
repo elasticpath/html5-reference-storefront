@@ -8,3 +8,4 @@ logs
 target/
 docs/
 missingCopyrightHeader.txt
+_site/
