@@ -199,7 +199,7 @@ define(function (require) {
     // this bug might be caused because view is not required by this test
     /*
      it("auth.btnAuthGlobalMenuItemClicked event with PUBLIC state should trigger modal with LoginFormView ", function (done) {
-     ep.io.localStore.setItem('oAuthRole','PUBLIC');
+     ep.io.localStore.setItem(ep.app.config.cortexApi.scope + '_oAuthRole','PUBLIC');
      //          ep.app.addRegions({
      //            appModalRegion:'[data-region="authMenuItemRegion"]'
      //          });
