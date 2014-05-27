@@ -181,7 +181,7 @@ define(function (require) {
       // if yes, is it still valid
       if (ep.io.localStore) {
         // check for auth token
-        oAuthToken = ep.io.localStore.getItem('oAuthToken');
+        oAuthToken = ep.io.localStore.getItem(ep.app.config.cortexApi.scope + '_oAuthToken');
 
         //if (!oAuthRole)
       }
@@ -384,7 +384,8 @@ define(function (require) {
     ep.app.isUserLoggedIn = function () {
       var retVar = false;
       // check if there is an auth token
-      if (ep.io.localStore.getItem('oAuthRole') && ep.io.localStore.getItem('oAuthRole') === 'REGISTERED') {
+      var role = ep.io.localStore.getItem(ep.app.config.cortexApi.scope + '_oAuthRole');
+      if (role && role === 'REGISTERED') {
         retVar = true;
       }
 

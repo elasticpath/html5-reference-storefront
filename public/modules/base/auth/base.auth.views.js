@@ -27,7 +27,7 @@ define(function (require) {
     var viewHelpers = ViewHelpers.extend({
       getLoginText: function () {
         var retVal;
-        if (ep.io.localStore.getItem('oAuthRole') === 'PUBLIC') {
+        if (ep.io.localStore.getItem(ep.app.config.cortexApi.scope + '_oAuthRole') === 'PUBLIC') {
           retVal = this.getI18nLabel('auth.loginMenu');
         } else {
           retVal = ep.io.localStore.getItem('oAuthUserName');
@@ -36,7 +36,7 @@ define(function (require) {
       },
       getMenuItemText: function () {
         var retVal = '';
-        if (ep.io.localStore.getItem('oAuthRole') === 'PUBLIC') {
+        if (ep.io.localStore.getItem(ep.app.config.cortexApi.scope + '_oAuthRole') === 'PUBLIC') {
           retVal = 'auth.loginMenu';
         }
         return retVal;
