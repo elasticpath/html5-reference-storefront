@@ -14,8 +14,10 @@
  * limitations under the License.
  *
  */
-define(['ep', 'app', 'backbone'],
-  function (ep, app, Backbone) {
+define(function (require) {
+    var ep = require('ep');
+    var Backbone = require('backbone');
+    var ModelHelper = require('modelHelpers');
 
     var zoomArray = [
       'availability',
@@ -110,7 +112,7 @@ define(['ep', 'app', 'backbone'],
          * */
         var availabilityObj = jsonPath(item, '$._availability')[0];
         if (availabilityObj) {
-          itemObj.availability = parseAvailability(availabilityObj);
+          itemObj.availability = modelHelpers.parseAvailability(availabilityObj);
         }
 
 
@@ -124,14 +126,14 @@ define(['ep', 'app', 'backbone'],
         itemObj.price.purchase = {};
         itemObj.rateCollection = [];
 
-        var listPriceObject = jsonPath(item, '$._price..list-price[0]')[0];
-        if (listPriceObject) {
-          itemObj.price.listed = parsePrice(listPriceObject);
-        }
-
         var purchasePriceObject = jsonPath(item, '$._price..purchase-price[0]')[0];
         if (purchasePriceObject) {
-          itemObj.price.purchase = parsePrice(purchasePriceObject);
+          itemObj.price.purchase = modelHelpers.parsePrice(purchasePriceObject);
+        }
+
+        var listPriceObject = jsonPath(item, '$._price..list-price[0]')[0];
+        if (listPriceObject) {
+          itemObj.price.listed = modelHelpers.parseListPrice(listPriceObject, itemObj.price.purchase);
         }
 
         var rates = jsonPath(item, '$._rate..rate')[0];
@@ -180,42 +182,7 @@ define(['ep', 'app', 'backbone'],
 
     var listPriceModel = Backbone.Model.extend();
 
-
-    // function to parse availability (states and release-date)
-    var parseAvailability = function (availabilityObj) {
-      var availability = {};
-
-      if (availabilityObj) {
-        availability.state = jsonPath(availabilityObj, '$..state')[0];
-        var releaseDate = jsonPath(availabilityObj, '$..release-date')[0];
-        if (releaseDate) {
-          availability.releaseDate = {
-            displayValue: releaseDate['display-value'],
-            value: releaseDate.value
-          };
-        }
-      }
-
-      return availability;
-    };
-
-    // function to parse one-time price (list or purchase)
-    var parsePrice = function (rawObject) {
-      var price = {};
-
-      try {
-        price = {
-          currency: jsonPath(rawObject, '$.currency')[0],
-          amount: jsonPath(rawObject, '$.amount')[0],
-          display: jsonPath(rawObject, '$.display')[0]
-        };
-      }
-      catch (error) {
-        ep.logger.error('Error building price object: ' + error.message);
-      }
-
-      return price;
-    };
+    var modelHelpers = ModelHelper.extend({});
 
     // function to parse rates collection
     var parseRates = function (rates) {

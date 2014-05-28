@@ -30,7 +30,7 @@ define(function (require) {
         if (ep.io.localStore.getItem(ep.app.config.cortexApi.scope + '_oAuthRole') === 'PUBLIC') {
           retVal = this.getI18nLabel('auth.loginMenu');
         } else {
-          retVal = ep.io.localStore.getItem('oAuthUserName');
+          retVal = ep.io.localStore.getItem(ep.app.config.cortexApi.scope + '_oAuthUserName');
         }
         return retVal;
       },
