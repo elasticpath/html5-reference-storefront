@@ -15,20 +15,22 @@
  *
  *
  */
-define(['ep', 'eventbus', 'backbone'],
-  function (ep, EventBus, Backbone) {
+define(function (require) {
+    var ep = require('ep');
+    var Backbone = require('backbone');
+    var ModelHelper = require('modelHelpers');
 
     // Array of zoom parameters to pass to Cortex
     var zoomArray = [
       'total',
       'lineitems:element',
       'lineitems:element:price',
+      'lineitems:element:total',
       'lineitems:element:rate',
       'lineitems:element:availability',
       'lineitems:element:item',
       'lineitems:element:item:definition',
       'lineitems:element:item:definition:assets:element',
-      'lineitems:element:item:price',
       'lineitems:element:item:rate',
       'order',
       'order:purchaseform'
@@ -90,22 +92,25 @@ define(['ep', 'eventbus', 'backbone'],
            */
           lineItemObj.unitPrice = {};
 
-          var itemUnitListPrice = jsonPath(currObj, '$._item.._price..list-price')[0];
-          lineItemObj.unitPrice.listed = parsePrice(itemUnitListPrice);
+          var itemUnitPurchasePrice = jsonPath(currObj, '$._price..purchase-price[0]')[0];
+          if (itemUnitPurchasePrice) {
+            lineItemObj.unitPrice.purchase = modelHelpers.parsePrice(itemUnitPurchasePrice);
+          }
 
-          var itemUnitPurchasePrice = jsonPath(currObj, '$._item.._price..purchase-price')[0];
-          lineItemObj.unitPrice.purchase = parsePrice(itemUnitPurchasePrice);
+          var itemUnitListPrice = jsonPath(currObj, '$._price..list-price[0]')[0];
+          if (itemUnitListPrice) {
+            lineItemObj.unitPrice.listed = modelHelpers.parseListPrice(itemUnitListPrice);
+          }
 
           /*
            * item-total (list price & purchase price)
            */
           lineItemObj.price = {};
 
-          var lineItemListPrice = jsonPath(currObj, '$._price..list-price')[0];
-          lineItemObj.price.listed = parsePrice(lineItemListPrice);
-
-          var lineItemPurchasePrice = jsonPath(currObj, '$._price..purchase-price')[0];
-          lineItemObj.price.purchase = parsePrice(lineItemPurchasePrice);
+          var lineItemTotal = jsonPath(currObj, '$._total..cost[0]')[0];
+          if (lineItemTotal) {
+            lineItemObj.price.purchase = modelHelpers.parsePrice(lineItemTotal);
+          }
 
           /*
            * Rates
@@ -119,7 +124,7 @@ define(['ep', 'eventbus', 'backbone'],
           lineItemObj.rateCollection = parseRates(lineItemRates);
 
           // fake a price object when neither rate nor price present
-          if (!lineItemPurchasePrice && lineItemObj.rateCollection.length === 0) {
+          if (!lineItemTotal && lineItemObj.rateCollection.length === 0) {
             lineItemObj.price.purchase = {
               display: 'none'
             };
@@ -148,9 +153,9 @@ define(['ep', 'eventbus', 'backbone'],
          * Cart Summary: total price (excluding tax)
          */
         cartObj.cartTotal = {};
-        var cartTotal = jsonPath(response, '$._total..cost[0]');
+        var cartTotal = jsonPath(response, '$._total..cost[0]')[0];
         if (cartTotal) {
-          cartObj.cartTotal = parsePrice(cartTotal);
+          cartObj.cartTotal = modelHelpers.parsePrice(cartTotal);
         }
 
 
@@ -175,6 +180,7 @@ define(['ep', 'eventbus', 'backbone'],
 
 
 
+    var modelHelpers = ModelHelper.extend({});
 
     // function to parse default image
     var parseDefaultImg = function(imgObj) {
