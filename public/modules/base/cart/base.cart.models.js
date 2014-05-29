@@ -99,7 +99,7 @@ define(function (require) {
 
           var itemUnitListPrice = jsonPath(currObj, '$._price..list-price[0]')[0];
           if (itemUnitListPrice) {
-            lineItemObj.unitPrice.listed = modelHelpers.parseListPrice(itemUnitListPrice);
+            lineItemObj.unitPrice.listed = modelHelpers.parseListPrice(itemUnitListPrice, lineItemObj.unitPrice.purchase);
           }
 
           /*
