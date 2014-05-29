@@ -11,7 +11,7 @@
 
 	<groupId>com.elasticpath.html5</groupId>
 	<artifactId>html5-data</artifactId>
-	<version>0.10.0.2014052914</version>
+	<version>0.10.1-SNAPSHOT</version>
 
 	<name>HTML5 Data</name>
 	<description>ImportExport data for the HTML5 functional demo storefront.</description>
@@ -20,7 +20,7 @@
 		<connection>scm:git:git://github.com:elasticpath/html5-storefront-touchpoint-reference.git</connection>
 		<developerConnection>scm:git:git@github.com:elasticpath/html5-storefront-touchpoint-reference.git</developerConnection>
 		<url>https://github.com/elasticpath/html5-storefront-touchpoint-reference</url>
-		<tag>ui-storefront-0.10.0.2014052914</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<distributionManagement>
