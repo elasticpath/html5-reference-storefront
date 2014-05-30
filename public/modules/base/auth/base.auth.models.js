@@ -31,10 +31,10 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
        type: 'POST',
        contentType: 'application/x-www-form-urlencoded',
        success: function (json, responseStatus, xhr) {
-         ep.io.localStore.setItem('oAuthRole', json.role);
-         ep.io.localStore.setItem('oAuthScope', json.scope);
-         ep.io.localStore.setItem('oAuthToken', 'Bearer ' + json.access_token);
-         ep.io.localStore.setItem('oAuthUserName', this.userName);
+         ep.io.localStore.setItem(ep.app.config.cortexApi.scope + '_oAuthRole', json.role);
+         ep.io.localStore.setItem(ep.app.config.cortexApi.scope + '_oAuthScope', json.scope);
+         ep.io.localStore.setItem(ep.app.config.cortexApi.scope + '_oAuthToken', 'Bearer ' + json.access_token);
+         ep.io.localStore.setItem(ep.app.config.cortexApi.scope + '_oAuthUserName', this.userName);
 
          Mediator.fire('mediator.authenticationSuccess', this.redirect);
        },
@@ -60,10 +60,10 @@ define(['ep', 'mediator', 'eventbus', 'backbone'],
         url: ep.io.getApiContext() + '/oauth2/tokens',
         success:function(json, responseSTatus, xhr) {
           try{
-            ep.io.localStore.removeItem('oAuthRole');
-            ep.io.localStore.removeItem('oAuthScope');
-            ep.io.localStore.removeItem('oAuthToken');
-            ep.io.localStore.removeItem('oAuthUserName');
+            ep.io.localStore.removeItem(ep.app.config.cortexApi.scope + '_oAuthRole');
+            ep.io.localStore.removeItem(ep.app.config.cortexApi.scope + '_oAuthScope');
+            ep.io.localStore.removeItem(ep.app.config.cortexApi.scope + '_oAuthToken');
+            ep.io.localStore.removeItem(ep.app.config.cortexApi.scope + '_oAuthUserName');
 
             Mediator.fire('mediator.logoutSuccess');
           }

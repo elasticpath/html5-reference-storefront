@@ -94,6 +94,17 @@ define(function (require) {
       return price;
     },
 
+    parseListPrice: function(rawObject, comparePrice) {
+      var price = {};
+
+      var listPrice = this.parsePrice(rawObject);
+
+      if ((listPrice && comparePrice) && listPrice.amount !== comparePrice.amount) {
+        price = listPrice;
+      }
+
+      return price;
+    },
     /**
      * Parse an image object.
      * @param rawObject raw image object.

@@ -15,8 +15,11 @@
  *
  *
  */
-define(['ep', 'eventbus', 'backbone'],
-  function (ep, EventBus, Backbone) {
+define(function (require) {
+    var ep = require('ep');
+    var Backbone = require('backbone');
+    var ModelHelper = require('modelHelpers');
+
 
     // Array of zoom parameters to pass to Cortex
     var itemPageZoomArray = [
@@ -106,16 +109,20 @@ define(['ep', 'eventbus', 'backbone'],
 
           // item availability
           var availabilityObj = jsonPath(itemArray[i], '$._availability')[0];
-          itemObj.availability = parseAvailability(availabilityObj);
+          itemObj.availability = modelHelpers.parseAvailability(availabilityObj);
 
 
           // item prices
           itemObj.price = {};
-          var listPrice = jsonPath(itemArray[i], '$._price..list-price')[0];
-          itemObj.price.listed = parsePrice(listPrice);
+          var purchasePrice = jsonPath(itemArray[i], '$._price..purchase-price[0]')[0];
+          if (purchasePrice) {
+            itemObj.price.purchase = modelHelpers.parsePrice(purchasePrice);
+          }
 
-          var purchasePrice = jsonPath(itemArray[i], '$._price..purchase-price')[0];
-          itemObj.price.purchase = parsePrice(purchasePrice);
+          var listPrice = jsonPath(itemArray[i], '$._price..list-price[0]')[0];
+          if (listPrice) {
+            itemObj.price.listed = modelHelpers.parseListPrice(listPrice, itemObj.price.purchase);
+          }
 
           // item rate collection
           var rates = jsonPath(itemArray[i], '$._rate..rate')[0];
@@ -148,6 +155,8 @@ define(['ep', 'eventbus', 'backbone'],
       model: itemModel
     });
 
+    var modelHelpers = ModelHelper.extend({});
+
     // function to parse default image
     var parseDefaultImg = function(imgObj) {
       var defaultImg = {};
@@ -161,39 +170,6 @@ define(['ep', 'eventbus', 'backbone'],
       }
 
       return defaultImg;
-    };
-
-    // function to parse availability (states and release-date)
-    var parseAvailability = function(availabilityObj) {
-      var availability = {};
-
-      if (availabilityObj) {
-        availability.state = jsonPath(availabilityObj, '$..state')[0];
-        var releaseDate = jsonPath(availabilityObj, '$..release-date')[0];
-        if (releaseDate) {
-          availability.releaseDate = {
-            displayValue: releaseDate['display-value'],
-            value: releaseDate.value
-          };
-        }
-      }
-
-      return availability;
-    };
-
-    // function to parse one-time price (list or purchase)
-    var parsePrice = function(priceObj) {
-      var price = {};
-
-      if (priceObj) {
-        price = {
-          currency: priceObj[0].currency,
-          amount: priceObj[0].amount,
-          display: priceObj[0].display
-        };
-      }
-
-      return price;
     };
 
     // function to parse rates collection
