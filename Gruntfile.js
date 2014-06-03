@@ -127,6 +127,15 @@ module.exports = function(grunt){
           },
           {
             /**
+             * Proxy to send payment form request to jsp form generator
+             */
+            context: '/gateway',
+            host: 'cdn.elasticpath.com',
+            port: '80',
+            changeOrigin: true
+          },
+          {
+            /**
              * Proxy to send localhost requests to 3008 where the node app runs
              */
             context: '/',
