@@ -90,7 +90,7 @@
 
         <div class="form-input">
             <select id="CardType" name="card_type" class="form-control">
-                <option value="001">Visa</option>
+                <option value="001" selected>Visa</option>
                 <option value="002">Master</option>
                 <option value="003">American Express</option>
             </select>
@@ -103,7 +103,7 @@
         </label>
 
         <div class="form-input">
-            <input id="CardNumber" name="card_number" class="form-control" type="text"/>
+            <input id="CardNumber" name="card_number" class="form-control" maxlength="16" type="text"/>
         </div>
     </div>
 
