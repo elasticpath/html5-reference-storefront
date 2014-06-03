@@ -40,6 +40,22 @@ define(function (require) {
   var defaultView;
 
   var defaultCreatePaymentController = function (billingInfo) {
+    if (!billingInfo) {
+      $().toastmessage('showToast', {
+        text:  i18n.t('paymentForm.errorMsg.missingBillingInfo'),
+        sticky: true,
+        position: 'middle-center',
+        type: 'warning'
+      });
+
+      var returnModule = ep.io.sessionStore.getItem('paymentFormReturnTo');
+      if (returnModule === 'checkout') {
+        ep.router.navigate(ep.router.urlHashes.checkout, true);
+      } else {
+        ep.router.navigate(ep.router.urlHashes.newPaymentBilling, true);
+      }
+    }
+
     defaultView = new Views.DefaultPaymentFormView();
 
     defaultView.on('render', function() {
