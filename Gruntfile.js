@@ -19,8 +19,8 @@ module.exports = function(grunt){
   /**
    * Cortex Configuration
    */
-  var CORTEX_HOST = '54.213.124.208';
-  var CORTEX_PORT = '8080';
+  var CORTEX_HOST = 'preview.demo.elasticpath.com';
+  var CORTEX_PORT = '80';
   var CORTEX_CONTEXT = '/cortex';
 
   grunt.initConfig({
@@ -110,6 +110,7 @@ module.exports = function(grunt){
           hostname: 'localhost',
           keepalive: true,
           appendProxies: false,
+          debug: false,
           // This middleware function ensures all requests go through the proxies
           middleware: function(connect) {
             var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
@@ -123,7 +124,12 @@ module.exports = function(grunt){
              */
             host: CORTEX_HOST,
             port: CORTEX_PORT,
-            context: CORTEX_CONTEXT
+            context: CORTEX_CONTEXT,
+			changeOrigin: true,
+			xforward: true,
+			headers: {
+				"x-Forwarded-Base": "http://localhost:3007/cortex"
+			}
           },
           {
             /**
