@@ -20,7 +20,7 @@ var config = {
       'backbone': 'scripts/lib/backbone',
       'bootstrap': 'scripts/lib/bootstrap.min',
       'equalize': 'scripts/lib/plugins/jquery-equalheights',
-      'i18n': 'scripts/lib/i18next.amd-1.6.0',
+      'i18n': 'scripts/lib/i18next.amd-1.7.2',
       'jquery': 'scripts/lib/jquery-1.8.3',
       'jsonpath': 'scripts/lib/jsonpath-0.8.0',
       'marionette': 'scripts/lib/backbone.marionette',
