@@ -69,9 +69,6 @@
 										<exclude name="gen/**" />
 									</fileset>
 									<regexpmapper from="(.*)xml$$" to="${jenkinsJobPrefix}-\1xml"/>
-									<!--
-									<regexpmapper from="(.*)xml$$" to="${projectTeam}-${projectIdentifier}-\1xml"/>
-									-->
 								</copy>
 							</target>
 						</configuration>
