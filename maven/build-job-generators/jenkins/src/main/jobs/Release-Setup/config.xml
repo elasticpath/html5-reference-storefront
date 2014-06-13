@@ -137,7 +137,7 @@ fi
 # creates and checks out the branch of name $1 at revision $2
 source $TOOLS_HOME/branch_for_release.sh &amp;&amp; createBranch $BRANCH_NAME $HTML5_SF_SCM_REVISION
 
-bash $SCRIPTSDIR/update-ep-dependencies-impl.sh $CODEDIR $HTML5_SF_SCM_VERSION $CE_VERSION
+bash $SCRIPTSDIR/update-ep-dependencies-impl.sh $CODEDIR $CE_VERSION
 
 # returns true if there is a change to the workspace
 if [[ $(git diff --shortstat 2&gt; /dev/null | tail -n1) != &quot;&quot; ]]; then
