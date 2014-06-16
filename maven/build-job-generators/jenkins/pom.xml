@@ -41,14 +41,6 @@
 					<exclude>Build-Flow/*.xml</exclude>
 				</excludes>
 			</resource>
-			<resource>
-				<filtering>true</filtering>
-				<directory>src/main/jobs</directory>
-				<includes>
-					<include>Release-Setup/*.xml</include>
-				</includes>
-			</resource>
-
 		</resources>
 
 		<plugins>

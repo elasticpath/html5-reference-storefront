@@ -5,7 +5,6 @@
 	<job>
 		<id>${jenkinsJobPrefix}-Main-Build</id>
 		<parent>abstract-scm</parent>
-		<scmType>git-release</scmType>
 
 		<parameters>
 			<parameter>
@@ -26,22 +25,6 @@
 
 		<mavenGoals>-B -U -e clean deploy</mavenGoals>
 		<pom>maven/pom.xml</pom>
-
-		<buildWrappers>
-		<![CDATA[
-			<org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper>
-				<scmUserEnvVar></scmUserEnvVar>
-				<scmPasswordEnvVar></scmPasswordEnvVar>
-				<releaseEnvVar>IS_M2RELEASEBUILD</releaseEnvVar>
-				<releaseGoals>-Dresume=false release:prepare release:perform</releaseGoals>
-				<dryRunGoals>-Dresume=false -DdryRun=true release:prepare</dryRunGoals>
-				<selectCustomScmCommentPrefix>false</selectCustomScmCommentPrefix>
-				<selectAppendHudsonUsername>false</selectAppendHudsonUsername>
-				<selectScmCredentials>false</selectScmCredentials>
-				<numberOfReleaseBuildsToKeep>-1</numberOfReleaseBuildsToKeep>
-			</org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper>
-		]]>
-		</buildWrappers>
 
 		<process>	  	
 			<![CDATA[	  	
