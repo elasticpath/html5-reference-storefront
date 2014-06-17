@@ -5,6 +5,7 @@
 	<job>
 		<id>${jenkinsJobPrefix}-Main-Build</id>
 		<parent>abstract-scm</parent>
+		<scmType>git</scmType>
 
 		<parameters>
 			<parameter>
