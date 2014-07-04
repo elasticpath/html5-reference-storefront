@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <categories>
 <category mastercatalog="CampusMasterCatalog">
+    <guid>courseMaterials|CampusMasterCatalog</guid>
     <parentcategory></parentcategory>
     <code>courseMaterials</code>
     <name>
@@ -41,6 +42,7 @@
     </seo>
     <linkedcategories>
         <linkedcategory virtualcatalog="campusVirtualCatalog">
+            <guid>courseMaterials|campusVirtualCatalog</guid>
             <order>3</order>
             <excluded>false</excluded>
         </linkedcategory>
@@ -48,6 +50,7 @@
 </category>
 
 <category mastercatalog="CampusMasterCatalog">
+    <guid>tablets|CampusMasterCatalog</guid>
     <parentcategory></parentcategory>
     <code>tablets</code>
     <name>
@@ -88,6 +91,7 @@
     </seo>
     <linkedcategories>
         <linkedcategory virtualcatalog="campusVirtualCatalog">
+            <guid>tablets|campusVirtualCatalog</guid>
             <order>2</order>
             <excluded>false</excluded>
         </linkedcategory>
@@ -95,6 +99,7 @@
 </category>
 
 <category mastercatalog="CampusMasterCatalog">
+    <guid>calculators|CampusMasterCatalog</guid>
     <parentcategory></parentcategory>
     <code>calculators</code>
     <name>
@@ -135,6 +140,7 @@
     </seo>
     <linkedcategories>
         <linkedcategory virtualcatalog="campusVirtualCatalog">
+            <guid>calculators|campusVirtualCatalog</guid>
             <order>1</order>
             <excluded>false</excluded>
         </linkedcategory>
