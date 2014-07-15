@@ -3,7 +3,7 @@
 	<mirrors>
 		<mirror>
 			<id>elasticpath</id>
-			<url>http://maven.elasticpath.com/nexus/content/groups/ui-storefront-build-server-group</url>
+			<url>http://maven.elasticpath.com/nexus/content/groups/html5-storefront-build-server-group</url>
 			<mirrorOf>external:*,!build-server-snapshots</mirrorOf>
 		</mirror>
 	</mirrors>
