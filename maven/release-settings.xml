@@ -68,6 +68,11 @@
 			<username>maven-deployer</username>
 			<password>{1Nte6eUXvf8H/nxSUvXr76rsa4h+AaQE5S5IsN977q0=}</password>
 		</server>
+		<server>
+			<id>nexus</id>
+			<username>nexus-repo-manager</username>
+			<password>{nqinr2upAjcHpDLZVzUKnDV/vFkIr49LeSrLzqDmrNs=}</password>
+		</server>
 	</servers>
 
 </settings>
