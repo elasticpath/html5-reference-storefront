@@ -66,8 +66,8 @@ define(function (require) {
     }
 
     return {
-      "display-value": displayValue,
-      "value": value
+      "display-name": displayValue,
+      "token": value
     };
   }
 
