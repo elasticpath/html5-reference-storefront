@@ -58,7 +58,7 @@ define(function (require) {
         purchaseInfoObj.paymentMeans = {};
         var paymentDisplay = jsonPath(response, '$._paymentmeans[0].._element[0]')[0];
         if (paymentDisplay) {
-          purchaseInfoObj.paymentMeans.displayValue = jsonPath(paymentDisplay, '$.display-value');
+          purchaseInfoObj.paymentMeans.displayValue = jsonPath(paymentDisplay, '$.display-name');
         }
 
         return purchaseInfoObj;
