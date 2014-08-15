@@ -20,7 +20,7 @@
               }
             ],
             "self": {
-              "type": "application/vnd.elasticpath.paymenttoken",
+              "type": "elasticpath.paymenttokens.payment-token",
               "uri": "/paymenttokens/orders/campus/gezdcmjzmy4dqljsgezgiljugjstsljzha4tolldgmzdenbvgbrtqnzvmu/form",
               "href": "ROOT/paymenttokens/orders/campus/gezdcmjzmy4dqljsgezgiljugjstsljzha4tolldgmzdenbvgbrtqnzvmu/form",
               "max-age": 0

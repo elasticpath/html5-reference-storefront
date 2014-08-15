@@ -58,7 +58,7 @@ define(function (require) {
 
         // Payment methods (tokenized only)
         // Only select payment methods with a display-value property (credit cards do not have this property)
-        var paymentMethodsArray = jsonPath(response, "$._paymentmethods.._element[?(@.self.type=='application/vnd.elasticpath.paymenttoken')]");
+        var paymentMethodsArray = jsonPath(response, "$._paymentmethods.._element[?(@.self.type=='elasticpath.paymenttokens.payment-token')]");
         if(paymentMethodsArray) {
           profileObj.paymentMethods = modelHelpers.parseArray(paymentMethodsArray, modelHelpers.parseTokenPayment);
         }
