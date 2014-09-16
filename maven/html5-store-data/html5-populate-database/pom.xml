@@ -6,12 +6,12 @@
 		<groupId>com.elasticpath.stores</groupId>
 		<artifactId>store-data-populate</artifactId>
 		<version>611.0.0.20140916104107</version>
-		<relativePath/>
+		<relativePath />
 	</parent>
 
 	<groupId>com.elasticpath.html5</groupId>
 	<artifactId>html5-data-populate</artifactId>
-	<version>0.10.0-SNAPSHOT</version>
+	<version>0.11.0.20140916104107</version>
 	<packaging>pom</packaging>
 
 	<name>HTML5 Functional Store Data Populate</name>
@@ -21,7 +21,7 @@
 		<connection>scm:git:git://github.com:elasticpath/html5-storefront-touchpoint-reference.git</connection>
 		<developerConnection>scm:git:git@github.com:elasticpath/html5-storefront-touchpoint-reference.git</developerConnection>
 		<url>https://github.com/elasticpath/html5-storefront-touchpoint-reference</url>
-		<tag>HEAD</tag>
+		<tag>ui-storefront-0.11.0.20140916104107</tag>
 	</scm>
 
 	<distributionManagement>
@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>com.elasticpath.html5</groupId>
 			<artifactId>html5-data</artifactId>
-			<version>0.10.0-SNAPSHOT</version>
+			<version>0.11.0.20140916104107</version>
 		</dependency>
 	</dependencies>
 </project>
