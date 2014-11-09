@@ -10,14 +10,14 @@
 
 	<groupId>com.elasticpath.cortex.ui</groupId>
 	<artifactId>ui-storefront-parent</artifactId>
-	<version>0.10.0-SNAPSHOT</version>
+	<version>0.12.0.20141108165934</version>
 	<packaging>pom</packaging>
 
 	<scm>
 		<connection>scm:git:git://github.com:elasticpath/html5-storefront-touchpoint-reference.git</connection>
 		<developerConnection>scm:git:git@github.com:elasticpath/html5-storefront-touchpoint-reference.git</developerConnection>
 		<url>https://github.com/elasticpath/html5-storefront-touchpoint-reference</url>
-		<tag>HEAD</tag>
+		<tag>ui-storefront-0.12.0.20141108165934</tag>
 	</scm>
 
 	<distributionManagement>
