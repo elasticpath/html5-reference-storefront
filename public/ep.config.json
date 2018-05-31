@@ -14,6 +14,7 @@
   "deployMode":"development",
   "requireAuthToCheckout":true,
   "viewFadeInValue":500,
+  "skuImagesS3Url":"https://s3-us-west-2.amazonaws.com/ep-demo-images/VESTRI_VIRTUAL/%sku%.png",
   "routes": {
     "cart":"#mycart",
     "category":"#category",

@@ -28,7 +28,8 @@ define(function (require) {
       'element:definition',
       'element:definition:assets:element',
       'element:price',
-      'element:rate'
+      'element:rate',
+      'element:code'
     ];
 
     /*
@@ -96,10 +97,12 @@ define(function (require) {
 
           var itemObj = {};
 
-          // item thumbnail
-          var defaultImgObj = jsonPath(itemArray[i], '$._definition.._assets.._element[?(@.name="default-image")]')[0];
-          itemObj.thumbnail = parseDefaultImg(defaultImgObj);
-
+          // item thumbnail by sku
+          var assetObj = {};
+          var skuName = jsonPath(itemArray[i], "$.['_code'][0]['code']")[0];
+          assetObj.absolutePath = ep.app.config.skuImagesS3Url.replace("%sku%",skuName)
+          assetObj.name = 'default-image'
+          itemObj.thumbnail = assetObj;
 
           // item name
           itemObj.name = jsonPath(itemArray[i], '$._definition..display-name')[0];
