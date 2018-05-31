@@ -96,22 +96,9 @@ define(function (require) {
        
         // item thumbnail by sku
         var skuName = jsonPath(item, "$.['_code'][0]['code']")[0];
-        assetObj.absolutePath = 'https://s3-us-west-2.amazonaws.com/ep-demo-images/VESTRI_VIRTUAL/'+skuName+'.png'
+        assetObj.absolutePath = ep.app.config.skuImagesS3Url.replace("%sku%",skuName)
         assetObj.name = 'default-image'
         assetsListArray.push(assetObj);
-
-        // item thumbnail default (Commented out as older behaviour)
-        // if (assetsArray) {
-        //   var defaultImage = jsonPath(item, "$._definition.._assets.._element[?(@.name='default-image')]")[0];
-        //   var assetObj = {};
-
-        //   //itemObj.asset.url = 'http://localhost:3007/images/testdata/finding-nemo.jpg';
-        //   //itemObj.asset.url = defaultImage['content-location'];
-        //   assetObj.absolutePath = defaultImage['content-location'];
-        //   assetObj.name = defaultImage.name;
-        //   assetObj.relativePath = defaultImage['relative-location'];
-        //   assetsListArray.push(assetObj);
-        // }
 
         itemObj.assets = assetsListArray;
 
