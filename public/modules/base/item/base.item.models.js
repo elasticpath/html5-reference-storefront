@@ -25,7 +25,8 @@ define(function (require) {
       'price',
       'rate',
       'definition',
-      'definition:assets:element'
+      'definition:assets:element',
+      'code'
     ];
 
     var itemModel = Backbone.Model.extend({
@@ -91,17 +92,27 @@ define(function (require) {
         itemObj.asset.url = '';
         var assetsListArray = [];
         var assetsArray = jsonPath(item, "$._definition.._assets.._element")[0];
-        if (assetsArray) {
-          var defaultImage = jsonPath(item, "$._definition.._assets.._element[?(@.name='default-image')]")[0];
-          var assetObj = {};
+        var assetObj = {};
+       
+        // item thumbnail by sku
+        var skuName = jsonPath(item, "$.['_code'][0]['code']")[0];
+        console.log(skuName)
+        assetObj.absolutePath = 'https://s3-us-west-2.amazonaws.com/ep-demo-images/VESTRI_VIRTUAL/'+skuName+'.png'
+        assetObj.name = 'default-image'
+        assetsListArray.push(assetObj);
 
-          //itemObj.asset.url = 'http://localhost:3007/images/testdata/finding-nemo.jpg';
-          //itemObj.asset.url = defaultImage['content-location'];
-          assetObj.absolutePath = defaultImage['content-location'];
-          assetObj.name = defaultImage.name;
-          assetObj.relativePath = defaultImage['relative-location'];
-          assetsListArray.push(assetObj);
-        }
+        // item thumbnail default
+        // if (assetsArray) {
+        //   var defaultImage = jsonPath(item, "$._definition.._assets.._element[?(@.name='default-image')]")[0];
+        //   var assetObj = {};
+
+        //   //itemObj.asset.url = 'http://localhost:3007/images/testdata/finding-nemo.jpg';
+        //   //itemObj.asset.url = defaultImage['content-location'];
+        //   assetObj.absolutePath = defaultImage['content-location'];
+        //   assetObj.name = defaultImage.name;
+        //   assetObj.relativePath = defaultImage['relative-location'];
+        //   assetsListArray.push(assetObj);
+        // }
 
         itemObj.assets = assetsListArray;
 
