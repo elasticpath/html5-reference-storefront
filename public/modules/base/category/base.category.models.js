@@ -100,12 +100,11 @@ define(function (require) {
           // item thumbnail by sku
           var assetObj = {};
           var skuName = jsonPath(itemArray[i], "$.['_code'][0]['code']")[0];
-          console.log(skuName)
           assetObj.absolutePath = 'https://s3-us-west-2.amazonaws.com/ep-demo-images/VESTRI_VIRTUAL/'+skuName+'.png'
           assetObj.name = 'default-image'
           itemObj.thumbnail = assetObj;
 
-          // // item thumbnail default
+          // // item thumbnail default (Commented out as older behaviour)
           // var defaultImgObj = jsonPath(itemArray[i], '$._definition.._assets.._element[?(@.name="default-image")]')[0];
           // itemObj.thumbnail = parseDefaultImg(defaultImgObj);
 
