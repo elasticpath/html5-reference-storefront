@@ -44,7 +44,9 @@
 
   <script id="SearchResultsItemContainer" type="text/template">
     <div class="search-results-item-inner">
-      <img src="images/img-placeholder.png" class="item-img" />
+      <div class="category-item-thumbnail-container">
+        <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>" class="item-img category-item-thumbnail img-responsive"/>
+      </div>
       <div data-region="displayName"><a href="<%= E.generateItemHref(E.uri) %>"><%= E.name %></a></div>
       <div data-region="price"><%= E.price %></div>
       <div class="btn-container">

@@ -24,13 +24,16 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.view
 
     var renderMainNavCompact = false;
     var showLogo = true;
+    var showSearch = true;
 
     var mainNavContainer;
     var globalNavContainer;
     var logoContainer;
+    var searchContainer;
 
     var initLogoWidth = 0;
     var initMainNavWidth = 0;
+    var initSearchWidth = 0;
     var initGlobalNavWidth = 0;
 
 
@@ -39,6 +42,7 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.view
 
     var appHeaderView = function(){
       ep.app.addRegions({
+        headerSearchRegion:'.main-search-container',
         mainNavRegion:'.main-nav-container',
         logoRegion:'.logo-container',
         authMenuItemRegion:'[data-region="authMenuItemRegion"]'
@@ -59,13 +63,14 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.view
         logoContainer = $('.logo-container');
 
         EventBus.trigger('appheader.loadLogoComponentRequest');
+        EventBus.trigger('appheader.loadSearchComponent');
        // Mediator.fire('mediator.loadLogoComponentRequest');
 
 
 
         mainNavContainer = $('.main-nav-container');
         globalNavContainer = $('.global-nav-container');
-
+        searchContainer = $('.main-search-container');
 
 
 
@@ -86,6 +91,13 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.view
     * Event Listeners
     *
     * */
+    EventBus.bind('appheader.loadSearchComponent',function(){
+     EventBus.trigger('layout.loadRegionContentRequest',{
+       region:'headerSearchRegion',
+       module:'search',
+       view:'DefaultSearchView'
+      });
+    });
     EventBus.on('appheader.loadLogoComponentRequest',function(){
       var logoView = new View.HeaderLogoView({
         model:new Model.LogoModel({

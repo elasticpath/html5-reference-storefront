@@ -8,8 +8,8 @@
     "showInstrumentation":false
   },
   "cortexApi":{
-    "path":"cortex",
-    "scope":"campus"
+    "path":"http://localhost:9080/cortex",
+    "scope":"vestri"
   },
   "deployMode":"development",
   "requireAuthToCheckout":true,

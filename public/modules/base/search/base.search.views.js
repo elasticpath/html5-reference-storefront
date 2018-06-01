@@ -34,6 +34,23 @@ define(['ep','backbone','eventbus'],
           ep.logger.warn('[search]: unable to generate href to item-detail');
         }
         return href;
+      },
+      getDefaultImagePath: function (thumbnail) {
+        var retVar;
+        if (thumbnail && thumbnail.absolutePath) {
+          retVar = thumbnail.absolutePath;
+        }
+        else {
+          retVar = 'images/img-placeholder-noborder.png';
+        }
+        return retVar;
+      },
+      getDefaultImageName: function (thumbnail) {
+        var retVar;
+        if (thumbnail && thumbnail.name) {
+          retVar = thumbnail.name;
+        }
+        return retVar;
       }
     };
 
