@@ -101,7 +101,6 @@ define(['ep','app', 'eventbus','backbone','cortex','jsonpath'],
             // item thumbnail by sku
             var assetObj = {};
             var skuName = jsonPath(item, "$.['_code'][0]['code']")[0];
-            console.log(skuName)
             assetObj.absolutePath = ep.app.config.skuImagesS3Url.replace("%sku%",skuName)
             assetObj.name = 'default-image'
             var absolutePath = assetObj;
