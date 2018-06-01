@@ -26,13 +26,13 @@ define(['ep','app', 'eventbus','backbone','cortex','jsonpath'],
       // in this case ep.io.getApiContext() +'/searches/' + ep.app.config.cortexApi.scope is a entry point
       // the posting url for search form should be retrieved by follow link keywordsearchform and parse out
       // the action link to post the query to
-      url: ep.io.getApiContext() +'/searches/' + ep.app.config.cortexApi.scope + '/keywords/items'
+      url: ep.io.getApiContext() +'/searches/' + ep.app.config.cortexApi.scope + '/keywords/form'
     });
 
     var searchResult = Backbone.Cortex.Model.extend({
       url: function () {
         // TODO: remove url function, replace with zoom and page params
-        var suffix = '?zoom=element,element_price,element:definition';
+        var suffix = '?zoom=element,element_price,element:definition,element:code';
         if (this.get('page')) {
           suffix = '/pages/' + this.get('page') + suffix;
         }
@@ -53,7 +53,7 @@ define(['ep','app', 'eventbus','backbone','cortex','jsonpath'],
     var expSearchResult = Backbone.Cortex.Model.extend({
       url: function () {
         // TODO: remove url function, replace with zoom and page params
-        var suffix = '?zoom=element,element:price,element_definition';
+        var suffix = '?zoom=element,element:price,element_definition,element:code';
         if (this.get('page')) {
           suffix = '/pages/' + this.get('page') + suffix;
         }
@@ -98,13 +98,22 @@ define(['ep','app', 'eventbus','backbone','cortex','jsonpath'],
 
             }
 
+            // item thumbnail by sku
+            var assetObj = {};
+            var skuName = jsonPath(item, "$.['_code'][0]['code']")[0];
+            assetObj.absolutePath = ep.app.config.skuImagesS3Url.replace("%sku%",skuName)
+            assetObj.name = 'default-image'
+            var absolutePath = assetObj;
+
             var displayName = jsonPath(firstDefinition, "$..['display-name']")[0];
 
             if (item['_definition']){
              // retItem.name = item['_definition'][0]['display-name'];
              // retItem.uri = item['_definition'][0].self.uri;
-              var itemUri = item['_definition'][0].self.uri;
-              var uriCruft = '/itemdefinitions/' +ep.app.config.cortexApi.scope + '/';
+              // var itemUri = item['_definition'][0].self.uri;
+              var itemUri = jsonPath(item, '$.self.href')[0];
+              var uriCruft = '/itemdetail/' +ep.app.config.cortexApi.scope + '/';
+              // var uriCruft = '/itemdefinitions/' +ep.app.config.cortexApi.scope + '/';
               if (itemUri.indexOf(uriCruft) > -1){
                 var isoId = itemUri.substring(uriCruft.length,itemUri.length);
                 procItemObj.isoId = isoId;
@@ -116,7 +125,8 @@ define(['ep','app', 'eventbus','backbone','cortex','jsonpath'],
 
             procItemObj.name = displayName;
             procItemObj.price = displayPrice;
-            procItemObj.uri = item.self.uri;
+            procItemObj.uri = item.self.href;
+            procItemObj.thumbnail = absolutePath;
 
             retCollection.push(procItemObj);
           }

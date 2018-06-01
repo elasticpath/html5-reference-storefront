@@ -58,7 +58,7 @@ define(['ep','eventbus','search.views','search.models','text!modules/base/search
                 var getCachedSearchResultUrl = xhr.getResponseHeader('location');
 
                 // initialize the search API GET URI (with zoom parameters)
-                var zoomSuffix = '?zoom=element,element:price,element:definition';
+                var zoomSuffix = '?zoom=element,element:price,element:definition,element:code';
                 getCachedSearchResultUrl = getCachedSearchResultUrl + zoomSuffix;
 
                 // initialize the search result model

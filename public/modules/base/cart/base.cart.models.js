@@ -32,6 +32,7 @@ define(function (require) {
       'lineitems:element:item:definition',
       'lineitems:element:item:definition:assets:element',
       'lineitems:element:item:rate',
+      'lineitems:element:item:code',
       'order',
       'order:purchaseform'
     ];
@@ -65,10 +66,13 @@ define(function (require) {
           var lineItemObj = {};
 
           /*
-           * item default image thumbnail
+           * item image by sku
            */
-          var defaultImgObj = jsonPath(currObj, '$._item.._definition.._assets.._element[?(@.name="default-image")]')[0];
-          lineItemObj.thumbnail = parseDefaultImg(defaultImgObj);
+          var assetObj = {};
+          var skuName = jsonPath(currObj, "$.['_code'][0]['code']")[0];
+          assetObj.absolutePath = ep.app.config.skuImagesS3Url.replace("%sku%",skuName)
+          assetObj.name = 'default-image'
+          lineItemObj.thumbnail = assetObj;
 
           /*
            * item display name

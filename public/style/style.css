@@ -6409,7 +6409,7 @@ fieldset[disabled] .btn-auth-login.active {
   position: absolute;
   display: inline-block;
   top: 12px;
-  right: 15px;
+  right: 275px;
   /*
   // on small screen move global nav under search
   @media (min-width: @screen-sm) and (max-width: @screen-md) {

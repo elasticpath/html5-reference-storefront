@@ -140,7 +140,7 @@ define(function(require) {
         view:'DefaultController'
       });
     }
-/*
+
     // search function disabled
 ,    search: function(keywords) {
       EventBus.trigger('layout.loadRegionContentRequest',{
@@ -150,7 +150,6 @@ define(function(require) {
         data:keywords
       });
     }
-*/
   };
 
   return loadRegionContentEvents;

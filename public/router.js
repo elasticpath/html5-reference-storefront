@@ -37,11 +37,10 @@ define(function(require) {
         'purchaseReceipt/:id': 'purchaseReceipt',
         'purchaseDetails/:id': 'purchaseDetails',
         'registration' : 'registration',
-/*
+
         // search function disabled
         'search' : 'search',
         'search/:keywords' : 'search',
-*/
         'signIn': 'checkoutAuth'
       },
       controller:loadRegionContentController,
