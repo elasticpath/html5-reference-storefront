@@ -16,37 +16,84 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="Elastic Path&trade; Visual Cortex - App Framework">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
 
-    <title>Elastic Path&trade; HTML5 Storefront Reference Application</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="Elastic Path&trade; Visual Cortex - App Framework">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#5bc0de" />
 
-    <!-- CSS Theme File -->
-    <link rel="stylesheet" href="style/style.css">
-    <script type="text/javascript" src="//use.typekit.net/iwa6qvc.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <link rel="manifest" href="/manifest.json">
 
-  </head>
-  <body>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <!-- Viewport -->
-    <div class="viewport ui-container" data-region="viewPortRegion"></div>
 
-    <!-- HTML Template Cache -->
-    <div id="TemplateContainer"></div>
+  <!-- iPhone ICON -->
+  <link href="/images/icons/icons-192.png" sizes="57x57" rel="apple-touch-icon">
+  <!-- iPad ICON-->
+  <link href="/images/icons/icons-192.png" sizes="72x72" rel="apple-touch-icon">
+  <!-- iPhone (Retina) ICON-->
+  <link href="/images/icons/icons-512.png" sizes="114x114" rel="apple-touch-icon">
+  <!-- iPad (Retina) ICON-->
+  <link href="/images/icons/icons-512.png" sizes="144x144" rel="apple-touch-icon">
+  <!-- iPhone X ICON -->
+  <link href="/images/icons/icons-192.png" sizes="192x192" rel="apple-touch-icon">
 
-    <!-- Modal Window PLaceholder -->
-    <div data-region="modalRegion" class="modal-container"></div>
+  <link href="/images/splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+  <link href="/images/splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+  <link href="/images/splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
+    rel="apple-touch-startup-image" />
+  <link href="/images/splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+    rel="apple-touch-startup-image" />
+  <link href="/images/splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+  <link href="/images/splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+  <link href="/images/splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
 
-    <!-- JavaScript Entry Point -->
-    <script src="scripts/lib/underscore.js"></script>
-    <script src="base.dependency.config.js"></script>
-    <script data-main="main" src="scripts/lib/require.js"></script>
+  <title>Elastic Path&trade; HTML5 Storefront Reference Application</title>
 
-  </body>
+  <!-- CSS Theme File -->
+  <link rel="stylesheet" href="style/style.css">
+  <script type="text/javascript" src="//use.typekit.net/iwa6qvc.js"></script>
+  <script type="text/javascript">try { Typekit.load(); } catch (e) { }</script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(function () { console.log("Service Worker Registered"); });
+    }
+  </script>
+
+</head>
+
+<body>
+
+  <!-- Viewport -->
+  <div class="viewport ui-container" data-region="viewPortRegion"></div>
+
+  <!-- HTML Template Cache -->
+  <div id="TemplateContainer"></div>
+
+  <noscript>
+    Javascript has been disabled.
+  </noscript>
+
+  <!-- Modal Window PLaceholder -->
+  <div data-region="modalRegion" class="modal-container"></div>
+
+  <!-- JavaScript Entry Point -->
+  <script src="scripts/lib/underscore.js"></script>
+  <script src="base.dependency.config.js"></script>
+  <script data-main="main" src="scripts/lib/require.js"></script>
+
+</body>
+
 </html>
-

@@ -9578,3 +9578,16 @@ ul {
   width: 100px;
   display: inline-block;
 }
+@media (max-width: 768px) {
+  .field-content h2 {
+    font-size: 29px;
+    line-height: 38px;
+  }
+}
+@media (max-width: 500px) {
+  .field-content h2 {
+    margin-top: 0px;
+    font-size: 18px;
+    line-height: 21px;
+  }
+}

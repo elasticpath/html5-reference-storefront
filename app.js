@@ -22,6 +22,8 @@
 /* global process, __dirname */
 var express = require('express');
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
 var path = require('path');
 var winston = require('winston');
 var app = express();
@@ -33,6 +35,12 @@ var logger = new (winston.Logger)({
     new (winston.transports.File)({ filename: 'logs/app.log' })
   ]
 });
+
+var options = {
+  key: fs.readFileSync('cert/privateKey.key'),
+  cert: fs.readFileSync('cert/certificate.crt')
+};
+
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3008);
