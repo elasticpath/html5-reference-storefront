@@ -22,6 +22,8 @@
 /* global process, __dirname */
 var express = require('express');
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
 var path = require('path');
 var winston = require('winston');
 var app = express();
@@ -33,6 +35,12 @@ var logger = new (winston.Logger)({
     new (winston.transports.File)({ filename: 'logs/app.log' })
   ]
 });
+
+var options = {
+  key: fs.readFileSync('privateKey.key'),
+  cert: fs.readFileSync('certificate.crt')
+};
+
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3008);
@@ -60,6 +68,6 @@ app.configure('development', function(){
  * */
 //require('./routes/routes-config')(app);
 
-http.createServer(app).listen(app.get('port'), function(){
+https.createServer(options, app).listen(app.get('port'), function(){
   console.log("EP UI Storefront listening on port " + app.get('port'));
 });
