@@ -37,8 +37,8 @@ var logger = new (winston.Logger)({
 });
 
 var options = {
-  key: fs.readFileSync('/cert/privateKey.key'),
-  cert: fs.readFileSync('/cert/certificate.crt')
+  key: fs.readFileSync('cert/privateKey.key'),
+  cert: fs.readFileSync('cert/certificate.crt')
 };
 
 
