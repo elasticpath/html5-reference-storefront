@@ -37,8 +37,8 @@ var logger = new (winston.Logger)({
 });
 
 var options = {
-  key: fs.readFileSync('privateKey.key'),
-  cert: fs.readFileSync('certificate.crt')
+  key: fs.readFileSync('/cert/privateKey.key'),
+  cert: fs.readFileSync('/cert/certificate.crt')
 };
 
 
@@ -68,6 +68,6 @@ app.configure('development', function(){
  * */
 //require('./routes/routes-config')(app);
 
-https.createServer(options, app).listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'), function(){
   console.log("EP UI Storefront listening on port " + app.get('port'));
 });
