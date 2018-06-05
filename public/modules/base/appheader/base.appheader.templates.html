@@ -19,9 +19,7 @@
   <!-- Header Container -->
   <script type="text/template" id="AppHeaderDefaultTemplateContainer">
 
-    <button type="button" class="navbar-back" onclick="window.history.back();">
-      <span class="icon"></span>
-    </button>
+    <div class="back-button-container">[back button template goes here]</div>
 
     <!-- Logo Container -->
     <div class="logo-container">[logo template goes here]</div>
@@ -65,6 +63,15 @@
     </div>
 
 
+  </script>
+
+  <!-- Back Button Template -->
+  <script id="BackButtonTemplateContainer" type="text/template">
+
+    <button type="button" class="navbar-back" data-region="backButtonRegion" data-el-label="navigation.back" onclick="window.history.back();">
+      <span class="icon"></span>
+    </button>
+  
   </script>
 
   <!-- Logo Template -->

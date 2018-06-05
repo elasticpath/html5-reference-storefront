@@ -48,11 +48,25 @@ define(['ep', 'mediator', 'eventbus','backbone','marionette','i18n','appheader.m
 
     });
 
+    var BackButtonView = Backbone.Marionette.Layout.extend({
+      ui: {
+        backButton: '[data-el-label="navigation.back"]'
+      },
+      template:'#BackButtonTemplateContainer',
+      onShow:function(){
+        if (document.referrer.indexOf(window.location.host) == -1){
+          $('[data-region="backButtonRegion"]', this.$el).addClass('is-hidden');
+          $('.logo-container').addClass('logo-container-left');
+        }
+      }
+    });
+
 
 
     return {
       PageHeaderView:PageHeaderView,
-      HeaderLogoView:HeaderLogoView
+      HeaderLogoView:HeaderLogoView,
+      BackButtonView:BackButtonView
 
     };
   }

@@ -6419,6 +6419,9 @@ fieldset[disabled] .btn-auth-login.active {
   margin: 15px 0 0 41px;
   z-index: 1031;
 }
+.logo-container-left {
+  margin: 15px 0 0 0px;
+}
 .logo-container a {
   display: inline-block;
   width: 100%;
