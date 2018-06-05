@@ -28,9 +28,34 @@
   <link rel="manifest" href="/manifest.json">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="apple-touch-icon" sizes="192x192" href="/images/icons-192.png">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-startup-image" href="/images/splash/Default@3x~iphone~comany.png">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+
+  <!-- iPhone ICON -->
+  <link href="/images/icons/icons-192.png" sizes="57x57" rel="apple-touch-icon">
+  <!-- iPad ICON-->
+  <link href="/images/icons/icons-192.png" sizes="72x72" rel="apple-touch-icon">
+  <!-- iPhone (Retina) ICON-->
+  <link href="/images/icons/icons-512.png" sizes="114x114" rel="apple-touch-icon">
+  <!-- iPad (Retina) ICON-->
+  <link href="/images/icons/icons-512.png" sizes="144x144" rel="apple-touch-icon">
+  <!-- iPhone X ICON -->
+  <link href="/images/icons/icons-192.png" sizes="192x192" rel="apple-touch-icon">
+
+  <link href="/images/splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+  <link href="/images/splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+  <link href="/images/splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
+    rel="apple-touch-startup-image" />
+  <link href="/images/splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+    rel="apple-touch-startup-image" />
+  <link href="/images/splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+  <link href="/images/splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+  <link href="/images/splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
 
   <title>Elastic Path&trade; HTML5 Storefront Reference Application</title>
 
@@ -44,18 +69,6 @@
       navigator.serviceWorker
         .register('/sw.js')
         .then(function () { console.log("Service Worker Registered"); });
-    }
-    // Detects if device is on iOS 
-    const isIos = () => {
-      const userAgent = window.navigator.userAgent.toLowerCase();
-      return /iphone|ipad|ipod/.test(userAgent);
-    }
-    // Detects if device is in standalone mode
-    const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
-
-    // Checks if should display install popup notification:
-    if (isIos() && !isInStandaloneMode()) {
-      this.setState({ showInstallMessage: true });
     }
   </script>
 
