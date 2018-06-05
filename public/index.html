@@ -16,53 +16,71 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="Elastic Path&trade; Visual Cortex - App Framework">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#5bc0de"/>
+<head>
 
-    <link rel="manifest" href="/manifest.json">
-    <link rel="apple-touch-icon" sizes="192x192" href="/images/icons-192.png">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="Elastic Path&trade; Visual Cortex - App Framework">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#5bc0de" />
 
-    <title>Elastic Path&trade; HTML5 Storefront Reference Application</title>
+  <link rel="manifest" href="/manifest.json">
 
-    <!-- CSS Theme File -->
-    <link rel="stylesheet" href="style/style.css">
-    <script type="text/javascript" src="//use.typekit.net/iwa6qvc.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" sizes="192x192" href="/images/icons-192.png">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-startup-image" href="/images/splash/Default@3x~iphone~comany.png">
 
-    <script>
-      if('serviceWorker' in navigator) {
-        navigator.serviceWorker
-                 .register('/sw.js')
-                 .then(function() { console.log("Service Worker Registered"); });
-      }
-      </script>
+  <title>Elastic Path&trade; HTML5 Storefront Reference Application</title>
 
-  </head>
-  <body>
+  <!-- CSS Theme File -->
+  <link rel="stylesheet" href="style/style.css">
+  <script type="text/javascript" src="//use.typekit.net/iwa6qvc.js"></script>
+  <script type="text/javascript">try { Typekit.load(); } catch (e) { }</script>
 
-    <!-- Viewport -->
-    <div class="viewport ui-container" data-region="viewPortRegion"></div>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(function () { console.log("Service Worker Registered"); });
+    }
+    // Detects if device is on iOS 
+    const isIos = () => {
+      const userAgent = window.navigator.userAgent.toLowerCase();
+      return /iphone|ipad|ipod/.test(userAgent);
+    }
+    // Detects if device is in standalone mode
+    const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
 
-    <!-- HTML Template Cache -->
-    <div id="TemplateContainer"></div>
+    // Checks if should display install popup notification:
+    if (isIos() && !isInStandaloneMode()) {
+      this.setState({ showInstallMessage: true });
+    }
+  </script>
 
-    <noscript>
-      Javascript has been disabled.
-    </noscript>
+</head>
 
-    <!-- Modal Window PLaceholder -->
-    <div data-region="modalRegion" class="modal-container"></div>
+<body>
 
-    <!-- JavaScript Entry Point -->
-    <script src="scripts/lib/underscore.js"></script>
-    <script src="base.dependency.config.js"></script>
-    <script data-main="main" src="scripts/lib/require.js"></script>
+  <!-- Viewport -->
+  <div class="viewport ui-container" data-region="viewPortRegion"></div>
 
-  </body>
+  <!-- HTML Template Cache -->
+  <div id="TemplateContainer"></div>
+
+  <noscript>
+    Javascript has been disabled.
+  </noscript>
+
+  <!-- Modal Window PLaceholder -->
+  <div data-region="modalRegion" class="modal-container"></div>
+
+  <!-- JavaScript Entry Point -->
+  <script src="scripts/lib/underscore.js"></script>
+  <script src="base.dependency.config.js"></script>
+  <script data-main="main" src="scripts/lib/require.js"></script>
+
+</body>
+
 </html>
-
