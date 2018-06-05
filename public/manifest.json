@@ -16,6 +16,6 @@
     "start_url": "/",
     "background_color": "#5bc0de",
     "display": "standalone",
-    "scope": "/vestri/",
+    "scope": "./",
     "theme_color": "#5bc0de"
   }
