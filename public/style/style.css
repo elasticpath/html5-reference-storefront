@@ -3701,8 +3701,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
   margin-top: 8px;
   margin-bottom: 8px;
   background-color: transparent;
-  border: 1px solid transparent;
-  border-radius: 4px;
 }
 .navbar-toggle .icon-bar {
   display: block;
@@ -3715,6 +3713,30 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 @media (min-width: 768px) {
   .navbar-toggle {
+    display: none;
+  }
+}
+.navbar-back {
+  position: relative;
+  float: left;
+  margin-right: 15px;
+  padding: 9px 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  min-height: 53.47px;
+}
+.navbar-back .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+}
+.navbar-back .icon-bar + .icon-bar {
+  margin-top: 4px;
+}
+@media (min-width: 768px) {
+  .navbar-back {
     display: none;
   }
 }
@@ -3883,11 +3905,14 @@ textarea.input-group-sm > .input-group-btn > .btn {
   color: #cccccc;
   background-color: transparent;
 }
-.navbar-default .navbar-toggle {
+.navbar-default .navbar-toggle,
+.navbar-default .navbar-back {
   border-color: #dddddd;
 }
 .navbar-default .navbar-toggle:hover,
-.navbar-default .navbar-toggle:focus {
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-back:hover,
+.navbar-default .navbar-back:focus {
   background-color: #dddddd;
 }
 .navbar-default .navbar-toggle .icon-bar {
@@ -6312,15 +6337,42 @@ fieldset[disabled] .btn-auth-login.active {
 .navbar .navbar-toggle {
   border-color: rgba(0, 0, 0, 0.2);
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 0px;
+  right: 0px;
   padding: 0;
   margin: 0;
+  min-height: 53.47px;
+  border: none;
 }
 .navbar .navbar-toggle:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
 .navbar .navbar-toggle .icon {
+  margin: 0;
+  padding: 4px 8px;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  font-size: 25px;
+}
+.navbar .navbar-toggle .icon:before {
+  content: "\e056";
+}
+.navbar .navbar-back {
+  right: 15px;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+.navbar .navbar-back:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.navbar .navbar-back .icon {
   margin: 0;
   padding: 4px 8px;
   color: #fff;
@@ -6332,9 +6384,10 @@ fieldset[disabled] .btn-auth-login.active {
   font-weight: normal;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
+  font-size: 25px;
 }
-.navbar .navbar-toggle .icon:before {
-  content: "\e056";
+.navbar .navbar-back .icon:before {
+  content: "\e079";
 }
 .main-nav-container {
   display: block;
@@ -6363,7 +6416,7 @@ fieldset[disabled] .btn-auth-login.active {
 .logo-container {
   position: relative;
   width: 200px;
-  margin: 15px 0 0 15px;
+  margin: 15px 0 0 41px;
   z-index: 1031;
 }
 .logo-container a {

@@ -45,6 +45,7 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.view
         headerSearchRegion:'.main-search-container',
         mainNavRegion:'.main-nav-container',
         logoRegion:'.logo-container',
+        backButtonRegion:'.navbar-back',
         authMenuItemRegion:'[data-region="authMenuItemRegion"]'
       });
       var headerView = new View.PageHeaderView();
@@ -61,6 +62,7 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.view
           view:'MainNavView'
         });
         logoContainer = $('.logo-container');
+        backButtonContainer = $('.navbar-back');
 
         EventBus.trigger('appheader.loadLogoComponentRequest');
         EventBus.trigger('appheader.loadSearchComponent');
