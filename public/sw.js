@@ -30,7 +30,8 @@ self.addEventListener('fetch', event => {
           console.log('cache fetch: ' + url);
           return response || fetch(event.request).then(function (response) {
             console.log('network fetch: ' + url);
-            cache.put(event.request, response.clone());
+            // Don't add the response to cache for now
+            // cache.put(event.request, response.clone());
             return response;
           });
         });
