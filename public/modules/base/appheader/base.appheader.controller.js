@@ -113,10 +113,6 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.view
     });
     EventBus.on('appheader.loadBackButtonComponentRequest',function(){
       var backButtonView = new View.BackButtonView({
-        model:new Model.LogoModel({
-          homeUri: '',
-          logoImgPath: 'images/elastic-path-logo.png'
-        })
       });
       // if (document.referrer.indexOf(window.location.host) == -1){
       //   $('[data-region="backButtonRegion"]', this.$el).addClass('is-hidden');
@@ -133,9 +129,9 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.view
       HeaderLogoView:function(){
         return new View.HeaderLogoView();
       },
-      BackButtonView:function(){
-        return new View.BackButtonView();
-      }
+      // BackButtonView:function(){
+      //   return new View.BackButtonView();
+      // }
     };
   }
 );

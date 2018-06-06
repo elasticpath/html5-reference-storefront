@@ -28,7 +28,6 @@ define(['ep','eventbus','home.views','text!modules/base/home/base.home.templates
 
       layout.on('show',function(){
         layout.homeContentRegion.show(homeView);
-        ep.ui.startActivityIndicator(homeView);
       });
 
       return layout;
