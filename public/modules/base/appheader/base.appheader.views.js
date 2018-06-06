@@ -16,15 +16,15 @@
  *
  */
 
-define(['ep', 'mediator', 'eventbus','backbone','marionette','i18n','appheader.models'],
-  function(ep, Mediator, EventBus,Backbone, Marionette,i18n,Model){
+define(['ep', 'mediator', 'eventbus', 'backbone', 'marionette', 'i18n', 'appheader.models'],
+  function (ep, Mediator, EventBus, Backbone, Marionette, i18n, Model) {
     var viewHelpers = {
-      getI18nLabel:function(key){
+      getI18nLabel: function (key) {
         var retVal = key;
-        try{
+        try {
           retVal = i18n.t(key);
         }
-        catch(e){
+        catch (e) {
           // slient failure on label rendering
         }
 
@@ -34,39 +34,30 @@ define(['ep', 'mediator', 'eventbus','backbone','marionette','i18n','appheader.m
     };
 
     var PageHeaderView = Backbone.Marionette.Layout.extend({
-      template:'#AppHeaderDefaultTemplateContainer',
-      templateHelpers:viewHelpers,
-      className:'container appheader-container',
-      onShow:function(){
+      template: '#AppHeaderDefaultTemplateContainer',
+      templateHelpers: viewHelpers,
+      className: 'container appheader-container',
+      onShow: function () {
         var elementWidth = $('.logo-container').outerWidth();
         EventBus.trigger('view.headerLogoViewRendered', elementWidth);
         Mediator.fire('mediator.appHeaderRendered');
       }
     });
     var HeaderLogoView = Backbone.Marionette.Layout.extend({
-      template:'#LogoTemplateContainer'
+      template: '#LogoTemplateContainer'
 
     });
 
     var BackButtonView = Backbone.Marionette.Layout.extend({
-      // ui: {
-      //   backButton: '[data-el-label="navigation.back"]'
-      // },
-      template:'#BackButtonTemplateContainer'
-      // onShow:function(){
-      //   if (document.referrer.indexOf(window.location.host) == -1){
-      //     $('[data-region="backButtonRegion"]', this.$el).addClass('is-hidden');
-      //     $('.logo-container').addClass('logo-container-left');
-      //   }
-      // }
+      template: '#BackButtonTemplateContainer'
     });
 
 
 
     return {
-      PageHeaderView:PageHeaderView,
-      HeaderLogoView:HeaderLogoView,
-      BackButtonView:BackButtonView
+      PageHeaderView: PageHeaderView,
+      HeaderLogoView: HeaderLogoView,
+      BackButtonView: BackButtonView
 
     };
   }
