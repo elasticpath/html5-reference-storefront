@@ -1,8 +1,8 @@
 var CACHE_NAME = 'ep-site-demo';
 var urlsToCache = [
-  '/style',
-  '/scripts',
-  '/images'
+  '/style/',
+  '/scripts/',
+  '/images/'
 ];
 
 self.addEventListener('install', function (event) {
