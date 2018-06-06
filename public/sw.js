@@ -34,21 +34,25 @@ self.addEventListener('fetch', event => {
     caches.open(CACHE_NAME)
       .then(cache => {
         return cache.match(event.request).then(function (response) {
-          console.log('cache fetch: ' + url);
+          if (response) {
+            // return cached file
+            console.log('cache fetch: ' + url);
+            return response;
+          }
           // If not match, there is no rejection but an undefined response.
-          if (!response || response === undefined) {
+          else {
             // Go to network.
             return fetch(event.request.clone()).then(function (response) {
+              console.log('network fetch: ' + url);
               // Put in cache and return the network response.
               if (urlsToCacheOnLoad.indexOf(response.url) >= 0) {
-                return cache.put(event.request, response.clone()).then(function () {
+                console.log('network fetch cached: ' + url);
+                cache.put(event.request, response.clone()).then(function () {
                   return response;
                 });
               }
-              return response;
             });
           }
-          return response;
         });
       })
   );
