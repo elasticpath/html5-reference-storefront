@@ -1,8 +1,7 @@
 var CACHE_NAME = 'ep-site-demo';
 var urlsToCache = [
   '/main.js',
-  '/router.js',
-  '/index.html'
+  '/router.js'
 ];
 
 self.addEventListener('install', function (event) {
