@@ -45,14 +45,20 @@ self.addEventListener('fetch', event => {
             return fetch(event.request).then(function (response) {
               console.log('network fetch: ' + url);
               // Put in cache and return the network response.
-              length = urlsToCacheOnLoad.length;
-              while (length--) {
-                if (response.url.indexOf(urlsToCacheOnLoad[length]) != -1) {
-                  console.log('network fetch cached: ' + url);
-                  cache.put(event.request, response.clone()).then(function () {
-                    return response;
-                  });
-                }
+              // length = urlsToCacheOnLoad.length;
+              // while (length--) {
+              //   if (response.url.indexOf(urlsToCacheOnLoad[length]) != -1) {
+              //     console.log('network fetch cached: ' + url);
+              //     cache.put(event.request, response.clone()).then(function () {
+              //       return response;
+              //     });
+              //   }
+              // }
+              if (urlsToCacheOnLoad.some(substring=>response.url.includes(substring))) {
+                console.log('network fetch cached: ' + url);
+                cache.put(event.request, response.clone()).then(function () {
+                  return response;
+                });
               }
               return response;
             });
