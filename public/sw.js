@@ -1,6 +1,7 @@
 var CACHE_NAME = 'ep-site-demo';
 var urlsToCache = [
-  '/style/style.css',
+  // Don't Cache styles for now
+  // '/style/style.css',
   'router.js',
   'manifest.json'
 ];
@@ -9,19 +10,20 @@ var urlsToCacheOnLoad = [
   '/scripts/lib/',
   '/images/',
   '/locales/',
-  '/style/'
+  // Don't Cache styles for now
+  // '/style/'
 ];
 
-// self.addEventListener('install', function (event) {
-//   // Perform install steps
-//   event.waitUntil(
-//     caches.open(CACHE_NAME)
-//       .then(function (cache) {
-//         console.log('Opened cache');
-//         return cache.addAll(urlsToCache);
-//       })
-//   );
-// });
+self.addEventListener('install', function (event) {
+  // Perform install steps
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(function (cache) {
+        console.log('Opened cache');
+        return cache.addAll(urlsToCache);
+      })
+  );
+});
 
 // application fetch network data
 self.addEventListener('fetch', event => {
