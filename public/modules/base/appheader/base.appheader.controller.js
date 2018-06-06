@@ -113,10 +113,6 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.view
     });
     EventBus.on('appheader.loadBackButtonComponentRequest',function(){
       var backButtonView = new View.BackButtonView({
-        model:new Model.LogoModel({
-          homeUri: '',
-          logoImgPath: 'images/elastic-path-logo.png'
-        })
       });
       // if (document.referrer.indexOf(window.location.host) == -1){
       //   $('[data-region="backButtonRegion"]', this.$el).addClass('is-hidden');
