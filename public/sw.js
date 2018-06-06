@@ -38,11 +38,13 @@ self.addEventListener('fetch', event => {
           // If not match, there is no rejection but an undefined response.
           if (!response) {
             // Go to network.
-            return fetch(event.request.clone()).then(function (res) {
+            return fetch(event.request.clone()).then(function (response) {
               // Put in cache and return the network response.
-              return cache.put(event.request, response.clone()).then(function () {
-                return response;
-              });
+              if (urlsToCacheOnLoad.indexOf(response.url) >= 0) {
+                return cache.put(event.request, response.clone()).then(function () {
+                  return response;
+                });
+              }
             });
           }
           return response
