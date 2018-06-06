@@ -129,9 +129,9 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.view
       HeaderLogoView:function(){
         return new View.HeaderLogoView();
       },
-      // BackButtonView:function(){
-      //   return new View.BackButtonView();
-      // }
+      BackButtonView:function(){
+        return new View.BackButtonView();
+      }
     };
   }
 );
