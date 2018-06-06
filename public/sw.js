@@ -1,22 +1,27 @@
 var CACHE_NAME = 'ep-site-demo';
 var urlsToCache = [
   '/style/style.css',
-  '/scripts/lib/jquery-1.8.3.js',
-  '/scripts/lib/require.js',
-  '/scripts/lib/bootstrap.min.js',
-  'router.js'
+  'router.js',
+  'manifest.json'
 ];
 
-self.addEventListener('install', function (event) {
-  // Perform install steps
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function (cache) {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
-  );
-});
+var urlsToCacheOnLoad = [
+  '/scripts/lib/',
+  '/images/',
+  '/locales/',
+  '/style/'
+];
+
+// self.addEventListener('install', function (event) {
+//   // Perform install steps
+//   event.waitUntil(
+//     caches.open(CACHE_NAME)
+//       .then(function (cache) {
+//         console.log('Opened cache');
+//         return cache.addAll(urlsToCache);
+//       })
+//   );
+// });
 
 // application fetch network data
 self.addEventListener('fetch', event => {
@@ -30,8 +35,10 @@ self.addEventListener('fetch', event => {
           console.log('cache fetch: ' + url);
           return response || fetch(event.request).then(function (response) {
             console.log('network fetch: ' + url);
-            // Don't add the response to cache for now
-            // cache.put(event.request, response.clone());
+            // Add the response to cache if it's in the array to add on load
+            if (urlsToCacheOnLoad.indexOf(response.url) >= 0) {
+              cache.put(event.request, response.clone());
+            }
             return response;
           });
         });
