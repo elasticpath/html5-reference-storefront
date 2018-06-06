@@ -3,7 +3,18 @@ var urlsToCache = [
   // Don't Cache styles for now
   // '/style/style.css',
   'router.js',
-  'manifest.json'
+  'manifest.json',
+  '/helpers/view.helpers.js',
+  '/base.dependency.config.js',
+  '/text.js',
+  '/eventbus.js',
+  '/main.js',
+  '/ep.mediator.js',
+  '/loadRegionContentEvents.js',
+  '/ep.client.js',
+  '/ep.config.json',
+  '/utils/utils.js',
+  '/style/fonts/glyphicons-halflings-regular.woff'
 ];
 
 var urlsToCacheOnLoad = [
@@ -44,16 +55,6 @@ self.addEventListener('fetch', event => {
             // Go to network.
             return fetch(event.request).then(function (response) {
               console.log('network fetch: ' + url);
-              // Put in cache and return the network response.
-              // length = urlsToCacheOnLoad.length;
-              // while (length--) {
-              //   if (response.url.indexOf(urlsToCacheOnLoad[length]) != -1) {
-              //     console.log('network fetch cached: ' + url);
-              //     cache.put(event.request, response.clone()).then(function () {
-              //       return response;
-              //     });
-              //   }
-              // }
               if (urlsToCacheOnLoad.some(substring=>response.url.includes(substring))) {
                 console.log('network fetch cached: ' + url);
                 cache.put(event.request, response.clone()).then(function () {
