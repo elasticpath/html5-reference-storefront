@@ -20,43 +20,20 @@ self.addEventListener('install', function (event) {
 
 // application fetch network data
 self.addEventListener('fetch', event => {
-
   // abandon non-GET requests
   if (event.request.method !== 'GET') return;
-
   let url = event.request.url;
-
   event.respondWith(
-
     caches.open(CACHE_NAME)
       .then(cache => {
-
-        return cache.match(event.request)
-          .then(response => {
-
-            if (response) {
-              // return cached file
-              console.log('cache fetch: ' + url);
-              return response;
-            }
-
-            // make network request
-            return fetch(event.request)
-              .then(newreq => {
-
-                console.log('network fetch: ' + url);
-                if (newreq.ok) cache.put(event.request, newreq.clone());
-                return newreq;
-
-              })
-              // app is offline
-              .catch(function (error) {
-                // () => offlineAsset(url)
-              })
+        return cache.match(event.request).then(function (response) {
+          console.log('cache fetch: ' + url);
+          return response || fetch(event.request).then(function (response) {
+            console.log('network fetch: ' + url);
+            cache.put(event.request, response.clone());
+            return response;
           });
-
+        });
       })
-
   );
-
 });
