@@ -23,7 +23,6 @@
 var express = require('express');
 var http = require('http');
 var https = require('https');
-var fs = require('fs');
 var path = require('path');
 var winston = require('winston');
 var app = express();
@@ -36,13 +35,7 @@ var logger = new (winston.Logger)({
   ]
 });
 
-var options = {
-  key: fs.readFileSync('cert/privateKey.key'),
-  cert: fs.readFileSync('cert/certificate.crt')
-};
-
-
-app.configure(function(){
+app.configure(function () {
   app.set('port', process.env.PORT || 3008);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -53,21 +46,18 @@ app.configure(function(){
   app.use(app.router);
   app.use('/', express.static(path.join(__dirname, '../ext')));
   app.use('/', express.static(path.join(__dirname, 'public')));
-  app.use (function (req, res, next) {
-    var schema = (req.headers['x-forwarded-proto'] || '').toLowerCase();
-    if (schema === 'https') {
-      next();
-    } else {
-      res.redirect('https://' + req.headers.host + req.url);
-    }
-  });
 });
 
-app.configure('development', function(){
+app.configure('development', function () {
   app.use(express.errorHandler());
 });
 
-
+app.use(function (req, res, next) {
+  if ((req.get('X-Forwarded-Proto') !== 'https')) {
+    res.redirect('https://' + req.get('Host') + req.url);
+  } else
+    next();
+});
 
 /*
  *
@@ -76,6 +66,6 @@ app.configure('development', function(){
  * */
 //require('./routes/routes-config')(app);
 
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'), function () {
   console.log("EP UI Storefront listening on port " + app.get('port'));
 });
