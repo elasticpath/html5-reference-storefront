@@ -35,14 +35,17 @@ self.addEventListener('fetch', event => {
       .then(cache => {
         return cache.match(event.request).then(function (response) {
           console.log('cache fetch: ' + url);
-          return response || fetch(event.request).then(function (response) {
-            console.log('network fetch: ' + url);
-            // Add the response to cache if it's in the array to add on load
-            if (urlsToCacheOnLoad.indexOf(response.url) >= 0) {
-              cache.put(event.request, response.clone());
-            }
-            return response;
-          });
+          // If not match, there is no rejection but an undefined response.
+          if (!response) {
+            // Go to network.
+            return fetch(event.request.clone()).then(function (res) {
+              // Put in cache and return the network response.
+              return cache.put(event.request, response.clone()).then(function () {
+                return response;
+              });
+            });
+          }
+          return response
         });
       })
   );
