@@ -42,7 +42,7 @@ self.addEventListener('fetch', event => {
           // If not match, there is no rejection but an undefined response.
           else {
             // Go to network.
-            return fetch(event.request.clone()).then(function (response) {
+            return fetch(event.request).then(function (response) {
               console.log('network fetch: ' + url);
               // Put in cache and return the network response.
               if (urlsToCacheOnLoad.indexOf(response.url) >= 0) {
