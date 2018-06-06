@@ -21,8 +21,9 @@ var urlsToCacheOnLoad = [
   '/scripts/lib/',
   '/images/',
   '/locales/',
-  // Don't Cache styles for now
-  // '/style/'
+  // Don't Cache styles or modules for now
+  // '/style/',
+  // '/modules/base/'
 ];
 
 self.addEventListener('install', function (event) {
