@@ -36,7 +36,7 @@ self.addEventListener('fetch', event => {
         return cache.match(event.request).then(function (response) {
           console.log('cache fetch: ' + url);
           // If not match, there is no rejection but an undefined response.
-          if (!response) {
+          if (!response || response === undefined) {
             // Go to network.
             return fetch(event.request.clone()).then(function (response) {
               // Put in cache and return the network response.
@@ -45,9 +45,10 @@ self.addEventListener('fetch', event => {
                   return response;
                 });
               }
+              return response;
             });
           }
-          return response
+          return response;
         });
       })
   );
