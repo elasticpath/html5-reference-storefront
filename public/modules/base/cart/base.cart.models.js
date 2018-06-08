@@ -33,8 +33,11 @@ define(function (require) {
       'lineitems:element:item:definition:assets:element',
       'lineitems:element:item:rate',
       'lineitems:element:item:code',
+      'lineitems:element:appliedpromotions:element',
+      'appliedpromotions',
       'order',
-      'order:purchaseform'
+      'order:purchaseform',
+      'order:deliveries:element:shippingoptioninfo'
     ];
 
     // Cart Model
@@ -55,6 +58,9 @@ define(function (require) {
         var lineItemsArray = [];
         var lineItemArrayLen = 0;
         var lineItemsRoot = jsonPath(response, '$._lineitems.._element')[0];
+
+        // Applied promotions
+        var appliedPromotions = "";
 
         if (lineItemsRoot) {
           lineItemArrayLen = lineItemsRoot.length;
@@ -107,6 +113,14 @@ define(function (require) {
           }
 
           /*
+           * line-item applied promotions
+           */
+          var lineItemAppliedPromotion= jsonPath(currObj, '$._appliedpromotions.._element[0].display-name')[0];
+          if (lineItemAppliedPromotion) {
+            appliedPromotions = appliedPromotions + lineItemAppliedPromotion + "<br/> ";
+          }
+
+          /*
            * item-total (list price & purchase price)
            */
           lineItemObj.price = {};
@@ -152,6 +166,25 @@ define(function (require) {
          * Cart Summary: total quantity
          */
         cartObj.cartTotalQuantity = jsonPath(response, '$.total-quantity')[0];
+
+         /*
+         * Cart applied promotions
+         */
+        var cartAppliedPromotion = jsonPath(response, '$._appliedpromotions.._element[0].display-name')[0];
+        if (cartAppliedPromotion) {
+          appliedPromotions = appliedPromotions + cartAppliedPromotion + "<br/> ";
+        }
+        cartObj.appliedPromotions = appliedPromotions
+
+        /*
+         * Shipping applied promotions
+         */
+        var cartAppliedPromotion = jsonPath(response, '$._shippingoption.._appliedpromotions.._element[0].display-name')[0];
+        if (cartAppliedPromotion) {
+          appliedPromotions = appliedPromotions + cartAppliedPromotion + "<br/> ";
+        }
+
+        cartObj.appliedPromotions = appliedPromotions
 
         /*
          * Cart Summary: total price (excluding tax)

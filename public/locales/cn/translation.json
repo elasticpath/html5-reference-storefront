@@ -60,6 +60,7 @@
     "itemTotal": "Total Price",
     "remove": "Remove",
     "totalQuantity": "Total Quantity",
+    "appliedPromotions": "Applied Promotions",
     "subTotal": "Today's Subtotal",
     "checkout": "Proceed to Checkout",
     "emptyCartMsg": "Your shopping cart is empty.",

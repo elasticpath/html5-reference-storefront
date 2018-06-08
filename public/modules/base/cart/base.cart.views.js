@@ -393,6 +393,14 @@ define(function (require) {
       modelEvents: {
         'change': function() {
           this.render();
+          if (!this.model.attributes.appliedPromotions) {
+            $('[data-region="cartAppliedPromotionsRegion"]', this.$el).addClass('is-hidden');
+          }
+        }
+      },
+      onShow: function () {
+        if (!this.model.attributes.appliedPromotions) {
+          $('[data-region="cartAppliedPromotionsRegion"]', this.$el).addClass('is-hidden');
         }
       }
     });
