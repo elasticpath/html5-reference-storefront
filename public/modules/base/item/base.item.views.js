@@ -123,6 +123,7 @@ define(function (require) {
         itemDetailTitleRegion:'[data-region="itemDetailTitleRegion"]',
         itemDetailAssetRegion:'[data-region="itemDetailAssetRegion"]',
         itemDetailAttributeRegion:'[data-region="itemDetailAttributeRegion"]',
+        itemDetailSelectorsRegion:'[data-region="itemDetailSelectorsRegion"]',
         itemDetailPriceRegion:'[data-region="itemDetailPriceRegion"]',
         itemDetailAvailabilityRegion:'[data-region="itemDetailAvailabilityRegion"]',
         itemDetailQuantityRegion:'[data-region="itemDetailQuantityRegion"]',

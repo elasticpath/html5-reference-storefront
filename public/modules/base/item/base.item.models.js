@@ -26,6 +26,10 @@ define(function (require) {
       'rate',
       'definition',
       'definition:assets:element',
+      'definition:options:element',
+      'definition:options:element:value',
+      'definition:options:element:selector:choice:description',
+      'definition:options:element:selector:chosen:description',
       'code'
     ];
 
@@ -69,6 +73,50 @@ define(function (require) {
 
         }
         itemObj.details = detailsArray;
+
+        /*
+         *
+         * Selectors
+         *
+         * */
+        var selectorsArray = [];
+        var selectorsRoot = jsonPath(item, "$._definition.._options.._element")[0];
+        if (selectorsRoot) {
+          var selectorsArrayLen = selectorsRoot.length;
+          for (var x = 0; x < selectorsArrayLen; x++) {
+            var currObj = selectorsRoot[x];
+            var selectorsObject = {};
+            selectorsObject.displayName = currObj['display-name'];
+            selectorsObject.name = currObj['name'];
+            selectorsObject.chosen = currObj['name'];
+            
+            
+            var selectorsChoicesArray = jsonPath(currObj, "$._selector.._choice")[0];
+            var selectorsChoicesArrayLen = selectorsChoicesArray.length;
+            var selectorChoicesMap = new Map();
+            for (var y = 0; y < selectorsChoicesArrayLen; y++) {
+              var choice = selectorsChoicesArray[y];
+              var choiceObject = {};
+              choiceObject.displayName = jsonPath(choice, "$.['_description'][0]['display_name']")[0];
+              choiceObject.name = jsonPath(choice, "$.['_description'][0]['name']")[0];
+              choiceObject.href = jsonPath(choice, "$._description..links[?(@.rel='option')].href")[0];
+              selectorChoicesMap.set(choiceObject.name,choiceObject);
+            }
+
+            var selectorsChoicesArray = jsonPath(currObj, "$._selector.._chosen")[0];
+            var choice = selectorsChoicesArray[0];
+            var chosenObject = {};
+            chosenObject.displayName = jsonPath(choice, "$.['_description'][0]['display_name']")[0];
+            chosenObject.name = jsonPath(choice, "$.['_description'][0]['name']")[0];
+            chosenObject.href = jsonPath(choice, "$._description..links[?(@.rel='option')].href")[0];
+            selectorChoicesMap.set(chosenObject.name,chosenObject);
+
+
+            selectorsObject.choicesMap = selectorChoicesMap;
+            selectorsArray.push(selectorsObject);
+          }
+        }
+        itemObj.selectors = selectorsArray;
 
         /*
          *

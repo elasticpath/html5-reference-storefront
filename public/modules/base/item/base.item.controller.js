@@ -39,6 +39,9 @@ define(['jquery','ep','app', 'eventbus', 'item.models', 'item.views', 'text!modu
           // Attribute List Collection
           var attribsList = new Model.ItemAttributeCollection(response.get('details'));
 
+          // Attribute List Collection
+          var selectorsList = new Model.ItemAttributeCollection(response.get('selectors'));
+
           // Title View
           var titleView = new View.DefaultItemTitleView({
             model: itemModel
@@ -51,6 +54,11 @@ define(['jquery','ep','app', 'eventbus', 'item.models', 'item.views', 'text!modu
           // Attribute View
           var attributeView = new View.DefaultItemAttributeView({
             collection: attribsList
+          });
+
+          // Selectors View
+          var selectorsView = new View.DefaultItemAttributeView({
+            collection: selectorsList
           });
 
           // Price View
@@ -68,6 +76,7 @@ define(['jquery','ep','app', 'eventbus', 'item.models', 'item.views', 'text!modu
           itemDetailLayout.itemDetailTitleRegion.show(titleView);
           itemDetailLayout.itemDetailAssetRegion.show(assetView);
           itemDetailLayout.itemDetailAttributeRegion.show(attributeView);
+          itemDetailLayout.itemDetailSelectorsRegion.show(selectorsView);
           itemDetailLayout.itemDetailPriceRegion.show(priceView);
           itemDetailLayout.itemDetailAddToCartRegion.show(addToCartView);
 
