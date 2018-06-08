@@ -168,6 +168,10 @@
         <label class="cart-summary-label-col"><%= E.getI18nLabel('cart.totalQuantity') %>: </label>
         <span class="cart-summary-value-col" data-el-value="cart.totalQuantity"><%= E.cartTotalQuantity %></span>
       </li>
+      <li class="cart-applied-promotions" data-region="cartAppliedPromotionsRegion">
+        <label class="cart-summary-label-col"><%= E.getI18nLabel('cart.appliedPromotions') %>: </label> <br/>
+        <span class="cart-summary-value-col cart-applied-promotions" data-el-value="cart.appliedPromotions"><%= E.appliedPromotions %></span>
+      </li>
       <li class="cart-subtotal">
         <label class="cart-summary-label-col"><%= E.getI18nLabel('cart.subTotal') %>: </label>
         <span class="cart-summary-value-col" data-el-value="cart.subTotal"><%= E.cartTotal.display %></span>

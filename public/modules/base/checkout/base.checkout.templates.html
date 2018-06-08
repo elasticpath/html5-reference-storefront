@@ -151,6 +151,10 @@
           <label data-el-label="checkout.totalQuantity"><%= E.getI18nLabel('checkout.totalQuantity') %>: </label>
           <span data-el-value="checkout.totalQuantity"><%= E.totalQuantity %></span>
         </li>
+        <li class="checkout-applied-promotions" data-region="checkoutAppliedPromotionsRegion">
+          <label class="checkout-summary-label-col"><%= E.getI18nLabel('cart.appliedPromotions') %>: </label> <br/>
+          <span class="checkout-summary-value-col" data-el-value="checkout.appliedPromotions"><%= E.appliedPromotions  %></span>
+        </li>
         <li class="checkout-subtotal">
           <label data-el-label="checkout.subTotal"><%= E.getI18nLabel('checkout.subTotal') %>: </label>
           <span data-el-value="checkout.subTotal"><%= E.subTotal.display %></span>

@@ -32,6 +32,10 @@ define(function (require) {
     'total',
     'cart',
     'cart:total',
+    // need promotions info
+    'cart:lineitems:element:appliedpromotions:element',
+    'cart:appliedpromotions',
+    'cart:order:deliveries:element:shippingoptioninfo',
     // delivery type
     'deliveries:element',
     // chosen shipping address
@@ -141,8 +145,8 @@ define(function (require) {
      * @param {Object} obj The object to be extended.
      * @returns {Object} The returned object with chosen property added.
      */
-    markAsChosenObject: function(obj) {
-      return _.extend(obj, {chosen: true});
+    markAsChosenObject: function (obj) {
+      return _.extend(obj, { chosen: true });
     },
 
     /**
@@ -154,8 +158,8 @@ define(function (require) {
      * @param objArray Array of objects (these could be billing/shipping addresses or shipping options)
      * @returns {Array} Array of objects with a chosen object defined
      */
-    setChosenEntity: function(objArray) {
-      var chosenEntity = _.find(objArray, function(obj) {
+    setChosenEntity: function (objArray) {
+      var chosenEntity = _.find(objArray, function (obj) {
         return obj.chosen;
       });
 
@@ -176,6 +180,7 @@ define(function (require) {
         subTotal: {},
         taxTotal: {},
         taxes: [],
+        appliedPromotion: {},
         total: {}
       };
 
@@ -199,9 +204,54 @@ define(function (require) {
         }
 
         var taxes = jsonPath(response, '$._tax..cost')[0];
-        if(taxes) {
+        if (taxes) {
           summary.taxes = modelHelpers.parseArray(taxes, modelHelpers.parseTax);
         }
+
+        /*
+         * Cart-lineitems
+         */
+        var lineItemsArray = [];
+        var lineItemArrayLen = 0;
+        var lineItemsRoot = jsonPath(response, '$._cart.._lineitems.._element')[0];
+
+        // Applied promotions
+        var appliedPromotions = "";
+
+        if (lineItemsRoot) {
+          lineItemArrayLen = lineItemsRoot.length;
+        }
+
+        // Iterate over Lineitems
+        for (var x = 0; x < lineItemArrayLen; x++) {
+          var currObj = lineItemsRoot[x];
+          var lineItemObj = {};
+          /*
+           * line-item applied promotions
+           */
+          var lineItemAppliedPromotion = jsonPath(currObj, '$._appliedpromotions.._element[0].display-name')[0];
+          if (lineItemAppliedPromotion) {
+            appliedPromotions = appliedPromotions + lineItemAppliedPromotion + "<br/> ";
+          }
+        }
+
+        /*
+         * Cart applied promotions
+         */
+        var cartAppliedPromotion = jsonPath(response, '$._appliedpromotions.._element[0].display-name')[0];
+        if (cartAppliedPromotion) {
+          appliedPromotions = appliedPromotions + cartAppliedPromotion + "<br/> ";
+        }
+        summary.appliedPromotions = appliedPromotions
+
+        /*
+         * Shipping applied promotions
+         */
+        var cartAppliedPromotion = jsonPath(response, '$._shippingoption.._appliedpromotions.._element[0].display-name')[0];
+        if (cartAppliedPromotion) {
+          appliedPromotions = appliedPromotions + cartAppliedPromotion + "<br/> ";
+        }
+        summary.appliedPromotions = appliedPromotions
 
         var total = jsonPath(response, '$._total[0].cost[0]')[0];
         if (total) {
@@ -270,12 +320,12 @@ define(function (require) {
           var numShippingOptions = choiceShippingOptions.length;
 
           for (var i = 0; i < numShippingOptions; i++) {
-            var parsedChoiceOption =  modelHelpers.parseShippingOption(choiceShippingOptions[i]._description[0]);
+            var parsedChoiceOption = modelHelpers.parseShippingOption(choiceShippingOptions[i]._description[0]);
             var selectActionHref = jsonPath(choiceShippingOptions[i], '$..links[?(@.rel=="selectaction")].href');
 
             // Add the Cortex select action to the choice billing address
             if (selectActionHref && selectActionHref[0]) {
-              _.extend(parsedChoiceOption, {selectAction: selectActionHref[0]});
+              _.extend(parsedChoiceOption, { selectAction: selectActionHref[0] });
             }
 
             shippingOptions.push(parsedChoiceOption);
@@ -317,12 +367,12 @@ define(function (require) {
           var numAddresses = choiceAddresses.length;
 
           for (var i = 0; i < numAddresses; i++) {
-            var parsedChoiceAddress =  modelHelpers.parseAddress(choiceAddresses[i]._description[0]);
+            var parsedChoiceAddress = modelHelpers.parseAddress(choiceAddresses[i]._description[0]);
             var selectActionHref = jsonPath(choiceAddresses[i], '$..links[?(@.rel=="selectaction")].href');
 
             // Add the Cortex select action to the choice billing address
             if (selectActionHref && selectActionHref[0]) {
-              _.extend(parsedChoiceAddress, {selectAction: selectActionHref[0]});
+              _.extend(parsedChoiceAddress, { selectAction: selectActionHref[0] });
             }
 
             checkoutAddresses.push(parsedChoiceAddress);
@@ -341,7 +391,7 @@ define(function (require) {
      * @param response  The raw JSON response to be parsed
      * @returns {Array} Parsed array of paymentMethods objects
      */
-    parsePaymentMethods: function(response) {
+    parsePaymentMethods: function (response) {
       var paymentMethods = [];
 
       if (response) {
@@ -362,13 +412,13 @@ define(function (require) {
         }
 
         if (choicePaymentMethods) {
-          choicePaymentMethods.forEach(function(choice) {
-            var parsedChoice =  modelHelpers.parseTokenPayment(choice._description[0]);
+          choicePaymentMethods.forEach(function (choice) {
+            var parsedChoice = modelHelpers.parseTokenPayment(choice._description[0]);
 
             // Add the Cortex select action to the choice payment method
             var selectActionHref = jsonPath(choice, '$..links[?(@.rel=="selectaction")].href');
             if (selectActionHref && selectActionHref[0]) {
-              _.extend(parsedChoice, {selectAction: selectActionHref[0]});
+              _.extend(parsedChoice, { selectAction: selectActionHref[0] });
             }
 
             paymentMethods.push(parsedChoice);
@@ -391,13 +441,13 @@ define(function (require) {
      * @param [secondarySortProperty] The optional secondary property to sort on.
      * @returns {Array} Sorted array of shipping option objects.
      */
-    sortShippingOptions: function(shippingOptionsArray, primarySortProperty, secondarySortProperty) {
+    sortShippingOptions: function (shippingOptionsArray, primarySortProperty, secondarySortProperty) {
       var sortedShippingOptionsArray = shippingOptionsArray;
 
       if (_.isArray(shippingOptionsArray) && shippingOptionsArray.length > 1) {
         // Begin with the sort by secondary property
         if (_.has(shippingOptionsArray[0], secondarySortProperty)) {
-          sortedShippingOptionsArray = _.sortBy(sortedShippingOptionsArray, function(shippingOption) {
+          sortedShippingOptionsArray = _.sortBy(sortedShippingOptionsArray, function (shippingOption) {
             // Convert string values to lowercase for case-insensitive sort
             if (_.isString(shippingOption[secondarySortProperty])) {
               return shippingOption[secondarySortProperty].toLowerCase();
@@ -407,7 +457,7 @@ define(function (require) {
         }
         // Then sort by the primary property (the order of items with the same key will be maintained)
         if (_.has(shippingOptionsArray[0], primarySortProperty)) {
-          sortedShippingOptionsArray = _.sortBy(sortedShippingOptionsArray, function(shippingOption) {
+          sortedShippingOptionsArray = _.sortBy(sortedShippingOptionsArray, function (shippingOption) {
             // Convert string values to lowercase for case-insensitive sort
             if (_.isString(shippingOption[primarySortProperty])) {
               return shippingOption[primarySortProperty].toLowerCase();
@@ -425,13 +475,13 @@ define(function (require) {
      * @param sortProperty The property to sort by
      * @returns {Array} A sorted array
      */
-    sortByAscAlphabeticOrder: function(arrayToSort, sortProperty) {
+    sortByAscAlphabeticOrder: function (arrayToSort, sortProperty) {
       var sortArgs = {
         "property": sortProperty
       };
 
       // Underscore will run each object through this iterator
-      var sortIterator = function(obj) {
+      var sortIterator = function (obj) {
         // If the sort property is a string, convert it to lower case to make this a case-insensitive sort
         if (typeof obj[sortArgs.property] === "string") {
           return obj[sortArgs.property].toLowerCase();
@@ -448,7 +498,7 @@ define(function (require) {
      * @param sortProperty  Property to sort by.
      * @returns {Array}     Sorted array of addresses.
      */
-    sortAddresses: function(addressArray, sortProperty) {
+    sortAddresses: function (addressArray, sortProperty) {
       return modelHelpers.sortByAscAlphabeticOrder(addressArray, sortProperty);
     }
   });

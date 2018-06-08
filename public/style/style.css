@@ -7043,6 +7043,10 @@ nav.main-nav {
   box-shadow: none;
   border-bottom: none;
 }
+.cart-applied-promotions {
+  display: inline-block;
+  margin-bottom: 5px;
+}
 @media (max-width: 768px) {
   .cart-container table tr td.cart-lineitem-remove-btn-col .btn-cart-removelineitem {
     padding: 8px!important;
@@ -7635,6 +7639,10 @@ Purchase Information
 }
 .checkout-summary-list {
   padding: 0;
+}
+.checkout-applied-promotions {
+  display: inline-block;
+  margin-bottom: 5px;
 }
 .btn-cmd-submit-order {
   display: inline-block;
