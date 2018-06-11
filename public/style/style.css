@@ -6885,6 +6885,7 @@ fieldset[disabled] .btn-header-search.active {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   margin-right: 0;
+  border-radius: 0;
 }
 .header-search-input:-moz-placeholder {
   color: #999999;
