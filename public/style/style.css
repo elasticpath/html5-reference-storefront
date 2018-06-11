@@ -6720,6 +6720,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
     position: absolute;
     /* top: 55px; */
     /* right: 15px; */
+    left: 15px;
     border: none;
     margin-left: -4px;
   }
