@@ -105,7 +105,7 @@ define(['ep', 'mediator', 'app', 'eventbus', 'appheader.models', 'appheader.view
       var logoView = new View.HeaderLogoView({
         model:new Model.LogoModel({
           homeUri: '',
-          logoImgPath: 'images/elastic-path-logo.png'
+          logoImgPath: 'images/Company-Logo-v1.png'
         })
       });
       ep.app.logoRegion.show(logoView);
