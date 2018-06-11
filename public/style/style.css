@@ -6412,6 +6412,7 @@ fieldset[disabled] .btn-auth-login.active {
     background: none;
     border: none;
     margin-bottom: 0px;
+    margin-top: 80px;
   }
 }
 .logo-container {
@@ -6466,7 +6467,7 @@ fieldset[disabled] .btn-auth-login.active {
   position: absolute;
   display: inline-block;
   top: 12px;
-  right: 275px;
+  right: 15px;
   /*
   // on small screen move global nav under search
   @media (min-width: @screen-sm) and (max-width: @screen-md) {
@@ -6478,11 +6479,7 @@ fieldset[disabled] .btn-auth-login.active {
 }
 @media (max-width: 768px) {
   .global-nav-container {
-    position: relative;
-    display: block;
-    width: 100%;
     top: auto;
-    left: 0;
     margin: 0px 0 20px 0;
     padding: 0;
   }
@@ -6701,7 +6698,7 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
 }
 .main-search-container {
   position: absolute;
-  right: 15px;
+  right: 240px;
   top: 0px;
   margin: 0 0 0 0;
 }
@@ -6709,14 +6706,16 @@ fieldset[disabled] .global-nav-container .global-nav-login.active {
   
 }
 @media (min-width: 768px) and (max-width: 992px) {
-  
+  .main-search-container {
+    top: 35px;
+    right: 15px;
+  }
 }
 @media (max-width: 768px) {
   .main-search-container {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
+    position: absolute;
+    top: 35px;
+    right: 15px;
     border: none;
     margin-left: -4px;
   }
