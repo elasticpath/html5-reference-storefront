@@ -59,7 +59,7 @@
   <script id="CartLineItemTemplate" type="text/template">
     <!-- Cart Line Item Thumbnail -->
     <td class="cart-lineitem-thumbnail-col" data-el-value="lineItem.thumbnail">
-      <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>"
+      <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" onError="this.onerror=null;this.src='images/img-placeholder.png';" alt="<%= E.getDefaultImageName(E.thumbnail) %>"
            class="cart-lineitem-thumbnail"/>
     </td>
 

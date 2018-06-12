@@ -39,7 +39,7 @@
     <div class="category-item-inner">
 
         <div class="category-item-thumbnail-container">
-          <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" alt="<%= E.getDefaultImageName(E.thumbnail) %>"
+          <img src="<%= E.getDefaultImagePath(E.thumbnail) %>" onError="this.onerror=null;this.src='images/img-placeholder.png';" alt="<%= E.getDefaultImageName(E.thumbnail) %>"
                 class="category-item-thumbnail img-responsive"/>
 
       <!--
