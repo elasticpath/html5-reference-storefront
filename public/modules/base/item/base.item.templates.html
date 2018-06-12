@@ -58,7 +58,7 @@
 
   <!-- Default Item Detail Asset Template -->
      <script id="DefaultItemAssetTemplate" type="text/template">
-<img src="<%- E.getDefaultImagePath(E.assets) %>" alt="<%= E.getDefaultImageName(E.assets) %>"
+<img src="<%- E.getDefaultImagePath(E.assets) %>" onError="this.onerror=null;this.src='images/img-placeholder.png';" alt="<%= E.getDefaultImageName(E.assets) %>"
          class="itemdetail-main-img"/>
     </script> <!-- Default Item Detail Attribute Template -->
      <script id="DefaultItemAttributeItemTemplate" type="text/template">
