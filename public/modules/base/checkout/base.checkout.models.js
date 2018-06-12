@@ -121,7 +121,7 @@ define(function (require) {
             if (chosenEntity && chosenEntity.displayName == "Ship to Store") {
               var i = checkoutObj.shippingAddresses.length;
               while (i--) {
-                if (!checkoutObj.shippingAddresses[i].givenName.includes("Vestri")) {
+                if (!checkoutObj.shippingAddresses[i].givenName.toUpperCase().includes(ep.app.config.cortexApi.scope.toUpperCase())) {
                   checkoutObj.shippingAddresses.splice(i, 1);
                 }
               }
@@ -129,7 +129,7 @@ define(function (require) {
             if (chosenEntity && chosenEntity.displayName == "FedEx Shipping") {
               var i = checkoutObj.shippingAddresses.length;
               while (i--) {
-                if (checkoutObj.shippingAddresses[i].givenName.includes("Vestri")) {
+                if (checkoutObj.shippingAddresses[i].givenName.toUpperCase().includes(ep.app.config.cortexApi.scope.toUpperCase())) {
                   checkoutObj.shippingAddresses.splice(i, 1);
                 }
               }
