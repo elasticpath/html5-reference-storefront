@@ -27,6 +27,7 @@ define(function (require) {
     'subscriptions:element',
     'purchases:element',
     'addresses:element',
+    'addresses:billingaddresses:default',
     'paymentmethods:element'
   ];
 
@@ -76,7 +77,7 @@ define(function (require) {
         }
 
         // Profile addresses
-        var addressesArray = jsonPath(response, '$._addresses.._element')[0];
+        var addressesArray = jsonPath(response, '$._addresses.._billingaddresses.._default')[0];
         if (addressesArray) {
           profileObj.addresses = modelHelpers.parseArray(addressesArray, modelHelpers.parseAddress);
         }

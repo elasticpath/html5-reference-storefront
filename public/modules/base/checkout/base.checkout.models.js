@@ -28,6 +28,7 @@ define(function (require) {
     // choice billing addresses
     'billingaddressinfo:selector:choice',
     'billingaddressinfo:selector:choice:description',
+    'billingaddressinfo:billingaddress:profile:addresses:billingaddresses:default',
     'tax',
     'total',
     'cart',
@@ -85,7 +86,7 @@ define(function (require) {
         var paymentMethodObj = jsonPath(response, '$.._paymentmethodinfo');
         checkoutObj.showPaymentMethods = paymentMethodObj ? true : false;
 
-        var parsedBillingAddresses = modelHelpers.parseCheckoutAddresses(response, "billingaddressinfo");
+        var parsedBillingAddresses = modelHelpers.parseBillingCheckoutAddresses(response, "billingaddressinfo");
         var parsedShippingAddresses = modelHelpers.parseCheckoutAddresses(response, "destinationinfo");
         var parsedPaymentMethods = modelHelpers.parsePaymentMethods(response);
 
@@ -112,6 +113,25 @@ define(function (require) {
 
             // Set a chosen shipping option if there is not one set already
             checkoutObj.shippingOptions = modelHelpers.setChosenEntity(checkoutObj.shippingOptions);
+
+            var chosenEntity = _.find(checkoutObj.shippingOptions, function (obj) {
+              return obj.chosen;
+            });
+      
+            if (chosenEntity && chosenEntity.displayName == "Ship to Store") {
+              for (var i = 0; i < checkoutObj.shippingAddresses; i++) {
+                if (checkoutObj.shippingAddresses[i].givenName.includes("Vestri")) {
+                  checkoutObj.shippingOptions.splice(i, 1);
+                }
+              }
+            }
+            if (chosenEntity && chosenEntity.displayName == "FedEx Shipping") {
+              for (var i = 0; i < checkoutObj.shippingAddresses; i++) {
+                if (!checkoutObj.shippingAddresses[i].givenName.includes("Vestri")) {
+                  checkoutObj.shippingOptions.splice(i, 1);
+                }
+              }
+            }
           }
         }
 
@@ -336,6 +356,68 @@ define(function (require) {
       }
 
       return shippingOptions;
+    },
+
+    /**
+     * Parse addresses (billing or shipping) that the registered user can use for checkout.
+     *
+     * @param response The JSON response to be parsed
+     * @param jsonPathPrefix The prefix to use in jsonPath selections:
+     *          "billingaddressinfo" for billing addresses
+     *          "destinationinfo" for shipping addresses
+     * @returns {Array} Addresses (billing or shipping) of a registered user
+     */
+    parseBillingCheckoutAddresses: function (response, jsonPathPrefix) {
+      var checkoutAddresses = [];
+
+      // if (response && jsonPathPrefix) {
+
+      //   var chosenAddress = jsonPath(response, '$.._' + jsonPathPrefix + '[0].._chosen.._description[0]')[0];
+      //   var choiceAddresses = jsonPath(response, '$.._' + jsonPathPrefix + '[0].._choice')[0];
+
+      //   if (chosenAddress) {
+      //     var parsedChosenAddress = modelHelpers.parseAddress(chosenAddress);
+
+      //     modelHelpers.markAsChosenObject(parsedChosenAddress);
+
+      //     checkoutAddresses.push(parsedChosenAddress);
+      //   }
+
+      //   if (choiceAddresses) {
+      //     var numAddresses = choiceAddresses.length;
+
+      //     for (var i = 0; i < numAddresses; i++) {
+      //       var parsedChoiceAddress = modelHelpers.parseAddress(choiceAddresses[i]._description[0]);
+      //       var selectActionHref = jsonPath(choiceAddresses[i], '$..links[?(@.rel=="selectaction")].href');
+
+      //       // Add the Cortex select action to the choice billing address
+      //       if (selectActionHref && selectActionHref[0]) {
+      //         _.extend(parsedChoiceAddress, { selectAction: selectActionHref[0] });
+      //       }
+
+      //       checkoutAddresses.push(parsedChoiceAddress);
+      //     }
+      //   }
+      // } else {
+      //   ep.logger.error('Error when building checkout addresses object');
+      // }
+
+      if (response && jsonPathPrefix) {
+
+        var address = jsonPath(response, '$.._' + jsonPathPrefix + '[0].._billingaddress.._default[0]')[0];
+
+        if (address) {
+          var parsedChosenAddress = modelHelpers.parseAddress(address);
+
+          modelHelpers.markAsChosenObject(parsedChosenAddress);
+
+          checkoutAddresses.push(parsedChosenAddress);
+        }
+      } else {
+        ep.logger.error('Error when building checkout addresses object');
+      }
+
+      return checkoutAddresses;
     },
 
     /**
