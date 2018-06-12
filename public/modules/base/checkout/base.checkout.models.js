@@ -119,15 +119,17 @@ define(function (require) {
             });
       
             if (chosenEntity && chosenEntity.displayName == "Ship to Store") {
-              for (var i = 0; i < checkoutObj.shippingAddresses.length; i++) {
-                if (checkoutObj.shippingAddresses[i].givenName.includes("Vestri")) {
+              var i = checkoutObj.shippingAddresses.length;
+              while (i--) {
+                if (!checkoutObj.shippingAddresses[i].givenName.includes("Vestri")) {
                   checkoutObj.shippingAddresses.splice(i, 1);
                 }
               }
             }
             if (chosenEntity && chosenEntity.displayName == "FedEx Shipping") {
-              for (var i = 0; i < checkoutObj.shippingAddresses.length; i++) {
-                if (!checkoutObj.shippingAddresses[i].givenName.includes("Vestri")) {
+              var i = checkoutObj.shippingAddresses.length;
+              while (i--) {
+                if (checkoutObj.shippingAddresses[i].givenName.includes("Vestri")) {
                   checkoutObj.shippingAddresses.splice(i, 1);
                 }
               }
