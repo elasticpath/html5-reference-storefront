@@ -523,6 +523,7 @@ define(function (require) {
 
         ep.io.ajax(ajaxModel.toJSON());
 
+        refreshShippingAddressViews();
         ep.ui.startActivityIndicator(checkoutLayout.shippingOptionsRegion.currentView);
         ep.ui.startActivityIndicator(checkoutLayout.checkoutOrderRegion.currentView);
       }
