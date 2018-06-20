@@ -2,3 +2,7 @@ HTML5 Reference Storefront
 =============
 Please see our documentation site at:
 http://elasticpath.github.io/html5-storefront-touchpoint-reference/
+
+## License
+[EP Labs License](https://github.com/elasticpath/html5-storefront-touchpoint-reference/blob/master/EP_LICENSE)
+[Apache License](https://github.com/elasticpath/html5-storefront-touchpoint-reference/blob/master/LICENSE)
